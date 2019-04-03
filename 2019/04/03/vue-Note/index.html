@@ -6,25 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://long95288.github.io">
-  <title>酷狗音乐排行爬虫 | 风兮木落</title>
+  <title>vue 学习笔记 | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、分析地址规律：https://www.kugou.com/yy/rank/home/1-8888.html  https://www.kugou.com/yy/rank/home/2-8888.html  https://www.kugou.com/yy/rank/home/3-8888.html  规律：相差的只有1-2-3，榜单从1-66二、需要爬取的信息1、排名2、歌名3、时长三、爬取策">
-<meta name="keywords" content="Python,爬虫">
+  <meta name="description" content="组件1. 一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象2.使用流程 2.1 注册组件，使用如下语法注册组件  Vue.component(‘组件名字’,{        选项})">
+<meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="酷狗音乐排行爬虫">
-<meta property="og:url" content="http://long95288.github.io/2019/03/14/酷狗音乐排行爬虫/index.html">
+<meta property="og:title" content="vue 学习笔记">
+<meta property="og:url" content="http://long95288.github.io/2019/04/03/vue-Note/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="一、分析地址规律：https://www.kugou.com/yy/rank/home/1-8888.html  https://www.kugou.com/yy/rank/home/2-8888.html  https://www.kugou.com/yy/rank/home/3-8888.html  规律：相差的只有1-2-3，榜单从1-66二、需要爬取的信息1、排名2、歌名3、时长三、爬取策">
+<meta property="og:description" content="组件1. 一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象2.使用流程 2.1 注册组件，使用如下语法注册组件  Vue.component(‘组件名字’,{        选项})">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://long95288.github.io/2019/03/14/酷狗音乐排行爬虫/page1.png">
-<meta property="og:image" content="http://long95288.github.io/2019/03/14/酷狗音乐排行爬虫/page2.png">
-<meta property="og:image" content="http://long95288.github.io/2019/03/14/酷狗音乐排行爬虫/page3.png">
-<meta property="og:image" content="http://long95288.github.io/2019/03/14/酷狗音乐排行爬虫/result4.png">
-<meta property="og:updated_time" content="2019-03-14T14:35:47.744Z">
+<meta property="og:updated_time" content="2019-04-03T02:31:48.828Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="酷狗音乐排行爬虫">
-<meta name="twitter:description" content="一、分析地址规律：https://www.kugou.com/yy/rank/home/1-8888.html  https://www.kugou.com/yy/rank/home/2-8888.html  https://www.kugou.com/yy/rank/home/3-8888.html  规律：相差的只有1-2-3，榜单从1-66二、需要爬取的信息1、排名2、歌名3、时长三、爬取策">
-<meta name="twitter:image" content="http://long95288.github.io/2019/03/14/酷狗音乐排行爬虫/page1.png">
+<meta name="twitter:title" content="vue 学习笔记">
+<meta name="twitter:description" content="组件1. 一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象2.使用流程 2.1 注册组件，使用如下语法注册组件  Vue.component(‘组件名字’,{        选项})">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
   
@@ -168,135 +163,33 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-酷狗音乐排行爬虫" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-vue-Note" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      酷狗音乐排行爬虫
+      vue 学习笔记
     </h1>
   
 
         
-        <a href="/2019/03/14/酷狗音乐排行爬虫/" class="archive-article-date">
-  	<time datetime="2019-03-14T13:32:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-14</time>
+        <a href="/2019/04/03/vue-Note/" class="archive-article-date">
+  	<time datetime="2019-04-03T02:26:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、分析"><a href="#一、分析" class="headerlink" title="一、分析"></a>一、分析</h2><h3 id="地址规律："><a href="#地址规律：" class="headerlink" title="地址规律："></a>地址规律：</h3><p><a href="https://www.kugou.com/yy/rank/home/1-8888.html" target="_blank" rel="noopener">https://www.kugou.com/yy/rank/home/1-8888.html</a></p>
-<p><img src="/2019/03/14/酷狗音乐排行爬虫/page1.png" alt="page1"></p>
-<p><a href="https://www.kugou.com/yy/rank/home/2-8888.html" target="_blank" rel="noopener">https://www.kugou.com/yy/rank/home/2-8888.html</a></p>
-<p><img src="/2019/03/14/酷狗音乐排行爬虫/page2.png" alt="page2"></p>
-<p><a href="https://www.kugou.com/yy/rank/home/3-8888.html" target="_blank" rel="noopener">https://www.kugou.com/yy/rank/home/3-8888.html</a></p>
-<p><img src="/2019/03/14/酷狗音乐排行爬虫/page3.png" alt="page3"></p>
-<h3 id="规律：相差的只有1-2-3，榜单从1-66"><a href="#规律：相差的只有1-2-3，榜单从1-66" class="headerlink" title="规律：相差的只有1-2-3，榜单从1-66"></a>规律：相差的只有1-2-3，榜单从1-66</h3><h2 id="二、需要爬取的信息"><a href="#二、需要爬取的信息" class="headerlink" title="二、需要爬取的信息"></a>二、需要爬取的信息</h2><h3 id="1、排名"><a href="#1、排名" class="headerlink" title="1、排名"></a>1、排名</h3><h3 id="2、歌名"><a href="#2、歌名" class="headerlink" title="2、歌名"></a>2、歌名</h3><h3 id="3、时长"><a href="#3、时长" class="headerlink" title="3、时长"></a>3、时长</h3><h2 id="三、爬取策略"><a href="#三、爬取策略" class="headerlink" title="三、爬取策略"></a>三、爬取策略</h2><p>1、先将第一页的源码下载下来，生成测试文件<br>2、获取测试文件的各项元素，能够准确提取网页中的元素，得到的数据写入文件中<br>2-1 提取元素，确定函数<br>2-2 写入数据<br>3、生成爬取的页面URL数组<br>4、联网爬取，设置时间间隔为2+RANDOM()，避免被禁<br>5、爬取完成</p>
-<h2 id="四、代码文件"><a href="#四、代码文件" class="headerlink" title="四、代码文件"></a>四、代码文件</h2><pre><code># encoding=utf-8
-# coding=utf-8
-# 引入包
-import requests
-from bs4 import BeautifulSoup
-import time
-import random
-header = {
-    &apos;user-agent&apos;: &apos;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) &apos;
-                  &apos;Chrome/71.0.3578.98 Safari/537.36&apos;
-}
+        <h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><h3 id="1-一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象"><a href="#1-一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象" class="headerlink" title="1. 一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象"></a>1. 一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象</h3><h3 id="2-使用流程"><a href="#2-使用流程" class="headerlink" title="2.使用流程"></a>2.使用流程</h3><blockquote>
+<p>2.1 注册组件，使用如下语法注册组件</p>
+<blockquote>
+<p>Vue.component(‘组件名字’,{<br>        选项<br>}) </p>
+</blockquote>
+</blockquote>
 
-
-# 获得头文件，随机生成
-def get_header():
-
-    return header
-
-
-# 打开测试文件,模拟用的
-def open_test_file(file_url):
-    file = open(file_url, &apos;r&apos;, encoding=&apos;utf-8&apos;)
-    return file.read()
-
-
-# 打开网页，获得网页数据
-def get_web_content(url):
-    res = requests.get(url, headers=get_header())
-    return res.text
-
-
-# 分析测试文件,获得相应的数据
-# 数据格式：排名 歌名 时长
-def analyze(txt):
-    # 变量区
-    soup = BeautifulSoup(txt, &apos;html.parser&apos;)
-    redata = []
-    # 选择器 #rankWrap &gt; div.pc_temp_songlist &gt; ul &gt;li
-    datas = soup.select(&apos;#rankWrap &gt; div.pc_temp_songlist &gt; ul &gt; li&apos;)
-
-    # 解析list数据
-    for data in datas:
-        # 获取排名
-        if data.find(&apos;strong&apos;) != None:
-            num = data.find(&apos;strong&apos;).string  # 前三名加粗的处理
-        else:
-            num = data.find(&apos;span&apos;, &apos;pc_temp_num&apos;).string.strip()  # 排名
-            # print(&quot;%r&quot; % num)
-        # 获取歌名
-        songname = data.find(&apos;a&apos;, &apos;pc_temp_songname&apos;).string.strip()
-
-        # 获取时间
-        song_time = data.find(&apos;span&apos;, &apos;pc_temp_time&apos;).string.strip()
-
-        # 生成数据redata
-        temp_data = num + &quot;----&quot; + songname + &quot;----&quot; + song_time
-        # print(temp_data)
-        redata.append(temp_data)
-    return redata
-
-
-# 写回数据
-def write_data(datas):
-    f = open(&apos;song.txt&apos;, &apos;a&apos;, encoding=&apos;utf-8&apos;)  # 文件追加写入
-    for data in datas:
-        f.write(data + &apos;\n&apos;)
-    f.close()
-    print(&quot;写入成功！&quot;)
-
-
-# 单页爬取内容
-def crawl_page(pageurl):
-    txt = get_web_content(pageurl)
-    datas = analyze(txt)
-    write_data(datas)
-    print(&quot;爬取成功&quot;)
-
-
-# 函数入口,开始爬取
-def start():
-    # 生成爬取页面数组
-    pages = [&apos;https://www.kugou.com/yy/rank/home/{}-8888.html&apos;.format(number)
-             for number in range(1, 24)]
-    # print(pages)
-    for pageurl in pages:
-        print(pageurl)
-        crawl_page(pageurl)
-        time.sleep(2+random.random())  # 暂停避免过快
-
-
-# 调用开始函数开始爬取
-start()
-
-# 测试
-# txt = open_test_file(&apos;test2.html&apos;)
-# print(txt)
-# datas = analyze(txt)
-# write_data(datas)
-
-# print(random.random())
-</code></pre><h3 id="爬取结果："><a href="#爬取结果：" class="headerlink" title="爬取结果："></a>爬取结果：</h3><p><img src="/2019/03/14/酷狗音乐排行爬虫/result4.png" alt="result"></p>
-<h3 id="收获："><a href="#收获：" class="headerlink" title="收获："></a>收获：</h3><h4 id="1、关于编码问题"><a href="#1、关于编码问题" class="headerlink" title="1、关于编码问题"></a>1、关于编码问题</h4><h4 id="写入文件的时候请使用open-xxx-x-encoding-’utf-8’-这样写入的时候才不会出现错误"><a href="#写入文件的时候请使用open-xxx-x-encoding-’utf-8’-这样写入的时候才不会出现错误" class="headerlink" title="写入文件的时候请使用open(xxx,x,encoding=’utf-8’)这样写入的时候才不会出现错误"></a>写入文件的时候请使用open(xxx,x,encoding=’utf-8’)这样写入的时候才不会出现错误</h4>
       
 
       
@@ -330,11 +223,7 @@ start()
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
         		</li>
       		
 		</ul>
@@ -390,7 +279,7 @@ start()
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/03/14/酷狗音乐排行爬虫/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/04/03/vue-Note/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -404,18 +293,18 @@ start()
   
 <nav id="article-nav">
   
-    <a href="/2019/04/02/JavascriptNote/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/04/03/PVC管DIY笔记本架子/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Javascript笔记
+          PVC管DIY笔记本架子
         
       </div>
     </a>
   
   
-    <a href="/2019/03/11/第一篇博客/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">hexo 基本用法</div>
+    <a href="/2019/04/02/JavascriptNote/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Javascript笔记</div>
       <i class="icon-circle-right"></i>
     </a>
   

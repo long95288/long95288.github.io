@@ -8,18 +8,20 @@
   <link rel="dns-prefetch" href="http://long95288.github.io">
   <title>Javascript笔记 | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. var、let、const区别 var 定义的变量 可以穿透块作用域访问，if和for可以穿透，var但不能跨函数作用域访问  let 定义的变量，只能在块作用域里访问，不能跨’{}’引用，也不能跨函数访问  const 定义常量，赋值，常量不可变。 2. (function(){函数体})(); 自引用的函数,不用调用便可以运行">
+  <meta name="description" content="1. var、let、const区别 var 定义的变量 可以穿透块作用域访问，if和for可以穿透，var但不能跨函数作用域访问  let 定义的变量，只能在块作用域里访问，不能跨’{}’引用，也不能跨函数访问  const 定义常量，赋值，常量不可变。 2. (function(){函数体})(); 自引用的函数,不用调用便可以运行 3.关于JQuery ajax请求一直返回Error(par">
 <meta name="keywords" content="笔记,JavaScript,周边技术">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Javascript笔记">
 <meta property="og:url" content="http://long95288.github.io/2019/04/02/JavascriptNote/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="1. var、let、const区别 var 定义的变量 可以穿透块作用域访问，if和for可以穿透，var但不能跨函数作用域访问  let 定义的变量，只能在块作用域里访问，不能跨’{}’引用，也不能跨函数访问  const 定义常量，赋值，常量不可变。 2. (function(){函数体})(); 自引用的函数,不用调用便可以运行">
+<meta property="og:description" content="1. var、let、const区别 var 定义的变量 可以穿透块作用域访问，if和for可以穿透，var但不能跨函数作用域访问  let 定义的变量，只能在块作用域里访问，不能跨’{}’引用，也不能跨函数访问  const 定义常量，赋值，常量不可变。 2. (function(){函数体})(); 自引用的函数,不用调用便可以运行 3.关于JQuery ajax请求一直返回Error(par">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-02T03:00:44.658Z">
+<meta property="og:image" content="http://long95288.github.io/2019/04/02/JavascriptNote/code1.jpg">
+<meta property="og:updated_time" content="2019-04-03T13:16:50.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Javascript笔记">
-<meta name="twitter:description" content="1. var、let、const区别 var 定义的变量 可以穿透块作用域访问，if和for可以穿透，var但不能跨函数作用域访问  let 定义的变量，只能在块作用域里访问，不能跨’{}’引用，也不能跨函数访问  const 定义常量，赋值，常量不可变。 2. (function(){函数体})(); 自引用的函数,不用调用便可以运行">
+<meta name="twitter:description" content="1. var、let、const区别 var 定义的变量 可以穿透块作用域访问，if和for可以穿透，var但不能跨函数作用域访问  let 定义的变量，只能在块作用域里访问，不能跨’{}’引用，也不能跨函数访问  const 定义常量，赋值，常量不可变。 2. (function(){函数体})(); 自引用的函数,不用调用便可以运行 3.关于JQuery ajax请求一直返回Error(par">
+<meta name="twitter:image" content="http://long95288.github.io/2019/04/02/JavascriptNote/code1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
   
@@ -191,6 +193,9 @@
 <h3 id="const-定义常量，赋值，常量不可变。"><a href="#const-定义常量，赋值，常量不可变。" class="headerlink" title="const 定义常量，赋值，常量不可变。"></a>const 定义常量，赋值，常量不可变。</h3></blockquote>
 <h2 id="2-function-函数体"><a href="#2-function-函数体" class="headerlink" title="2. (function(){函数体})();"></a>2. (function(){函数体})();</h2><blockquote>
 <h3 id="自引用的函数-不用调用便可以运行"><a href="#自引用的函数-不用调用便可以运行" class="headerlink" title="自引用的函数,不用调用便可以运行"></a>自引用的函数,不用调用便可以运行</h3></blockquote>
+<h2 id="3-关于JQuery-ajax请求一直返回Error-parsererror-问题"><a href="#3-关于JQuery-ajax请求一直返回Error-parsererror-问题" class="headerlink" title="3.关于JQuery ajax请求一直返回Error(parsererror)问题"></a>3.关于JQuery ajax请求一直返回Error(parsererror)问题</h2><blockquote>
+<h3 id="问题出在请求的类型上，如果参数DataType设置为JSON-然而服务器端并不是返回json数据，就出现解析错误。若无用需要将该参数注释掉便可。"><a href="#问题出在请求的类型上，如果参数DataType设置为JSON-然而服务器端并不是返回json数据，就出现解析错误。若无用需要将该参数注释掉便可。" class="headerlink" title="问题出在请求的类型上，如果参数DataType设置为JSON,然而服务器端并不是返回json数据，就出现解析错误。若无用需要将该参数注释掉便可。"></a>问题出在请求的类型上，如果参数DataType设置为JSON,然而服务器端并不是返回json数据，就出现解析错误。若无用需要将该参数注释掉便可。</h3><p><img src="/2019/04/02/JavascriptNote/code1.jpg" alt="code1"></p>
+</blockquote>
 
       
 
@@ -302,6 +307,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/04/03/vue-Note/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          vue 学习笔记
+        
+      </div>
+    </a>
   
   
     <a href="/2019/03/14/酷狗音乐排行爬虫/" id="article-nav-older" class="article-nav-link-wrap">
@@ -439,7 +453,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -448,6 +462,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
             
             <div class="clearfix"></div>
