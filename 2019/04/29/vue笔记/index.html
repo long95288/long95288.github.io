@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="1、*.vue的文件表示一个vue组件，和使用commponet生成的模版类似，但是比之要多出一点东西，单页式组件（1）视图模版  &amp;lt;template&amp;gt;&amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/template&amp;gt; 这是html的模版（2）样式定义  &amp;lt;style&amp;gt;&amp;lt;/style&amp;gt; 可以放置样式（3）组件代">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-30T11:20:08.785Z">
+<meta property="og:updated_time" content="2019-05-01T04:38:18.415Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue笔记">
 <meta name="twitter:description" content="1、*.vue的文件表示一个vue组件，和使用commponet生成的模版类似，但是比之要多出一点东西，单页式组件（1）视图模版  &amp;lt;template&amp;gt;&amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/template&amp;gt; 这是html的模版（2）样式定义  &amp;lt;style&amp;gt;&amp;lt;/style&amp;gt; 可以放置样式（3）组件代">
@@ -190,7 +190,7 @@
 <p>这种方式还没运行起来</p>
 <h3 id="3、编程技巧"><a href="#3、编程技巧" class="headerlink" title="3、编程技巧"></a>3、编程技巧</h3><p>（1）凡是样式绑定必然是绑定到判断对象上的，不能直接写CSS类名，即使是一个固定的CSS类也都要这样写<br>（2）</p>
 <h3 id="4、路由的一些理解"><a href="#4、路由的一些理解" class="headerlink" title="4、路由的一些理解"></a>4、路由的一些理解</h3><p>（1）路由的声明和引用<br>引用 <code>import VueRouter from &#39;vue-router</code><br>使用 <code>Vue.use(VueRouter)</code><br>实例化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const router = new VueRouter(&#123;</span><br><span class="line">  mode: &apos;history&apos;, // 可选</span><br><span class="line">  routes: [</span><br><span class="line">      &#123;name: &apos;Home&apos;, path: &apos;/Home&apos;, component: Home&#125;,</span><br><span class="line">      &#123;name: &apos;Layout&apos;, path: &apos;/Layout&apos;, component: Layout&#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>相关说明:name 别名,在<code>&lt;router-link&gt;</code> 的 to = “Home” 和 to=”/Home” 相同的作用。但是使用别名的话更改只要改一个地方就行了。<br>（2）界面和文件之间的关系是怎么样的？<br>两个非常重要的标签，<code>&lt;router-link&gt;</code>和<code>&lt;router-view&gt;</code>其中link是接收路由事件，view是加载内容的容器。<br>*.vue作为一个页面组件，通过引用之后加载进入view中，每一个.vue的文件的加载由link和view决定。关于嵌套路由，在view中有viwe,这样如何确定页面是如何加载在某一个页面的呢？这还需要深入的理解。</p>
+<p>相关说明:name 别名,在<code>&lt;router-link&gt;</code> 的 to = “Home” 和 to=”/Home” 相同的作用。但是使用别名的话更改只要改一个地方就行了。<br>（2）界面和文件之间的关系是怎么样的？<br>两个非常重要的标签，<code>&lt;router-link&gt;</code>和<code>&lt;router-view&gt;</code>其中link是接收路由事件，view是加载内容的容器。<br>*.vue作为一个页面组件，通过引用之后加载进入view中，每一个.vue的文件的加载由link和view决定。关于嵌套路由，在view中有viwe,这样如何确定页面是如何加载在某一个页面的呢？这还需要深入的理解。<br>(3)嵌套路由<br>在某个组件中声明一个<code>&lt;router-view&gt;</code>则可以在该组件中 加载所引入的组件。routes中声明如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;name: &apos;Home&apos;,paht: &apos;/Home&apos;,componnent: Home,</span><br><span class="line">childern: [ // Home 组件中嵌套tab的组件</span><br><span class="line">  &#123; // 空白子路由</span><br><span class="line">    path: &apos;&apos;,</span><br><span class="line">    component: XX</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path:&apos;Tab&apos;,  // 路由路径为/Home/tab</span><br><span class="line">    component: Tab</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
 
@@ -443,11 +443,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
