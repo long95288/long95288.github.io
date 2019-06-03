@@ -197,11 +197,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
         		</li>
       		
 		</ul>
@@ -263,11 +263,40 @@
       
         <h4 id="vector-是线程安全的"><a href="#vector-是线程安全的" class="headerlink" title="vector 是线程安全的"></a>vector 是线程安全的</h4><p>在发送数据到服务器的时候，发送数据线程，从共享变量<code>senddatas</code>中取出要发送的数值并发送到服务器，但是这时候可能有新的数据加入，这时候需要保证数据的线程安全，而arrarylist不是线程安全的。</p>
 <h4 id="开启发送线程的原因"><a href="#开启发送线程的原因" class="headerlink" title="开启发送线程的原因"></a>开启发送线程的原因</h4><p>数据突发太大，会将还没发送出去的信息覆盖。设置发送数据时间间隔大于30ms才不至于被覆盖。</p>
-<h4 id="客户端与服务器数据请求格式json"><a href="#客户端与服务器数据请求格式json" class="headerlink" title="客户端与服务器数据请求格式json"></a>客户端与服务器数据请求格式json</h4><p><strong>1、type</strong> 数据类型<br><strong>2、values</strong> 数据的值<br><strong>从客户端请求的数据类型如下</strong><br>1、登入请求<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="attr">"type"</span> : <span class="string">"Login"</span>,</span><br><span class="line">   <span class="attr">"values"</span> : &#123;</span><br><span class="line">       <span class="attr">"account"</span> : <span class="string">"1234556"</span>,</span><br><span class="line">       <span class="attr">"password"</span> : <span class="string">"21fefefefesdfs"</span>, </span><br><span class="line">   &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>2、登出请求<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span> : <span class="string">"Logout"</span>,</span><br><span class="line">    <span class="attr">"values"</span> : &#123;</span><br><span class="line">        <span class="attr">"account"</span> : <span class="string">"1223456"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>3、转发数据请求(更新雷区)<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span> : <span class="string">"Transmit"</span>,</span><br><span class="line">    <span class="attr">"values"</span> : &#123;</span><br><span class="line">        <span class="attr">"to"</span> : <span class="string">"ClientId"</span>,</span><br><span class="line">        <span class="attr">"data"</span> : &#123;</span><br><span class="line">            <span class="attr">"x"</span>: <span class="string">"2"</span>,</span><br><span class="line">            <span class="attr">"y"</span>: <span class="string">"2"</span>,</span><br><span class="line">            <span class="attr">"value"</span>: <span class="string">"-1"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>4、游戏结束请求<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span>: <span class="string">"GameOver"</span>,</span><br><span class="line">    <span class="attr">"values"</span>: &#123;</span><br><span class="line">        <span class="attr">"time"</span>: <span class="string">"213"</span> // 获胜所用时长</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>5、匹配游戏请求<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span>: <span class="string">"Math"</span>,</span><br><span class="line">    <span class="attr">"values"</span>:</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="客户端与服务器数据请求格式json"><a href="#客户端与服务器数据请求格式json" class="headerlink" title="客户端与服务器数据请求格式json"></a>客户端与服务器数据请求格式json</h4><p><strong>1、type</strong> 数据类型<br><strong>2、value</strong> 数据的值<br><strong>从客户端请求的数据类型如下</strong><br>1、登入请求<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="attr">"type"</span> : <span class="string">"Login"</span>,</span><br><span class="line">    <span class="attr">"account"</span> : <span class="string">"1234556"</span>,</span><br><span class="line">    <span class="attr">"password"</span> : <span class="string">"21fefefefesdfs"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、登出请求<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span> : <span class="string">"Logout"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3、转发数据请求(更新雷区)<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span> : <span class="string">"Transmit"</span>,</span><br><span class="line">    <span class="attr">"x"</span>:<span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"y"</span>:<span class="string">"2"</span>,</span><br><span class="line">    <span class="attr">"value"</span>:<span class="string">"1 | 2| -1"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>4、游戏结束请求<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span>: <span class="string">"GameOver"</span>,</span><br><span class="line">    <span class="attr">"status"</span>: <span class="string">"win|defeat"</span>,</span><br><span class="line">    <span class="attr">"costTime"</span>: <span class="string">"34323 | -1"</span>,</span><br><span class="line">    <span class="attr">"description"</span>:<span class="string">"关于游戏结束的描述"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>5、匹配游戏请求<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span>: <span class="string">"Math"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="服务器返回数据类型"><a href="#服务器返回数据类型" class="headerlink" title="服务器返回数据类型"></a>服务器返回数据类型</h3><p>1、登陆成功<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span>:<span class="string">"LoginSuccess"</span>,</span><br><span class="line">    <span class="attr">"value"</span>: <span class="string">"account"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、登陆失败<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span>:<span class="string">"LoginFailure"</span>,</span><br><span class="line">    <span class="attr">"value"</span>:<span class="string">"failure-type"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="责任链产生请求和处理请求说明"><a href="#责任链产生请求和处理请求说明" class="headerlink" title="责任链产生请求和处理请求说明"></a>责任链产生请求和处理请求说明</h3><p>1、<code>EvenType.SENDDATA</code> 发送数据的请求<br>2、<code>EvenType.UPDATE</code> 更新雷区的请求<br>3、<code>EvenType.LOGIN</code> 登陆游戏请求<br>4、<code>EvenType.CLICK</code> 鼠标点击雷区请求</p>
+<hr>
+<p>MyMouseListener.java 鼠标监听类</p>
+<blockquote>
+<p>产生: 点击雷区之后，产生鼠标点击请求(EvenType.CLICK)<br>处理: 无</p>
+</blockquote>
+<p>Conection.java 连接服务器类</p>
+<blockquote>
+<p>产生:<br>1、更新数据请求(EvenType.UPDATE) 这个更新信息是从服务器传送过来的<br>处理:<br>1、发送的数据请求(EvenType.SENDDATA)将数据发送到服务器<br>2、登陆请求(EvenType.LOGIN) 将登陆信息发送到服务器?两者是否能合并？</p>
+</blockquote>
+<p>Core.java 游戏核心类</p>
+<blockquote>
+<p>产生:<br>      1、更新雷区请求（EvenType.UPDATE）经过计算之后需要更新雷区数据<br>      2、游戏结束请求()<br>处理:<br>      1、鼠标的点击请求(EvenType.CLICK) 调用函数计算该请求导致的结果</p>
+</blockquote>
+<p>MineFile.java 雷区显示类</p>
+<blockquote>
+<p>产生: 发送数据请求(EvenType.SENDDATA)，主要是将雷区更新的数据发送到服务器，<br>处理: 更新雷区的请求(EvenType.UPDATE)，根据传过来的数据更新雷区的显示</p>
+</blockquote>
+<p>LoginPanel.java 登陆面板</p>
+<blockquote>
+<p>产生: 登陆游戏请求(EvenType.LOGIN),传递的数据是账号和hash取值后的密码<br>处理: 无</p>
+</blockquote>
+<p>OperatePanel.java 操作面板</p>
+<blockquote>
+<p>产生: 开始匹配游戏请求<br>处理: 待定</p>
+</blockquote>
+<h3 id="责任链中数据传输格式"><a href="#责任链中数据传输格式" class="headerlink" title="责任链中数据传输格式"></a>责任链中数据传输格式</h3><p><strong>旧版</strong><br>MineFile.java </p>
 <p>###java引用调用和按值调用<br>对象引用调用，类似于C中的指针。这样可以在B类对象中引入A类对象，这样便可以调用A类对象中的函数，代码如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.test;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引用调用</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> a = <span class="number">99</span>;</span><br><span class="line">    A()&#123;</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.a += i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">    B()&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addA</span><span class="params">(A a)</span></span>&#123;</span><br><span class="line">        a.add(<span class="number">1</span>); <span class="comment">// 引用a</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInt</span><span class="params">(<span class="keyword">int</span> i2, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        i2 = i2 + j;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">testReference</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] argv)</span></span>&#123;</span><br><span class="line">        A a = <span class="keyword">new</span>  A();</span><br><span class="line">        B b = <span class="keyword">new</span> B();</span><br><span class="line">        b.addA(a);</span><br><span class="line">        a.print(); <span class="comment">// 输出100</span></span><br><span class="line">        A a1 = a; <span class="comment">//</span></span><br><span class="line">        b.addA(a1);</span><br><span class="line">        a1.print(); <span class="comment">// 预计是101</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line">        b.addInt(i,<span class="number">19</span>);</span><br><span class="line">        System.out.println(i); <span class="comment">// 结果为1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>在b中操作a的函数。这样可以在core类中调用Login中的关闭函数</p>
 
@@ -347,7 +376,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h3><p>1、新建分支<br><code>git branch newBranchName</code> 在当前分支中新建一个newBranchName分支，但是目前还没有到那个分支里面去，<br>2、切换分支<br>使用<code>git branch -v</code>查看分支情况，前面有*号的为当前所在分支<br>使用<code>git checkout xxx</code> 移动到名为xxx的分支中<br><code>git branch -v</code> 进行分支查看<br>3、创建分支和移动分支命令也可以合并成<code>git checkout -b newBranch</code>.<br>4、删除分支<code>git branch -d delbranchname</code>可以删除已经合并了的分支，若要删除没有合并过的分支则需要使用—D来强制删除</p>
+        <h3 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h3><p>1、新建分支<br><code>git branch newBranchName</code> 在当前分支中新建一个newBranchName分支，但是目前还没有到那个分支里面去，<br>2、切换分支<br>使用<code>git branch -v</code>查看分支情况，前面有*号的为当前所在分支<br>使用<code>git checkout xxx</code> 移动到名为xxx的分支中<br><code>git branch -v</code> 进行分支查看<br>3、创建分支和移动分支命令也可以合并成<code>git checkout -b newBranch</code>.<br>4、删除分支<code>git branch -d delbranchname</code>可以删除已经合并了的分支，若要删除没有合并过的分支则需要使用—D来强制删除<br>5、关于分支无法push问题处理<br><strong>问题</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fatal: The current branch 1.0-dev has no upstream branch.</span><br><span class="line">To push the current branch and set the remote as upstream, use</span><br><span class="line">    git push --set-upstream origin 1.0-dev</span><br></pre></td></tr></table></figure></p>
+<p>使用<code>git push --set-upstream origin 1.0-dev</code>来建立一个上传流,其中的1.0-dev是分支名称</p>
 
       
 
@@ -544,11 +574,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
         		</li>
       		
 		</ul>
@@ -1118,10 +1148,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
@@ -1134,6 +1160,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
@@ -1142,11 +1172,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
