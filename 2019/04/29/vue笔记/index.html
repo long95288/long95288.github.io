@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="1、*.vue的文件表示一个vue组件，和使用commponet生成的模版类似，但是比之要多出一点东西，单页式组件（1）视图模版  &amp;lt;template&amp;gt;&amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/template&amp;gt; 这是html的模版（2）样式定义  &amp;lt;style&amp;gt;&amp;lt;/style&amp;gt; 可以放置样式（3）组件代">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-06T09:40:39.023Z">
+<meta property="og:updated_time" content="2019-06-28T14:53:51.581Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue笔记">
 <meta name="twitter:description" content="1、*.vue的文件表示一个vue组件，和使用commponet生成的模版类似，但是比之要多出一点东西，单页式组件（1）视图模版  &amp;lt;template&amp;gt;&amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/template&amp;gt; 这是html的模版（2）样式定义  &amp;lt;style&amp;gt;&amp;lt;/style&amp;gt; 可以放置样式（3）组件代">
@@ -207,6 +207,7 @@
 <h3 id="5、引入Element组件"><a href="#5、引入Element组件" class="headerlink" title="5、引入Element组件"></a>5、引入Element组件</h3><p>1、官方文档得引入<br>在main.js里面加入<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ElementUI <span class="keyword">from</span> <span class="string">'element-ui'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'element-ui/lib/theme-chalk/index.css'</span></span><br><span class="line">Vue.use(ElementUI)</span><br></pre></td></tr></table></figure></p>
 <p>在渲染的页面中，最顶层引入了<code>index.css</code>的样式。这样就可以使用ELement的标签了。因为已经在渲染的Html文件的头部加入样式表，标签便可以被识别。若是使用额外的样式则需要另外添加样式渲染的插件和模块。</p>
 <p>###6、Vue文件逻辑处理<br>1、v-bind的缩写<code>:</code>,例如<code>&lt;a :href=&quot;url&quot;&gt;&lt;/a&gt;</code><br>2、v-on的缩写<code>@</code>,例如<code>&lt;a v-on:click=&quot;doSomething&quot;&gt;&lt;/a&gt;</code>=&gt;<code>&lt;a @click=&quot;doSomething&quot;&gt;&lt;/a&gt;</code>缩写之后没有<code>:</code><br>3、计算属性,任何的复杂逻辑，都应该使用<strong>计算属性</strong><br>（1）使用计算属性,在标签中声明和了一个属性，然后在<code>computed</code>里面对这个属性进行处理。在vue文件中也是直接在 <code>computed:{}</code>之中完成逻辑处理<br>（2）计算属性和方法的区别,计算属性是依赖于所绑定的数据，若是所依赖的数据没有变化。则使用计算属性就会返回之前计算出来的结果，不会重新计算。方法的话每次访问的话就会重新计算，使用计算机的运算资源。不论所依赖的数据是否已经发生变化。从一定程度来说，计算属性是用空间来换取时间（增加缓存，减少cup的使用时间）。而方法在每一次都会重新执行，申请计算资源。<br>（3）计算属性默认是没有<code>set</code>方法的。可以自己定义.<br>4、监听<code>watch:{}</code>是用来对数据进行监听的。若是对数据进行的监听。若是数据发生变化，则会触发监听事件。但是这个和<code>v-model</code>有什么区别？？<code>v-model</code>是对<code>&lt;input&gt;、&lt;textarea&gt;、&lt;select&gt;</code>进行双向数据绑定。不会涉及数据处理<br>5、一个逐渐的<code>data</code>选项必须是一个函数，便于复用。</p>
+<h3 id="6、异步和等待-async-await"><a href="#6、异步和等待-async-await" class="headerlink" title="6、异步和等待(async await)"></a>6、异步和等待(async await)</h3><p>  有时候异步的处理中有同步的逻辑。这时候需要异步中的等待，例如:异步获得数据，但是将数据渲染到模板中的话就必须等待数据加载完毕之后才能进一步渲染，否则将会得到怪异的结果。虽然重渲染可能看不出来，但是网络差的时候。显示的会是模板语法。await就是解决async中的不确定。执行到await函数之后不会再往下执行了，得等到await函数执行完毕之后再执行。</p>
 
       
 
@@ -460,11 +461,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -476,11 +477,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -488,7 +489,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
             
             <div class="clearfix"></div>
