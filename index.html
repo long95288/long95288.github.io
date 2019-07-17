@@ -163,6 +163,84 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-dom4j-xml解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/17/dom4j-xml解析/">dom4j-xml解析</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/17/dom4j-xml解析/" class="archive-article-date">
+  	<time datetime="2019-07-17T02:29:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="maven-添加依赖"><a href="#maven-添加依赖" class="headerlink" title="maven 添加依赖"></a>maven 添加依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/dom4j/dom4j --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>dom4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>dom4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.6.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="读取xml文件"><a href="#读取xml文件" class="headerlink" title="读取xml文件"></a>读取xml文件</h4><p>1、获得读取文件的对象<br><code>SAXReader reader = new SAXReader();</code><br>2、读取文件，返回一个Element对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String path = <span class="string">"student.xml"</span>;</span><br><span class="line">Document doc = reader.read(<span class="keyword">new</span> File(path));</span><br></pre></td></tr></table></figure></p>
+<p>3、获得根元素<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Element root = doc.getRootElement();</span><br><span class="line">System.out.println(root.getName());</span><br></pre></td></tr></table></figure></p>
+<p>4、获得元素的列表<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;ELement&gt; list = root.elements();</span><br></pre></td></tr></table></figure></p>
+<h4 id="相关的函数说明"><a href="#相关的函数说明" class="headerlink" title="相关的函数说明"></a>相关的函数说明</h4><p>1、getRootElement<br>获得Document文件的根元素<br>2、Element#getName()<br>获得标签的名称<br>3、获得指定标签内的值<br>3.1 方法一<br>(1)先获得指定标签的element<br>Element#element(“tag”)-&gt;Element;<br>(2)获得标签内的值<br>Element#getText()-&gt;String<br>3.2 方法二<br>ELement#elementText(“tag”)-&gt;String<br>4、获得标签的属性<br>Element#attribute(“attr”)-&gt;Atrribute<br>4.1 获得属性的的名称<br> Attribute#getName()-&gt;String<br>4.2 获得属性的值<br> Atrribute#getValue()-&gt;String</p>
+<h4 id="写XML"><a href="#写XML" class="headerlink" title="写XML"></a>写XML</h4>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/17/dom4j-xml解析/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-linux环境配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -974,84 +1052,9 @@
 
 
   
-    <article id="post-git常用操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/07/git常用操作/">git常用操作</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/07/git常用操作/" class="archive-article-date">
-  	<time datetime="2019-05-07T15:12:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h3><p>1、新建分支<br><code>git branch newBranchName</code> 在当前分支中新建一个newBranchName分支，但是目前还没有到那个分支里面去，<br>2、切换分支<br>使用<code>git branch -v</code>查看分支情况，前面有*号的为当前所在分支<br>使用<code>git checkout xxx</code> 移动到名为xxx的分支中<br><code>git branch -v</code> 进行分支查看<br>3、创建分支和移动分支命令也可以合并成<code>git checkout -b newBranch</code>.<br>4、删除分支<code>git branch -d delbranchname</code>可以删除已经合并了的分支，若要删除没有合并过的分支则需要使用—D来强制删除<br>5、关于分支无法push问题处理<br><strong>问题</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fatal: The current branch 1.0-dev has no upstream branch.</span><br><span class="line">To push the current branch and set the remote as upstream, use</span><br><span class="line">    git push --set-upstream origin 1.0-dev</span><br></pre></td></tr></table></figure></p>
-<p>使用<code>git push --set-upstream origin 1.0-dev</code>来建立一个上传流,其中的1.0-dev是分支名称</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/07/git常用操作/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1146,15 +1149,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">diy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1166,19 +1169,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">

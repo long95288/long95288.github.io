@@ -6,20 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://long95288.github.io">
-  <title>linux安装MySql | 风兮木落</title>
+  <title>Archives | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="转载来的哦！！ yum安装介绍Linux下使用Yum安装Mysql：  在mysql官网下载mysql的yum源  1wget https://repo.mysql.com//mysql80-community-release-el7-3.noarch.rpm  上传到centos中并执行本地安装  1yum localinstall mysql80-community-release-el7-3">
-<meta name="keywords" content="笔记">
-<meta property="og:type" content="article">
-<meta property="og:title" content="linux安装MySql">
-<meta property="og:url" content="http://long95288.github.io/2019/07/15/linux安装MySql/index.html">
+  <meta name="description" content="代码和文学本来就是一个世界的，寻找文学和code的和谐统一">
+<meta property="og:type" content="website">
+<meta property="og:title" content="风兮木落">
+<meta property="og:url" content="http://long95288.github.io/archives/page/3/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="转载来的哦！！ yum安装介绍Linux下使用Yum安装Mysql：  在mysql官网下载mysql的yum源  1wget https://repo.mysql.com//mysql80-community-release-el7-3.noarch.rpm  上传到centos中并执行本地安装  1yum localinstall mysql80-community-release-el7-3">
+<meta property="og:description" content="代码和文学本来就是一个世界的，寻找文学和code的和谐统一">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-15T15:20:53.021Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="linux安装MySql">
-<meta name="twitter:description" content="转载来的哦！！ yum安装介绍Linux下使用Yum安装Mysql：  在mysql官网下载mysql的yum源  1wget https://repo.mysql.com//mysql80-community-release-el7-3.noarch.rpm  上传到centos中并执行本地安装  1yum localinstall mysql80-community-release-el7-3">
+<meta name="twitter:title" content="风兮木落">
+<meta name="twitter:description" content="代码和文学本来就是一个世界的，寻找文学和code的和谐统一">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
   
@@ -163,254 +161,63 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-linux安装MySql" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      linux安装MySql
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/03/11/算法笔记/" class="archive-article-date">
+  	<time datetime="2019-03-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-11</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/03/11/算法笔记/">辗转相除法</a>
     </h1>
   
 
-        
-        <a href="/2019/07/15/linux安装MySql/" class="archive-article-date">
-  	<time datetime="2019-07-15T15:18:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>转载来的哦！！</p>
-<h5 id="yum安装"><a href="#yum安装" class="headerlink" title="yum安装"></a>yum安装</h5><p>介绍Linux下使用Yum安装Mysql：</p>
-<ol>
-<li>在mysql官网下载mysql的yum源</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://repo.mysql.com//mysql80-community-release-el7-3.noarch.rpm</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>上传到centos中并执行本地安装</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum localinstall mysql80-community-release-el7-3.noarch.rpm</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>安装服务</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install mysql-community-server</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>查看Mysql服务的状态</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld status</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li>开启Mysql服务</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld start</span><br></pre></td></tr></table></figure>
-<ol start="6">
-<li>查看配置文件，找到日志目录</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br></pre></td></tr></table></figure>
-<ol start="7">
-<li>查看日志文件，找到初始密码</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /var/log/mysqld.log</span><br></pre></td></tr></table></figure>
-<ol start="8">
-<li>登录MySQL</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
-<ol start="9">
-<li>修改初始密码（Root.123）大小写字母加数字加符号</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter user &apos;root&apos;@&apos;localhost&apos; identified by &apos;Root.123&apos;;</span><br></pre></td></tr></table></figure>
-<h5 id="远程授权"><a href="#远程授权" class="headerlink" title="远程授权"></a>远程授权</h5><p>授权远程登录账号：</p>
-<ol>
-<li>以下是5.7版本的方法，实测在8.0以上版本不行</li>
-</ol>
-<ul>
-<li>第一个xxxx是用户名，第二个xxxx是密码，意思是通过xxxx用户和密码可以从任何主机连接到mysql服务器。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grant all privileges on *.* to &apos;xxxx&apos;@&apos;%&apos; identified by &apos;xxxxxx&apos; with grant option;</span><br><span class="line">grant all privileges on *.* to &apos;root&apos;@&apos;%&apos; identified by &apos;123456&apos; with grant option;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>权限立即生效</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>以下是适用于8.0版本的授权：</li>
-</ol>
-<ul>
-<li>进入数据库</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>查看当前用户信息</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select host, user, authentication_string, plugin from user;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>修改MySQL对密码的要求</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set global validate_password.policy=0;</span><br><span class="line">set global validate_password.length=1;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>创建远程连接的用户</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模板 create user 'xxxx'@'x' identified by 'xxxxxxx';</span></span><br><span class="line">create user <span class="string">'kang'</span>@<span class="string">'%'</span> identified by <span class="string">'kang123'</span>;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>修改密码加密规则，mysql8.0默认的加密方式是“caching_sha2_password”，而navicat只支持以前的”mysql_native_password”</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &apos;kang&apos;@&apos;%&apos; IDENTIFIED WITH mysql_native_password BY &apos;kang123&apos;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>查看加密规则是否改变</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select host, user, authentication_string, plugin from user;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>给新用户添加权限，最后刷新权限</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO &apos;kang&apos;@&apos;%&apos;;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/07/15/linux安装MySql/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/07/16/linux环境配置/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          linux环境配置
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/07/15/spring笔记/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">spring笔记</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/page/2/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
   
 
 
@@ -434,8 +241,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
