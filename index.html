@@ -263,6 +263,9 @@
         <h4 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h4><p>过滤器的作用是对url访问进行拦截，比如：有一个需要登陆的系统，登陆成功后便跳转到index.jsp。如果用户直接输入index.jsp。这时候后台要对这样的行为进行拦截。<br>1、过滤器需要实现servlet的Filter接口。并且实现doFilter方法。</p>
 <p>2、过滤器要起作用还要配置过滤器和拦截的对象。在web.xml中配置。<br>一个简单的登陆过滤器的配置例子:</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置过滤器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>LoginFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>com.bosssoft.hr.train.chp2.filter.LoginFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--配置路由映射--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>LoginFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/index.jsp<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="监听器"><a href="#监听器" class="headerlink" title="监听器"></a>监听器</h4><p>1、监听器一共有8种类型，主要是监听对象的创建和销毁，属性的增加和减少。其中有如下几种<br>监听对象的创建和销毁的监听器<br>（1）ServletContextlistener 监听ServletContext对象<br>（2）HttpSessionListener 监听HttpSession对象<br>（3）ServletRequestListener 监听ServletRequest对象<br>监听对象属性的增加、修改和删除的事件监听器<br>（4）ServletContextAttributeListener 监听ServletContext对象属性变更<br>（5）HttpSessionAttributeListener监听HttpSession对象属性变更<br>（6）ServletRequestAttributeListener监听Servlet对象的属性的变更<br>监听绑定到HttpSession域中的某个对象状态的事件监听器<br>(7)HttpSessionBindingListener 监听session的绑定和解除<br>(8)HttpSessionActivationListener 会话持久层。</p>
+<p>2、一个统计网站当前在线人数的例子的监听器例子<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">**</span><br><span class="line"> * session 用户监听，当有新连接的时候在线数量加一</span><br><span class="line"> * <span class="meta">@author</span> 风兮木落</span><br><span class="line"> *</span><br><span class="line"> * */</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OnlineListener</span> <span class="keyword">implements</span> <span class="title">HttpSessionListener</span>,<span class="title">ServletRequestListener</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">sessionCreated</span><span class="params">(HttpSessionEvent se)</span> </span>&#123;</span><br><span class="line">        HttpSession session = se.getSession();</span><br><span class="line">        Store.onlineCount += <span class="number">1</span>;</span><br><span class="line">        System.out.println(<span class="string">"创建session:"</span>+session.getId());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">sessionDestroyed</span><span class="params">(HttpSessionEvent se)</span> </span>&#123;</span><br><span class="line">       Store.onlineCount -= <span class="number">1</span>;</span><br><span class="line">       System.out.println(<span class="string">"销毁session:"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">requestDestroyed</span><span class="params">(ServletRequestEvent sre)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"destroy request:"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">requestInitialized</span><span class="params">(ServletRequestEvent sre)</span> </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"create request"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>每当有一个新的连接的时候，会触发request的监听器。当有一个session创建的时候就会触发sessionCreated函数，将全局的变量加一。当一个session过期的时候就会触发sessionDestred函数，将全局变量减一。</p>
 
       
 
@@ -1113,15 +1116,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">diy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1141,11 +1144,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
