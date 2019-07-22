@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://long95288.github.io">
   <title>spring笔记 | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="注解配置和xml配置的优先级xml 配置优先于注解配置。如果同时有xml和注解，则xml中会覆盖掉注解中的配置。">
+  <meta name="description" content="注解配置和xml配置的优先级xml 配置优先于注解配置。如果同时有xml和注解，则xml中会覆盖掉注解中的配置。 bean的相关知识1、bean的属性 （1）class bean里面的所连接的类 （2）name 这个bean的标识 （3）scope bean的对象的作用域 ​    bean的作用域： singleton 单例，只要调用该bean的都是得到同一个对象。默认的属性 prototype">
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spring笔记">
 <meta property="og:url" content="http://long95288.github.io/2019/07/15/spring笔记/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="注解配置和xml配置的优先级xml 配置优先于注解配置。如果同时有xml和注解，则xml中会覆盖掉注解中的配置。">
+<meta property="og:description" content="注解配置和xml配置的优先级xml 配置优先于注解配置。如果同时有xml和注解，则xml中会覆盖掉注解中的配置。 bean的相关知识1、bean的属性 （1）class bean里面的所连接的类 （2）name 这个bean的标识 （3）scope bean的对象的作用域 ​    bean的作用域： singleton 单例，只要调用该bean的都是得到同一个对象。默认的属性 prototype">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-15T02:37:56.673Z">
+<meta property="og:updated_time" content="2019-07-22T13:46:57.443Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spring笔记">
-<meta name="twitter:description" content="注解配置和xml配置的优先级xml 配置优先于注解配置。如果同时有xml和注解，则xml中会覆盖掉注解中的配置。">
+<meta name="twitter:description" content="注解配置和xml配置的优先级xml 配置优先于注解配置。如果同时有xml和注解，则xml中会覆盖掉注解中的配置。 bean的相关知识1、bean的属性 （1）class bean里面的所连接的类 （2）name 这个bean的标识 （3）scope bean的对象的作用域 ​    bean的作用域： singleton 单例，只要调用该bean的都是得到同一个对象。默认的属性 prototype">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
   
@@ -184,6 +184,24 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h4 id="注解配置和xml配置的优先级"><a href="#注解配置和xml配置的优先级" class="headerlink" title="注解配置和xml配置的优先级"></a>注解配置和xml配置的优先级</h4><p>xml 配置优先于注解配置。如果同时有xml和注解，则xml中会覆盖掉注解中的配置。</p>
+<h4 id="bean的相关知识"><a href="#bean的相关知识" class="headerlink" title="bean的相关知识"></a>bean的相关知识</h4><p>1、bean的属性</p>
+<p>（1）class bean里面的所连接的类</p>
+<p>（2）name 这个bean的标识</p>
+<p>（3）scope bean的对象的作用域</p>
+<p>​    bean的作用域：</p>
+<p>singleton 单例，只要调用该bean的都是得到同一个对象。默认的属性</p>
+<p>prototype 原型， 每次获得该bean都得到一个新的bean</p>
+<p>request http请求会产生一个新的实例bean.仅适用于WebApplicationContext环境</p>
+<p>session 同一个session共享一个bean。不同的session使用不同的bean.用于WebApplicationContext环境</p>
+<p>global-session Portlet应用环境。仅适用于WebApplicationContext环境。</p>
+<p>2、bean的生命周期</p>
+<p>（1）Bean的定义</p>
+<p>xml中配置<strong>init-method</strong> 和<strong>destroy-method</strong>参数。init-method 实例化的时候调用该方法。destroy-method 容器移除bean之后，调用该方法。</p>
+<p>在beans标签里面默认的初始化和销毁方法</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag"><span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"</span></span></span><br><span class="line"><span class="tag"><span class="attr">default-init-method</span>=<span class="string">"init"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">default-destroy-method</span>=<span class="string">"destroy"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>（2）Bean的初始化</p>
+<p>（3）Bean的使用</p>
+<p>（4）Bean的销毁</p>
 
       
 
@@ -425,15 +443,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">diy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -445,11 +463,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
