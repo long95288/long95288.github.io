@@ -46,7 +46,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="/images/logo.png" class="js-avatar">
+			<img src="/images/logo.jpg" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">long</a></h1>
@@ -104,7 +104,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="/images/logo.png" class="js-avatar">
+				<img src="/images/logo.jpg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">long</h1>
@@ -669,6 +669,17 @@
 <p>（2）Bean的初始化</p>
 <p>（3）Bean的使用</p>
 <p>（4）Bean的销毁</p>
+<h5 id="SpringMVC-Controller"><a href="#SpringMVC-Controller" class="headerlink" title="SpringMVC Controller"></a>SpringMVC Controller</h5><p>1、在dispatcher-servlet.xml中配置<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 扫描控制器的所在的包 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"Controller"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>2、controller配置路径的post、get请求。<br>在<code>@RequestMapping()</code>中含有一些参数可一个配置路径</p>
+<ul>
+<li>method 请求的方法<br>例如:<br>(1)post请求:<code>@RequestMapping(path=&quot;/login&quot;,method = RequestMethod.POST)</code><br>(2)get请求的简写:<code>@GetMapping(path = &quot;/login&quot;)</code>但是使用相同的方法简写post请求就出现错误了。</li>
+</ul>
+<p>3、controller Model<br>可以使用Model#addAttribute(K,V) 来设置传回去的值。然后在jsp页面中使用<code>${K}</code>获得model中<code>V</code>的值。<br>4、controller 获得页面传过来的值<br>直接在函数的入口参数中声明便可以获得相应的值<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(path = <span class="string">"/login"</span>,method = RequestMethod.POST)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">(Model model,String account,String password )</span> </span>&#123;</span><br><span class="line">        model.addAttribute(<span class="string">"account"</span>,account);</span><br><span class="line">        model.addAttribute(<span class="string">"password"</span>,password);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"info"</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中的<code>info</code>是视图的名称。会将model传递到info.jsp中。</p>
+<h4 id="SpringMVC-View"><a href="#SpringMVC-View" class="headerlink" title="SpringMVC View"></a>SpringMVC View</h4><p>1、在view中使用model中的数据。</p>
+<ul>
+<li>在info.jsp中显示用户从index.jsp中传过来用户名和密码<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>账号:<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;account&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>密码:<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;password&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
 
@@ -1134,10 +1145,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
               </li>
              
@@ -1146,7 +1153,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1154,15 +1161,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
