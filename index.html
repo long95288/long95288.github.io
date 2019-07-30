@@ -588,19 +588,19 @@
 
 
   
-    <article id="post-linux环境配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-linux环境配置和常用命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/16/linux环境配置/">linux环境配置</a>
+      <a class="article-title" href="/2019/07/16/linux环境配置和常用命令/">linux环境配置</a>
     </h1>
   
 
         
-        <a href="/2019/07/16/linux环境配置/" class="archive-article-date">
+        <a href="/2019/07/16/linux环境配置和常用命令/" class="archive-article-date">
   	<time datetime="2019-07-16T13:28:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-16</time>
 </a>
         
@@ -610,7 +610,7 @@
       
         <h3 id="Linux配置java的环境变量"><a href="#Linux配置java的环境变量" class="headerlink" title="Linux配置java的环境变量"></a>Linux配置java的环境变量</h3><p>1、找到jdk安装包的位置<br>2、打开profile文件<br><code># vim /etc/profile</code><br>3、添加如下的内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/java/jdk1.8.0_212-amd64</span><br><span class="line"><span class="built_in">export</span> JRE_HOME=/usr/java/jdk1.8.0_212-amd64/jre</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$JRE_HOME</span>/bin</span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$CLASSPATH</span>:<span class="variable">$JAVA_HOME</span>/lib:<span class="variable">$JRE_HOME</span>/lib</span><br></pre></td></tr></table></figure></p>
 <p>4、更新配置<br><code>source /etc/profile</code><br>5、使用如下命令查看是否配置成功<br><code>java -version</code><br><code>echo $JAVA_HOME</code><br>6.注意分隔符在Linux中使用:(冒号),在Windows中使用;(分号)</p>
-
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3>
       
 
       
@@ -633,7 +633,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/16/linux环境配置/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/07/16/linux环境配置和常用命令/">展开全文 >></a>
         </p>
       
 
@@ -1202,15 +1202,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
