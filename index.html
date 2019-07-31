@@ -610,7 +610,20 @@
       
         <h3 id="Linux配置java的环境变量"><a href="#Linux配置java的环境变量" class="headerlink" title="Linux配置java的环境变量"></a>Linux配置java的环境变量</h3><p>1、找到jdk安装包的位置<br>2、打开profile文件<br><code># vim /etc/profile</code><br>3、添加如下的内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/java/jdk1.8.0_212-amd64</span><br><span class="line"><span class="built_in">export</span> JRE_HOME=/usr/java/jdk1.8.0_212-amd64/jre</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$JRE_HOME</span>/bin</span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$CLASSPATH</span>:<span class="variable">$JAVA_HOME</span>/lib:<span class="variable">$JRE_HOME</span>/lib</span><br></pre></td></tr></table></figure></p>
 <p>4、更新配置<br><code>source /etc/profile</code><br>5、使用如下命令查看是否配置成功<br><code>java -version</code><br><code>echo $JAVA_HOME</code><br>6.注意分隔符在Linux中使用:(冒号),在Windows中使用;(分号)</p>
-<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><p>一、文件夹命令</p>
+<ul>
+<li>创建同级目录<br><code>mkdir -p {a,b,c,d}</code></li>
+<li>创建嵌套<br><code>mkdir -p a/b/c</code></li>
+<li>删除同级目录<br><code>rm -rf {a,b,c}</code></li>
+<li>强制删除嵌套目录<br><code>rm -rf dictionary</code></li>
+<li>设置目录权限<br>(1) 切换目录的权限<br><code>chmod 775 abc</code><br>(2)将abc的权限赋给root(组):root(用户)<br><code>sudo chown root:root abc</code></li>
+</ul>
+<p>二、用户命令</p>
+<ul>
+<li>创建用户命令<br><code>useradd -m test</code></li>
+<li>切换用户<br><code>su test</code></li>
+</ul>
+
       
 
       
@@ -950,6 +963,13 @@
 <h4 id="第三步-更改映像地址"><a href="#第三步-更改映像地址" class="headerlink" title="第三步 更改映像地址"></a>第三步 更改映像地址</h4><p>定位到解压的目录,进入conf文件夹，打开setting.xml文件<br>在<code>&lt;mirrors&gt;</code>标签中添加新的映像地址<br>例如:阿里的地址<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置阿里云的服务器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>至此，安装和配置环境变量完成</p>
 <h3 id="Maven使用命令"><a href="#Maven使用命令" class="headerlink" title="Maven使用命令"></a>Maven使用命令</h3><p>1、启动spring boot<br><code>mvn spring-boot:run</code></p>
+<p>2、创建项目命令<br><code>mvn archetype:generate</code></p>
+<p>3、将项目转成idea项目<br><code>mvn idea:idea</code></p>
+<p>4、编译项目<br><code>mvn complie</code></p>
+<p>5、清除旧的class文件<br><code>mvn clean</code></p>
+<p>6、生成测试报告<br><code>mvn test</code></p>
+<p>7、打包<br><code>mvn package</code></p>
+<p>8、安装到仓库<br><code>mvn install</code></p>
 
       
 
@@ -1202,7 +1222,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1210,7 +1230,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
