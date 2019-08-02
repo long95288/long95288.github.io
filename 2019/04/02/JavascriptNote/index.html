@@ -8,20 +8,20 @@
   <link rel="dns-prefetch" href="http://long95288.github.io">
   <title>Javascript笔记 | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. var、let、const区别 var 定义的变量 可以穿透块作用域访问，if和for可以穿透，var但不能跨函数作用域访问  let 定义的变量，只能在块作用域里访问，不能跨’{}’引用，也不能跨函数访问  const 定义常量，赋值，常量不可变。 2. (function(){函数体})(); 自引用的函数,不用调用便可以运行 3.关于JQuery ajax请求一直返回Error(par">
+  <meta name="description" content="1. var、let、const区别 var 定义的变量 可以穿透块作用域访问，if和for可以穿透，var但不能跨函数作用域访问  let 定义的变量，只能在块作用域里访问，不能跨’{}’引用，也不能跨函数访问  const 定义常量，赋值，常量不可变。   2. (function(){函数体})(); 自引用的函数,不用调用便可以运行  3.关于JQuery ajax请求一直返回Error(">
 <meta name="keywords" content="笔记,JavaScript,周边技术">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Javascript笔记">
 <meta property="og:url" content="http://long95288.github.io/2019/04/02/JavascriptNote/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="1. var、let、const区别 var 定义的变量 可以穿透块作用域访问，if和for可以穿透，var但不能跨函数作用域访问  let 定义的变量，只能在块作用域里访问，不能跨’{}’引用，也不能跨函数访问  const 定义常量，赋值，常量不可变。 2. (function(){函数体})(); 自引用的函数,不用调用便可以运行 3.关于JQuery ajax请求一直返回Error(par">
+<meta property="og:description" content="1. var、let、const区别 var 定义的变量 可以穿透块作用域访问，if和for可以穿透，var但不能跨函数作用域访问  let 定义的变量，只能在块作用域里访问，不能跨’{}’引用，也不能跨函数访问  const 定义常量，赋值，常量不可变。   2. (function(){函数体})(); 自引用的函数,不用调用便可以运行  3.关于JQuery ajax请求一直返回Error(">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://long95288.github.io/2019/04/02/JavascriptNote/code1.jpg">
 <meta property="og:image" content="http://long95288.github.io/2019/04/02/JavascriptNote/es6forin.jpg">
-<meta property="og:updated_time" content="2019-06-05T07:47:17.175Z">
+<meta property="og:updated_time" content="2019-08-02T07:28:19.329Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Javascript笔记">
-<meta name="twitter:description" content="1. var、let、const区别 var 定义的变量 可以穿透块作用域访问，if和for可以穿透，var但不能跨函数作用域访问  let 定义的变量，只能在块作用域里访问，不能跨’{}’引用，也不能跨函数访问  const 定义常量，赋值，常量不可变。 2. (function(){函数体})(); 自引用的函数,不用调用便可以运行 3.关于JQuery ajax请求一直返回Error(par">
+<meta name="twitter:description" content="1. var、let、const区别 var 定义的变量 可以穿透块作用域访问，if和for可以穿透，var但不能跨函数作用域访问  let 定义的变量，只能在块作用域里访问，不能跨’{}’引用，也不能跨函数访问  const 定义常量，赋值，常量不可变。   2. (function(){函数体})(); 自引用的函数,不用调用便可以运行  3.关于JQuery ajax请求一直返回Error(">
 <meta name="twitter:image" content="http://long95288.github.io/2019/04/02/JavascriptNote/code1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
@@ -186,24 +186,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-var、let、const区别"><a href="#1-var、let、const区别" class="headerlink" title="1. var、let、const区别"></a>1. var、let、const区别</h2><blockquote>
-<h3 id="var-定义的变量-可以穿透块作用域访问，if和for可以穿透，var但不能跨函数作用域访问"><a href="#var-定义的变量-可以穿透块作用域访问，if和for可以穿透，var但不能跨函数作用域访问" class="headerlink" title="var 定义的变量 可以穿透块作用域访问，if和for可以穿透，var但不能跨函数作用域访问"></a>var 定义的变量 可以穿透块作用域访问，if和for可以穿透，var但不能跨函数作用域访问</h3></blockquote>
-<blockquote>
-<h3 id="let-定义的变量，只能在块作用域里访问，不能跨’-’引用，也不能跨函数访问"><a href="#let-定义的变量，只能在块作用域里访问，不能跨’-’引用，也不能跨函数访问" class="headerlink" title="let 定义的变量，只能在块作用域里访问，不能跨’{}’引用，也不能跨函数访问"></a>let 定义的变量，只能在<strong>块作用域</strong>里访问，不能跨’{}’引用，也不能跨函数访问</h3></blockquote>
-<blockquote>
-<h3 id="const-定义常量，赋值，常量不可变。"><a href="#const-定义常量，赋值，常量不可变。" class="headerlink" title="const 定义常量，赋值，常量不可变。"></a>const 定义常量，赋值，常量不可变。</h3></blockquote>
-<h2 id="2-function-函数体"><a href="#2-function-函数体" class="headerlink" title="2. (function(){函数体})();"></a>2. (function(){函数体})();</h2><blockquote>
-<h3 id="自引用的函数-不用调用便可以运行"><a href="#自引用的函数-不用调用便可以运行" class="headerlink" title="自引用的函数,不用调用便可以运行"></a>自引用的函数,不用调用便可以运行</h3></blockquote>
-<h2 id="3-关于JQuery-ajax请求一直返回Error-parsererror-问题"><a href="#3-关于JQuery-ajax请求一直返回Error-parsererror-问题" class="headerlink" title="3.关于JQuery ajax请求一直返回Error(parsererror)问题"></a>3.关于JQuery ajax请求一直返回Error(parsererror)问题</h2><blockquote>
-<h3 id="问题出在请求的类型上，如果参数DataType设置为JSON-然而服务器端并不是返回json数据，就出现解析错误。若无用需要将该参数注释掉便可。"><a href="#问题出在请求的类型上，如果参数DataType设置为JSON-然而服务器端并不是返回json数据，就出现解析错误。若无用需要将该参数注释掉便可。" class="headerlink" title="问题出在请求的类型上，如果参数DataType设置为JSON,然而服务器端并不是返回json数据，就出现解析错误。若无用需要将该参数注释掉便可。"></a>问题出在请求的类型上，如果参数DataType设置为JSON,然而服务器端并不是返回json数据，就出现解析错误。若无用需要将该参数注释掉便可。</h3><p><img src="/2019/04/02/JavascriptNote/code1.jpg" alt="code1"></p>
-</blockquote>
-<h2 id="4、for-in-和-for-of区别"><a href="#4、for-in-和-for-of区别" class="headerlink" title="4、for in 和 for of区别"></a>4、for in 和 for of区别</h2><blockquote>
-<h3 id="for-in-是遍历数组的索引，for-of-是遍历数组的元素。"><a href="#for-in-是遍历数组的索引，for-of-是遍历数组的元素。" class="headerlink" title="for in 是遍历数组的索引，for of 是遍历数组的元素。"></a>for in 是遍历数组的索引，for of 是遍历数组的元素。</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// for of 遍历元素</span></span><br><span class="line"><span class="keyword">let</span> sum = <span class="function">(<span class="params">...m</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">let</span> total = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">of</span> m)&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">`i:<span class="subst">$&#123;i&#125;</span>`</span>);</span><br><span class="line">		total += i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">`total:<span class="subst">$&#123;total&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line">sum(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>); <span class="comment">// 10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// for in 遍历索引</span></span><br><span class="line"><span class="keyword">let</span> sum2 =<span class="function">(<span class="params">...m</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">let</span> total=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> m)</span><br><span class="line">	&#123;   <span class="comment">// 索引 0 1 2 3</span></span><br><span class="line">		total += i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">`total:<span class="subst">$&#123;total&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line">sum2(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>); <span class="comment">//00123</span></span><br></pre></td></tr></table></figure>
-</blockquote>
+        <h4 id="1-var、let、const区别"><a href="#1-var、let、const区别" class="headerlink" title="1. var、let、const区别"></a>1. var、let、const区别</h4><ul>
+<li><p>var 定义的变量 可以穿透块作用域访问，if和for可以穿透，var但不能跨函数作用域访问</p>
+</li>
+<li><p>let 定义的变量，只能在<strong>块作用域</strong>里访问，不能跨’{}’引用，也不能跨函数访问</p>
+</li>
+<li><p>const 定义常量，赋值，常量不可变。</p>
+</li>
+</ul>
+<h4 id="2-function-函数体"><a href="#2-function-函数体" class="headerlink" title="2. (function(){函数体})();"></a>2. (function(){函数体})();</h4><ul>
+<li>自引用的函数,不用调用便可以运行</li>
+</ul>
+<h4 id="3-关于JQuery-ajax请求一直返回Error-parsererror-问题"><a href="#3-关于JQuery-ajax请求一直返回Error-parsererror-问题" class="headerlink" title="3.关于JQuery ajax请求一直返回Error(parsererror)问题"></a>3.关于JQuery ajax请求一直返回Error(parsererror)问题</h4><ul>
+<li>问题出在请求的类型上，如果参数DataType设置为JSON,然而服务器端并不是返回json数据，就出现解析错误。若无用需要将该参数注释掉便可。<br><img src="/2019/04/02/JavascriptNote/code1.jpg" alt="code1"><h4 id="4、for-in-和-for-of区别"><a href="#4、for-in-和-for-of区别" class="headerlink" title="4、for in 和 for of区别"></a>4、for in 和 for of区别</h4></li>
+<li>for in 是遍历数组的索引，for of 是遍历数组的元素。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// for of 遍历元素</span></span><br><span class="line"><span class="keyword">let</span> sum = <span class="function">(<span class="params">...m</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">let</span> total = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">of</span> m)&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">`i:<span class="subst">$&#123;i&#125;</span>`</span>);</span><br><span class="line">		total += i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">`total:<span class="subst">$&#123;total&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line">sum(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>); <span class="comment">// 10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// for in 遍历索引</span></span><br><span class="line"><span class="keyword">let</span> sum2 =<span class="function">(<span class="params">...m</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">let</span> total=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> m)</span><br><span class="line">	&#123;   <span class="comment">// 索引 0 1 2 3</span></span><br><span class="line">		total += i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">`total:<span class="subst">$&#123;total&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line">sum2(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>); <span class="comment">//00123</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 <p><img src="/2019/04/02/JavascriptNote/es6forin.jpg" alt="result"></p>
-<blockquote>
-<h3 id="结果显示for-of-是元素，for-each是遍历索引。"><a href="#结果显示for-of-是元素，for-each是遍历索引。" class="headerlink" title="结果显示for of 是元素，for each是遍历索引。"></a>结果显示for of 是元素，for each是遍历索引。</h3></blockquote>
-<h2 id="5-异步请求的同步请求"><a href="#5-异步请求的同步请求" class="headerlink" title="5.异步请求的同步请求"></a>5.异步请求的同步请求</h2><p>很多时候，异步请求是不错。但是，在特殊的逻辑处理，异步的请求是会影响程序的处理逻辑的。在大创的项目中，判断是否喜欢的逻辑，使用同步请求的逻辑，影响程序的执行顺序.</p>
+<ul>
+<li>结果显示for of 是元素，for each是遍历索引。<h4 id="5-异步请求的同步请求"><a href="#5-异步请求的同步请求" class="headerlink" title="5.异步请求的同步请求"></a>5.异步请求的同步请求</h4>很多时候，异步请求是不错。但是，在特殊的逻辑处理，异步的请求是会影响程序的处理逻辑的。在大创的项目中，判断是否喜欢的逻辑，使用同步请求的逻辑，影响程序的执行顺序.</li>
+</ul>
 
       
 
@@ -461,11 +463,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -473,11 +475,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
