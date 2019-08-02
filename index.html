@@ -452,6 +452,7 @@
 <h4 id="监听器"><a href="#监听器" class="headerlink" title="监听器"></a>监听器</h4><p>1、监听器一共有8种类型，主要是监听对象的创建和销毁，属性的增加和减少。其中有如下几种<br>监听对象的创建和销毁的监听器<br>（1）ServletContextlistener 监听ServletContext对象<br>（2）HttpSessionListener 监听HttpSession对象<br>（3）ServletRequestListener 监听ServletRequest对象<br>监听对象属性的增加、修改和删除的事件监听器<br>（4）ServletContextAttributeListener 监听ServletContext对象属性变更<br>（5）HttpSessionAttributeListener监听HttpSession对象属性变更<br>（6）ServletRequestAttributeListener监听Servlet对象的属性的变更<br>监听绑定到HttpSession域中的某个对象状态的事件监听器<br>(7)HttpSessionBindingListener 监听session的绑定和解除<br>(8)HttpSessionActivationListener 会话持久层。</p>
 <p>2、一个统计网站当前在线人数的例子的监听器例子<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">**</span><br><span class="line"> * session 用户监听，当有新连接的时候在线数量加一</span><br><span class="line"> * <span class="meta">@author</span> 风兮木落</span><br><span class="line"> *</span><br><span class="line"> * */</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OnlineListener</span> <span class="keyword">implements</span> <span class="title">HttpSessionListener</span>,<span class="title">ServletRequestListener</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">sessionCreated</span><span class="params">(HttpSessionEvent se)</span> </span>&#123;</span><br><span class="line">        HttpSession session = se.getSession();</span><br><span class="line">        Store.onlineCount += <span class="number">1</span>;</span><br><span class="line">        System.out.println(<span class="string">"创建session:"</span>+session.getId());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">sessionDestroyed</span><span class="params">(HttpSessionEvent se)</span> </span>&#123;</span><br><span class="line">       Store.onlineCount -= <span class="number">1</span>;</span><br><span class="line">       System.out.println(<span class="string">"销毁session:"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">requestDestroyed</span><span class="params">(ServletRequestEvent sre)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"destroy request:"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">requestInitialized</span><span class="params">(ServletRequestEvent sre)</span> </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"create request"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>每当有一个新的连接的时候，会触发request的监听器。当有一个session创建的时候就会触发sessionCreated函数，将全局的变量加一。当一个session过期的时候就会触发sessionDestred函数，将全局变量减一。</p>
+<h4 id="jsp9大内置对象"><a href="#jsp9大内置对象" class="headerlink" title="jsp9大内置对象"></a>jsp9大内置对象</h4><p>一、Request 对象<br>  客户端的请求信息封装在request对象中，是HttpServletRequest的实例<br>常用的方法:<br>1、<code>Object getAttribute(String name)</code> 返回指定属性的属性值<br>2、<code>Enumeration getAttributeNames()</code> 返回所有可用属性名的枚举<br>3、<code>String getCharacterEncoding()</code> 返回字符串编码格式<br>4、<code>int getContentLength()</code> 返回请求体的长度<br>5、<code>String getContentType()</code> 返回请求体的MIME的长度<br>6、<code>ServletInputStream getInputStream()</code> 得到请求体中一行的二进制流数据<br>7、<code>String getParameter(String name)</code> 返回name指定参数的参数值</p>
 
       
 
@@ -1206,11 +1207,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1219,6 +1220,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1231,10 +1236,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
