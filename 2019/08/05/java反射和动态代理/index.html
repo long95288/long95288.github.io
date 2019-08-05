@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="Java反射机制   java的反射机制是一种逆向的思维。通常来所，知道一个类，然后new一个对象。而反射便是从一个对象开始，然后反推出它所在的类。前者是抽象到具体的过程。后者是从具体到抽象的过程。1、类对象Class  通过类的实例获得该类的类对象。使用instance#getClass()方法。即通过具体获得类的框架。12Peson p = new Person(&quot;xiaoming&quot;);Cla">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-05T12:30:38.349Z">
+<meta property="og:updated_time" content="2019-08-05T12:54:27.860Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java反射和动态代理">
 <meta name="twitter:description" content="Java反射机制   java的反射机制是一种逆向的思维。通常来所，知道一个类，然后new一个对象。而反射便是从一个对象开始，然后反推出它所在的类。前者是抽象到具体的过程。后者是从具体到抽象的过程。1、类对象Class  通过类的实例获得该类的类对象。使用instance#getClass()方法。即通过具体获得类的框架。12Peson p = new Person(&quot;xiaoming&quot;);Cla">
@@ -201,7 +201,7 @@
 </ul>
 <p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">World</span><br><span class="line">World</span><br><span class="line">n=12346</span><br></pre></td></tr></table></figure></p>
 <h4 id="动态代理模式"><a href="#动态代理模式" class="headerlink" title="动态代理模式"></a>动态代理模式</h4><ul>
-<li>核心函数<br><code>Proxy.newProxyInstance(ClassLoader,Interface,handler)</code><br>第一个参数:ClassLoader。除了jdk自带的一些类:ClassLoader不用使用之外，随意使用classLoader便可以了。<br>第二个参数:Interface。需要代理的类的接口，这个决定了所代理的类<br>第三个参数:handler，实现了Invocation的接口，并且实现<code>public Object invoke(Object proxy, Method method, Object[] args) throws Throwable</code>函数。method.invoke(object,args)必须object必须匹配接口</li>
+<li>核心函数<br><code>Proxy.newProxyInstance(ClassLoader,Interface,handler)</code><br>第一个参数:ClassLoader。除了jdk自带的一些类:ClassLoader不用使用之外，随意使用classLoader便可以了。<br>第二个参数:Interface。需要代理的类的接口，这个决定了所代理的类,以下的参数均通过测试<br>1、<code>Student.class.getInterfaces()</code><br>2、<code>new Class[]{Person.class}</code><br>3、<code>student.getClass.getInterfaces()</code><br>第三个参数:handler，实现了Invocation的接口，并且实现<code>public Object invoke(Object proxy, Method method, Object[] args) throws Throwable</code>函数。method.invoke(object,args)必须object必须匹配接口</li>
 <li>简单实现<br>接口类:Bird<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Bird</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 鸟</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -439,15 +439,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -455,7 +451,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
