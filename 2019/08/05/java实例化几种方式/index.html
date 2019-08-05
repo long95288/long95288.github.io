@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://long95288.github.io">
-  <title>linux环境配置 | 风兮木落</title>
+  <title>java实例化几种方式 | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Linux配置java的环境变量1、找到jdk安装包的位置2、打开profile文件# vim /etc/profile3、添加如下的内容1234export JAVA_HOME=/usr/java/jdk1.8.0_212-amd64export JRE_HOME=/usr/java/jdk1.8.0_212-amd64/jreexport PATH=$PATH:$JAVA_HOME/bin:$">
-<meta name="keywords" content="笔记">
+  <meta name="description" content="实例化的几种方式1、HelloWorld类12345678910public class HelloWorld &amp;#123;    private String name;    public void setName(String name) &amp;#123;        this.name = name;    &amp;#125;    public void sayName()&amp;#123;">
+<meta name="keywords" content="笔记,java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux环境配置">
-<meta property="og:url" content="http://long95288.github.io/2019/07/16/linux环境配置和常用命令/index.html">
+<meta property="og:title" content="java实例化几种方式">
+<meta property="og:url" content="http://long95288.github.io/2019/08/05/java实例化几种方式/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="Linux配置java的环境变量1、找到jdk安装包的位置2、打开profile文件# vim /etc/profile3、添加如下的内容1234export JAVA_HOME=/usr/java/jdk1.8.0_212-amd64export JRE_HOME=/usr/java/jdk1.8.0_212-amd64/jreexport PATH=$PATH:$JAVA_HOME/bin:$">
+<meta property="og:description" content="实例化的几种方式1、HelloWorld类12345678910public class HelloWorld &amp;#123;    private String name;    public void setName(String name) &amp;#123;        this.name = name;    &amp;#125;    public void sayName()&amp;#123;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-31T12:52:06.868Z">
+<meta property="og:updated_time" content="2019-08-05T13:50:20.641Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="linux环境配置">
-<meta name="twitter:description" content="Linux配置java的环境变量1、找到jdk安装包的位置2、打开profile文件# vim /etc/profile3、添加如下的内容1234export JAVA_HOME=/usr/java/jdk1.8.0_212-amd64export JRE_HOME=/usr/java/jdk1.8.0_212-amd64/jreexport PATH=$PATH:$JAVA_HOME/bin:$">
+<meta name="twitter:title" content="java实例化几种方式">
+<meta name="twitter:description" content="实例化的几种方式1、HelloWorld类12345678910public class HelloWorld &amp;#123;    private String name;    public void setName(String name) &amp;#123;        this.name = name;    &amp;#125;    public void sayName()&amp;#123;">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
   
@@ -163,41 +163,30 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-linux环境配置和常用命令" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-java实例化几种方式" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      linux环境配置
+      java实例化几种方式
     </h1>
   
 
         
-        <a href="/2019/07/16/linux环境配置和常用命令/" class="archive-article-date">
-  	<time datetime="2019-07-16T13:28:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-16</time>
+        <a href="/2019/08/05/java实例化几种方式/" class="archive-article-date">
+  	<time datetime="2019-08-05T13:32:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Linux配置java的环境变量"><a href="#Linux配置java的环境变量" class="headerlink" title="Linux配置java的环境变量"></a>Linux配置java的环境变量</h3><p>1、找到jdk安装包的位置<br>2、打开profile文件<br><code># vim /etc/profile</code><br>3、添加如下的内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/java/jdk1.8.0_212-amd64</span><br><span class="line"><span class="built_in">export</span> JRE_HOME=/usr/java/jdk1.8.0_212-amd64/jre</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$JRE_HOME</span>/bin</span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$CLASSPATH</span>:<span class="variable">$JAVA_HOME</span>/lib:<span class="variable">$JRE_HOME</span>/lib</span><br></pre></td></tr></table></figure></p>
-<p>4、更新配置<br><code>source /etc/profile</code><br>5、使用如下命令查看是否配置成功<br><code>java -version</code><br><code>echo $JAVA_HOME</code><br>6.注意分隔符在Linux中使用:(冒号),在Windows中使用;(分号)</p>
-<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><p>一、文件夹命令</p>
-<ul>
-<li>创建同级目录<br><code>mkdir -p {a,b,c,d}</code></li>
-<li>创建嵌套<br><code>mkdir -p a/b/c</code></li>
-<li>删除同级目录<br><code>rm -rf {a,b,c}</code></li>
-<li>强制删除嵌套目录<br><code>rm -rf dictionary</code></li>
-<li>设置目录权限<br>(1) 切换目录的权限<br><code>chmod 775 abc</code><br>(2)将abc的权限赋给root(组):root(用户)<br><code>sudo chown root:root abc</code></li>
-</ul>
-<p>二、用户命令</p>
-<ul>
-<li>创建用户命令<br><code>useradd -m test</code></li>
-<li>切换用户<br><code>su test</code></li>
-</ul>
+        <h4 id="实例化的几种方式"><a href="#实例化的几种方式" class="headerlink" title="实例化的几种方式"></a>实例化的几种方式</h4><p>1、HelloWorld类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"name="</span>+name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、主类三种实例化<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 第一种实例化</span></span><br><span class="line">            HelloWorld h1 = HelloWorld.class.newInstance();</span><br><span class="line">            h1.setName(<span class="string">"h1"</span>);</span><br><span class="line">            h1.sayName();</span><br><span class="line">            <span class="comment">// 使用类加载器实例化</span></span><br><span class="line">            String name = <span class="string">"com.longquanxiao.instance.HelloWorld"</span>;</span><br><span class="line">            Class hClass = Class.forName(name);</span><br><span class="line">            HelloWorld h2 =(HelloWorld) hClass.newInstance();</span><br><span class="line">            h2.setName(<span class="string">"h2"</span>);</span><br><span class="line">            h2.sayName();</span><br><span class="line">            <span class="comment">// 传统的new实例化</span></span><br><span class="line">            HelloWorld h3 = <span class="keyword">new</span> HelloWorld();</span><br><span class="line">            h3.setName(<span class="string">"h3"</span>);</span><br><span class="line">            h3.sayName();</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name=h1</span><br><span class="line">name=h2</span><br><span class="line">name=h3</span><br></pre></td></tr></table></figure></p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>1、使用<code>Class#newInstance()</code>返回实例化的对象<br>2、使用<code>Class.forName(classpath)</code>获得class对象。然后再使用newInstance()方法进行实例化<br>3、使用new的传统方式来实例化对象<br>4、使用newInstance时必须保证（1）这个类已经加载了(2)这个类已经完成连接了<br>使用class.forName()保证了上述两个条件。使用new就没有那么那么多的显示。</p>
 
       
 
@@ -233,6 +222,10 @@
 			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -288,7 +281,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/07/16/linux环境配置和常用命令/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/08/05/java实例化几种方式/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -302,18 +295,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/07/17/dom4j-xml解析/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          dom4j-xml解析
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/07/15/linux安装MySql/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">linux安装MySql</div>
+    <a href="/2019/08/05/java反射和动态代理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java反射和动态代理</div>
       <i class="icon-circle-right"></i>
     </a>
   
