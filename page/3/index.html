@@ -163,6 +163,109 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-vue笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/29/vue笔记/">vue笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/29/vue笔记/" class="archive-article-date">
+  	<time datetime="2019-04-29T13:20:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1、-vue的文件"><a href="#1、-vue的文件" class="headerlink" title="1、*.vue的文件"></a>1、*.vue的文件</h3><p>表示一个vue组件，和使用commponet生成的模版类似，但是比之要多出一点东西，<strong>单页式组件</strong><br>（1）视图模版  <code>&lt;template&gt;&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;&lt;/template&gt;</code> 这是html的模版<br>（2）样式定义  <code>&lt;style&gt;&lt;/style&gt;</code> 可以放置样式<br>（3）组件代码  <code>&lt;script&gt;&lt;/script&gt;</code> js处理，代码逻辑<br><strong>如何在.vue文件中调用声明的数据</strong><br>使用<strong>this</strong>来获取相应的数据，比如<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">name: <span class="string">'Page2'</span>,</span><br><span class="line">data ()&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      number: <span class="number">1</span>  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">methods: &#123; <span class="comment">// 方法属性</span></span><br><span class="line">    back(e)&#123; <span class="comment">// 设置了按钮的点击监听事件</span></span><br><span class="line">        <span class="comment">// alert("你点击了我")</span></span><br><span class="line">        <span class="keyword">this</span>.number+=<span class="number">1</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.number);</span><br><span class="line">    &#125;,</span><br><span class="line">    clickbtn()&#123;</span><br><span class="line">        <span class="comment">// alert("计算属性");</span></span><br><span class="line">        <span class="keyword">this</span>.number-=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>声明了一个number的数据，使用this.number便可以获取该值，但是并不是所有的地方使用this语句便可以获得值得。<br><strong>问题</strong><br>使用<code>back:()=&gt;{}</code>和<code>back(){}</code>的区别<br><strong>*.vue组件相互引用</strong><br>在某vue文件中加载另一组件。和配置路由的嵌套不同。<br>在<code>&lt;script&gt;</code>标签中使用<br><code>import mycomponent from &#39;./xxx.vue&#39;</code><br>暴露<code>components:{mycomponent}</code><br>在<code>&lt;template&gt;</code>标签中可以使用<code>&lt;mycomponent&gt;</code>来加载组件。注意和路由渲染之间的区别。<br>一个列子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div id=<span class="string">"Page1inner"</span>&gt;</span><br><span class="line">        这是Page1inner的内容,在这个页面中将使用饿了么组件并</span><br><span class="line">        使用内嵌组件</span><br><span class="line">        &lt;el-button&gt;按钮&lt;<span class="regexp">/el-button&gt;</span></span><br><span class="line"><span class="regexp">        &lt;i class="el-icon-edit"&gt;&lt;/i</span>&gt;</span><br><span class="line">        &lt;mycomponent&gt;<span class="xml"><span class="tag">&lt;/<span class="name">mycomponent</span>&gt;</span></span></span><br><span class="line">        &lt;mycomponent2&gt;<span class="xml"><span class="tag">&lt;/<span class="name">mycomponent2</span>&gt;</span></span></span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="comment">// 引入其他的组件</span></span><br><span class="line"><span class="keyword">import</span> mycomponent <span class="keyword">from</span> <span class="string">'./mycomponent.vue'</span></span><br><span class="line"><span class="keyword">import</span> mycomponent2 <span class="keyword">from</span> <span class="string">'./mycomponent2.vue'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">components:&#123;</span><br><span class="line">     mycomponent,mycomponent2</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;style&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>style&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2、样式绑定"><a href="#2、样式绑定" class="headerlink" title="2、样式绑定"></a>2、样式绑定</h3><p>npm安装less编译包<br><code>$ npm i less style-loader css - loader less-loader - D</code><br>在包配置中配置<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    test:<span class="regexp">/\.less$/</span>, <span class="comment">// 配置less样式</span></span><br><span class="line">    loader:<span class="string">"style-loader!css-loader!less-loader"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在<code>&lt;script&gt;&lt;/script&gt;</code> 标签中引用less文件<br><code>import &#39;./assetd/xxx.less&#39;</code></p>
+<p>在<code>&lt;style&gt;&lt;/style&gt;</code> 中引用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;style scoped&gt;</span><br><span class="line">@import &apos;./assets/xxx.less&apos;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这种方式还没运行起来</p>
+<h3 id="3、编程技巧"><a href="#3、编程技巧" class="headerlink" title="3、编程技巧"></a>3、编程技巧</h3><p>（1）凡是样式绑定必然是绑定到判断对象上的，不能直接写CSS类名，即使是一个固定的CSS类也都要这样写<br>（2）</p>
+<h3 id="4、路由的一些理解"><a href="#4、路由的一些理解" class="headerlink" title="4、路由的一些理解"></a>4、路由的一些理解</h3><p>（1）路由的声明和引用<br>引用 <code>import VueRouter from &#39;vue-router</code><br>使用 <code>Vue.use(VueRouter)</code><br>实例化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const router = new VueRouter(&#123;</span><br><span class="line">  mode: &apos;history&apos;, // 可选</span><br><span class="line">  routes: [</span><br><span class="line">      &#123;name: &apos;Home&apos;, path: &apos;/Home&apos;, component: Home&#125;,</span><br><span class="line">      &#123;name: &apos;Layout&apos;, path: &apos;/Layout&apos;, component: Layout&#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>相关说明:name 别名,在<code>&lt;router-link&gt;</code> 的 to = “Home” 和 to=”/Home” 相同的作用。但是使用别名的话更改只要改一个地方就行了。<br>（2）界面和文件之间的关系是怎么样的？<br>两个非常重要的标签，<code>&lt;router-link&gt;</code>和<code>&lt;router-view&gt;</code>其中link是接收路由事件，view是加载内容的容器。<br>*.vue作为一个页面组件，通过引用之后加载进入view中，每一个.vue的文件的加载由link和view决定。关于嵌套路由，在view中有viwe,这样如何确定页面是如何加载在某一个页面的呢？这还需要深入的理解。<br>(3)嵌套路由<br>在某个组件中声明一个<code>&lt;router-view&gt;</code>则可以在该组件中 加载所引入的组件。routes中声明如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;name: &apos;Home&apos;,paht: &apos;/Home&apos;,componnent: Home,</span><br><span class="line">childern: [ // Home 组件中嵌套tab的组件</span><br><span class="line">  &#123; // 空白子路由</span><br><span class="line">    path: &apos;&apos;,</span><br><span class="line">    component: XX</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path:&apos;Tab&apos;,  // 路由路径为/Home/tab</span><br><span class="line">    component: Tab</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>多级路由嵌套</strong><br>如何配置多级的路由嵌套？首先，假设A中嵌套B,在B中嵌套C。这时候有A.vue和B.vue和C.vue组件。在A.vue文件中有一<code>&lt;router-link&gt;</code>来指向B的路由。在A中的<code>&lt;router-view&gt;</code>来显示B组件的内容，同理在B.vue中也有相应的标签指向C和相应的view来渲染C.<br>1、在.vue文件中<code>&lt;router-link&gt;</code>的写法.<br>A.vue中<code>&lt;router-link to=&quot;B&quot;&gt;这是到B的路由&lt;/router-link&gt;</code><br>B.vue中<code>&lt;router-link to=&quot;C&quot;&gt;这是到C的路由&lt;/router-link&gt;</code></p>
+<p>2、路由的配置<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  path: <span class="string">'/A'</span>, <span class="comment">// 到A的路由</span></span><br><span class="line">  component: A, <span class="comment">// A的组件</span></span><br><span class="line">  children: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/B'</span>, <span class="comment">// 到B的路由,是A的嵌套路由</span></span><br><span class="line">      component: B, <span class="comment">// 组件B</span></span><br><span class="line">      children: [</span><br><span class="line">        &#123;</span><br><span class="line">          path: <span class="string">'/C'</span>, <span class="comment">// 到C的路由,是B的嵌套，同时是A的嵌套的嵌套</span></span><br><span class="line">          component: C <span class="comment">// 组件C</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用了两个<strong>children</strong>的关键字，在使用的过程中需要注意的是<code>&lt;router-link&gt;</code>中<strong>to</strong>属性的值和path的对应关系。使用<code>to=&quot;B&quot;</code>和<code>to=&quot;/B&quot;</code>是一样的作用,但是推荐使用第一种命名。</p>
+<p><strong>路由跳转</strong><br>使用js来操作页面的跳转，<br>1、使用<code>this.router</code>获得全局的路由<br>2、调用相关的函数来进行路由的跳转<br><code>this.$router.push(&#39;World&#39;)</code> 跳转到World的路由<br><code>this.$router.back()</code> 返回上一个页面<br><code>this.$router.go(n)</code> 跳转到第n次路由<br>3、路由跳转带参<br>3.1 命名的路由,跳转到list页面，携带路由对象row<br><code>this.$route.push({name: &#39;list&#39;,params: {row:row}})</code><br>3.1 读取路由中的参数。获得row的对象<br><code>this.$route.params.row</code><br><strong>命名视图</strong><br>*解决同级页面组件问题，和嵌套路由不一样<br>如何渲染在不同的<code>&lt;router-view&gt;</code>?通过<code>view</code>标签中的name属性来区分。没有设置名字默认为<code>default</code>。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-view <span class="class"><span class="keyword">class</span></span>=<span class="string">"view one"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span></span><br><span class="line">&lt;router-view class="view two" name="a"&gt;&lt;/router-view&gt;</span><br><span class="line">&lt;router-view class="view three" name="b"&gt;&lt;/router-view&gt;</span><br></pre></td></tr></table></figure></p>
+<p>多个页面有多个组件，则在配置路由时和嵌套路由的不一样。使用的components有个s<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  path: <span class="string">'/pathurl'</span>,</span><br><span class="line">  components: &#123;</span><br><span class="line">    <span class="keyword">default</span>: Component1, <span class="comment">// 默认的视图</span></span><br><span class="line">    a: Component2,  <span class="comment">// 命名为a的加载的组件为Componnent2</span></span><br><span class="line">    b: Component3  <span class="comment">// 命名为b的router-viwe加载组件为Component3</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过命名路由之后，就把组件分在同一个级别上了，而不是嵌套。可以命名视图和嵌套视图的一起使用来完成应用的布局<br>配置路由就是嵌套路由和命名视图时所用的路由的综合。<br><strong>同级路由和嵌套路由整合</strong><br>假设：World组件中有两个<strong>同级</strong>的组件A和B,在B的组件中有C和D两个<strong>嵌套</strong>组件。嵌套组件每次只能渲染其中的一个，同级组件则会全部渲染。<br>相应的div结构如下<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"World"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 组件A渲染&gt; --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"A"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"C"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 或者渲染为&lt;div id="D"&gt;&lt;/div&gt; --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 组件B渲染 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"B"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>由结构可知，A和B都是World的子节点，C和D是A的子节点。使用的配置文件为<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">      name: <span class="string">'World'</span>,</span><br><span class="line">      path: <span class="string">'/World'</span>,</span><br><span class="line">      component: World,</span><br><span class="line">      children:[</span><br><span class="line">        &#123;</span><br><span class="line">          path: <span class="string">''</span>,</span><br><span class="line">          components:</span><br><span class="line">          &#123;</span><br><span class="line">            A: A,</span><br><span class="line">            B: B</span><br><span class="line">          &#125;,</span><br><span class="line">          children: [</span><br><span class="line">            &#123;</span><br><span class="line">              path: <span class="string">'/C'</span>, <span class="comment">// 配置C的路由</span></span><br><span class="line">              components:&#123;</span><br><span class="line">               Aview: C   <span class="comment">// C组件渲染到A中name为Aview的router-view中</span></span><br><span class="line">              &#125; </span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">              path: <span class="string">'/D'</span>,</span><br><span class="line">              components: &#123;</span><br><span class="line">                Aview: D <span class="comment">//</span></span><br><span class="line">              &#125; </span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;,</span><br><span class="line">       </span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>问题1</strong>是若是不指定C和D组件渲染入对应的<code>&lt;router-view&gt;</code>中的话，C和D也会渲染到B的<code>&lt;router-view&gt;</code>中,暂时解决的办法就是使用命名来指定对应的组件渲染在对应的地方。<br><strong>问题2</strong>若是组件嵌套的逻辑过多的话，就会造成路由配置文件的愈发复杂。如何将路由的配置分配在不同的文件中？<br><strong>单页面路由配置</strong><br>在需要设置路由的界面里，在<code>&lt;script&gt;</code>标签中引入vue和vue-router.然后新建一个路由对象，在这个路由对象中配置路由。然后暴露出去之后便可以了。<strong><em>每一个vue文件是否对应一个vue对象。</em></strong><br>路由配置也可以使用外置文件引入的方式<br>例子:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div id=<span class="string">"D"</span>&gt;</span><br><span class="line">        这是D中的内容</span><br><span class="line">        &lt;p&gt;测试内嵌路由&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">        &lt;router-link to="test"&gt;测试&lt;/</span>router-link&gt;</span><br><span class="line">        &lt;router-link to=<span class="string">"test2"</span>&gt;测试<span class="number">2</span>&lt;<span class="regexp">/router-link&gt;</span></span><br><span class="line"><span class="regexp">        &lt;router-view/</span>&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Router <span class="keyword">from</span> <span class="string">'vue-router'</span></span><br><span class="line"><span class="keyword">import</span> Test <span class="keyword">from</span> <span class="string">'./test.vue'</span></span><br><span class="line"><span class="keyword">import</span> Test2 <span class="keyword">from</span> <span class="string">'./test2.vue'</span></span><br><span class="line">Vue.use(Router)</span><br><span class="line"><span class="keyword">var</span> router = <span class="keyword">new</span> Router(&#123;</span><br><span class="line">    routes:[</span><br><span class="line">        &#123;</span><br><span class="line">            path:<span class="string">'/test'</span>,</span><br><span class="line">            component:Test</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            path:<span class="string">'/test2'</span>,</span><br><span class="line">            component:Test2</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    router</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;style&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;/</span>style&gt;</span><br></pre></td></tr></table></figure></p>
+<p><strong>外置路由文件的引用</strong><br>在根目录创建一个文件夹D，在D中创建文件名为D.js的路由js。内容如下<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Router <span class="keyword">from</span> <span class="string">'vue-router'</span></span><br><span class="line"><span class="keyword">import</span> Test <span class="keyword">from</span> <span class="string">'@/components/test'</span></span><br><span class="line"><span class="keyword">import</span> Test2 <span class="keyword">from</span> <span class="string">'@/components/test2'</span></span><br><span class="line">Vue.use(Router)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Router(&#123;</span><br><span class="line">    routes:[</span><br><span class="line">        &#123;</span><br><span class="line">            path:<span class="string">'/test'</span>,</span><br><span class="line">            component:Test</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            path:<span class="string">'/test2'</span>,</span><br><span class="line">            component:Test2</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>在D.vue文件相应的更改为<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div id=<span class="string">"D"</span>&gt;</span><br><span class="line">        这是D中的内容</span><br><span class="line">        &lt;p&gt;测试内嵌路由&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">        &lt;router-link to="test"&gt;测试&lt;/</span>router-link&gt;</span><br><span class="line">        &lt;router-link to=<span class="string">"test2"</span>&gt;测试<span class="number">2</span>&lt;<span class="regexp">/router-link&gt;</span></span><br><span class="line"><span class="regexp">        &lt;router-view/</span>&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="comment">//import Vue from 'vue'</span></span><br><span class="line"><span class="comment">//import Router from 'vue-router'</span></span><br><span class="line"><span class="comment">//import Test from './test.vue'</span></span><br><span class="line"><span class="comment">//import Test2 from './test2.vue'</span></span><br><span class="line"><span class="comment">//Vue.use(Router)</span></span><br><span class="line"><span class="comment">// var router = new Router(&#123;</span></span><br><span class="line"><span class="comment">//     routes:[</span></span><br><span class="line"><span class="comment">//         &#123;</span></span><br><span class="line"><span class="comment">//             path:'/test',</span></span><br><span class="line"><span class="comment">//             component:Test</span></span><br><span class="line"><span class="comment">//         &#125;,</span></span><br><span class="line"><span class="comment">//         &#123;</span></span><br><span class="line"><span class="comment">//             path:'/test2',</span></span><br><span class="line"><span class="comment">//             component:Test2</span></span><br><span class="line"><span class="comment">//         &#125;</span></span><br><span class="line"><span class="comment">//     ]</span></span><br><span class="line"><span class="comment">// &#125;)</span></span><br><span class="line"><span class="comment">// 引用D文件夹中的路由文件</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">'@/D/D'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    router</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;style&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;/</span>style&gt;</span><br></pre></td></tr></table></figure></p>
+<p>结果和内嵌路由配置是一样的。</p>
+<h3 id="5、引入Element组件"><a href="#5、引入Element组件" class="headerlink" title="5、引入Element组件"></a>5、引入Element组件</h3><p>1、官方文档得引入<br>在main.js里面加入<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ElementUI <span class="keyword">from</span> <span class="string">'element-ui'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'element-ui/lib/theme-chalk/index.css'</span></span><br><span class="line">Vue.use(ElementUI)</span><br></pre></td></tr></table></figure></p>
+<p>在渲染的页面中，最顶层引入了<code>index.css</code>的样式。这样就可以使用ELement的标签了。因为已经在渲染的Html文件的头部加入样式表，标签便可以被识别。若是使用额外的样式则需要另外添加样式渲染的插件和模块。</p>
+<p>###6、Vue文件逻辑处理<br>1、v-bind的缩写<code>:</code>,例如<code>&lt;a :href=&quot;url&quot;&gt;&lt;/a&gt;</code><br>2、v-on的缩写<code>@</code>,例如<code>&lt;a v-on:click=&quot;doSomething&quot;&gt;&lt;/a&gt;</code>=&gt;<code>&lt;a @click=&quot;doSomething&quot;&gt;&lt;/a&gt;</code>缩写之后没有<code>:</code><br>3、计算属性,任何的复杂逻辑，都应该使用<strong>计算属性</strong><br>（1）使用计算属性,在标签中声明和了一个属性，然后在<code>computed</code>里面对这个属性进行处理。在vue文件中也是直接在 <code>computed:{}</code>之中完成逻辑处理<br>（2）计算属性和方法的区别,计算属性是依赖于所绑定的数据，若是所依赖的数据没有变化。则使用计算属性就会返回之前计算出来的结果，不会重新计算。方法的话每次访问的话就会重新计算，使用计算机的运算资源。不论所依赖的数据是否已经发生变化。从一定程度来说，计算属性是用空间来换取时间（增加缓存，减少cup的使用时间）。而方法在每一次都会重新执行，申请计算资源。<br>（3）计算属性默认是没有<code>set</code>方法的。可以自己定义.<br>4、监听<code>watch:{}</code>是用来对数据进行监听的。若是对数据进行的监听。若是数据发生变化，则会触发监听事件。但是这个和<code>v-model</code>有什么区别？？<code>v-model</code>是对<code>&lt;input&gt;、&lt;textarea&gt;、&lt;select&gt;</code>进行双向数据绑定。不会涉及数据处理<br>5、一个逐渐的<code>data</code>选项必须是一个函数，便于复用。</p>
+<h3 id="6、异步和等待-async-await"><a href="#6、异步和等待-async-await" class="headerlink" title="6、异步和等待(async await)"></a>6、异步和等待(async await)</h3><p>  有时候异步的处理中有同步的逻辑。这时候需要异步中的等待，例如:异步获得数据，但是将数据渲染到模板中的话就必须等待数据加载完毕之后才能进一步渲染，否则将会得到怪异的结果。虽然重渲染可能看不出来，但是网络差的时候。显示的会是模板语法。await就是解决async中的不确定。执行到await函数之后不会再往下执行了，得等到await函数执行完毕之后再执行。</p>
+<h3 id="7、promise"><a href="#7、promise" class="headerlink" title="7、promise"></a>7、promise</h3><h4 id="8、vue处理每次访问生成新的sessionId问题"><a href="#8、vue处理每次访问生成新的sessionId问题" class="headerlink" title="8、vue处理每次访问生成新的sessionId问题"></a>8、vue处理每次访问生成新的sessionId问题</h4><p>  在使用axios处,设置axios的对象属性<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> service = axios.create(&#123;</span><br><span class="line">  baseURL: baseURL, <span class="comment">// url = base url + request url</span></span><br><span class="line">  <span class="comment">// withCredentials: true, // send cookies when cross-domain requests</span></span><br><span class="line">  timeout: <span class="number">5000</span> <span class="comment">// request timeout</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 设置统一session</span></span><br><span class="line">service.defaults.withCredentials = <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="9、使用v-for时ESLint报错"><a href="#9、使用v-for时ESLint报错" class="headerlink" title="9、使用v-for时ESLint报错"></a>9、使用v-for时ESLint报错</h4><p>  vue 2.2.0+ 里使用v-for时key是必须的。解决办法,添加<code>:key</code>绑定</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/29/vue笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-爬取B站的视频链接" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -289,11 +392,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">周边技术</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">周边技术</a>
         		</li>
       		
 		</ul>
@@ -367,11 +470,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">周边技术</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">周边技术</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -640,11 +743,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">周边技术</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">周边技术</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -1027,6 +1130,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
               </li>
              
@@ -1035,15 +1142,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1055,19 +1158,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">

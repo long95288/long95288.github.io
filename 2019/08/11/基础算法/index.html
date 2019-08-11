@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://long95288.github.io">
-  <title>关于htmlcss的笔记 | 风兮木落</title>
+  <title>基础算法 | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、固定悬浮框核心语法：12position:fixed;	z-index:99; 固定在右上方12345678910/*固定在右上方*/.fixedRight&amp;#123;	background-color: limegreen;	height: 200px;	width: 200px;	position: fixed!important;	right: 20px;	top:20px;	z-ind">
-<meta name="keywords" content="笔记,周边技术">
+  <meta name="description" content="递归实现累加和累乘1、实现n+(n-1)+(n-2)+..3+2+1最佳办法是使用等差求和公式:n(n+1)/212345678910111213141516/*** 递归实现累加*/public static int accumulate(int n)&amp;#123;    if(n &amp;lt; 0)&amp;#123;        // 递归异常        return -1;    &amp;#125;">
+<meta name="keywords" content="算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于htmlcss的笔记">
-<meta property="og:url" content="http://long95288.github.io/2019/04/22/关于htmlcss的笔记/index.html">
+<meta property="og:title" content="基础算法">
+<meta property="og:url" content="http://long95288.github.io/2019/08/11/基础算法/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="1、固定悬浮框核心语法：12position:fixed;	z-index:99; 固定在右上方12345678910/*固定在右上方*/.fixedRight&amp;#123;	background-color: limegreen;	height: 200px;	width: 200px;	position: fixed!important;	right: 20px;	top:20px;	z-ind">
+<meta property="og:description" content="递归实现累加和累乘1、实现n+(n-1)+(n-2)+..3+2+1最佳办法是使用等差求和公式:n(n+1)/212345678910111213141516/*** 递归实现累加*/public static int accumulate(int n)&amp;#123;    if(n &amp;lt; 0)&amp;#123;        // 递归异常        return -1;    &amp;#125;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-02T07:32:35.761Z">
+<meta property="og:updated_time" content="2019-08-11T13:40:05.351Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于htmlcss的笔记">
-<meta name="twitter:description" content="1、固定悬浮框核心语法：12position:fixed;	z-index:99; 固定在右上方12345678910/*固定在右上方*/.fixedRight&amp;#123;	background-color: limegreen;	height: 200px;	width: 200px;	position: fixed!important;	right: 20px;	top:20px;	z-ind">
+<meta name="twitter:title" content="基础算法">
+<meta name="twitter:description" content="递归实现累加和累乘1、实现n+(n-1)+(n-2)+..3+2+1最佳办法是使用等差求和公式:n(n+1)/212345678910111213141516/*** 递归实现累加*/public static int accumulate(int n)&amp;#123;    if(n &amp;lt; 0)&amp;#123;        // 递归异常        return -1;    &amp;#125;">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
   
@@ -163,34 +163,29 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-关于htmlcss的笔记" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-基础算法" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      关于htmlcss的笔记
+      基础算法
     </h1>
   
 
         
-        <a href="/2019/04/22/关于htmlcss的笔记/" class="archive-article-date">
-  	<time datetime="2019-04-22T07:41:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-22</time>
+        <a href="/2019/08/11/基础算法/" class="archive-article-date">
+  	<time datetime="2019-08-11T12:29:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="1、固定悬浮框"><a href="#1、固定悬浮框" class="headerlink" title="1、固定悬浮框"></a>1、固定悬浮框</h4><p>核心语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">position:fixed;	</span><br><span class="line">z-index:99;</span><br></pre></td></tr></table></figure></p>
-<p>固定在右上方<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/*固定在右上方*/</span><br><span class="line">.fixedRight&#123;</span><br><span class="line">	background-color: limegreen;</span><br><span class="line">	height: 200px;</span><br><span class="line">	width: 200px;</span><br><span class="line">	position: fixed!important;</span><br><span class="line">	right: 20px;</span><br><span class="line">	top:20px;</span><br><span class="line">	z-index: 99;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>只要改变right、left、top、bottom的值便可以得到自己想要得</p>
-<p><strong>底部悬浮</strong></p>
-<p>只需更改bottom的值，调左右便可以了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/*固定在底部*/</span><br><span class="line">.fixedBottom&#123;</span><br><span class="line">	background-color: greenyellow;</span><br><span class="line">	position: fixed;</span><br><span class="line">	height: 40px;</span><br><span class="line">	width: 100%;</span><br><span class="line">	bottom: 0px;</span><br><span class="line">	left: 20px;</span><br><span class="line">	z-index: 99;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="2、居中"><a href="#2、居中" class="headerlink" title="2、居中"></a>2、居中</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/*居中*/</span><br><span class="line">.center&#123;</span><br><span class="line">	display:-webkit-flex;</span><br><span class="line">	-webkit-justify-content:center;</span><br><span class="line">	-webkit-align-items: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="随鼠标移动的悬浮框的实现"><a href="#随鼠标移动的悬浮框的实现" class="headerlink" title="随鼠标移动的悬浮框的实现"></a>随鼠标移动的悬浮框的实现</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">	#floatDiv&#123;</span></span><br><span class="line"><span class="undefined">		position: absolute;</span></span><br><span class="line"><span class="undefined">		height: 40px;</span></span><br><span class="line"><span class="undefined">		width: 150px;</span></span><br><span class="line"><span class="undefined">		background-color: deepskyblue;</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined">	</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"floatDiv"</span> <span class="attr">style</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">			我是悬浮的</span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">		<span class="built_in">document</span>.onmousemove=<span class="function"><span class="keyword">function</span>(<span class="params">even</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">			<span class="comment">// 获得当前鼠标的坐标，设置浮动框坐标为鼠标坐标</span></span></span><br><span class="line"><span class="javascript">			<span class="keyword">var</span> floatDiv = <span class="built_in">document</span>.getElementById(<span class="string">"floatDiv"</span>);</span></span><br><span class="line"><span class="javascript">			floatDiv.style.top = even.clientY +<span class="string">"px"</span>;</span></span><br><span class="line"><span class="javascript">			floatDiv.style.left = even.clientX+<span class="string">"px"</span>;</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">	</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        <h4 id="递归实现累加和累乘"><a href="#递归实现累加和累乘" class="headerlink" title="递归实现累加和累乘"></a>递归实现累加和累乘</h4><p>1、实现n+(n-1)+(n-2)+..3+2+1<br>最佳办法是使用等差求和公式:n(n+1)/2<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 递归实现累加</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">accumulate</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">// 递归异常</span></span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">// 递归出口</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 递归的函数体</span></span><br><span class="line">        <span class="keyword">return</span> n + Solution.accumulate(n-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、实现n!<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 递归实现阶乘</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">factorial</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n&lt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> n * Solution.factorial(n-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="插入排序算法"><a href="#插入排序算法" class="headerlink" title="插入排序算法"></a>插入排序算法</h4>
       
 
       
@@ -224,11 +219,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">周边技术</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
         		</li>
       		
 		</ul>
@@ -284,7 +275,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/04/22/关于htmlcss的笔记/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/08/11/基础算法/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -298,18 +289,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/04/22/爬取B站的视频链接/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          爬取B站的视频链接
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/04/17/DBLearn/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数据库实验代码</div>
+    <a href="/2019/08/10/springBootAop使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">springBootAop使用</div>
       <i class="icon-circle-right"></i>
     </a>
   
