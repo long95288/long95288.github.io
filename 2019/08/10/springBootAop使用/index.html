@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="pom引入aop的依赖12345&amp;lt;!--引入aop的依赖--&amp;gt;&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;spring-boot-starter-aop&amp;lt;/artifactId&amp;gt;&amp;lt;/dependency&amp;gt; ap">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-10T14:02:31.362Z">
+<meta property="og:updated_time" content="2019-08-12T10:15:45.216Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springBootAop使用">
 <meta name="twitter:description" content="pom引入aop的依赖12345&amp;lt;!--引入aop的依赖--&amp;gt;&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;spring-boot-starter-aop&amp;lt;/artifactId&amp;gt;&amp;lt;/dependency&amp;gt; ap">
@@ -195,6 +195,11 @@
 <p>5、输出的结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">-----------------------------------------------</span><br><span class="line">logging className = com.longquanxiao.springboot.service.Function</span><br><span class="line">logging method = print</span><br><span class="line">logging parameters:</span><br><span class="line">parameter 0,value=mm</span><br><span class="line">parameter 1,value=dd</span><br><span class="line">..................before .............</span><br><span class="line">start function print ...........</span><br><span class="line">message1=mm</span><br><span class="line">message2=dd</span><br><span class="line">end function print..............</span><br><span class="line">logging  proceed return value = ok</span><br><span class="line">-----------------------------------------------</span><br><span class="line">.................after() .............</span><br><span class="line">............after returning() ...</span><br><span class="line">I have no log</span><br></pre></td></tr></table></figure></p>
 <p>6、给print2也打上日志注解,输出的结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">-----------------------------------------------</span><br><span class="line">logging className = com.longquanxiao.springboot.service.Function</span><br><span class="line">logging method = print</span><br><span class="line">logging parameters:</span><br><span class="line">parameter 0,value=mm</span><br><span class="line">parameter 1,value=dd</span><br><span class="line">..................before .............</span><br><span class="line">start function print ...........</span><br><span class="line">message1=mm</span><br><span class="line">message2=dd</span><br><span class="line">end function print..............</span><br><span class="line">logging  proceed return value = ok</span><br><span class="line">-----------------------------------------------</span><br><span class="line">.................after() .............</span><br><span class="line">............after returning() ...</span><br><span class="line">-----------------------------------------------</span><br><span class="line">logging className = com.longquanxiao.springboot.service.Function</span><br><span class="line">logging method = print2</span><br><span class="line">logging parameters:</span><br><span class="line">..................before .............</span><br><span class="line">I have no log</span><br><span class="line">logging  proceed return value = ok2</span><br><span class="line">-----------------------------------------------</span><br><span class="line">.................after() .............</span><br><span class="line">............after returning() ...</span><br></pre></td></tr></table></figure></p>
 <p>在切面函数中,每个函数都可以传入JoinPoint对象来获取相应的参数和设置相应的参数。在around中可以传入一个不同的参数，ProceedingJoinPoint 是JointPoint的子类。拥有proceed()方法。可以按需的调用被代理的函数。</p>
+<h4 id="获得日志注解传进来的值"><a href="#获得日志注解传进来的值" class="headerlink" title="获得日志注解传进来的值"></a>获得日志注解传进来的值</h4><p>1、在<code>@Around()</code>中value使用<code>@annotation(logInstance)</code>和<code>argNames=&quot;joinPoint,logInstance&quot;</code><br>Around的处理函数接收两个参数<code>joinPoint,logInstance</code>如果只有参数列表只有joinpoint可以省略<br><code>public Object around(ProceedingJoinPoint joinPoint,MyLog logInstance) throws Throwable{}</code><br>这样在函数中想要传进来的参数值便可以用<code>logInstance.value()</code>获得了。注意其中的参数问题，<code>logInstance</code>在annotation中使用,在参数列表中使用。<br>2、只要注解的值<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@After</span>(value = <span class="string">"@annotation(log)"</span>,argNames = <span class="string">"log"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">after</span><span class="params">(MyLog log)</span></span>&#123;</span><br><span class="line">    System.out.println(log.value());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3、可不可以要该函数上另外注解的值呢?<br>3.1 为了去了解是否可以使用该注解切面获得该函数上其它注解的值。做出了如下的实验。<br>(1) 新建一个名为MyDescroption的注解<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> longquanxiao</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2019/8/12</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.METHOD&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyDescription &#123;</span><br><span class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> "description <span class="keyword">default</span>"</span>;</span><br><span class="line">    <span class="function">String <span class="title">description</span><span class="params">()</span> <span class="keyword">default</span> "body"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>(2)将切面中的@Around方法,更改成<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Around</span>(value = <span class="string">"pointCut()&amp;&amp;@annotation(logInstance)&amp;&amp;@annotation(description)"</span>,argNames = <span class="string">"joinPoint,logInstance,description"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">around</span><span class="params">(ProceedingJoinPoint joinPoint, MyLog logInstance, MyDescription description)</span> <span class="keyword">throws</span> Throwable</span>&#123;</span><br><span class="line">    <span class="comment">// 打印description</span></span><br><span class="line">    System.out.println(<span class="string">"description value = "</span> + description.value());</span><br><span class="line">    System.out.println(<span class="string">"description description = "</span> + description.description());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>(3) 将注解打入函数中<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MyDescription</span>(value = <span class="string">"print2"</span>,description = <span class="string">"print2Body"</span>)</span><br><span class="line">    <span class="meta">@MyLog</span>(value = <span class="string">"print2"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">print2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I have no log"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"ok2"</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">description value = print2</span><br><span class="line">description description = print2Body</span><br></pre></td></tr></table></figure></p>
 
       
 
@@ -440,15 +445,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -456,7 +457,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -468,7 +477,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -476,15 +485,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
             
             <div class="clearfix"></div>
