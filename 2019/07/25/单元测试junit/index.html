@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="要求1、不用捕获异常2、不要输出控制台3、使用断言 常用的断言方法1、assertArrayEquals(expecteds, actuals) 数组相等判断2、assertEquals(expected, actual) 对象相等判断3、assertNotEquals(first, second) 不相等判断4、assertNull(object) 空值断言5、assertNotNull(obj">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-25T03:08:24.432Z">
+<meta property="og:updated_time" content="2019-08-12T10:35:23.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单元测试unit">
 <meta name="twitter:description" content="要求1、不用捕获异常2、不要输出控制台3、使用断言 常用的断言方法1、assertArrayEquals(expecteds, actuals) 数组相等判断2、assertEquals(expected, actual) 对象相等判断3、assertNotEquals(first, second) 不相等判断4、assertNull(object) 空值断言5、assertNotNull(obj">
@@ -185,6 +185,8 @@
       
         <h4 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h4><p>1、不用捕获异常<br>2、不要输出控制台<br>3、使用断言</p>
 <h4 id="常用的断言方法"><a href="#常用的断言方法" class="headerlink" title="常用的断言方法"></a>常用的断言方法</h4><p>1、assertArrayEquals(expecteds, actuals) 数组相等判断<br>2、assertEquals(expected, actual) 对象相等判断<br>3、assertNotEquals(first, second) 不相等判断<br>4、assertNull(object) 空值断言<br>5、assertNotNull(object) 非空值断言<br>6、assertSame(expected, actual) 对象引用相等断言<br>7、assertNotSame(unexpected, actual) 对象引用不相等断言<br>8、assertTrue(condition) 结果为真值断言<br>9、assertFalse(condition) 结果为假断言<br>10、assertThat(actual, matcher) 条件断言<br>11、fail() 强行失败</p>
+<h4 id="配置测试环境"><a href="#配置测试环境" class="headerlink" title="配置测试环境"></a>配置测试环境</h4><p>1、maven引入依赖<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.11<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>2、test包中使用函数头使用@Test便可以使用该函数来完成单元测试<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">factorial</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">int</span> result = Solution.factorial(n);</span><br><span class="line">    assertEquals(<span class="number">120</span>,result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
 
@@ -434,11 +436,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">UML</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -446,7 +452,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -470,7 +476,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
             
             <div class="clearfix"></div>

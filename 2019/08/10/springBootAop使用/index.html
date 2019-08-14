@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="pom引入aop的依赖12345&amp;lt;!--引入aop的依赖--&amp;gt;&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;spring-boot-starter-aop&amp;lt;/artifactId&amp;gt;&amp;lt;/dependency&amp;gt; ap">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-12T10:15:45.216Z">
+<meta property="og:updated_time" content="2019-08-12T10:19:53.053Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springBootAop使用">
 <meta name="twitter:description" content="pom引入aop的依赖12345&amp;lt;!--引入aop的依赖--&amp;gt;&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;spring-boot-starter-aop&amp;lt;/artifactId&amp;gt;&amp;lt;/dependency&amp;gt; ap">
@@ -200,6 +200,7 @@
 <p>(2)将切面中的@Around方法,更改成<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Around</span>(value = <span class="string">"pointCut()&amp;&amp;@annotation(logInstance)&amp;&amp;@annotation(description)"</span>,argNames = <span class="string">"joinPoint,logInstance,description"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">around</span><span class="params">(ProceedingJoinPoint joinPoint, MyLog logInstance, MyDescription description)</span> <span class="keyword">throws</span> Throwable</span>&#123;</span><br><span class="line">    <span class="comment">// 打印description</span></span><br><span class="line">    System.out.println(<span class="string">"description value = "</span> + description.value());</span><br><span class="line">    System.out.println(<span class="string">"description description = "</span> + description.description());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>(3) 将注解打入函数中<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MyDescription</span>(value = <span class="string">"print2"</span>,description = <span class="string">"print2Body"</span>)</span><br><span class="line">    <span class="meta">@MyLog</span>(value = <span class="string">"print2"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">print2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I have no log"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"ok2"</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <p>输出结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">description value = print2</span><br><span class="line">description description = print2Body</span><br></pre></td></tr></table></figure></p>
+<p>(4)结论:将切点切入函数中,函数上所有的注解被获得和使用</p>
 
       
 
@@ -453,11 +454,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">UML</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -465,7 +470,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -489,7 +494,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
             
             <div class="clearfix"></div>

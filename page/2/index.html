@@ -163,6 +163,174 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-jsp和servlet相关知识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/18/jsp和servlet相关知识/">jsp和servlet相关知识</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/18/jsp和servlet相关知识/" class="archive-article-date">
+  	<time datetime="2019-07-18T11:57:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h4><p>过滤器的作用是对url访问进行拦截，比如：有一个需要登陆的系统，登陆成功后便跳转到index.jsp。如果用户直接输入index.jsp。这时候后台要对这样的行为进行拦截。<br>1、过滤器需要实现servlet的Filter接口。并且实现doFilter方法。</p>
+<p>2、过滤器要起作用还要配置过滤器和拦截的对象。在web.xml中配置。<br>一个简单的登陆过滤器的配置例子:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置过滤器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>LoginFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>com.bosssoft.hr.train.chp2.filter.LoginFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--配置路由映射--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>LoginFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/index.jsp<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="监听器"><a href="#监听器" class="headerlink" title="监听器"></a>监听器</h4><p>1、监听器一共有8种类型，主要是监听对象的创建和销毁，属性的增加和减少。其中有如下几种<br>监听对象的创建和销毁的监听器<br>（1）ServletContextlistener 监听ServletContext对象<br>（2）HttpSessionListener 监听HttpSession对象<br>（3）ServletRequestListener 监听ServletRequest对象<br>监听对象属性的增加、修改和删除的事件监听器<br>（4）ServletContextAttributeListener 监听ServletContext对象属性变更<br>（5）HttpSessionAttributeListener监听HttpSession对象属性变更<br>（6）ServletRequestAttributeListener监听Servlet对象的属性的变更<br>监听绑定到HttpSession域中的某个对象状态的事件监听器<br>(7)HttpSessionBindingListener 监听session的绑定和解除<br>(8)HttpSessionActivationListener 会话持久层。</p>
+<p>2、一个统计网站当前在线人数的例子的监听器例子<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">**</span><br><span class="line"> * session 用户监听，当有新连接的时候在线数量加一</span><br><span class="line"> * <span class="meta">@author</span> 风兮木落</span><br><span class="line"> *</span><br><span class="line"> * */</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OnlineListener</span> <span class="keyword">implements</span> <span class="title">HttpSessionListener</span>,<span class="title">ServletRequestListener</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">sessionCreated</span><span class="params">(HttpSessionEvent se)</span> </span>&#123;</span><br><span class="line">        HttpSession session = se.getSession();</span><br><span class="line">        Store.onlineCount += <span class="number">1</span>;</span><br><span class="line">        System.out.println(<span class="string">"创建session:"</span>+session.getId());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">sessionDestroyed</span><span class="params">(HttpSessionEvent se)</span> </span>&#123;</span><br><span class="line">       Store.onlineCount -= <span class="number">1</span>;</span><br><span class="line">       System.out.println(<span class="string">"销毁session:"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">requestDestroyed</span><span class="params">(ServletRequestEvent sre)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"destroy request:"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">requestInitialized</span><span class="params">(ServletRequestEvent sre)</span> </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"create request"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>每当有一个新的连接的时候，会触发request的监听器。当有一个session创建的时候就会触发sessionCreated函数，将全局的变量加一。当一个session过期的时候就会触发sessionDestred函数，将全局变量减一。</p>
+<h4 id="jsp9大内置对象"><a href="#jsp9大内置对象" class="headerlink" title="jsp9大内置对象"></a>jsp9大内置对象</h4><p>一、Request 对象<br>  客户端的请求信息封装在request对象中，是HttpServletRequest的实例<br>常用的方法:<br>1、<code>Object getAttribute(String name)</code> 返回指定属性的属性值<br>2、<code>Enumeration getAttributeNames()</code> 返回所有可用属性名的枚举<br>3、<code>String getCharacterEncoding()</code> 返回字符串编码格式<br>4、<code>int getContentLength()</code> 返回请求体的长度<br>5、<code>String getContentType()</code> 返回请求体的MIME的长度<br>6、<code>ServletInputStream getInputStream()</code> 得到请求体中一行的二进制流数据<br>7、<code>String getParameter(String name)</code> 返回name指定参数的参数值<br>8、<code>Enumeration getParameterNames()</code> 返回可用参数名的枚举<br>9、<code>String[] getParameterValues(String name)</code> 返回包含参数name的<br>10、<code>String getProtocol()</code> 返回请求用的协议类型及版本号<br>11、<code>String getScheme()</code> 返回请求的结构类型 http、https、ftp<br>12、<code>String getServerName()</code> 返回接收请求的服务器主机名<br>13、<code>int getServerPort</code> 返回服务器接收此请求的所用的端口号<br>14、<code>BufferReader getReader()</code> 返回解码过了的请求体<br>15、<code>String getRemoteAddr()</code> 返回发送此请求的客户端IP地址<br>16、<code>String getRemoteHost</code> 返回发送此请求的客户端主机名<br>17、<code>void setAttribute(String key,Object obj)</code> 设置属性的属性值<br>18、<code>String getRealPath(String path)</code> 返回一虚拟路径的真实路径<br>二、Response 对象<br>常用方法:<br>1、<code>String getCharacterEncoding()</code> 返回响应用的是何种字符串编码格式<br>2、<code>ServletOutputStream getOutputStream()</code> 返回相应的一个二进制的输出流<br>3、<code>PrintWriter getWriter()</code> 返回可以向客户端输出字符的一个对象<br>4、<code>void setContentLength(int len)</code> 设置响应的长度<br>5、<code>void setContentType(String type)</code> 设置响应的MIME类型<br>6、<code>void sendRedirect(String location)</code> 重新定向客户端的请求<br>三、session 对象<br>从客户端连到服务器的一个WebApplication开始。直到客户端与服务器断开连接为止。是HttpSession 的实例<br>常用方法:<br>1、<code>long getCreationTime()</code> 返回Session的创建时间<br>2、<code>String getId()</code> 返回唯一的ID号<br>3、<code>long getLastAccessedTime()</code> 返回此客户端最近一次请求时间<br>4、<code>int getMaxInactiveInterval()</code> 获得两个请求间隔多长时间此SESSION被取消<br>5、<code>void setMaxInactiveInterval(int ms)</code> 设置两次请求间隔时长。被销毁<br>6、<code>String[] getValueNames()</code> 返回一个包含此SESSION中所有可用属性的数组<br>7、<code>void invalidate()</code> 使该session不可用<br>8、<code>boolean isNew()</code>是不是新的，客户端新加入<br>9、<code>void removeValue(String name)</code> 删除SESSION中指定属性<br>四、out 对象<br>  out对象是JspWriter类的实例，是向客户端输出内容常用的对象<br>常用方法:<br>1、<code>void clear()</code> 清除缓冲区的内容<br>2、<code>void clearBuffer()</code> 清除缓冲区当前内容<br>3、<code>void flush()</code> 清空流<br>4、<code>int getBufferSize()</code> 返回缓冲区的字节大小<br>5、<code>int getRemaining()</code> 返回缓冲区还剩余多少可用<br>6、<code>boolean isAutoFlush()</code> 返回缓冲区满时时自动清空还是抛出异常<br>7、<code>void close()</code> 关闭输出流<br>四、page对象<br>page对象指向当前JSP页面本身,<br>常用方法:<br>1、<code>class getClass</code> 返回此Object的类<br>2、<code>int hashCode()</code><br>3、<code>boolean equals(Object obj)</code><br>4、<code>void copy(Object objet)</code><br>5、<code>Object clone()</code><br>6、<code>String toString()</code><br>7、<code>void notify()</code> 唤醒一个等待的线程<br>8、<code>void notifyAll()</code> 唤醒所有等待的线程<br>9、<code>void wait(int timeout)</code><br>10、<code>void wait()</code><br>11、<code>void enterMonitor()</code> 对Object对象加锁<br>12、<code>void exitMonitor()</code> 对Object对象开锁</p>
+<p>五、application 对象<br>  实现了用户间数据共享，可存放全局变量。它开始于服务器的启动，直到服务器关闭。是ServletContext类的实例<br>  常用方法:<br>  1、<code>Object getAttribute(String name)</code><br>  2、<code>void setAttribute(String name,Object obj)</code><br>  3、<code>void removeAttribute(String name)</code> 删除一属性及其属性值<br>  4、<code>Enumeration getAttributeNames()</code> 返回所有可用的属性值<br>  5、<code>String getServerInfo()</code> 返回jsp引擎的名称和版本号<br>  6、<code>String getRealPath(String path)</code> 返回一虚拟路径的真实路径<br>  7、<code>ServletContext getContext(String uripath)</code> 返回指定WebApplication的application对象<br>  8、<code>int getMajorVersion()</code> 返回服务器支持的Servlet API 的最大版本号<br>  9、<code>int getMinorVerion()</code> 支持最小版本号<br>  10、<code>String getMineType(String file)</code> 返回指定文件的MINE类型<br>  11、<code>URL getResource(String path)</code> 返回指定资源的URL路径<br>  12、<code>InputStream getResourceAsStream(String uripath)</code>返回指定资源的输入流<br>  13、<code>RequestDispacher getRequestDispatcher(String uripath)</code>返回指定资源的RequestDispachcer对象<br>  14、<code>Servlet getServlet(String name)</code>返回指定名的Servlet<br>  15、<code>Enumeration getServlets()</code> 返回所有的Servlet的枚举<br>  16、<code>Enumeration getServletNames()</code> 返回所有的Servlet名的枚举<br>  17、<code>void log(Stirng msg)</code> 写入日志文件中<br>六、exception 对象<br>  1、<code>String getMessage()</code> 返回异常的描述消息<br>  2、<code>String toString()</code> 返回异常的简短描述消息<br>  3、<code>void printStackTrace()</code> 显示异常及栈轨道<br>  4、<code>Throwable FillInStackTrace()</code> 重写异常执行栈轨迹<br>七、pageContext对象<br>  页面中所有功能的集大成者<br>  1、<code>JspWriter getOut()</code> 返回当前客户端响应被使用的JspWriter流(out)<br>  2、<code>HttpSession getSession()</code> 返回当前页中的HttpSession对象<br>  3、<code>Object getPage()</code><br>  4、<code>ServletRequest getRequest()</code> 返回当前页的request对象<br>  5、<code>ServletResponse getResponse()</code> 返回当前页的response对象<br>  6、<code>Exception getException()</code><br>  7、<code>ServletConfig getServletConfig()</code><br>  8、<code>ServletContext getServletContext()</code><br>  9、<code>void setAttribute(String name,Object obj)</code><br>  10、<code>Object getAttribute(String name)</code><br>  11、<code>Objcet findAttribute(String name)</code><br>  12、<code>void removeAttribute(String name)</code><br>  13、<code>void removeAttribute(String name,int scope)</code><br>  14、<code>int getAttributeScope(String name)</code><br>  15、<code>Enumeration getAttributeNamesInScope(int scope)</code><br>  16、<code>void release()</code> 释放pageContext所占用的资源<br>  17、<code>void forward(String relativeUrlPath)</code> 重定向到另一个页面<br>  18、<code>void include(String relativeUrlPath)</code> 包含另一个文件<br>八、config对象<br>  相关的配置信息<br>  1、<code>ServletContext getServletContext()</code> 返回服务器相关信息的ServletContext对象<br>  2、<code>String getInitParameter(String name)</code> 初始参数<br>  3、<code>Enumeration getInitParameterNames()</code> 返回Servlet初始化所需所有参数的枚举</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/18/jsp和servlet相关知识/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-dom4j-xml解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/17/dom4j-xml解析/">dom4j-xml解析</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/17/dom4j-xml解析/" class="archive-article-date">
+  	<time datetime="2019-07-17T02:29:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="maven-添加依赖"><a href="#maven-添加依赖" class="headerlink" title="maven 添加依赖"></a>maven 添加依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/dom4j/dom4j --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>dom4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>dom4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.6.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="读取xml文件"><a href="#读取xml文件" class="headerlink" title="读取xml文件"></a>读取xml文件</h4><p>1、获得读取文件的对象<br><code>SAXReader reader = new SAXReader();</code><br>2、读取文件，返回一个Element对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String path = <span class="string">"student.xml"</span>;</span><br><span class="line">Document doc = reader.read(<span class="keyword">new</span> File(path));</span><br></pre></td></tr></table></figure></p>
+<p>3、获得根元素<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Element root = doc.getRootElement();</span><br><span class="line">System.out.println(root.getName());</span><br></pre></td></tr></table></figure></p>
+<p>4、获得元素的列表<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;ELement&gt; list = root.elements();</span><br></pre></td></tr></table></figure></p>
+<h4 id="相关的函数说明"><a href="#相关的函数说明" class="headerlink" title="相关的函数说明"></a>相关的函数说明</h4><p>1、getRootElement<br>获得Document文件的根元素<br>2、Element#getName()<br>获得标签的名称<br>3、获得指定标签内的值<br>3.1 方法一<br>(1)先获得指定标签的element<br>Element#element(“tag”)-&gt;Element;<br>(2)获得标签内的值<br>Element#getText()-&gt;String<br>3.2 方法二<br>ELement#elementText(“tag”)-&gt;String<br>4、获得标签的属性<br>Element#attribute(“attr”)-&gt;Atrribute<br>4.1 获得属性的的名称<br> Attribute#getName()-&gt;String<br>4.2 获得属性的值<br> Atrribute#getValue()-&gt;String</p>
+<h4 id="写XML"><a href="#写XML" class="headerlink" title="写XML"></a>写XML</h4><p>1、新建一个document对象<br><code>Document writeDoc = DocumentHelper.createDocument();</code><br>2、往文档中添加一个根节点<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加根元素</span></span><br><span class="line">Element elRoot = writeDoc.addElement(<span class="string">"t_user"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>3、往这个根元素中添加一些元素<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; <span class="number">10</span>;i++)&#123;</span><br><span class="line">    Element writeRoot = elRoot.addElement(<span class="string">"student"</span>);</span><br><span class="line">    <span class="comment">// 添加id标签</span></span><br><span class="line">    Element wIdEle = writeRoot.addElement(<span class="string">"id"</span>);</span><br><span class="line">    <span class="comment">// 设置id标签的值</span></span><br><span class="line">    wIdEle.addText(<span class="string">"23"</span>);</span><br><span class="line">    <span class="comment">// 添加name标签并设置为李华</span></span><br><span class="line">    writeRoot.addElement(<span class="string">"name"</span>).addText(<span class="string">"李华"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>4、设置写出xml的格式和编码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">OutputFormat xmlFormat = OutputFormat.createPrettyPrint();</span><br><span class="line">xmlFormat.setEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line"><span class="comment">// 是否要写头</span></span><br><span class="line"><span class="comment">// xmlFormat.setSuppressDeclaration(ture);</span></span><br></pre></td></tr></table></figure></p>
+<p>5、建立写回文件的对象并写回数据<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">XMLWriter writer = <span class="keyword">new</span> XMLWriter(xmlFormat);</span><br><span class="line">writer.setOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="string">"output.xml"</span>));</span><br><span class="line"><span class="comment">// 将数据写回xml文件</span></span><br><span class="line">writer.write(writeDoc);</span><br><span class="line"><span class="comment">//</span></span><br><span class="line">writer.close();</span><br></pre></td></tr></table></figure></p>
+<h5 id="完整的文件"><a href="#完整的文件" class="headerlink" title="完整的文件"></a>完整的文件</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.dom4j.Document;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.DocumentException;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.DocumentHelper;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.Element;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.io.OutputFormat;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.io.SAXReader;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.io.XMLWriter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> 风兮木落</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SaveXml</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 1.获得读取对象</span></span><br><span class="line">            SAXReader reader = <span class="keyword">new</span> SAXReader();</span><br><span class="line">            String path = <span class="string">"student.xml"</span>;</span><br><span class="line">            Document doc = reader.read(<span class="keyword">new</span> File(path));</span><br><span class="line">            Element root = doc.getRootElement();</span><br><span class="line">            System.out.println(root.getName());</span><br><span class="line">            <span class="comment">// 2.获得信息</span></span><br><span class="line">            List&lt;Element&gt; list = root.elements();</span><br><span class="line">            <span class="keyword">for</span> (Element item:list)&#123;</span><br><span class="line">                System.out.println(item.getName());</span><br><span class="line">                String id = item.element(<span class="string">"id"</span>).getText();</span><br><span class="line">                String id2 = item.elementText(<span class="string">"id"</span>);</span><br><span class="line">                System.out.println(<span class="string">"id="</span>+id);</span><br><span class="line">                System.out.println(<span class="string">"id="</span>+id2);</span><br><span class="line">                System.out.println(<span class="string">"code="</span>+item.elementText(<span class="string">"code"</span>));</span><br><span class="line">                System.out.println(<span class="string">"name="</span>+item.elementText(<span class="string">"name"</span>));</span><br><span class="line">                System.out.println(<span class="string">"password="</span>+item.elementText(<span class="string">"password"</span>));</span><br><span class="line">                System.out.println(<span class="string">"sex="</span>+item.elementText(<span class="string">"sex"</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 写xml</span></span><br><span class="line">            <span class="comment">// 准备数据</span></span><br><span class="line">            Document writeDoc = DocumentHelper.createDocument();</span><br><span class="line">            <span class="comment">// 添加根元素</span></span><br><span class="line">            Element elRoot = writeDoc.addElement(<span class="string">"t_user"</span>);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; <span class="number">10</span>;i++)&#123;</span><br><span class="line">                Element writeRoot = elRoot.addElement(<span class="string">"student"</span>);</span><br><span class="line">                <span class="comment">// 添加id标签</span></span><br><span class="line">                Element wIdEle = writeRoot.addElement(<span class="string">"id"</span>);</span><br><span class="line">                <span class="comment">// 设置id标签的值</span></span><br><span class="line">                wIdEle.addText(<span class="string">"23"</span>);</span><br><span class="line">                <span class="comment">// 添加name标签并设置为李华</span></span><br><span class="line">                writeRoot.addElement(<span class="string">"name"</span>).addText(<span class="string">"李华"</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 写出文件</span></span><br><span class="line">            <span class="comment">// 设置xml编码</span></span><br><span class="line">            OutputFormat xmlFormat = OutputFormat.createPrettyPrint();</span><br><span class="line">            xmlFormat.setEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">            <span class="comment">// 是否要写头</span></span><br><span class="line">            <span class="comment">// xmlFormat.setSuppressDeclaration(ture);</span></span><br><span class="line">            XMLWriter writer = <span class="keyword">new</span> XMLWriter(xmlFormat);</span><br><span class="line">            writer.setOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="string">"output.xml"</span>));</span><br><span class="line">            <span class="comment">// 将数据写回xml文件</span></span><br><span class="line">            writer.write(writeDoc);</span><br><span class="line">            <span class="comment">//</span></span><br><span class="line">            writer.close();</span><br><span class="line">        &#125;<span class="keyword">catch</span> (DocumentException e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">catch</span> (FileNotFoundException e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/17/dom4j-xml解析/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-linux环境配置和常用命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -426,8 +594,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="注解配置和xml配置的优先级"><a href="#注解配置和xml配置的优先级" class="headerlink" title="注解配置和xml配置的优先级"></a>注解配置和xml配置的优先级</h4><p>xml 配置优先于注解配置。如果同时有xml和注解，则xml中会覆盖掉注解中的配置。</p>
-<h4 id="bean的相关知识"><a href="#bean的相关知识" class="headerlink" title="bean的相关知识"></a>bean的相关知识</h4><p>1、bean的属性</p>
+        <h3 id="零碎知识点"><a href="#零碎知识点" class="headerlink" title="零碎知识点"></a>零碎知识点</h3><h5 id="1、注解配置和xml配置的优先级"><a href="#1、注解配置和xml配置的优先级" class="headerlink" title="1、注解配置和xml配置的优先级"></a>1、注解配置和xml配置的优先级</h5><ul>
+<li>xml 配置优先于注解配置。如果同时有xml和注解，则xml中会覆盖掉注解中的配置。<h6 id="2、bean的相关知识"><a href="#2、bean的相关知识" class="headerlink" title="2、bean的相关知识"></a>2、bean的相关知识</h6></li>
+</ul>
+<p>1、bean的属性</p>
 <p>（1）class bean里面的所连接的类</p>
 <p>（2）name 这个bean的标识</p>
 <p>（3）scope bean的对象的作用域</p>
@@ -445,19 +615,19 @@
 <p>（2）Bean的初始化</p>
 <p>（3）Bean的使用</p>
 <p>（4）Bean的销毁</p>
-<h5 id="SpringMVC-Controller"><a href="#SpringMVC-Controller" class="headerlink" title="SpringMVC Controller"></a>SpringMVC Controller</h5><p>1、在dispatcher-servlet.xml中配置<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 扫描控制器的所在的包 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"Controller"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>2、controller配置路径的post、get请求。<br>在<code>@RequestMapping()</code>中含有一些参数可一个配置路径</p>
+<h3 id="SpringMVC-Controller"><a href="#SpringMVC-Controller" class="headerlink" title="SpringMVC Controller"></a>SpringMVC Controller</h3><h4 id="1、在dispatcher-servlet-xml中配置"><a href="#1、在dispatcher-servlet-xml中配置" class="headerlink" title="1、在dispatcher-servlet.xml中配置"></a>1、在dispatcher-servlet.xml中配置</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 扫描控制器的所在的包 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"Controller"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="2、controller配置路径的post、get请求。"><a href="#2、controller配置路径的post、get请求。" class="headerlink" title="2、controller配置路径的post、get请求。"></a>2、controller配置路径的post、get请求。</h4><p>在<code>@RequestMapping()</code>中含有一些参数可一个配置路径</p>
 <ul>
 <li>method 请求的方法<br>例如:<br>(1)post请求:<code>@RequestMapping(path=&quot;/login&quot;,method = RequestMethod.POST)</code><br>(2)get请求的简写:<code>@GetMapping(path = &quot;/login&quot;)</code>但是使用相同的方法简写post请求就出现错误了。</li>
 </ul>
-<p>3、controller Model<br>可以使用Model#addAttribute(K,V) 来设置传回去的值。然后在jsp页面中使用<code>${K}</code>获得model中<code>V</code>的值。<br>4、controller 获得页面传过来的值<br>直接在函数的入口参数中声明便可以获得相应的值<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(path = <span class="string">"/login"</span>,method = RequestMethod.POST)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">(Model model,String account,String password )</span> </span>&#123;</span><br><span class="line">        model.addAttribute(<span class="string">"account"</span>,account);</span><br><span class="line">        model.addAttribute(<span class="string">"password"</span>,password);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"info"</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="3、controller-Model"><a href="#3、controller-Model" class="headerlink" title="3、controller Model"></a>3、controller Model</h4><p>可以使用Model#addAttribute(K,V) 来设置传回去的值。然后在jsp页面中使用<code>${K}</code>获得model中<code>V</code>的值。</p>
+<h4 id="4、controller-获得页面传过来的值"><a href="#4、controller-获得页面传过来的值" class="headerlink" title="4、controller 获得页面传过来的值"></a>4、controller 获得页面传过来的值</h4><p>直接在函数的入口参数中声明便可以获得相应的值<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(path = <span class="string">"/login"</span>,method = RequestMethod.POST)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">(Model model,String account,String password )</span> </span>&#123;</span><br><span class="line">        model.addAttribute(<span class="string">"account"</span>,account);</span><br><span class="line">        model.addAttribute(<span class="string">"password"</span>,password);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"info"</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <p>其中的<code>info</code>是视图的名称。会将model传递到info.jsp中。</p>
-<h4 id="SpringMVC-View"><a href="#SpringMVC-View" class="headerlink" title="SpringMVC View"></a>SpringMVC View</h4><p>1、在view中使用model中的数据。</p>
-<ul>
+<h3 id="SpringMVC-View"><a href="#SpringMVC-View" class="headerlink" title="SpringMVC View"></a>SpringMVC View</h3><h4 id="1、在view中使用model中的数据。"><a href="#1、在view中使用model中的数据。" class="headerlink" title="1、在view中使用model中的数据。"></a>1、在view中使用model中的数据。</h4><ul>
 <li>在info.jsp中显示用户从index.jsp中传过来用户名和密码<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>账号:<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;account&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>密码:<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;password&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h5 id="url"><a href="#url" class="headerlink" title="url"></a>url</h5><p>@RequestMapping(“/a/{ownId})<br>获得ownId的值<br>@PathvVariable String ownId</p>
+<h5 id="2、url路径映射"><a href="#2、url路径映射" class="headerlink" title="2、url路径映射"></a>2、url路径映射</h5><p>@RequestMapping(“/a/{ownId})<br>获得ownId的值<br>@PathvVariable String ownId<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/&#123;recordId&#125;"</span>,method = RequestMethod.GET)</span><br><span class="line"><span class="function"><span class="keyword">public</span> PublishRecordDto <span class="title">getRecordById</span><span class="params">(@PathVariable(<span class="string">"recordId"</span>)</span> <span class="keyword">long</span> recordId)</span>&#123;</span><br></pre></td></tr></table></figure></p>
 <h3 id="spring-boot"><a href="#spring-boot" class="headerlink" title="spring boot"></a>spring boot</h3><h4 id="1、配置mybatis的坑。"><a href="#1、配置mybatis的坑。" class="headerlink" title="1、配置mybatis的坑。"></a>1、配置mybatis的坑。</h4><p>application.properties<br>自动生成的是有问题的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.data-username=root</span><br><span class="line">spring.datasource.data-password=root</span><br></pre></td></tr></table></figure></p>
 <p>正确的配置如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver</span><br><span class="line">spring.datasource.url=jdbc:mysql://localhost:3306/train</span><br><span class="line">spring.datasource.username=root</span><br><span class="line">spring.datasource.password=root</span><br></pre></td></tr></table></figure></p>
 <h4 id="2、扫描dao的包位置"><a href="#2、扫描dao的包位置" class="headerlink" title="2、扫描dao的包位置"></a>2、扫描dao的包位置</h4><p><code>@MapperScan(&quot;com.package..dao&quot;)</code><br>在dao使用接口类来定义一个dao.全部使用注解。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">**</span><br><span class="line"> * Mybatis 的dao 接口</span><br><span class="line"> * <span class="meta">@author</span> longquanxiao</span><br><span class="line"> * <span class="meta">@date</span> <span class="number">2019</span>/<span class="number">7</span>/<span class="number">26</span></span><br><span class="line"> */</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DictionaryDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 插入数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> dictionary 数据字典</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 插入的个数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Insert</span>(<span class="string">"INSERT INTO t_dictionary (category_id,name,category,value,remark,status,org_id,"</span> +</span><br><span class="line">            <span class="string">"created_by,created_time,updated_by,updated_time,version) values"</span> +</span><br><span class="line">            <span class="string">"(#&#123;categoryId&#125;,#&#123;name&#125;,#&#123;category&#125;,#&#123;value&#125;,#&#123;remark&#125;,#&#123;status&#125;,#&#123;orgId&#125;,"</span> +</span><br><span class="line">            <span class="string">"#&#123;createdBy&#125;,#&#123;createdTime&#125;,#&#123;updatedBy&#125;,#&#123;updatedTime&#125;,#&#123;version&#125;) "</span>)</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">insertUser</span><span class="params">(Dictionary dictionary)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获得所有的字典</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Select</span>(<span class="string">"SELECT * FROM t_dictionary"</span>)</span><br><span class="line">    <span class="meta">@Results</span>(id = <span class="string">"dictionaryMap"</span>,value = &#123;</span><br><span class="line">            <span class="meta">@Result</span>(id = <span class="keyword">true</span>,column = <span class="string">"category_id"</span>,property = <span class="string">"categoryId"</span>),</span><br><span class="line">            <span class="meta">@Result</span>(column = <span class="string">"name"</span>,property = <span class="string">"name"</span>),</span><br><span class="line">            <span class="meta">@Result</span>(column = <span class="string">"category"</span>,property = <span class="string">"category"</span>),</span><br><span class="line">            <span class="meta">@Result</span>(column = <span class="string">"value"</span>,property = <span class="string">"value"</span>),</span><br><span class="line">            <span class="meta">@Result</span>(column = <span class="string">"remark"</span>,property = <span class="string">"remark"</span>),</span><br><span class="line">            <span class="meta">@Result</span>(property=<span class="string">"status"</span>,column=<span class="string">"status"</span>),</span><br><span class="line">            <span class="meta">@Result</span>(property=<span class="string">"orgId"</span>,column=<span class="string">"org_id"</span>),</span><br><span class="line">            <span class="meta">@Result</span>(property=<span class="string">"createdBy"</span>,column=<span class="string">"created_by"</span>),</span><br><span class="line">            <span class="meta">@Result</span>(property=<span class="string">"createdTime"</span>,column=<span class="string">"created_time"</span>),</span><br><span class="line">            <span class="meta">@Result</span>(property=<span class="string">"updatedBy"</span>, column=<span class="string">"updated_by"</span>),</span><br><span class="line">            <span class="meta">@Result</span>(property=<span class="string">"updatedTime"</span>, column=<span class="string">"updated_time"</span>),</span><br><span class="line">            <span class="meta">@Result</span>(property=<span class="string">"version"</span> ,column=<span class="string">"version"</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="function">List&lt;Dictionary&gt; <span class="title">queryAll</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -479,6 +649,10 @@
 			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
         		</li>
       		
 		</ul>
@@ -923,204 +1097,9 @@
 
 
   
-    <article id="post-扫雷项目相关笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/13/扫雷项目相关笔记/">扫雷项目相关笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/13/扫雷项目相关笔记/" class="archive-article-date">
-  	<time datetime="2019-05-13T12:09:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="vector-是线程安全的"><a href="#vector-是线程安全的" class="headerlink" title="vector 是线程安全的"></a>vector 是线程安全的</h4><p>在发送数据到服务器的时候，发送数据线程，从共享变量<code>senddatas</code>中取出要发送的数值并发送到服务器，但是这时候可能有新的数据加入，这时候需要保证数据的线程安全，而arrarylist不是线程安全的。</p>
-<h4 id="开启发送线程的原因"><a href="#开启发送线程的原因" class="headerlink" title="开启发送线程的原因"></a>开启发送线程的原因</h4><p>数据突发太大，会将还没发送出去的信息覆盖。设置发送数据时间间隔大于30ms才不至于被覆盖。</p>
-<h4 id="客户端与服务器数据请求格式json"><a href="#客户端与服务器数据请求格式json" class="headerlink" title="客户端与服务器数据请求格式json"></a>客户端与服务器数据请求格式json</h4><p><strong>1、type</strong> 数据类型<br><strong>2、value</strong> 数据的值<br><strong>从客户端请求的数据类型如下</strong><br>1、登入请求<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="attr">"type"</span> : <span class="string">"Login"</span>,</span><br><span class="line">    <span class="attr">"account"</span> : <span class="string">"1234556"</span>,</span><br><span class="line">    <span class="attr">"password"</span> : <span class="string">"21fefefefesdfs"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>2、登出请求<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span> : <span class="string">"Logout"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>3、转发数据请求(更新雷区)<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span> : <span class="string">"Transmit"</span>,</span><br><span class="line">    <span class="attr">"x"</span>:<span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"y"</span>:<span class="string">"2"</span>,</span><br><span class="line">    <span class="attr">"value"</span>:<span class="string">"1 | 2| -1"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>4、游戏结束请求<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span>: <span class="string">"GameOver"</span>,</span><br><span class="line">    <span class="attr">"status"</span>: <span class="string">"win|defeat"</span>,</span><br><span class="line">    <span class="attr">"costTime"</span>: <span class="string">"34323 | -1"</span>,</span><br><span class="line">    <span class="attr">"description"</span>:<span class="string">"关于游戏结束的描述"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>5、匹配游戏请求<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span>: <span class="string">"Math"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="服务器返回数据类型"><a href="#服务器返回数据类型" class="headerlink" title="服务器返回数据类型"></a>服务器返回数据类型</h3><p>1、登陆成功<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span>:<span class="string">"LoginSuccess"</span>,</span><br><span class="line">    <span class="attr">"value"</span>: <span class="string">"account"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>2、登陆失败<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span>:<span class="string">"LoginFailure"</span>,</span><br><span class="line">    <span class="attr">"value"</span>:<span class="string">"failure-type"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="责任链产生请求和处理请求说明"><a href="#责任链产生请求和处理请求说明" class="headerlink" title="责任链产生请求和处理请求说明"></a>责任链产生请求和处理请求说明</h3><p>1、<code>EvenType.SENDDATA</code> 发送数据的请求<br>2、<code>EvenType.UPDATE</code> 更新雷区的请求<br>3、<code>EvenType.LOGIN</code> 登陆游戏请求<br>4、<code>EvenType.CLICK</code> 鼠标点击雷区请求</p>
-<hr>
-<p>MyMouseListener.java 鼠标监听类</p>
-<blockquote>
-<p>产生: 点击雷区之后，产生鼠标点击请求(EvenType.CLICK)<br>处理: 无</p>
-</blockquote>
-<p>Conection.java 连接服务器类</p>
-<blockquote>
-<p>产生:<br>1、更新数据请求(EvenType.UPDATE) 这个更新信息是从服务器传送过来的<br>处理:<br>1、发送的数据请求(EvenType.SENDDATA)将数据发送到服务器<br>2、登陆请求(EvenType.LOGIN) 将登陆信息发送到服务器?两者是否能合并？</p>
-</blockquote>
-<p>Core.java 游戏核心类</p>
-<blockquote>
-<p>产生:<br>      1、更新雷区请求（EvenType.UPDATE）经过计算之后需要更新雷区数据<br>      2、游戏结束请求()<br>处理:<br>      1、鼠标的点击请求(EvenType.CLICK) 调用函数计算该请求导致的结果</p>
-</blockquote>
-<p>MineFile.java 雷区显示类</p>
-<blockquote>
-<p>产生: 发送数据请求(EvenType.SENDDATA)，主要是将雷区更新的数据发送到服务器，<br>处理: 更新雷区的请求(EvenType.UPDATE)，根据传过来的数据更新雷区的显示</p>
-</blockquote>
-<p>LoginPanel.java 登陆面板</p>
-<blockquote>
-<p>产生: 登陆游戏请求(EvenType.LOGIN),传递的数据是账号和hash取值后的密码<br>处理: 无</p>
-</blockquote>
-<p>OperatePanel.java 操作面板</p>
-<blockquote>
-<p>产生: 开始匹配游戏请求<br>处理: 待定</p>
-</blockquote>
-<h3 id="责任链中数据传输格式"><a href="#责任链中数据传输格式" class="headerlink" title="责任链中数据传输格式"></a>责任链中数据传输格式</h3><p><strong>旧版</strong><br>MineFile.java </p>
-<p>###java引用调用和按值调用<br>对象引用调用，类似于C中的指针。这样可以在B类对象中引入A类对象，这样便可以调用A类对象中的函数，代码如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.test;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引用调用</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> a = <span class="number">99</span>;</span><br><span class="line">    A()&#123;</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.a += i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">    B()&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addA</span><span class="params">(A a)</span></span>&#123;</span><br><span class="line">        a.add(<span class="number">1</span>); <span class="comment">// 引用a</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInt</span><span class="params">(<span class="keyword">int</span> i2, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        i2 = i2 + j;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">testReference</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] argv)</span></span>&#123;</span><br><span class="line">        A a = <span class="keyword">new</span>  A();</span><br><span class="line">        B b = <span class="keyword">new</span> B();</span><br><span class="line">        b.addA(a);</span><br><span class="line">        a.print(); <span class="comment">// 输出100</span></span><br><span class="line">        A a1 = a; <span class="comment">//</span></span><br><span class="line">        b.addA(a1);</span><br><span class="line">        a1.print(); <span class="comment">// 预计是101</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line">        b.addInt(i,<span class="number">19</span>);</span><br><span class="line">        System.out.println(i); <span class="comment">// 结果为1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在b中操作a的函数。这样可以在core类中调用Login中的关闭函数</p>
-<h3 id="使用implement-runable-和继承线程extend-Thread-的一些区别"><a href="#使用implement-runable-和继承线程extend-Thread-的一些区别" class="headerlink" title="使用implement runable 和继承线程extend Thread 的一些区别"></a>使用implement runable 和继承线程extend Thread 的一些区别</h3><p>使用实现接口的话，对象调用run函数之后。该对象之后的语句并不会执行，直到run执行完毕。而使用继承的话，线程对象调用，start函数之后。该对象之后的语句可以执行。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/13/扫雷项目相关笔记/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-git常用操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/07/git常用操作/">git常用操作</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/07/git常用操作/" class="archive-article-date">
-  	<time datetime="2019-05-07T15:12:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h3><p>1、新建分支<br><code>git branch newBranchName</code> 在当前分支中新建一个newBranchName分支，但是目前还没有到那个分支里面去，<br>2、切换分支<br>使用<code>git branch -v</code>查看分支情况，使用<code>git branch -a</code>来查远程的分支等详细情况。前面有*号的为当前所在分支<br>使用<code>git checkout xxx</code> 移动到名为xxx的分支中<br><code>git branch -v</code> 进行分支查看<br>3、创建分支和移动分支命令也可以合并成<code>git checkout -b newBranch</code>.<br>4、删除分支<code>git branch -d delbranchname</code>可以删除已经合并了的分支，若要删除没有合并过的分支则需要使用—D来强制删除<br>5、关于分支无法push问题处理<br><strong>问题</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fatal: The current branch 1.0-dev has no upstream branch.</span><br><span class="line">To push the current branch and set the remote as upstream, use</span><br><span class="line">    git push --set-upstream origin 1.0-dev</span><br></pre></td></tr></table></figure></p>
-<p>使用<code>git push --set-upstream origin 1.0-dev</code>来建立一个上传流,其中的1.0-dev是分支名称</p>
-<h3 id="新建远程仓库"><a href="#新建远程仓库" class="headerlink" title="新建远程仓库"></a>新建远程仓库</h3><p>命令:<code>git remote add origin url</code><br>其中的origin 是远程的仓库名<br>以一个本地的git repository 可以部署在不同的服务器。这样有不同的remote。为了区分不同的远程仓库。则需要设置不同的仓库名。<br>可以在该项目继续添加远程仓库。<code>git remote add bak url2</code><br>如何使用:<br>  当想要把代码推送到特定的远程仓库的。push的时候加上仓库名<code>git push origin</code> 推送到origin远程。<code>git push bak</code> 推送到bak的远程分支。</p>
-<p><strong>问题</strong>:<br>ssh 连接,出现push 权限问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br></pre></td></tr></table></figure></p>
-<p>查看.git/config文件。是不是使用https协议.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[remote &quot;origin&quot;]</span><br><span class="line"> 12     url = https://github.com/long95288/TrainHomework.git</span><br><span class="line"> 13     fetch = +refs/heads/*:refs/remotes/origin/*</span><br><span class="line"> 14 [branch &quot;master&quot;]</span><br><span class="line"> 15     remote = origin</span><br><span class="line"> 16     merge = refs/heads/master</span><br></pre></td></tr></table></figure></p>
-<h4 id="命令说明"><a href="#命令说明" class="headerlink" title="命令说明"></a>命令说明</h4><p>1、<code>git diff hello.c</code><br>查看hello.c的变更<br>2、<code>git add .</code><br>添加当前目录下的更改到暂存区<br>3、<code>git add -A</code><br>添加所有的更改到暂存区<br>4、<code>git commit -a -m</code><br>添加和提交一起操作<br>5、<code>git push -u origin develop</code><br>推送到origin远程仓库的develop分支<br>6、<code>git log</code><br>查看提交日志<br>7、<code>git tag -a tagname commitId -m &quot;description&quot;</code><br>打标签<br>8、<code>git push origin tagname</code><br>推送标签到远端<br>9、</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/07/git常用操作/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -1223,11 +1202,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">UML</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1235,7 +1218,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1259,7 +1242,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
             
             <div class="clearfix"></div>
