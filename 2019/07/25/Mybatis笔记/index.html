@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="一、MyBatis的简单使用1、maven项目依赖简单的使用Mybatis只需要引入连个包便可以了。1234567891011&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;mybatis&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;3.4.6&amp;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-15T07:07:08.112Z">
+<meta property="og:updated_time" content="2019-08-15T07:19:47.693Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mybatis笔记">
 <meta name="twitter:description" content="一、MyBatis的简单使用1、maven项目依赖简单的使用Mybatis只需要引入连个包便可以了。1234567891011&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;mybatis&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;3.4.6&amp;">
@@ -246,8 +246,8 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Delete</span>(<span class="string">"DELETE FROM t_dictionary WHERE category_id = #&#123;id&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">deleteDictionary</span><span class="params">(<span class="keyword">long</span> id)</span></span>;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h5 id="启动类中扫描相关的组件"><a href="#启动类中扫描相关的组件" class="headerlink" title="启动类中扫描相关的组件"></a>启动类中扫描相关的组件</h5><p><code>@MapperScan(&quot;com.bosssoft.hr.train.chp2.dao&quot;)</code>扫描为dao</p>
-
+<h5 id="2-2-启动类中扫描相关的组件"><a href="#2-2-启动类中扫描相关的组件" class="headerlink" title="2.2 启动类中扫描相关的组件"></a>2.2 启动类中扫描相关的组件</h5><p><code>@MapperScan(&quot;com.bosssoft.hr.train.chp2.dao&quot;)</code>扫描为dao</p>
+<h4 id="3、使用Dao来进行访问"><a href="#3、使用Dao来进行访问" class="headerlink" title="3、使用Dao来进行访问"></a>3、使用Dao来进行访问</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * dao对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Resource</span></span><br><span class="line"><span class="keyword">private</span> DictionaryDao dictionaryDao;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -488,10 +488,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
@@ -512,11 +508,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -537,6 +533,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
             
             <div class="clearfix"></div>
