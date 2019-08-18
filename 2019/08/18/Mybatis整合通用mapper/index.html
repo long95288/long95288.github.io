@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="1、相关配置1.1 maven依赖123456&amp;lt;!--引入通用mapper--&amp;gt;&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;tk.mybatis&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;mapper-spring-boot-starter&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;2.1.5">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-18T12:35:15.204Z">
+<meta property="og:updated_time" content="2019-08-18T13:45:05.147Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mybatis整合通用mapper">
 <meta name="twitter:description" content="1、相关配置1.1 maven依赖123456&amp;lt;!--引入通用mapper--&amp;gt;&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;tk.mybatis&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;mapper-spring-boot-starter&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;2.1.5">
@@ -221,8 +221,11 @@
 <li><code>int deleteByPrimaryKey(Object key)</code><br>说明: 根据主键进行删除数据</li>
 <li><code>int delete(T entity)</code><br>说明: 根据传进来的实体的属性删除满足的字段<h5 id="2-4-4-更新类"><a href="#2-4-4-更新类" class="headerlink" title="2.4.4 更新类"></a>2.4.4 更新类</h5></li>
 <li><code>int updateByPrimaryKey(T entity)</code><br>说明: 根据传进来的实体id更新数据库相应的数据,null值会被更新</li>
-<li><code>int updateByPrimaryKeySelective(T entity)</code><br>说明: 根据传进来的实体更新属性不为空的值<h4 id="2-5-使用Example"><a href="#2-5-使用Example" class="headerlink" title="2.5 使用Example"></a>2.5 使用Example</h4></li>
+<li><code>int updateByPrimaryKeySelective(T entity)</code><br>说明: 根据传进来的实体更新属性不为空的值<h4 id="2-5-使用Example"><a href="#2-5-使用Example" class="headerlink" title="2.5 使用Example"></a>2.5 使用Example</h4>examples能够更加灵活的用来进行查询<h5 id="2-5-1-获得某个实体类的样本example"><a href="#2-5-1-获得某个实体类的样本example" class="headerlink" title="2.5.1 获得某个实体类的样本example"></a>2.5.1 获得某个实体类的样本example</h5><code>Example example = new Example(User.class);</code><h5 id="2-5-2-获得这个样本的criteria"><a href="#2-5-2-获得这个样本的criteria" class="headerlink" title="2.5.2 获得这个样本的criteria"></a>2.5.2 获得这个样本的criteria</h5><code>Example.Criteria criteria = example.createCriteria();</code><h5 id="2-5-3-使用这个criteria来设定相应的条件"><a href="#2-5-3-使用这个criteria来设定相应的条件" class="headerlink" title="2.5.3 使用这个criteria来设定相应的条件"></a>2.5.3 使用这个criteria来设定相应的条件</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">criteria.andEqualTo(<span class="string">"account"</span>,<span class="string">"long1532"</span>);</span><br><span class="line">criteria.andNotEqualTo(<span class="string">"nickname"</span>,<span class="string">"long153222"</span>);</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
+<p>可以调用相应的函数来构建相应的条件。这就是将本来是要写sql语句的部分封装成函数。只要传入相应的属性和调用相应的方法便可以完成某些条件的查询。</p>
+<h5 id="2-5-4-使用example来增删改查相应的数据"><a href="#2-5-4-使用example来增删改查相应的数据" class="headerlink" title="2.5.4 使用example来增删改查相应的数据"></a>2.5.4 使用example来增删改查相应的数据</h5><p><code>List&lt;User&gt; userList = userDao.selectByExample(example);</code></p>
 
       
 
@@ -471,11 +474,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
