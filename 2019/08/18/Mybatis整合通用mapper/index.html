@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://long95288.github.io">
-  <title>Archives: 2019/3 | 风兮木落</title>
+  <title>Mybatis整合通用mapper | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="代码和文学本来就是一个世界的，寻找文学和code的和谐统一">
-<meta property="og:type" content="website">
-<meta property="og:title" content="风兮木落">
-<meta property="og:url" content="http://long95288.github.io/archives/2019/03/index.html">
+  <meta name="description" content="1、相关配置1.1 maven依赖123456&amp;lt;!--引入通用mapper--&amp;gt;&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;tk.mybatis&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;mapper-spring-boot-starter&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;2.1.5">
+<meta name="keywords" content="笔记,spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mybatis整合通用mapper">
+<meta property="og:url" content="http://long95288.github.io/2019/08/18/Mybatis整合通用mapper/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="代码和文学本来就是一个世界的，寻找文学和code的和谐统一">
+<meta property="og:description" content="1、相关配置1.1 maven依赖123456&amp;lt;!--引入通用mapper--&amp;gt;&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;tk.mybatis&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;mapper-spring-boot-starter&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;2.1.5">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-18T12:35:15.204Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="风兮木落">
-<meta name="twitter:description" content="代码和文学本来就是一个世界的，寻找文学和code的和谐统一">
+<meta name="twitter:title" content="Mybatis整合通用mapper">
+<meta name="twitter:description" content="1、相关配置1.1 maven依赖123456&amp;lt;!--引入通用mapper--&amp;gt;&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;tk.mybatis&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;mapper-spring-boot-starter&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;2.1.5">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
   
@@ -161,129 +163,210 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Mybatis整合通用mapper" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/14/酷狗音乐排行爬虫/" class="archive-article-date">
-  	<time datetime="2019-03-14T13:32:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-14</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/14/酷狗音乐排行爬虫/">酷狗音乐排行爬虫</a>
+    <h1 class="article-title" itemprop="name">
+      Mybatis整合通用mapper
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/08/18/Mybatis整合通用mapper/" class="archive-article-date">
+  	<time datetime="2019-08-18T09:54:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1、相关配置"><a href="#1、相关配置" class="headerlink" title="1、相关配置"></a>1、相关配置</h3><h4 id="1-1-maven依赖"><a href="#1-1-maven依赖" class="headerlink" title="1.1 maven依赖"></a>1.1 maven依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--引入通用mapper--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>tk.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mapper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-2-application-properties配置"><a href="#1-2-application-properties配置" class="headerlink" title="1.2 application.properties配置"></a>1.2 application.properties配置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mapper.identity=MYSQL</span><br></pre></td></tr></table></figure>
+<h4 id="1-3-spring启动配置scan"><a href="#1-3-spring启动配置scan" class="headerlink" title="1.3 spring启动配置scan"></a>1.3 spring启动配置scan</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MapperScan</span>(<span class="string">"com.longquanxiao.quanjing.dao"</span>)</span><br></pre></td></tr></table></figure>
+<p>使用<code>import tk.mybatis.spring.annotation.MapperScan;</code>来扫描</p>
+<h3 id="2、使用通用mapper"><a href="#2、使用通用mapper" class="headerlink" title="2、使用通用mapper"></a>2、使用通用mapper</h3><h4 id="2-1-创建顶层的BaseDao"><a href="#2-1-创建顶层的BaseDao" class="headerlink" title="2.1 创建顶层的BaseDao"></a>2.1 创建顶层的BaseDao</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BaseDao</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">Mapper</span>, <span class="title">MySqlMapper</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主要是起到一个模板的作用</p>
+<h4 id="2-2-创建自己的DAO层"><a href="#2-2-创建自己的DAO层" class="headerlink" title="2.2 创建自己的DAO层"></a>2.2 创建自己的DAO层</h4><p>实现BaseDao<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserDao</span> <span class="keyword">extends</span> <span class="title">BaseDao</span>&lt;<span class="title">User</span>&gt; </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中的User是实体对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="meta">@Table</span>(name = <span class="string">"t_user"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span>(strategy = GenerationType.IDENTITY)</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"nickname"</span>)</span><br><span class="line">    <span class="keyword">private</span> String nickname;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"account"</span>)</span><br><span class="line">    <span class="keyword">private</span> String account;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"password"</span>)</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"telephone"</span>)</span><br><span class="line">    <span class="keyword">private</span> String telephone;</span><br><span class="line">    ...getter</span><br><span class="line">    ...setter</span><br></pre></td></tr></table></figure></p>
+<p>@Table中映射到数据库中对应的数据表<br>@Id@GeneratedValue是用来确定相关的主键的标识的<br>@Column是和数据表中相关的字段相对应。</p>
+<h4 id="2-3-使用UserDao"><a href="#2-3-使用UserDao" class="headerlink" title="2.3 使用UserDao"></a>2.3 使用UserDao</h4><p>在service层引入<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Resource</span></span><br><span class="line"><span class="keyword">private</span> UserDao userDao;</span><br></pre></td></tr></table></figure></p>
+<p>简单的增删该查的函数</p>
+<ul>
+<li><p>新增用户 insert(Object)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insert</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 添加用户</span></span><br><span class="line">    <span class="keyword">return</span>  userDao.insert(user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除用户 deleteByPrimaryKey(Integer id)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">deleteUser</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 使用id删除用户</span></span><br><span class="line">    <span class="keyword">int</span> row = userDao.deleteByPrimaryKey(id);</span><br><span class="line">    <span class="keyword">return</span> row;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改(更新)用户 updateByPrimaryKey(EntityObject)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">updateByPrimaryKey</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> userDao.updateByPrimaryKey(user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>根据id查询用户selectByPrimaryKey(Integer id)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">queryById</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (User)userDao.selectByPrimaryKey(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询所有的用户 selectAll()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">queryUserList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 返回所有的用户</span></span><br><span class="line">    <span class="keyword">return</span> userDao.selectAll();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="2-4-其它常用函数"><a href="#2-4-其它常用函数" class="headerlink" title="2.4 其它常用函数"></a>2.4 其它常用函数</h4><h5 id="2-4-1-查询类"><a href="#2-4-1-查询类" class="headerlink" title="2.4.1 查询类"></a>2.4.1 查询类</h5><ul>
+<li><code>List&lt;T&gt; select(T entity)</code><br>说明:根据传进来的实体记录找出符合条件的数据列表,使用的and查询。满足传入的属性</li>
+<li><code>T selectOne(T entity)</code><br>说明: 根据传进来的实体，从数据库中查找出一条记录。如果找到多个值会抛出异常。使用and查询</li>
+<li><code>List&lt;T&gt; selectAll()</code>等价于<code>select(null)</code></li>
+<li><code>int selectCount(T entity)</code>根据实体属性返回查询到的数据个数<h5 id="2-4-2-新增类"><a href="#2-4-2-新增类" class="headerlink" title="2.4.2 新增类"></a>2.4.2 新增类</h5></li>
+<li><code>int insert(T entity)</code><br>说明:向数据库中插入一条数据,entity中null值会保存。不会使用数据库的默认值</li>
+<li><code>int insertSelective(T entity)</code><br>说明:向数据库中插入一条数据,entity中的null值会使用数据库中的默认值进行填充<h5 id="2-4-3-删除类"><a href="#2-4-3-删除类" class="headerlink" title="2.4.3 删除类"></a>2.4.3 删除类</h5></li>
+<li><code>int deleteByPrimaryKey(Object key)</code><br>说明: 根据主键进行删除数据</li>
+<li><code>int delete(T entity)</code><br>说明: 根据传进来的实体的属性删除满足的字段<h5 id="2-4-4-更新类"><a href="#2-4-4-更新类" class="headerlink" title="2.4.4 更新类"></a>2.4.4 更新类</h5></li>
+<li><code>int updateByPrimaryKey(T entity)</code><br>说明: 根据传进来的实体id更新数据库相应的数据,null值会被更新</li>
+<li><code>int updateByPrimaryKeySelective(T entity)</code><br>说明: 根据传进来的实体更新属性不为空的值<h4 id="2-5-使用Example"><a href="#2-5-使用Example" class="headerlink" title="2.5 使用Example"></a>2.5 使用Example</h4></li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/08/18/Mybatis整合通用mapper/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/11/第一篇博客/" class="archive-article-date">
-  	<time datetime="2019-03-11T13:17:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-11</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/14/SpringBoot整合Swagger/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SpringBoot整合Swagger</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/11/第一篇博客/">hexo 基本用法</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/11/算法笔记/" class="archive-article-date">
-  	<time datetime="2019-03-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/11/算法笔记/">辗转相除法</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -306,8 +389,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
