@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://long95288.github.io">
-  <title>Mybatis整合通用mapper | 风兮木落</title>
+  <title>vue QRCode生成二维码 | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、相关配置1.1 maven依赖123456&amp;lt;!--引入通用mapper--&amp;gt;&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;tk.mybatis&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;mapper-spring-boot-starter&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;2.1.5">
-<meta name="keywords" content="笔记,spring">
+  <meta name="description" content="1、npm 安装qrcode使用下面的命令安装qrcodenpm install --save qrcode网上有好多的版本。比如说qrcodejs2等等。经过采坑之后才知道qscode是最可控的。qrcodejs2会生成一个位置让人凌乱的图片。 2、使用qrcode生成二维码图片推荐去看官方的api,博客什么的各种牛马蛇神都有。 2.1 引入包1import QRCode from &apos;qrcod">
+<meta name="keywords" content="笔记,前端,vue">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mybatis整合通用mapper">
-<meta property="og:url" content="http://long95288.github.io/2019/08/18/Mybatis整合通用mapper/index.html">
+<meta property="og:title" content="vue QRCode生成二维码">
+<meta property="og:url" content="http://long95288.github.io/2019/08/19/vue-QRCode生成二维码/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="1、相关配置1.1 maven依赖123456&amp;lt;!--引入通用mapper--&amp;gt;&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;tk.mybatis&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;mapper-spring-boot-starter&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;2.1.5">
+<meta property="og:description" content="1、npm 安装qrcode使用下面的命令安装qrcodenpm install --save qrcode网上有好多的版本。比如说qrcodejs2等等。经过采坑之后才知道qscode是最可控的。qrcodejs2会生成一个位置让人凌乱的图片。 2、使用qrcode生成二维码图片推荐去看官方的api,博客什么的各种牛马蛇神都有。 2.1 引入包1import QRCode from &apos;qrcod">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-18T13:45:05.147Z">
+<meta property="og:image" content="http://long95288.github.io/2019/08/19/vue-QRCode生成二维码/gitQrcode.jpg">
+<meta property="og:updated_time" content="2019-08-19T15:29:33.270Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mybatis整合通用mapper">
-<meta name="twitter:description" content="1、相关配置1.1 maven依赖123456&amp;lt;!--引入通用mapper--&amp;gt;&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;tk.mybatis&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;mapper-spring-boot-starter&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;2.1.5">
+<meta name="twitter:title" content="vue QRCode生成二维码">
+<meta name="twitter:description" content="1、npm 安装qrcode使用下面的命令安装qrcodenpm install --save qrcode网上有好多的版本。比如说qrcodejs2等等。经过采坑之后才知道qscode是最可控的。qrcodejs2会生成一个位置让人凌乱的图片。 2、使用qrcode生成二维码图片推荐去看官方的api,博客什么的各种牛马蛇神都有。 2.1 引入包1import QRCode from &apos;qrcod">
+<meta name="twitter:image" content="http://long95288.github.io/2019/08/19/vue-QRCode生成二维码/gitQrcode.jpg">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
   
@@ -163,69 +165,42 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Mybatis整合通用mapper" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-vue-QRCode生成二维码" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Mybatis整合通用mapper
+      vue QRCode生成二维码
     </h1>
   
 
         
-        <a href="/2019/08/18/Mybatis整合通用mapper/" class="archive-article-date">
-  	<time datetime="2019-08-18T09:54:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
+        <a href="/2019/08/19/vue-QRCode生成二维码/" class="archive-article-date">
+  	<time datetime="2019-08-19T14:31:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1、相关配置"><a href="#1、相关配置" class="headerlink" title="1、相关配置"></a>1、相关配置</h3><h4 id="1-1-maven依赖"><a href="#1-1-maven依赖" class="headerlink" title="1.1 maven依赖"></a>1.1 maven依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--引入通用mapper--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>tk.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mapper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="1-2-application-properties配置"><a href="#1-2-application-properties配置" class="headerlink" title="1.2 application.properties配置"></a>1.2 application.properties配置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mapper.identity=MYSQL</span><br></pre></td></tr></table></figure>
-<h4 id="1-3-spring启动配置scan"><a href="#1-3-spring启动配置scan" class="headerlink" title="1.3 spring启动配置scan"></a>1.3 spring启动配置scan</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MapperScan</span>(<span class="string">"com.longquanxiao.quanjing.dao"</span>)</span><br></pre></td></tr></table></figure>
-<p>使用<code>import tk.mybatis.spring.annotation.MapperScan;</code>来扫描</p>
-<h3 id="2、使用通用mapper"><a href="#2、使用通用mapper" class="headerlink" title="2、使用通用mapper"></a>2、使用通用mapper</h3><h4 id="2-1-创建顶层的BaseDao"><a href="#2-1-创建顶层的BaseDao" class="headerlink" title="2.1 创建顶层的BaseDao"></a>2.1 创建顶层的BaseDao</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BaseDao</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">Mapper</span>, <span class="title">MySqlMapper</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>主要是起到一个模板的作用</p>
-<h4 id="2-2-创建自己的DAO层"><a href="#2-2-创建自己的DAO层" class="headerlink" title="2.2 创建自己的DAO层"></a>2.2 创建自己的DAO层</h4><p>实现BaseDao<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserDao</span> <span class="keyword">extends</span> <span class="title">BaseDao</span>&lt;<span class="title">User</span>&gt; </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>其中的User是实体对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="meta">@Table</span>(name = <span class="string">"t_user"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span>(strategy = GenerationType.IDENTITY)</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"nickname"</span>)</span><br><span class="line">    <span class="keyword">private</span> String nickname;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"account"</span>)</span><br><span class="line">    <span class="keyword">private</span> String account;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"password"</span>)</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"telephone"</span>)</span><br><span class="line">    <span class="keyword">private</span> String telephone;</span><br><span class="line">    ...getter</span><br><span class="line">    ...setter</span><br></pre></td></tr></table></figure></p>
-<p>@Table中映射到数据库中对应的数据表<br>@Id@GeneratedValue是用来确定相关的主键的标识的<br>@Column是和数据表中相关的字段相对应。</p>
-<h4 id="2-3-使用UserDao"><a href="#2-3-使用UserDao" class="headerlink" title="2.3 使用UserDao"></a>2.3 使用UserDao</h4><p>在service层引入<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Resource</span></span><br><span class="line"><span class="keyword">private</span> UserDao userDao;</span><br></pre></td></tr></table></figure></p>
-<p>简单的增删该查的函数</p>
+        <h4 id="1、npm-安装qrcode"><a href="#1、npm-安装qrcode" class="headerlink" title="1、npm 安装qrcode"></a>1、npm 安装qrcode</h4><p>使用下面的命令安装qrcode<br><code>npm install --save qrcode</code><br>网上有好多的版本。比如说qrcodejs2等等。经过采坑之后才知道qscode是最可控的。qrcodejs2会生成一个位置让人凌乱的图片。</p>
+<h4 id="2、使用qrcode生成二维码图片"><a href="#2、使用qrcode生成二维码图片" class="headerlink" title="2、使用qrcode生成二维码图片"></a>2、使用qrcode生成二维码图片</h4><p>推荐去看官方的<a href="https://www.npmjs.com/package/qrcode#api" target="_blank" rel="noopener">api</a>,博客什么的各种牛马蛇神都有。</p>
+<h5 id="2-1-引入包"><a href="#2-1-引入包" class="headerlink" title="2.1 引入包"></a>2.1 引入包</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> QRCode <span class="keyword">from</span> <span class="string">'qrcode'</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-2-创建一个函数来生成二维码"><a href="#2-2-创建一个函数来生成二维码" class="headerlink" title="2.2 创建一个函数来生成二维码"></a>2.2 创建一个函数来生成二维码</h5><p>  也可以在vue的mounted中创建。<br>有两种方式生成二维码</p>
 <ul>
-<li><p>新增用户 insert(Object)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insert</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 添加用户</span></span><br><span class="line">    <span class="keyword">return</span>  userDao.insert(user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>第一种 使用html中canvas标签</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"canvas"</span> <span class="attr">style</span>=<span class="string">"width:400px;height:400px;"</span> <span class="attr">class</span>=<span class="string">"qrcode"</span> <span class="attr">ref</span>=<span class="string">"canva"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后再js中生成二维码图片</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> canva = <span class="keyword">this</span>.$refs.canva</span><br><span class="line">QRCode.toCanvas(canva,<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.qrCodeUrl&#125;</span>`</span>,error =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (error) &#123;</span><br><span class="line">    <span class="keyword">this</span>.$message(&#123;</span><br><span class="line">      type: <span class="string">'error'</span>,</span><br><span class="line">      message: <span class="string">'生成二维码失败'</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.$message(&#123;</span><br><span class="line">      type: <span class="string">'success'</span>,</span><br><span class="line">      message: <span class="string">'生成二维码成功'</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>删除用户 deleteByPrimaryKey(Integer id)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">deleteUser</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 使用id删除用户</span></span><br><span class="line">    <span class="keyword">int</span> row = userDao.deleteByPrimaryKey(id);</span><br><span class="line">    <span class="keyword">return</span> row;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改(更新)用户 updateByPrimaryKey(EntityObject)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">updateByPrimaryKey</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> userDao.updateByPrimaryKey(user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>根据id查询用户selectByPrimaryKey(Integer id)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">queryById</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (User)userDao.selectByPrimaryKey(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查询所有的用户 selectAll()</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">queryUserList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 返回所有的用户</span></span><br><span class="line">    <span class="keyword">return</span> userDao.selectAll();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>第二种是直接产生二维码的urlData然后再进行处理显示。个人喜欢用可控的方式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 配置变量</span></span><br><span class="line"><span class="keyword">const</span> opts = &#123;</span><br><span class="line">  errorCorrectionLevel: <span class="string">'H'</span>,</span><br><span class="line">  type: <span class="string">'image/jpeg'</span>,</span><br><span class="line">  renderOpts: &#123;</span><br><span class="line">    quality: <span class="number">0.3</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">QRCode.toDataURL(</span><br><span class="line">  <span class="string">'text'</span>,</span><br><span class="line">  opts,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">err, url</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">      <span class="keyword">this</span>.$message(&#123;</span><br><span class="line">        type: <span class="string">'error'</span>,</span><br><span class="line">        message: <span class="string">'生成二维码失败'</span></span><br><span class="line">      &#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.$message(&#123;</span><br><span class="line">        type: <span class="string">'success'</span>,</span><br><span class="line">        message: <span class="string">'生成二维码成功'</span></span><br><span class="line">      &#125;)</span><br><span class="line">      <span class="keyword">this</span>.qrImage = url;</span><br><span class="line">  &#125;</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h4 id="2-4-其它常用函数"><a href="#2-4-其它常用函数" class="headerlink" title="2.4 其它常用函数"></a>2.4 其它常用函数</h4><h5 id="2-4-1-查询类"><a href="#2-4-1-查询类" class="headerlink" title="2.4.1 查询类"></a>2.4.1 查询类</h5><ul>
-<li><code>List&lt;T&gt; select(T entity)</code><br>说明:根据传进来的实体记录找出符合条件的数据列表,使用的and查询。满足传入的属性</li>
-<li><code>T selectOne(T entity)</code><br>说明: 根据传进来的实体，从数据库中查找出一条记录。如果找到多个值会抛出异常。使用and查询</li>
-<li><code>List&lt;T&gt; selectAll()</code>等价于<code>select(null)</code></li>
-<li><code>int selectCount(T entity)</code>根据实体属性返回查询到的数据个数<h5 id="2-4-2-新增类"><a href="#2-4-2-新增类" class="headerlink" title="2.4.2 新增类"></a>2.4.2 新增类</h5></li>
-<li><code>int insert(T entity)</code><br>说明:向数据库中插入一条数据,entity中null值会保存。不会使用数据库的默认值</li>
-<li><code>int insertSelective(T entity)</code><br>说明:向数据库中插入一条数据,entity中的null值会使用数据库中的默认值进行填充<h5 id="2-4-3-删除类"><a href="#2-4-3-删除类" class="headerlink" title="2.4.3 删除类"></a>2.4.3 删除类</h5></li>
-<li><code>int deleteByPrimaryKey(Object key)</code><br>说明: 根据主键进行删除数据</li>
-<li><code>int delete(T entity)</code><br>说明: 根据传进来的实体的属性删除满足的字段<h5 id="2-4-4-更新类"><a href="#2-4-4-更新类" class="headerlink" title="2.4.4 更新类"></a>2.4.4 更新类</h5></li>
-<li><code>int updateByPrimaryKey(T entity)</code><br>说明: 根据传进来的实体id更新数据库相应的数据,null值会被更新</li>
-<li><code>int updateByPrimaryKeySelective(T entity)</code><br>说明: 根据传进来的实体更新属性不为空的值<h4 id="2-5-使用Example"><a href="#2-5-使用Example" class="headerlink" title="2.5 使用Example"></a>2.5 使用Example</h4>examples能够更加灵活的用来进行查询<h5 id="2-5-1-获得某个实体类的样本example"><a href="#2-5-1-获得某个实体类的样本example" class="headerlink" title="2.5.1 获得某个实体类的样本example"></a>2.5.1 获得某个实体类的样本example</h5><code>Example example = new Example(User.class);</code><h5 id="2-5-2-获得这个样本的criteria"><a href="#2-5-2-获得这个样本的criteria" class="headerlink" title="2.5.2 获得这个样本的criteria"></a>2.5.2 获得这个样本的criteria</h5><code>Example.Criteria criteria = example.createCriteria();</code><h5 id="2-5-3-使用这个criteria来设定相应的条件"><a href="#2-5-3-使用这个criteria来设定相应的条件" class="headerlink" title="2.5.3 使用这个criteria来设定相应的条件"></a>2.5.3 使用这个criteria来设定相应的条件</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">criteria.andEqualTo(<span class="string">"account"</span>,<span class="string">"long1532"</span>);</span><br><span class="line">criteria.andNotEqualTo(<span class="string">"nickname"</span>,<span class="string">"long153222"</span>);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>可以调用相应的函数来构建相应的条件。这就是将本来是要写sql语句的部分封装成函数。只要传入相应的属性和调用相应的方法便可以完成某些条件的查询。</p>
-<h5 id="2-5-4-使用example来增删改查相应的数据"><a href="#2-5-4-使用example来增删改查相应的数据" class="headerlink" title="2.5.4 使用example来增删改查相应的数据"></a>2.5.4 使用example来增删改查相应的数据</h5><p><code>List&lt;User&gt; userList = userDao.selectByExample(example);</code></p>
+<p>es6写法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> QRCode.toDataURL(<span class="keyword">this</span>.qrCodeUrl,opts)</span><br><span class="line">        .then(<span class="function"><span class="params">url</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(url)</span><br><span class="line">          alert(<span class="string">'生成成功'</span>)</span><br><span class="line">          <span class="keyword">this</span>.qrImage = url</span><br><span class="line">        &#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(err)</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure></p>
+<h4 id="3、生成的结果"><a href="#3、生成的结果" class="headerlink" title="3、生成的结果"></a>3、生成的结果</h4><p><img src="/2019/08/19/vue-QRCode生成二维码/gitQrcode.jpg" alt="http://long95288.github.io"></p>
 
       
 
@@ -264,7 +239,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
         		</li>
       		
 		</ul>
@@ -320,7 +299,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/08/18/Mybatis整合通用mapper/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/08/19/vue-QRCode生成二维码/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -334,18 +313,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/19/vue-QRCode生成二维码/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          vue QRCode生成二维码
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/08/14/SpringBoot整合Swagger/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">SpringBoot整合Swagger</div>
+    <a href="/2019/08/18/Mybatis整合通用mapper/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Mybatis整合通用mapper</div>
       <i class="icon-circle-right"></i>
     </a>
   
