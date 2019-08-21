@@ -163,6 +163,88 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-javascript实现的小东西" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/21/javascript实现的小东西/">javascript实现的小东西</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/21/javascript实现的小东西/" class="archive-article-date">
+  	<time datetime="2019-08-21T12:13:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1、javascript实现倒计时"><a href="#1、javascript实现倒计时" class="headerlink" title="1、javascript实现倒计时"></a>1、javascript实现倒计时</h3><p>实现的思路: 一个setInterval对象。在setInterval中将全局的时间变量减一，然后vue会触发页面更新。在渲染的时候将时间戳经过过滤器生成:小时:分钟:秒<br>的格式。</p>
+<h4 id="1-1-启动计时"><a href="#1-1-启动计时" class="headerlink" title="1.1 启动计时"></a>1.1 启动计时</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">startCount() &#123;</span><br><span class="line">  <span class="keyword">const</span> intervalId = setInterval(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.updateTime()</span><br><span class="line">  &#125;, <span class="number">1000</span>)</span><br><span class="line">  <span class="keyword">this</span>.intervalId = intervalId</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-时间更新函数"><a href="#1-2-时间更新函数" class="headerlink" title="1.2 时间更新函数"></a>1.2 时间更新函数</h4><p> 时间更新函数除了将全局的时间戳减一之外。还可以进行一些业务操作。比如说每隔一段时间的将数据发送到后台。<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> updateTime() &#123;</span><br><span class="line">  <span class="comment">// console.log('updated')</span></span><br><span class="line">  <span class="keyword">this</span>.remainTime = <span class="keyword">this</span>.remainTime - <span class="number">1</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.remainTime === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.$message(&#123;</span><br><span class="line">      type: <span class="string">'warn'</span>,</span><br><span class="line">      message: <span class="string">'考试结束时间到'</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 清空计时器</span></span><br><span class="line">    clearInterval(<span class="keyword">this</span>.intervalId)</span><br><span class="line">    <span class="comment">// 提交数据</span></span><br><span class="line">    <span class="keyword">this</span>.submit()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<h4 id="1-3-时间戳过滤器"><a href="#1-3-时间戳过滤器" class="headerlink" title="1.3 时间戳过滤器"></a>1.3 时间戳过滤器</h4><p>将整型的时间戳转换成时间hours:minutes:second格式<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">filters: &#123;</span><br><span class="line">  toDateStr: <span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> timestamp = value</span><br><span class="line">    <span class="keyword">const</span> hours = <span class="built_in">parseInt</span>(timestamp / <span class="number">3600</span>)</span><br><span class="line">    <span class="comment">// console.log('小时:'+ hours)</span></span><br><span class="line">    <span class="comment">// 获得分钟时间戳</span></span><br><span class="line">    timestamp = timestamp % <span class="number">3600</span></span><br><span class="line">    <span class="keyword">const</span> min = <span class="built_in">parseInt</span>(timestamp / <span class="number">60</span>)</span><br><span class="line">    <span class="comment">// console.log('分钟:'+min)</span></span><br><span class="line">    timestamp = timestamp % <span class="number">60</span></span><br><span class="line">    <span class="comment">// 获得秒数</span></span><br><span class="line">    <span class="keyword">const</span> second = timestamp</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;hours&#125;</span>:<span class="subst">$&#123;min&#125;</span>:<span class="subst">$&#123;second&#125;</span>`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>效果:<img src="/2019/08/21/javascript实现的小东西/timeclock.png" alt></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/21/javascript实现的小东西/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-vue-QRCode生成二维码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -982,83 +1064,6 @@
 
 
   
-    <article id="post-单元测试junit" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/25/单元测试junit/">单元测试unit</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/25/单元测试junit/" class="archive-article-date">
-  	<time datetime="2019-07-25T02:06:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h4><p>1、不用捕获异常<br>2、不要输出控制台<br>3、使用断言</p>
-<h4 id="常用的断言方法"><a href="#常用的断言方法" class="headerlink" title="常用的断言方法"></a>常用的断言方法</h4><p>1、assertArrayEquals(expecteds, actuals) 数组相等判断<br>2、assertEquals(expected, actual) 对象相等判断<br>3、assertNotEquals(first, second) 不相等判断<br>4、assertNull(object) 空值断言<br>5、assertNotNull(object) 非空值断言<br>6、assertSame(expected, actual) 对象引用相等断言<br>7、assertNotSame(unexpected, actual) 对象引用不相等断言<br>8、assertTrue(condition) 结果为真值断言<br>9、assertFalse(condition) 结果为假断言<br>10、assertThat(actual, matcher) 条件断言<br>11、fail() 强行失败</p>
-<h4 id="配置测试环境"><a href="#配置测试环境" class="headerlink" title="配置测试环境"></a>配置测试环境</h4><p>1、maven引入依赖<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.11<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>2、test包中使用函数头使用@Test便可以使用该函数来完成单元测试<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">factorial</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">int</span> result = Solution.factorial(n);</span><br><span class="line">    assertEquals(<span class="number">120</span>,result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/25/单元测试junit/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1164,11 +1169,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1176,7 +1185,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1188,19 +1197,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
