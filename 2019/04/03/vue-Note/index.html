@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://long95288.github.io">
-  <title>vue 学习笔记 | 风兮木落</title>
+  <title>vue 高阶部分 | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="组件1. 一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象2.使用流程2.1 注册组件，使用如下语法注册组件123Vue.component(&amp;apos;组件名字&amp;apos;,&amp;#123;   选项&amp;#125;)">
-<meta name="keywords" content="笔记">
+  <meta name="description" content="组件1. 一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象2.使用流程2.1 注册组件，使用如下语法注册组件123Vue.component(&amp;apos;组件名字&amp;apos;,&amp;#123;   选项&amp;#125;) 3、模块中自定义组件3.1 自定义组件之自定义属性3.2 自定义组件之自定义函数3.3 自定义组件之组件通信">
+<meta name="keywords" content="笔记,前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue 学习笔记">
+<meta property="og:title" content="vue 高阶部分">
 <meta property="og:url" content="http://long95288.github.io/2019/04/03/vue-Note/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="组件1. 一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象2.使用流程2.1 注册组件，使用如下语法注册组件123Vue.component(&amp;apos;组件名字&amp;apos;,&amp;#123;   选项&amp;#125;)">
+<meta property="og:description" content="组件1. 一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象2.使用流程2.1 注册组件，使用如下语法注册组件123Vue.component(&amp;apos;组件名字&amp;apos;,&amp;#123;   选项&amp;#125;) 3、模块中自定义组件3.1 自定义组件之自定义属性3.2 自定义组件之自定义函数3.3 自定义组件之组件通信">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-02T07:36:55.827Z">
+<meta property="og:updated_time" content="2019-08-21T12:10:13.610Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue 学习笔记">
-<meta name="twitter:description" content="组件1. 一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象2.使用流程2.1 注册组件，使用如下语法注册组件123Vue.component(&amp;apos;组件名字&amp;apos;,&amp;#123;   选项&amp;#125;)">
+<meta name="twitter:title" content="vue 高阶部分">
+<meta name="twitter:description" content="组件1. 一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象2.使用流程2.1 注册组件，使用如下语法注册组件123Vue.component(&amp;apos;组件名字&amp;apos;,&amp;#123;   选项&amp;#125;) 3、模块中自定义组件3.1 自定义组件之自定义属性3.2 自定义组件之自定义函数3.3 自定义组件之组件通信">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
   
@@ -170,7 +170,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      vue 学习笔记
+      vue 高阶部分
     </h1>
   
 
@@ -183,8 +183,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><h3 id="1-一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象"><a href="#1-一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象" class="headerlink" title="1. 一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象"></a>1. 一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象</h3><h3 id="2-使用流程"><a href="#2-使用流程" class="headerlink" title="2.使用流程"></a>2.使用流程</h3><p>2.1 注册组件，使用如下语法注册组件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&apos;组件名字&apos;,&#123;</span><br><span class="line">   选项</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-
+        <h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><h4 id="1-一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象"><a href="#1-一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象" class="headerlink" title="1. 一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象"></a>1. 一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象</h4><h4 id="2-使用流程"><a href="#2-使用流程" class="headerlink" title="2.使用流程"></a>2.使用流程</h4><p>2.1 注册组件，使用如下语法注册组件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&apos;组件名字&apos;,&#123;</span><br><span class="line">   选项</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h4 id="3、模块中自定义组件"><a href="#3、模块中自定义组件" class="headerlink" title="3、模块中自定义组件"></a>3、模块中自定义组件</h4><h5 id="3-1-自定义组件之自定义属性"><a href="#3-1-自定义组件之自定义属性" class="headerlink" title="3.1 自定义组件之自定义属性"></a>3.1 自定义组件之自定义属性</h5><h5 id="3-2-自定义组件之自定义函数"><a href="#3-2-自定义组件之自定义函数" class="headerlink" title="3.2 自定义组件之自定义函数"></a>3.2 自定义组件之自定义函数</h5><h5 id="3-3-自定义组件之组件通信"><a href="#3-3-自定义组件之组件通信" class="headerlink" title="3.3 自定义组件之组件通信"></a>3.3 自定义组件之组件通信</h5>
       
 
       
@@ -219,6 +219,10 @@
 			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
         		</li>
       		
 		</ul>
@@ -425,10 +429,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
@@ -437,7 +437,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -445,11 +449,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -478,6 +478,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
             
             <div class="clearfix"></div>

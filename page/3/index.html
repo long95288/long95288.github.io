@@ -546,6 +546,8 @@
 <h3 id="3、编程技巧"><a href="#3、编程技巧" class="headerlink" title="3、编程技巧"></a>3、编程技巧</h3><p>（1）凡是样式绑定必然是绑定到判断对象上的，不能直接写CSS类名，即使是一个固定的CSS类也都要这样写<br>（2）</p>
 <h3 id="4、路由的一些理解"><a href="#4、路由的一些理解" class="headerlink" title="4、路由的一些理解"></a>4、路由的一些理解</h3><h4 id="4-1-路由的声明和引用"><a href="#4-1-路由的声明和引用" class="headerlink" title="4.1 路由的声明和引用"></a>4.1 路由的声明和引用</h4><p>引用 <code>import VueRouter from &#39;vue-router</code><br>使用 <code>Vue.use(VueRouter)</code><br>实例化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const router = new VueRouter(&#123;</span><br><span class="line">  mode: &apos;history&apos;, // 可选</span><br><span class="line">  routes: [</span><br><span class="line">      &#123;name: &apos;Home&apos;, path: &apos;/Home&apos;, component: Home&#125;,</span><br><span class="line">      &#123;name: &apos;Layout&apos;, path: &apos;/Layout&apos;, component: Layout&#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
 <p>相关说明:name 别名,在<code>&lt;router-link&gt;</code> 的 to = “Home” 和 to=”/Home” 相同的作用。但是使用别名的话更改只要改一个地方就行了。<br>name还可以直接再js中使用<br><code>this.$router.push({name: &#39;Home&#39;})</code><br>当调用该js的时候就会转到home中了</p>
+<h4 id="4-2-获得url中的路由的参数"><a href="#4-2-获得url中的路由的参数" class="headerlink" title="4.2 获得url中的路由的参数"></a>4.2 获得url中的路由的参数</h4><p>需求描述:<br>当前页面的请求url为<code>http://localhost:9528/#/login?examId=23414515151</code><br>我想要将examId的值给获取并做进一步处理。<br>实现:<br>监听路由的变化,当路由变化时获得路由的值。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">  $route: &#123;</span><br><span class="line">    handler: <span class="function"><span class="keyword">function</span>(<span class="params">route</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.redirect = route.query &amp;&amp; route.query.redirect</span><br><span class="line">      <span class="keyword">this</span>.examId = route.query.examId</span><br><span class="line">    &#125;,</span><br><span class="line">    immediate: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>核心的语句是<code>route.query.examId</code><br>在一些地方，获得请求的url中的参数使用<code>query</code>,特别是获得get请求的时候。有些时候使用body来获得请求中的请求体。<br>应用的实例为:当用户扫描一个带有路径信息url的二维码时,跳转到登陆页面。这时候,登陆的时候可以将二维码中信息返回的给后台。这样就可以轻松的统计一些移动端的信息。毕竟很少人会通过电脑扫描二维码进行登陆。</p>
 <h4 id="4-2-界面和文件之间的关系是怎么样的？"><a href="#4-2-界面和文件之间的关系是怎么样的？" class="headerlink" title="4.2 界面和文件之间的关系是怎么样的？"></a>4.2 界面和文件之间的关系是怎么样的？</h4><p>两个非常重要的标签，<code>&lt;router-link&gt;</code>和<code>&lt;router-view&gt;</code>其中link是接收路由事件，view是加载内容的容器。<br>*.vue作为一个页面组件，通过引用之后加载进入view中，每一个.vue的文件的加载由link和view决定。关于嵌套路由，在view中有viwe,这样如何确定页面是如何加载在某一个页面的呢？使用命名路由便可以让某一个组件渲染进相应的router-view中</p>
 <h4 id="4-3-嵌套路由"><a href="#4-3-嵌套路由" class="headerlink" title="4.3 嵌套路由"></a>4.3 嵌套路由</h4><p>在某个组件中声明一个<code>&lt;router-view&gt;</code>则可以在该组件中 加载所引入的组件。routes中声明如下<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">name: <span class="string">'Home'</span>,</span><br><span class="line">paht: <span class="string">'/Home'</span>,</span><br><span class="line">componnent: Home,</span><br><span class="line">childern: [ <span class="comment">// Home 组件中嵌套tab的组件</span></span><br><span class="line">  &#123; <span class="comment">// 空白子路由</span></span><br><span class="line">    path: <span class="string">''</span>,</span><br><span class="line">    component: XX</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path:<span class="string">'Tab'</span>,  <span class="comment">// 路由路径为/Home/tab</span></span><br><span class="line">    component: Tab</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <ul>
@@ -569,9 +571,10 @@
 <h4 id="4-5-路由的一些总结"><a href="#4-5-路由的一些总结" class="headerlink" title="4.5 路由的一些总结"></a>4.5 路由的一些总结</h4><ul>
 <li>可以使用统一的一个路由文件来维护整个系统的路由。这样的做的好处是利于维护。但是当路由过多的话路由文件中就很大。</li>
 <li>每个组件在自己的vue中配置自己的路由信息。好处是灵活，但是不利于维护</li>
-<li>折中的办法<h3 id="5、引入Element组件"><a href="#5、引入Element组件" class="headerlink" title="5、引入Element组件"></a>5、引入Element组件</h3>1、官方文档得引入<br>在main.js里面加入<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ElementUI <span class="keyword">from</span> <span class="string">'element-ui'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'element-ui/lib/theme-chalk/index.css'</span></span><br><span class="line">Vue.use(ElementUI)</span><br></pre></td></tr></table></figure>
-</li>
+<li>折中的办法<h4 id="4-6-一些路由的坑"><a href="#4-6-一些路由的坑" class="headerlink" title="4.6 一些路由的坑"></a>4.6 一些路由的坑</h4></li>
+<li>使用<code>this.$router.push({ path: &#39;/example&#39;,params: {value:value}})</code>路由的参数无法传递.使用<code>this.$router.push({ name: &#39;Example&#39;,params:{value:value}})</code>可以传递参数</li>
 </ul>
+<h3 id="5、引入Element组件"><a href="#5、引入Element组件" class="headerlink" title="5、引入Element组件"></a>5、引入Element组件</h3><p>1、官方文档得引入<br>在main.js里面加入<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ElementUI <span class="keyword">from</span> <span class="string">'element-ui'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'element-ui/lib/theme-chalk/index.css'</span></span><br><span class="line">Vue.use(ElementUI)</span><br></pre></td></tr></table></figure></p>
 <p>在渲染的页面中，最顶层引入了<code>index.css</code>的样式。这样就可以使用ELement的标签了。因为已经在渲染的Html文件的头部加入样式表，标签便可以被识别。若是使用额外的样式则需要另外添加样式渲染的插件和模块。</p>
 <p>###6、Vue文件逻辑处理<br>1、v-bind的缩写<code>:</code>,例如<code>&lt;a :href=&quot;url&quot;&gt;&lt;/a&gt;</code><br>2、v-on的缩写<code>@</code>,例如<code>&lt;a v-on:click=&quot;doSomething&quot;&gt;&lt;/a&gt;</code>=&gt;<code>&lt;a @click=&quot;doSomething&quot;&gt;&lt;/a&gt;</code>缩写之后没有<code>:</code><br>3、计算属性,任何的复杂逻辑，都应该使用<strong>计算属性</strong><br>（1）使用计算属性,在标签中声明和了一个属性，然后在<code>computed</code>里面对这个属性进行处理。在vue文件中也是直接在 <code>computed:{}</code>之中完成逻辑处理<br>（2）计算属性和方法的区别,计算属性是依赖于所绑定的数据，若是所依赖的数据没有变化。则使用计算属性就会返回之前计算出来的结果，不会重新计算。方法的话每次访问的话就会重新计算，使用计算机的运算资源。不论所依赖的数据是否已经发生变化。从一定程度来说，计算属性是用空间来换取时间（增加缓存，减少cup的使用时间）。而方法在每一次都会重新执行，申请计算资源。<br>（3）计算属性默认是没有<code>set</code>方法的。可以自己定义.<br>4、监听<code>watch:{}</code>是用来对数据进行监听的。若是对数据进行的监听。若是数据发生变化，则会触发监听事件。但是这个和<code>v-model</code>有什么区别？？<code>v-model</code>是对<code>&lt;input&gt;、&lt;textarea&gt;、&lt;select&gt;</code>进行双向数据绑定。不会涉及数据处理<br>5、一个逐渐的<code>data</code>选项必须是一个函数，便于复用。</p>
 <h3 id="6、异步和等待-async-await"><a href="#6、异步和等待-async-await" class="headerlink" title="6、异步和等待(async await)"></a>6、异步和等待(async await)</h3><p>  有时候异步的处理中有同步的逻辑。这时候需要异步中的等待，例如:异步获得数据，但是将数据渲染到模板中的话就必须等待数据加载完毕之后才能进一步渲染，否则将会得到怪异的结果。虽然重渲染可能看不出来，但是网络差的时候。显示的会是模板语法。await就是解决async中的不确定。执行到await函数之后不会再往下执行了，得等到await函数执行完毕之后再执行。</p>
@@ -991,7 +994,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/03/vue-Note/">vue 学习笔记</a>
+      <a class="article-title" href="/2019/04/03/vue-Note/">vue 高阶部分</a>
     </h1>
   
 
@@ -1004,8 +1007,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><h3 id="1-一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象"><a href="#1-一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象" class="headerlink" title="1. 一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象"></a>1. 一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象</h3><h3 id="2-使用流程"><a href="#2-使用流程" class="headerlink" title="2.使用流程"></a>2.使用流程</h3><p>2.1 注册组件，使用如下语法注册组件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&apos;组件名字&apos;,&#123;</span><br><span class="line">   选项</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-
+        <h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><h4 id="1-一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象"><a href="#1-一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象" class="headerlink" title="1. 一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象"></a>1. 一个组件的data选项必须是一个函数，所以每一个实例可以维护一份被返回的对象</h4><h4 id="2-使用流程"><a href="#2-使用流程" class="headerlink" title="2.使用流程"></a>2.使用流程</h4><p>2.1 注册组件，使用如下语法注册组件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&apos;组件名字&apos;,&#123;</span><br><span class="line">   选项</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h4 id="3、模块中自定义组件"><a href="#3、模块中自定义组件" class="headerlink" title="3、模块中自定义组件"></a>3、模块中自定义组件</h4><h5 id="3-1-自定义组件之自定义属性"><a href="#3-1-自定义组件之自定义属性" class="headerlink" title="3.1 自定义组件之自定义属性"></a>3.1 自定义组件之自定义属性</h5><h5 id="3-2-自定义组件之自定义函数"><a href="#3-2-自定义组件之自定义函数" class="headerlink" title="3.2 自定义组件之自定义函数"></a>3.2 自定义组件之自定义函数</h5><h5 id="3-3-自定义组件之组件通信"><a href="#3-3-自定义组件之组件通信" class="headerlink" title="3.3 自定义组件之组件通信"></a>3.3 自定义组件之组件通信</h5>
       
 
       
@@ -1019,6 +1022,10 @@
 			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
         		</li>
       		
 		</ul>
@@ -1155,10 +1162,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
@@ -1167,7 +1170,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1175,11 +1182,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1208,6 +1211,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
             
             <div class="clearfix"></div>
