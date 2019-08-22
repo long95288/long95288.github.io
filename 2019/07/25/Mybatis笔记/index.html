@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://long95288.github.io">
   <title>Mybatis笔记 | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、MyBatis的简单使用1、maven项目依赖简单的使用Mybatis只需要引入连个包便可以了。1234567891011&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;mybatis&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;3.4.6&amp;">
+  <meta name="description" content="一、MyBatis的简单使用1、maven项目依赖简单的使用Mybatis只需要引入依赖包便可以了。1234567891011&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;mybatis&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;3.4.6&amp;">
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mybatis笔记">
 <meta property="og:url" content="http://long95288.github.io/2019/07/25/Mybatis笔记/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="一、MyBatis的简单使用1、maven项目依赖简单的使用Mybatis只需要引入连个包便可以了。1234567891011&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;mybatis&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;3.4.6&amp;">
+<meta property="og:description" content="一、MyBatis的简单使用1、maven项目依赖简单的使用Mybatis只需要引入依赖包便可以了。1234567891011&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;mybatis&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;3.4.6&amp;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-15T07:19:47.693Z">
+<meta property="og:updated_time" content="2019-08-22T06:53:10.173Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mybatis笔记">
-<meta name="twitter:description" content="一、MyBatis的简单使用1、maven项目依赖简单的使用Mybatis只需要引入连个包便可以了。1234567891011&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;mybatis&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;3.4.6&amp;">
+<meta name="twitter:description" content="一、MyBatis的简单使用1、maven项目依赖简单的使用Mybatis只需要引入依赖包便可以了。1234567891011&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;mybatis&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;3.4.6&amp;">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
   
@@ -183,7 +183,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="一、MyBatis的简单使用"><a href="#一、MyBatis的简单使用" class="headerlink" title="一、MyBatis的简单使用"></a>一、MyBatis的简单使用</h3><h4 id="1、maven项目依赖"><a href="#1、maven项目依赖" class="headerlink" title="1、maven项目依赖"></a>1、maven项目依赖</h4><p>简单的使用Mybatis只需要引入连个包便可以了。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.47<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+        <h3 id="一、MyBatis的简单使用"><a href="#一、MyBatis的简单使用" class="headerlink" title="一、MyBatis的简单使用"></a>一、MyBatis的简单使用</h3><h4 id="1、maven项目依赖"><a href="#1、maven项目依赖" class="headerlink" title="1、maven项目依赖"></a>1、maven项目依赖</h4><p>简单的使用Mybatis只需要引入依赖包便可以了。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.47<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <h4 id="2、需要配置的文件"><a href="#2、需要配置的文件" class="headerlink" title="2、需要配置的文件"></a>2、需要配置的文件</h4><p>1、mybatis的配置文件<br>2、数据库的连接配置文件<br>3、数据库和Do的实体映射文件</p>
 <ul>
 <li><p>mybatis配置文件 configuration.xml名字自定。</p>
@@ -496,19 +496,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">UML</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">UML</a>
               </li>
              
               <li class="article-tag-list-item">
