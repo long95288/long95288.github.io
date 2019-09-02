@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://long95288.github.io">
-  <title>辗转相除法 | 风兮木落</title>
+  <title>Spring 事务 | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="辗转相除法求最大公因子1234567891011121314   int hfc(int m,int n)&amp;#123;	int r=1;	r = m % n;	while(r!=0)&amp;#123;		if(r==1)&amp;#123;			return 1;		&amp;#125;		m=n;		n=r;		r=m % n;	&amp;#125;	return n;&amp;#125; 优化版的辗转相除法123456789101">
-<meta name="keywords" content="算法">
+  <meta name="description" content="Spring 事务传播特性1、事务属性的种类 传播行为 隔离级别 只读 事务超时1.1 传播行为 传播行为定义了被调用方法的事务边界 PROPERGATION_MANDATORY 方法必须运行在一个事务中，如果当前事务不存在，就抛出异常 PROPAGATION_NESTED 如果当前事务存在,则方法应该运行在一个嵌套事务中。否则,它看起来和PROPAGATION_REQUIRED没有什么两样。 P">
+<meta name="keywords" content="笔记,spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="辗转相除法">
-<meta property="og:url" content="http://long95288.github.io/2019/03/11/算法笔记/index.html">
+<meta property="og:title" content="Spring 事务">
+<meta property="og:url" content="http://long95288.github.io/2019/09/02/Spring-事务/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="辗转相除法求最大公因子1234567891011121314   int hfc(int m,int n)&amp;#123;	int r=1;	r = m % n;	while(r!=0)&amp;#123;		if(r==1)&amp;#123;			return 1;		&amp;#125;		m=n;		n=r;		r=m % n;	&amp;#125;	return n;&amp;#125; 优化版的辗转相除法123456789101">
+<meta property="og:description" content="Spring 事务传播特性1、事务属性的种类 传播行为 隔离级别 只读 事务超时1.1 传播行为 传播行为定义了被调用方法的事务边界 PROPERGATION_MANDATORY 方法必须运行在一个事务中，如果当前事务不存在，就抛出异常 PROPAGATION_NESTED 如果当前事务存在,则方法应该运行在一个嵌套事务中。否则,它看起来和PROPAGATION_REQUIRED没有什么两样。 P">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-17T13:12:28.758Z">
+<meta property="og:updated_time" content="2019-09-02T03:11:05.819Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="辗转相除法">
-<meta name="twitter:description" content="辗转相除法求最大公因子1234567891011121314   int hfc(int m,int n)&amp;#123;	int r=1;	r = m % n;	while(r!=0)&amp;#123;		if(r==1)&amp;#123;			return 1;		&amp;#125;		m=n;		n=r;		r=m % n;	&amp;#125;	return n;&amp;#125; 优化版的辗转相除法123456789101">
+<meta name="twitter:title" content="Spring 事务">
+<meta name="twitter:description" content="Spring 事务传播特性1、事务属性的种类 传播行为 隔离级别 只读 事务超时1.1 传播行为 传播行为定义了被调用方法的事务边界 PROPERGATION_MANDATORY 方法必须运行在一个事务中，如果当前事务不存在，就抛出异常 PROPAGATION_NESTED 如果当前事务存在,则方法应该运行在一个嵌套事务中。否则,它看起来和PROPAGATION_REQUIRED没有什么两样。 P">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
   
@@ -163,34 +163,45 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-算法笔记" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Spring-事务" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      辗转相除法
+      Spring 事务
     </h1>
   
 
         
-        <a href="/2019/03/11/算法笔记/" class="archive-article-date">
-  	<time datetime="2019-03-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-11</time>
+        <a href="/2019/09/02/Spring-事务/" class="archive-article-date">
+  	<time datetime="2019-09-02T02:19:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="辗转相除法求最大公因子"><a href="#辗转相除法求最大公因子" class="headerlink" title="辗转相除法求最大公因子"></a>辗转相除法求最大公因子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   int hfc(int m,int n)</span><br><span class="line">&#123;</span><br><span class="line">	int r=1;</span><br><span class="line">	r = m % n;</span><br><span class="line">	while(r!=0)&#123;</span><br><span class="line">		if(r==1)&#123;</span><br><span class="line">			return 1;</span><br><span class="line">		&#125;</span><br><span class="line">		m=n;</span><br><span class="line">		n=r;</span><br><span class="line">		r=m % n;</span><br><span class="line">	&#125;</span><br><span class="line">	return n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="优化版的辗转相除法"><a href="#优化版的辗转相除法" class="headerlink" title="优化版的辗转相除法"></a>优化版的辗转相除法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public int hfc(int m,int n)</span><br><span class="line">   &#123;</span><br><span class="line">       int r =1;</span><br><span class="line">       r = m % n;</span><br><span class="line">       while ( r != 0)</span><br><span class="line">       &#123;</span><br><span class="line">           m = n;</span><br><span class="line">           n = r;</span><br><span class="line">           r = m % n;</span><br><span class="line">       &#125;</span><br><span class="line">       return n;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="合并两个数组"><a href="#合并两个数组" class="headerlink" title="合并两个数组"></a>合并两个数组</h4><p>题目描述:<br>给定两个有序整数数组 nums1 和 nums2，将 nums2 合并到 nums1 中，使得 num1 成为一个有序数组。</p>
-<p>说明:</p>
-<p>初始化 nums1 和 nums2 的元素数量分别为 m 和 n。<br>你可以假设 nums1 有足够的空间（空间大小大于或等于 m + n）来保存 nums2 中的元素。<br>示例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">nums1 = [1,2,3,0,0,0], m = 3</span><br><span class="line">nums2 = [2,5,6],       n = 3</span><br><span class="line">输出: [1,2,2,3,5,6]</span><br></pre></td></tr></table></figure></p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/merge-sorted-array" target="_blank" rel="noopener">https://leetcode-cn.com/problems/merge-sorted-array</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h5 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h5><p>由于两个数组都是有序的,则可以使用类似于归并排序的思想。从后往前合并数组，每次选择从两个数组中选取其中最大的合并到nums1的尾部。<br>边界处理:<br>1、nums1值为空,将nums2复制到nums1中。<br>2、nums2为空,不做任何处理</p>
-<h5 id="我的题解"><a href="#我的题解" class="headerlink" title="我的题解"></a>我的题解</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span> m, <span class="keyword">int</span>[] nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> point = m + n -<span class="number">1</span>;</span><br><span class="line">        -- m;</span><br><span class="line">        -- n;</span><br><span class="line">        <span class="comment">// 归并排序的思想</span></span><br><span class="line">        <span class="keyword">while</span>(m &gt;=<span class="number">0</span> &amp;&amp; n &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums1[m] &gt; nums2[n])&#123;</span><br><span class="line">                nums1[point] = nums1[m];</span><br><span class="line">                -- point;</span><br><span class="line">                -- m;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                nums1[point] = nums2[n];</span><br><span class="line">                -- point;</span><br><span class="line">                -- n;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>( n &gt;= <span class="number">0</span> )&#123;</span><br><span class="line">            nums1[point] = nums2[n];</span><br><span class="line">            -- point;</span><br><span class="line">            -- n;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">``` </span><br><span class="line">##### 大神的题解</span><br><span class="line">```java</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span> m, <span class="keyword">int</span>[] nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p = m-- + n-- - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (m &gt;= <span class="number">0</span> &amp;&amp; n &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            nums1[p--] = nums1[m] &gt; nums2[n] ? nums1[m--] : nums2[n--];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (n &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            nums1[p--] = nums2[n--];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="Spring-事务传播特性"><a href="#Spring-事务传播特性" class="headerlink" title="Spring 事务传播特性"></a>Spring 事务传播特性</h2><h3 id="1、事务属性的种类"><a href="#1、事务属性的种类" class="headerlink" title="1、事务属性的种类"></a>1、事务属性的种类</h3><ul>
+<li>传播行为</li>
+<li>隔离级别</li>
+<li>只读</li>
+<li>事务超时<h4 id="1-1-传播行为"><a href="#1-1-传播行为" class="headerlink" title="1.1 传播行为"></a>1.1 传播行为</h4></li>
+<li>传播行为定义了被调用方法的事务边界</li>
+<li><code>PROPERGATION_MANDATORY</code> 方法必须运行在一个事务中，如果当前事务不存在，就抛出异常</li>
+<li><code>PROPAGATION_NESTED</code> 如果当前事务存在,则方法应该运行在一个嵌套事务中。否则,它看起来和<code>PROPAGATION_REQUIRED</code>没有什么两样。</li>
+<li><code>PROGATION_NEVER</code> 方法不能运行在一个事务中，否则会抛出异常</li>
+<li><code>PROGATION_NOT_SUPPORTED</code> 方法不能运行在一个事务中，如果当前存在事务，那么该方法将被挂起</li>
+<li><code>PROGATION_REQUIRED</code> 当前方法必须运行在一个事务中，如果存在事务，则运行在该事务中，否则创建一个新的事务</li>
+<li><code>PROGATION_REQUIRES_NEW</code> 必须运行在自己的事务中，如果当前存在一个事务，那么这个事务将在该方法运行期间被挂起</li>
+<li><code>PROGATION_SUPPORTS</code> 当前方法不需要运行在一个事务中，如果有一个事务存在，该方法也可以运行在这个事务中。<h4 id="1-2-隔离级别"><a href="#1-2-隔离级别" class="headerlink" title="1.2 隔离级别"></a>1.2 隔离级别</h4>(1) 未提交读 （2）已提交读 （3) 可重复读 （4） 可序列化</li>
+<li><code>ISOLATION_DEFAULT</code> 后端数据库默认的隔离级别</li>
+<li><code>ISOLATION_READ_UNCOMMITTED</code> 允许读取未提交的数据。可能导致脏读、不可重复读、幻读(未提交读)</li>
+<li><code>ISOLATION_REPEATABLE_READ</code> 一个事务不可能更新由另一个事务修改但未提交(回滚)的数据。(对应不可重复读),可避免脏读、不可重复读、但无法避免幻读</li>
+<li><code>ISOLATION_SERIALIZATABLE</code> 所有的事务都在一个执行队列中,依次顺序执行，而不是并行(可序列化)。可以避免脏读、不可重复读、幻读。但效率低<h4 id="1-3-只读"><a href="#1-3-只读" class="headerlink" title="1.3 只读"></a>1.3 只读</h4>只读数据而不更新,<code>READ_ONLY_MARKER</code><h4 id="1-4-事务超时"><a href="#1-4-事务超时" class="headerlink" title="1.4 事务超时"></a>1.4 事务超时</h4>超时回滚，避免浪费系统资源<h4 id="1-5-理解"><a href="#1-5-理解" class="headerlink" title="1.5 理解"></a>1.5 理解</h4></li>
+<li>什么是未提交读? </li>
+</ul>
 
       
 
@@ -225,7 +236,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
         		</li>
       		
 		</ul>
@@ -281,7 +296,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/03/11/算法笔记/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/09/02/Spring-事务/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -295,15 +310,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/03/11/第一篇博客/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          hexo 基本用法
-        
-      </div>
-    </a>
   
+    <a href="/2019/08/31/千奇百问/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">千奇百问</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
