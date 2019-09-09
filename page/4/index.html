@@ -163,6 +163,84 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Payload爬虫" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/25/Payload爬虫/">Payload爬虫</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/25/Payload爬虫/" class="archive-article-date">
+  	<time datetime="2019-05-25T10:29:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># encoding=utf-8</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">header = &#123;</span><br><span class="line">    <span class="string">'content-type'</span>: <span class="string">'application/json'</span></span><br><span class="line">&#125;</span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">'Origin'</span>: <span class="string">'https://www.kaggle.com'</span>,</span><br><span class="line">    <span class="string">'Referer'</span>: <span class="string">'https://www.kaggle.com/'</span>,</span><br><span class="line">    <span class="string">'Host'</span>: <span class="string">'www.kaggleusercontent.com'</span>,</span><br><span class="line">    <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>,</span><br><span class="line">    <span class="string">'user-agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '</span></span><br><span class="line">                  <span class="string">'Chrome/71.0.3578.98 Safari/537.36'</span>,</span><br><span class="line">    <span class="string">'Accept'</span>: <span class="string">'*/*'</span>,</span><br><span class="line">    <span class="string">'Cache-Control'</span>: <span class="string">'no-cache'</span>,</span><br><span class="line">    <span class="string">'Agent-Token'</span>: <span class="string">'592c2f33-3ff3-4c40-8c88-99677e01173f,4c3bcf86-cca6-4f8f-be02-a35ae370c5db'</span>,</span><br><span class="line">    <span class="string">'Host'</span>: <span class="string">'www.kaggleusercontent.com'</span>,</span><br><span class="line">    <span class="string">'accept-encoding'</span>: <span class="string">'gzip, deflate'</span>,</span><br><span class="line">    <span class="string">'content-length'</span>: <span class="string">'1367'</span>,</span><br><span class="line">    <span class="string">'Connection'</span>: <span class="string">'keep-alive'</span>,</span><br><span class="line">&#125;</span><br><span class="line">timeout = <span class="number">2000</span> <span class="comment"># 超时两秒</span></span><br><span class="line">pageUrl = <span class="string">'https://www.kaggleusercontent.com/services/datasets/kaggle.dataview.v1.DataViewer/GetDataView'</span></span><br><span class="line">payloadData =<span class="string">'''</span></span><br><span class="line"><span class="string">    &#123;</span></span><br><span class="line"><span class="string">    "jwe": &#123;</span></span><br><span class="line"><span class="string">        "encryptedToken": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..UZF_MtdCj7iugGBTcFVDVw.52l2kfUGwQbEtkTCuNrtPEeNUotAyu5ilpt8FD3PVf679rpLAdj0W-FIyoO4rcvOgEfNVXkVIUvsyImHyJV7-mWpxtvdoBjaB1M8v-xSOUvQ4Evx19gRTqo_HHdoEtSMxKAlMoGobomo6eNKw_6Pol2gZ7GuV7cc83qDaxvrUh1herCnPAo2nXkU-lhg9h5hLiL0iYNfouWMZjWt8CsHfb6dB24e4UmkLg-rhu_Qx8WFvGd0O7OMfIxl0Q1lAMP4gnBIpvLGvO3WPfaqhQE2PFtCo8N5JBJT3dC5-weKEKjCatWwhuHeBDkNKgNkO6PNwzZWdhJFkCair8XdpeeOm7378JeXSRtDB3Iip4HsSzvJ29gwqsDd6hsksFDhXYTN2oJCioJs0896unZlvYKnwCURzEnuBf0zeuqGAeO2jpAoks6F3MtwgeO55txul2i8zHQuwJySFe0URZiv8b_Q8UeBSXJVzqWZLuJR0xiFqsemjPmEV55GJyTH9cJi9SfVai54gY-uZInub_f0Sz3gmMexsI2uomeS667aEoPupRY.CI6gaw_g-okeovcaz72c5A"</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    "source": &#123;</span></span><br><span class="line"><span class="string">        "type": 3,</span></span><br><span class="line"><span class="string">        "dataset": &#123;</span></span><br><span class="line"><span class="string">            "url": "russellyates88/suicide-rates-overview-1985-to-2016",</span></span><br><span class="line"><span class="string">            "tableType": 1,</span></span><br><span class="line"><span class="string">            "csv": &#123;</span></span><br><span class="line"><span class="string">                "fileName": "master.csv",</span></span><br><span class="line"><span class="string">                "delimiter": ",",</span></span><br><span class="line"><span class="string">                "headerRows": 1</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    "operations": null,</span></span><br><span class="line"><span class="string">    "select": [</span></span><br><span class="line"><span class="string">        "country",</span></span><br><span class="line"><span class="string">        "year",</span></span><br><span class="line"><span class="string">        "sex",</span></span><br><span class="line"><span class="string">        "age",</span></span><br><span class="line"><span class="string">        "suicides_no",</span></span><br><span class="line"><span class="string">        "population",</span></span><br><span class="line"><span class="string">        "suicides/100k pop",</span></span><br><span class="line"><span class="string">        "country-year",</span></span><br><span class="line"><span class="string">        "HDI for year",</span></span><br><span class="line"><span class="string">        " gdp_for_year ($) ",</span></span><br><span class="line"><span class="string">        "gdp_per_capita ($)",</span></span><br><span class="line"><span class="string">        "generation"</span></span><br><span class="line"><span class="string">    ],</span></span><br><span class="line"><span class="string">    "skip": 0,</span></span><br><span class="line"><span class="string">    "take": 100</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getTextData</span><span class="params">(rawData)</span>:</span></span><br><span class="line">    res = requests.post(pageUrl,data=rawData,headers=headers,timeout=timeout)</span><br><span class="line">    <span class="keyword">return</span> res.text</span><br><span class="line"></span><br><span class="line">csvf = open(<span class="string">'data.csv'</span>,<span class="string">'w+'</span>,encoding=<span class="string">'utf-8'</span>)</span><br><span class="line">csvwriter = csv.writer(csvf)</span><br><span class="line">csvwriter.writerow((<span class="string">'rowNumber'</span>,<span class="string">'country'</span>,</span><br><span class="line"><span class="string">'year'</span>,<span class="string">'sex'</span>,<span class="string">'age'</span>,<span class="string">'suicides_no'</span>,<span class="string">'population'</span>,<span class="string">'suicides/100k pop'</span>,</span><br><span class="line"><span class="string">'country-year'</span>,<span class="string">'HDI for year'</span>,<span class="string">" gdp_for_year ($) "</span>,</span><br><span class="line">        <span class="string">"gdp_per_capita ($)"</span>,</span><br><span class="line">        <span class="string">"generation"</span>))</span><br><span class="line"><span class="comment"># nextskip = 0</span></span><br><span class="line"><span class="comment"># res = requests.post(pageUrl,data=payloadData,headers=headers,timeout=timeout)</span></span><br><span class="line"><span class="comment"># print(json.dumps(payloadData))</span></span><br><span class="line"><span class="comment">#print(res.text)</span></span><br><span class="line"><span class="comment"># print(json.dumps(payloadData))</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">saveData</span><span class="params">(jsondata)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> jsondata:</span><br><span class="line">        rowNumber = item[<span class="string">'rowNumber'</span>]</span><br><span class="line">        text = item[<span class="string">'text'</span>]</span><br><span class="line">        country = text[<span class="number">0</span>]</span><br><span class="line">        year = text[<span class="number">1</span>]</span><br><span class="line">        sex = text[<span class="number">2</span>]</span><br><span class="line">        age = text[<span class="number">3</span>]</span><br><span class="line">        suicides_no = text[<span class="number">4</span>]</span><br><span class="line">        population = text[<span class="number">5</span>]</span><br><span class="line">        suicides_100k = text[<span class="number">6</span>]</span><br><span class="line">        country_year = text[<span class="number">7</span>]</span><br><span class="line">        HDI = text[<span class="number">8</span>]</span><br><span class="line">        gdp_year = text[<span class="number">9</span>]</span><br><span class="line">        gdp_caption = text[<span class="number">10</span>]</span><br><span class="line">        generation = text[<span class="number">11</span>]</span><br><span class="line">        csvwriter.writerow((rowNumber,country,year,sex,age,suicides_no,</span><br><span class="line">        population,suicides_100k,country_year,HDI,gdp_year,gdp_caption,generation))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">start</span><span class="params">(payloadData)</span>:</span></span><br><span class="line">    jsontext = getTextData(payloadData)</span><br><span class="line">    i2 = <span class="number">1500</span> <span class="comment"># 爬去的数量</span></span><br><span class="line">    nextskip = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,i2):</span><br><span class="line">        s = json.loads(jsontext) <span class="comment"># 转换为json格式</span></span><br><span class="line">        writejson = s[<span class="string">'dataView'</span>][<span class="string">'rows'</span>]</span><br><span class="line">        saveData(writejson) <span class="comment"># 写入数据</span></span><br><span class="line">        <span class="comment"># 设置新的payload</span></span><br><span class="line">        nextskip = i*<span class="number">100</span></span><br><span class="line">        payloadobj = json.loads(payloadData)</span><br><span class="line">        payloadobj[<span class="string">'skip'</span>] = nextskip <span class="comment">## 下一个请求</span></span><br><span class="line">        payloadData2 = str(json.dumps(payloadobj))</span><br><span class="line">        time.sleep(<span class="number">2</span>+random.random())</span><br><span class="line">        payloadData =payloadData2</span><br><span class="line">        jsontext = getTextData(payloadData) <span class="comment"># 开始下一个请求</span></span><br><span class="line">    <span class="comment"># jsonobj = json.loads(payloadData) # 转换成json对象</span></span><br><span class="line">    <span class="comment"># skip = jsonobj['skip']</span></span><br><span class="line">    <span class="comment"># print(skip)</span></span><br><span class="line">    <span class="comment"># jsonobj['skip'] = 100 # 赋值</span></span><br><span class="line">    <span class="comment"># print(jsonobj['skip'])</span></span><br><span class="line">    <span class="comment">#s = json.loads(jsondata)</span></span><br><span class="line">    <span class="comment">#jsondata=s['dataView']['rows']</span></span><br><span class="line">    <span class="comment">#saveData(jsondata)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始爬取</span></span><br><span class="line">start(payloadData)</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/25/Payload爬虫/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-扫雷项目相关笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1009,95 +1087,6 @@
 
 
   
-    <article id="post-酷狗音乐排行爬虫" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/14/酷狗音乐排行爬虫/">酷狗音乐排行爬虫</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/14/酷狗音乐排行爬虫/" class="archive-article-date">
-  	<time datetime="2019-03-14T13:32:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、分析"><a href="#一、分析" class="headerlink" title="一、分析"></a>一、分析</h2><h3 id="地址规律："><a href="#地址规律：" class="headerlink" title="地址规律："></a>地址规律：</h3><p><a href="https://www.kugou.com/yy/rank/home/1-8888.html" target="_blank" rel="noopener">https://www.kugou.com/yy/rank/home/1-8888.html</a></p>
-<p><img src="/2019/03/14/酷狗音乐排行爬虫/page1.png" alt="page1"></p>
-<p><a href="https://www.kugou.com/yy/rank/home/2-8888.html" target="_blank" rel="noopener">https://www.kugou.com/yy/rank/home/2-8888.html</a></p>
-<p><img src="/2019/03/14/酷狗音乐排行爬虫/page2.png" alt="page2"></p>
-<p><a href="https://www.kugou.com/yy/rank/home/3-8888.html" target="_blank" rel="noopener">https://www.kugou.com/yy/rank/home/3-8888.html</a></p>
-<p><img src="/2019/03/14/酷狗音乐排行爬虫/page3.png" alt="page3"></p>
-<h3 id="规律：相差的只有1-2-3，榜单从1-66"><a href="#规律：相差的只有1-2-3，榜单从1-66" class="headerlink" title="规律：相差的只有1-2-3，榜单从1-66"></a>规律：相差的只有1-2-3，榜单从1-66</h3><h2 id="二、需要爬取的信息"><a href="#二、需要爬取的信息" class="headerlink" title="二、需要爬取的信息"></a>二、需要爬取的信息</h2><h3 id="1、排名"><a href="#1、排名" class="headerlink" title="1、排名"></a>1、排名</h3><h3 id="2、歌名"><a href="#2、歌名" class="headerlink" title="2、歌名"></a>2、歌名</h3><h3 id="3、时长"><a href="#3、时长" class="headerlink" title="3、时长"></a>3、时长</h3><h2 id="三、爬取策略"><a href="#三、爬取策略" class="headerlink" title="三、爬取策略"></a>三、爬取策略</h2><p>1、先将第一页的源码下载下来，生成测试文件<br>2、获取测试文件的各项元素，能够准确提取网页中的元素，得到的数据写入文件中<br>2-1 提取元素，确定函数<br>2-2 写入数据<br>3、生成爬取的页面URL数组<br>4、联网爬取，设置时间间隔为2+RANDOM()，避免被禁<br>5、爬取完成</p>
-<h2 id="四、代码文件"><a href="#四、代码文件" class="headerlink" title="四、代码文件"></a>四、代码文件</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># encoding=utf-8</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="comment"># 引入包</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line">header = &#123;</span><br><span class="line">    <span class="string">'user-agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '</span></span><br><span class="line">                  <span class="string">'Chrome/71.0.3578.98 Safari/537.36'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获得头文件，随机生成</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_header</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> header</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开测试文件,模拟用的</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">open_test_file</span><span class="params">(file_url)</span>:</span></span><br><span class="line">    file = open(file_url, <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>)</span><br><span class="line">    <span class="keyword">return</span> file.read()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开网页，获得网页数据</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_web_content</span><span class="params">(url)</span>:</span></span><br><span class="line">    res = requests.get(url, headers=get_header())</span><br><span class="line">    <span class="keyword">return</span> res.text</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 分析测试文件,获得相应的数据</span></span><br><span class="line"><span class="comment"># 数据格式：排名 歌名 时长</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">analyze</span><span class="params">(txt)</span>:</span></span><br><span class="line">    <span class="comment"># 变量区</span></span><br><span class="line">    soup = BeautifulSoup(txt, <span class="string">'html.parser'</span>)</span><br><span class="line">    redata = []</span><br><span class="line">    <span class="comment"># 选择器 #rankWrap &gt; div.pc_temp_songlist &gt; ul &gt;li</span></span><br><span class="line">    datas = soup.select(<span class="string">'#rankWrap &gt; div.pc_temp_songlist &gt; ul &gt; li'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 解析list数据</span></span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span> datas:</span><br><span class="line">        <span class="comment"># 获取排名</span></span><br><span class="line">        <span class="keyword">if</span> data.find(<span class="string">'strong'</span>) != <span class="literal">None</span>:</span><br><span class="line">            num = data.find(<span class="string">'strong'</span>).string  <span class="comment"># 前三名加粗的处理</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            num = data.find(<span class="string">'span'</span>, <span class="string">'pc_temp_num'</span>).string.strip()  <span class="comment"># 排名</span></span><br><span class="line">            <span class="comment"># print("%r" % num)</span></span><br><span class="line">        <span class="comment"># 获取歌名</span></span><br><span class="line">        songname = data.find(<span class="string">'a'</span>, <span class="string">'pc_temp_songname'</span>).string.strip()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 获取时间</span></span><br><span class="line">        song_time = data.find(<span class="string">'span'</span>, <span class="string">'pc_temp_time'</span>).string.strip()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 生成数据redata</span></span><br><span class="line">        temp_data = num + <span class="string">"----"</span> + songname + <span class="string">"----"</span> + song_time</span><br><span class="line">        <span class="comment"># print(temp_data)</span></span><br><span class="line">        redata.append(temp_data)</span><br><span class="line">    <span class="keyword">return</span> redata</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 写回数据</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_data</span><span class="params">(datas)</span>:</span></span><br><span class="line">    f = open(<span class="string">'song.txt'</span>, <span class="string">'a'</span>, encoding=<span class="string">'utf-8'</span>)  <span class="comment"># 文件追加写入</span></span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span> datas:</span><br><span class="line">        f.write(data + <span class="string">'\n'</span>)</span><br><span class="line">    f.close()</span><br><span class="line">    print(<span class="string">"写入成功！"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 单页爬取内容</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">crawl_page</span><span class="params">(pageurl)</span>:</span></span><br><span class="line">    txt = get_web_content(pageurl)</span><br><span class="line">    datas = analyze(txt)</span><br><span class="line">    write_data(datas)</span><br><span class="line">    print(<span class="string">"爬取成功"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 函数入口,开始爬取</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">start</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 生成爬取页面数组</span></span><br><span class="line">    pages = [<span class="string">'https://www.kugou.com/yy/rank/home/&#123;&#125;-8888.html'</span>.format(number)</span><br><span class="line">             <span class="keyword">for</span> number <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">24</span>)]</span><br><span class="line">    <span class="comment"># print(pages)</span></span><br><span class="line">    <span class="keyword">for</span> pageurl <span class="keyword">in</span> pages:</span><br><span class="line">        print(pageurl)</span><br><span class="line">        crawl_page(pageurl)</span><br><span class="line">        time.sleep(<span class="number">2</span>+random.random())  <span class="comment"># 暂停避免过快</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用开始函数开始爬取</span></span><br><span class="line">start()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line"><span class="comment"># txt = open_test_file('test2.html')</span></span><br><span class="line"><span class="comment"># print(txt)</span></span><br><span class="line"><span class="comment"># datas = analyze(txt)</span></span><br><span class="line"><span class="comment"># write_data(datas)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print(random.random())</span></span><br></pre></td></tr></table></figure>
-<h4 id="爬取结果："><a href="#爬取结果：" class="headerlink" title="爬取结果："></a>爬取结果：</h4><p><img src="/2019/03/14/酷狗音乐排行爬虫/result4.png" alt="result"></p>
-<h4 id="收获："><a href="#收获：" class="headerlink" title="收获："></a>收获：</h4><ul>
-<li>1、关于编码问题 写入文件的时候请使用open(xxx,x,encoding=’utf-8’)这样写入的时候才不会出现错误</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/14/酷狗音乐排行爬虫/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
@@ -1239,11 +1228,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">问题</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1251,7 +1236,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">技术</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">问题</a>
               </li>
              
               <li class="article-tag-list-item">

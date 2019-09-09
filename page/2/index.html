@@ -163,6 +163,132 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Mybatis整合通用mapper" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/18/Mybatis整合通用mapper/">Mybatis整合通用mapper</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/18/Mybatis整合通用mapper/" class="archive-article-date">
+  	<time datetime="2019-08-18T09:54:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1、相关配置"><a href="#1、相关配置" class="headerlink" title="1、相关配置"></a>1、相关配置</h3><h4 id="1-1-maven依赖"><a href="#1-1-maven依赖" class="headerlink" title="1.1 maven依赖"></a>1.1 maven依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--引入通用mapper--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>tk.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mapper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-2-application-properties配置"><a href="#1-2-application-properties配置" class="headerlink" title="1.2 application.properties配置"></a>1.2 application.properties配置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mapper.identity=MYSQL</span><br></pre></td></tr></table></figure>
+<h4 id="1-3-spring启动配置scan"><a href="#1-3-spring启动配置scan" class="headerlink" title="1.3 spring启动配置scan"></a>1.3 spring启动配置scan</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MapperScan</span>(<span class="string">"com.longquanxiao.quanjing.dao"</span>)</span><br></pre></td></tr></table></figure>
+<p>使用<code>import tk.mybatis.spring.annotation.MapperScan;</code>来扫描</p>
+<h3 id="2、使用通用mapper"><a href="#2、使用通用mapper" class="headerlink" title="2、使用通用mapper"></a>2、使用通用mapper</h3><h4 id="2-1-创建顶层的BaseDao"><a href="#2-1-创建顶层的BaseDao" class="headerlink" title="2.1 创建顶层的BaseDao"></a>2.1 创建顶层的BaseDao</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BaseDao</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">Mapper</span>, <span class="title">MySqlMapper</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主要是起到一个模板的作用</p>
+<h4 id="2-2-创建自己的DAO层"><a href="#2-2-创建自己的DAO层" class="headerlink" title="2.2 创建自己的DAO层"></a>2.2 创建自己的DAO层</h4><p>实现BaseDao<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserDao</span> <span class="keyword">extends</span> <span class="title">BaseDao</span>&lt;<span class="title">User</span>&gt; </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中的User是实体对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="meta">@Table</span>(name = <span class="string">"t_user"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span>(strategy = GenerationType.IDENTITY)</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"nickname"</span>)</span><br><span class="line">    <span class="keyword">private</span> String nickname;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"account"</span>)</span><br><span class="line">    <span class="keyword">private</span> String account;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"password"</span>)</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"telephone"</span>)</span><br><span class="line">    <span class="keyword">private</span> String telephone;</span><br><span class="line">    ...getter</span><br><span class="line">    ...setter</span><br></pre></td></tr></table></figure></p>
+<p>@Table中映射到数据库中对应的数据表<br>@Id@GeneratedValue是用来确定相关的主键的标识的<br>@Column是和数据表中相关的字段相对应。</p>
+<h4 id="2-3-使用UserDao"><a href="#2-3-使用UserDao" class="headerlink" title="2.3 使用UserDao"></a>2.3 使用UserDao</h4><p>在service层引入<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Resource</span></span><br><span class="line"><span class="keyword">private</span> UserDao userDao;</span><br></pre></td></tr></table></figure></p>
+<p>简单的增删该查的函数</p>
+<ul>
+<li><p>新增用户 insert(Object)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insert</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 添加用户</span></span><br><span class="line">    <span class="keyword">return</span>  userDao.insert(user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除用户 deleteByPrimaryKey(Integer id)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">deleteUser</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 使用id删除用户</span></span><br><span class="line">    <span class="keyword">int</span> row = userDao.deleteByPrimaryKey(id);</span><br><span class="line">    <span class="keyword">return</span> row;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改(更新)用户 updateByPrimaryKey(EntityObject)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">updateByPrimaryKey</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> userDao.updateByPrimaryKey(user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>根据id查询用户selectByPrimaryKey(Integer id)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">queryById</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (User)userDao.selectByPrimaryKey(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询所有的用户 selectAll()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">queryUserList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 返回所有的用户</span></span><br><span class="line">    <span class="keyword">return</span> userDao.selectAll();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="2-4-其它常用函数"><a href="#2-4-其它常用函数" class="headerlink" title="2.4 其它常用函数"></a>2.4 其它常用函数</h4><h5 id="2-4-1-查询类"><a href="#2-4-1-查询类" class="headerlink" title="2.4.1 查询类"></a>2.4.1 查询类</h5><ul>
+<li><code>List&lt;T&gt; select(T entity)</code><br>说明:根据传进来的实体记录找出符合条件的数据列表,使用的and查询。满足传入的属性</li>
+<li><code>T selectOne(T entity)</code><br>说明: 根据传进来的实体，从数据库中查找出一条记录。如果找到多个值会抛出异常。使用and查询</li>
+<li><code>List&lt;T&gt; selectAll()</code>等价于<code>select(null)</code></li>
+<li><code>int selectCount(T entity)</code>根据实体属性返回查询到的数据个数<h5 id="2-4-2-新增类"><a href="#2-4-2-新增类" class="headerlink" title="2.4.2 新增类"></a>2.4.2 新增类</h5></li>
+<li><code>int insert(T entity)</code><br>说明:向数据库中插入一条数据,entity中null值会保存。不会使用数据库的默认值</li>
+<li><code>int insertSelective(T entity)</code><br>说明:向数据库中插入一条数据,entity中的null值会使用数据库中的默认值进行填充<h5 id="2-4-3-删除类"><a href="#2-4-3-删除类" class="headerlink" title="2.4.3 删除类"></a>2.4.3 删除类</h5></li>
+<li><code>int deleteByPrimaryKey(Object key)</code><br>说明: 根据主键进行删除数据</li>
+<li><code>int delete(T entity)</code><br>说明: 根据传进来的实体的属性删除满足的字段<h5 id="2-4-4-更新类"><a href="#2-4-4-更新类" class="headerlink" title="2.4.4 更新类"></a>2.4.4 更新类</h5></li>
+<li><code>int updateByPrimaryKey(T entity)</code><br>说明: 根据传进来的实体id更新数据库相应的数据,null值会被更新</li>
+<li><code>int updateByPrimaryKeySelective(T entity)</code><br>说明: 根据传进来的实体更新属性不为空的值<h4 id="2-5-使用Example"><a href="#2-5-使用Example" class="headerlink" title="2.5 使用Example"></a>2.5 使用Example</h4>examples能够更加灵活的用来进行查询<h5 id="2-5-1-获得某个实体类的样本example"><a href="#2-5-1-获得某个实体类的样本example" class="headerlink" title="2.5.1 获得某个实体类的样本example"></a>2.5.1 获得某个实体类的样本example</h5><code>Example example = new Example(User.class);</code><h5 id="2-5-2-获得这个样本的criteria"><a href="#2-5-2-获得这个样本的criteria" class="headerlink" title="2.5.2 获得这个样本的criteria"></a>2.5.2 获得这个样本的criteria</h5><code>Example.Criteria criteria = example.createCriteria();</code><h5 id="2-5-3-使用这个criteria来设定相应的条件"><a href="#2-5-3-使用这个criteria来设定相应的条件" class="headerlink" title="2.5.3 使用这个criteria来设定相应的条件"></a>2.5.3 使用这个criteria来设定相应的条件</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">criteria.andEqualTo(<span class="string">"account"</span>,<span class="string">"long1532"</span>);</span><br><span class="line">criteria.andNotEqualTo(<span class="string">"nickname"</span>,<span class="string">"long153222"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>可以调用相应的函数来构建相应的条件。这就是将本来是要写sql语句的部分封装成函数。只要传入相应的属性和调用相应的方法便可以完成某些条件的查询。</p>
+<h5 id="2-5-4-使用example来增删改查相应的数据"><a href="#2-5-4-使用example来增删改查相应的数据" class="headerlink" title="2.5.4 使用example来增删改查相应的数据"></a>2.5.4 使用example来增删改查相应的数据</h5><p><code>List&lt;User&gt; userList = userDao.selectByExample(example);</code></p>
+<h3 id="3、整合pageHelper实现模糊查询和分页"><a href="#3、整合pageHelper实现模糊查询和分页" class="headerlink" title="3、整合pageHelper实现模糊查询和分页"></a>3、整合pageHelper实现模糊查询和分页</h3><h5 id="3-1-分页的和查询可以一起共用一个接口"><a href="#3-1-分页的和查询可以一起共用一个接口" class="headerlink" title="3.1 分页的和查询可以一起共用一个接口"></a>3.1 分页的和查询可以一起共用一个接口</h5><p>  查询和分页可以共用一个接口，因为查询出来的数据可能有很多条数据。这时候有分页的请求。初始加载的时候将查询条件置空便可以获得所有的数据,然后经过的分页插件便可以进行业务上的分页了。</p>
+<h5 id="3-2-引入分页插件"><a href="#3-2-引入分页插件" class="headerlink" title="3.2 引入分页插件"></a>3.2 引入分页插件</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 分页插件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;pagehelper.starter.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="3-3-通用mapper的模糊查询"><a href="#3-3-通用mapper的模糊查询" class="headerlink" title="3.3 通用mapper的模糊查询"></a>3.3 通用mapper的模糊查询</h5><p><code>criteria</code>对象函数andLike()实现模糊查询<br><code>andLike(String property, String value)</code>接收两个参数<br>1、property是对应实体的属性。<br>2、value 是模糊查询传进来的值<br>对于时间对象的模糊查询可以使用<br><code>andLessThanOrEqualTo</code><br><code>andGreaterThanOrEqualTo</code></p>
+<h5 id="3-4-使用PageHelper完成分页"><a href="#3-4-使用PageHelper完成分页" class="headerlink" title="3.4 使用PageHelper完成分页"></a>3.4 使用PageHelper完成分页</h5><p>核心是<code>PageHelper.startPage(pageNum,pageSize)</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PageInfo&lt;xxxEntity&gt; pageInfo = PageHelper.startPage(pageNum, pageSize)</span><br><span class="line">    .doSelectPageInfo(() -&gt; <span class="keyword">this</span>.xxxxDao.selectByExample(example));</span><br></pre></td></tr></table></figure>
+<p>其中的example是设置了模糊查询的查询exmaple<br>获得分页的数据<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list = pageInfo.getList();</span><br><span class="line">total = pageInfo.getTotal();</span><br><span class="line">pageNum = pageInfo.getPageNum();</span><br><span class="line">pageSize = pageInfo.getPageSize();</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/18/Mybatis整合通用mapper/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-SpringBoot整合Swagger" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -979,83 +1105,6 @@
 
 
   
-    <article id="post-Ideas使用的坑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/21/Ideas使用的坑/">Ideas使用的坑</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/21/Ideas使用的坑/" class="archive-article-date">
-  	<time datetime="2019-07-21T14:26:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="关于无法读取配置文件的解决办法"><a href="#关于无法读取配置文件的解决办法" class="headerlink" title="关于无法读取配置文件的解决办法"></a>关于无法读取配置文件的解决办法</h4><p>1、问题描述<br>  在使用idea开发web项目的时候，读取数据连接的配置文件的时候出现FileNotFound的错误。并且尝试了配置pom.xml文件之后，将配置文件放置在根目录。但都是出现了无法找到文件的错误。<br>2、解决过程<br>（1）由于web项目的部署问题，需要定位到目前项目运行的根目录。然后使用了如下的语句进行根目录的查询<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File config = <span class="keyword">new</span> File(<span class="string">"connect.properties"</span>);</span><br><span class="line">System.out.println(<span class="string">"绝对路径:"</span>+config.getAbsolutePath);</span><br></pre></td></tr></table></figure></p>
-<p>输出的结果是tomcat/bin目录。显然不对。<br>(2)使用class类来获取当前类的所在的路径,代码如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String path = ConnectionUtil.class.getResource(<span class="string">"/"</span>).getPath()+<span class="string">"connect.properties"</span>;</span><br><span class="line">System.out.println(<span class="string">"Path:"</span>+path);</span><br></pre></td></tr></table></figure></p>
-<p>输出的结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path:/D:/TraineeHomeworkProject/JspServlet2/target/JspServlet/WEB-INF/classes/connect.properties</span><br></pre></td></tr></table></figure></p>
-<p>这样便可以读取到properties文件了</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/21/Ideas使用的坑/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1197,11 +1246,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">问题</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1209,7 +1254,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">技术</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">问题</a>
               </li>
              
               <li class="article-tag-list-item">

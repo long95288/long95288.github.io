@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://long95288.github.io">
-  <title>Ideas使用的坑 | 风兮木落</title>
+  <title>java基础 | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于无法读取配置文件的解决办法1、问题描述  在使用idea开发web项目的时候，读取数据连接的配置文件的时候出现FileNotFound的错误。并且尝试了配置pom.xml文件之后，将配置文件放置在根目录。但都是出现了无法找到文件的错误。2、解决过程（1）由于web项目的部署问题，需要定位到目前项目运行的根目录。然后使用了如下的语句进行根目录的查询12File config = new File">
-<meta name="keywords" content="笔记">
+  <meta name="description" content="二维数组获得行的数量和列的数量对于一个int[][] array = new int[5][10];获得行数int rows = array.lenght;获得列数int columns = array[0].length;">
+<meta name="keywords" content="笔记,java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ideas使用的坑">
-<meta property="og:url" content="http://long95288.github.io/2019/07/21/Ideas使用的坑/index.html">
+<meta property="og:title" content="java基础">
+<meta property="og:url" content="http://long95288.github.io/2019/09/09/java基础/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="关于无法读取配置文件的解决办法1、问题描述  在使用idea开发web项目的时候，读取数据连接的配置文件的时候出现FileNotFound的错误。并且尝试了配置pom.xml文件之后，将配置文件放置在根目录。但都是出现了无法找到文件的错误。2、解决过程（1）由于web项目的部署问题，需要定位到目前项目运行的根目录。然后使用了如下的语句进行根目录的查询12File config = new File">
+<meta property="og:description" content="二维数组获得行的数量和列的数量对于一个int[][] array = new int[5][10];获得行数int rows = array.lenght;获得列数int columns = array[0].length;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-21T14:55:31.219Z">
+<meta property="og:updated_time" content="2019-09-09T14:29:45.364Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ideas使用的坑">
-<meta name="twitter:description" content="关于无法读取配置文件的解决办法1、问题描述  在使用idea开发web项目的时候，读取数据连接的配置文件的时候出现FileNotFound的错误。并且尝试了配置pom.xml文件之后，将配置文件放置在根目录。但都是出现了无法找到文件的错误。2、解决过程（1）由于web项目的部署问题，需要定位到目前项目运行的根目录。然后使用了如下的语句进行根目录的查询12File config = new File">
+<meta name="twitter:title" content="java基础">
+<meta name="twitter:description" content="二维数组获得行的数量和列的数量对于一个int[][] array = new int[5][10];获得行数int rows = array.lenght;获得列数int columns = array[0].length;">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
   
@@ -163,30 +163,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Ideas使用的坑" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-java基础" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Ideas使用的坑
+      java基础
     </h1>
   
 
         
-        <a href="/2019/07/21/Ideas使用的坑/" class="archive-article-date">
-  	<time datetime="2019-07-21T14:26:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-21</time>
+        <a href="/2019/09/09/java基础/" class="archive-article-date">
+  	<time datetime="2019-09-09T14:04:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="关于无法读取配置文件的解决办法"><a href="#关于无法读取配置文件的解决办法" class="headerlink" title="关于无法读取配置文件的解决办法"></a>关于无法读取配置文件的解决办法</h4><p>1、问题描述<br>  在使用idea开发web项目的时候，读取数据连接的配置文件的时候出现FileNotFound的错误。并且尝试了配置pom.xml文件之后，将配置文件放置在根目录。但都是出现了无法找到文件的错误。<br>2、解决过程<br>（1）由于web项目的部署问题，需要定位到目前项目运行的根目录。然后使用了如下的语句进行根目录的查询<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File config = <span class="keyword">new</span> File(<span class="string">"connect.properties"</span>);</span><br><span class="line">System.out.println(<span class="string">"绝对路径:"</span>+config.getAbsolutePath);</span><br></pre></td></tr></table></figure></p>
-<p>输出的结果是tomcat/bin目录。显然不对。<br>(2)使用class类来获取当前类的所在的路径,代码如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String path = ConnectionUtil.class.getResource(<span class="string">"/"</span>).getPath()+<span class="string">"connect.properties"</span>;</span><br><span class="line">System.out.println(<span class="string">"Path:"</span>+path);</span><br></pre></td></tr></table></figure></p>
-<p>输出的结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path:/D:/TraineeHomeworkProject/JspServlet2/target/JspServlet/WEB-INF/classes/connect.properties</span><br></pre></td></tr></table></figure></p>
-<p>这样便可以读取到properties文件了</p>
+        <h4 id="二维数组获得行的数量和列的数量"><a href="#二维数组获得行的数量和列的数量" class="headerlink" title="二维数组获得行的数量和列的数量"></a>二维数组获得行的数量和列的数量</h4><p>对于一个<code>int[][] array = new int[5][10];</code><br>获得行数<code>int rows = array.lenght;</code><br>获得列数<code>int columns = array[0].length;</code></p>
 
       
 
@@ -222,6 +219,10 @@
 			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -277,7 +278,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/07/21/Ideas使用的坑/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/09/09/java基础/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -291,18 +292,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/07/25/Mybatis笔记/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Mybatis笔记
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/07/18/jsp和servlet相关知识/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">jsp和servlet相关知识</div>
+    <a href="/2019/09/07/javaScanner输入数据/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">javaScanner输入数据</div>
       <i class="icon-circle-right"></i>
     </a>
   
