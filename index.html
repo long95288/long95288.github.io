@@ -184,6 +184,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h4 id="二维数组获得行的数量和列的数量"><a href="#二维数组获得行的数量和列的数量" class="headerlink" title="二维数组获得行的数量和列的数量"></a>二维数组获得行的数量和列的数量</h4><p>对于一个<code>int[][] array = new int[5][10];</code><br>获得行数<code>int rows = array.lenght;</code><br>获得列数<code>int columns = array[0].length;</code></p>
+<h4 id="equals-和-和-hashCode-区别和联系"><a href="#equals-和-和-hashCode-区别和联系" class="headerlink" title="equals() 和 == 和 hashCode()区别和联系"></a>equals() 和 == 和 hashCode()区别和联系</h4><p>1、<code>equals()</code>比较的是对象的内容是否相等，而<code>==</code>比较的是对象的引用是否不同。即<code>==</code>比较的是内存地址。<br>例如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">String a1 = <span class="string">"Hello World"</span>;</span><br><span class="line">String a2 = <span class="string">"Hello World"</span>;</span><br><span class="line">System.out.println(<span class="string">"a1 == a2:\t"</span> + (a1 == a2));</span><br><span class="line">System.out.println(<span class="string">"al equals a2:\t"</span>+(a1.equals(a2)));</span><br><span class="line">String a3 = <span class="keyword">new</span> String(<span class="string">"Hello World"</span>);</span><br><span class="line">String a4 = <span class="keyword">new</span> String(<span class="string">"Hello World"</span>);</span><br><span class="line">System.out.println(<span class="string">"a3 == a4:\t"</span>+(a3 == a4));</span><br><span class="line">System.out.println(<span class="string">"a3 equals a4:\t"</span>+(a3.equals(a4)));</span><br></pre></td></tr></table></figure></p>
+<p>结果:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a1 == a2:	<span class="keyword">true</span></span><br><span class="line">al equals a2:	<span class="keyword">true</span></span><br><span class="line">a3 == a4:	<span class="keyword">false</span></span><br><span class="line">a3 equals a4:	<span class="keyword">true</span></span><br></pre></td></tr></table></figure></p>
+<p>a1 和 a2的值Hello World都是放在常量区中。所以对应的内存地址都一样。所以== 和equals都是true<br>a3 和 a4是两个对象,对象的内存地址不一样。但是里面的值是一样的。<br>2、equals()是如何比较的?<br>Object类中equals的源码源码如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">this</span> == obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>比较的是对象的引用地址<br>String类中重写了equals方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object anObject)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> == anObject) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (anObject <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">        String anotherString = (String)anObject;</span><br><span class="line">        <span class="keyword">int</span> n = value.length;</span><br><span class="line">        <span class="keyword">if</span> (n == anotherString.value.length) &#123;</span><br><span class="line">            <span class="keyword">char</span> v1[] = value;</span><br><span class="line">            <span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line">            <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (v1[i] != v2[i])</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>第一个部分判断引用是否相等。引用相等则对象是同一个,里面的值就一定相等。<br>如果是两个对象，则取出两个对象的值一个一个的比较是否相等。<br>3、关于hashCode()<br><a href="http://coding-geek.com/how-does-a-hashmap-work-in-java/" target="_blank" rel="noopener">http://coding-geek.com/how-does-a-hashmap-work-in-java/</a><br>hashCode() 函数返回的是一个函数的hash值。两个对象相等则hashCode一定相等。两个hashCode() 相等则两个对象不一定相等。<br>为什么要重写hashCode()函数。因为有些集合框架是基于对象的hash值的。例如hashMap。如果不重写对象使用的都是父类生成的hash值。这样冲突变多,对于存储不利。<br>没有重写hashCode函数在hashMap中放置可能如下图所示<br><img src="/2019/09/09/java基础/skewedHashMap.webp" alt><br>如果重写了hashCode()<br><img src="/2019/09/09/java基础/wellBanlanced.webp" alt></p>
+<p>提高了访问的效率和存储的效率。</p>
 
       
 
@@ -1157,15 +1163,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1173,7 +1171,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1185,11 +1191,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1198,10 +1204,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1214,6 +1216,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
