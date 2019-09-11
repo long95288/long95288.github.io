@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="一、MyBatis的简单使用1、maven项目依赖简单的使用Mybatis只需要引入依赖包便可以了。1234567891011&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;mybatis&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;3.4.6&amp;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-22T06:53:10.173Z">
+<meta property="og:updated_time" content="2019-09-11T14:47:59.567Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mybatis笔记">
 <meta name="twitter:description" content="一、MyBatis的简单使用1、maven项目依赖简单的使用Mybatis只需要引入依赖包便可以了。1234567891011&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.mybatis&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;mybatis&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;3.4.6&amp;">
@@ -208,6 +208,7 @@
 <li>sql语句<br>相关属性说明<br>(1) <code>id</code> 该sql语句的唯一标识符。和命名空间一起被唯一的调用。<br>(2) <code>parameterType</code> 参数的类型。这个是入口参数类型。可以是基本的数据类型，也可以是自己的类。<br>(3) <code>resultMap</code> 返回的数据对象。和前面的resultMap相对应。这样在代码中便可以获得该返回对象了。</li>
 </ul>
 <p>将该配置文件和Mybatis的配置文件关联起来需要在configuration.xml中引入该mapper.<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--将mybatis配置和映射文件关联起来--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"DictionaryMapper.xml"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>1对多返回的部分数据中存储为list<br>使用如下的格式返回list数据<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"roles"</span> <span class="attr">ofType</span>=<span class="string">"java.lang.String"</span> <span class="attr">javaType</span>=<span class="string">"java.util.List"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"role_name"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <h4 id="3、Mybatis加载过程。"><a href="#3、Mybatis加载过程。" class="headerlink" title="3、Mybatis加载过程。"></a>3、Mybatis加载过程。</h4><p>基本流程如下：<br>1、读取configuration.xml -&gt; 加载连接配置jdbc.properties -&gt; 获得连接对象SqlSession<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Reader reader = Resources.getResourceAsReader(<span class="string">"configuration.xml"</span>);</span><br><span class="line">        sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        logger.error(e.getMessage(),e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>返回连接对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取SqlSession</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SqlSession <span class="title">getSqlSession</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//从当前线程中获取SqlSession对象</span></span><br><span class="line">        SqlSession sqlSession = threadLocal.get();</span><br><span class="line">        <span class="comment">//如果SqlSession对象为空</span></span><br><span class="line">        <span class="keyword">if</span>(sqlSession == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="comment">//在SqlSessionFactory非空的情况下，获取SqlSession对象</span></span><br><span class="line">            sqlSession = sqlSessionFactory.openSession();</span><br><span class="line"></span><br><span class="line">            <span class="comment">//将SqlSession对象与当前线程绑定在一起</span></span><br><span class="line">            threadLocal.set(sqlSession);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//返回SqlSession对象</span></span><br><span class="line">        <span class="keyword">return</span> sqlSession;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <p>2、使用SqlSession对象来调用sql语句,configuration.xml 知道mapper位置 -&gt; mapper命名空间的和sql的id -&gt; 加载语句执行<br>简单的插入语句的操作<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> dictionary 待插入的字典</span></span><br><span class="line"><span class="comment">* <span class="doctag">@return</span> 返回插入结果</span></span><br><span class="line"><span class="comment">* <span class="doctag">@throws</span> Exception 可能会抛出异常</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">insertDictionary</span><span class="params">(Dictionary dictionary)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    SqlSession sqlSession = MybatisUtil.getSqlSession();</span><br><span class="line">    <span class="keyword">boolean</span> returnStatus = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        sqlSession.insert(<span class="string">"DictionarySpace.insertDictionary"</span>,dictionary);</span><br><span class="line">        sqlSession.commit();</span><br><span class="line">        returnStatus = <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        sqlSession.rollback();</span><br><span class="line">        <span class="keyword">throw</span> e;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        MybatisUtil.closeSqlSession();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> returnStatus;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -488,6 +489,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
               </li>
              
@@ -496,15 +501,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -512,7 +513,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -520,7 +521,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -536,11 +537,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">问题</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -548,7 +545,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color3">技术</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">问题</a>
               </li>
              
               <li class="article-tag-list-item">
