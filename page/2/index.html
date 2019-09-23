@@ -163,6 +163,93 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-spring踩坑日志" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/22/spring踩坑日志/">spring踩坑日志</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/22/spring踩坑日志/" class="archive-article-date">
+  	<time datetime="2019-08-22T08:29:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1、文件上传大小限制问题"><a href="#1、文件上传大小限制问题" class="headerlink" title="1、文件上传大小限制问题"></a>1、文件上传大小限制问题</h4><p>问题描述:使用application.properties配置文件上传大小限制不起作用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spring.servlet.multipart.max-request-size=-<span class="number">1</span></span><br><span class="line">spring.servlet.multipart.max-file-size=-<span class="number">1</span></span><br><span class="line">spring.servlet.multipart.location=/home/trainee/springboot/document</span><br></pre></td></tr></table></figure></p>
+<p>解决办法:新建一个bean的配置<br>可以在启动类中添加如下代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> MultipartConfigElement <span class="title">multipartConfigElement</span><span class="params">()</span></span>&#123;</span><br><span class="line">    MultipartConfigFactory factory = <span class="keyword">new</span> MultipartConfigFactory();</span><br><span class="line">    <span class="comment">// 设置最大文件的大小</span></span><br><span class="line">    factory.setMaxFileSize(DataSize.of(<span class="number">2000</span>, DataUnit.MEGABYTES));</span><br><span class="line">    <span class="comment">// 设置最大请求大小</span></span><br><span class="line">    factory.setMaxRequestSize(DataSize.of(<span class="number">2000</span>,DataUnit.MEGABYTES));</span><br><span class="line">    <span class="keyword">return</span> factory.createMultipartConfig();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="2、springBoot跨域请求问题"><a href="#2、springBoot跨域请求问题" class="headerlink" title="2、springBoot跨域请求问题"></a>2、springBoot跨域请求问题</h4><p>使用<code>@CrossOrigin(&quot;*&quot;)</code>无法实现跨域<br>解决办法，在控制层使用如下注解就可以实现跨域<br><code>@CrossOrigin(origins = &quot;*&quot;,allowCredentials = &quot;true&quot;,methods = {})</code></p>
+<h4 id="3、时区出现错误解决办法"><a href="#3、时区出现错误解决办法" class="headerlink" title="3、时区出现错误解决办法"></a>3、时区出现错误解决办法</h4><p>（1）出现连接时区错误<br>（2）插入时间数据时出现错误<br>解决办法：在连接的url之后设置时间属性<br><code>jdbc:mysql://127.0.0.1:3306/trainee?serverTimezone=GMT%2B8</code><br>将时区设置成北京的时区</p>
+<h4 id="4、接收前端返回json对象自动打包问题"><a href="#4、接收前端返回json对象自动打包问题" class="headerlink" title="4、接收前端返回json对象自动打包问题"></a>4、接收前端返回json对象自动打包问题</h4><p>需要在接收的处声明<code>@RequestBody</code>才能自动装箱。声明<code>@Valid</code>来验证数据。</p>
+<h4 id="5、log4j配置不起作用"><a href="#5、log4j配置不起作用" class="headerlink" title="5、log4j配置不起作用"></a>5、log4j配置不起作用</h4><p>要使用自定义的log,必须将spring boot 中自带的spring.boot.start.logging给去掉。因为logback的优先级比log4j的优先级要高。(后面测试含有logback也可以加载配置文件,玄幻)<br>推荐把依赖包给去掉<br>去除包中的依赖如下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.7.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!--排除logback依赖--&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>如果出现下面的错误,需要检查log4j依赖是否都添加了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SLF4J: Failed to load class &quot;org.slf4j.impl.StaticLoggerBinder&quot;.</span><br><span class="line">SLF4J: Defaulting to no-operation (NOP) logger implementation</span><br><span class="line">SLF4J: See https://www.slf4j.org/codes.html#StaticLoggerBinder for further details.</span><br></pre></td></tr></table></figure></p>
+<p>能够运行的依赖如下:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--日志--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.26<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.26<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>如果还有错误，可能需要引入common-logging.jar</p>
+<h5 id="6、Long-类型传到前端页面的精度丢失问题"><a href="#6、Long-类型传到前端页面的精度丢失问题" class="headerlink" title="6、Long 类型传到前端页面的精度丢失问题"></a>6、Long 类型传到前端页面的精度丢失问题</h5><p>解决办法，将Long类型转换成字符串。传给前端，前端传回去从字符串转成Long类型。可以自己写函数转换。但是有现成的轮子可以用就不必造轮子了。<br>使用阿里的fastjson提供的注解便可以轻松的完成工作了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JsonSerialize</span>(using = ToStringSerializer.class)</span><br><span class="line"><span class="keyword">private</span> Long id;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/22/spring踩坑日志/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-javascript实现的小东西" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -965,111 +1052,6 @@
 
 
   
-    <article id="post-java反射和动态代理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/05/java反射和动态代理/">java反射和动态代理</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/05/java反射和动态代理/" class="archive-article-date">
-  	<time datetime="2019-08-05T01:32:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="Java反射机制"><a href="#Java反射机制" class="headerlink" title="Java反射机制"></a>Java反射机制</h4><p>   java的反射机制是一种逆向的思维。通常来所，知道一个类，然后new一个对象。而反射便是从一个对象开始，然后反推出它所在的类。前者是抽象到具体的过程。后者是从具体到抽象的过程。<br>1、类对象Class</p>
-<ul>
-<li>通过类的实例获得该类的类对象。使用instance#getClass()方法。即通过具体获得类的框架。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Peson p = <span class="keyword">new</span> Person(<span class="string">"xiaoming"</span>);</span><br><span class="line">Class pClass = p.getClass();</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>通过pClass可以获得Person类中的接口和函数等方法。当获得class类之后和实例的关系就分开了。</p>
-<ul>
-<li>使用Class#getDeclaredField(“name”)-&gt;Field来获得类响应的属性。可以是公有的，也可以是私有的。但是获得的只是一个类的模板，想要获得一个实例的具体属性，就要用模板来加载实例，然后返回实例的值。也可以通过该Field来设置相应的值。<br>(1)Field#get(instance) 获得instance中对应Field字段的值<br>(2)Field#set(instance,value) 设置instance中对应Field字段的值<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获得Field对象，是一个模板，该模板是属性name的模板</span></span><br><span class="line">Field f = pClass.getDeclaredField(<span class="string">"name"</span>);</span><br><span class="line"><span class="comment">// 设置可访问私有属性</span></span><br><span class="line">f.setAccessible(<span class="keyword">true</span>);</span><br><span class="line"><span class="comment">// 调用Field的get方法来加载p，即获得p中的name属性值</span></span><br><span class="line"><span class="comment">// 等价于p.get("name");</span></span><br><span class="line">Object value = f.get(p);</span><br><span class="line">System.out.println(value);</span><br><span class="line"><span class="comment">// f.set(p,"张三") 对实例p的name属性进行赋值</span></span><br><span class="line">f.set(p,<span class="string">"张三"</span>);</span><br><span class="line">System.out.println(p.getName());</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>输出结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xiaoming</span><br><span class="line">张三</span><br></pre></td></tr></table></figure></p>
-<p>2、反射调用函数</p>
-<ul>
-<li>每个Class类中都含有getMethod的方法。根据该方法返回一个Method的对象。该Mehtod对象便是方法的一个模板，使用Method#invoke(Object obj,Object.. args)来对obj对象执行Method方法。并且传入想要的参数。或者参数类<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">String s = <span class="string">"Hello World"</span>;</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="comment">// Method 的方法是String类中substring(beginIndex)中的方法</span></span><br><span class="line">    Method m = String.class.getMethod(<span class="string">"substring"</span>,<span class="keyword">int</span>.class);</span><br><span class="line">    <span class="comment">// invoke 调用,等价于s.substring(6)</span></span><br><span class="line">    String sub = (String) m.invoke(s, <span class="number">6</span>);</span><br><span class="line">    System.out.println(sub);</span><br><span class="line">    String sub2 = s.substring(<span class="number">6</span>);</span><br><span class="line">    System.out.println(sub2);</span><br><span class="line">    </span><br><span class="line">    Method parseInt = Integer.class.getMethod(<span class="string">"parseInt"</span>, String.class);</span><br><span class="line">    <span class="comment">// invoke</span></span><br><span class="line">    Integer n = (Integer) parseInt.invoke(<span class="keyword">null</span>, <span class="string">"12346"</span>);</span><br><span class="line">    System.out.println(<span class="string">"n="</span> + n);</span><br><span class="line">&#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">World</span><br><span class="line">World</span><br><span class="line">n=12346</span><br></pre></td></tr></table></figure></p>
-<h4 id="动态代理模式"><a href="#动态代理模式" class="headerlink" title="动态代理模式"></a>动态代理模式</h4><ul>
-<li>核心函数<br><code>Proxy.newProxyInstance(ClassLoader,Interface,handler)</code><br>第一个参数:ClassLoader。除了jdk自带的一些类:ClassLoader不用使用之外，随意使用classLoader便可以了。<br>第二个参数:Interface。需要代理的类的接口，这个决定了所代理的类,以下的参数均通过测试<br>1、<code>Student.class.getInterfaces()</code><br>2、<code>new Class[]{Person.class}</code><br>3、<code>student.getClass.getInterfaces()</code><br>第三个参数:handler，实现了Invocation的接口，并且实现<code>public Object invoke(Object proxy, Method method, Object[] args) throws Throwable</code>函数。method.invoke(object,args)必须object必须匹配接口</li>
-<li>简单实现<br>接口类:Bird<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Bird</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 鸟</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>实现类:Swallow<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Swallow</span> <span class="keyword">implements</span> <span class="title">Bird</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I'am fly..........."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>接口类:Person<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">say</span><span class="params">(String str)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>实现类:Student<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I'am Student running"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I'am say "</span>+str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>MyHandler实现InvocationHandler的接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 维护的的对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyHandler</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 构造函数，输入要代理的对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> target</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyHandler</span><span class="params">(Object target)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 设置代理对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> target 代理的对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTarget</span><span class="params">(Object target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable</span>&#123;</span><br><span class="line">        <span class="comment">//代理对象前的操作</span></span><br><span class="line">        System.out.println(<span class="string">"before invoke ....."</span>);</span><br><span class="line">        System.out.println(<span class="string">"Method:"</span>+method);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调用原有的函数</span></span><br><span class="line">        method.invoke(target, args);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调用原有的函数之后</span></span><br><span class="line">        System.out.println(<span class="string">"after invoke ....."</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>主类，测试<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Bird realSubject = <span class="keyword">new</span> Swallow();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="comment">// 声明的代理类的处理者</span></span><br><span class="line">            InvocationHandler handler = <span class="keyword">new</span> MyHandler(realSubject);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 获得代理类</span></span><br><span class="line">            Bird birdProxy = (Bird)Proxy.newProxyInstance(</span><br><span class="line">                    handler.getClass().getClassLoader(),</span><br><span class="line">                    realSubject.getClass().getInterfaces(),</span><br><span class="line">                    handler);</span><br><span class="line"></span><br><span class="line">            System.out.println(birdProxy.getClass().getName());</span><br><span class="line">            <span class="comment">// 调用鸟飞函数</span></span><br><span class="line">            birdProxy.fly();</span><br><span class="line"></span><br><span class="line">            Person student = <span class="keyword">new</span> Student();</span><br><span class="line">            ((MyHandler) handler).setTarget(student);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 获得student的代理对象</span></span><br><span class="line">            HelloWorld helloWorld = <span class="keyword">new</span> HelloWorld();</span><br><span class="line"></span><br><span class="line">            Person studentProxy =(Person) Proxy.newProxyInstance(</span><br><span class="line">                    HelloWorld.class.getClassLoader(),</span><br><span class="line">                    student.getClass().getInterfaces(),</span><br><span class="line">                    handler);</span><br><span class="line">            <span class="comment">// 代理类调用函数</span></span><br><span class="line">            studentProxy.run();</span><br><span class="line">            studentProxy.say(<span class="string">"proxy"</span>);</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>输出结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">com.sun.proxy.$Proxy0</span><br><span class="line">before invoke .....</span><br><span class="line">Method:public abstract void com.longquanxiao.proxy.Bird.fly()</span><br><span class="line">I&apos;am fly...........</span><br><span class="line">after invoke .....</span><br><span class="line">before invoke .....</span><br><span class="line">Method:public abstract void com.longquanxiao.proxy.Person.run()</span><br><span class="line">I&apos;am Student running</span><br><span class="line">after invoke .....</span><br><span class="line">before invoke .....</span><br><span class="line">Method:public abstract void com.longquanxiao.proxy.Person.say(java.lang.String)</span><br><span class="line">I&apos;am say proxy</span><br><span class="line">after invoke .....</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/05/java反射和动态代理/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1167,15 +1149,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1183,7 +1157,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1191,11 +1169,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1219,11 +1201,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
