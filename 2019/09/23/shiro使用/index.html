@@ -16,10 +16,13 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="shiro核心对象和方法核心对象 Subject使用Subject currentUser = SecurityUtils.getSubject();该条语句是获得当前的用户。 常用方法 subject.login(AuthenticationToken token)登陆。这种登陆是给shiro的认证机制登陆的。 1234567AuthenticationToken token =new User">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-23T15:54:44.524Z">
+<meta property="og:image" content="http://long95288.github.io/2019/09/23/shiro使用/process.png">
+<meta property="og:image" content="http://long95288.github.io/2019/09/23/shiro使用/struct.png">
+<meta property="og:updated_time" content="2019-09-26T15:18:22.322Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="shiro使用">
 <meta name="twitter:description" content="shiro核心对象和方法核心对象 Subject使用Subject currentUser = SecurityUtils.getSubject();该条语句是获得当前的用户。 常用方法 subject.login(AuthenticationToken token)登陆。这种登陆是给shiro的认证机制登陆的。 1234567AuthenticationToken token =new User">
+<meta name="twitter:image" content="http://long95288.github.io/2019/09/23/shiro使用/process.png">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
   
@@ -190,9 +193,33 @@
 </li>
 <li><p><code>boolean subject.hasRole(&quot;administrator&quot;)</code><br>判断是否有某个角色.</p>
 </li>
-<li>权限检查 <code>boolean subject.isPermitted(&quot;user:create&quot;)</code><br>是否有user的create权限</li>
+<li>权限检查 <code>boolean subject.isPermitted(&quot;user:create&quot;)</code><br>是否有user的create权限<h3 id="shiro使用"><a href="#shiro使用" class="headerlink" title="shiro使用"></a>shiro使用</h3>工作流程如下:<br>Subject是我们可以操作的接口。<br>Realm是配置shiro的核心领域。包括账号验证、加密解密、权限的配置<br><img src="/2019/09/23/shiro使用/process.png" alt="流程"><br>内部的架构如下<br><img src="/2019/09/23/shiro使用/struct.png" alt><br>相关说明:</li>
+<li>SecurityManager:相当于SpringMVC 中的 DispatcherServlet；是 Shiro 的心脏;所有具体的交互都通过 SecurityManager 进行控制；它管理着所有 Subject、且负责进行认证、授权、会话及缓存的管理</li>
+<li>Authenticator: 负责 Subject 认证，是一个扩展点，可以自定义实现；可以使用认证策略（Authentication Strategy），即什么情况下算用户认证通过了</li>
+<li>Authorizer: 授权器、 即访问控制器，用来决定主体是否有权限进行相应的操作；即控制着用户能访问应用中的哪些功能</li>
+<li>Realm:可以有一个或多个Realm,可以认为是安全实体数据源，即用于获得安全实体的;可以是JDBC实现，也可以是内存实现等。由用户提供，应用中要自己实现自己的Realm;</li>
+<li>SessionManager: 管理Session生命周期的组件;Shiro不仅可以用在Web环境。普通的JavaSE环境也可以使用session.和httpServletSession差不多的接口。</li>
+<li>CacheManager:缓存控制器，用来管理用户、角色、权限等的缓存;</li>
+<li>Cryptography:加密和解密模块。内置了加密和解密的模块,不需要自己将前台的明文密码加密后再和数据中的加密的密码比较。shiro会自动调用加密模块然后完成比较。</li>
 </ul>
-
+<h5 id="shiro默认过滤器"><a href="#shiro默认过滤器" class="headerlink" title="shiro默认过滤器"></a>shiro默认过滤器</h5><ul>
+<li><code>anon</code> 所属类:org.apache.shiro.web.filter.authc.AnonymousFilter 没有参数,可以匿名使用。例如: /admin/** = anon</li>
+<li><code>authc</code> 所属类:org.apache.shiro.web.filter.authc.FormAuthenticationFilter 没有参数，需要认证(登陆)之后才能访问 例如:/user/** = authc</li>
+<li><code>authcBasic</code> org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter 没有参数，表示需要通过HttpBasic验证。如果不通过验证，跳转到登陆页面。 例如: /user/** = authcBasic</li>
+<li><code>logout</code> org.apache.shiro.web.filter.authc.LogoutFilter 注销登陆的时候，完成一定功能：任何现有的session都将会失效，任何身份都会失去关联。(web应用程序中，RememberMe cookie将被删除)</li>
+<li><code>noSessionCreation</code> org.apache.shiro.web.filter.authc.NoSessionCreationFiler 阻止在请求期间创建新的会话，保证无状态体验。</li>
+<li><code>perms</code> org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter 可以写多个。多个时加上引号。用逗号分隔。多个参数需要通过全部的参数才算通过。相当于isPermitedAll()方法。 例如:/admin/<strong> = perms[user:add:*] /admin/</strong> = perms[“user:add:<em>,user:delete:</em>“]</li>
+<li><code>port</code> org.apache.shiro.web.filter.authz.PortFilter 指定访问的端口。如果不匹配跳转到登陆界面。 例如:/admin/** = port[8080]</li>
+<li><code>rest</code> org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter 根据请求方法 例如:/admins/user/** = perms[user.method] method为post、get、delete等请求方法</li>
+<li><code>roles</code> org.apache.shiro.web.filter.authz.RolesAuthorizationFilter 角色过滤。判断当前用户是否指定角色。多个参数需通过所有的角色。 例如:/admins/** = roles[“admin,guest”]</li>
+<li><code>ssl</code> org.apache.shiro.web.filter.authz.SslFilter 使用协议为Https</li>
+<li><code>user</code> org.apache.shiro.web.filter.authc.UserFilter 缓存必须存在用户<h4 id="URL匹配模式"><a href="#URL匹配模式" class="headerlink" title="URL匹配模式"></a>URL匹配模式</h4>url模式使用Ant风格模式，支持<code>？</code>，<code>*</code>，<code>**</code>。通配符匹配不了包括目录分隔符<code>&quot;\&quot;</code></li>
+<li><code>?</code>:匹配一个字符，如/admin?。将匹配/admin1，但是不匹配/admin 或 /admin/</li>
+<li><code>*</code>:匹配0个或n个字符串.如/admin* 匹配/admin、/admin123。但不匹配/admin/1、/admin/</li>
+<li><code>**</code>: 匹配路径中的0或n路径。如/admin/** 匹配/admin/a or /admin/a/b</li>
+</ul>
+<p>URL权限采取第一次匹配优先的方式。所以需要一些不要认证的路径放在前面。将需要认证的路径放在后面。否则会被覆盖的。</p>
+<h4 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h4><h4 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h4>
       
 
       
@@ -436,6 +463,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
@@ -444,11 +475,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color4">UML</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">UML</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -457,10 +488,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
