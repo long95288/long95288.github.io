@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://long95288.github.io">
-  <title>Archives | 风兮木落</title>
+  <title>PyQt5 QSS 样式的使用 | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="代码和文学本来就是一个世界的，寻找文学和code的和谐统一">
-<meta property="og:type" content="website">
-<meta property="og:title" content="风兮木落">
-<meta property="og:url" content="http://long95288.github.io/archives/page/5/index.html">
+  <meta name="description" content="QSS 语法规则  Qss 和CSS 几乎是相同的。都是由选择器(Selector)+声明(Declaration)。使用使用”属性:值”对设置。使用分号分隔数据(“;”),例如.设置背景颜色和字体颜色1234QPushButton&amp;#123;  color:red;  background-color:red;&amp;#125; 如何加载QSS到相应的组件中？  调用组件(QWidget)中的setS">
+<meta name="keywords" content="笔记,PyQt5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PyQt5 QSS 样式的使用">
+<meta property="og:url" content="http://long95288.github.io/2019/11/23/PyQt5-QSS-样式的使用/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="代码和文学本来就是一个世界的，寻找文学和code的和谐统一">
+<meta property="og:description" content="QSS 语法规则  Qss 和CSS 几乎是相同的。都是由选择器(Selector)+声明(Declaration)。使用使用”属性:值”对设置。使用分号分隔数据(“;”),例如.设置背景颜色和字体颜色1234QPushButton&amp;#123;  color:red;  background-color:red;&amp;#125; 如何加载QSS到相应的组件中？  调用组件(QWidget)中的setS">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-11-23T14:16:12.436Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="风兮木落">
-<meta name="twitter:description" content="代码和文学本来就是一个世界的，寻找文学和code的和谐统一">
+<meta name="twitter:title" content="PyQt5 QSS 样式的使用">
+<meta name="twitter:description" content="QSS 语法规则  Qss 和CSS 几乎是相同的。都是由选择器(Selector)+声明(Declaration)。使用使用”属性:值”对设置。使用分号分隔数据(“;”),例如.设置背景颜色和字体颜色1234QPushButton&amp;#123;  color:red;  background-color:red;&amp;#125; 如何加载QSS到相应的组件中？  调用组件(QWidget)中的setS">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
   
@@ -161,36 +163,69 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-PyQt5-QSS-样式的使用" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PyQt5 QSS 样式的使用
+    </h1>
+  
+
+        
+        <a href="/2019/11/23/PyQt5-QSS-样式的使用/" class="archive-article-date">
+  	<time datetime="2019-11-23T13:25:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-23</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="QSS-语法规则"><a href="#QSS-语法规则" class="headerlink" title="QSS 语法规则"></a>QSS 语法规则</h3><p>  Qss 和CSS 几乎是相同的。都是由选择器(Selector)+声明(Declaration)。使用使用”属性:值”对设置。使用分号分隔数据(“;”),例如.设置背景颜色和字体颜色<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">QPushButton</span>&#123;</span><br><span class="line">  <span class="attribute">color</span>:red;</span><br><span class="line">  <span class="attribute">background-color</span>:red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="如何加载QSS到相应的组件中？"><a href="#如何加载QSS到相应的组件中？" class="headerlink" title="如何加载QSS到相应的组件中？"></a>如何加载QSS到相应的组件中？</h3><p>  调用组件(QWidget)中的<code>setStyleSheet()</code>来设置样式。样式的具有继承，如果对最上层的(QWidget)设置，该QWidget中有相应的组件被选择便会被设置。</p>
+<h3 id="QSS-选择器"><a href="#QSS-选择器" class="headerlink" title="QSS 选择器"></a>QSS 选择器</h3><h4 id="1、通配选择器-，匹配所有控件"><a href="#1、通配选择器-，匹配所有控件" class="headerlink" title="1、通配选择器: *，匹配所有控件"></a>1、通配选择器: *，匹配所有控件</h4><h4 id="2、类型选择器"><a href="#2、类型选择器" class="headerlink" title="2、类型选择器"></a>2、类型选择器</h4><p>  使用<code>QPushButton</code>,<code>QLineEdit</code>。这种特定的控件类型。<br>  QPushButton 会匹配到QPushButton类和子类的实例。</p>
+<p>  如果想要几种类型的控件设置相同的样式。可以使用”,”来控制。例如:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">QPushButton</span>,<span class="selector-tag">QLineEdit</span>,<span class="selector-tag">QCombox</span> &#123;<span class="attribute">color</span>:blue&#125;</span><br></pre></td></tr></table></figure></p>
+<p>等价于:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">QPushButton</span> &#123;<span class="attribute">color</span>:blue&#125;</span><br><span class="line"><span class="selector-tag">QLineEdit</span> &#123;<span class="attribute">color</span>:blue&#125;</span><br><span class="line"><span class="selector-tag">QCombox</span> &#123;<span class="attribute">color</span>:blue&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="3、属性选择器。"><a href="#3、属性选择器。" class="headerlink" title="3、属性选择器。"></a>3、属性选择器。</h4><p>  属性选择器是最灵活的，选择颗粒的到某一个单一控件的。例如:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">btn = QPushButton(self)</span><br><span class="line"><span class="comment"># 设置name属性的值为myBtn</span></span><br><span class="line">btn.setProperty(<span class="string">'name'</span>,<span class="string">'myBtn'</span>)</span><br></pre></td></tr></table></figure>
+<p>选中该按钮<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 页面主类</span></span><br><span class="line">win = WindowDemo()</span><br><span class="line"><span class="comment"># 样式</span></span><br><span class="line">qssStyle = <span class="string">"""</span></span><br><span class="line"><span class="string">  QPushButton[name="myBtn"]&#123;</span></span><br><span class="line"><span class="string">    background-color:red;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="comment"># 设置样式</span></span><br><span class="line">win.setStyleSheet(qssStyle)</span><br><span class="line">win.show()</span><br></pre></td></tr></table></figure></p>
+<p>设置win中的属性name值为”myBtn”的按钮控件设置背景颜色为红色。</p>
+<h4 id="4、类选择器"><a href="#4、类选择器" class="headerlink" title="4、类选择器"></a>4、类选择器</h4><p>  <code>.QPushButton</code>匹配所有的QPushButton的实列。但是并不会匹配到子类。这要和第二种的类型选择的做区别。这个和CSS选择器不一样</p>
+<h4 id="5、ID选择器"><a href="#5、ID选择器" class="headerlink" title="5、ID选择器"></a>5、ID选择器</h4><p>  <code>#myButton</code> 匹配ID为myButton的控件，控件使用<code>setObjectName(&quot;myButton&quot;)</code>设置ID值。这个选择器也是最常使用的。</p>
+<h4 id="6、后代选择器"><a href="#6、后代选择器" class="headerlink" title="6、后代选择器"></a>6、后代选择器</h4><p>  <code>QDialog QPushButton{}</code> 匹配<code>QDialog</code>容器中的<code>QPushButton</code>的样式。不管是直间还是间接的。</p>
+<h4 id="7、子选择器"><a href="#7、子选择器" class="headerlink" title="7、子选择器"></a>7、子选择器</h4><p>  <code>QDialog &gt; QPushButton{}</code> 匹配<code>Dialog</code>中包含的<code>QPushButton</code>。其中必须要求QPushButton的直接父容器是QDialog。</p>
+<h4 id="联合选择使用"><a href="#联合选择使用" class="headerlink" title="联合选择使用"></a>联合选择使用</h4><p>  (1) 一次设置多种选择器类型,使用”,”。<code>#frameCut,#frameInterrupt,#frameJoin{}</code><br>  (2) <code>#mytable QPushButton</code></p>
+<h3 id="QSS子控件"><a href="#QSS子控件" class="headerlink" title="QSS子控件"></a>QSS子控件</h3>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/05/pip-更改映像源/" class="archive-article-date">
-  	<time datetime="2019-06-05T07:39:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/05/pip-更改映像源/">pip 更改映像源</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -200,406 +235,111 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">PyQt5</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/11/23/PyQt5-QSS-样式的使用/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/25/Payload爬虫/" class="archive-article-date">
-  	<time datetime="2019-05-25T10:29:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-25</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/31/查看和解除端口占用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">查看和解除端口占用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/25/Payload爬虫/">Payload爬虫</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/13/扫雷项目相关笔记/" class="archive-article-date">
-  	<time datetime="2019-05-13T12:09:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/13/扫雷项目相关笔记/">扫雷项目相关笔记</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/07/git常用操作/" class="archive-article-date">
-  	<time datetime="2019-05-07T15:12:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/07/git常用操作/">git常用操作</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/29/vue笔记/" class="archive-article-date">
-  	<time datetime="2019-04-29T13:20:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/29/vue笔记/">vue笔记</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/22/爬取B站的视频链接/" class="archive-article-date">
-  	<time datetime="2019-04-22T07:57:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/22/爬取B站的视频链接/">爬取B站的视频链接</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/22/关于htmlcss的笔记/" class="archive-article-date">
-  	<time datetime="2019-04-22T07:41:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/22/关于htmlcss的笔记/">关于htmlcss的笔记</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">周边技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/17/DBLearn/" class="archive-article-date">
-  	<time datetime="2019-04-17T04:21:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/17/DBLearn/">数据库实验代码</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">周边技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/03/PVC管DIY笔记本架子/" class="archive-article-date">
-  	<time datetime="2019-04-03T12:42:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/03/PVC管DIY笔记本架子/">PVC管DIY笔记本架子</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">周边技术</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">diy</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/03/vue-Note/" class="archive-article-date">
-  	<time datetime="2019-04-03T02:26:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/03/vue-Note/">vue 高阶部分</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/4/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/archives/page/6/">6</a><a class="extend next" rel="next" href="/archives/page/6/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -623,8 +363,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
