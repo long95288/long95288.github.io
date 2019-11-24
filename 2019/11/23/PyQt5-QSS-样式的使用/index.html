@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="QSS 语法规则  Qss 和CSS 几乎是相同的。都是由选择器(Selector)+声明(Declaration)。使用使用”属性:值”对设置。使用分号分隔数据(“;”),例如.设置背景颜色和字体颜色1234QPushButton&amp;#123;  color:red;  background-color:red;&amp;#125; 如何加载QSS到相应的组件中？  调用组件(QWidget)中的setS">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-11-23T14:16:12.436Z">
+<meta property="og:updated_time" content="2019-11-24T11:05:27.206Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PyQt5 QSS 样式的使用">
 <meta name="twitter:description" content="QSS 语法规则  Qss 和CSS 几乎是相同的。都是由选择器(Selector)+声明(Declaration)。使用使用”属性:值”对设置。使用分号分隔数据(“;”),例如.设置背景颜色和字体颜色1234QPushButton&amp;#123;  color:red;  background-color:red;&amp;#125; 如何加载QSS到相应的组件中？  调用组件(QWidget)中的setS">
@@ -197,7 +197,10 @@
 <h4 id="6、后代选择器"><a href="#6、后代选择器" class="headerlink" title="6、后代选择器"></a>6、后代选择器</h4><p>  <code>QDialog QPushButton{}</code> 匹配<code>QDialog</code>容器中的<code>QPushButton</code>的样式。不管是直间还是间接的。</p>
 <h4 id="7、子选择器"><a href="#7、子选择器" class="headerlink" title="7、子选择器"></a>7、子选择器</h4><p>  <code>QDialog &gt; QPushButton{}</code> 匹配<code>Dialog</code>中包含的<code>QPushButton</code>。其中必须要求QPushButton的直接父容器是QDialog。</p>
 <h4 id="联合选择使用"><a href="#联合选择使用" class="headerlink" title="联合选择使用"></a>联合选择使用</h4><p>  (1) 一次设置多种选择器类型,使用”,”。<code>#frameCut,#frameInterrupt,#frameJoin{}</code><br>  (2) <code>#mytable QPushButton</code></p>
-<h3 id="QSS子控件"><a href="#QSS子控件" class="headerlink" title="QSS子控件"></a>QSS子控件</h3>
+<h3 id="QSS子控件"><a href="#QSS子控件" class="headerlink" title="QSS子控件"></a>QSS子控件</h3><p>  复合控件的样式，例如下拉框的箭头，点击之后下拉列表。例如<br>  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">QComboBox</span><span class="selector-pseudo">::drop-down</span> &#123; <span class="attribute">image</span>: <span class="built_in">url</span>(dropdown.png)&#125;</span><br></pre></td></tr></table></figure></p>
+<p>  下拉的图片为:dropdown.png</p>
+<h3 id="QSS伪装态"><a href="#QSS伪装态" class="headerlink" title="QSS伪装态"></a>QSS伪装态</h3><p>  伪装态选择器，冒号开头的一个选择表达式。例如:<code>QComboBox:hover{}</code>鼠标经过的样式。<br>  <code>QComboBox::drop-down:hover{background-color:red;}</code>复合控件下拉鼠标覆盖样式。<code>:!hover</code>没有覆盖。</p>
+
       
 
       
@@ -429,14 +432,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
@@ -445,15 +440,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -465,11 +468,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -477,11 +480,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -493,6 +496,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">技术</a>
               </li>
              
@@ -501,15 +508,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
               </li>
              
               <li class="article-tag-list-item">
