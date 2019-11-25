@@ -200,6 +200,17 @@
 <h3 id="QSS子控件"><a href="#QSS子控件" class="headerlink" title="QSS子控件"></a>QSS子控件</h3><p>  复合控件的样式，例如下拉框的箭头，点击之后下拉列表。例如<br>  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">QComboBox</span><span class="selector-pseudo">::drop-down</span> &#123; <span class="attribute">image</span>: <span class="built_in">url</span>(dropdown.png)&#125;</span><br></pre></td></tr></table></figure></p>
 <p>  下拉的图片为:dropdown.png</p>
 <h3 id="QSS伪装态"><a href="#QSS伪装态" class="headerlink" title="QSS伪装态"></a>QSS伪装态</h3><p>  伪装态选择器，冒号开头的一个选择表达式。例如:<code>QComboBox:hover{}</code>鼠标经过的样式。<br>  <code>QComboBox::drop-down:hover{background-color:red;}</code>复合控件下拉鼠标覆盖样式。<code>:!hover</code>没有覆盖。</p>
+<h3 id="应用页面背景设置"><a href="#应用页面背景设置" class="headerlink" title="应用页面背景设置"></a>应用页面背景设置</h3><h4 id="方法一-使用QSS设置窗口背景"><a href="#方法一-使用QSS设置窗口背景" class="headerlink" title="方法一 使用QSS设置窗口背景"></a>方法一 使用QSS设置窗口背景</h4><p>  (1) 设置背景图片<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">win = QWidget()</span><br><span class="line">win.setWindowTitle(<span class="string">"界面背景图片设置"</span>) </span><br><span class="line">win.resize(<span class="number">350</span>,  <span class="number">250</span>)  </span><br><span class="line">win.setObjectName(<span class="string">"MainWindow"</span>)</span><br><span class="line">win.setStyleSheet(<span class="string">"#MainWindow&#123;border-image:url(./images/bg.jpg);&#125;"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>(2) 设置背景颜色<br><code>win.setStyleSheet(&quot;#MainWindow{background-color: yellow}&quot;)</code></p>
+<h4 id="方法二-使用QPalette-调色板-设置窗口背景"><a href="#方法二-使用QPalette-调色板-设置窗口背景" class="headerlink" title="方法二 使用QPalette(调色板)设置窗口背景"></a>方法二 使用QPalette(调色板)设置窗口背景</h4><p>  (1) 设置背景图片<br>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">palette = QPalette()</span><br><span class="line">palette.setBrush(QPalette.Background,QBrush(QPixmap(<span class="string">"./images/python.jpg"</span>)))</span><br><span class="line">win.setPalette(palette)</span><br></pre></td></tr></table></figure></p>
+<p>  注意:<br>  当 窗口宽高 &lt; 图片宽高 部分显示图片内容。<br>  当 窗口宽高 &gt; 图片宽高 图片重复填充。<br>  (2) 设置背景颜色<br>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">palette = QPalette()</span><br><span class="line">palette.setColor(QPalette.Background, Qt.red )</span><br><span class="line">win.setPalette(palette)</span><br></pre></td></tr></table></figure></p>
+<h4 id="方法三-使用painEvent-设置窗口背景"><a href="#方法三-使用painEvent-设置窗口背景" class="headerlink" title="方法三 使用painEvent 设置窗口背景"></a>方法三 使用painEvent 设置窗口背景</h4><p>  通过重写painEvent方法来设置窗口的背景或者图片<br>  (1) 设置背景图片<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">paintEvent</span><span class="params">(self,event)</span>:</span></span><br><span class="line">	painter = QPainter(self)</span><br><span class="line">	pixmap = QPixmap(<span class="string">"./images/screen1.jpg"</span>)</span><br><span class="line">  <span class="comment">#绘制窗口背景，平铺到整个窗口，随着窗口改变而改变</span></span><br><span class="line">	painter.drawPixmap(self.rect(),pixmap)</span><br></pre></td></tr></table></figure></p>
+<p>  (2) 设置背景色<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">paintEvent</span><span class="params">(self,event)</span>:</span></span><br><span class="line">  painter = QPainter(self)</span><br><span class="line">  painter.setBrush(Qt.yellow)</span><br><span class="line">  <span class="comment"># 设置背景颜色</span></span><br><span class="line">  painter.drawRect(self.rect())</span><br></pre></td></tr></table></figure></p>
+<h3 id="不规则窗口的显示"><a href="#不规则窗口的显示" class="headerlink" title="不规则窗口的显示"></a>不规则窗口的显示</h3><p>  不规则窗口才是美化应用界面，更加随心所欲的设置窗口的关键</p>
+<h4 id="setMask-给窗口-组件设置蒙版"><a href="#setMask-给窗口-组件设置蒙版" class="headerlink" title="setMask()给窗口/组件设置蒙版"></a>setMask()给窗口/组件设置蒙版</h4><p>  可以使用<code>setMask(self,QBitmap)</code>和<code>setMask(self,QRegion)</code>。通过重写<code>painEvent()</code>函数来设置蒙版。Qbitmap获得的是一个二值化后的图像。其中为1白色会不显示，黑色0显示。设置完蒙版的图片之后，再添加背景图片可以完成相应不规则窗体。<br>蒙版如下:<br><img src="/2019/11/23/PyQt5-QSS-样式的使用/mask1.jpg" alt="蒙版"><br>白色的部分会被镂空(透明)。黑色的部分会正常显示。<br>设置蒙版<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">self.pix = QBitmap( <span class="string">"./images/mask2.png"</span> )</span><br><span class="line">self.resize(self.pix.size())       </span><br><span class="line">self.setMask(self.pix)</span><br></pre></td></tr></table></figure></p>
+<p>运行之后的结果:<br><img src="/2019/11/23/PyQt5-QSS-样式的使用/result1.jpg" alt="结果"><br>白色部分会显示桌面的图片<br>想要什么样的不规则的窗口，只需要设置相应的不规则蒙版才行。</p>
+<h5 id="设置控件蒙版之后拖动失效，需要重写鼠标相应的函数"><a href="#设置控件蒙版之后拖动失效，需要重写鼠标相应的函数" class="headerlink" title="设置控件蒙版之后拖动失效，需要重写鼠标相应的函数"></a>设置控件蒙版之后拖动失效，需要重写鼠标相应的函数</h5><p>通用的重写</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#重定义鼠标按下响应函数mousePressEvent(QMouseEvent)和鼠标移动响应函数mouseMoveEvent(QMouseEvent)，</span></span><br><span class="line"><span class="comment">#使不规则窗体能响应鼠标事件，随意拖动。</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mousePressEvent</span><span class="params">(self, event)</span>:</span></span><br><span class="line">  <span class="keyword">if</span> event.button() == Qt.LeftButton:</span><br><span class="line">      self.m_drag=<span class="literal">True</span></span><br><span class="line">      self.m_DragPosition=event.globalPos()-self.pos()</span><br><span class="line">      event.accept()</span><br><span class="line">      self.setCursor(QCursor(Qt.OpenHandCursor))</span><br><span class="line">  <span class="keyword">if</span> event.button()==Qt.RightButton:  </span><br><span class="line">      self.close()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mouseMoveEvent</span><span class="params">(self, QMouseEvent)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> Qt.LeftButton <span class="keyword">and</span> self.m_drag:</span><br><span class="line">        <span class="comment"># 当左键移动窗体修改偏移值</span></span><br><span class="line">        self.move(QMouseEvent.globalPos()- self.m_DragPosition )</span><br><span class="line">        QMouseEvent.accept()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mouseReleaseEvent</span><span class="params">(self, QMouseEvent)</span>:</span></span><br><span class="line">    self.m_drag=<span class="literal">False</span></span><br><span class="line">    self.setCursor(QCursor(Qt.ArrowCursor))</span><br></pre></td></tr></table></figure>
 
       
 
@@ -1139,7 +1150,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1151,15 +1162,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1171,11 +1182,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1183,11 +1194,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1199,10 +1210,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">技术</a>
               </li>
              
@@ -1211,11 +1218,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
               </li>
              
               <li class="article-tag-list-item">
