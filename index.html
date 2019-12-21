@@ -163,6 +163,103 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-TiJ-String-笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/21/TiJ-String-笔记/">TiJ String 笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/21/TiJ-String-笔记/" class="archive-article-date">
+  	<time datetime="2019-12-21T11:57:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><h4 id="1、不可变的String"><a href="#1、不可变的String" class="headerlink" title="1、不可变的String"></a>1、不可变的String</h4><p>  每一个String对象都是不可变的，他们在创建的时候已经在内存中固定了。String对象的改变本质是拷贝一个当前的String的值然后完成修改后，生成新的String对象。这个新的对象和原来对象在内存中没有一丁点关系。是两个独立的对象</p>
+<h4 id="2、重载“-”-与StringBuilder"><a href="#2、重载“-”-与StringBuilder" class="headerlink" title="2、重载“+” 与StringBuilder"></a>2、重载“+” 与StringBuilder</h4><p>  Java 不允许程序员重载任何操作符。<code>&quot;Hello&quot; + &quot;World&quot;</code>本质是在编译器编译之后，生成一个<code>StringBuilder</code> 调用两次<code>append()</code>将<code>Hello</code>和<code>World</code>添加。最后使用<code>toString()</code>返回整合之后的字符串。如果使用<code>+</code>太多的话就会产生很多的String中间量。上述的Hello和World产生两个String的中间量。<br>  使用“+”编译器会自动将代码转换成StringBuilder对象。自动转换在循环内是会出现问题的，例如<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String[] strs = &#123;<span class="string">"Hello"</span>,<span class="string">"World"</span>,<span class="string">"Java"</span>,<span class="string">"Good"</span>&#125;;</span><br><span class="line">String result = <span class="string">""</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;strs.length;i++)&#123;</span><br><span class="line">  result += strs[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> result;</span><br></pre></td></tr></table></figure></p>
+<p>  上述的代码会对循环内的每一个<code>+=</code>操作创建新的StringBuilder对象完成字符串的拼接。使用如下的代码会更加高效<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String[] strs = &#123;<span class="string">"Hello"</span>,<span class="string">"World"</span>,<span class="string">"Java"</span>,<span class="string">"Good"</span>&#125;;</span><br><span class="line">StringBuilder result = <span class="keyword">new</span> StringBuilder();</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;strs.length;i++)&#123;</span><br><span class="line">  result.append(strs[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> result.toString();</span><br></pre></td></tr></table></figure></p>
+<p>  编译器自动编译有时候可能会愚蠢的优化代码。需要自己知道如何编写更加高效的代码。避开编译器的优化陷阱。<br>  <strong>StringBuilder为什么效率更高？</strong><br>  StringBuilder 会在内存中申请一个空间。这个空间可以自己指定也可以使用默认的。使用append()操作的时候就是在自己的空间内完成操作，一次申请，随意改变。String 对象是只读的。内存的申请和释放都是有代价的！！<br>  <strong>愚蠢的便捷</strong><br>  自己创建了一个StringBuilder然后在使用如下形式的函数<br>  <code>append(a + &quot;:&quot;+ b)</code>;<br>  这个有什么问题。编译器会帮你将<code>a+ &quot;:&quot; + b</code>部分新建一个StringBuilder对象来处理。这样就会得到两个字符串了。<br>  <strong>小结</strong></p>
+<ul>
+<li>StringBuilder常用的操作有<code>append()</code>和<code>toString()</code>.其它的还有<code>insert()、replace()、substring()、reverse()、delete()</code></li>
+<li><p>StringBuilder和StringBuffer。前者线程不安全、后者线程安全。</p>
+<h4 id="3、无意识的递归"><a href="#3、无意识的递归" class="headerlink" title="3、无意识的递归"></a>3、无意识的递归</h4><p>一个类A中的<code>toString()</code>的方法如下。为了输出该类当前实例对象的地址。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"Class A address:"</span> + <span class="keyword">this</span>+ <span class="string">"\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>会产生异常，自动转换类型。将A类转换成String类。<code>+ this</code>会将this转换成String类。this指向A类，然后A又调用toString()方法来转换成String.递归的无出口。this -&gt; this.toString() -&gt; this -&gt; ….<br>想要打印当前对象的地址使用<code>Object.toString()</code>.应该使用父类的toString() <code>super.toString()</code>。这样就不会出现死递归。</p>
+<h4 id="4、String上的操作"><a href="#4、String上的操作" class="headerlink" title="4、String上的操作"></a>4、String上的操作</h4><p>String常用的操作在自己的编程至今。最多的就是字符串的更改和比较。更改使用StringBuilder更加好。String比较最多的便是相等比较。</p>
+</li>
+<li><code>equals(),equalsIgnoreCase()</code> 相等比较。<br>使用<code>&quot;String&quot;.equals(a)</code>替换<code>a.equals(&quot;String&quot;)</code>。如果<code>a</code>是个null。调用<code>equals()</code>方法会出现问题。</li>
+<li><code>length()</code> 字符串的长度</li>
+<li><p><code>trim()</code> 去掉自字符串两端的空白字符</p>
+<p>其它的操作有</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">charAt()</span><br><span class="line">getChars()</span><br><span class="line">getBytes()</span><br><span class="line">toCharArrary()</span><br><span class="line">compareTo()</span><br><span class="line">contains()</span><br><span class="line">contentEquals()</span><br><span class="line">regionMatcher()</span><br><span class="line">startWith()</span><br><span class="line">endsWith()</span><br><span class="line">indexOf(),lastIndexOf()</span><br><span class="line">substring()</span><br><span class="line">concat()</span><br><span class="line">replace()</span><br><span class="line">toLowerCase(),toUpperCase()</span><br><span class="line">valueOf()</span><br><span class="line">intern()</span><br></pre></td></tr></table></figure>
+<p>用的时候再查帮助手册</p>
+</li>
+</ul>
+<h4 id="5、格式化输出"><a href="#5、格式化输出" class="headerlink" title="5、格式化输出"></a>5、格式化输出</h4><h5 id="5-1-printf"><a href="#5-1-printf" class="headerlink" title="5.1 printf()"></a>5.1 printf()</h5><h5 id="5-2-System-out-format"><a href="#5-2-System-out-format" class="headerlink" title="5.2 System.out.format()"></a>5.2 System.out.format()</h5><h5 id="5-3-Formatter类"><a href="#5-3-Formatter类" class="headerlink" title="5.3 Formatter类"></a>5.3 Formatter类</h5><h5 id="5-4-格式化说明符"><a href="#5-4-格式化说明符" class="headerlink" title="5.4 格式化说明符"></a>5.4 格式化说明符</h5><h5 id="5-5-Formatter转换"><a href="#5-5-Formatter转换" class="headerlink" title="5.5 Formatter转换"></a>5.5 Formatter转换</h5><h5 id="5-6-String-format"><a href="#5-6-String-format" class="headerlink" title="5.6 String.format()"></a>5.6 String.format()</h5><h4 id="6、正则表达式"><a href="#6、正则表达式" class="headerlink" title="6、正则表达式"></a>6、正则表达式</h4><h5 id="6-1-基础"><a href="#6-1-基础" class="headerlink" title="6.1 基础"></a>6.1 基础</h5><h5 id="6-2-创建正则表达式"><a href="#6-2-创建正则表达式" class="headerlink" title="6.2 创建正则表达式"></a>6.2 创建正则表达式</h5><h5 id="6-3-量词"><a href="#6-3-量词" class="headerlink" title="6.3 量词"></a>6.3 量词</h5><h5 id="6-4-Pattern和Matcher"><a href="#6-4-Pattern和Matcher" class="headerlink" title="6.4 Pattern和Matcher"></a>6.4 Pattern和Matcher</h5><h5 id="6-5-split"><a href="#6-5-split" class="headerlink" title="6.5 split()"></a>6.5 split()</h5><h5 id="6-6-替换操作"><a href="#6-6-替换操作" class="headerlink" title="6.6 替换操作"></a>6.6 替换操作</h5><h5 id="6-7-reset"><a href="#6-7-reset" class="headerlink" title="6.7 reset()"></a>6.7 reset()</h5><h5 id="6-8-正则表达式与Java-I-O"><a href="#6-8-正则表达式与Java-I-O" class="headerlink" title="6.8 正则表达式与Java I/O"></a>6.8 正则表达式与Java I/O</h5><h4 id="7、扫描输入"><a href="#7、扫描输入" class="headerlink" title="7、扫描输入"></a>7、扫描输入</h4><h5 id="7-1-Scanner定界符"><a href="#7-1-Scanner定界符" class="headerlink" title="7.1 Scanner定界符"></a>7.1 Scanner定界符</h5><h5 id="7-2-用正则表达式扫描"><a href="#7-2-用正则表达式扫描" class="headerlink" title="7.2 用正则表达式扫描"></a>7.2 用正则表达式扫描</h5><h4 id="8、StringTokenizer"><a href="#8、StringTokenizer" class="headerlink" title="8、StringTokenizer"></a>8、StringTokenizer</h4>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">String</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/21/TiJ-String-笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-PyQt5-QSS-样式的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -967,97 +1064,6 @@
 
 
   
-    <article id="post-element使用javascript触发表单校验" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/15/element使用javascript触发表单校验/">element使用javascript触发表单校验</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/15/element使用javascript触发表单校验/" class="archive-article-date">
-  	<time datetime="2019-09-15T15:37:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="需求说明"><a href="#需求说明" class="headerlink" title="需求说明"></a>需求说明</h4><p>在用户没有填写表单数据,没有产生输入框的焦点时点击提交。在提交前进行触发表单校验</p>
-<h5 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h5><p>调用element表单对象中的<code>validateField(prop:string, callback)</code><br>函数来触发表单校验.<br>prop是需要校验的属性。与表单中的属性一致。该函数接收一个回调函数。入口参数是校验规则中的message<br>例子</p>
-<ul>
-<li><p>设置一个引用</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-form</span> <span class="attr">:model</span>=<span class="string">"dialogForm"</span> <span class="attr">ref</span>=<span class="string">"formData"</span>  <span class="attr">:rules</span>=<span class="string">"rules"</span> <span class="attr">size</span>=<span class="string">"small"</span> <span class="attr">label-position</span>=<span class="string">"left"</span> <span class="attr">label-width</span>=<span class="string">"120px"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>需要校验的属性为title</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">label</span>=<span class="string">"考试标题:"</span> <span class="attr">prop</span>=<span class="string">"title"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-col</span> <span class="attr">:span</span>=<span class="string">"16"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">v-model</span>=<span class="string">"dialogForm.title"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">el-col</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>手动触发校验规则</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$refs.formData.validateField(<span class="string">'title'</span>, err =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>校验通过不会返回任何的东西。err为空。校验不通过返回title校验规则中的message<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: [</span><br><span class="line">    &#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">'必须输入考试标题'</span>, <span class="attr">trigger</span>: <span class="string">'blur'</span> &#125;</span><br><span class="line">  ],</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/15/element使用javascript触发表单校验/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1155,6 +1161,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
               </li>
              
@@ -1163,19 +1177,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">String</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1199,11 +1213,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1223,11 +1237,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
