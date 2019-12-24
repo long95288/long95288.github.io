@@ -205,7 +205,20 @@
 </ul>
 <h4 id="5、格式化输出"><a href="#5、格式化输出" class="headerlink" title="5、格式化输出"></a>5、格式化输出</h4><h5 id="5-1-printf"><a href="#5-1-printf" class="headerlink" title="5.1 printf()"></a>5.1 printf()</h5><p>  使用<code>System.out.printf()</code>可以输出和C语言中的占位符。格式化输出.使用System.out.format()来替代。</p>
 <h5 id="5-2-System-out-format"><a href="#5-2-System-out-format" class="headerlink" title="5.2 System.out.format()"></a>5.2 System.out.format()</h5><p>  <code>Sytem.out.format()</code> 可以使用%d,%s 等占位符</p>
-<h5 id="5-3-Formatter类"><a href="#5-3-Formatter类" class="headerlink" title="5.3 Formatter类"></a>5.3 Formatter类</h5><h5 id="5-4-格式化说明符"><a href="#5-4-格式化说明符" class="headerlink" title="5.4 格式化说明符"></a>5.4 格式化说明符</h5><h5 id="5-5-Formatter转换"><a href="#5-5-Formatter转换" class="headerlink" title="5.5 Formatter转换"></a>5.5 Formatter转换</h5><h5 id="5-6-String-format"><a href="#5-6-String-format" class="headerlink" title="5.6 String.format()"></a>5.6 String.format()</h5><h4 id="6、正则表达式"><a href="#6、正则表达式" class="headerlink" title="6、正则表达式"></a>6、正则表达式</h4><h5 id="6-1-基础"><a href="#6-1-基础" class="headerlink" title="6.1 基础"></a>6.1 基础</h5><h5 id="6-2-创建正则表达式"><a href="#6-2-创建正则表达式" class="headerlink" title="6.2 创建正则表达式"></a>6.2 创建正则表达式</h5><h5 id="6-3-量词"><a href="#6-3-量词" class="headerlink" title="6.3 量词"></a>6.3 量词</h5><h5 id="6-4-Pattern和Matcher"><a href="#6-4-Pattern和Matcher" class="headerlink" title="6.4 Pattern和Matcher"></a>6.4 Pattern和Matcher</h5><h5 id="6-5-split"><a href="#6-5-split" class="headerlink" title="6.5 split()"></a>6.5 split()</h5><h5 id="6-6-替换操作"><a href="#6-6-替换操作" class="headerlink" title="6.6 替换操作"></a>6.6 替换操作</h5><h5 id="6-7-reset"><a href="#6-7-reset" class="headerlink" title="6.7 reset()"></a>6.7 reset()</h5><h5 id="6-8-正则表达式与Java-I-O"><a href="#6-8-正则表达式与Java-I-O" class="headerlink" title="6.8 正则表达式与Java I/O"></a>6.8 正则表达式与Java I/O</h5><h4 id="7、扫描输入"><a href="#7、扫描输入" class="headerlink" title="7、扫描输入"></a>7、扫描输入</h4><h5 id="7-1-Scanner定界符"><a href="#7-1-Scanner定界符" class="headerlink" title="7.1 Scanner定界符"></a>7.1 Scanner定界符</h5><h5 id="7-2-用正则表达式扫描"><a href="#7-2-用正则表达式扫描" class="headerlink" title="7.2 用正则表达式扫描"></a>7.2 用正则表达式扫描</h5><h4 id="8、StringTokenizer"><a href="#8、StringTokenizer" class="headerlink" title="8、StringTokenizer"></a>8、StringTokenizer</h4>
+<h5 id="5-3-Formatter类"><a href="#5-3-Formatter类" class="headerlink" title="5.3 Formatter类"></a>5.3 Formatter类</h5><p>  在Java中，Formatter类是一个翻译器。翻译格式化字符和数据，构造Formatter类时需要传递一个输出流，说明要向什么地方输出。</p>
+<p>  向控制台输出<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Formatter f = <span class="keyword">new</span> Formatter(System.out);</span><br><span class="line">f.format(<span class="string">""</span>)</span><br></pre></td></tr></table></figure></p>
+<p>  还可以使用<code>OutputStream</code>和<code>File</code>输出</p>
+<h5 id="5-4-格式化说明符"><a href="#5-4-格式化说明符" class="headerlink" title="5.4 格式化说明符"></a>5.4 格式化说明符</h5><p>  格式化的语法<br>  <code>%[argument_index$][flag][width][.precision]conversion</code></p>
+<ul>
+<li>flag 是左右对齐标志，默认为右对齐。如果flag = ‘-’ ;变成左对齐。</li>
+<li>width 宽度，整数</li>
+<li>.precision 精度。保留小数点后几位。如果String类型，输出字符的最大数量。浮点数，默认打印6位，但是可以自己指定。小数位多则舍入，少就补零。整数没有精度，在整数中使用精度会触发异常。</li>
+<li>conversion 需要转换成的类型<h5 id="5-5-Formatter转换"><a href="#5-5-Formatter转换" class="headerlink" title="5.5 Formatter转换"></a>5.5 Formatter转换</h5>字符 | 说明<br>:-: | :-:|<br>d| 整数型(十进制)<br>c| Unicode字符<br>b| Boolean值<br>s| String<br>f| 浮点数（十进制）<br>e| 浮点数(科学计数法)<br>x| 整数(十进制)<br>h| 散列码(16进制)<br>%| 字符‘%’</li>
+</ul>
+<p>各种类型的适用字符<br>类型 |可用转换字符<br>:-:  | :-:<br>字符| c、b、h<br>整数| d、c、b、s、x、h<br>浮点数| b、s、f、e、h<br>对象| b、s、h<br>布尔类型| b、s、h</p>
+<p>b转换对于Boolean和boolean会对应true和false，但是对于其他的数据类型。只要不是null。对应转换的都是true,只要是null输出的是false</p>
+<h5 id="5-6-String-format"><a href="#5-6-String-format" class="headerlink" title="5.6 String.format()"></a>5.6 String.format()</h5><p>  想要获得一个格式化的字符串，可以使用”+”和StringBuilder中的append()来构建。但是还有一个更加方便的方法。使用String.format()方法获得一个格式化的字符串。</p>
+<h4 id="6、正则表达式"><a href="#6、正则表达式" class="headerlink" title="6、正则表达式"></a>6、正则表达式</h4><h5 id="6-1-基础"><a href="#6-1-基础" class="headerlink" title="6.1 基础"></a>6.1 基础</h5><h5 id="6-2-创建正则表达式"><a href="#6-2-创建正则表达式" class="headerlink" title="6.2 创建正则表达式"></a>6.2 创建正则表达式</h5><h5 id="6-3-量词"><a href="#6-3-量词" class="headerlink" title="6.3 量词"></a>6.3 量词</h5><h5 id="6-4-Pattern和Matcher"><a href="#6-4-Pattern和Matcher" class="headerlink" title="6.4 Pattern和Matcher"></a>6.4 Pattern和Matcher</h5><h5 id="6-5-split"><a href="#6-5-split" class="headerlink" title="6.5 split()"></a>6.5 split()</h5><h5 id="6-6-替换操作"><a href="#6-6-替换操作" class="headerlink" title="6.6 替换操作"></a>6.6 替换操作</h5><h5 id="6-7-reset"><a href="#6-7-reset" class="headerlink" title="6.7 reset()"></a>6.7 reset()</h5><h5 id="6-8-正则表达式与Java-I-O"><a href="#6-8-正则表达式与Java-I-O" class="headerlink" title="6.8 正则表达式与Java I/O"></a>6.8 正则表达式与Java I/O</h5><h4 id="7、扫描输入"><a href="#7、扫描输入" class="headerlink" title="7、扫描输入"></a>7、扫描输入</h4><h5 id="7-1-Scanner定界符"><a href="#7-1-Scanner定界符" class="headerlink" title="7.1 Scanner定界符"></a>7.1 Scanner定界符</h5><h5 id="7-2-用正则表达式扫描"><a href="#7-2-用正则表达式扫描" class="headerlink" title="7.2 用正则表达式扫描"></a>7.2 用正则表达式扫描</h5><h4 id="8、StringTokenizer"><a href="#8、StringTokenizer" class="headerlink" title="8、StringTokenizer"></a>8、StringTokenizer</h4>
       
 
       
@@ -1163,15 +1176,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1187,6 +1200,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">UML</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
@@ -1196,10 +1213,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">UML</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1215,11 +1228,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1235,19 +1248,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
