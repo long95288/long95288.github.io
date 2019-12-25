@@ -294,7 +294,171 @@
 </table>
 <p>b转换对于Boolean和boolean会对应true和false，但是对于其他的数据类型。只要不是null。对应转换的都是true,只要是null输出的是false</p>
 <h5 id="5-6-String-format"><a href="#5-6-String-format" class="headerlink" title="5.6 String.format()"></a>5.6 String.format()</h5><p>  想要获得一个格式化的字符串，可以使用”+”和StringBuilder中的append()来构建。但是还有一个更加方便的方法。使用String.format()方法获得一个格式化的字符串。</p>
-<h4 id="6、正则表达式"><a href="#6、正则表达式" class="headerlink" title="6、正则表达式"></a>6、正则表达式</h4><h5 id="6-1-基础"><a href="#6-1-基础" class="headerlink" title="6.1 基础"></a>6.1 基础</h5><h5 id="6-2-创建正则表达式"><a href="#6-2-创建正则表达式" class="headerlink" title="6.2 创建正则表达式"></a>6.2 创建正则表达式</h5><h5 id="6-3-量词"><a href="#6-3-量词" class="headerlink" title="6.3 量词"></a>6.3 量词</h5><h5 id="6-4-Pattern和Matcher"><a href="#6-4-Pattern和Matcher" class="headerlink" title="6.4 Pattern和Matcher"></a>6.4 Pattern和Matcher</h5><h5 id="6-5-split"><a href="#6-5-split" class="headerlink" title="6.5 split()"></a>6.5 split()</h5><h5 id="6-6-替换操作"><a href="#6-6-替换操作" class="headerlink" title="6.6 替换操作"></a>6.6 替换操作</h5><h5 id="6-7-reset"><a href="#6-7-reset" class="headerlink" title="6.7 reset()"></a>6.7 reset()</h5><h5 id="6-8-正则表达式与Java-I-O"><a href="#6-8-正则表达式与Java-I-O" class="headerlink" title="6.8 正则表达式与Java I/O"></a>6.8 正则表达式与Java I/O</h5><h4 id="7、扫描输入"><a href="#7、扫描输入" class="headerlink" title="7、扫描输入"></a>7、扫描输入</h4><h5 id="7-1-Scanner定界符"><a href="#7-1-Scanner定界符" class="headerlink" title="7.1 Scanner定界符"></a>7.1 Scanner定界符</h5><h5 id="7-2-用正则表达式扫描"><a href="#7-2-用正则表达式扫描" class="headerlink" title="7.2 用正则表达式扫描"></a>7.2 用正则表达式扫描</h5><h4 id="8、StringTokenizer"><a href="#8、StringTokenizer" class="headerlink" title="8、StringTokenizer"></a>8、StringTokenizer</h4>
+<h4 id="6、正则表达式"><a href="#6、正则表达式" class="headerlink" title="6、正则表达式"></a>6、正则表达式</h4><h5 id="6-1-基础"><a href="#6-1-基础" class="headerlink" title="6.1 基础"></a>6.1 基础</h5><p>  字符表</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符</th>
+<th style="text-align:center">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">  B</td>
+<td style="text-align:center">指定字符B,可以是其他指定字符</td>
+</tr>
+<tr>
+<td style="text-align:center">  \xhh</td>
+<td style="text-align:center">十六进制为oxhh的字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">  \uhhh</td>
+<td style="text-align:center">十六进制表示为oxhhhh的Unicode编码</td>
+</tr>
+<tr>
+<td style="text-align:center">  \t</td>
+<td style="text-align:center">标识符Tab</td>
+</tr>
+<tr>
+<td style="text-align:center">  \n</td>
+<td style="text-align:center">换行符</td>
+</tr>
+<tr>
+<td style="text-align:center">  \r</td>
+<td style="text-align:center">回车</td>
+</tr>
+<tr>
+<td style="text-align:center">  \f</td>
+<td style="text-align:center">换页</td>
+</tr>
+<tr>
+<td style="text-align:center">  \e</td>
+<td style="text-align:center">转义</td>
+</tr>
+</tbody>
+</table>
+<p>字符类，字符类是最需要掌握的。掌握字符类之后便可以显示正则表达式的威力</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符类</th>
+<th style="text-align:center">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">.</td>
+<td style="text-align:center">任意字符</td>
+</tr>
+<tr>
+<td style="text-align:center">[abc]</td>
+<td style="text-align:center">包含a、b和c的任何字符。等价于`a</td>
+<td>b</td>
+<td>c`</td>
+</tr>
+<tr>
+<td style="text-align:center">[^abc]</td>
+<td style="text-align:center">除了a、b和c之外的任何字符</td>
+</tr>
+<tr>
+<td style="text-align:center">[a-zA-Z]</td>
+<td style="text-align:center">从a到z或A到Z的任何字符(范围)</td>
+</tr>
+<tr>
+<td style="text-align:center">[abc[hij]]</td>
+<td style="text-align:center">任意a、b、c、h、i和j的字符。等价于`a</td>
+<td>b</td>
+<td>c</td>
+<td>h</td>
+<td>i</td>
+<td>j`展开合并</td>
+</tr>
+<tr>
+<td style="text-align:center">[a-z&amp;&amp;[hij]]</td>
+<td style="text-align:center">任意h,i或j(交)</td>
+</tr>
+<tr>
+<td style="text-align:center">\s</td>
+<td style="text-align:center">空白符(空格、tab、换行、换页和回车)</td>
+</tr>
+<tr>
+<td style="text-align:center">\S</td>
+<td style="text-align:center">非空白字符,等价于[^\s]</td>
+</tr>
+<tr>
+<td style="text-align:center">\d</td>
+<td style="text-align:center">数字[0-9]</td>
+</tr>
+<tr>
+<td style="text-align:center">\D</td>
+<td style="text-align:center">非数字[^0-9]</td>
+</tr>
+<tr>
+<td style="text-align:center">\w</td>
+<td style="text-align:center">词字符[a-zA-Z0-9]</td>
+</tr>
+<tr>
+<td style="text-align:center">\W</td>
+<td style="text-align:center">非词字符[^\w]</td>
+</tr>
+</tbody>
+</table>
+<p>逻辑操作表</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符</th>
+<th style="text-align:center">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">XY</td>
+<td style="text-align:center">Y跟在X后面</td>
+</tr>
+<tr>
+<td style="text-align:center">`X</td>
+<td style="text-align:center">Y`</td>
+<td>X或Y</td>
+</tr>
+<tr>
+<td style="text-align:center">(X)</td>
+<td style="text-align:center">捕获组 (capturing group).可以在表达式中用\i引用第i个捕获组</td>
+</tr>
+</tbody>
+</table>
+<p>边界匹配表</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符</th>
+<th style="text-align:center">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">^</td>
+<td style="text-align:center">一行的起始</td>
+</tr>
+<tr>
+<td style="text-align:center">$</td>
+<td style="text-align:center">一行的结束</td>
+</tr>
+<tr>
+<td style="text-align:center">\b</td>
+<td style="text-align:center">词的边界</td>
+</tr>
+<tr>
+<td style="text-align:center">\B</td>
+<td style="text-align:center">非词的边界</td>
+</tr>
+<tr>
+<td style="text-align:center">\G</td>
+<td style="text-align:center">前一个匹配的结束</td>
+</tr>
+</tbody>
+</table>
+<h5 id="6-2-创建正则表达式"><a href="#6-2-创建正则表达式" class="headerlink" title="6.2 创建正则表达式"></a>6.2 创建正则表达式</h5><h5 id="6-3-量词"><a href="#6-3-量词" class="headerlink" title="6.3 量词"></a>6.3 量词</h5><h5 id="6-4-Pattern和Matcher"><a href="#6-4-Pattern和Matcher" class="headerlink" title="6.4 Pattern和Matcher"></a>6.4 Pattern和Matcher</h5><h5 id="6-5-split"><a href="#6-5-split" class="headerlink" title="6.5 split()"></a>6.5 split()</h5><h5 id="6-6-替换操作"><a href="#6-6-替换操作" class="headerlink" title="6.6 替换操作"></a>6.6 替换操作</h5><h5 id="6-7-reset"><a href="#6-7-reset" class="headerlink" title="6.7 reset()"></a>6.7 reset()</h5><h5 id="6-8-正则表达式与Java-I-O"><a href="#6-8-正则表达式与Java-I-O" class="headerlink" title="6.8 正则表达式与Java I/O"></a>6.8 正则表达式与Java I/O</h5><h4 id="7、扫描输入"><a href="#7、扫描输入" class="headerlink" title="7、扫描输入"></a>7、扫描输入</h4><h5 id="7-1-Scanner定界符"><a href="#7-1-Scanner定界符" class="headerlink" title="7.1 Scanner定界符"></a>7.1 Scanner定界符</h5><h5 id="7-2-用正则表达式扫描"><a href="#7-2-用正则表达式扫描" class="headerlink" title="7.2 用正则表达式扫描"></a>7.2 用正则表达式扫描</h5><h4 id="8、StringTokenizer"><a href="#8、StringTokenizer" class="headerlink" title="8、StringTokenizer"></a>8、StringTokenizer</h4>
       
 
       
@@ -1252,10 +1416,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
@@ -1264,19 +1424,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">UML</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1288,7 +1444,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color4">UML</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1296,11 +1456,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
