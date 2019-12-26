@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="字符串1、不可变的String  每一个String对象都是不可变的，他们在创建的时候已经在内存中固定了。String对象的改变本质是拷贝一个当前的String的值然后完成修改后，生成新的String对象。这个新的对象和原来对象在内存中没有一丁点关系。是两个独立的对象 2、重载“+” 与StringBuilder  Java 不允许程序员重载任何操作符。&amp;quot;Hello&amp;quot; + &amp;q">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-12-25T13:28:57.841Z">
+<meta property="og:updated_time" content="2019-12-26T07:27:25.070Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TiJ String 笔记">
 <meta name="twitter:description" content="字符串1、不可变的String  每一个String对象都是不可变的，他们在创建的时候已经在内存中固定了。String对象的改变本质是拷贝一个当前的String的值然后完成修改后，生成新的String对象。这个新的对象和原来对象在内存中没有一丁点关系。是两个独立的对象 2、重载“+” 与StringBuilder  Java 不允许程序员重载任何操作符。&amp;quot;Hello&amp;quot; + &amp;q">
@@ -352,9 +352,9 @@
 </tr>
 <tr>
 <td style="text-align:center">[abc]</td>
-<td style="text-align:center">包含a、b和c的任何字符。等价于`a</td>
-<td>b</td>
-<td>c`</td>
+<td style="text-align:center">包含a、b和c的任何字符。等价于a\</td>
+<td>b\</td>
+<td>c</td>
 </tr>
 <tr>
 <td style="text-align:center">[^abc]</td>
@@ -366,12 +366,12 @@
 </tr>
 <tr>
 <td style="text-align:center">[abc[hij]]</td>
-<td style="text-align:center">任意a、b、c、h、i和j的字符。等价于`a</td>
-<td>b</td>
-<td>c</td>
-<td>h</td>
-<td>i</td>
-<td>j`展开合并</td>
+<td style="text-align:center">任意a、b、c、h、i和j的字符。等价于a\</td>
+<td>b\</td>
+<td>c\</td>
+<td>h\</td>
+<td>i\</td>
+<td>j展开合并</td>
 </tr>
 <tr>
 <td style="text-align:center">[a-z&amp;&amp;[hij]]</td>
@@ -417,8 +417,8 @@
 <td style="text-align:center">Y跟在X后面</td>
 </tr>
 <tr>
-<td style="text-align:center">`X</td>
-<td style="text-align:center">Y`</td>
+<td style="text-align:center">X\</td>
+<td style="text-align:center">Y</td>
 <td>X或Y</td>
 </tr>
 <tr>
@@ -458,7 +458,56 @@
 </tr>
 </tbody>
 </table>
-<h5 id="6-2-创建正则表达式"><a href="#6-2-创建正则表达式" class="headerlink" title="6.2 创建正则表达式"></a>6.2 创建正则表达式</h5><h5 id="6-3-量词"><a href="#6-3-量词" class="headerlink" title="6.3 量词"></a>6.3 量词</h5><h5 id="6-4-Pattern和Matcher"><a href="#6-4-Pattern和Matcher" class="headerlink" title="6.4 Pattern和Matcher"></a>6.4 Pattern和Matcher</h5><h5 id="6-5-split"><a href="#6-5-split" class="headerlink" title="6.5 split()"></a>6.5 split()</h5><h5 id="6-6-替换操作"><a href="#6-6-替换操作" class="headerlink" title="6.6 替换操作"></a>6.6 替换操作</h5><h5 id="6-7-reset"><a href="#6-7-reset" class="headerlink" title="6.7 reset()"></a>6.7 reset()</h5><h5 id="6-8-正则表达式与Java-I-O"><a href="#6-8-正则表达式与Java-I-O" class="headerlink" title="6.8 正则表达式与Java I/O"></a>6.8 正则表达式与Java I/O</h5><h4 id="7、扫描输入"><a href="#7、扫描输入" class="headerlink" title="7、扫描输入"></a>7、扫描输入</h4><h5 id="7-1-Scanner定界符"><a href="#7-1-Scanner定界符" class="headerlink" title="7.1 Scanner定界符"></a>7.1 Scanner定界符</h5><h5 id="7-2-用正则表达式扫描"><a href="#7-2-用正则表达式扫描" class="headerlink" title="7.2 用正则表达式扫描"></a>7.2 用正则表达式扫描</h5><h4 id="8、StringTokenizer"><a href="#8、StringTokenizer" class="headerlink" title="8、StringTokenizer"></a>8、StringTokenizer</h4>
+<h5 id="6-2-创建正则表达式"><a href="#6-2-创建正则表达式" class="headerlink" title="6.2 创建正则表达式"></a>6.2 创建正则表达式</h5><h5 id="6-3-量词"><a href="#6-3-量词" class="headerlink" title="6.3 量词"></a>6.3 量词</h5><p>  量词的主要作用的确定要怎么匹配，有贪婪型、勉强型、占有型。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">贪婪型</th>
+<th style="text-align:center">勉强型</th>
+<th style="text-align:center">占有型</th>
+<th style="text-align:center">如何匹配</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">  X？</td>
+<td style="text-align:center">X??</td>
+<td style="text-align:center">X?+</td>
+<td style="text-align:center">一个或零个X</td>
+</tr>
+<tr>
+<td style="text-align:center">  X*</td>
+<td style="text-align:center">X*?</td>
+<td style="text-align:center">X?+</td>
+<td style="text-align:center">零个或多个X</td>
+</tr>
+<tr>
+<td style="text-align:center">  X+</td>
+<td style="text-align:center">X+?</td>
+<td style="text-align:center">X++</td>
+<td style="text-align:center">一个或多个X</td>
+</tr>
+<tr>
+<td style="text-align:center">  X{n}</td>
+<td style="text-align:center">X{n}?</td>
+<td style="text-align:center">X{n}+</td>
+<td style="text-align:center">恰好n次X</td>
+</tr>
+<tr>
+<td style="text-align:center">  X{n,}</td>
+<td style="text-align:center">X{n,}?</td>
+<td style="text-align:center">X{n,}+</td>
+<td style="text-align:center">至少n次X</td>
+</tr>
+<tr>
+<td style="text-align:center">  X{n,m}</td>
+<td style="text-align:center">X{n,m}?</td>
+<td style="text-align:center">X{n,m}</td>
+<td style="text-align:center">X至少n次,且不超过m次</td>
+</tr>
+</tbody>
+</table>
+<h5 id="6-4-Pattern和Matcher"><a href="#6-4-Pattern和Matcher" class="headerlink" title="6.4 Pattern和Matcher"></a>6.4 Pattern和Matcher</h5><h5 id="6-5-split"><a href="#6-5-split" class="headerlink" title="6.5 split()"></a>6.5 split()</h5><h5 id="6-6-替换操作"><a href="#6-6-替换操作" class="headerlink" title="6.6 替换操作"></a>6.6 替换操作</h5><h5 id="6-7-reset"><a href="#6-7-reset" class="headerlink" title="6.7 reset()"></a>6.7 reset()</h5><h5 id="6-8-正则表达式与Java-I-O"><a href="#6-8-正则表达式与Java-I-O" class="headerlink" title="6.8 正则表达式与Java I/O"></a>6.8 正则表达式与Java I/O</h5><h4 id="7、扫描输入"><a href="#7、扫描输入" class="headerlink" title="7、扫描输入"></a>7、扫描输入</h4><h5 id="7-1-Scanner定界符"><a href="#7-1-Scanner定界符" class="headerlink" title="7.1 Scanner定界符"></a>7.1 Scanner定界符</h5><h5 id="7-2-用正则表达式扫描"><a href="#7-2-用正则表达式扫描" class="headerlink" title="7.2 用正则表达式扫描"></a>7.2 用正则表达式扫描</h5><h4 id="8、StringTokenizer"><a href="#8、StringTokenizer" class="headerlink" title="8、StringTokenizer"></a>8、StringTokenizer</h4>
       
 
       
@@ -714,6 +763,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">UML</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
@@ -722,19 +779,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">UML</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -770,15 +819,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -787,6 +832,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
               </li>
              
               <li class="article-tag-list-item">
