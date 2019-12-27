@@ -366,12 +366,7 @@
 </tr>
 <tr>
 <td style="text-align:center">[abc[hij]]</td>
-<td style="text-align:center">任意a、b、c、h、i和j的字符。等价于a\</td>
-<td>b\</td>
-<td>c\</td>
-<td>h\</td>
-<td>i\</td>
-<td>j展开合并</td>
+<td style="text-align:center">任意a、b、c、h、i和j的字符。等价于a&#124;b&#124;c&#124;h&#124;i&#124;j展开合并</td>
 </tr>
 <tr>
 <td style="text-align:center">[a-z&amp;&amp;[hij]]</td>
@@ -417,9 +412,8 @@
 <td style="text-align:center">Y跟在X后面</td>
 </tr>
 <tr>
-<td style="text-align:center">X\</td>
-<td style="text-align:center">Y</td>
-<td>X或Y</td>
+<td style="text-align:center">X&#124;Y</td>
+<td style="text-align:center">X或Y</td>
 </tr>
 <tr>
 <td style="text-align:center">(X)</td>
@@ -507,7 +501,19 @@
 </tr>
 </tbody>
 </table>
-<h5 id="6-4-Pattern和Matcher"><a href="#6-4-Pattern和Matcher" class="headerlink" title="6.4 Pattern和Matcher"></a>6.4 Pattern和Matcher</h5><h5 id="6-5-split"><a href="#6-5-split" class="headerlink" title="6.5 split()"></a>6.5 split()</h5><h5 id="6-6-替换操作"><a href="#6-6-替换操作" class="headerlink" title="6.6 替换操作"></a>6.6 替换操作</h5><h5 id="6-7-reset"><a href="#6-7-reset" class="headerlink" title="6.7 reset()"></a>6.7 reset()</h5><h5 id="6-8-正则表达式与Java-I-O"><a href="#6-8-正则表达式与Java-I-O" class="headerlink" title="6.8 正则表达式与Java I/O"></a>6.8 正则表达式与Java I/O</h5><h4 id="7、扫描输入"><a href="#7、扫描输入" class="headerlink" title="7、扫描输入"></a>7、扫描输入</h4><h5 id="7-1-Scanner定界符"><a href="#7-1-Scanner定界符" class="headerlink" title="7.1 Scanner定界符"></a>7.1 Scanner定界符</h5><h5 id="7-2-用正则表达式扫描"><a href="#7-2-用正则表达式扫描" class="headerlink" title="7.2 用正则表达式扫描"></a>7.2 用正则表达式扫描</h5><h4 id="8、StringTokenizer"><a href="#8、StringTokenizer" class="headerlink" title="8、StringTokenizer"></a>8、StringTokenizer</h4>
+<h5 id="6-4-Pattern和Matcher"><a href="#6-4-Pattern和Matcher" class="headerlink" title="6.4 Pattern和Matcher"></a>6.4 Pattern和Matcher</h5><ul>
+<li><p>字符串匹配正则表达式，可以使用<code>String.matches(pattern)</code>.例如<br><code>&quot;Rudolph&quot;.matches(pattern)</code>其中pattern为<code>String pattern = &quot;[rR]udolph&quot;</code></p>
+</li>
+<li><p>使用正则表达式的对象处理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原始字符</span></span><br><span class="line">String str = <span class="string">"afafafafagavawe"</span>;</span><br><span class="line"><span class="comment">// 正则表达式</span></span><br><span class="line">String pattern = <span class="string">"[af]ag"</span>:</span><br><span class="line"><span class="comment">// 正则表达式对象</span></span><br><span class="line">Pattern p = Pattern.complile(str);</span><br><span class="line"><span class="comment">// 匹配对象</span></span><br><span class="line">Matcher m = p.matcher(pattern);</span><br></pre></td></tr></table></figure>
+<p><strong>matcher常用方法</strong></p>
+<p>方法名 | 解释<br>:-: | :-:<br>boolean matches() | 整个输入字符串是否匹配正则表达式模式<br>boolean lookAt() | 判断该字符串的始部分是否能够匹配模式<br>boolean find() | 查找多个匹配,每调用一次就会自动向前迭代。<br>boolean find(i) | 查找特定索引的匹配，指定开始搜索的位置<br>int groupCount() | 该匹配器中的分组数目<br>String group(int i) | 返回前一次匹配的指定的组号，没有返回null。没有group(0)等价于group()<br>int start(int group) | 返回在前一次匹配操作中寻找到的组的起始索引<br>int end(int group) | 返回在前一次匹配操作中寻找到的组的最后一个字符串索引加一的值。注意是加一!!</p>
+<p><strong>pattern标记</strong><br><code>Pattern Pattern.compile(String regex, int flag);</code><br>标记的作用的是设定特定模式的匹配规则，.是否匹配行终结符，是否考虑字符串的大小写等。</p>
+</li>
+</ul>
+<h5 id="6-5-split"><a href="#6-5-split" class="headerlink" title="6.5 split()"></a>6.5 split()</h5><p>  和String.split()分隔字符串有相同的作用<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String input = <span class="string">"This is unusual use!!of exclamtion!!points"</span>:</span><br><span class="line">Pattern.compile(<span class="string">"!!"</span>).split(input);</span><br><span class="line">Pattern.complie(<span class="string">"!!"</span>).split(input,<span class="number">3</span>);</span><br></pre></td></tr></table></figure></p>
+<p>  <code>String[] split(CharSequence input);</code><br>  // limit 分成几个部分<br>  <code>String[] split(CharSequence input,int limit);</code></p>
+<h5 id="6-6-替换操作"><a href="#6-6-替换操作" class="headerlink" title="6.6 替换操作"></a>6.6 替换操作</h5><h5 id="6-7-reset"><a href="#6-7-reset" class="headerlink" title="6.7 reset()"></a>6.7 reset()</h5><h5 id="6-8-正则表达式与Java-I-O"><a href="#6-8-正则表达式与Java-I-O" class="headerlink" title="6.8 正则表达式与Java I/O"></a>6.8 正则表达式与Java I/O</h5><h4 id="7、扫描输入"><a href="#7、扫描输入" class="headerlink" title="7、扫描输入"></a>7、扫描输入</h4><h5 id="7-1-Scanner定界符"><a href="#7-1-Scanner定界符" class="headerlink" title="7.1 Scanner定界符"></a>7.1 Scanner定界符</h5><h5 id="7-2-用正则表达式扫描"><a href="#7-2-用正则表达式扫描" class="headerlink" title="7.2 用正则表达式扫描"></a>7.2 用正则表达式扫描</h5><h4 id="8、StringTokenizer"><a href="#8、StringTokenizer" class="headerlink" title="8、StringTokenizer"></a>8、StringTokenizer</h4>
       
 
       
@@ -1465,6 +1471,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
@@ -1481,23 +1491,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">UML</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">String</a>
+                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1529,15 +1527,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">技术</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1557,11 +1559,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">String</a>
               </li>
             
             <div class="clearfix"></div>
