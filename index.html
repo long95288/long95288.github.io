@@ -163,6 +163,169 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Tij-IO-笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/30/Tij-IO-笔记/">Tij-IO-笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/30/Tij-IO-笔记/" class="archive-article-date">
+  	<time datetime="2019-12-30T12:46:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="File类"><a href="#File类" class="headerlink" title="File类"></a>File类</h3><h4 id="目录列表器"><a href="#目录列表器" class="headerlink" title="目录列表器"></a>目录列表器</h4><p>  查询一个文件夹中的文件数据，使用File类的<code>list()</code>函数获得该目录下的文件数据,返回String数组。包括普通的文件名称和文件夹。<code>list()</code>接收一个<code>FilenameFilter</code>的实现类实例来过滤获得相应的文件。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">FilenameFilter</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">accept</span><span class="params">(File dir, String name)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>  如何使用该过滤器？当调用list函数的时候会调用该接口的accept()函数来判断是否保留该文件数据返回。每个文件都会调用该函数一次，自己在accept()函数里面设置规则，就可以获得相应的文件数据。</p>
+<h4 id="目录的检查及创建"><a href="#目录的检查及创建" class="headerlink" title="目录的检查及创建"></a>目录的检查及创建</h4><p>  File代表的是一个文件或目录，文件的相关信息都可以使用File中的函数来获得。下面是常用的函数。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数名</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">getAbsolutePath()</td>
+<td style="text-align:center">获得绝对路径,不会处理.和..</td>
+</tr>
+<tr>
+<td style="text-align:center">getCanonicalPath()</td>
+<td style="text-align:center">获得标准的绝对路径。将.和..解析之后返回路径</td>
+</tr>
+<tr>
+<td style="text-align:center">canRead()</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">canWrite()</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">getName()</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">getParent()</td>
+<td style="text-align:center">解析File文件中路径的父路径。只是对构造文件对象时输入的path字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">getPath()</td>
+<td style="text-align:center">获得文件路径，构造时传进来的文件路径</td>
+</tr>
+<tr>
+<td style="text-align:center">length()</td>
+<td style="text-align:center">返回文件的字节大小,long类型</td>
+</tr>
+<tr>
+<td style="text-align:center">lastModified()</td>
+<td style="text-align:center">上一次修改时间戳,long类型</td>
+</tr>
+<tr>
+<td style="text-align:center">isFile()</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">isDirectory()</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">exists()</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">createNewFile</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">renameTo(File f)</td>
+<td style="text-align:center">重命名</td>
+</tr>
+<tr>
+<td style="text-align:center">delete()</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">mkdirs()</td>
+<td style="text-align:center">创建文件/目录(可以多级创建)</td>
+</tr>
+<tr>
+<td style="text-align:center">mkdir()</td>
+<td style="text-align:center">仅一级创建。路径的上一个文件夹必须存在才能创建。</td>
+</tr>
+</tbody>
+</table>
+<p><code>getParent()</code>、<code>getName()</code>、<code>getPath()</code>、<code>getAbsolutePath()</code>、<code>getCanonicalPath()</code>的区别</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">File f = <span class="keyword">new</span> File(<span class="string">".\\pom.xml"</span>);</span><br><span class="line">System.out.println(f.getParent());</span><br><span class="line">System.out.println(f.getName());</span><br><span class="line">System.out.println(f.getPath());</span><br><span class="line">System.out.println(f.getAbsolutePath());</span><br><span class="line">System.out.println(f.getCanonicalPath());</span><br></pre></td></tr></table></figure>
+<p>ouput:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">pom.xml</span><br><span class="line">.\pom.xml</span><br><span class="line">E:\Project\Java\.\pom.xml</span><br><span class="line">E:\Project\Java\pom.xml</span><br></pre></td></tr></table></figure></p>
+<p><code>getParent()</code>获得的只是路径中的上一层,构造对象f时传进去的是<code>.\\pom.xml</code>。是对该字符串解析。如果直接使用<code>pom.xml</code>构造f对象,该函数返回的是空值。</p>
+<p><code>mkdirs()</code>和<code>mkdir()</code><br>创建”E:\test\test1\test2\test3”嵌套目录,使用mkdirs()可以顺利创建。但是使用mkdir()如果文件夹组”E:\test\test1\test2”存在,成功创建。否则创建失败。</p>
+<h3 id="输入和输出"><a href="#输入和输出" class="headerlink" title="输入和输出"></a>输入和输出</h3><h3 id="添加属性和有用的接口"><a href="#添加属性和有用的接口" class="headerlink" title="添加属性和有用的接口"></a>添加属性和有用的接口</h3><h3 id="Reader和Writer"><a href="#Reader和Writer" class="headerlink" title="Reader和Writer"></a><code>Reader</code>和<code>Writer</code></h3><h3 id="自我独立类-RandomAccessFile"><a href="#自我独立类-RandomAccessFile" class="headerlink" title="自我独立类:RandomAccessFile"></a>自我独立类:<code>RandomAccessFile</code></h3><h3 id="I-O流的典型使用方式"><a href="#I-O流的典型使用方式" class="headerlink" title="I/O流的典型使用方式"></a>I/O流的典型使用方式</h3><h3 id="文件读取的实用工具"><a href="#文件读取的实用工具" class="headerlink" title="文件读取的实用工具"></a>文件读取的实用工具</h3><h3 id="标准I-O"><a href="#标准I-O" class="headerlink" title="标准I/O"></a>标准I/O</h3><h3 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h3><h3 id="新的I-O"><a href="#新的I-O" class="headerlink" title="新的I/O"></a>新的I/O</h3><h3 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h3><h3 id="对象序列化"><a href="#对象序列化" class="headerlink" title="对象序列化"></a>对象序列化</h3><h3 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h3><h3 id="Preferences-Api"><a href="#Preferences-Api" class="headerlink" title="Preferences Api"></a><code>Preferences</code> Api</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">IO</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/30/Tij-IO-笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-TiJ-String-笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1271,124 +1434,6 @@
 
 
   
-    <article id="post-shiro使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/23/shiro使用/">shiro使用</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/23/shiro使用/" class="archive-article-date">
-  	<time datetime="2019-09-23T15:30:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="shiro核心对象和方法"><a href="#shiro核心对象和方法" class="headerlink" title="shiro核心对象和方法"></a>shiro核心对象和方法</h3><h4 id="核心对象-Subject"><a href="#核心对象-Subject" class="headerlink" title="核心对象 Subject"></a>核心对象 Subject</h4><p>使用<code>Subject currentUser = SecurityUtils.getSubject();</code><br>该条语句是获得当前的用户。</p>
-<h5 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h5><ul>
-<li><p><code>subject.login(AuthenticationToken token)</code>登陆。这种登陆是给shiro的认证机制登陆的。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">AuthenticationToken token =</span><br><span class="line"><span class="keyword">new</span> UsernamePasswordToken(username, password);</span><br><span class="line"></span><br><span class="line"><span class="comment">//2. 获取当前 Subject：</span></span><br><span class="line">Subject currentUser = SecurityUtils.getSubject();</span><br><span class="line"><span class="comment">//3. 登录： </span></span><br><span class="line">currentUser.login(token);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>boolean subject.hasRole(&quot;administrator&quot;)</code><br>判断是否有某个角色.</p>
-</li>
-<li>权限检查 <code>boolean subject.isPermitted(&quot;user:create&quot;)</code><br>是否有user的create权限<h3 id="shiro使用"><a href="#shiro使用" class="headerlink" title="shiro使用"></a>shiro使用</h3>工作流程如下:<br>Subject是我们可以操作的接口。<br>Realm是配置shiro的核心领域。包括账号验证、加密解密、权限的配置<br><img src="/2019/09/23/shiro使用/process.png" alt="流程"><br>内部的架构如下<br><img src="/2019/09/23/shiro使用/struct.png" alt><br>相关说明:</li>
-<li>SecurityManager:相当于SpringMVC 中的 DispatcherServlet；是 Shiro 的心脏;所有具体的交互都通过 SecurityManager 进行控制；它管理着所有 Subject、且负责进行认证、授权、会话及缓存的管理</li>
-<li>Authenticator: 负责 Subject 认证，是一个扩展点，可以自定义实现；可以使用认证策略（Authentication Strategy），即什么情况下算用户认证通过了</li>
-<li>Authorizer: 授权器、 即访问控制器，用来决定主体是否有权限进行相应的操作；即控制着用户能访问应用中的哪些功能</li>
-<li>Realm:可以有一个或多个Realm,可以认为是安全实体数据源，即用于获得安全实体的;可以是JDBC实现，也可以是内存实现等。由用户提供，应用中要自己实现自己的Realm;</li>
-<li>SessionManager: 管理Session生命周期的组件;Shiro不仅可以用在Web环境。普通的JavaSE环境也可以使用session.和httpServletSession差不多的接口。</li>
-<li>CacheManager:缓存控制器，用来管理用户、角色、权限等的缓存;</li>
-<li>Cryptography:加密和解密模块。内置了加密和解密的模块,不需要自己将前台的明文密码加密后再和数据中的加密的密码比较。shiro会自动调用加密模块然后完成比较。</li>
-</ul>
-<h5 id="shiro默认过滤器"><a href="#shiro默认过滤器" class="headerlink" title="shiro默认过滤器"></a>shiro默认过滤器</h5><ul>
-<li><code>anon</code> 所属类:org.apache.shiro.web.filter.authc.AnonymousFilter 没有参数,可以匿名使用。例如: /admin/** = anon</li>
-<li><code>authc</code> 所属类:org.apache.shiro.web.filter.authc.FormAuthenticationFilter 没有参数，需要认证(登陆)之后才能访问 例如:/user/** = authc</li>
-<li><code>authcBasic</code> org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter 没有参数，表示需要通过HttpBasic验证。如果不通过验证，跳转到登陆页面。 例如: /user/** = authcBasic</li>
-<li><code>logout</code> org.apache.shiro.web.filter.authc.LogoutFilter 注销登陆的时候，完成一定功能：任何现有的session都将会失效，任何身份都会失去关联。(web应用程序中，RememberMe cookie将被删除)</li>
-<li><code>noSessionCreation</code> org.apache.shiro.web.filter.authc.NoSessionCreationFiler 阻止在请求期间创建新的会话，保证无状态体验。</li>
-<li><code>perms</code> org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter 可以写多个。多个时加上引号。用逗号分隔。多个参数需要通过全部的参数才算通过。相当于isPermitedAll()方法。 例如:/admin/<strong> = perms[user:add:*] /admin/</strong> = perms[“user:add:<em>,user:delete:</em>“]</li>
-<li><code>port</code> org.apache.shiro.web.filter.authz.PortFilter 指定访问的端口。如果不匹配跳转到登陆界面。 例如:/admin/** = port[8080]</li>
-<li><code>rest</code> org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter 根据请求方法 例如:/admins/user/** = perms[user.method] method为post、get、delete等请求方法</li>
-<li><code>roles</code> org.apache.shiro.web.filter.authz.RolesAuthorizationFilter 角色过滤。判断当前用户是否指定角色。多个参数需通过所有的角色。 例如:/admins/** = roles[“admin,guest”]</li>
-<li><code>ssl</code> org.apache.shiro.web.filter.authz.SslFilter 使用协议为Https</li>
-<li><code>user</code> org.apache.shiro.web.filter.authc.UserFilter 缓存必须存在用户<h4 id="URL匹配模式"><a href="#URL匹配模式" class="headerlink" title="URL匹配模式"></a>URL匹配模式</h4>url模式使用Ant风格模式，支持<code>？</code>，<code>*</code>，<code>**</code>。通配符匹配不了包括目录分隔符<code>&quot;\&quot;</code></li>
-<li><code>?</code>:匹配一个字符，如/admin?。将匹配/admin1，但是不匹配/admin 或 /admin/</li>
-<li><code>*</code>:匹配0个或n个字符串.如/admin* 匹配/admin、/admin123。但不匹配/admin/1、/admin/</li>
-<li><code>**</code>: 匹配路径中的0或n路径。如/admin/** 匹配/admin/a or /admin/a/b</li>
-</ul>
-<p>URL权限采取第一次匹配优先的方式。所以需要一些不要认证的路径放在前面。将需要认证的路径放在后面。否则会被覆盖的。</p>
-<h4 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h4><h5 id="身份验证"><a href="#身份验证" class="headerlink" title="身份验证"></a>身份验证</h5><p>在shiro中我们需要提供两个对象(principals和credentials)用来完成身份的验证</p>
-<ul>
-<li><code>principals</code> 身份,主体的标识属性，可以是任何的属性。用户名、邮箱等。具备唯一性。可以有多个principals.但只有一个Primary principals。一般是用户名/邮箱/手机号</li>
-<li><code>credentials</code> 证明/凭证。证明主体标识的，如密码和数字证书等。<br>最常使用的就是用户名和密码来组合成principals和credentials</li>
-</ul>
-<h5 id="身份验证的基本流程"><a href="#身份验证的基本流程" class="headerlink" title="身份验证的基本流程"></a>身份验证的基本流程</h5><p>1、收集用户的身份/凭证。一般是从前端获得用户名和密码<br>2、调用<code>Subject.login</code>进行登陆。失败会抛出响应的异常信息<br>3、创建自定义的<code>Realm</code>类。继承<code>org.apache.shiro.realm.AuthorizingRealm类。实现doGetAuthenticationInfo()</code>方法<br>官方给的认证示例代码:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// let's login the current user so we can check against roles and permissions:</span></span><br><span class="line"><span class="comment">// 测试当前的用户是否已经被认证. 即是否已经登录. </span></span><br><span class="line"><span class="comment">// 调动 Subject 的 isAuthenticated() </span></span><br><span class="line"><span class="keyword">if</span> (!currentUser.isAuthenticated()) &#123;</span><br><span class="line"><span class="comment">// 把用户名和密码封装为 UsernamePasswordToken 对象</span></span><br><span class="line">  UsernamePasswordToken token = <span class="keyword">new</span> UsernamePasswordToken(<span class="string">"lonestarr"</span>, <span class="string">"vespa"</span>);</span><br><span class="line">  <span class="comment">// rememberme</span></span><br><span class="line">  token.setRememberMe(<span class="keyword">true</span>);</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 执行登录. </span></span><br><span class="line">      currentUser.login(token);</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="comment">// 若没有指定的账户, 则 shiro 将会抛出 UnknownAccountException 异常. </span></span><br><span class="line">  <span class="keyword">catch</span> (UnknownAccountException uae) &#123;</span><br><span class="line">      log.info(<span class="string">"----&gt; There is no user with username of "</span> + token.getPrincipal());</span><br><span class="line">      <span class="keyword">return</span>; </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="comment">// 若账户存在, 但密码不匹配, 则 shiro 会抛出 IncorrectCredentialsException 异常。 </span></span><br><span class="line">  <span class="keyword">catch</span> (IncorrectCredentialsException ice) &#123;</span><br><span class="line">      log.info(<span class="string">"----&gt; Password for account "</span> + token.getPrincipal() + <span class="string">" was incorrect!"</span>);</span><br><span class="line">      <span class="keyword">return</span>; </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="comment">// 用户被锁定的异常 LockedAccountException</span></span><br><span class="line">  <span class="keyword">catch</span> (LockedAccountException lae) &#123;</span><br><span class="line">      log.info(<span class="string">"The account for username "</span> + token.getPrincipal() + <span class="string">" is locked.  "</span> +</span><br><span class="line">              <span class="string">"Please contact your administrator to unlock it."</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ... catch more exceptions here (maybe custom ones specific to your application?</span></span><br><span class="line">  <span class="comment">// 所有认证时异常的父类. </span></span><br><span class="line">  <span class="keyword">catch</span> (AuthenticationException ae) &#123;</span><br><span class="line">      <span class="comment">//unexpected condition?  error?</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h5 id="身份认证的流程"><a href="#身份认证的流程" class="headerlink" title="身份认证的流程"></a>身份认证的流程</h5><p><img src="/2019/09/23/shiro使用/authenticationprocess.png" alt="流程图"></p>
-<p>1、首先调用 Subject.login(token) 进行登录，其会自动委托给SecurityManager<br>2、 SecurityManager 负责真正的身份验证逻辑；它会委托给Authenticator 进行身份验证；<br>3、 Authenticator 才是真正的身份验证者，Shiro API 中核心的身份认证入口点，此处可以自定义插入自己的实现；<br>4、 Authenticator 可能会委托给相应的 AuthenticationStrategy 进行多 Realm 身份验证，默认 ModularRealmAuthenticator 会调用AuthenticationStrategy 进行多 Realm 身份验证；<br>5、 Authenticator 会把相应的 token 传入 Realm，从 Realm 获取身份验证信息，如果没有返回/抛出异常表示身份验证失败了。此处可以配置多个Realm，将按照相应的顺序及策略进行访问。</p>
-<h4 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h4><h4 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h4>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/23/shiro使用/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1486,10 +1531,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
@@ -1498,7 +1539,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">diy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1506,7 +1555,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1526,10 +1579,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
               </li>
              
@@ -1542,14 +1591,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">技术</a>
               </li>
              
@@ -1558,7 +1599,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">

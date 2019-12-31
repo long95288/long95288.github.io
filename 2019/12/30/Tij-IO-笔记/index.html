@@ -6,23 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://long95288.github.io">
-  <title>SpringBoot整合Swagger | 风兮木落</title>
+  <title>Tij-IO-笔记 | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、相关的配置1、maven引入swagger2依赖1234567891011&amp;lt;!--添加swagger依赖--&amp;gt;&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;io.springfox&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;springfox-swagger2&amp;lt;/artifactId&amp;gt;    &amp;lt;versi">
-<meta name="keywords" content="笔记,spring">
+  <meta name="description" content="File类目录列表器  查询一个文件夹中的文件数据，使用File类的list()函数获得该目录下的文件数据,返回String数组。包括普通的文件名称和文件夹。list()接收一个FilenameFilter的实现类实例来过滤获得相应的文件。  123public interface FilenameFilter&amp;#123;  boolean accept(File dir, String name">
+<meta name="keywords" content="java,IO">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SpringBoot整合Swagger">
-<meta property="og:url" content="http://long95288.github.io/2019/08/14/SpringBoot整合Swagger/index.html">
+<meta property="og:title" content="Tij-IO-笔记">
+<meta property="og:url" content="http://long95288.github.io/2019/12/30/Tij-IO-笔记/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="一、相关的配置1、maven引入swagger2依赖1234567891011&amp;lt;!--添加swagger依赖--&amp;gt;&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;io.springfox&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;springfox-swagger2&amp;lt;/artifactId&amp;gt;    &amp;lt;versi">
+<meta property="og:description" content="File类目录列表器  查询一个文件夹中的文件数据，使用File类的list()函数获得该目录下的文件数据,返回String数组。包括普通的文件名称和文件夹。list()接收一个FilenameFilter的实现类实例来过滤获得相应的文件。  123public interface FilenameFilter&amp;#123;  boolean accept(File dir, String name">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://long95288.github.io/2019/08/14/SpringBoot整合Swagger/config.png">
-<meta property="og:image" content="http://long95288.github.io/2019/08/14/SpringBoot整合Swagger/result.png">
-<meta property="og:updated_time" content="2019-08-14T12:29:42.866Z">
+<meta property="og:updated_time" content="2019-12-31T13:12:03.699Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SpringBoot整合Swagger">
-<meta name="twitter:description" content="一、相关的配置1、maven引入swagger2依赖1234567891011&amp;lt;!--添加swagger依赖--&amp;gt;&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;io.springfox&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;springfox-swagger2&amp;lt;/artifactId&amp;gt;    &amp;lt;versi">
-<meta name="twitter:image" content="http://long95288.github.io/2019/08/14/SpringBoot整合Swagger/config.png">
+<meta name="twitter:title" content="Tij-IO-笔记">
+<meta name="twitter:description" content="File类目录列表器  查询一个文件夹中的文件数据，使用File类的list()函数获得该目录下的文件数据,返回String数组。包括普通的文件名称和文件夹。list()接收一个FilenameFilter的实现类实例来过滤获得相应的文件。  123public interface FilenameFilter&amp;#123;  boolean accept(File dir, String name">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
   
@@ -166,38 +163,113 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-SpringBoot整合Swagger" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Tij-IO-笔记" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      SpringBoot整合Swagger
+      Tij-IO-笔记
     </h1>
   
 
         
-        <a href="/2019/08/14/SpringBoot整合Swagger/" class="archive-article-date">
-  	<time datetime="2019-08-14T10:42:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-14</time>
+        <a href="/2019/12/30/Tij-IO-笔记/" class="archive-article-date">
+  	<time datetime="2019-12-30T12:46:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="一、相关的配置"><a href="#一、相关的配置" class="headerlink" title="一、相关的配置"></a>一、相关的配置</h3><h4 id="1、maven引入swagger2依赖"><a href="#1、maven引入swagger2依赖" class="headerlink" title="1、maven引入swagger2依赖"></a>1、maven引入swagger2依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--添加swagger依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="2、swagger的配置类"><a href="#2、swagger的配置类" class="headerlink" title="2、swagger的配置类"></a>2、swagger的配置类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger</span>2</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SwaggerConfig</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> ApiInfo <span class="title">apiInfo</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ApiInfoBuilder()</span><br><span class="line">                .title(<span class="string">"考试管理的接口"</span>)</span><br><span class="line">                .contact(<span class="keyword">new</span> Contact(<span class="string">"我的姓名"</span>,<span class="string">"http://long95288.github.io"</span>,<span class="string">"123456@xx.com"</span>))</span><br><span class="line">                .version(<span class="string">"1.0"</span>)</span><br><span class="line">                .description(<span class="string">"这个接口是用来给前端的测试接口的"</span>)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Docket <span class="title">createRestApi</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">                .apiInfo(apiInfo())</span><br><span class="line">                .select()</span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(<span class="string">"com.bosssoft.hr.train.bes.exam.controller"</span>))</span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>类头的<code>@Configuration</code>是spring 配置类的注解</li>
-<li><code>@EnableSwagger2</code>是必须的用来开启swagger2</li>
-<li><code>ApiInfo</code>主要是对接口文档的一些说明<br>1、<code>title</code>文档的标题<br>2、<code>Contact(name,url,email)</code> 作者相关信息<br>3、<code>version</code> 版本号<br>4、<code>description()</code>对该文档的描述</li>
-<li>上述配置的效果为:<br><img src="/2019/08/14/SpringBoot整合Swagger/config.png" alt="配置效果"><h3 id="二、使用swagger"><a href="#二、使用swagger" class="headerlink" title="二、使用swagger"></a>二、使用swagger</h3><h4 id="1、相关注解说明"><a href="#1、相关注解说明" class="headerlink" title="1、相关注解说明"></a>1、相关注解说明</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">@Api：用在请求的类上，表示对类的说明</span><br><span class="line">    tags=&quot;说明该类的作用，可以在UI界面上看到的注解&quot;</span><br><span class="line">    value=&quot;该参数没什么意义，在UI界面上也看到，所以不需要配置&quot;</span><br><span class="line"></span><br><span class="line">@ApiOperation：用在请求的方法上，说明方法的用途、作用</span><br><span class="line">    value=&quot;说明方法的用途、作用&quot;</span><br><span class="line">    notes=&quot;方法的备注说明&quot;</span><br><span class="line"></span><br><span class="line">@ApiImplicitParams：用在请求的方法上，表示一组参数说明</span><br><span class="line">    @ApiImplicitParam：用在@ApiImplicitParams注解中，指定一个请求参数的各个方面</span><br><span class="line">        name：参数名</span><br><span class="line">        value：参数的汉字说明、解释</span><br><span class="line">        required：参数是否必须传</span><br><span class="line">        paramType：参数放在哪个地方</span><br><span class="line">            · header --&gt; 请求参数的获取：@RequestHeader</span><br><span class="line">            · query --&gt; 请求参数的获取：@RequestParam</span><br><span class="line">            · path（用于restful接口）--&gt; 请求参数的获取：@PathVariable</span><br><span class="line">            · body（不常用）</span><br><span class="line">            · form（不常用）    </span><br><span class="line">        dataType：参数类型，默认String，其它值dataType=&quot;Integer&quot;       </span><br><span class="line">        defaultValue：参数的默认值</span><br><span class="line"></span><br><span class="line">@ApiResponses：用在请求的方法上，表示一组响应</span><br><span class="line">    @ApiResponse：用在@ApiResponses中，一般用于表达一个错误的响应信息</span><br><span class="line">        code：数字，例如400</span><br><span class="line">        message：信息，例如&quot;请求参数没填好&quot;</span><br><span class="line">        response：抛出异常的类</span><br><span class="line"></span><br><span class="line">@ApiModel：用于响应类上，表示一个返回响应数据的信息</span><br><span class="line">            （这种一般用在post创建的时候，使用@RequestBody这样的场景，</span><br><span class="line">            请求参数无法使用@ApiImplicitParam注解进行描述的时候）</span><br><span class="line">    @ApiModelProperty：用在属性上，描述响应类的属性</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="2、使用注解"><a href="#2、使用注解" class="headerlink" title="2、使用注解"></a>2、使用注解</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Api</span>(tags = <span class="string">"tags 类的描述 Swagger控制器"</span>,value = <span class="string">"@Api value Swagger控制器"</span>)</span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"swagger"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SwaggerController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation</span>(value = <span class="string">"接口说明"</span>,notes = <span class="string">"接口备注 输入message 返回Hello Swagger Message"</span>)</span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/hello"</span>,method = RequestMethod.POST)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">helloSwagger</span><span class="params">(@RequestParam(<span class="string">"message"</span>)</span> String message)</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello Swagger"</span> + message);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Hello Swagger "</span>+ message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation</span>(value = <span class="string">"add"</span>,notes = <span class="string">"a + b"</span>)</span><br><span class="line">    <span class="meta">@ApiImplicitParams</span>(&#123;</span><br><span class="line">            <span class="meta">@ApiImplicitParam</span>(name = <span class="string">"a"</span>,value = <span class="string">"1"</span>,paramType = <span class="string">"query"</span>),</span><br><span class="line">            <span class="meta">@ApiImplicitParam</span>(name = <span class="string">"b"</span>,value = <span class="string">"2"</span>,paramType = <span class="string">"query"</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/add"</span>,method = RequestMethod.POST)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(@RequestParam(<span class="string">"a"</span>)</span> <span class="keyword">int</span> a,@<span class="title">RequestParam</span><span class="params">(<span class="string">"b"</span>)</span> <span class="keyword">int</span> b)</span>&#123;</span><br><span class="line">        <span class="keyword">int</span> c = a + b;</span><br><span class="line">        <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="4、使用效果"><a href="#4、使用效果" class="headerlink" title="4、使用效果"></a>4、使用效果</h4><p><img src="/2019/08/14/SpringBoot整合Swagger/result.png" alt="结果"></p>
-
+        <h3 id="File类"><a href="#File类" class="headerlink" title="File类"></a>File类</h3><h4 id="目录列表器"><a href="#目录列表器" class="headerlink" title="目录列表器"></a>目录列表器</h4><p>  查询一个文件夹中的文件数据，使用File类的<code>list()</code>函数获得该目录下的文件数据,返回String数组。包括普通的文件名称和文件夹。<code>list()</code>接收一个<code>FilenameFilter</code>的实现类实例来过滤获得相应的文件。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">FilenameFilter</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">accept</span><span class="params">(File dir, String name)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>  如何使用该过滤器？当调用list函数的时候会调用该接口的accept()函数来判断是否保留该文件数据返回。每个文件都会调用该函数一次，自己在accept()函数里面设置规则，就可以获得相应的文件数据。</p>
+<h4 id="目录的检查及创建"><a href="#目录的检查及创建" class="headerlink" title="目录的检查及创建"></a>目录的检查及创建</h4><p>  File代表的是一个文件或目录，文件的相关信息都可以使用File中的函数来获得。下面是常用的函数。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数名</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">getAbsolutePath()</td>
+<td style="text-align:center">获得绝对路径,不会处理.和..</td>
+</tr>
+<tr>
+<td style="text-align:center">getCanonicalPath()</td>
+<td style="text-align:center">获得标准的绝对路径。将.和..解析之后返回路径</td>
+</tr>
+<tr>
+<td style="text-align:center">canRead()</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">canWrite()</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">getName()</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">getParent()</td>
+<td style="text-align:center">解析File文件中路径的父路径。只是对构造文件对象时输入的path字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">getPath()</td>
+<td style="text-align:center">获得文件路径，构造时传进来的文件路径</td>
+</tr>
+<tr>
+<td style="text-align:center">length()</td>
+<td style="text-align:center">返回文件的字节大小,long类型</td>
+</tr>
+<tr>
+<td style="text-align:center">lastModified()</td>
+<td style="text-align:center">上一次修改时间戳,long类型</td>
+</tr>
+<tr>
+<td style="text-align:center">isFile()</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">isDirectory()</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">exists()</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">createNewFile</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">renameTo(File f)</td>
+<td style="text-align:center">重命名</td>
+</tr>
+<tr>
+<td style="text-align:center">delete()</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">mkdirs()</td>
+<td style="text-align:center">创建文件/目录(可以多级创建)</td>
+</tr>
+<tr>
+<td style="text-align:center">mkdir()</td>
+<td style="text-align:center">仅一级创建。路径的上一个文件夹必须存在才能创建。</td>
+</tr>
+</tbody>
+</table>
+<p><code>getParent()</code>、<code>getName()</code>、<code>getPath()</code>、<code>getAbsolutePath()</code>、<code>getCanonicalPath()</code>的区别</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">File f = <span class="keyword">new</span> File(<span class="string">".\\pom.xml"</span>);</span><br><span class="line">System.out.println(f.getParent());</span><br><span class="line">System.out.println(f.getName());</span><br><span class="line">System.out.println(f.getPath());</span><br><span class="line">System.out.println(f.getAbsolutePath());</span><br><span class="line">System.out.println(f.getCanonicalPath());</span><br></pre></td></tr></table></figure>
+<p>ouput:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">pom.xml</span><br><span class="line">.\pom.xml</span><br><span class="line">E:\Project\Java\.\pom.xml</span><br><span class="line">E:\Project\Java\pom.xml</span><br></pre></td></tr></table></figure></p>
+<p><code>getParent()</code>获得的只是路径中的上一层,构造对象f时传进去的是<code>.\\pom.xml</code>。是对该字符串解析。如果直接使用<code>pom.xml</code>构造f对象,该函数返回的是空值。</p>
+<p><code>mkdirs()</code>和<code>mkdir()</code><br>创建”E:\test\test1\test2\test3”嵌套目录,使用mkdirs()可以顺利创建。但是使用mkdir()如果文件夹组”E:\test\test1\test2”存在,成功创建。否则创建失败。</p>
+<h3 id="输入和输出"><a href="#输入和输出" class="headerlink" title="输入和输出"></a>输入和输出</h3><h3 id="添加属性和有用的接口"><a href="#添加属性和有用的接口" class="headerlink" title="添加属性和有用的接口"></a>添加属性和有用的接口</h3><h3 id="Reader和Writer"><a href="#Reader和Writer" class="headerlink" title="Reader和Writer"></a><code>Reader</code>和<code>Writer</code></h3><h3 id="自我独立类-RandomAccessFile"><a href="#自我独立类-RandomAccessFile" class="headerlink" title="自我独立类:RandomAccessFile"></a>自我独立类:<code>RandomAccessFile</code></h3><h3 id="I-O流的典型使用方式"><a href="#I-O流的典型使用方式" class="headerlink" title="I/O流的典型使用方式"></a>I/O流的典型使用方式</h3><h3 id="文件读取的实用工具"><a href="#文件读取的实用工具" class="headerlink" title="文件读取的实用工具"></a>文件读取的实用工具</h3><h3 id="标准I-O"><a href="#标准I-O" class="headerlink" title="标准I/O"></a>标准I/O</h3><h3 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h3><h3 id="新的I-O"><a href="#新的I-O" class="headerlink" title="新的I/O"></a>新的I/O</h3><h3 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h3><h3 id="对象序列化"><a href="#对象序列化" class="headerlink" title="对象序列化"></a>对象序列化</h3><h3 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h3><h3 id="Preferences-Api"><a href="#Preferences-Api" class="headerlink" title="Preferences Api"></a><code>Preferences</code> Api</h3>
       
 
       
@@ -231,11 +303,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">IO</a>
         		</li>
       		
 		</ul>
@@ -291,7 +363,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/08/14/SpringBoot整合Swagger/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/12/30/Tij-IO-笔记/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -305,18 +377,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/18/Mybatis整合通用mapper/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Mybatis整合通用mapper
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/08/14/UML文档编写/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">UML文档编写</div>
+    <a href="/2019/12/21/TiJ-String-笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">TiJ String 笔记</div>
       <i class="icon-circle-right"></i>
     </a>
   
