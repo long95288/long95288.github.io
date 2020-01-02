@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="File类目录列表器  查询一个文件夹中的文件数据，使用File类的list()函数获得该目录下的文件数据,返回String数组。包括普通的文件名称和文件夹。list()接收一个FilenameFilter的实现类实例来过滤获得相应的文件。  123public interface FilenameFilter&amp;#123;  boolean accept(File dir, String name">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-12-31T13:12:03.699Z">
+<meta property="og:updated_time" content="2020-01-02T13:08:47.755Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tij-IO-笔记">
 <meta name="twitter:description" content="File类目录列表器  查询一个文件夹中的文件数据，使用File类的list()函数获得该目录下的文件数据,返回String数组。包括普通的文件名称和文件夹。list()接收一个FilenameFilter的实现类实例来过滤获得相应的文件。  123public interface FilenameFilter&amp;#123;  boolean accept(File dir, String name">
@@ -269,7 +269,8 @@
 <p>ouput:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">pom.xml</span><br><span class="line">.\pom.xml</span><br><span class="line">E:\Project\Java\.\pom.xml</span><br><span class="line">E:\Project\Java\pom.xml</span><br></pre></td></tr></table></figure></p>
 <p><code>getParent()</code>获得的只是路径中的上一层,构造对象f时传进去的是<code>.\\pom.xml</code>。是对该字符串解析。如果直接使用<code>pom.xml</code>构造f对象,该函数返回的是空值。</p>
 <p><code>mkdirs()</code>和<code>mkdir()</code><br>创建”E:\test\test1\test2\test3”嵌套目录,使用mkdirs()可以顺利创建。但是使用mkdir()如果文件夹组”E:\test\test1\test2”存在,成功创建。否则创建失败。</p>
-<h3 id="输入和输出"><a href="#输入和输出" class="headerlink" title="输入和输出"></a>输入和输出</h3><h3 id="添加属性和有用的接口"><a href="#添加属性和有用的接口" class="headerlink" title="添加属性和有用的接口"></a>添加属性和有用的接口</h3><h3 id="Reader和Writer"><a href="#Reader和Writer" class="headerlink" title="Reader和Writer"></a><code>Reader</code>和<code>Writer</code></h3><h3 id="自我独立类-RandomAccessFile"><a href="#自我独立类-RandomAccessFile" class="headerlink" title="自我独立类:RandomAccessFile"></a>自我独立类:<code>RandomAccessFile</code></h3><h3 id="I-O流的典型使用方式"><a href="#I-O流的典型使用方式" class="headerlink" title="I/O流的典型使用方式"></a>I/O流的典型使用方式</h3><h3 id="文件读取的实用工具"><a href="#文件读取的实用工具" class="headerlink" title="文件读取的实用工具"></a>文件读取的实用工具</h3><h3 id="标准I-O"><a href="#标准I-O" class="headerlink" title="标准I/O"></a>标准I/O</h3><h3 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h3><h3 id="新的I-O"><a href="#新的I-O" class="headerlink" title="新的I/O"></a>新的I/O</h3><h3 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h3><h3 id="对象序列化"><a href="#对象序列化" class="headerlink" title="对象序列化"></a>对象序列化</h3><h3 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h3><h3 id="Preferences-Api"><a href="#Preferences-Api" class="headerlink" title="Preferences Api"></a><code>Preferences</code> Api</h3>
+<h3 id="输入和输出"><a href="#输入和输出" class="headerlink" title="输入和输出"></a>输入和输出</h3><h3 id="添加属性和有用的接口"><a href="#添加属性和有用的接口" class="headerlink" title="添加属性和有用的接口"></a>添加属性和有用的接口</h3><h3 id="Reader和Writer"><a href="#Reader和Writer" class="headerlink" title="Reader和Writer"></a><code>Reader</code>和<code>Writer</code></h3><h3 id="自我独立类-RandomAccessFile"><a href="#自我独立类-RandomAccessFile" class="headerlink" title="自我独立类:RandomAccessFile"></a>自我独立类:<code>RandomAccessFile</code></h3><h3 id="I-O流的典型使用方式"><a href="#I-O流的典型使用方式" class="headerlink" title="I/O流的典型使用方式"></a>I/O流的典型使用方式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String</span><br><span class="line">read(String filename)&#123;</span><br><span class="line">  BufferReader in = <span class="keyword">new</span> BufferReader(</span><br><span class="line">    <span class="keyword">new</span> FileReader(filename)</span><br><span class="line">  );</span><br><span class="line">  String s;</span><br><span class="line">  StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">  <span class="keyword">while</span>(s = in.readLine() != <span class="keyword">null</span>)&#123;</span><br><span class="line">    sb.append(s+<span class="string">"\n"</span>);</span><br><span class="line">    <span class="comment">// 使用如下代码是否更好？</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    sb.append(s);</span></span><br><span class="line"><span class="comment">    sb.append("\n");</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">  &#125;</span><br><span class="line">  in.close();</span><br><span class="line">  <span class="keyword">return</span> sb.toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="文件读取的实用工具"><a href="#文件读取的实用工具" class="headerlink" title="文件读取的实用工具"></a>文件读取的实用工具</h3><h3 id="标准I-O"><a href="#标准I-O" class="headerlink" title="标准I/O"></a>标准I/O</h3><h3 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h3><h3 id="新的I-O"><a href="#新的I-O" class="headerlink" title="新的I/O"></a>新的I/O</h3><h3 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h3><h3 id="对象序列化"><a href="#对象序列化" class="headerlink" title="对象序列化"></a>对象序列化</h3><h3 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h3><h3 id="Preferences-Api"><a href="#Preferences-Api" class="headerlink" title="Preferences Api"></a><code>Preferences</code> Api</h3>
       
 
       
@@ -422,7 +423,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 long
+    		&copy; 2020 long
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -521,11 +522,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -565,6 +566,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">技术</a>
               </li>
              
@@ -573,7 +578,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -581,11 +586,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -594,10 +599,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">设计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
