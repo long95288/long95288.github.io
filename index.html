@@ -321,11 +321,13 @@
 <h4 id="通道和缓冲器"><a href="#通道和缓冲器" class="headerlink" title="通道和缓冲器"></a>通道和缓冲器</h4><p>  唯一和通道交互得缓冲器为ByteBuffer。原始得字节形式输出和读取,没有办法输出和读取对象。也就是存进去得是什么，拿出来得也是什么。不会包装成String或者其它得对象。</p>
 <h4 id="FileChannels-文件通道"><a href="#FileChannels-文件通道" class="headerlink" title="FileChannels 文件通道"></a>FileChannels 文件通道</h4>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用文件通道写入数据</span></span><br><span class="line">FileChannels fc = <span class="keyword">new</span> FileOutputStream(filename).getChannel();</span><br><span class="line"><span class="comment">// 写入字节数组</span></span><br><span class="line">Byte[] bytes = <span class="string">"Hello"</span>.getBytes();</span><br><span class="line">fc.write(ByteBuffer.wrap(bytes));</span><br><span class="line">fc.close();</span><br><span class="line"><span class="comment">// 通过文件通道读取数据</span></span><br><span class="line">fc = <span class="keyword">new</span> FileInputStream(filename).getChannel();</span><br><span class="line"><span class="comment">// 分配缓冲区大小</span></span><br><span class="line">ByteBuffer buff = ByteBuffer.allocate(SIZE);</span><br><span class="line">fc.read(buff);</span><br><span class="line"><span class="comment">// flip()作用是告诉外部,可以读取缓冲中的字节数据了。</span></span><br><span class="line">buff.flip();</span><br><span class="line"><span class="keyword">while</span>(buff.hasRemaining())&#123;</span><br><span class="line">  <span class="comment">// 将字节数据转成字符</span></span><br><span class="line">  System.out.print((<span class="keyword">char</span>)buff.get());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5 id="通过通道来复制文件"><a href="#通过通道来复制文件" class="headerlink" title="通过通道来复制文件"></a>通过通道来复制文件</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常量缓冲区的大小</span></span><br><span class="line"><span class="keyword">final</span> <span class="keyword">int</span> BSIZE = <span class="number">1024</span>;</span><br><span class="line">FileChannel</span><br><span class="line">  in = <span class="keyword">new</span> FileInputStream(source).getChannel(),</span><br><span class="line">  out = <span class="keyword">new</span> FileOutputStream(dest).getChannel();</span><br><span class="line"><span class="comment">// 缓冲区</span></span><br><span class="line">ByteBuffer buffer = ByteBuffer.allocate(BSIZE);</span><br><span class="line"><span class="keyword">while</span>(in.read(buffer) != -<span class="number">1</span>)&#123;</span><br><span class="line">  <span class="comment">// -1标志为读取数据结束</span></span><br><span class="line">  <span class="comment">// 准备好写</span></span><br><span class="line">  buffer.flip();</span><br><span class="line">  out.write(buffer);</span><br><span class="line">  <span class="comment">// 准备好读</span></span><br><span class="line">  buffer.clear();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>flip()表示ByteBuffer已经写完数据,你从ByteBuffer可以读出来了。<br>clear()表示ByteBuffer已经清空完数据了,你现在已经可以往ByteBuffer写数据了。</p>
+<p>flip()表示ByteBuffer已经写完数据,你从ByteBuffer可以读出来了。<br>clear()表示ByteBuffer已经清空完数据了,你现在已经可以往ByteBuffer写数据了。<br>rewind() 返回到数据开始部分。</p>
 <ul>
 <li>两个通道相连除了通过上述中间变量之外，使用transferTo()和transFrom()可以将两个通道连起来。这两个不常用，知道就好。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// in =&gt; out</span></span><br><span class="line">in.transferTo(<span class="number">0</span>,in.size(),out);</span><br><span class="line"><span class="comment">// or </span></span><br><span class="line"><span class="comment">// out.transferFrom(in,0,in.size());</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<h5 id="转换数据"><a href="#转换数据" class="headerlink" title="转换数据"></a>转换数据</h5><p>  要想ByteBuffer存储有意义的数据，比如说字符串数据。需要写入字节之前对字符串进行编码，或者在读出的时候进行解码。<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 获得字节数据的时候编码</span><br><span class="line">&quot;hello world&quot;.getBytes(&quot;UTF-16BE&quot;);</span><br><span class="line">// 读取数据的时候解码</span><br><span class="line">buffer.asCharBuffer();</span><br></pre></td></tr></table></figure></p>
+<p>  使用java.nio.charset.Charset来实现编码和解码。</p>
 <h3 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h3><h3 id="对象序列化"><a href="#对象序列化" class="headerlink" title="对象序列化"></a>对象序列化</h3><h3 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h3><h3 id="Preferences-Api"><a href="#Preferences-Api" class="headerlink" title="Preferences Api"></a><code>Preferences</code> Api</h3>
       
 
@@ -1584,23 +1586,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1608,19 +1594,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">UML</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1628,7 +1618,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">UML</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1652,6 +1650,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">技术</a>
               </li>
              
@@ -1660,11 +1662,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color3">计划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">设计</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1676,11 +1682,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">计划</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计</a>
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
