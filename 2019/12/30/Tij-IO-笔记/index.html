@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="File类目录列表器  查询一个文件夹中的文件数据，使用File类的list()函数获得该目录下的文件数据,返回String数组。包括普通的文件名称和文件夹。list()接收一个FilenameFilter的实现类实例来过滤获得相应的文件。  123public interface FilenameFilter&amp;#123;  boolean accept(File dir, String name">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-09T07:29:54.071Z">
+<meta property="og:updated_time" content="2020-01-17T08:54:51.941Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tij-IO-笔记">
 <meta name="twitter:description" content="File类目录列表器  查询一个文件夹中的文件数据，使用File类的list()函数获得该目录下的文件数据,返回String数组。包括普通的文件名称和文件夹。list()接收一个FilenameFilter的实现类实例来过滤获得相应的文件。  123public interface FilenameFilter&amp;#123;  boolean accept(File dir, String name">
@@ -328,7 +328,51 @@
 </ul>
 <h5 id="转换数据"><a href="#转换数据" class="headerlink" title="转换数据"></a>转换数据</h5><p>  要想ByteBuffer存储有意义的数据，比如说字符串数据。需要写入字节之前对字符串进行编码，或者在读出的时候进行解码。<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 获得字节数据的时候编码</span><br><span class="line">&quot;hello world&quot;.getBytes(&quot;UTF-16BE&quot;);</span><br><span class="line">// 读取数据的时候解码</span><br><span class="line">buffer.asCharBuffer();</span><br></pre></td></tr></table></figure></p>
 <p>  使用java.nio.charset.Charset来实现编码和解码。</p>
-<h4 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h4><h3 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h3><h3 id="对象序列化"><a href="#对象序列化" class="headerlink" title="对象序列化"></a>对象序列化</h3><h3 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h3><h3 id="Preferences-Api"><a href="#Preferences-Api" class="headerlink" title="Preferences Api"></a><code>Preferences</code> Api</h3>
+<h4 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h4><p>  由于通道存储的只是字节数据。不方便进行读取和管理，这时候需要一个视图缓冲器来作为中间人让使用者直接读写为整型、字符、长整型、浮点、双精度浮点型。<br>  注意: 由于通道存储的是字节数据，转换成相应的数据类型会占用不同字节大小。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">字节大小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">  shorts</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">  chars</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">  ints</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:center">  floats</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:center">  longs</td>
+<td style="text-align:center">8</td>
+</tr>
+<tr>
+<td style="text-align:center">  double</td>
+<td style="text-align:center">8</td>
+</tr>
+</tbody>
+</table>
+<p>转换成Chars类型。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CharBuffer cb = ((ByteBuffer)bb.rewind()).asCharBuffer();</span><br><span class="line"><span class="comment">// 读取Char数据</span></span><br><span class="line"><span class="keyword">while</span>(cb.hasRemaining())&#123;</span><br><span class="line">  System.out.print(cb.position() + <span class="string">"-&gt;"</span> + cb.get()+ <span class="string">","</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中bb是一个ByteBuffer的对象。<br>同理转换成其它的类型的视图<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FloatBuffer fb = ((ByteBuffer)bb.rewind()).asFloatBuffer();</span><br><span class="line">IntBuffer ib = ((ByteBuffer)bb.rewind()).asIntBuffer();</span><br><span class="line">ShortBuffer sb = ((ByteBuffer)bb.rewind()).asShortBuffer();</span><br><span class="line">LongBuffer lb = ((ByteBuffer)bb.rewind()).asLongBuffer();</span><br><span class="line">DoubleBuffer db = ((ByteBuffer)bb.rewind()).asDoubleBuffer();</span><br></pre></td></tr></table></figure></p>
+<h4 id="字节存放次序"><a href="#字节存放次序" class="headerlink" title="字节存放次序"></a>字节存放次序</h4><p>  有些基本的数据类型需要占用两个及两个以上的字节。计算机的基本存储单位是字节，对于像字符这种占用2个字节，存放有高位优先和低位优先两种方式。java默认的是高位优先。也就是说字符‘a’在内存中存放次序是[0,97]。如果是低位优先则是[97,0]。优先次序使用order来设置。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 高位优先</span></span><br><span class="line">bb.order(ByteOrder.BIG_ENDIAN);</span><br><span class="line"><span class="comment">// 低位优先</span></span><br><span class="line">bb.order(ByteOrder.LITTLE_ENDIAN);</span><br></pre></td></tr></table></figure></p>
+<p>  字节存放次序并无优劣之分。重要的数据的一致性，存进去的和读出来的一致便可。</p>
+<h4 id="交换相邻两个字符"><a href="#交换相邻两个字符" class="headerlink" title="交换相邻两个字符"></a>交换相邻两个字符</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UsingBuffers</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">symmetricScramble</span><span class="params">(CharBuffer buffer)</span></span>&#123;</span><br><span class="line">       <span class="keyword">while</span> (buffer.hasRemaining())&#123;</span><br><span class="line">           <span class="comment">// 做标记</span></span><br><span class="line">           buffer.mark();</span><br><span class="line">           <span class="keyword">char</span> c1 = buffer.get();</span><br><span class="line">           <span class="keyword">char</span> c2 = buffer.get();</span><br><span class="line">           <span class="comment">// 回到标记点</span></span><br><span class="line">           buffer.reset();</span><br><span class="line">           <span class="comment">// 交换次序存储</span></span><br><span class="line">           buffer.put(c2).put(c1);</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span>[] data = <span class="string">"UsingBuffers"</span>.toCharArray();</span><br><span class="line">        <span class="comment">// 一个字符占有两个字节</span></span><br><span class="line">        ByteBuffer bb = ByteBuffer.allocate(data.length*<span class="number">2</span>);</span><br><span class="line">        CharBuffer cb = bb.asCharBuffer();</span><br><span class="line">        cb.put(data);</span><br><span class="line">        System.out.println(cb.rewind());</span><br><span class="line">        <span class="comment">// 交换</span></span><br><span class="line">        symmetricScramble(cb);</span><br><span class="line">        System.out.println(cb.rewind());</span><br><span class="line">        <span class="comment">// 交换</span></span><br><span class="line">        symmetricScramble(cb);</span><br><span class="line">        System.out.println(cb.rewind());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UsingBuffers</span><br><span class="line">sUniBgfuefsr</span><br><span class="line">UsingBuffers</span><br></pre></td></tr></table></figure></p>
+<h4 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h4><p>  使用“映射文件访问”更好，更高效。下面是使用传统的io流和通道map的读写对比差距。使用映射速度更加显著。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Stream Write:73.48 </span><br><span class="line">Mapped Write:0.02 </span><br><span class="line">Stream Read:0.06 </span><br><span class="line">Mapped Read:0.01 </span><br><span class="line">Stream Read/Write:6.05 </span><br><span class="line">Mapped Read/Write:0.01</span><br></pre></td></tr></table></figure></p>
+<p>使用mapped写数据<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">FileChannel fc = <span class="keyword">new</span> RandomAccessFile(<span class="string">"temp.tmp"</span>,<span class="string">"rw"</span>).getChannel();</span><br><span class="line">IntBuffer ib = fc.map(FileChannel.MapMode.READ_WRITE,<span class="number">0</span>,fc.size()).asIntBuffer();</span><br><span class="line"><span class="comment">// 使用通道写入数据</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numOfInts; i++) &#123;</span><br><span class="line">    ib.put(i);</span><br><span class="line">&#125;</span><br><span class="line">fc.close();</span><br></pre></td></tr></table></figure></p>
+<p>使用mapped读数据<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">FileChannel fc = <span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(<span class="string">"temp.tmp"</span>)).getChannel();</span><br><span class="line">IntBuffer ib = fc.map(FileChannel.MapMode.READ_ONLY,<span class="number">0</span>,fc.size()).asIntBuffer();</span><br><span class="line"><span class="keyword">while</span> (ib.hasRemaining())&#123;</span><br><span class="line">    ib.get();</span><br><span class="line">&#125;</span><br><span class="line">fc.close();</span><br></pre></td></tr></table></figure></p>
+<h4 id="文件加锁"><a href="#文件加锁" class="headerlink" title="文件加锁"></a>文件加锁</h4><h3 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h3><h3 id="对象序列化"><a href="#对象序列化" class="headerlink" title="对象序列化"></a>对象序列化</h3><h3 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h3><h3 id="Preferences-Api"><a href="#Preferences-Api" class="headerlink" title="Preferences Api"></a><code>Preferences</code> Api</h3>
       
 
       
@@ -560,6 +604,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
               </li>
              
@@ -568,15 +620,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -608,11 +652,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -632,15 +676,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -652,19 +700,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">String</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
             
             <div class="clearfix"></div>
