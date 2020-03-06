@@ -163,6 +163,84 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-一键下载blibli的专栏图片" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/05/一键下载blibli的专栏图片/">一键下载blibli的专栏图片</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/05/一键下载blibli的专栏图片/" class="archive-article-date">
+  	<time datetime="2019-10-05T10:17:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.downloadImage = <span class="function"><span class="keyword">function</span> (<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(url);</span><br><span class="line">  <span class="keyword">var</span> timeout = <span class="built_in">Math</span>.random() * <span class="number">5000</span>;</span><br><span class="line">  <span class="comment">// return;</span></span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    xhr.open(<span class="string">"get"</span>, url, <span class="literal">true</span>);</span><br><span class="line">    xhr.responseType = <span class="string">"blob"</span>;</span><br><span class="line">    xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.status == <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> blob = <span class="keyword">this</span>.response;</span><br><span class="line">        <span class="keyword">var</span> downloadElement = <span class="built_in">document</span>.createElement(<span class="string">'a'</span>);</span><br><span class="line">        <span class="keyword">var</span> href = <span class="built_in">window</span>.URL.createObjectURL(blob); <span class="comment">//创建下载的链接</span></span><br><span class="line">        downloadElement.href = href;</span><br><span class="line">        downloadElement.download = name; <span class="comment">//下载后文件名</span></span><br><span class="line">        <span class="built_in">document</span>.body.appendChild(downloadElement);</span><br><span class="line">        downloadElement.click(); <span class="comment">//点击下载</span></span><br><span class="line">        <span class="built_in">document</span>.body.removeChild(downloadElement); <span class="comment">//下载完成移除元素</span></span><br><span class="line">        <span class="built_in">window</span>.URL.revokeObjectURL(href); <span class="comment">//释放掉blob对象</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    xhr.send()</span><br><span class="line">  &#125;, timeout);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.getImage =<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> imageBox = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"img-box"</span>);</span><br><span class="line">  <span class="keyword">var</span> message = <span class="string">"确认下载该cv的图片?"</span></span><br><span class="line">  <span class="keyword">if</span> (confirm(message) === <span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; imageBox.length; i++) &#123;</span><br><span class="line">      <span class="keyword">var</span> html = imageBox[i].innerHTML;</span><br><span class="line">      <span class="comment">// console.log(html);</span></span><br><span class="line">      <span class="keyword">var</span> pattern = <span class="regexp">/src=[\'\"]?([^\'\"]*)[\'\"]/i</span></span><br><span class="line">      <span class="keyword">var</span> srcs = pattern.exec(html)</span><br><span class="line">      <span class="built_in">console</span>.log(srcs[<span class="number">0</span>]);</span><br><span class="line">      <span class="keyword">var</span> imgSrc = <span class="string">"https:"</span> + srcs[<span class="number">0</span>].split(<span class="string">"="</span>)[<span class="number">1</span>].replace(<span class="regexp">/\"/g</span>, <span class="string">""</span>).split(<span class="string">"@"</span>)[<span class="number">0</span>].trim();</span><br><span class="line">      <span class="built_in">window</span>.downloadImage(imgSrc);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertButton</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> button = <span class="built_in">document</span>.createElement(<span class="string">"button"</span>);</span><br><span class="line">  button.setAttribute(<span class="string">"value"</span>,<span class="string">"下载图片"</span>);</span><br><span class="line">  button.setAttribute(<span class="string">"onclick"</span>,<span class="string">"getImage()"</span>);</span><br><span class="line">  button.style.backgroundColor=<span class="string">"#66C6E7"</span>;</span><br><span class="line">  button.style.height=<span class="string">"40px"</span>;</span><br><span class="line">  button.style.color=<span class="string">"white"</span>;</span><br><span class="line">  button.innerText = <span class="string">"下载该cv的图片"</span></span><br><span class="line">  <span class="built_in">document</span>.getElementsByClassName(<span class="string">"fixed-box"</span>)[<span class="number">0</span>].append(button);</span><br><span class="line">&#125;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    insertButton();</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/05/一键下载blibli的专栏图片/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-shiro使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1008,96 +1086,6 @@
 
 
   
-    <article id="post-前端路由" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/23/前端路由/">前端路由</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/23/前端路由/" class="archive-article-date">
-  	<time datetime="2019-08-23T09:26:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一些知识点"><a href="#一些知识点" class="headerlink" title="一些知识点"></a>一些知识点</h3><h4 id="1、-锚编程"><a href="#1、-锚编程" class="headerlink" title="1、# 锚编程"></a>1、# 锚编程</h4><p>在浏览器解析url的时候会忽略掉#字符后面的数据，但是仍然会将此时的url压入history的栈中。<br>在编写前端的时候，当一个网友的长度特别长的时候。便会在底部放置返回顶部的锚。通过锚将页面定位到相应的地方。<code>&lt;a&gt;</code>标签通常会被用来作为一个跳转的标签。</p>
-<h4 id="2、history对象"><a href="#2、history对象" class="headerlink" title="2、history对象"></a>2、history对象</h4><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History" target="_blank" rel="noopener">官方api说明</a><br>(1) history<br>  history对象是浏览器自带的一个全局对象。用来记录用户的浏览历史的,但是用户不能通过history获得相关的数据。<br>(2) history对象的属性。</p>
-<ul>
-<li>length 长度，历史记录的长度</li>
-<li>scrollRestoration 允许Web应用程序在历史导航上显式地设置默认滚动恢复行为。此属性可以是自动的（auto）或者手动的（manual)</li>
-<li>state 返回一个表示历史堆栈顶部的状态的值。这是一种可以不必等待popstate 事件而查看状态而的方<br>(3) history对象的方法</li>
-<li>back() 返回上一页 等价于go(-1)</li>
-<li>forward() 前往下一页 等价于go(1)</li>
-<li>go(n) 相对于当前页面的跳转。n为正往前,n为负往后。0 为当前。空值和非数值型和超出栈长都不会报错。也不会做任何的事件处理</li>
-<li>pushState() 按指定的名称和URL（如果提供该参数）将数据push进会话历史栈，数据被DOM进行不透明处理</li>
-<li>replaceState() 按指定的数据，名称和URL(如果提供该参数)，更新历史栈上最新的入口<br>（3) 事件监听<br>window.onpopstate用来监听url改变事件的。但是对pushState并不起作用。<h4 id="3、自主实现一个渲染系统-并且路由可控"><a href="#3、自主实现一个渲染系统-并且路由可控" class="headerlink" title="3、自主实现一个渲染系统,并且路由可控"></a>3、自主实现一个渲染系统,并且路由可控</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">			body&#123;</span></span><br><span class="line"><span class="undefined">				text-align: center;</span></span><br><span class="line"><span class="undefined">			&#125;</span></span><br><span class="line"><span class="undefined">			h1 &#123;</span></span><br><span class="line"><span class="undefined">				font-size: 50px;</span></span><br><span class="line"><span class="undefined">			&#125;</span></span><br><span class="line"><span class="css">			<span class="selector-id">#app</span> &#123;</span></span><br><span class="line"><span class="undefined">				font-size: 40px;</span></span><br><span class="line"><span class="undefined">				height: 300px;</span></span><br><span class="line"><span class="undefined">				background-color: lightgray;</span></span><br><span class="line"><span class="undefined">			&#125;</span></span><br><span class="line"><span class="css">			<span class="selector-id">#operation</span> &#123;</span></span><br><span class="line"><span class="undefined">				font-size: 36px;</span></span><br><span class="line"><span class="undefined">				</span></span><br><span class="line"><span class="undefined">			&#125;</span></span><br><span class="line"><span class="undefined">			input &#123;</span></span><br><span class="line"><span class="undefined">			  height: 36px;</span></span><br><span class="line"><span class="undefined">			  font-size: 32px;</span></span><br><span class="line"><span class="undefined">				&#125;</span></span><br><span class="line"><span class="undefined">			button &#123;</span></span><br><span class="line"><span class="undefined">			  height: 36px;</span></span><br><span class="line"><span class="undefined">			&#125;</span></span><br><span class="line"><span class="undefined">		</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">h1</span>&gt;</span>模拟路由<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">h2</span> <span class="attr">id</span>=<span class="string">"showParams"</span>&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--渲染主要区域--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--操作栏--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"operation"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#login"</span>&gt;</span>登陆<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#main"</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#fadfagaseawg"</span>&gt;</span>404<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">			</span><br><span class="line">			<span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">			路由地址: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"routerTarget"</span> <span class="attr">width</span>=<span class="string">"100"</span>/&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">			路由参数:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"routerParams"</span> <span class="attr">width</span>=<span class="string">"100"</span>/&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"jump()"</span>&gt;</span>跳转<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--锚编程--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"height: 10000px;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#app"</span>&gt;</span>返回顶部<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">		/**</span></span><br><span class="line"><span class="undefined">		 * 浏览器路由监听器</span></span><br><span class="line"><span class="javascript">		 * @param &#123;<span class="built_in">Object</span>&#125; event</span></span><br><span class="line"><span class="undefined">		 */</span></span><br><span class="line"><span class="javascript">		<span class="function"><span class="keyword">function</span> <span class="title">routerChangeListener</span>(<span class="params">event</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">			<span class="built_in">console</span>.log(event);</span></span><br><span class="line"><span class="javascript">			<span class="built_in">console</span>.log(location.href);</span></span><br><span class="line"><span class="javascript">			<span class="built_in">console</span>.log(location.hash);</span></span><br><span class="line"><span class="javascript">			<span class="keyword">if</span>(event.state)&#123;</span></span><br><span class="line"><span class="javascript">				<span class="comment">// 路由有参数 将路由参数显示在页面</span></span></span><br><span class="line"><span class="javascript">				<span class="keyword">const</span> params = <span class="built_in">JSON</span>.stringify(event.state.params);</span></span><br><span class="line"><span class="javascript">				<span class="built_in">console</span>.log(<span class="string">`路由传参:<span class="subst">$&#123;params&#125;</span>`</span>);</span></span><br><span class="line"><span class="javascript">				<span class="built_in">document</span>.getElementById(<span class="string">"showParams"</span>).innerHTML = params;</span></span><br><span class="line"><span class="undefined">			&#125;</span></span><br><span class="line"><span class="javascript">			<span class="comment">// 获得路由</span></span></span><br><span class="line"><span class="javascript">			<span class="keyword">let</span> route = location.hash.split(<span class="string">"#"</span>)[<span class="number">1</span>];</span></span><br><span class="line"><span class="undefined">			Route(route)</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">		/**</span></span><br><span class="line"><span class="undefined">		 * main的组件</span></span><br><span class="line"><span class="undefined">		 */</span></span><br><span class="line"><span class="javascript">		<span class="keyword">const</span> mainComponet = <span class="string">`</span></span></span><br><span class="line"><span class="xml">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"main"</span>&gt;</span></span></span><br><span class="line"><span class="xml">				<span class="tag">&lt;<span class="name">h1</span>&gt;</span>这是首页的内容<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">				<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#login"</span>&gt;</span>返回登陆页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line"><span class="xml">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="undefined">		`</span></span><br><span class="line"><span class="undefined">		/**</span></span><br><span class="line"><span class="undefined">		 * 路由配置文件</span></span><br><span class="line"><span class="undefined">		 */</span></span><br><span class="line"><span class="javascript">		<span class="keyword">const</span> router = </span></span><br><span class="line"><span class="undefined">			[</span></span><br><span class="line"><span class="undefined">				&#123;</span></span><br><span class="line"><span class="javascript">					path: <span class="string">'login'</span>,</span></span><br><span class="line"><span class="xml">					component: `<span class="tag">&lt;<span class="name">h2</span>&gt;</span>Login 页面<span class="tag">&lt;/<span class="name">h2</span>&gt;</span>`</span></span><br><span class="line"><span class="undefined">				&#125;,</span></span><br><span class="line"><span class="undefined">				&#123;</span></span><br><span class="line"><span class="javascript">					path: <span class="string">'main'</span>,</span></span><br><span class="line"><span class="undefined">					component: mainComponet</span></span><br><span class="line"><span class="undefined">				&#125;,</span></span><br><span class="line"><span class="undefined">				&#123;</span></span><br><span class="line"><span class="javascript">					path: <span class="string">'404'</span>,</span></span><br><span class="line"><span class="javascript">					component: <span class="string">'404 NO FOUND'</span></span></span><br><span class="line"><span class="undefined">				&#125;</span></span><br><span class="line"><span class="undefined">			]</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">		/**</span></span><br><span class="line"><span class="undefined">		 * 渲染的函数</span></span><br><span class="line"><span class="javascript">		 * @param &#123;<span class="built_in">Object</span>&#125; el 要渲染到的dom标签</span></span><br><span class="line"><span class="javascript">		 * @param &#123;<span class="built_in">Object</span>&#125; value 渲染的值</span></span><br><span class="line"><span class="undefined">		 */</span></span><br><span class="line"><span class="javascript">		<span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params">el,value</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">			<span class="keyword">let</span> element = <span class="built_in">document</span>.getElementById(el);</span></span><br><span class="line"><span class="undefined">			element.innerHTML= value;</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">		</span></span><br><span class="line"><span class="undefined">		/**</span></span><br><span class="line"><span class="undefined">		 * 路由函数，用来寻找对应组件来渲染</span></span><br><span class="line"><span class="javascript">		 * @param &#123;<span class="built_in">Object</span>&#125; hash</span></span><br><span class="line"><span class="undefined">		 */</span></span><br><span class="line"><span class="javascript">		<span class="function"><span class="keyword">function</span> <span class="title">Route</span>(<span class="params">hash</span>)</span>&#123;</span></span><br><span class="line"><span class="undefined">			/**</span></span><br><span class="line"><span class="undefined">			 * 寻找路由</span></span><br><span class="line"><span class="undefined">			 */</span></span><br><span class="line"><span class="javascript">			<span class="keyword">for</span>(routerItem <span class="keyword">of</span> router)&#123;</span></span><br><span class="line"><span class="javascript"><span class="comment">//				console.log(routerItem);</span></span></span><br><span class="line"><span class="javascript">				<span class="keyword">if</span>(routerItem.path === hash)&#123;</span></span><br><span class="line"><span class="javascript">					<span class="comment">// 调用render 来渲染数据</span></span></span><br><span class="line"><span class="javascript">					render(<span class="string">'app'</span>,routerItem.component);</span></span><br><span class="line"><span class="javascript">					<span class="keyword">return</span>;</span></span><br><span class="line"><span class="undefined">				&#125;</span></span><br><span class="line"><span class="undefined">			&#125;</span></span><br><span class="line"><span class="javascript">			<span class="comment">// 渲染404</span></span></span><br><span class="line"><span class="javascript">			<span class="keyword">let</span> noFoundPage = router[router.length<span class="number">-1</span>];</span></span><br><span class="line"><span class="javascript"><span class="comment">//			console.log(noFoundPage);</span></span></span><br><span class="line"><span class="javascript">			render(<span class="string">'app'</span>,noFoundPage.component);</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">		</span></span><br><span class="line"><span class="undefined">		/**</span></span><br><span class="line"><span class="undefined">		 * Router对象</span></span><br><span class="line"><span class="undefined">		 * 核心函数: push</span></span><br><span class="line"><span class="javascript">		 * 模拟: <span class="keyword">this</span>.$router.push()</span></span><br><span class="line"><span class="undefined">		 */</span></span><br><span class="line"><span class="javascript">		<span class="function"><span class="keyword">function</span> <span class="title">Router</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="undefined">			/**</span></span><br><span class="line"><span class="javascript">			 * <span class="keyword">this</span>.$router.push()</span></span><br><span class="line"><span class="undefined">			 */</span></span><br><span class="line"><span class="javascript">			<span class="keyword">this</span>.push = <span class="function"><span class="keyword">function</span> <span class="title">push</span>(<span class="params">url,params</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript"><span class="comment">//				console.log('push')</span></span></span><br><span class="line"><span class="javascript">				<span class="built_in">window</span>.history.pushState(&#123;<span class="attr">params</span>:params&#125;,<span class="string">'push'</span>,<span class="string">`#<span class="subst">$&#123;url&#125;</span>`</span>);</span></span><br><span class="line"><span class="javascript">				<span class="comment">// 填充后后退刷新</span></span></span><br><span class="line"><span class="javascript">				<span class="built_in">window</span>.history.pushState(&#123;&#125;,<span class="string">'null'</span>,<span class="string">'#'</span>);</span></span><br><span class="line"><span class="undefined">				history.back();</span></span><br><span class="line"><span class="undefined">			&#125;</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">		/**</span></span><br><span class="line"><span class="undefined">		 * 全局路由对象</span></span><br><span class="line"><span class="undefined">		 */</span></span><br><span class="line"><span class="javascript">		<span class="keyword">var</span> $router = <span class="keyword">new</span> Router();</span></span><br><span class="line"><span class="undefined">		/**</span></span><br><span class="line"><span class="undefined">		 * 业务逻辑</span></span><br><span class="line"><span class="undefined">		 */</span></span><br><span class="line"><span class="undefined">		/**</span></span><br><span class="line"><span class="undefined">		 * 按钮单击 跳转到对应的路由</span></span><br><span class="line"><span class="javascript">		 * @param &#123;<span class="built_in">Object</span>&#125; event</span></span><br><span class="line"><span class="undefined">		 */</span></span><br><span class="line"><span class="javascript">		<span class="function"><span class="keyword">function</span> <span class="title">jump</span>(<span class="params">event</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">			<span class="built_in">console</span>.log(<span class="string">'跳转'</span>)</span></span><br><span class="line"><span class="javascript">			<span class="comment">// 获得要跳转的路径</span></span></span><br><span class="line"><span class="javascript">			<span class="keyword">let</span> target = <span class="built_in">document</span>.getElementById(<span class="string">"routerTarget"</span>).value;</span></span><br><span class="line"><span class="javascript">			<span class="comment">// 获得路由的传参</span></span></span><br><span class="line"><span class="javascript">			<span class="keyword">let</span> params = <span class="built_in">document</span>.getElementById(<span class="string">"routerParams"</span>).value;</span></span><br><span class="line"><span class="javascript">			<span class="comment">// 路由跳转类似 vue中 this.$router.push()</span></span></span><br><span class="line"><span class="javascript">			<span class="keyword">this</span>.$router.push(target,params);</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">		/**</span></span><br><span class="line"><span class="undefined">		 * 开始运行</span></span><br><span class="line"><span class="undefined">		 */</span></span><br><span class="line"><span class="javascript">		(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">			<span class="built_in">console</span>.log(<span class="string">'hello'</span>)</span></span><br><span class="line"><span class="undefined">			/**</span></span><br><span class="line"><span class="undefined">			 * 给浏览器路由变化设置监听</span></span><br><span class="line"><span class="undefined">			 */</span></span><br><span class="line"><span class="javascript">			<span class="built_in">window</span>.onpopstate = routerChangeListener;</span></span><br><span class="line"><span class="undefined">			/**</span></span><br><span class="line"><span class="undefined">			 * 路由到登陆界面</span></span><br><span class="line"><span class="undefined">			 */</span></span><br><span class="line"><span class="javascript">			<span class="keyword">this</span>.$router.push(<span class="string">'login'</span>);</span></span><br><span class="line"><span class="undefined">		&#125;)()</span></span><br><span class="line"><span class="undefined">	</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/23/前端路由/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1195,15 +1183,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">diy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1227,11 +1215,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1239,11 +1227,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1255,15 +1247,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">技术</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1275,15 +1267,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">计划</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
