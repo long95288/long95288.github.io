@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="1、文件上传大小限制问题问题描述:使用application.properties配置文件上传大小限制不起作用123spring.servlet.multipart.max-request-size=-1spring.servlet.multipart.max-file-size=-1spring.servlet.multipart.location=/home/trainee/springboo">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-04-06T11:10:52.908Z">
+<meta property="og:updated_time" content="2020-04-06T12:38:31.046Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spring踩坑日志">
 <meta name="twitter:description" content="1、文件上传大小限制问题问题描述:使用application.properties配置文件上传大小限制不起作用123spring.servlet.multipart.max-request-size=-1spring.servlet.multipart.max-file-size=-1spring.servlet.multipart.location=/home/trainee/springboo">
@@ -196,6 +196,7 @@
 <h5 id="7、controller返回前端的数据自动转换大小写的问题"><a href="#7、controller返回前端的数据自动转换大小写的问题" class="headerlink" title="7、controller返回前端的数据自动转换大小写的问题"></a>7、controller返回前端的数据自动转换大小写的问题</h5><p> 由于移植了一个net的项目到java。但是,前端的命名不规范,变量全部为大写。但是由于fastjson的自动转换,将本来是大写的的变量变成小写了。</p>
 <h6 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h6><p>  由于使用lombok插件,所以不能在get方法上使用<code>@JsonPropertty</code>注解。使用在属性上有一样的效果。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JsonProperty</span>(<span class="string">"Name"</span>)</span><br><span class="line"><span class="meta">@TableField</span>(<span class="string">"Name"</span>)</span><br><span class="line"><span class="keyword">private</span> String Name;</span><br></pre></td></tr></table></figure></p>
 <p>  返回前端的数据就变成了Name而不是name</p>
+<h4 id="8、mybatis-plus忽视某些实体字段。不对数据库进行映射。"><a href="#8、mybatis-plus忽视某些实体字段。不对数据库进行映射。" class="headerlink" title="8、mybatis-plus忽视某些实体字段。不对数据库进行映射。"></a>8、mybatis-plus忽视某些实体字段。不对数据库进行映射。</h4><p>在字段上使用<code>@TableField(exist = false)</code>来忽视该字段对数据库的映射。</p>
 
       
 
@@ -441,6 +442,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
               </li>
              
@@ -450,10 +455,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -473,11 +474,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -505,11 +506,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技术</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">技术</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -517,7 +518,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
