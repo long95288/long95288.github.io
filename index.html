@@ -163,6 +163,88 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-windows右键添加项" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/09/windows右键添加项/">windows右键添加项</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/09/windows右键添加项/" class="archive-article-date">
+  	<time datetime="2020-04-09T14:42:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="1、进入注册列表"><a href="#1、进入注册列表" class="headerlink" title="1、进入注册列表"></a>1、进入注册列表</h5><p>运行regedit.注册列表编辑器</p>
+<h5 id="2、定位"><a href="#2、定位" class="headerlink" title="2、定位"></a>2、定位</h5><p><code>\HKEY_CLASSES_ROOT\Directory\Background\shell</code></p>
+<h5 id="3、新建一个子项"><a href="#3、新建一个子项" class="headerlink" title="3、新建一个子项"></a>3、新建一个子项</h5><p>名称为右键所看见得项</p>
+<h5 id="4、在新建子项下面添加command项"><a href="#4、在新建子项下面添加command项" class="headerlink" title="4、在新建子项下面添加command项"></a>4、在新建子项下面添加command项</h5><p>command项为固定项。项的数据便是命令行。当你点击的时候便会运行该数据</p>
+<h5 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h5><p><img src="/2020/04/09/windows右键添加项/step.png" alt="步骤"><br><img src="/2020/04/09/windows右键添加项/result.png" alt="结果"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">windows</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">注册列表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/09/windows右键添加项/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Mysql大小写问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1432,102 +1514,9 @@
 
 
   
-    <article id="post-longSys相关文档" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/23/longSys相关文档/">longSys相关文档</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/23/longSys相关文档/" class="archive-article-date">
-  	<time datetime="2019-10-23T14:33:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h3><p>  个人资源管理平台</p>
-<h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><p>  需要一个软件平台来管理自己日益复杂和丰富的资源。包括但不限于个人文档、积累的电子书、下载的音乐、下载的视频教程，一些常用的功能。日记、笔记等。一些相关的人工智能的资源整合。如车标识别、orc等常用的接口。未来可能要接入物联网的相关设备、由于腾讯云的服务器的存储资源有限，未来需要将自己本地的文件外挂到该平台，即可以减小服务器的开销，还可以保护文档的私密性。服务器只做数据中转，而不是数据存储。</p>
-<h4 id="一、文件管理需求"><a href="#一、文件管理需求" class="headerlink" title="一、文件管理需求"></a>一、文件管理需求</h4><ul>
-<li>该平台需要能够存储文件，解决U盘的不便携性。一些小的文档可以上传至该平台。当需要的时候可以上传和下载。大文件管理，由于设备原因，不可能将所有的文件上传到远端的服务器。所以需要一个功能，能够在该平台管理自己的本地的文件。包括，添加、删除、读取等常用功能。</li>
-<li>该平台的界面应该是非常友好的<h4 id="二、图片管理需求"><a href="#二、图片管理需求" class="headerlink" title="二、图片管理需求"></a>二、图片管理需求</h4>宅男喜欢二次元、现在积累了几个G的图片文件。但是很杂，该平台提供相册、分类的功能<ul>
-<li>相册功能 将图片分类到相册中</li>
-<li>添加、删除、修改相册。</li>
-<li>查看图片和编辑分开。<h4 id="三、音乐管理需求"><a href="#三、音乐管理需求" class="headerlink" title="三、音乐管理需求"></a>三、音乐管理需求</h4>音乐很多,想要有自己的音乐播放器，类似于网易云音乐那种。</li>
-<li>曲库 全部的音乐，可以搜索。一首歌可以放入很多的歌单中。</li>
-<li>歌单 将音乐分类，在管理界面可以添加、编辑、删除歌单</li>
-<li>上传音乐 上传的音乐会出现在曲库中，上传音乐的时候会添加相应的歌曲数据。<h4 id="四、视频管理需求"><a href="#四、视频管理需求" class="headerlink" title="四、视频管理需求"></a>四、视频管理需求</h4>视频很多、非常多。需要有效的管理<br>1、能够看视频(宽带问题，无法流畅的看视频)<br>2、用户能够根据名字搜索视频<br>3、用户能够创建自己的栏目，并且往里面添加视频(类似于blibli的收藏夹功能)<br>4、用户能够删除视频<h4 id="五、日记和笔记的需求"><a href="#五、日记和笔记的需求" class="headerlink" title="五、日记和笔记的需求"></a>五、日记和笔记的需求</h4>笔记有很多成熟的产品，但是数据不可控。自己不想把信息放在他们的服务器上。所以需要一个能够多端编写的文档的功能。数据放在自己的数据库中。支持富文本和markdown格式的语法。</li>
-<li>文档的导入和导出 可以将数据库的中笔记文档导出pdf格式，保存备份在磁盘中。</li>
-<li><h4 id="六、常用工具的需求"><a href="#六、常用工具的需求" class="headerlink" title="六、常用工具的需求"></a>六、常用工具的需求</h4>学习工作中有很多工具的需求，图片转文字、开发中json格式化、还有很多的开发手册。这些都是用得到的，并且自己已经实现了车标的识别并且建立了模型。可以将该功能整合<br>到平台中<br>1、二维码工具。能够根据字符串生成二维码，也能识别二维码为字符串。<br>2、车标识别工具。能够根据上传的图片识别相应的车标。<br>3、<h4 id="七、物联网设备管理需求"><a href="#七、物联网设备管理需求" class="headerlink" title="七、物联网设备管理需求"></a>七、物联网设备管理需求</h4>未来自己会将家里的物联网的设备挂在该平台中，并且能够在该平台进行管理。空调、冰箱、台灯、电视机。自己梦想中的家。需要一个同一的管理平台，而不是各自为政。<br>添加设备，每个设备都有自己的id码，并且有相应的命令。<h4 id="八、计划跟踪平台"><a href="#八、计划跟踪平台" class="headerlink" title="八、计划跟踪平台"></a>八、计划跟踪平台</h4>用来记录自己的计划和执行情况，主要借鉴TODO List的功能<br>添加计划，一个计划会有开始时间、截止时间、完成时间(用户完成)，具体内容，轻重缓急。<br>编辑、删除计划，只有未开始的计划才能编辑和删除<br>生成报表，可以按周、按月生成报表。记录计划的预计完成时间和实际完成时间，计算完成工作计划的轻重缓急的比例。<h3 id="概要设计"><a href="#概要设计" class="headerlink" title="概要设计"></a>概要设计</h3></li>
-</ul>
-</li>
-</ul>
-<h3 id="详细设计"><a href="#详细设计" class="headerlink" title="详细设计"></a>详细设计</h3><h3 id="平台原型"><a href="#平台原型" class="headerlink" title="平台原型"></a>平台原型</h3><h3 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h3>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件设计</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/23/longSys相关文档/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1626,15 +1615,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1642,11 +1627,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1662,11 +1651,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1686,15 +1675,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">注册列表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技术</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">技术</a>
               </li>
              
               <li class="article-tag-list-item">

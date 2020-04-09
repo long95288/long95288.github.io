@@ -163,6 +163,85 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-git常用操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/07/git常用操作/">git常用操作</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/07/git常用操作/" class="archive-article-date">
+  	<time datetime="2019-05-07T15:12:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h3><p>1、新建分支<br><code>git branch newBranchName</code> 在当前分支中新建一个newBranchName分支，但是目前还没有到那个分支里面去，<br>2、切换分支<br>使用<code>git branch -v</code>查看分支情况，使用<code>git branch -a</code>来查远程的分支等详细情况。前面有*号的为当前所在分支<br>使用<code>git checkout xxx</code> 移动到名为xxx的分支中<br><code>git branch -v</code> 进行分支查看<br>3、创建分支和移动分支命令也可以合并成<code>git checkout -b newBranch</code>.<br>4、删除分支<code>git branch -d delbranchname</code>可以删除已经合并了的分支，若要删除没有合并过的分支则需要使用—D来强制删除<br>5、关于分支无法push问题处理<br><strong>问题</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fatal: The current branch 1.0-dev has no upstream branch.</span><br><span class="line">To push the current branch and set the remote as upstream, use</span><br><span class="line">    git push --set-upstream origin 1.0-dev</span><br></pre></td></tr></table></figure></p>
+<p>使用<code>git push --set-upstream origin 1.0-dev</code>来建立一个上传流,其中的1.0-dev是分支名称</p>
+<h3 id="新建远程仓库"><a href="#新建远程仓库" class="headerlink" title="新建远程仓库"></a>新建远程仓库</h3><p>命令:<code>git remote add origin url</code><br>其中的origin 是远程的仓库名<br>以一个本地的git repository 可以部署在不同的服务器。这样有不同的remote。为了区分不同的远程仓库。则需要设置不同的仓库名。<br>可以在该项目继续添加远程仓库。<code>git remote add bak url2</code><br>如何使用:<br>  当想要把代码推送到特定的远程仓库的。push的时候加上仓库名<code>git push origin</code> 推送到origin远程。<code>git push bak</code> 推送到bak的远程分支。</p>
+<p><strong>问题</strong>:<br>ssh 连接,出现push 权限问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br></pre></td></tr></table></figure></p>
+<p>查看.git/config文件。是不是使用https协议.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[remote &quot;origin&quot;]</span><br><span class="line"> 12     url = https://github.com/long95288/TrainHomework.git</span><br><span class="line"> 13     fetch = +refs/heads/*:refs/remotes/origin/*</span><br><span class="line"> 14 [branch &quot;master&quot;]</span><br><span class="line"> 15     remote = origin</span><br><span class="line"> 16     merge = refs/heads/master</span><br></pre></td></tr></table></figure></p>
+<h4 id="命令说明"><a href="#命令说明" class="headerlink" title="命令说明"></a>命令说明</h4><p>1、<code>git diff hello.c</code><br>查看hello.c的变更<br>2、<code>git add .</code><br>添加当前目录下的更改到暂存区<br>3、<code>git add -A</code><br>添加所有的更改到暂存区<br>4、<code>git commit -a -m</code><br>添加和提交一起操作<br>5、<code>git push -u origin develop</code><br>推送到origin远程仓库的develop分支<br>6、<code>git log</code><br>查看提交日志<br>7、<code>git tag -a tagname commitId -m &quot;description&quot;</code><br>打标签<br>8、<code>git push origin tagname</code><br>推送标签到远端<br>9、</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/07/git常用操作/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-vue笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -771,11 +850,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">周边技术</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">周边技术</a>
         		</li>
       		
 		</ul>
@@ -986,90 +1065,9 @@
 
 
   
-    <article id="post-算法笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/11/算法笔记/">辗转相除法</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/11/算法笔记/" class="archive-article-date">
-  	<time datetime="2019-03-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="辗转相除法求最大公因子"><a href="#辗转相除法求最大公因子" class="headerlink" title="辗转相除法求最大公因子"></a>辗转相除法求最大公因子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   int hfc(int m,int n)</span><br><span class="line">&#123;</span><br><span class="line">	int r=1;</span><br><span class="line">	r = m % n;</span><br><span class="line">	while(r!=0)&#123;</span><br><span class="line">		if(r==1)&#123;</span><br><span class="line">			return 1;</span><br><span class="line">		&#125;</span><br><span class="line">		m=n;</span><br><span class="line">		n=r;</span><br><span class="line">		r=m % n;</span><br><span class="line">	&#125;</span><br><span class="line">	return n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="优化版的辗转相除法"><a href="#优化版的辗转相除法" class="headerlink" title="优化版的辗转相除法"></a>优化版的辗转相除法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public int hfc(int m,int n)</span><br><span class="line">   &#123;</span><br><span class="line">       int r =1;</span><br><span class="line">       r = m % n;</span><br><span class="line">       while ( r != 0)</span><br><span class="line">       &#123;</span><br><span class="line">           m = n;</span><br><span class="line">           n = r;</span><br><span class="line">           r = m % n;</span><br><span class="line">       &#125;</span><br><span class="line">       return n;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="合并两个数组"><a href="#合并两个数组" class="headerlink" title="合并两个数组"></a>合并两个数组</h4><p>题目描述:<br>给定两个有序整数数组 nums1 和 nums2，将 nums2 合并到 nums1 中，使得 num1 成为一个有序数组。</p>
-<p>说明:</p>
-<p>初始化 nums1 和 nums2 的元素数量分别为 m 和 n。<br>你可以假设 nums1 有足够的空间（空间大小大于或等于 m + n）来保存 nums2 中的元素。<br>示例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">nums1 = [1,2,3,0,0,0], m = 3</span><br><span class="line">nums2 = [2,5,6],       n = 3</span><br><span class="line">输出: [1,2,2,3,5,6]</span><br></pre></td></tr></table></figure></p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/merge-sorted-array" target="_blank" rel="noopener">https://leetcode-cn.com/problems/merge-sorted-array</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h5 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h5><p>由于两个数组都是有序的,则可以使用类似于归并排序的思想。从后往前合并数组，每次选择从两个数组中选取其中最大的合并到nums1的尾部。<br>边界处理:<br>1、nums1值为空,将nums2复制到nums1中。<br>2、nums2为空,不做任何处理</p>
-<h5 id="我的题解"><a href="#我的题解" class="headerlink" title="我的题解"></a>我的题解</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span> m, <span class="keyword">int</span>[] nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> point = m + n -<span class="number">1</span>;</span><br><span class="line">        -- m;</span><br><span class="line">        -- n;</span><br><span class="line">        <span class="comment">// 归并排序的思想</span></span><br><span class="line">        <span class="keyword">while</span>(m &gt;=<span class="number">0</span> &amp;&amp; n &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums1[m] &gt; nums2[n])&#123;</span><br><span class="line">                nums1[point] = nums1[m];</span><br><span class="line">                -- point;</span><br><span class="line">                -- m;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                nums1[point] = nums2[n];</span><br><span class="line">                -- point;</span><br><span class="line">                -- n;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>( n &gt;= <span class="number">0</span> )&#123;</span><br><span class="line">            nums1[point] = nums2[n];</span><br><span class="line">            -- point;</span><br><span class="line">            -- n;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">``` </span><br><span class="line">##### 大神的题解</span><br><span class="line">```java</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span> m, <span class="keyword">int</span>[] nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p = m-- + n-- - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (m &gt;= <span class="number">0</span> &amp;&amp; n &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            nums1[p--] = nums1[m] &gt; nums2[n] ? nums1[m--] : nums2[n--];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (n &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            nums1[p--] = nums2[n--];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/11/算法笔记/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
+      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
     </nav>
   
 
@@ -1168,15 +1166,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1184,11 +1178,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1204,11 +1202,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1228,15 +1226,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">注册列表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技术</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">技术</a>
               </li>
              
               <li class="article-tag-list-item">
