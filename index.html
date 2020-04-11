@@ -163,6 +163,86 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-右键更换壁纸" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/11/右键更换壁纸/">右键更换壁纸</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/11/右键更换壁纸/" class="archive-article-date">
+  	<time datetime="2020-04-11T15:39:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="python文件"><a href="#python文件" class="headerlink" title="python文件"></a>python文件</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> win32api</span><br><span class="line"><span class="keyword">import</span> win32gui</span><br><span class="line"><span class="keyword">import</span> win32con</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">day = datetime.datetime.now().strftime(<span class="string">'%Y%m%d'</span>)</span><br><span class="line">log_filename = day+<span class="string">"_log.txt"</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log</span><span class="params">(value,print_flag = True)</span>:</span></span><br><span class="line">    log_path = os.getcwd() + <span class="string">"\\log"</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(log_path) :</span><br><span class="line">        os.mkdir(log_path)</span><br><span class="line">    log_file_path = log_path + <span class="string">"\\"</span> + log_filename</span><br><span class="line">    logfile = open(log_file_path, <span class="string">'a'</span>, encoding=<span class="string">'utf-8'</span>)</span><br><span class="line">    <span class="keyword">if</span> logfile.writable():</span><br><span class="line">        now_data = datetime.datetime.now().strftime(<span class="string">'%Y-%m-%d %H:%M:%S'</span>)</span><br><span class="line">        log_message = <span class="string">"时间:&#123;&#125; : log : &#123;&#125;\n"</span>.format(now_data, value)</span><br><span class="line">        <span class="keyword">if</span> print_flag:</span><br><span class="line">            print(log_message)</span><br><span class="line">        logfile.write(log_message)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        logfile.close()</span><br><span class="line">    <span class="keyword">except</span> IOError:</span><br><span class="line">        print(<span class="string">"写入日志错误&#123;&#125;"</span>.format(IOError))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setWallPaper</span><span class="params">(wallpaper)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        key = win32api.RegOpenKeyEx(win32con.HKEY_CURRENT_USER,</span><br><span class="line">                                    <span class="string">"Control Panel\\Desktop"</span>, <span class="number">0</span>, win32con.KEY_SET_VALUE)</span><br><span class="line">        win32api.RegSetValueEx(key, <span class="string">"WallpaperStyle"</span>, <span class="number">0</span>, win32con.REG_SZ, <span class="string">"2"</span>)</span><br><span class="line">        win32api.RegSetValueEx(key, <span class="string">"TileWallPaper"</span>, <span class="number">0</span>, win32con.REG_SZ, <span class="string">"0"</span>)</span><br><span class="line">        win32gui.SystemParametersInfo(win32con.SPI_SETDESKWALLPAPER, wallpaper, <span class="number">1</span> + <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">except</span> EnvironmentError:</span><br><span class="line">        log(<span class="string">"except:&#123;&#125;错误"</span>.format(EnvironmentError))</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">过滤图片文件</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">image_filter</span><span class="params">(file_list)</span>:</span></span><br><span class="line">    image_list = []</span><br><span class="line">    <span class="comment"># 图片后缀</span></span><br><span class="line">    image_suffix = [<span class="string">"jpg"</span>,<span class="string">"png"</span>,<span class="string">"bmp"</span>]</span><br><span class="line">    <span class="keyword">for</span> file <span class="keyword">in</span> file_list:</span><br><span class="line">        <span class="keyword">if</span> file.split(<span class="string">"."</span>)[<span class="number">-1</span>] <span class="keyword">in</span> image_suffix:</span><br><span class="line">            image_list.append(file)</span><br><span class="line">    <span class="keyword">return</span> image_list</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    image_dir = os.getcwd() + <span class="string">"\images"</span></span><br><span class="line">    <span class="keyword">if</span> os.path.exists(image_dir):</span><br><span class="line">        file_list = os.listdir(image_dir)</span><br><span class="line">        print(file_list)</span><br><span class="line">        image_list = image_filter(file_list)</span><br><span class="line">        print(image_list)</span><br><span class="line">        <span class="keyword">if</span> len(image_list) &gt; <span class="number">0</span>:</span><br><span class="line">            wallpaper_path = image_dir + <span class="string">"\\"</span> + random.choice(image_list)</span><br><span class="line">            <span class="keyword">if</span> os.path.exists(wallpaper_path):</span><br><span class="line">                <span class="keyword">if</span> setWallPaper(wallpaper_path):</span><br><span class="line">                    log(<span class="string">"设置壁纸成功:path = &#123;&#125;"</span>.format(wallpaper_path))</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    log(<span class="string">"设置壁纸失败,详情查看日志。path = &#123;&#125;"</span>.format(wallpaper_path))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                log(<span class="string">"无效路径:&#123;&#125;"</span>.format(wallpaper_path))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            log(<span class="string">"文件夹中没有图片文件:path = &#123;&#125;"</span>.format(image_dir))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        log(<span class="string">"不存在路径:&#123;&#125;"</span>.format(image_dir))</span><br></pre></td></tr></table></figure>
+<h4 id="启动文件"><a href="#启动文件" class="headerlink" title="启动文件"></a>启动文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">set curdir=%~dp0</span><br><span class="line">cd /d %curdir%</span><br><span class="line"></span><br><span class="line">@echo off</span><br><span class="line">if "%1" == "h" goto begin</span><br><span class="line">start mshta vbscript:createobject("wscript.shell").run("%~nx0 h",0)(window.close)&amp;&amp;exit</span><br><span class="line">:begin</span><br><span class="line"></span><br><span class="line">python main.py</span><br></pre></td></tr></table></figure>
+<h4 id="设置右键项的"><a href="#设置右键项的" class="headerlink" title="设置右键项的"></a>设置右键项的</h4><p><img src="/2020/04/11/右键更换壁纸/set.png" alt="设置右键图片"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">windows</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">注册列表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/11/右键更换壁纸/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-windows右键添加项" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -422,6 +502,8 @@
       
         <h3 id="如何让bat文件后台运行？"><a href="#如何让bat文件后台运行？" class="headerlink" title="如何让bat文件后台运行？"></a>如何让bat文件后台运行？</h3><p>需要在bat前面加上以下代码<br><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">if</span> "%<span class="number">1</span>" == "h" <span class="keyword">goto</span> begin</span><br><span class="line"><span class="built_in">start</span> mshta vbscript:createobject("wscript.shell").run("%~nx0 h",<span class="number">0</span>)(window.close)&amp;&amp;<span class="keyword">exit</span></span><br><span class="line">:begin</span><br></pre></td></tr></table></figure></p>
 <p>下面是启动aria2c的脚本代码<br><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">if</span> "%<span class="number">1</span>" == "h" <span class="keyword">goto</span> begin</span><br><span class="line"><span class="built_in">start</span> mshta vbscript:createobject("wscript.shell").run("%~nx0 h",<span class="number">0</span>)(window.close)&amp;&amp;<span class="keyword">exit</span></span><br><span class="line">:begin</span><br><span class="line"></span><br><span class="line">@<span class="built_in">echo</span> "<span class="built_in">start</span> aria2 rpc service"</span><br><span class="line">aria2c --enable-rpc --rpc-allow-origin-all</span><br></pre></td></tr></table></figure></p>
+<h3 id="bat文件的路径问题"><a href="#bat文件的路径问题" class="headerlink" title="bat文件的路径问题"></a>bat文件的路径问题</h3><h5 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h5><p>发现以管理员运行bat文件时会发现路径错误。因为命令行运行的路径和当前运行的路径不一致。</p>
+<h5 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h5><p>重新将cmd定位回当前文件夹便可。需要在bat文件中添加如下命令<br><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> curdir=%~dp0</span><br><span class="line"><span class="built_in">cd</span> /d <span class="variable">%curdir%</span></span><br></pre></td></tr></table></figure></p>
 
       
 
@@ -1435,85 +1517,6 @@
 
 
   
-    <article id="post-软件管理平台" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/28/软件管理平台/">软件管理平台</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/28/软件管理平台/" class="archive-article-date">
-  	<time datetime="2019-10-28T13:48:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="问题提出"><a href="#问题提出" class="headerlink" title="问题提出"></a>问题提出</h3><p>  最近整理桌面的时候发现一个问题，就是一些软件找不到启动方式，可能快捷方式已经被删除了。桌面上又有许多的东西。这时候就想有一个平台，将自己的软件管理起来。这个功能类似于软件管家，但是只是进行软件的启动。分类。这是在有时间的前提下才进行创造。</p>
-<h3 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h3><p>  结合现有的技术，可以使用electron来搭建。里面有相应的函数接口可以使用</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">计划</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">设计</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/28/软件管理平台/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1615,15 +1618,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1631,7 +1626,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1639,11 +1638,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">UML</a>
+                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">UML</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1655,15 +1662,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1671,7 +1670,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1680,10 +1687,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">注册列表</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
