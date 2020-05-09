@@ -163,6 +163,81 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-下载bing首页图片" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/09/下载bing首页图片/">下载bing首页图片</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/09/下载bing首页图片/" class="archive-article-date">
+  	<time datetime="2020-05-09T14:39:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUrl</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// console.log("geturl");</span></span><br><span class="line">    <span class="keyword">var</span> bgurl = <span class="built_in">document</span>.getElementById(<span class="string">"bgImgProgLoad"</span>).getAttribute(<span class="string">"data-ultra-definition-src"</span>);</span><br><span class="line">    <span class="keyword">var</span> bgDivUrl = <span class="built_in">document</span>.getElementById(<span class="string">"bgDiv"</span>).style.backgroundImage;</span><br><span class="line">    <span class="keyword">if</span>(bgDivUrl != <span class="literal">undefined</span> || bgDivUrl != <span class="string">""</span>)&#123;</span><br><span class="line">        bgurl = bgDivUrl.replace(<span class="string">"url(\""</span>,<span class="string">""</span>).replace(<span class="string">"\")"</span>,<span class="string">""</span>);</span><br><span class="line">       &#125;</span><br><span class="line">    <span class="keyword">return</span> bgurl;</span><br><span class="line">&#125;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="comment">// add download btn</span></span><br><span class="line">    <span class="keyword">var</span> downloadButton = <span class="built_in">document</span>.createElement(<span class="string">"button"</span>);</span><br><span class="line">    downloadButton.style.borderRadius=<span class="string">"6px"</span>;</span><br><span class="line">    downloadButton.style.zIndex=<span class="string">"99"</span>;</span><br><span class="line">    downloadButton.style.borderWidth=<span class="string">"thin"</span>;</span><br><span class="line">    downloadButton.style.height = <span class="string">"55px"</span>;</span><br><span class="line">    downloadButton.style.marginLeft=<span class="string">"20px"</span>;</span><br><span class="line">    downloadButton.innerText = <span class="string">"下载图片"</span>;</span><br><span class="line">    downloadButton.addEventListener(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> bgurl = getUrl();</span><br><span class="line">        <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">        xhr.open(<span class="string">"get"</span>,bgurl,<span class="literal">true</span>);</span><br><span class="line">        xhr.responseType = <span class="string">"blob"</span>;</span><br><span class="line">        xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">           <span class="keyword">if</span> (<span class="keyword">this</span>.status == <span class="number">200</span>) &#123;</span><br><span class="line">               <span class="keyword">var</span> blob = <span class="keyword">this</span>.response;</span><br><span class="line">               <span class="keyword">var</span> downloadElement = <span class="built_in">document</span>.createElement(<span class="string">'a'</span>);</span><br><span class="line">               <span class="keyword">var</span> href = <span class="built_in">window</span>.URL.createObjectURL(blob); <span class="comment">//创建下载的链接</span></span><br><span class="line">               downloadElement.href = href;</span><br><span class="line">               downloadElement.download = name; <span class="comment">//下载后文件名</span></span><br><span class="line">               <span class="built_in">document</span>.body.appendChild(downloadElement);</span><br><span class="line">               downloadElement.click(); <span class="comment">//点击下载</span></span><br><span class="line">               <span class="built_in">document</span>.body.removeChild(downloadElement); <span class="comment">//下载完成移除元素</span></span><br><span class="line">               <span class="built_in">window</span>.URL.revokeObjectURL(href); <span class="comment">//释放掉blob对象</span></span><br><span class="line">          &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">              alert(<span class="string">"下载失败"</span>);</span><br><span class="line">          &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       xhr.send();</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">var</span> sbox = <span class="built_in">document</span>.getElementById(<span class="string">"sbox"</span>);</span><br><span class="line">    sbox.appendChild(downloadButton);</span><br><span class="line">    <span class="comment">// Your code here...</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<h5 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h5><p><img src="/2020/05/09/下载bing首页图片/result.png" alt="效果"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/09/下载bing首页图片/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-kali忘记密码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -893,272 +968,6 @@
 
 
   
-    <article id="post-Tij-IO-笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/30/Tij-IO-笔记/">Tij-IO-笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/30/Tij-IO-笔记/" class="archive-article-date">
-  	<time datetime="2019-12-30T12:46:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="File类"><a href="#File类" class="headerlink" title="File类"></a>File类</h3><h4 id="目录列表器"><a href="#目录列表器" class="headerlink" title="目录列表器"></a>目录列表器</h4><p>  查询一个文件夹中的文件数据，使用File类的<code>list()</code>函数获得该目录下的文件数据,返回String数组。包括普通的文件名称和文件夹。<code>list()</code>接收一个<code>FilenameFilter</code>的实现类实例来过滤获得相应的文件。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">FilenameFilter</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">accept</span><span class="params">(File dir, String name)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>  如何使用该过滤器？当调用list函数的时候会调用该接口的accept()函数来判断是否保留该文件数据返回。每个文件都会调用该函数一次，自己在accept()函数里面设置规则，就可以获得相应的文件数据。</p>
-<h4 id="目录的检查及创建"><a href="#目录的检查及创建" class="headerlink" title="目录的检查及创建"></a>目录的检查及创建</h4><p>  File代表的是一个文件或目录，文件的相关信息都可以使用File中的函数来获得。下面是常用的函数。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">函数名</th>
-<th style="text-align:center">作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">getAbsolutePath()</td>
-<td style="text-align:center">获得绝对路径,不会处理.和..</td>
-</tr>
-<tr>
-<td style="text-align:center">getCanonicalPath()</td>
-<td style="text-align:center">获得标准的绝对路径。将.和..解析之后返回路径</td>
-</tr>
-<tr>
-<td style="text-align:center">canRead()</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">canWrite()</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">getName()</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">getParent()</td>
-<td style="text-align:center">解析File文件中路径的父路径。只是对构造文件对象时输入的path字符串</td>
-</tr>
-<tr>
-<td style="text-align:center">getPath()</td>
-<td style="text-align:center">获得文件路径，构造时传进来的文件路径</td>
-</tr>
-<tr>
-<td style="text-align:center">length()</td>
-<td style="text-align:center">返回文件的字节大小,long类型</td>
-</tr>
-<tr>
-<td style="text-align:center">lastModified()</td>
-<td style="text-align:center">上一次修改时间戳,long类型</td>
-</tr>
-<tr>
-<td style="text-align:center">isFile()</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">isDirectory()</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">exists()</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">createNewFile</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">renameTo(File f)</td>
-<td style="text-align:center">重命名</td>
-</tr>
-<tr>
-<td style="text-align:center">delete()</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">mkdirs()</td>
-<td style="text-align:center">创建文件/目录(可以多级创建)</td>
-</tr>
-<tr>
-<td style="text-align:center">mkdir()</td>
-<td style="text-align:center">仅一级创建。路径的上一个文件夹必须存在才能创建。</td>
-</tr>
-</tbody>
-</table>
-<p><code>getParent()</code>、<code>getName()</code>、<code>getPath()</code>、<code>getAbsolutePath()</code>、<code>getCanonicalPath()</code>的区别</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">File f = <span class="keyword">new</span> File(<span class="string">".\\pom.xml"</span>);</span><br><span class="line">System.out.println(f.getParent());</span><br><span class="line">System.out.println(f.getName());</span><br><span class="line">System.out.println(f.getPath());</span><br><span class="line">System.out.println(f.getAbsolutePath());</span><br><span class="line">System.out.println(f.getCanonicalPath());</span><br></pre></td></tr></table></figure>
-<p>ouput:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">pom.xml</span><br><span class="line">.\pom.xml</span><br><span class="line">E:\Project\Java\.\pom.xml</span><br><span class="line">E:\Project\Java\pom.xml</span><br></pre></td></tr></table></figure></p>
-<p><code>getParent()</code>获得的只是路径中的上一层,构造对象f时传进去的是<code>.\\pom.xml</code>。是对该字符串解析。如果直接使用<code>pom.xml</code>构造f对象,该函数返回的是空值。</p>
-<p><code>mkdirs()</code>和<code>mkdir()</code><br>创建”E:\test\test1\test2\test3”嵌套目录,使用mkdirs()可以顺利创建。但是使用mkdir()如果文件夹组”E:\test\test1\test2”存在,成功创建。否则创建失败。</p>
-<h3 id="输入和输出"><a href="#输入和输出" class="headerlink" title="输入和输出"></a>输入和输出</h3><h3 id="添加属性和有用的接口"><a href="#添加属性和有用的接口" class="headerlink" title="添加属性和有用的接口"></a>添加属性和有用的接口</h3><h3 id="Reader和Writer"><a href="#Reader和Writer" class="headerlink" title="Reader和Writer"></a><code>Reader</code>和<code>Writer</code></h3><h3 id="自我独立类-RandomAccessFile"><a href="#自我独立类-RandomAccessFile" class="headerlink" title="自我独立类:RandomAccessFile"></a>自我独立类:<code>RandomAccessFile</code></h3><h3 id="I-O流的典型使用方式"><a href="#I-O流的典型使用方式" class="headerlink" title="I/O流的典型使用方式"></a>I/O流的典型使用方式</h3><ul>
-<li><p>缓冲输入文件。使用缓冲来提高文件的输入</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String</span><br><span class="line">read(String filename)&#123;</span><br><span class="line">  BufferReader in = <span class="keyword">new</span> BufferReader(</span><br><span class="line">    <span class="keyword">new</span> FileReader(filename)</span><br><span class="line">  );</span><br><span class="line">  String s;</span><br><span class="line">  StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">  <span class="keyword">while</span>(s = in.readLine() != <span class="keyword">null</span>)&#123;</span><br><span class="line">    sb.append(s+<span class="string">"\n"</span>);</span><br><span class="line">    <span class="comment">// 使用如下代码是否更好？</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    sb.append(s);</span></span><br><span class="line"><span class="comment">    sb.append("\n");</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">  &#125;</span><br><span class="line">  in.close();</span><br><span class="line">  <span class="keyword">return</span> sb.toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>从内存读取文件。将文件加载进内存中，然后再从内存中读取数据。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">StringReader in = <span class="keyword">new</span> StringReader(</span><br><span class="line">  BufferedInputFile.read(filename)</span><br><span class="line">);</span><br><span class="line"><span class="keyword">int</span> c;</span><br><span class="line"><span class="comment">// 从内存缓冲区读取文件的字节数据。</span></span><br><span class="line"><span class="keyword">while</span>((c = in.read()) != -<span class="number">1</span>)&#123;</span><br><span class="line">  System.out.print((<span class="keyword">char</span>)c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>格式化的内存输入。读取格式化的数据，不需要自己进行格式化处理。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DataInputSteam in = <span class="keyword">new</span> DataInputStream(</span><br><span class="line">  <span class="keyword">new</span> ByteArrayInputStream(</span><br><span class="line">    BufferedInputFile.read(filename).getBytes()</span><br><span class="line">  )</span><br><span class="line">);</span><br><span class="line"><span class="keyword">while</span>(in.available() != <span class="number">0</span>)&#123;</span><br><span class="line">  System.out.print((<span class="keyword">char</span>)in.readBytes());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>文件输出</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PrintWriter out = <span class="keyword">new</span> PrintWriter(</span><br><span class="line">  <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(filename))</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 将内容输出到文件中</span></span><br><span class="line">out.println(str);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>最简单的创建文件输出</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String filename = <span class="string">"Hello.java"</span>;</span><br><span class="line">PrintWriter out = <span class="keyword">new</span> PrintWriter(filename);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>存储和恢复数据。目标是写进去的数据能够正确的读出来。需要统一的写和读，编码统一才可以读出来。使用DataInputStream和DataOutputSteam来进行文件的读写。<br>文件数据的读写。</p>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">写</th>
-<th style="text-align:center">读</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">writeUTF()</td>
-<td style="text-align:center">readUTF()</td>
-</tr>
-<tr>
-<td style="text-align:center">writeDouble()</td>
-<td style="text-align:center">readDouble()</td>
-</tr>
-</tbody>
-</table>
-<p>更多的类型数据读写可以参考JDK.</p>
-<ul>
-<li>读写随机文件。<br>使用RandomAccessFile 类来随机的读写文件。其它的输入输出流就只是从头开始读写，随机读写流可以使用seek()来读写文件。这是一个类似C中指针一样的东西，可以在特定的地方读写文件。但是这需要对文件的格式很熟悉才能定位到正确的地方。</li>
-</ul>
-<h3 id="标准I-O"><a href="#标准I-O" class="headerlink" title="标准I/O"></a>标准I/O</h3><p>  标准的I/O中含有标准输入、标准输出、标准异常。在java中对应<code>System.in</code>、<code>System.out</code>、<code>System.err</code>。out和err已经被包装成PrintStream对象。</p>
-<h4 id="从标准输入中读取"><a href="#从标准输入中读取" class="headerlink" title="从标准输入中读取"></a>从标准输入中读取</h4>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">BufferedReader stdin = <span class="keyword">new</span> BufferedRead(</span><br><span class="line">  <span class="keyword">new</span> InputStreamReader(System.in)</span><br><span class="line">);</span><br><span class="line">String s;</span><br><span class="line"><span class="keyword">while</span>((s = std.readLine()) != <span class="keyword">null</span> &amp;&amp; s.length() != <span class="number">0</span>)&#123;</span><br><span class="line">  System.out.println(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  可以使用Scanner来读出特定的类型。</p>
-<h4 id="System-out转换成PrintWriter"><a href="#System-out转换成PrintWriter" class="headerlink" title="System.out转换成PrintWriter"></a>System.out转换成PrintWriter</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// true 自动清空</span></span><br><span class="line">PrintWriter out = <span class="keyword">new</span> PrintWriter(System.out,<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
-<h4 id="IO重定向。"><a href="#IO重定向。" class="headerlink" title="IO重定向。"></a>IO重定向。</h4><p>  标准IO一般默认是从控制台输入和输出的，但是可以通过重定向来改变标准IO的方向。<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.setIn(InputStream)</span><br><span class="line">System.setOut(PrintStream)</span><br><span class="line">System.setErr(PrintStream)</span><br></pre></td></tr></table></figure></p>
-<p>  经过重定向之后就可以使用System.out、System.in、System.err。</p>
-<h3 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h3><p>  在java中运行其它的程序。使用Process类来运行程序。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// comnands 是运行命令的String[]</span></span><br><span class="line">Process process = <span class="keyword">new</span> ProcessBuilder(commands).start();</span><br><span class="line"><span class="comment">// 获得运行的输出结果</span></span><br><span class="line">BufferedRead result = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(process.getInputStream()));</span><br><span class="line"><span class="comment">// 获得程序运行的错误</span></span><br><span class="line">BufferedReader errors = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(process.getErrorStream()))</span><br></pre></td></tr></table></figure></p>
-<h3 id="新的I-O"><a href="#新的I-O" class="headerlink" title="新的I/O"></a>新的I/O</h3><p>  nio不用太过在意,旧的IO已经用nio来实现过了。</p>
-<h4 id="通道和缓冲器"><a href="#通道和缓冲器" class="headerlink" title="通道和缓冲器"></a>通道和缓冲器</h4><p>  唯一和通道交互得缓冲器为ByteBuffer。原始得字节形式输出和读取,没有办法输出和读取对象。也就是存进去得是什么，拿出来得也是什么。不会包装成String或者其它得对象。</p>
-<h4 id="FileChannels-文件通道"><a href="#FileChannels-文件通道" class="headerlink" title="FileChannels 文件通道"></a>FileChannels 文件通道</h4>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用文件通道写入数据</span></span><br><span class="line">FileChannels fc = <span class="keyword">new</span> FileOutputStream(filename).getChannel();</span><br><span class="line"><span class="comment">// 写入字节数组</span></span><br><span class="line">Byte[] bytes = <span class="string">"Hello"</span>.getBytes();</span><br><span class="line">fc.write(ByteBuffer.wrap(bytes));</span><br><span class="line">fc.close();</span><br><span class="line"><span class="comment">// 通过文件通道读取数据</span></span><br><span class="line">fc = <span class="keyword">new</span> FileInputStream(filename).getChannel();</span><br><span class="line"><span class="comment">// 分配缓冲区大小</span></span><br><span class="line">ByteBuffer buff = ByteBuffer.allocate(SIZE);</span><br><span class="line">fc.read(buff);</span><br><span class="line"><span class="comment">// flip()作用是告诉外部,可以读取缓冲中的字节数据了。</span></span><br><span class="line">buff.flip();</span><br><span class="line"><span class="keyword">while</span>(buff.hasRemaining())&#123;</span><br><span class="line">  <span class="comment">// 将字节数据转成字符</span></span><br><span class="line">  System.out.print((<span class="keyword">char</span>)buff.get());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="通过通道来复制文件"><a href="#通过通道来复制文件" class="headerlink" title="通过通道来复制文件"></a>通过通道来复制文件</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常量缓冲区的大小</span></span><br><span class="line"><span class="keyword">final</span> <span class="keyword">int</span> BSIZE = <span class="number">1024</span>;</span><br><span class="line">FileChannel</span><br><span class="line">  in = <span class="keyword">new</span> FileInputStream(source).getChannel(),</span><br><span class="line">  out = <span class="keyword">new</span> FileOutputStream(dest).getChannel();</span><br><span class="line"><span class="comment">// 缓冲区</span></span><br><span class="line">ByteBuffer buffer = ByteBuffer.allocate(BSIZE);</span><br><span class="line"><span class="keyword">while</span>(in.read(buffer) != -<span class="number">1</span>)&#123;</span><br><span class="line">  <span class="comment">// -1标志为读取数据结束</span></span><br><span class="line">  <span class="comment">// 准备好写</span></span><br><span class="line">  buffer.flip();</span><br><span class="line">  out.write(buffer);</span><br><span class="line">  <span class="comment">// 准备好读</span></span><br><span class="line">  buffer.clear();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>flip()表示ByteBuffer已经写完数据,你从ByteBuffer可以读出来了。<br>clear()表示ByteBuffer已经清空完数据了,你现在已经可以往ByteBuffer写数据了。<br>rewind() 返回到数据开始部分。</p>
-<ul>
-<li>两个通道相连除了通过上述中间变量之外，使用transferTo()和transFrom()可以将两个通道连起来。这两个不常用，知道就好。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// in =&gt; out</span></span><br><span class="line">in.transferTo(<span class="number">0</span>,in.size(),out);</span><br><span class="line"><span class="comment">// or </span></span><br><span class="line"><span class="comment">// out.transferFrom(in,0,in.size());</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="转换数据"><a href="#转换数据" class="headerlink" title="转换数据"></a>转换数据</h5><p>  要想ByteBuffer存储有意义的数据，比如说字符串数据。需要写入字节之前对字符串进行编码，或者在读出的时候进行解码。<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 获得字节数据的时候编码</span><br><span class="line">&quot;hello world&quot;.getBytes(&quot;UTF-16BE&quot;);</span><br><span class="line">// 读取数据的时候解码</span><br><span class="line">buffer.asCharBuffer();</span><br></pre></td></tr></table></figure></p>
-<p>  使用java.nio.charset.Charset来实现编码和解码。</p>
-<h4 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h4><p>  由于通道存储的只是字节数据。不方便进行读取和管理，这时候需要一个视图缓冲器来作为中间人让使用者直接读写为整型、字符、长整型、浮点、双精度浮点型。<br>  注意: 由于通道存储的是字节数据，转换成相应的数据类型会占用不同字节大小。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">类型</th>
-<th style="text-align:center">字节大小</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">  shorts</td>
-<td style="text-align:center">2</td>
-</tr>
-<tr>
-<td style="text-align:center">  chars</td>
-<td style="text-align:center">2</td>
-</tr>
-<tr>
-<td style="text-align:center">  ints</td>
-<td style="text-align:center">4</td>
-</tr>
-<tr>
-<td style="text-align:center">  floats</td>
-<td style="text-align:center">4</td>
-</tr>
-<tr>
-<td style="text-align:center">  longs</td>
-<td style="text-align:center">8</td>
-</tr>
-<tr>
-<td style="text-align:center">  double</td>
-<td style="text-align:center">8</td>
-</tr>
-</tbody>
-</table>
-<p>转换成Chars类型。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CharBuffer cb = ((ByteBuffer)bb.rewind()).asCharBuffer();</span><br><span class="line"><span class="comment">// 读取Char数据</span></span><br><span class="line"><span class="keyword">while</span>(cb.hasRemaining())&#123;</span><br><span class="line">  System.out.print(cb.position() + <span class="string">"-&gt;"</span> + cb.get()+ <span class="string">","</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>其中bb是一个ByteBuffer的对象。<br>同理转换成其它的类型的视图<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FloatBuffer fb = ((ByteBuffer)bb.rewind()).asFloatBuffer();</span><br><span class="line">IntBuffer ib = ((ByteBuffer)bb.rewind()).asIntBuffer();</span><br><span class="line">ShortBuffer sb = ((ByteBuffer)bb.rewind()).asShortBuffer();</span><br><span class="line">LongBuffer lb = ((ByteBuffer)bb.rewind()).asLongBuffer();</span><br><span class="line">DoubleBuffer db = ((ByteBuffer)bb.rewind()).asDoubleBuffer();</span><br></pre></td></tr></table></figure></p>
-<h4 id="字节存放次序"><a href="#字节存放次序" class="headerlink" title="字节存放次序"></a>字节存放次序</h4><p>  有些基本的数据类型需要占用两个及两个以上的字节。计算机的基本存储单位是字节，对于像字符这种占用2个字节，存放有高位优先和低位优先两种方式。java默认的是高位优先。也就是说字符‘a’在内存中存放次序是[0,97]。如果是低位优先则是[97,0]。优先次序使用order来设置。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 高位优先</span></span><br><span class="line">bb.order(ByteOrder.BIG_ENDIAN);</span><br><span class="line"><span class="comment">// 低位优先</span></span><br><span class="line">bb.order(ByteOrder.LITTLE_ENDIAN);</span><br></pre></td></tr></table></figure></p>
-<p>  字节存放次序并无优劣之分。重要的数据的一致性，存进去的和读出来的一致便可。</p>
-<h4 id="交换相邻两个字符"><a href="#交换相邻两个字符" class="headerlink" title="交换相邻两个字符"></a>交换相邻两个字符</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UsingBuffers</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">symmetricScramble</span><span class="params">(CharBuffer buffer)</span></span>&#123;</span><br><span class="line">       <span class="keyword">while</span> (buffer.hasRemaining())&#123;</span><br><span class="line">           <span class="comment">// 做标记</span></span><br><span class="line">           buffer.mark();</span><br><span class="line">           <span class="keyword">char</span> c1 = buffer.get();</span><br><span class="line">           <span class="keyword">char</span> c2 = buffer.get();</span><br><span class="line">           <span class="comment">// 回到标记点</span></span><br><span class="line">           buffer.reset();</span><br><span class="line">           <span class="comment">// 交换次序存储</span></span><br><span class="line">           buffer.put(c2).put(c1);</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span>[] data = <span class="string">"UsingBuffers"</span>.toCharArray();</span><br><span class="line">        <span class="comment">// 一个字符占有两个字节</span></span><br><span class="line">        ByteBuffer bb = ByteBuffer.allocate(data.length*<span class="number">2</span>);</span><br><span class="line">        CharBuffer cb = bb.asCharBuffer();</span><br><span class="line">        cb.put(data);</span><br><span class="line">        System.out.println(cb.rewind());</span><br><span class="line">        <span class="comment">// 交换</span></span><br><span class="line">        symmetricScramble(cb);</span><br><span class="line">        System.out.println(cb.rewind());</span><br><span class="line">        <span class="comment">// 交换</span></span><br><span class="line">        symmetricScramble(cb);</span><br><span class="line">        System.out.println(cb.rewind());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UsingBuffers</span><br><span class="line">sUniBgfuefsr</span><br><span class="line">UsingBuffers</span><br></pre></td></tr></table></figure></p>
-<h4 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h4><p>  使用“映射文件访问”更好，更高效。下面是使用传统的io流和通道map的读写对比差距。使用映射速度更加显著。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Stream Write:73.48 </span><br><span class="line">Mapped Write:0.02 </span><br><span class="line">Stream Read:0.06 </span><br><span class="line">Mapped Read:0.01 </span><br><span class="line">Stream Read/Write:6.05 </span><br><span class="line">Mapped Read/Write:0.01</span><br></pre></td></tr></table></figure></p>
-<p>使用mapped写数据<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">FileChannel fc = <span class="keyword">new</span> RandomAccessFile(<span class="string">"temp.tmp"</span>,<span class="string">"rw"</span>).getChannel();</span><br><span class="line">IntBuffer ib = fc.map(FileChannel.MapMode.READ_WRITE,<span class="number">0</span>,fc.size()).asIntBuffer();</span><br><span class="line"><span class="comment">// 使用通道写入数据</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numOfInts; i++) &#123;</span><br><span class="line">    ib.put(i);</span><br><span class="line">&#125;</span><br><span class="line">fc.close();</span><br></pre></td></tr></table></figure></p>
-<p>使用mapped读数据<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">FileChannel fc = <span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(<span class="string">"temp.tmp"</span>)).getChannel();</span><br><span class="line">IntBuffer ib = fc.map(FileChannel.MapMode.READ_ONLY,<span class="number">0</span>,fc.size()).asIntBuffer();</span><br><span class="line"><span class="keyword">while</span> (ib.hasRemaining())&#123;</span><br><span class="line">    ib.get();</span><br><span class="line">&#125;</span><br><span class="line">fc.close();</span><br></pre></td></tr></table></figure></p>
-<h4 id="文件加锁"><a href="#文件加锁" class="headerlink" title="文件加锁"></a>文件加锁</h4><h3 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h3><h3 id="对象序列化"><a href="#对象序列化" class="headerlink" title="对象序列化"></a>对象序列化</h3><h3 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h3><h3 id="Preferences-Api"><a href="#Preferences-Api" class="headerlink" title="Preferences Api"></a><code>Preferences</code> Api</h3>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">IO</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/30/Tij-IO-笔记/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1256,6 +1065,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">运维</a>
               </li>
              
@@ -1264,27 +1085,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1344,15 +1153,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">技术</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1361,10 +1174,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">设计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
               </li>
              
               <li class="article-tag-list-item">
