@@ -163,6 +163,87 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-cmd命令问题总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/23/cmd命令问题总结/">cmd命令问题总结</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/23/cmd命令问题总结/" class="archive-article-date">
+  	<time datetime="2020-03-23T13:44:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="如何让bat文件后台运行？"><a href="#如何让bat文件后台运行？" class="headerlink" title="如何让bat文件后台运行？"></a>如何让bat文件后台运行？</h3><p>需要在bat前面加上以下代码<br><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">if</span> "%<span class="number">1</span>" == "h" <span class="keyword">goto</span> begin</span><br><span class="line"><span class="built_in">start</span> mshta vbscript:createobject("wscript.shell").run("%~nx0 h",<span class="number">0</span>)(window.close)&amp;&amp;<span class="keyword">exit</span></span><br><span class="line">:begin</span><br></pre></td></tr></table></figure></p>
+<p>下面是启动aria2c的脚本代码<br><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">if</span> "%<span class="number">1</span>" == "h" <span class="keyword">goto</span> begin</span><br><span class="line"><span class="built_in">start</span> mshta vbscript:createobject("wscript.shell").run("%~nx0 h",<span class="number">0</span>)(window.close)&amp;&amp;<span class="keyword">exit</span></span><br><span class="line">:begin</span><br><span class="line"></span><br><span class="line">@<span class="built_in">echo</span> "<span class="built_in">start</span> aria2 rpc service"</span><br><span class="line">aria2c --enable-rpc --rpc-allow-origin-all</span><br></pre></td></tr></table></figure></p>
+<h3 id="bat文件的路径问题"><a href="#bat文件的路径问题" class="headerlink" title="bat文件的路径问题"></a>bat文件的路径问题</h3><h5 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h5><p>发现以管理员运行bat文件时会发现路径错误。因为命令行运行的路径和当前运行的路径不一致。</p>
+<h5 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h5><p>重新将cmd定位回当前文件夹便可。需要在bat文件中添加如下命令<br><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> curdir=%~dp0</span><br><span class="line"><span class="built_in">cd</span> /d <span class="variable">%curdir%</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="如何根据ip查询域名"><a href="#如何根据ip查询域名" class="headerlink" title="如何根据ip查询域名"></a>如何根据ip查询域名</h3><p>使用nslookup可以查询对应的域名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup 14.215.177.38</span><br></pre></td></tr></table></figure></p>
+<p>返回的值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">服务器:  TianYi.Home</span><br><span class="line">Address:  192.168.1.1</span><br><span class="line"></span><br><span class="line">名称:    www.baidu.com</span><br><span class="line">Address:  14.215.177.38</span><br></pre></td></tr></table></figure></p>
+<h3 id="根据域名查询ip"><a href="#根据域名查询ip" class="headerlink" title="根据域名查询ip"></a>根据域名查询ip</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup www.baidu.com</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">服务器:  TianYi.Home</span><br><span class="line">Address:  192.168.1.1</span><br><span class="line"></span><br><span class="line">非权威应答:</span><br><span class="line">名称:    www.baidu.com</span><br><span class="line">Address:  14.215.177.38</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/23/cmd命令问题总结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-github-push-提示输入账户名和密码问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1456,90 +1537,6 @@
 
 
   
-    <article id="post-blibli动态9宫格图片下载脚本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/07/blibli动态9宫格图片下载脚本/">blibli动态9宫格图片下载脚本</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/07/blibli动态9宫格图片下载脚本/" class="archive-article-date">
-  	<time datetime="2019-10-07T11:38:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>涉及到的技术点</p>
-<ul>
-<li>js控制样式和类</li>
-<li>DOM的节点添加和删除</li>
-<li>原生的xhr</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.downloadImage = <span class="function"><span class="keyword">function</span> (<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> timeout = <span class="built_in">Math</span>.random() * <span class="number">5000</span>;</span><br><span class="line">  <span class="keyword">this</span>.setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    xhr.open(<span class="string">"get"</span>, url, <span class="literal">true</span>);</span><br><span class="line">    xhr.responseType = <span class="string">"blob"</span>;</span><br><span class="line">    xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.status == <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> blob = <span class="keyword">this</span>.response;</span><br><span class="line">        <span class="keyword">var</span> downloadElement = <span class="built_in">document</span>.createElement(<span class="string">'a'</span>);</span><br><span class="line">        <span class="keyword">var</span> href = <span class="built_in">window</span>.URL.createObjectURL(blob); <span class="comment">//创建下载的链接</span></span><br><span class="line">        downloadElement.href = href;</span><br><span class="line">        downloadElement.download = name; <span class="comment">//下载后文件名</span></span><br><span class="line">        <span class="built_in">document</span>.body.appendChild(downloadElement);</span><br><span class="line">        downloadElement.click(); <span class="comment">//点击下载</span></span><br><span class="line">        <span class="built_in">document</span>.body.removeChild(downloadElement); <span class="comment">//下载完成移除元素</span></span><br><span class="line">        <span class="built_in">window</span>.URL.revokeObjectURL(href); <span class="comment">//释放掉blob对象</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    xhr.send()</span><br><span class="line">  &#125;, timeout);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.insertButtons = <span class="function"><span class="keyword">function</span> (<span class="params">element</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"=== element ======="</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(element);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"=== end ========== "</span>);</span><br><span class="line">  <span class="keyword">var</span> button = <span class="built_in">document</span>.createElement(<span class="string">"button"</span>);</span><br><span class="line">  button.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(element);</span><br><span class="line">    <span class="comment">// 获得该box的9个图片的url</span></span><br><span class="line">    <span class="keyword">var</span> urlList = element.firstElementChild.firstElementChild.children;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; urlList.length; i++) &#123;</span><br><span class="line">      <span class="keyword">var</span> url = <span class="string">"https:"</span> + urlList[i].firstElementChild.style.backgroundImage.split(<span class="string">"url"</span>)[<span class="number">1</span>].replace(<span class="regexp">/[\(\)\"]/g</span>, <span class="string">""</span>).split(<span class="string">"@"</span>)[<span class="number">0</span>].trim();</span><br><span class="line">      <span class="built_in">console</span>.log(url);</span><br><span class="line">      <span class="comment">// console.log(timeout);</span></span><br><span class="line">      <span class="built_in">window</span>.downloadImage(url);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">// button.style.backgroundColor = "#3388ff";</span></span><br><span class="line">  <span class="comment">// button.style.color = "white";</span></span><br><span class="line">  button.style.borderRadius=<span class="string">"10px"</span>;</span><br><span class="line">  button.style.height = <span class="string">"35px"</span>;</span><br><span class="line">  button.style.backgroundColor=<span class="string">"white"</span>;</span><br><span class="line">  button.style.opacity= <span class="string">"0.5"</span>;</span><br><span class="line">  button.style.borderWidth=<span class="string">"thin"</span>;</span><br><span class="line">  button.style.position=<span class="string">"absolute"</span>;</span><br><span class="line">  button.classList.add(<span class="string">"downBtn"</span>);</span><br><span class="line">  button.innerText = <span class="string">"下载该九宫格的图片"</span>;</span><br><span class="line">  element.append(button);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.initImageBox = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 先清除按钮</span></span><br><span class="line">  <span class="keyword">var</span> allDownBtn = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"downBtn"</span>);</span><br><span class="line">  <span class="keyword">var</span> btnLength = allDownBtn.length;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>;i &lt; btnLength;i++)&#123;</span><br><span class="line">      allDownBtn[<span class="number">0</span>].remove();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> allImagesBox = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"imagesbox"</span>);</span><br><span class="line">  <span class="comment">// 每个动态插入下载图片按钮</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"=======allImagesBox======"</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(allImagesBox);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"=======end============"</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; allImagesBox.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> element22 = allImagesBox[i];</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"i="</span>+i);</span><br><span class="line">    <span class="built_in">window</span>.insertButtons(element22);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"call back initImageBox"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertFreshButton</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> freshButton = <span class="built_in">document</span>.createElement(<span class="string">"button"</span>);</span><br><span class="line">    freshButton.style.backgroundColor = <span class="string">"#ABD6E6"</span>;</span><br><span class="line">    freshButton.style.position = <span class="string">"fixed"</span>;</span><br><span class="line">    freshButton.style.right=<span class="string">"60px"</span>;</span><br><span class="line">    <span class="comment">// var buttonTop = screen.height / 2;</span></span><br><span class="line">    <span class="comment">// freshButton.style.top= buttonTop +"px";</span></span><br><span class="line">    freshButton.style.bottom=<span class="string">"40px"</span>;</span><br><span class="line">    freshButton.style.zIndex=<span class="string">"99"</span>;</span><br><span class="line">    freshButton.style.color = <span class="string">"white"</span>;</span><br><span class="line">    freshButton.style.borderWidth=<span class="string">"thin"</span>;</span><br><span class="line">    freshButton.style.height = <span class="string">"40px"</span>;</span><br><span class="line">    freshButton.innerText = <span class="string">"刷新/查看下载按钮"</span>;</span><br><span class="line">    freshButton.setAttribute(<span class="string">"onclick"</span>,<span class="string">"initImageBox()"</span>);</span><br><span class="line">    <span class="built_in">document</span>.body.append(freshButton);</span><br><span class="line">&#125;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="comment">// Your code here...</span></span><br><span class="line">    insertFreshButton()</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/07/blibli动态9宫格图片下载脚本/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1641,15 +1638,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1657,15 +1646,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1678,6 +1675,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">go</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1729,11 +1730,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">技术</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技术</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">

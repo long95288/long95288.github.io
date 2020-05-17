@@ -163,6 +163,118 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-go笔记-一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/17/go笔记-一/">go笔记(一)</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/17/go笔记-一/" class="archive-article-date">
+  	<time datetime="2020-05-17T10:18:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h4><ul>
+<li>普通函数变量<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">anon := <span class="function"><span class="keyword">func</span><span class="params">(a <span class="keyword">int</span>,b <span class="keyword">int</span>)</span><span class="title">int</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>anon是一个函数变量。</p>
+<ul>
+<li>函数返回函数<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">annof := <span class="function"><span class="keyword">func</span><span class="params">()</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>,<span class="keyword">int</span>)</span> <span class="title">int</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(a1 <span class="keyword">int</span>, b1 <span class="keyword">int</span>)</span> <span class="title">int</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a1 + b1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">anon2 := annof()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>anon2 也是一个匿名函数，该函数是返回一个函数。</p>
+<ul>
+<li><p>自启动。并且传参</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">anon3 := <span class="function"><span class="keyword">func</span><span class="params">(param <span class="keyword">string</span>)</span><span class="title">func</span><span class="params">(<span class="keyword">int</span>,<span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">  fmt.Println(<span class="string">"param"</span>,param)</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(a1 <span class="keyword">int</span>,b1 <span class="keyword">int</span>)</span> <span class="title">int</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a1 + b1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;(<span class="string">"Hello World!"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>函数别名</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> returnFunctionType <span class="function"><span class="keyword">func</span><span class="params">(<span class="keyword">int</span>,<span class="keyword">int</span>)</span> <span class="title">int</span></span></span><br><span class="line"><span class="function"><span class="title">anon4</span> := <span class="title">func</span><span class="params">()</span> <span class="title">returnFunctionType</span></span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(a1 <span class="keyword">int</span>, b1 <span class="keyword">int</span>)</span> <span class="title">int</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a1 + b1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用函数</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(<span class="string">"anon func ="</span>,anon(<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line">fmt.Println(<span class="string">"anon func2 = "</span>,anon2(<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line">fmt.Println(<span class="string">"anon func3 = "</span>,anon3(<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line">fmt.Println(<span class="string">"anon func4 = "</span>,anon4(<span class="number">1</span>,<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">param Hello World!</span><br><span class="line">anon func = 3</span><br><span class="line">anon func2 =  3</span><br><span class="line">anon func3 =  3</span><br><span class="line">anon func4 =  3</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h4><ul>
+<li>累加器<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">addUper</span><span class="params">()</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>)</span><span class="title">int</span></span> &#123;</span><br><span class="line">  base := <span class="number">10</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(n1 <span class="keyword">int</span>)</span> <span class="title">int</span></span>&#123;</span><br><span class="line">    res := base + n1</span><br><span class="line">    base ++</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>说明</strong> 改函数不依赖外部的数据实现累加。返回的<code>func(int)int</code>中含有一个base变量。该变量会自增。不会因为被调用而初始化。</p>
+<ul>
+<li>图片后缀<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">suffixImage</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="title">func</span><span class="params">(<span class="keyword">string</span>)</span><span class="title">string</span></span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(path <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> strings.HasSuffix(path,s) &#123;</span><br><span class="line">      <span class="keyword">return</span> path</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> path + s</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>说明</strong> 该函数返回一个闭包。能够识别是否拥有对应的后缀。没有就自己添加。</p>
+<h5 id="闭包总结"><a href="#闭包总结" class="headerlink" title="闭包总结"></a>闭包总结</h5><p>闭包等价于函数，但是该函数和普通的函数不一样的是，函数内部有一个不受外部影响而变化的变量。外部调用该函数时并不会重置该闭包内的数据。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">go</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/17/go笔记-一/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-python-aria2-rpc" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -886,87 +998,6 @@
 
 
   
-    <article id="post-cmd命令问题总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/23/cmd命令问题总结/">cmd命令问题总结</a>
-    </h1>
-  
-
-        
-        <a href="/2020/03/23/cmd命令问题总结/" class="archive-article-date">
-  	<time datetime="2020-03-23T13:44:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="如何让bat文件后台运行？"><a href="#如何让bat文件后台运行？" class="headerlink" title="如何让bat文件后台运行？"></a>如何让bat文件后台运行？</h3><p>需要在bat前面加上以下代码<br><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">if</span> "%<span class="number">1</span>" == "h" <span class="keyword">goto</span> begin</span><br><span class="line"><span class="built_in">start</span> mshta vbscript:createobject("wscript.shell").run("%~nx0 h",<span class="number">0</span>)(window.close)&amp;&amp;<span class="keyword">exit</span></span><br><span class="line">:begin</span><br></pre></td></tr></table></figure></p>
-<p>下面是启动aria2c的脚本代码<br><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">if</span> "%<span class="number">1</span>" == "h" <span class="keyword">goto</span> begin</span><br><span class="line"><span class="built_in">start</span> mshta vbscript:createobject("wscript.shell").run("%~nx0 h",<span class="number">0</span>)(window.close)&amp;&amp;<span class="keyword">exit</span></span><br><span class="line">:begin</span><br><span class="line"></span><br><span class="line">@<span class="built_in">echo</span> "<span class="built_in">start</span> aria2 rpc service"</span><br><span class="line">aria2c --enable-rpc --rpc-allow-origin-all</span><br></pre></td></tr></table></figure></p>
-<h3 id="bat文件的路径问题"><a href="#bat文件的路径问题" class="headerlink" title="bat文件的路径问题"></a>bat文件的路径问题</h3><h5 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h5><p>发现以管理员运行bat文件时会发现路径错误。因为命令行运行的路径和当前运行的路径不一致。</p>
-<h5 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h5><p>重新将cmd定位回当前文件夹便可。需要在bat文件中添加如下命令<br><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> curdir=%~dp0</span><br><span class="line"><span class="built_in">cd</span> /d <span class="variable">%curdir%</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="如何根据ip查询域名"><a href="#如何根据ip查询域名" class="headerlink" title="如何根据ip查询域名"></a>如何根据ip查询域名</h3><p>使用nslookup可以查询对应的域名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup 14.215.177.38</span><br></pre></td></tr></table></figure></p>
-<p>返回的值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">服务器:  TianYi.Home</span><br><span class="line">Address:  192.168.1.1</span><br><span class="line"></span><br><span class="line">名称:    www.baidu.com</span><br><span class="line">Address:  14.215.177.38</span><br></pre></td></tr></table></figure></p>
-<h3 id="根据域名查询ip"><a href="#根据域名查询ip" class="headerlink" title="根据域名查询ip"></a>根据域名查询ip</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup www.baidu.com</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">服务器:  TianYi.Home</span><br><span class="line">Address:  192.168.1.1</span><br><span class="line"></span><br><span class="line">非权威应答:</span><br><span class="line">名称:    www.baidu.com</span><br><span class="line">Address:  14.215.177.38</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/03/23/cmd命令问题总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1068,15 +1099,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1084,15 +1107,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1105,6 +1136,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">go</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1156,11 +1191,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">技术</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技术</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
