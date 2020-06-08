@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="Linux配置java的环境变量1、找到jdk安装包的位置2、打开profile文件# vim /etc/profile3、添加如下的内容1234export JAVA_HOME=/usr/java/jdk1.8.0_212-amd64export JRE_HOME=/usr/java/jdk1.8.0_212-amd64/jreexport PATH=$PATH:$JAVA_HOME/bin:$">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-06T15:13:17.244Z">
+<meta property="og:updated_time" content="2020-06-08T14:51:37.889Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux环境配置">
 <meta name="twitter:description" content="Linux配置java的环境变量1、找到jdk安装包的位置2、打开profile文件# vim /etc/profile3、添加如下的内容1234export JAVA_HOME=/usr/java/jdk1.8.0_212-amd64export JRE_HOME=/usr/java/jdk1.8.0_212-amd64/jreexport PATH=$PATH:$JAVA_HOME/bin:$">
@@ -200,6 +200,12 @@
 </li>
 </ul>
 <p>&amp;是后台运行的意思，但是关闭终端会退出<br>nohup 关闭终端不会退出<br>> log.txt 是将日志消息打印到log.txt中</p>
+<h4 id="kali-ssh配置"><a href="#kali-ssh配置" class="headerlink" title="kali ssh配置"></a>kali ssh配置</h4><p>  kali安装之后，22端口是默认关闭的，需要自己设置开启</p>
+<h5 id="一、更改配置文件"><a href="#一、更改配置文件" class="headerlink" title="一、更改配置文件"></a>一、更改配置文件</h5><p>  修改<code>/etc/ssh/sshd_config</code>文件。</p>
+<ul>
+<li>设置<code>PasswordAuthentication yes</code>,开启密码认证</li>
+<li>设置<code>PermitRootLogin yes</code>,设置可以超管登录。<h5 id="二、启动ssh服务"><a href="#二、启动ssh服务" class="headerlink" title="二、启动ssh服务"></a>二、启动ssh服务</h5>使用<code>ssh start</code>报错localhost unresolve错误。需要进入到<code>/etc/init.d/</code>文件夹中,使用命令<code>./ssh start</code>启动。<h5 id="三、设置开机自启动"><a href="#三、设置开机自启动" class="headerlink" title="三、设置开机自启动"></a>三、设置开机自启动</h5>使用命令<code>update-rc.d ssh enable</code><h5 id="四、重启系统便可以正常连接"><a href="#四、重启系统便可以正常连接" class="headerlink" title="四、重启系统便可以正常连接"></a>四、重启系统便可以正常连接</h5></li>
+</ul>
 
       
 
@@ -449,15 +455,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -485,11 +491,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color3">go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">go</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -549,15 +555,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">计划</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">设计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
               </li>
              
               <li class="article-tag-list-item">
