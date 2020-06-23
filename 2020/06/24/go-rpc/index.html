@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://long95288.github.io">
-  <title>Archives: 2019/5 | 风兮木落</title>
+  <title>go-rpc | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="代码和文学本来就是一个世界的，寻找文学和code的和谐统一">
-<meta property="og:type" content="website">
-<meta property="og:title" content="风兮木落">
-<meta property="og:url" content="http://long95288.github.io/archives/2019/05/index.html">
+  <meta name="description" content="Http RPC 例子rpc server123456789101112131415161718192021222324252627282930313233343536373839404142434445464748package mainimport (    &quot;errors&quot;    &quot;fmt&quot;    &quot;net/http&quot;    &quot;net/rpc&quot;)type Args struct &amp;#123;">
+<meta name="keywords" content="golang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go-rpc">
+<meta property="og:url" content="http://long95288.github.io/2020/06/24/go-rpc/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="代码和文学本来就是一个世界的，寻找文学和code的和谐统一">
+<meta property="og:description" content="Http RPC 例子rpc server123456789101112131415161718192021222324252627282930313233343536373839404142434445464748package mainimport (    &quot;errors&quot;    &quot;fmt&quot;    &quot;net/http&quot;    &quot;net/rpc&quot;)type Args struct &amp;#123;">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-06-23T16:07:43.101Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="风兮木落">
-<meta name="twitter:description" content="代码和文学本来就是一个世界的，寻找文学和code的和谐统一">
+<meta name="twitter:title" content="go-rpc">
+<meta name="twitter:description" content="Http RPC 例子rpc server123456789101112131415161718192021222324252627282930313233343536373839404142434445464748package mainimport (    &quot;errors&quot;    &quot;fmt&quot;    &quot;net/http&quot;    &quot;net/rpc&quot;)type Args struct &amp;#123;">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
   
@@ -161,144 +163,169 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-go-rpc" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      go-rpc
+    </h1>
+  
+
+        
+        <a href="/2020/06/24/go-rpc/" class="archive-article-date">
+  	<time datetime="2020-06-23T16:04:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-24</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Http-RPC-例子"><a href="#Http-RPC-例子" class="headerlink" title="Http RPC 例子"></a>Http RPC 例子</h4><h5 id="rpc-server"><a href="#rpc-server" class="headerlink" title="rpc server"></a>rpc server</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"errors"</span></span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"net/http"</span></span><br><span class="line">    <span class="string">"net/rpc"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Args <span class="keyword">struct</span> &#123;</span><br><span class="line">    A,B <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Quotient <span class="keyword">struct</span>&#123;</span><br><span class="line">    Quo, Rem <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rpc 的结构对象</span></span><br><span class="line"><span class="keyword">type</span> Arith <span class="keyword">int</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">两数相乘函数，被调用</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Arith)</span> <span class="title">Multiply</span><span class="params">(args *Args, reply *<span class="keyword">int</span>)</span> <span class="title">error</span></span>&#123;</span><br><span class="line">    *reply = args.A + args.B</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">两数相除函数，被调用</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Arith)</span> <span class="title">Divide</span><span class="params">(args *Args, quo *Quotient)</span> <span class="title">error</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> args.B == <span class="number">0</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> errors.New(<span class="string">"Divide by zero"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    quo.Quo = args.A / args.B</span><br><span class="line">    quo.Rem = args.A % args.B</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    arith := <span class="built_in">new</span>(Arith)</span><br><span class="line">    rpc.Register(arith)</span><br><span class="line">    rpc.HandleHTTP()</span><br><span class="line">    </span><br><span class="line">    err := http.ListenAndServe(<span class="string">":1234"</span>,<span class="literal">nil</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(err.Error())</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="rpc-client"><a href="#rpc-client" class="headerlink" title="rpc client"></a>rpc client</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"log"</span></span><br><span class="line">    <span class="string">"net/rpc"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Args <span class="keyword">struct</span> &#123;</span><br><span class="line">    A,B <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Quotient <span class="keyword">struct</span> &#123;</span><br><span class="line">    Quo,Rem <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   </span><br><span class="line">    client,err := rpc.DialHTTP(<span class="string">"tcp"</span>,<span class="string">"localhost:1234"</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Fatal(<span class="string">"Dialing: "</span>,err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    args := Args&#123;<span class="number">17</span>,<span class="number">8</span>&#125;</span><br><span class="line">    <span class="keyword">var</span> reply <span class="keyword">int</span></span><br><span class="line">    <span class="comment">// 远程过程调用</span></span><br><span class="line">    err = client.Call(<span class="string">"Arith.Multiply"</span>,args,&amp;reply)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Fatal(<span class="string">"arith error :"</span>,err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 输出回调信息</span></span><br><span class="line">    fmt.Printf(<span class="string">"Arith: %d * % d = %d \n"</span>,args.A,args.B,reply)</span><br><span class="line">    <span class="keyword">var</span> quot Quotient</span><br><span class="line">    err = client.Call(<span class="string">"Arith.Divide"</span>,args,&amp;quot)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Fatal(<span class="string">"arith error :"</span>,err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Printf(<span class="string">"Arith: %d / %d = %d remainder %d \n"</span>,args.A,args.B,quot.Quo,quot.Rem)</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h5><p>  使用<code>rpc.Call()</code>函数像调用本地函数一样,至于中间网络请求过程已经被隐藏了。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/25/Payload爬虫/" class="archive-article-date">
-  	<time datetime="2019-05-25T10:29:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/25/Payload爬虫/">Payload爬虫</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2020/06/24/go-rpc/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/13/扫雷项目相关笔记/" class="archive-article-date">
-  	<time datetime="2019-05-13T12:09:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-13</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/06/21/go-redis/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">go-redis</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/13/扫雷项目相关笔记/">扫雷项目相关笔记</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/07/git常用操作/" class="archive-article-date">
-  	<time datetime="2019-05-07T15:12:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/07/git常用操作/">git常用操作</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -321,8 +348,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -163,6 +163,89 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-基础算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/11/基础算法/">基础算法</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/11/基础算法/" class="archive-article-date">
+  	<time datetime="2019-08-11T12:29:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="递归实现累加和累乘"><a href="#递归实现累加和累乘" class="headerlink" title="递归实现累加和累乘"></a>递归实现累加和累乘</h4><p>1、实现n+(n-1)+(n-2)+..3+2+1<br>最佳办法是使用等差求和公式:n(n+1)/2<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 递归实现累加</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">accumulate</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">// 递归异常</span></span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">// 递归出口</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 递归的函数体</span></span><br><span class="line">        <span class="keyword">return</span> n + Solution.accumulate(n-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、实现n!<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 递归实现阶乘</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">factorial</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n&lt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> n * Solution.factorial(n-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h4><h4 id="关键路径算法"><a href="#关键路径算法" class="headerlink" title="关键路径算法"></a>关键路径算法</h4><h5 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h5><ul>
+<li>节点最早开始时间,做这项最早开工干活。可以开工干活的前提是该工序之前的全部节点(工序)已经全部完成，如果是汇聚节点。需要选择消耗时间最大的那个。因为花费时间最多的工序完成了，则花费时间少的就很不用管了(并行)。<br>使用<code>Tes(i)</code>标记为该节点i的最早开始时间。计算公式为<br><code>Tes(i)=max{Tes(i) + T(i,j)},i=1,2,3...k</code></li>
+<li>节点的最迟结束时间。<br>最迟结束时间是为了保证该节点后面的工作能够按时完成，这个工序晚点的话依赖这个工序的可能会晚点。<br>使用<code>Tlf(j)</code>标记该节点的最迟结束时间。公式为<br><code>Tlf(i) = min{Tlf(j) - T(i,j)},j=1,2,3....n</code><br>计算的时候从后面逆序计算。因为结束时间已经知道了。<ul>
+<li>节点时差 <code>S(i) = Tlf(i) - Tes(i)</code></li>
+<li>关键路径。节点时差为0的节点联结起来算为关键路径。因为这个节点不能最早开始时间和最迟结束时间是没有时间差的。关键路径上的工序为关键工序，关键工序作业时间之和就是工程的完工总工期。</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/11/基础算法/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-springBootAop使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -982,102 +1065,6 @@
 
 
   
-    <article id="post-linux环境配置和常用命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/16/linux环境配置和常用命令/">linux环境配置</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/16/linux环境配置和常用命令/" class="archive-article-date">
-  	<time datetime="2019-07-16T13:28:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Linux配置java的环境变量"><a href="#Linux配置java的环境变量" class="headerlink" title="Linux配置java的环境变量"></a>Linux配置java的环境变量</h3><p>1、找到jdk安装包的位置<br>2、打开profile文件<br><code># vim /etc/profile</code><br>3、添加如下的内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/java/jdk1.8.0_212-amd64</span><br><span class="line"><span class="built_in">export</span> JRE_HOME=/usr/java/jdk1.8.0_212-amd64/jre</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$JRE_HOME</span>/bin</span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$CLASSPATH</span>:<span class="variable">$JAVA_HOME</span>/lib:<span class="variable">$JRE_HOME</span>/lib</span><br></pre></td></tr></table></figure></p>
-<p>4、更新配置<br><code>source /etc/profile</code><br>5、使用如下命令查看是否配置成功<br><code>java -version</code><br><code>echo $JAVA_HOME</code><br>6.注意分隔符在Linux中使用:(冒号),在Windows中使用;(分号)</p>
-<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><p>一、文件夹命令</p>
-<ul>
-<li>创建同级目录<br><code>mkdir -p {a,b,c,d}</code></li>
-<li>创建嵌套<br><code>mkdir -p a/b/c</code></li>
-<li>删除同级目录<br><code>rm -rf {a,b,c}</code></li>
-<li>强制删除嵌套目录<br><code>rm -rf dictionary</code></li>
-<li>设置目录权限<br>(1) 切换目录的权限<br><code>chmod 775 abc</code><br>(2)将abc的权限赋给root(组):root(用户)<br><code>sudo chown root:root abc</code></li>
-</ul>
-<p>二、用户命令</p>
-<ul>
-<li>创建用户命令<br><code>useradd -m test</code></li>
-<li>切换用户<br><code>su test</code><h4 id="shell脚本"><a href="#shell脚本" class="headerlink" title="shell脚本"></a>shell脚本</h4>一、后台运行jar包<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar xxx.jar &gt; log.txt &amp;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>&amp;是后台运行的意思，但是关闭终端会退出<br>nohup 关闭终端不会退出<br>> log.txt 是将日志消息打印到log.txt中</p>
-<h4 id="kali-ssh配置"><a href="#kali-ssh配置" class="headerlink" title="kali ssh配置"></a>kali ssh配置</h4><p>  kali安装之后，22端口是默认关闭的，需要自己设置开启</p>
-<h5 id="一、更改配置文件"><a href="#一、更改配置文件" class="headerlink" title="一、更改配置文件"></a>一、更改配置文件</h5><p>  修改<code>/etc/ssh/sshd_config</code>文件。</p>
-<ul>
-<li>设置<code>PasswordAuthentication yes</code>,开启密码认证</li>
-<li>设置<code>PermitRootLogin yes</code>,设置可以超管登录。<h5 id="二、启动ssh服务"><a href="#二、启动ssh服务" class="headerlink" title="二、启动ssh服务"></a>二、启动ssh服务</h5>使用<code>ssh start</code>报错localhost unresolve错误。需要进入到<code>/etc/init.d/</code>文件夹中,使用命令<code>./ssh start</code>启动。<h5 id="三、设置开机自启动"><a href="#三、设置开机自启动" class="headerlink" title="三、设置开机自启动"></a>三、设置开机自启动</h5>使用命令<code>update-rc.d ssh enable</code><h5 id="四、重启系统便可以正常连接"><a href="#四、重启系统便可以正常连接" class="headerlink" title="四、重启系统便可以正常连接"></a>四、重启系统便可以正常连接</h5></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/16/linux环境配置和常用命令/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
@@ -1175,10 +1162,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">运维</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
               </li>
              
@@ -1191,11 +1174,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color3">运维</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1215,15 +1202,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">golang</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">go</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">golang</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1239,15 +1226,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1271,19 +1258,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">技术</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1292,6 +1275,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
               </li>
              
               <li class="article-tag-list-item">
