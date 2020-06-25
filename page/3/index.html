@@ -163,6 +163,99 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-longSys相关文档" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/23/longSys相关文档/">longSys相关文档</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/23/longSys相关文档/" class="archive-article-date">
+  	<time datetime="2019-10-23T14:33:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h3><p>  个人资源管理平台</p>
+<h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><p>  需要一个软件平台来管理自己日益复杂和丰富的资源。包括但不限于个人文档、积累的电子书、下载的音乐、下载的视频教程，一些常用的功能。日记、笔记等。一些相关的人工智能的资源整合。如车标识别、orc等常用的接口。未来可能要接入物联网的相关设备、由于腾讯云的服务器的存储资源有限，未来需要将自己本地的文件外挂到该平台，即可以减小服务器的开销，还可以保护文档的私密性。服务器只做数据中转，而不是数据存储。</p>
+<h4 id="一、文件管理需求"><a href="#一、文件管理需求" class="headerlink" title="一、文件管理需求"></a>一、文件管理需求</h4><ul>
+<li>该平台需要能够存储文件，解决U盘的不便携性。一些小的文档可以上传至该平台。当需要的时候可以上传和下载。大文件管理，由于设备原因，不可能将所有的文件上传到远端的服务器。所以需要一个功能，能够在该平台管理自己的本地的文件。包括，添加、删除、读取等常用功能。</li>
+<li>该平台的界面应该是非常友好的<h4 id="二、图片管理需求"><a href="#二、图片管理需求" class="headerlink" title="二、图片管理需求"></a>二、图片管理需求</h4>宅男喜欢二次元、现在积累了几个G的图片文件。但是很杂，该平台提供相册、分类的功能<ul>
+<li>相册功能 将图片分类到相册中</li>
+<li>添加、删除、修改相册。</li>
+<li>查看图片和编辑分开。<h4 id="三、音乐管理需求"><a href="#三、音乐管理需求" class="headerlink" title="三、音乐管理需求"></a>三、音乐管理需求</h4>音乐很多,想要有自己的音乐播放器，类似于网易云音乐那种。</li>
+<li>曲库 全部的音乐，可以搜索。一首歌可以放入很多的歌单中。</li>
+<li>歌单 将音乐分类，在管理界面可以添加、编辑、删除歌单</li>
+<li>上传音乐 上传的音乐会出现在曲库中，上传音乐的时候会添加相应的歌曲数据。<h4 id="四、视频管理需求"><a href="#四、视频管理需求" class="headerlink" title="四、视频管理需求"></a>四、视频管理需求</h4>视频很多、非常多。需要有效的管理<br>1、能够看视频(宽带问题，无法流畅的看视频)<br>2、用户能够根据名字搜索视频<br>3、用户能够创建自己的栏目，并且往里面添加视频(类似于blibli的收藏夹功能)<br>4、用户能够删除视频<h4 id="五、日记和笔记的需求"><a href="#五、日记和笔记的需求" class="headerlink" title="五、日记和笔记的需求"></a>五、日记和笔记的需求</h4>笔记有很多成熟的产品，但是数据不可控。自己不想把信息放在他们的服务器上。所以需要一个能够多端编写的文档的功能。数据放在自己的数据库中。支持富文本和markdown格式的语法。</li>
+<li>文档的导入和导出 可以将数据库的中笔记文档导出pdf格式，保存备份在磁盘中。</li>
+<li><h4 id="六、常用工具的需求"><a href="#六、常用工具的需求" class="headerlink" title="六、常用工具的需求"></a>六、常用工具的需求</h4>学习工作中有很多工具的需求，图片转文字、开发中json格式化、还有很多的开发手册。这些都是用得到的，并且自己已经实现了车标的识别并且建立了模型。可以将该功能整合<br>到平台中<br>1、二维码工具。能够根据字符串生成二维码，也能识别二维码为字符串。<br>2、车标识别工具。能够根据上传的图片识别相应的车标。<br>3、<h4 id="七、物联网设备管理需求"><a href="#七、物联网设备管理需求" class="headerlink" title="七、物联网设备管理需求"></a>七、物联网设备管理需求</h4>未来自己会将家里的物联网的设备挂在该平台中，并且能够在该平台进行管理。空调、冰箱、台灯、电视机。自己梦想中的家。需要一个同一的管理平台，而不是各自为政。<br>添加设备，每个设备都有自己的id码，并且有相应的命令。<h4 id="八、计划跟踪平台"><a href="#八、计划跟踪平台" class="headerlink" title="八、计划跟踪平台"></a>八、计划跟踪平台</h4>用来记录自己的计划和执行情况，主要借鉴TODO List的功能<br>添加计划，一个计划会有开始时间、截止时间、完成时间(用户完成)，具体内容，轻重缓急。<br>编辑、删除计划，只有未开始的计划才能编辑和删除<br>生成报表，可以按周、按月生成报表。记录计划的预计完成时间和实际完成时间，计算完成工作计划的轻重缓急的比例。<h3 id="概要设计"><a href="#概要设计" class="headerlink" title="概要设计"></a>概要设计</h3></li>
+</ul>
+</li>
+</ul>
+<h3 id="详细设计"><a href="#详细设计" class="headerlink" title="详细设计"></a>详细设计</h3><h3 id="平台原型"><a href="#平台原型" class="headerlink" title="平台原型"></a>平台原型</h3><h3 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件设计</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/23/longSys相关文档/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-book118预览文档下载" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -949,139 +1042,9 @@
 
 
   
-    <article id="post-Redis笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/04/Redis笔记/">Redis笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/04/Redis笔记/" class="archive-article-date">
-  	<time datetime="2019-09-04T13:24:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Redis拿来干什么？"><a href="#Redis拿来干什么？" class="headerlink" title="Redis拿来干什么？"></a>Redis拿来干什么？</h3><p> redis是运行在内存的软件。速度快，完全基于内存。使用C语言实现，网络层使用epoll解决高并发问题。单线程模型，避免不必要的上下文切换和竞争条件浪费资源。Redis可以用在下面的场景。<br>1、缓存。常用的功能<br>2、数据排序 使用Redis的SortSet数据结构能够非常方便搞定<br>3、计算器/请求限流 秒杀的时候,将数据缓存在Redis中。减少数据库的频繁读写。<br>4、使用集合的命令获得相关的数据<br>5、简单的消息队列。使用Redis的list实现消息队列<br>6、Session共享、token实现单点验证</p>
-<h3 id="Redis数据类型"><a href="#Redis数据类型" class="headerlink" title="Redis数据类型"></a>Redis数据类型</h3><p>Redis提供8种数据类型，常用的主要是String、Hash、List、Set、SortSet这5种类型。另外还有BitMap-位图、HyperLogLog、GEO-地理信息定位。<br>存储的为Key-Value的值。</p>
-<h3 id="Redis常用命令"><a href="#Redis常用命令" class="headerlink" title="Redis常用命令"></a>Redis常用命令</h3><h4 id="1、基本操作"><a href="#1、基本操作" class="headerlink" title="1、基本操作"></a>1、基本操作</h4><ul>
-<li>启动Redis<br><code>./redis-server ../redis.conf</code></li>
-<li>启动Redis的脚本工具<br><code>./redis-cli</code></li>
-<li>存储数据的命令<br><code>&gt; set mykey myvalue</code><br>使用set语句 后面加上key值和value值</li>
-<li>查看是否含有某个key值<br><code>&gt; exists mykey</code><br>如果存在返回1 如果不存在返回0</li>
-<li>获得key值对应的value<br><code>&gt; get mykey</code></li>
-<li>查看key值对应的数据类型<br><code>&gt; type mykey</code><br>如果是字符型返回string</li>
-<li>使用正则匹配查找对应的数据<br><code>&gt; keys my*</code><br>查找含有my开头的key。查到返回对应的key列表。找不到返回empty list or set</li>
-<li>删除对应的key值<br><code>&gt; del key</code><br>也可以使用正则匹配来删除<br><code>&gt; del key*</code></li>
-<li>随机获得一个key<br><code>&gt; randomkey</code></li>
-<li>清除所有的key值<br><code>&gt; clear</code></li>
-<li>重命名key值<br><code>&gt; rename newkey oldkey</code></li>
-<li>查看当前的数据库的大小<br><code>&gt; dbsize</code><h4 id="2、Redis时间过期相关的命令"><a href="#2、Redis时间过期相关的命令" class="headerlink" title="2、Redis时间过期相关的命令"></a>2、Redis时间过期相关的命令</h4></li>
-<li>限定key的生存时间<br><code>&gt; expire key 20</code>设置key值20秒后过期</li>
-<li>查看过期时间<br><code>&gt; ttl key</code> 查看key的值还有多少秒过期<br>过期后会返回-2</li>
-<li>清除整个db<br><code>&gt; flushdb</code><br><code>&gt; flushall</code><h4 id="3、配置Redis的命令"><a href="#3、配置Redis的命令" class="headerlink" title="3、配置Redis的命令"></a>3、配置Redis的命令</h4></li>
-<li>配置requirepass<br>获得账号名<br><code>&gt; config get requirepass</code><br>设置密码<br><code>&gt; config set requirepass test123</code></li>
-<li><p>使用密码验证<br><code>&gt; auth test123</code><br>重新查看账号<br><code>&gt; config get requirepass</code><br>返回值如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1) &quot;requirepass&quot;</span><br><span class="line">2) &quot;test123&quot;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>获得实体存储的相关命令<br><code>&gt; config get *max-*-entries*</code><br>返回的数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1) &quot;hash-max-ziplist-entries&quot;</span><br><span class="line">2) &quot;512&quot;</span><br><span class="line">3) &quot;set-max-intset-entries&quot;</span><br><span class="line">4) &quot;512&quot;</span><br><span class="line">6) &quot;zset-max-ziplist-entries&quot;</span><br><span class="line">7) &quot;128&quot;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重置配置<br><code>&gt; config resetstat</code></p>
-</li>
-<li>服务器的信息<br><code>&gt; info server</code></li>
-<li>连接客户端的信息<br><code>&gt; info client</code></li>
-<li>内存的信息<br><code>&gt; info memory</code></li>
-<li>持久层数据<br><code>&gt; info persistence</code></li>
-<li>状态的数据<br><code>&gt; info stats</code></li>
-<li>从节点的信息<br><code>&gt; info replication</code></li>
-<li>cpu的信息<br><code>&gt; info cpu</code><h4 id="4、配置文件配置账号"><a href="#4、配置文件配置账号" class="headerlink" title="4、配置文件配置账号"></a>4、配置文件配置账号</h4>在配置文件redis.conf的文件中。在<code>requirepass</code>后面加上需要验证的密码<br>如:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">requirepass test1234</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>重启redis服务器之后进入命令行就要使用<br><code>auth test1234</code> 来验证了</p>
-<h4 id="5、事务的处理"><a href="#5、事务的处理" class="headerlink" title="5、事务的处理"></a>5、事务的处理</h4><p>使用<code>multi</code>命令开启一个事务<br>然后接下来可以进行一些命令的操作<br>使用<code>exec</code>命令批量执行操作</p>
-<h4 id="6、持久化的操作"><a href="#6、持久化的操作" class="headerlink" title="6、持久化的操作"></a>6、持久化的操作</h4><p>将内存中的数据存储到磁盘文件中<br>使用<code>save</code>命令</p>
-<h3 id="使用Jedis来访问redis"><a href="#使用Jedis来访问redis" class="headerlink" title="使用Jedis来访问redis"></a>使用Jedis来访问redis</h3><h4 id="1、maven添加依赖"><a href="#1、maven添加依赖" class="headerlink" title="1、maven添加依赖"></a>1、maven添加依赖</h4><p>引入redis的依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<h4 id="2、连接和配置redis"><a href="#2、连接和配置redis" class="headerlink" title="2、连接和配置redis"></a>2、连接和配置redis</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># Redis 配置</span><br><span class="line">spring.redis.jedis.pool.max-idle=<span class="number">10</span></span><br><span class="line">spring.redis.jedis.pool.max-active=<span class="number">10</span></span><br><span class="line">spring.redis.jedis.pool.min-idle=<span class="number">5</span></span><br><span class="line">spring.redis.jedis.pool.max-wait=<span class="number">2000</span></span><br><span class="line">#配置Redis服务器属性</span><br><span class="line">spring.redis.port=<span class="number">6379</span></span><br><span class="line">spring.redis.host=<span class="number">49.234</span>.180.69</span><br><span class="line"># 连接的密码</span><br><span class="line">spring.redis.password=password</span><br><span class="line"># 连接超时设置</span><br><span class="line">spring.redis.timeout=<span class="number">1000</span></span><br><span class="line"></span><br><span class="line"># 缓存配置</span><br><span class="line">spring.cache.type=redis</span><br><span class="line">spring.cache.cache-names=redisCache</span><br></pre></td></tr></table></figure>
-<h4 id="3、java中配置Redis的操作对象"><a href="#3、java中配置Redis的操作对象" class="headerlink" title="3、java中配置Redis的操作对象"></a>3、java中配置Redis的操作对象</h4><p>1、在启用类的类头哪里使用<code>@EnableCaching</code>注解开启redis<br>2、获得redis的模板对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 注入RedisTemplate对象</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> RedisTemplate redisTemplate = <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure></p>
-<p>3、在bean的构造函数中初始化模板。主要是用来设置序列化的方式<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostConstruct</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    initRedisTemplate();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>初始化方法如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 设置RedisTemplate的序列化器</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initRedisTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    RedisSerializer stringSerializer = redisTemplate.getStringSerializer();</span><br><span class="line">    redisTemplate.setKeySerializer(stringSerializer);</span><br><span class="line">    redisTemplate.setHashKeySerializer(stringSerializer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>4、使用redis的模板来操作redis<br>涉及到的函数为</p>
-<ul>
-<li><code>boolean hashKey = redisTemplate.hasKey(key)</code> 判断redis中是否含有key值</li>
-<li>获得操作Redis对象的函数，其中的Dictionary是放进去的对象，redis会自动完成ORM的<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ValueOperations&lt;String,Dictionary&gt; operations = redisTemplate.opsForValue();</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>设置key对应的值<br><code>operations.set(key,dictionary,timeout,TimeUnit.HOURS);</code><br>key为对应的String类型的key值。<br><code>dictionary</code>为设置到缓存的对象。会被序列化为stirng类型。<br><code>timeout</code>为过期时间,long类型<br><code>TimeUnit.HOURS</code>是timeout的单位.可以设置纳秒、微秒、分钟、小时、天等。</p>
-<h3 id="缓存穿透和缓存雪崩"><a href="#缓存穿透和缓存雪崩" class="headerlink" title="缓存穿透和缓存雪崩"></a>缓存穿透和缓存雪崩</h3><h4 id="1、缓存穿透"><a href="#1、缓存穿透" class="headerlink" title="1、缓存穿透"></a>1、缓存穿透</h4><p>  如何理解缓存穿透，缓存原本是放在数据库读写之前的一层缓存。用来减少数据库的io。穿透就是数据直接穿透缓存访问数据库，可以理解为缓存被穿透了。什么时候会导致缓存穿透？为什么会出现缓存穿透？读写数据的时候没有在redis中命中数据。导致访问数据库。没有命中数据 -&gt; 访问数据库。缓存的命中率太低了,导致缓存不起作用。这样就出现缓存穿透</p>
-<h4 id="2、缓存雪崩"><a href="#2、缓存雪崩" class="headerlink" title="2、缓存雪崩"></a>2、缓存雪崩</h4><p>  什么是缓存雪崩?在某一时间段，缓存中的数据集体失效，导致大量的数据库出现大量的io请求。缓存中数据在同一时间失效。这就是缓存的雪崩，缓存雪崩可能会导致数据库的崩溃。如何避免缓存雪崩？雪崩的原因是同一时间失效，设置随机失效时间。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/04/Redis笔记/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 
@@ -1176,6 +1139,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">运维</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
               </li>
              
@@ -1184,27 +1159,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">运维</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1216,7 +1179,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">go</a>
+                <a href="javascript:void(0)" class="js-tag color2">golang</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1224,7 +1187,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">golang</a>
+                <a href="javascript:void(0)" class="js-tag color3">go</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1240,11 +1203,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1252,11 +1215,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">aria2c</a>
+                <a href="javascript:void(0)" class="js-tag color3">问题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">问题</a>
+                <a href="javascript:void(0)" class="js-tag color2">aria2c</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1272,15 +1235,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">技术</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1289,10 +1256,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">设计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
               </li>
              
               <li class="article-tag-list-item">
