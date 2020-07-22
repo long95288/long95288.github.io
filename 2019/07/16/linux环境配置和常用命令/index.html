@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="Linux配置java的环境变量1、找到jdk安装包的位置2、打开profile文件# vim /etc/profile3、添加如下的内容1234export JAVA_HOME=/usr/java/jdk1.8.0_212-amd64export JRE_HOME=/usr/java/jdk1.8.0_212-amd64/jreexport PATH=$PATH:$JAVA_HOME/bin:$">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-20T13:50:06.313Z">
+<meta property="og:updated_time" content="2020-07-22T15:19:45.911Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux环境配置">
 <meta name="twitter:description" content="Linux配置java的环境变量1、找到jdk安装包的位置2、打开profile文件# vim /etc/profile3、添加如下的内容1234export JAVA_HOME=/usr/java/jdk1.8.0_212-amd64export JRE_HOME=/usr/java/jdk1.8.0_212-amd64/jreexport PATH=$PATH:$JAVA_HOME/bin:$">
@@ -211,6 +211,8 @@
 <h4 id="查看磁盘ID"><a href="#查看磁盘ID" class="headerlink" title="查看磁盘ID"></a>查看磁盘ID</h4><p><code>blkid</code>为查看磁盘命令<br><code>blkid /dev/sdc</code> </p>
 <h4 id="开机自动挂载"><a href="#开机自动挂载" class="headerlink" title="开机自动挂载"></a>开机自动挂载</h4><p>  需要修改<code>/etc/fstab</code><br>  参数如下<br><code>&lt;file system&gt;，&lt;mount point&gt;，&lt;type&gt;，&lt;options&gt;，&lt;dump&gt;，&lt;pass&gt;</code><br><code>&lt;file system&gt;</code> 配置好磁盘<code>UUID</code><br><code>mount point</code> 挂载路径，这个路径必须事先存在<br><code>type</code> 硬盘的文件系统类型,ntfs、ext4、fat、vfat<br><code>option</code>配置磁盘选项<br>  选项  |  说明<br>  :-: |   :-:<br>  defaults|use default options: rw, suid, dev, exec, auto, nouser, and async<br>noauto|do not mount when “mount -a” is given (e.g., at boot time)<br>user|allow a user to mount<br>owner|allow device owner to mount<br>comment or x-|for use by fstab-maintaining programs<br>nofail|do not report errors for this device if it does not exist</p>
 <p><code>dump</code> 备份，默认值为0<br><code>pass</code> 1自动扫描，0不扫描</p>
+<h4 id="Ubuntu手动安装软件创建快捷方式"><a href="#Ubuntu手动安装软件创建快捷方式" class="headerlink" title="Ubuntu手动安装软件创建快捷方式"></a>Ubuntu手动安装软件创建快捷方式</h4><p>  下载二进制Typora软件,想设置为markdown文件的默认打开器。<br>创建<code>typora.desktop</code>文件放置在<code>/usr/share/applications/</code>文件夹中。typora.desktop的文件内容如下。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Encoding=UTF-8</span><br><span class="line">Name = Typora</span><br><span class="line">GenericName=Editor</span><br><span class="line">Comment=Typora-a markdown editor</span><br><span class="line">Exec=&quot;/opt/Typora-linux-x64/Typora&quot; %U</span><br><span class="line">Icon=/opt/Typora-linux-x64/resources/app/asserts/icon/icon_256x256@2x.png</span><br><span class="line">Terminal=false</span><br><span class="line">Categories=MarkDown;</span><br><span class="line">StartupNotify=false</span><br><span class="line">Type=Application</span><br></pre></td></tr></table></figure></p>
+<p>创建成功之后可以在软件中心中查询到,也可以添加入收藏夹。</p>
 
       
 
@@ -456,15 +458,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -492,11 +494,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">golang</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color2">golang</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -560,10 +562,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">计划</a>
               </li>
              
@@ -572,11 +570,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -585,6 +583,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">String</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
