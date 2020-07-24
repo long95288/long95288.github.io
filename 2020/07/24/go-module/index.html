@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://long95288.github.io">
-  <title>vmware出现Device/Credential Guard问题 | 风兮木落</title>
+  <title>go-module | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="问题描述今日开启vmware的时候,出现Device/Credential Guard.问题如下所示 解决办法 由于之前开启了windows 的沙箱模式。先将程序与功能中的沙箱给禁用了。然后cmd(管理员模式)输入如下代码。bcdedit /set hypervisorlanuchtype off重启计算机,成功进入虚拟机">
-<meta name="keywords" content="笔记,问题">
+  <meta name="description" content="go module介绍​    go module 是从1.11版本开始支持的官方包管理工具。不用go module的话，所有的项目必须在gopath下创建，版本依赖无法处理。通过使用go module可以摆脱GoPath开发，可以通过配置go.mod文件来自已定义依赖包的版本。 go module的三种模式 off、on、auto    模式 说明     off 关闭，使用在GoPath下开发">
+<meta name="keywords" content="笔记,golang">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vmware出现Device&#x2F;Credential Guard问题">
-<meta property="og:url" content="http://long95288.github.io/2020/03/27/vmware出现Device-Credential-Guard问题/index.html">
+<meta property="og:title" content="go-module">
+<meta property="og:url" content="http://long95288.github.io/2020/07/24/go-module/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="问题描述今日开启vmware的时候,出现Device/Credential Guard.问题如下所示 解决办法 由于之前开启了windows 的沙箱模式。先将程序与功能中的沙箱给禁用了。然后cmd(管理员模式)输入如下代码。bcdedit /set hypervisorlanuchtype off重启计算机,成功进入虚拟机">
+<meta property="og:description" content="go module介绍​    go module 是从1.11版本开始支持的官方包管理工具。不用go module的话，所有的项目必须在gopath下创建，版本依赖无法处理。通过使用go module可以摆脱GoPath开发，可以通过配置go.mod文件来自已定义依赖包的版本。 go module的三种模式 off、on、auto    模式 说明     off 关闭，使用在GoPath下开发">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://long95288.github.io/2020/03/27/vmware出现Device-Credential-Guard问题/problem.jpg">
-<meta property="og:updated_time" content="2020-03-27T13:18:16.542Z">
+<meta property="og:updated_time" content="2020-07-24T14:10:21.833Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vmware出现Device&#x2F;Credential Guard问题">
-<meta name="twitter:description" content="问题描述今日开启vmware的时候,出现Device/Credential Guard.问题如下所示 解决办法 由于之前开启了windows 的沙箱模式。先将程序与功能中的沙箱给禁用了。然后cmd(管理员模式)输入如下代码。bcdedit /set hypervisorlanuchtype off重启计算机,成功进入虚拟机">
-<meta name="twitter:image" content="http://long95288.github.io/2020/03/27/vmware出现Device-Credential-Guard问题/problem.jpg">
+<meta name="twitter:title" content="go-module">
+<meta name="twitter:description" content="go module介绍​    go module 是从1.11版本开始支持的官方包管理工具。不用go module的话，所有的项目必须在gopath下创建，版本依赖无法处理。通过使用go module可以摆脱GoPath开发，可以通过配置go.mod文件来自已定义依赖包的版本。 go module的三种模式 off、on、auto    模式 说明     off 关闭，使用在GoPath下开发">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
   
@@ -165,29 +163,135 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-vmware出现Device-Credential-Guard问题" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-go-module" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      vmware出现Device/Credential Guard问题
+      go-module
     </h1>
   
 
         
-        <a href="/2020/03/27/vmware出现Device-Credential-Guard问题/" class="archive-article-date">
-  	<time datetime="2020-03-27T12:59:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-27</time>
+        <a href="/2020/07/24/go-module/" class="archive-article-date">
+  	<time datetime="2020-07-24T14:08:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>今日开启vmware的时候,出现Device/Credential Guard.问题如下所示<br><img src="/2020/03/27/vmware出现Device-Credential-Guard问题/problem.jpg" alt="问题截图"></p>
-<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p> 由于之前开启了windows 的沙箱模式。先将程序与功能中的沙箱给禁用了。然后cmd(管理员模式)输入如下代码。<br><code>bcdedit /set hypervisorlanuchtype off</code><br>重启计算机,成功进入虚拟机</p>
-
+        <h4 id="go-module介绍"><a href="#go-module介绍" class="headerlink" title="go module介绍"></a>go module介绍</h4><p>​    go module 是从1.11版本开始支持的官方包管理工具。不用go module的话，所有的项目必须在gopath下创建，版本依赖无法处理。通过使用go module可以摆脱GoPath开发，可以通过配置go.mod文件来自已定义依赖包的版本。</p>
+<h4 id="go-module的三种模式"><a href="#go-module的三种模式" class="headerlink" title="go module的三种模式"></a>go module的三种模式</h4><p> <code>off</code>、<code>on</code>、<code>auto</code></p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>off</td>
+<td>关闭，使用在GoPath下开发的模式</td>
+</tr>
+<tr>
+<td>on</td>
+<td>开启module,默认开启</td>
+</tr>
+<tr>
+<td>auto</td>
+<td>项目在GoPath之外，根目录有go.mod文件</td>
+</tr>
+</tbody>
+</table>
+<p>可以在系统环境变量中配置如下变量:<code>GO111MODULE=auto</code></p>
+<p>使用go module必须使用代理才能顺利的上网，环境变量中配置代理。需要配置如下的环境变量</p>
+<p><code>GOPROXY=https://goproxy.cn,direct</code></p>
+<p>go1.13之后GOPROXY的默认值是<code>https://proxy.golang.org</code>,国内无法访问。</p>
+<h4 id="go-mod-常用命令"><a href="#go-mod-常用命令" class="headerlink" title="go mod 常用命令"></a>go mod 常用命令</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">go mod init [modulename]</td>
+<td style="text-align:left">创建go.mod文件，如果该项目是在GoPath下面的，不用自己指定包名。如果不是在GoPath下的项目，必须提供包名，否则无法创建。</td>
+</tr>
+<tr>
+<td style="text-align:center">go mod download</td>
+<td style="text-align:left">根据go.mod文件下载依赖。</td>
+</tr>
+<tr>
+<td style="text-align:center">go mod tidy</td>
+<td style="text-align:left">整理依赖项，代码中用不到的依赖会被删除，新的依赖会被下载。</td>
+</tr>
+<tr>
+<td style="text-align:center">go mod graph</td>
+<td style="text-align:left">打印模块依赖</td>
+</tr>
+<tr>
+<td style="text-align:center">go mod vendor</td>
+<td style="text-align:left">将依赖复制到vendor下</td>
+</tr>
+<tr>
+<td style="text-align:center">go mod why</td>
+<td style="text-align:left">为什么需要依赖</td>
+</tr>
+<tr>
+<td style="text-align:center">go mod edit -fmt</td>
+<td style="text-align:left">格式化go.mod文件</td>
+</tr>
+<tr>
+<td style="text-align:center">go mod edit -require=golang.xx.xx</td>
+<td style="text-align:left">添加依赖项</td>
+</tr>
+</tbody>
+</table>
+<h4 id="go-mod文件"><a href="#go-mod文件" class="headerlink" title="go.mod文件"></a>go.mod文件</h4><p>go.mod文件中包含该项目所有的依赖信息，和Java项目中的pom.xml文件类似。</p>
+<p>以下为常用关键字和说明</p>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>关键字说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>module</td>
+<td>包名说明</td>
+</tr>
+<tr>
+<td>require</td>
+<td>项目的依赖包及版本</td>
+</tr>
+<tr>
+<td>indirect</td>
+<td>间接引用</td>
+</tr>
+<tr>
+<td>replace</td>
+<td>依赖替换</td>
+</tr>
+</tbody>
+</table>
+<h4 id="go-module导入本地包"><a href="#go-module导入本地包" class="headerlink" title="go module导入本地包"></a>go module导入本地包</h4><h5 id="一、同一个项目下"><a href="#一、同一个项目下" class="headerlink" title="一、同一个项目下"></a>一、同一个项目下</h5><p>一个项目有如下的目录结构，main.go需要引用subpackage中的sb.go中的函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── go.mod</span><br><span class="line">├── main.go</span><br><span class="line">├── subpackage</span><br><span class="line">│   └── sb.go</span><br></pre></td></tr></table></figure>
+<p>go.mod文件不用任何配置，只需要在main.go中添加<code>import &quot;package1/subpackage&quot;</code>便可以引用了。</p>
+<h5 id="二、不同项目下"><a href="#二、不同项目下" class="headerlink" title="二、不同项目下"></a>二、不同项目下</h5><p>有如下的目录结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── moduledemo</span><br><span class="line">│   ├── go.mod</span><br><span class="line">│   └── main.go</span><br><span class="line">├── package1</span><br><span class="line">│   ├── go.mod</span><br><span class="line">│   └── package1.go</span><br><span class="line">├── package2</span><br><span class="line">│   ├── go.mod</span><br><span class="line">│   └── package2.go</span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<p>在mouledemo项目main.go中想要调用package1包中的函数。需要在module项目的go.mod中添加如下配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">require package1 v0.0.0</span><br><span class="line">replace package1 =&gt; ../package1</span><br></pre></td></tr></table></figure>
+<p>在main.go文件中导入，<code>import &quot;package1&quot;</code>便可以调用package1中的内容了。</p>
+<p><strong>极端调用</strong>：在main.go中导入了<code>&quot;subprint.com/sbp&quot;</code>项目,并取别名为<code>sbp</code>，但是这个项目并不在goPath中，也不在网上，而是在本地的package2中。需要在go.mod中配置如下信息便可以调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">require subprint.com/sbp v0.0.0</span><br><span class="line">replace subprint.com/sbp =&gt; ../package2</span><br></pre></td></tr></table></figure>
       
 
       
@@ -225,7 +329,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">问题</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
         		</li>
       		
 		</ul>
@@ -281,7 +385,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2020/03/27/vmware出现Device-Credential-Guard问题/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2020/07/24/go-module/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -295,18 +399,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/09/Mysql大小写问题/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Mysql大小写问题
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/03/23/cmd命令问题总结/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">cmd命令问题总结</div>
+    <a href="/2020/07/23/go-reflect/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">go-reflect</div>
       <i class="icon-circle-right"></i>
     </a>
   
