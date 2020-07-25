@@ -458,6 +458,8 @@
 <p><code>dump</code> 备份，默认值为0<br><code>pass</code> 1自动扫描，0不扫描</p>
 <h4 id="Ubuntu手动安装软件创建快捷方式"><a href="#Ubuntu手动安装软件创建快捷方式" class="headerlink" title="Ubuntu手动安装软件创建快捷方式"></a>Ubuntu手动安装软件创建快捷方式</h4><p>  下载二进制Typora软件,想设置为markdown文件的默认打开器。<br>创建<code>typora.desktop</code>文件放置在<code>/usr/share/applications/</code>文件夹中。typora.desktop的文件内容如下。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Encoding=UTF-8</span><br><span class="line">Name = Typora</span><br><span class="line">GenericName=Editor</span><br><span class="line">Comment=Typora-a markdown editor</span><br><span class="line">Exec=&quot;/opt/Typora-linux-x64/Typora&quot; %U</span><br><span class="line">Icon=/opt/Typora-linux-x64/resources/app/asserts/icon/icon_256x256@2x.png</span><br><span class="line">Terminal=false</span><br><span class="line">Categories=MarkDown;</span><br><span class="line">StartupNotify=false</span><br><span class="line">Type=Application</span><br></pre></td></tr></table></figure></p>
 <p>创建成功之后可以在软件中心中查询到,也可以添加入收藏夹。</p>
+<h4 id="Ubuntu-安装证书"><a href="#Ubuntu-安装证书" class="headerlink" title="Ubuntu 安装证书"></a>Ubuntu 安装证书</h4><p>(1) 获得crt证书<br>(2) 将证书放入<code>/usr/local/share/ca-certificates/</code>文件夹中<br>(3) 赋予证书644权限<br>(4) 更新证书<code>sudo update-ca-certificates</code></p>
+<h4 id="修改dash为bash"><a href="#修改dash为bash" class="headerlink" title="修改dash为bash"></a>修改dash为bash</h4><p>(1) 查询当前使用壳是哪一个？<code>ls -l /bin/sh</code> 返回<code>/bin/sh-&gt;dash</code>说明使用dash<br>(2) 修改为<code>bash</code>,<code>sudo dpkg-recofigure dash</code> 在页面中选择<strong>否</strong>。</p>
 
       
 
@@ -1207,18 +1209,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">运维</a>
               </li>
              
@@ -1227,15 +1217,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1247,11 +1249,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color2">golang</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">golang</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1279,11 +1281,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1295,15 +1297,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">注册列表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1323,15 +1325,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">计划</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
