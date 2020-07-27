@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="Linux配置java的环境变量1、找到jdk安装包的位置2、打开profile文件# vim /etc/profile3、添加如下的内容1234export JAVA_HOME=/usr/java/jdk1.8.0_212-amd64export JRE_HOME=/usr/java/jdk1.8.0_212-amd64/jreexport PATH=$PATH:$JAVA_HOME/bin:$">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-25T13:45:31.263Z">
+<meta property="og:updated_time" content="2020-07-27T15:07:55.472Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux环境配置">
 <meta name="twitter:description" content="Linux配置java的环境变量1、找到jdk安装包的位置2、打开profile文件# vim /etc/profile3、添加如下的内容1234export JAVA_HOME=/usr/java/jdk1.8.0_212-amd64export JRE_HOME=/usr/java/jdk1.8.0_212-amd64/jreexport PATH=$PATH:$JAVA_HOME/bin:$">
@@ -215,6 +215,11 @@
 <p>创建成功之后可以在软件中心中查询到,也可以添加入收藏夹。</p>
 <h4 id="Ubuntu-安装证书"><a href="#Ubuntu-安装证书" class="headerlink" title="Ubuntu 安装证书"></a>Ubuntu 安装证书</h4><p>(1) 获得crt证书<br>(2) 将证书放入<code>/usr/local/share/ca-certificates/</code>文件夹中<br>(3) 赋予证书644权限<br>(4) 更新证书<code>sudo update-ca-certificates</code></p>
 <h4 id="修改dash为bash"><a href="#修改dash为bash" class="headerlink" title="修改dash为bash"></a>修改dash为bash</h4><p>(1) 查询当前使用壳是哪一个？<code>ls -l /bin/sh</code> 返回<code>/bin/sh-&gt;dash</code>说明使用dash<br>(2) 修改为<code>bash</code>,<code>sudo dpkg-recofigure dash</code> 在页面中选择<strong>否</strong>。</p>
+<h4 id="配置SSH"><a href="#配置SSH" class="headerlink" title="配置SSH"></a>配置SSH</h4><p>使用命令<code>ssh-keygen -t rsa</code>生成公钥和私钥。位于<code>~/.ssh</code>中。</p>
+<ul>
+<li>使用ssh登录<code>ssh user@remote-host</code></li>
+<li>使用私钥登录<br><code>ssh -i &quot;xxxx.pem&quot; user@remote-host</code></li>
+</ul>
 
       
 
@@ -472,15 +477,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -496,6 +501,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">golang</a>
               </li>
              
@@ -504,7 +513,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -513,10 +522,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">go</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -532,11 +537,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -572,10 +577,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">计划</a>
               </li>
              
@@ -584,11 +585,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -597,6 +598,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">String</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
