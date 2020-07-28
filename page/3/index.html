@@ -185,7 +185,8 @@
       
         <h3 id="QSS-语法规则"><a href="#QSS-语法规则" class="headerlink" title="QSS 语法规则"></a>QSS 语法规则</h3><p>  Qss 和CSS 几乎是相同的。都是由选择器(Selector)+声明(Declaration)。使用使用”属性:值”对设置。使用分号分隔数据(“;”),例如.设置背景颜色和字体颜色<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">QPushButton</span>&#123;</span><br><span class="line">  <span class="attribute">color</span>:red;</span><br><span class="line">  <span class="attribute">background-color</span>:red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="如何加载QSS到相应的组件中？"><a href="#如何加载QSS到相应的组件中？" class="headerlink" title="如何加载QSS到相应的组件中？"></a>如何加载QSS到相应的组件中？</h3><p>  调用组件(QWidget)中的<code>setStyleSheet()</code>来设置样式。样式的具有继承，如果对最上层的(QWidget)设置，该QWidget中有相应的组件被选择便会被设置。</p>
-<h3 id="QSS-选择器"><a href="#QSS-选择器" class="headerlink" title="QSS 选择器"></a>QSS 选择器</h3><h4 id="1、通配选择器-，匹配所有控件"><a href="#1、通配选择器-，匹配所有控件" class="headerlink" title="1、通配选择器: *，匹配所有控件"></a>1、通配选择器: *，匹配所有控件</h4><h4 id="2、类型选择器"><a href="#2、类型选择器" class="headerlink" title="2、类型选择器"></a>2、类型选择器</h4><p>  使用<code>QPushButton</code>,<code>QLineEdit</code>。这种特定的控件类型。<br>  QPushButton 会匹配到QPushButton类和子类的实例。</p>
+<h3 id="QSS-选择器"><a href="#QSS-选择器" class="headerlink" title="QSS 选择器"></a>QSS 选择器</h3><h4 id="1、通配选择器-，"><a href="#1、通配选择器-，" class="headerlink" title="1、通配选择器: *，"></a>1、通配选择器: *，</h4><p>  匹配所有控件</p>
+<h4 id="2、类型选择器"><a href="#2、类型选择器" class="headerlink" title="2、类型选择器"></a>2、类型选择器</h4><p>  使用<code>QPushButton</code>,<code>QLineEdit</code>。这种特定的控件类型。<br>  QPushButton 会匹配到QPushButton类和子类的实例。</p>
 <p>  如果想要几种类型的控件设置相同的样式。可以使用”,”来控制。例如:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">QPushButton</span>,<span class="selector-tag">QLineEdit</span>,<span class="selector-tag">QCombox</span> &#123;<span class="attribute">color</span>:blue&#125;</span><br></pre></td></tr></table></figure></p>
 <p>等价于:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">QPushButton</span> &#123;<span class="attribute">color</span>:blue&#125;</span><br><span class="line"><span class="selector-tag">QLineEdit</span> &#123;<span class="attribute">color</span>:blue&#125;</span><br><span class="line"><span class="selector-tag">QCombox</span> &#123;<span class="attribute">color</span>:blue&#125;</span><br></pre></td></tr></table></figure></p>
 <h4 id="3、属性选择器。"><a href="#3、属性选择器。" class="headerlink" title="3、属性选择器。"></a>3、属性选择器。</h4><p>  属性选择器是最灵活的，选择颗粒的到某一个单一控件的。例如:</p>
@@ -1159,7 +1160,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1167,11 +1168,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1183,7 +1184,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1203,15 +1204,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">反射</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gin</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1220,6 +1217,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1243,11 +1244,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">问题</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color3">问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1263,11 +1264,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1279,11 +1284,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1292,10 +1297,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">String</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
