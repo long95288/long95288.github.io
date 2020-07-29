@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="golang连接mysql数据库简单demo 引入相关依赖包123456import (  &quot;database/sql&quot;  &quot;fmt&quot;  _ &quot;github.com/go-sql-driver/mysql&quot;) 初始化连接1234567891011121314151617var db *sql.DBfunc initDB() (error) &amp;#123;  dsn := &quot;user:passwo">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-28T14:14:08.029Z">
+<meta property="og:updated_time" content="2020-07-29T15:13:23.571Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="go-mysql">
 <meta name="twitter:description" content="golang连接mysql数据库简单demo 引入相关依赖包123456import (  &quot;database/sql&quot;  &quot;fmt&quot;  _ &quot;github.com/go-sql-driver/mysql&quot;) 初始化连接1234567891011121314151617var db *sql.DBfunc initDB() (error) &amp;#123;  dsn := &quot;user:passwo">
@@ -194,6 +194,7 @@
 <h5 id="查询多条数据"><a href="#查询多条数据" class="headerlink" title="查询多条数据"></a>查询多条数据</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">QueryMultiDemo</span><span class="params">()</span></span>&#123;</span><br><span class="line">  sqlStr := <span class="string">"select id,name,age from user where id &gt; ?"</span></span><br><span class="line">  rows,err := db.Query(sqlStr,<span class="number">1</span>)</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"query failed,err :%v\n"</span>,err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">defer</span> rows.Close()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> rows.Next()&#123;</span><br><span class="line">    <span class="keyword">var</span> u User</span><br><span class="line">    err := rows.Scan(&amp;u.id,&amp;u.name,&amp;u.age)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">      fmt.Printf(<span class="string">"Scan failed,err:\v\n"</span>,err)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Printf(<span class="string">"u:%v"</span>,u)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5 id="带预处理的查询"><a href="#带预处理的查询" class="headerlink" title="带预处理的查询"></a>带预处理的查询</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">PrepareQueryDemo</span><span class="params">()</span></span>  &#123;</span><br><span class="line">  sqlStr := <span class="string">"Select id,name,age from user where id &gt; ?"</span></span><br><span class="line">  stmt,err := db.Prepare(sqlStr)</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"Prepare failed,err :%v \n"</span>,err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">defer</span> stmt.Close()</span><br><span class="line">  <span class="comment">// 放置参数</span></span><br><span class="line">  rows,err := stmt.Query(<span class="number">0</span>)</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"prepare failed,err :%v\n"</span>,err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">defer</span> rows.Close()</span><br><span class="line">  <span class="keyword">for</span> rows.Next()&#123;</span><br><span class="line">    <span class="keyword">var</span> u User</span><br><span class="line">    err := rows.Scan(&amp;u.id,&amp;u.name,&amp;u.age)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">      fmt.Printf(<span class="string">"Scan failed ,err: %v\n"</span>,err)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Printf(<span class="string">"user: %v\n"</span>,u)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="gorm使用"><a href="#gorm使用" class="headerlink" title="gorm使用"></a>gorm使用</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"github.com/jinzhu/gorm"</span></span><br><span class="line">    _ <span class="string">"github.com/jinzhu/gorm/dialects/mysql"</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">type</span> UserTb <span class="keyword">struct</span> &#123;</span><br><span class="line">    Account <span class="keyword">string</span> <span class="string">`gorm:"column:account;primary_key"`</span></span><br><span class="line">    Password <span class="keyword">string</span> <span class="string">`gorm:"column:password"`</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">    db *gorm.DB</span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(u *UserTb)</span> <span class="title">TableName</span><span class="params">()</span> <span class="title">string</span></span>  &#123;</span><br><span class="line">    <span class="comment">// 返回的值是数据库中数据库表名</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"usertb"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">InsertDemo</span><span class="params">()</span></span> &#123;</span><br><span class="line">    insertUser := UserTb&#123;</span><br><span class="line">        Account:  <span class="string">"testUserAccount"</span>,</span><br><span class="line">        Password: <span class="string">"testPassword"</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 判断主键是否为空</span></span><br><span class="line">    <span class="comment">// 只是对值进行非空(零值)判断,并不会涉及数据库查询</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    re := db.NewRecord(insertUser)</span><br><span class="line">    <span class="keyword">if</span> re &#123;</span><br><span class="line">        <span class="comment">// 插入数据</span></span><br><span class="line">        <span class="keyword">if</span> err := db.Create(&amp;insertUser).Error;err == <span class="literal">nil</span>&#123;</span><br><span class="line">            fmt.Println(<span class="string">"insert success"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SelectDemo</span><span class="params">()</span></span>&#123;</span><br><span class="line">    user := UserTb&#123;&#125;</span><br><span class="line">    db.Where(<span class="string">"account=?"</span>,<span class="string">"testUserAccount"</span>).Find(&amp;user)</span><br><span class="line">    fmt.Println(user)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">UpdateDemo</span><span class="params">()</span></span>&#123;</span><br><span class="line">    user := UserTb&#123;Account: <span class="string">"testUserAccount"</span>&#125;</span><br><span class="line">    db.Where(<span class="string">"account=?"</span>,<span class="string">"testUserAccount"</span>).First(&amp;user)</span><br><span class="line">    fmt.Println(<span class="string">"find : "</span>,user)</span><br><span class="line">    user.Password = <span class="string">"testUserPasswordUpdate"</span></span><br><span class="line">    <span class="comment">// db.Save(&amp;user)</span></span><br><span class="line">    db.Model(&amp;user).Update(<span class="string">"password"</span>,<span class="string">"testUserPasswordUpdate2"</span>)</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    fmt.Println(<span class="string">"update"</span>)</span><br><span class="line">    fmt.Println(user)</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    fmt.Println(<span class="string">"find : "</span>)</span><br><span class="line">    db.Where(<span class="string">"account"</span>,<span class="string">"testUserAccount"</span>).First(&amp;user)</span><br><span class="line">    fmt.Println(user)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">DeleteDemo</span><span class="params">()</span></span> &#123;</span><br><span class="line">    user := UserTb&#123;Account: <span class="string">"testUserAccount"</span>&#125;</span><br><span class="line">    db.Delete(&amp;user)</span><br><span class="line">    fmt.Println(<span class="string">"Delete success"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> err error</span><br><span class="line">    db,err = gorm.Open(<span class="string">"mysql"</span>,<span class="string">"root:root1234@(localhost:3306)/gamedb?charset=utf8mb4&amp;parseTime=True&amp;loc=Local"</span>)</span><br><span class="line">    <span class="keyword">if</span> err!= <span class="literal">nil</span>&#123;</span><br><span class="line">        <span class="built_in">panic</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">defer</span> db.Close()</span><br><span class="line">    usr := UserTb&#123;&#125;</span><br><span class="line">    db.First(&amp;usr)</span><br><span class="line">    fmt.Println(usr)</span><br><span class="line">    users := []UserTb&#123;&#125;</span><br><span class="line">    db.Find(&amp;users)</span><br><span class="line">    fmt.Println(users)</span><br><span class="line">    InsertDemo()</span><br><span class="line">    SelectDemo()</span><br><span class="line">    UpdateDemo()</span><br><span class="line">    DeleteDemo()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -438,6 +439,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
@@ -446,11 +451,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -458,11 +463,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -482,15 +483,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">反射</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">gin</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">go</a>
+                <a href="javascript:void(0)" class="js-tag color3">反射</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -499,6 +496,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">go</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -518,15 +519,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">aria2c</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color3">问题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">问题</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
