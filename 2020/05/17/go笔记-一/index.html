@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="go get 无法使用问题解决办法使用第三方包gopm设置代理。windows需要设置相应的环境变量12go env -w GO111MODULE=ongo env -w GOPROXY=https://goproxy.io,direct 匿名函数 普通函数变量123anon := func(a int,b int)int&amp;#123;  return a + b&amp;#125;   anon是一个函数">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-06-14T13:56:32.872Z">
+<meta property="og:updated_time" content="2020-07-30T12:54:27.628Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="go笔记(一)">
 <meta name="twitter:description" content="go get 无法使用问题解决办法使用第三方包gopm设置代理。windows需要设置相应的环境变量12go env -w GO111MODULE=ongo env -w GOPROXY=https://goproxy.io,direct 匿名函数 普通函数变量123anon := func(a int,b int)int&amp;#123;  return a + b&amp;#125;   anon是一个函数">
@@ -233,6 +233,7 @@
 <h5 id="2-2-类型断言的使用-二"><a href="#2-2-类型断言的使用-二" class="headerlink" title="2.2 类型断言的使用(二)"></a>2.2 类型断言的使用(二)</h5><p>使用一个类型判断函数<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TypeJudge</span><span class="params">(item... <span class="keyword">interface</span>&#123;&#125;)</span></span>&#123;</span><br><span class="line">  <span class="keyword">for</span> index,v := <span class="keyword">range</span> item&#123;</span><br><span class="line">    <span class="keyword">switch</span> v.(<span class="keyword">type</span>) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="keyword">bool</span>:</span><br><span class="line">          fmt.Printf(<span class="string">"第%v参数 bool类型,值为:%v\n"</span>,index,v)</span><br><span class="line">      <span class="keyword">case</span> <span class="keyword">float32</span>:</span><br><span class="line">          fmt.Printf(<span class="string">"第%v参数 float32类型,值为:%v\n"</span>,index,v)</span><br><span class="line">      <span class="keyword">case</span> <span class="keyword">float64</span>:</span><br><span class="line">          fmt.Printf(<span class="string">"第%v参数 float64类型,值为:%v\n"</span>,index,v)</span><br><span class="line">      <span class="keyword">case</span> <span class="keyword">int</span>, <span class="keyword">int32</span>, <span class="keyword">int64</span>:</span><br><span class="line">          fmt.Printf(<span class="string">"第%v参数 int 类型,值为:%v\n"</span>,index,v)</span><br><span class="line">      <span class="keyword">case</span> <span class="keyword">string</span>:</span><br><span class="line">          fmt.Printf(<span class="string">"第%v参数 string类型,值为:%v\n"</span>,index,v)</span><br><span class="line">      <span class="keyword">case</span> Phone:</span><br><span class="line">          fmt.Printf(<span class="string">"第%v参数 Phone类型,值为:%v\n"</span>,index,v)</span><br><span class="line">      <span class="keyword">case</span> Camera:</span><br><span class="line">          fmt.Printf(<span class="string">"第%v参数 Camera类型,值为:%v\n"</span>,index,v)</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">          fmt.Printf(<span class="string">"第%v参数 未知类型,值为:%v\n"</span>,index,v)</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>调用函数<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeJudge(<span class="number">1</span>,<span class="string">"stringvalue"</span>,<span class="number">1.1</span>,Phone&#123;<span class="string">"phone"</span>&#125;,Camera&#123;<span class="string">"camera"</span>&#125;,computer)</span><br></pre></td></tr></table></figure></p>
 <p>控制台输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">第0参数 int 类型,值为:1</span><br><span class="line">第1参数 string类型,值为:stringvalue</span><br><span class="line">第2参数 float64类型,值为:1.1</span><br><span class="line">第3参数 Phone类型,值为:&#123;phone&#125;</span><br><span class="line">第4参数 Camera类型,值为:&#123;camera&#125;</span><br><span class="line">第5参数 未知类型,值为:&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="panic"><a href="#panic" class="headerlink" title="panic"></a>panic</h4><p>捕获函数panic的defer必须在调用函数之前才能捕获。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestPanic</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">//defer func() &#123;</span></span><br><span class="line">    <span class="comment">//   if err := recover();err!= nil&#123;</span></span><br><span class="line">    <span class="comment">//       fmt.Println("Function Catch Panic ",err)</span></span><br><span class="line">    <span class="comment">//   &#125;</span></span><br><span class="line">    <span class="comment">//&#125;()</span></span><br><span class="line">    <span class="comment">// 抛出panic</span></span><br><span class="line">    <span class="built_in">panic</span>(errors.New(<span class="string">"Test Panic"</span>))</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   <span class="comment">// TestPanic() //无法捕获</span></span><br><span class="line">    <span class="comment">// defer必须在TestPanic之前才能捕获</span></span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> err := <span class="built_in">recover</span>();err!= <span class="literal">nil</span>&#123;</span><br><span class="line">            fmt.Println(<span class="string">"Main catch Panic "</span>,err)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    TestPanic()</span><br><span class="line">    fmt.Println(<span class="string">"over"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
 
@@ -486,6 +487,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
@@ -494,19 +499,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,11 +531,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">反射</a>
+                <a href="javascript:void(0)" class="js-tag color3">go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">反射</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -542,11 +543,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">go</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -559,10 +564,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -590,11 +591,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
