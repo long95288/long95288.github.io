@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="基于共享变量的并发-笔记一、竞争条件 线性程序-&amp;gt;顺序执行 并发条件下，函数依然可以正确工作=&amp;gt;函数并发安全 文档明确函数并发安全，才可以并发的访问它并发无法工作（1）死锁（deadlock）-&amp;gt; 干瞪眼，谁都不好过。（2）活锁（livelock）-&amp;gt;还活着，形成闭环，但没有什么进展。互相踢皮球，没有啥进展。（3）饿死（resource starvation）-&amp;gt;饭多">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-31T15:54:45.296Z">
+<meta property="og:updated_time" content="2020-07-31T16:16:26.117Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="go-圣经-笔记">
 <meta name="twitter:description" content="基于共享变量的并发-笔记一、竞争条件 线性程序-&amp;gt;顺序执行 并发条件下，函数依然可以正确工作=&amp;gt;函数并发安全 文档明确函数并发安全，才可以并发的访问它并发无法工作（1）死锁（deadlock）-&amp;gt; 干瞪眼，谁都不好过。（2）活锁（livelock）-&amp;gt;还活着，形成闭环，但没有什么进展。互相踢皮球，没有啥进展。（3）饿死（resource starvation）-&amp;gt;饭多">
@@ -195,7 +195,11 @@
 <li>可重入锁：go没有可重入锁。入口函数锁了，被调用的函数里再次请求锁失败造成阻塞。</li>
 <li>封装机制：在可导出的函数变量加锁，结构体不可导出可以不用加锁便可以被安全的访问。</li>
 </ul>
-<h4 id="三、sync-RWMutex读写锁"><a href="#三、sync-RWMutex读写锁" class="headerlink" title="三、sync.RWMutex读写锁"></a>三、sync.RWMutex读写锁</h4><p>允许</p>
+<h4 id="三、sync-RWMutex读写锁"><a href="#三、sync-RWMutex读写锁" class="headerlink" title="三、sync.RWMutex读写锁"></a>三、sync.RWMutex读写锁</h4><p>允许多个只读操作并发执行，但写操作会完全互斥。-&gt;“多读单写锁”(multiple reader,single writer)<br>go语言提供的多读单写锁<code>sync.RWMutex</code><br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mu sync.RWMutex</span><br><span class="line">mu.RLock()</span><br><span class="line"><span class="keyword">defer</span> mu.RUnlock()</span><br><span class="line"><span class="keyword">return</span> blance</span><br></pre></td></tr></table></figure></p>
+<p><code>blance</code>变量可以被多个gorountine并发访问,但是写是互斥的。<br><strong>缺点:</strong>RWMutex使用更加复杂的内部记录，比无竞争的Mutex慢一些。</p>
+<h4 id="四、内存同步"><a href="#四、内存同步" class="headerlink" title="四、内存同步"></a>四、内存同步</h4><p>一个数据写入流程:cpu执行指令产生新数据-&gt;写入cpu缓存-&gt;写入主存。<br>不同的gorountine在读取共享变量的时候，都是从主存中读入数据。不加锁的变量在内存中的数据可能不一致。一个gorountine读取到的内存值可能不是另一个gorountine产生的最新数据。最新的数据还在另一个核中的缓存内，没有flush到主存中。<br>channel通信和互斥操作会使处理器将其缓存中的数据flush并commit。保证主存中的数据是最新的。</p>
+<h5 id="例子分析"><a href="#例子分析" class="headerlink" title="例子分析"></a>例子分析</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x,y <span class="keyword">int</span></span><br><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">  x = <span class="number">1</span></span><br><span class="line">  fmt.Print(<span class="string">"y:"</span>,y,<span class="string">" "</span>)</span><br><span class="line">&#125;()</span><br><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">  y = <span class="number">1</span></span><br><span class="line">  fmt.Print(<span class="string">"x:"</span>,x,<span class="string">" "</span>)</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<p>数据的数据可能为:<code>y:0 x:0</code><br><strong>原因:</strong><br>(1) 编译器优化:赋值和打印操作没有数据关联，编译器会让两条语句并发执行。先赋值还是先打印输出对于当前的gorountin执行结果是没有任何影响的。<br>(2) 缓存未更新:</p>
 
       
 
@@ -432,6 +436,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">运维</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
@@ -444,15 +452,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">运维</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -496,11 +500,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">go</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -516,11 +520,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
