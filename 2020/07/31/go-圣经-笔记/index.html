@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="风兮木落">
 <meta property="og:description" content="基于共享变量的并发-笔记一、竞争条件 线性程序-&amp;gt;顺序执行 并发条件下，函数依然可以正确工作=&amp;gt;函数并发安全 文档明确函数并发安全，才可以并发的访问它并发无法工作（1）死锁（deadlock）-&amp;gt; 干瞪眼，谁都不好过。（2）活锁（livelock）-&amp;gt;还活着，形成闭环，但没有什么进展。互相踢皮球，没有啥进展。（3）饿死（resource starvation）-&amp;gt;饭多">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-31T16:16:26.117Z">
+<meta property="og:updated_time" content="2020-08-01T05:07:04.659Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="go-圣经-笔记">
 <meta name="twitter:description" content="基于共享变量的并发-笔记一、竞争条件 线性程序-&amp;gt;顺序执行 并发条件下，函数依然可以正确工作=&amp;gt;函数并发安全 文档明确函数并发安全，才可以并发的访问它并发无法工作（1）死锁（deadlock）-&amp;gt; 干瞪眼，谁都不好过。（2）活锁（livelock）-&amp;gt;还活着，形成闭环，但没有什么进展。互相踢皮球，没有啥进展。（3）饿死（resource starvation）-&amp;gt;饭多">
@@ -199,7 +199,15 @@
 <p><code>blance</code>变量可以被多个gorountine并发访问,但是写是互斥的。<br><strong>缺点:</strong>RWMutex使用更加复杂的内部记录，比无竞争的Mutex慢一些。</p>
 <h4 id="四、内存同步"><a href="#四、内存同步" class="headerlink" title="四、内存同步"></a>四、内存同步</h4><p>一个数据写入流程:cpu执行指令产生新数据-&gt;写入cpu缓存-&gt;写入主存。<br>不同的gorountine在读取共享变量的时候，都是从主存中读入数据。不加锁的变量在内存中的数据可能不一致。一个gorountine读取到的内存值可能不是另一个gorountine产生的最新数据。最新的数据还在另一个核中的缓存内，没有flush到主存中。<br>channel通信和互斥操作会使处理器将其缓存中的数据flush并commit。保证主存中的数据是最新的。</p>
 <h5 id="例子分析"><a href="#例子分析" class="headerlink" title="例子分析"></a>例子分析</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x,y <span class="keyword">int</span></span><br><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">  x = <span class="number">1</span></span><br><span class="line">  fmt.Print(<span class="string">"y:"</span>,y,<span class="string">" "</span>)</span><br><span class="line">&#125;()</span><br><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">  y = <span class="number">1</span></span><br><span class="line">  fmt.Print(<span class="string">"x:"</span>,x,<span class="string">" "</span>)</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
-<p>数据的数据可能为:<code>y:0 x:0</code><br><strong>原因:</strong><br>(1) 编译器优化:赋值和打印操作没有数据关联，编译器会让两条语句并发执行。先赋值还是先打印输出对于当前的gorountin执行结果是没有任何影响的。<br>(2) 缓存未更新:</p>
+<p>数据的数据可能为:<code>y:0 x:0</code><br><strong>原因:</strong><br>(1) 编译器优化:赋值和打印操作没有数据关联，编译器会让两条语句并发执行。先赋值还是先打印输出对于当前的gorountine执行结果是没有任何影响的。<br>(2) 缓存未更新:两个gorountine会运行在不同的核上，运行的最新结果(赋值的数据)还在cpu缓存中，未同步到主存里面。这时候另外一个gorountine从主存中获得的数据还是旧的数据</p>
+<h4 id="五、sync-Once惰性初始化"><a href="#五、sync-Once惰性初始化" class="headerlink" title="五、sync.Once惰性初始化"></a>五、sync.Once惰性初始化</h4><p>需求:<br>  （1）需要相关变量的时候才去初始化。<br>  （2）只初始化一次<br>问题:<br>  当一个gorountine发现数据未初始化时，调用初始化函数。在该协程初始化的过程中，另外一个gorountine尝试获取数据，发现数据还没初始化，又一次的调用初始化函数。<br>解决办法:<br>  （1）加互斥锁，保证初始化成功，不支持并发读。<br>  （2）读取数据部分使用RWMuntex支持并发读，初始化使用互斥锁。读得到就读，读不到就只允许一个调用初始化函数。<br>  （3）使用sync.Once-&gt;Do函数只会调用一次</p>
+<h5 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> mu sync.Once</span><br><span class="line"><span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line"><span class="keyword">var</span> config <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">initConfig</span><span class="params">()</span></span>&#123;</span><br><span class="line">	fmt.Println(<span class="string">"call initConfig function"</span>)</span><br><span class="line">	<span class="comment">// 加长初始化的时间</span></span><br><span class="line">	time.Sleep(<span class="number">1</span>*time.Second)</span><br><span class="line">	config = <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>&#123;</span><br><span class="line">		<span class="string">"hello"</span>:<span class="number">1</span>,</span><br><span class="line">		<span class="string">"world"</span>:<span class="number">2</span>,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 获得配置,</span></span><br><span class="line"><span class="comment">// 如果配置没有初始化，就调用初始化函数</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getConfigure</span><span class="params">(key <span class="keyword">string</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	v,ok := config[key]</span><br><span class="line">	<span class="keyword">if</span> !ok &#123;</span><br><span class="line">		initConfig()</span><br><span class="line">		v = config[key]</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> v</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 只初始化一次</span></span><br><span class="line">	mu.Do(initConfig)</span><br><span class="line">	wg.Add(<span class="number">1</span>)</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		fmt.Println(getConfigure(<span class="string">"hello"</span>))</span><br><span class="line">		wg.Done()</span><br><span class="line">	&#125;()</span><br><span class="line">	wg.Add(<span class="number">1</span>)</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		fmt.Println(getConfigure(<span class="string">"world"</span>))</span><br><span class="line">		wg.Done()</span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	wg.Wait()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="六、竞争条件检测"><a href="#六、竞争条件检测" class="headerlink" title="六、竞争条件检测"></a>六、竞争条件检测</h4><p><code>go build/run/test -race</code>生成报告文档</p>
+<h4 id="gorountine和线程"><a href="#gorountine和线程" class="headerlink" title="gorountine和线程"></a>gorountine和线程</h4><ul>
+<li>上下文切换不同</li>
+<li>调度器不同</li>
+<li>动态栈</li>
+</ul>
 
       
 
@@ -440,15 +448,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">周边技术</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -456,7 +464,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diy</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -468,15 +476,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">UML</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color4">UML</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -488,15 +492,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">gin</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">反射</a>
+                <a href="javascript:void(0)" class="js-tag color4">《go语言圣经》</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">《go语言圣经》</a>
+                <a href="javascript:void(0)" class="js-tag color3">反射</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -520,11 +528,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -540,10 +548,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
@@ -552,11 +556,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技术</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">技术</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -580,15 +588,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">String</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
