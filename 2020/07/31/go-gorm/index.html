@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://long95288.github.io">
   <title>go-gorm | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="连接数据库操作数据库操作表坑位unsupported Scan, storing driver.Value type []uint8 into type *time.Time解决办法:数据库连接使用parseTime=true便可以解决">
+  <meta name="description" content="官方文档 已经很详细的对gorm的使用方法进行介绍了。 连接数据库123args := &quot;root:root1234@(localhost:3306)/gamedb?charset=utf8mb4&amp;amp;parseTime=True&amp;amp;loc=Local&quot;db,err = gorm.Open(&quot;mysql&quot;,args)db.LogMode(true) // 开启日志，会打印sql语句 操作">
 <meta name="keywords" content="golang,gorm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="go-gorm">
 <meta property="og:url" content="http://long95288.github.io/2020/07/31/go-gorm/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="连接数据库操作数据库操作表坑位unsupported Scan, storing driver.Value type []uint8 into type *time.Time解决办法:数据库连接使用parseTime=true便可以解决">
+<meta property="og:description" content="官方文档 已经很详细的对gorm的使用方法进行介绍了。 连接数据库123args := &quot;root:root1234@(localhost:3306)/gamedb?charset=utf8mb4&amp;amp;parseTime=True&amp;amp;loc=Local&quot;db,err = gorm.Open(&quot;mysql&quot;,args)db.LogMode(true) // 开启日志，会打印sql语句 操作">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-31T15:37:08.435Z">
+<meta property="og:updated_time" content="2020-08-02T09:04:25.368Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="go-gorm">
-<meta name="twitter:description" content="连接数据库操作数据库操作表坑位unsupported Scan, storing driver.Value type []uint8 into type *time.Time解决办法:数据库连接使用parseTime=true便可以解决">
+<meta name="twitter:description" content="官方文档 已经很详细的对gorm的使用方法进行介绍了。 连接数据库123args := &quot;root:root1234@(localhost:3306)/gamedb?charset=utf8mb4&amp;amp;parseTime=True&amp;amp;loc=Local&quot;db,err = gorm.Open(&quot;mysql&quot;,args)db.LogMode(true) // 开启日志，会打印sql语句 操作">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
   
@@ -183,7 +183,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h4><h4 id="操作数据库"><a href="#操作数据库" class="headerlink" title="操作数据库"></a>操作数据库</h4><h4 id="操作表"><a href="#操作表" class="headerlink" title="操作表"></a>操作表</h4><h5 id="坑位"><a href="#坑位" class="headerlink" title="坑位"></a>坑位</h5><h5 id="unsupported-Scan-storing-driver-Value-type-uint8-into-type-time-Time"><a href="#unsupported-Scan-storing-driver-Value-type-uint8-into-type-time-Time" class="headerlink" title="unsupported Scan, storing driver.Value type []uint8 into type *time.Time"></a>unsupported Scan, storing driver.Value type []uint8 into type *time.Time</h5><p>解决办法:数据库连接使用<code>parseTime=true</code>便可以解决</p>
+        <p><a href="http://gorm.io/zh_CN/docs/index.html" target="_blank" rel="noopener">官方文档</a> 已经很详细的对gorm的使用方法进行介绍了。</p>
+<h4 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">args := <span class="string">"root:root1234@(localhost:3306)/gamedb?charset=utf8mb4&amp;parseTime=True&amp;loc=Local"</span></span><br><span class="line">db,err = gorm.Open(<span class="string">"mysql"</span>,args)</span><br><span class="line">db.LogMode(<span class="literal">true</span>) <span class="comment">// 开启日志，会打印sql语句</span></span><br></pre></td></tr></table></figure>
+<h4 id="操作数据库"><a href="#操作数据库" class="headerlink" title="操作数据库"></a>操作数据库</h4><h5 id="查询表是否存在"><a href="#查询表是否存在" class="headerlink" title="查询表是否存在"></a>查询表是否存在</h5><p><code>db.HasTable(&amp;user)</code><br><code>db.HasTable(&amp;User{})</code><br><code>db.HasTable(&quot;users&quot;)</code></p>
+<h5 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h5><p><code>db.CreateTable(&amp;user)</code></p>
+<h5 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h5><p><code>db.DropTable(&amp;User{})</code><br><code>db.DropTable(&quot;user&quot;)</code><br><code>db.DropTableIfExist(&amp;User{},&quot;prodcuts&quot;)</code> //删除两张表</p>
+<h5 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h5><ul>
+<li>修改列<br><code>db.Model(&amp;User).ModifyColumn(&quot;description&quot;,&quot;text&quot;)</code> //修改description列为text</li>
+<li>删除列<br><code>db.Model(&amp;User{}).DropColumn(&quot;description&quot;)</code><h4 id="操作表数据"><a href="#操作表数据" class="headerlink" title="操作表数据"></a>操作表数据</h4><h5 id="创建数据"><a href="#创建数据" class="headerlink" title="创建数据"></a>创建数据</h5><code>db.Create(&amp;user)</code><h5 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.First(&amp;user) <span class="comment">// SELECT * FROM users ORDER BY id LIMIT 1;</span></span><br><span class="line">db.Last(&amp;user) <span class="comment">//  SELECT * FROM users ORDER BY id DESC LIMIT 1;</span></span><br><span class="line">db.Find(&amp;users) <span class="comment">//  SELECT * FROM users;</span></span><br><span class="line">db.First(&amp;user,<span class="number">10</span>) <span class="comment">// SELECT * FROM users WHERE id = 10</span></span><br><span class="line">db.Where(<span class="string">"name = ?"</span>,<span class="string">"jinzhu"</span>).First(&amp;user) <span class="comment">//  SELECT * FROM users WHERE name = 'jinzhu' limit 1;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Where函数里面使用?作为拼接。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Where(<span class="string">"name &lt;&gt; ?"</span>, <span class="string">"jinzhu"</span>)</span><br><span class="line">Where(<span class="string">"name in (?)"</span>, []<span class="keyword">string</span>&#123;<span class="string">"jinzhu"</span>, <span class="string">"jinzhu 2"</span>&#125;)</span><br><span class="line">Where(<span class="string">"name LIKE ?"</span>, <span class="string">"%jin%"</span>)</span><br><span class="line">Where(<span class="string">"name = ? AND age &gt;= ?"</span>, <span class="string">"jinzhu"</span>, <span class="string">"22"</span>)</span><br><span class="line">Where(<span class="string">"updated_at &gt; ?"</span>, lastWeek)</span><br><span class="line">Where(<span class="string">"created_at BETWEEN ? AND ?"</span>, lastWeek, today)</span><br></pre></td></tr></table></figure></p>
+<p>Struct和map作为查询条件<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Struct</span></span><br><span class="line">db.Where(&amp;User&#123;Name: <span class="string">"jinzhu"</span>, Age: <span class="number">20</span>&#125;).First(&amp;user)</span><br><span class="line"><span class="comment">//// SELECT * FROM users WHERE name = "jinzhu" AND age = 20 LIMIT 1;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Map</span></span><br><span class="line">db.Where(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;&#123;<span class="string">"name"</span>: <span class="string">"jinzhu"</span>, <span class="string">"age"</span>: <span class="number">20</span>&#125;).Find(&amp;users)</span><br><span class="line"><span class="comment">//// SELECT * FROM users WHERE name = "jinzhu" AND age = 20;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 主键的Slice</span></span><br><span class="line">db.Where([]<span class="keyword">int64</span>&#123;<span class="number">20</span>, <span class="number">21</span>, <span class="number">22</span>&#125;).Find(&amp;users)</span><br><span class="line"><span class="comment">//// SELECT * FROM users WHERE id IN (20, 21, 22);</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h5><h5 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h5><h5 id="坑位"><a href="#坑位" class="headerlink" title="坑位"></a>坑位</h5><h5 id="unsupported-Scan-storing-driver-Value-type-uint8-into-type-time-Time"><a href="#unsupported-Scan-storing-driver-Value-type-uint8-into-type-time-Time" class="headerlink" title="unsupported Scan, storing driver.Value type []uint8 into type *time.Time"></a>unsupported Scan, storing driver.Value type []uint8 into type *time.Time</h5><p>解决办法:数据库连接使用<code>parseTime=true</code>便可以解决</p>
 
       
 
@@ -429,6 +441,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">运维</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
@@ -437,23 +457,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">运维</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">diy</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -509,19 +521,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">软件设计</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -549,11 +561,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">技术</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技术</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
