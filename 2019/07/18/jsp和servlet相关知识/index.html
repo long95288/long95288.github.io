@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://long95288.github.io">
   <title>jsp和servlet相关知识 | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="过滤器过滤器的作用是对url访问进行拦截，比如：有一个需要登陆的系统，登陆成功后便跳转到index.jsp。如果用户直接输入index.jsp。这时候后台要对这样的行为进行拦截。1、过滤器需要实现servlet的Filter接口。并且实现doFilter方法。 2、过滤器要起作用还要配置过滤器和拦截的对象。在web.xml中配置。一个简单的登陆过滤器的配置例子: 12345678910&amp;lt;!-">
-<meta name="keywords" content="笔记,java">
+  <meta name="description" content="过滤器过滤器的作用是对url访问进行拦截，比如：有一个需要登陆的系统，登陆成功后便跳转到index.jsp。如果用户直接输入index.jsp。这时候后台要对这样的行为进行拦截。1、过滤器需要实现servlet的Filter接口。并且实现doFilter方法。 2、过滤器要起作用还要配置过滤器和拦截的对象。在web.xml中配置。一个简单的登陆过滤器的配置例子: 12345678910&lt;!-">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jsp和servlet相关知识">
-<meta property="og:url" content="http://long95288.github.io/2019/07/18/jsp和servlet相关知识/index.html">
+<meta property="og:url" content="http://long95288.github.io/2019/07/18/jsp%E5%92%8Cservlet%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="过滤器过滤器的作用是对url访问进行拦截，比如：有一个需要登陆的系统，登陆成功后便跳转到index.jsp。如果用户直接输入index.jsp。这时候后台要对这样的行为进行拦截。1、过滤器需要实现servlet的Filter接口。并且实现doFilter方法。 2、过滤器要起作用还要配置过滤器和拦截的对象。在web.xml中配置。一个简单的登陆过滤器的配置例子: 12345678910&amp;lt;!-">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-05T13:44:26.191Z">
+<meta property="og:description" content="过滤器过滤器的作用是对url访问进行拦截，比如：有一个需要登陆的系统，登陆成功后便跳转到index.jsp。如果用户直接输入index.jsp。这时候后台要对这样的行为进行拦截。1、过滤器需要实现servlet的Filter接口。并且实现doFilter方法。 2、过滤器要起作用还要配置过滤器和拦截的对象。在web.xml中配置。一个简单的登陆过滤器的配置例子: 12345678910&lt;!-">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-07-18T11:57:41.000Z">
+<meta property="article:modified_time" content="2019-08-05T13:44:26.191Z">
+<meta property="article:author" content="long">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jsp和servlet相关知识">
-<meta name="twitter:description" content="过滤器过滤器的作用是对url访问进行拦截，比如：有一个需要登陆的系统，登陆成功后便跳转到index.jsp。如果用户直接输入index.jsp。这时候后台要对这样的行为进行拦截。1、过滤器需要实现servlet的Filter接口。并且实现doFilter方法。 2、过滤器要起作用还要配置过滤器和拦截的对象。在web.xml中配置。一个简单的登陆过滤器的配置例子: 12345678910&amp;lt;!-">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
   
@@ -37,8 +38,8 @@
 
   
 
-</head>
-</html>
+<meta name="generator" content="Hexo 5.0.0"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -51,10 +52,8 @@
 			<img src="/images/logo.jpg" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">long</a></h1>
+		  <h1 class="header-author"><a href="/"></a></h1>
 		</hgroup>
-		
-		<p class="header-subtitle">像袍子一样傻，像狼一样奔波</p>
 		
 
 		<nav class="header-menu">
@@ -62,13 +61,13 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/笔记/">笔记</a></li>
+				<li><a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a></li>
 	        
-				<li><a href="/tags/算法/">算法</a></li>
+				<li><a href="/tags/%E7%AE%97%E6%B3%95/">算法</a></li>
 	        
-				<li><a href="/tags/爬虫/">爬虫</a></li>
+				<li><a href="/tags/%E7%88%AC%E8%99%AB/">爬虫</a></li>
 	        
-				<li><a href="/tags/周边技术">周边技术</a></li>
+				<li><a href="/tags/%E5%91%A8%E8%BE%B9%E6%8A%80%E6%9C%AF">周边技术</a></li>
 	        
 			</ul>
 		</nav>
@@ -109,10 +108,8 @@
 				<img src="/images/logo.jpg" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">long</h1>
+			  <h1 class="header-author js-header-author"></h1>
 			</hgroup>
-			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>像袍子一样傻，像狼一样奔波<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -142,13 +139,13 @@
 				
 					<li style="width: 20%"><a href="/">主页</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/笔记/">笔记</a></li>
+					<li style="width: 20%"><a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/算法/">算法</a></li>
+					<li style="width: 20%"><a href="/tags/%E7%AE%97%E6%B3%95/">算法</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/爬虫/">爬虫</a></li>
+					<li style="width: 20%"><a href="/tags/%E7%88%AC%E8%99%AB/">爬虫</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/周边技术">周边技术</a></li>
+					<li style="width: 20%"><a href="/tags/%E5%91%A8%E8%BE%B9%E6%8A%80%E6%9C%AF">周边技术</a></li>
 		        
 				</ul>
 			</nav>
@@ -175,7 +172,7 @@
   
 
         
-        <a href="/2019/07/18/jsp和servlet相关知识/" class="archive-article-date">
+        <a href="/2019/07/18/jsp%E5%92%8Cservlet%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" class="archive-article-date">
   	<time datetime="2019-07-18T11:57:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-18</time>
 </a>
         
@@ -285,7 +282,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/07/18/jsp和servlet相关知识/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/07/18/jsp%E5%92%8Cservlet%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -299,7 +296,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/07/21/Ideas使用的坑/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/07/21/Ideas%E4%BD%BF%E7%94%A8%E7%9A%84%E5%9D%91/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -309,7 +306,7 @@
     </a>
   
   
-    <a href="/2019/07/17/dom4j-xml解析/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/07/17/dom4j-xml%E8%A7%A3%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">dom4j-xml解析</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -436,11 +433,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">运维</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+                <a href="javascript:void(0)" class="js-tag color3">运维</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -452,7 +449,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -460,11 +457,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -484,11 +481,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">gorm</a>
+                <a href="javascript:void(0)" class="js-tag color4">gin</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gin</a>
+                <a href="javascript:void(0)" class="js-tag color5">gorm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -504,11 +501,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -552,15 +549,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">技术</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -572,15 +573,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -592,6 +585,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
             
@@ -600,7 +597,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
         </div>
         <ul class="search-ul">
           <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
-            缺失模块。<br>1、请确保node版本大于6.2<br>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br> npm i hexo-generator-json-content --save<br><br>
+            缺失模块。<br/>1、请确保node版本大于6.2<br/>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
             3、在根目录_config.yml里添加配置：
 <pre style="font-size: 12px;" q-show="jsonFail">
   jsonContent:

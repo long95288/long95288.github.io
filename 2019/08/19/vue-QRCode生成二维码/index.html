@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://long95288.github.io">
   <title>vue QRCode生成二维码 | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、npm 安装qrcode使用下面的命令安装qrcodenpm install --save qrcode网上有好多的版本。比如说qrcodejs2等等。经过采坑之后才知道qscode是最可控的。qrcodejs2会生成一个位置让人凌乱的图片。 2、使用qrcode生成二维码图片推荐去看官方的api,博客什么的各种牛马蛇神都有。 2.1 引入包1import QRCode from &apos;qrcod">
-<meta name="keywords" content="笔记,前端,vue">
+  <meta name="description" content="1、npm 安装qrcode使用下面的命令安装qrcodenpm install --save qrcode网上有好多的版本。比如说qrcodejs2等等。经过采坑之后才知道qscode是最可控的。qrcodejs2会生成一个位置让人凌乱的图片。 2、使用qrcode生成二维码图片推荐去看官方的api,博客什么的各种牛马蛇神都有。 2.1 引入包1import QRCode from &#39;qrcod">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue QRCode生成二维码">
-<meta property="og:url" content="http://long95288.github.io/2019/08/19/vue-QRCode生成二维码/index.html">
+<meta property="og:url" content="http://long95288.github.io/2019/08/19/vue-QRCode%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="1、npm 安装qrcode使用下面的命令安装qrcodenpm install --save qrcode网上有好多的版本。比如说qrcodejs2等等。经过采坑之后才知道qscode是最可控的。qrcodejs2会生成一个位置让人凌乱的图片。 2、使用qrcode生成二维码图片推荐去看官方的api,博客什么的各种牛马蛇神都有。 2.1 引入包1import QRCode from &apos;qrcod">
-<meta property="og:locale" content="default">
+<meta property="og:description" content="1、npm 安装qrcode使用下面的命令安装qrcodenpm install --save qrcode网上有好多的版本。比如说qrcodejs2等等。经过采坑之后才知道qscode是最可控的。qrcodejs2会生成一个位置让人凌乱的图片。 2、使用qrcode生成二维码图片推荐去看官方的api,博客什么的各种牛马蛇神都有。 2.1 引入包1import QRCode from &#39;qrcod">
+<meta property="og:locale">
 <meta property="og:image" content="http://long95288.github.io/2019/08/19/vue-QRCode生成二维码/gitQrcode.jpg">
-<meta property="og:updated_time" content="2019-08-19T15:29:33.270Z">
+<meta property="article:published_time" content="2019-08-19T14:31:23.000Z">
+<meta property="article:modified_time" content="2019-08-19T15:29:33.270Z">
+<meta property="article:author" content="long">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue QRCode生成二维码">
-<meta name="twitter:description" content="1、npm 安装qrcode使用下面的命令安装qrcodenpm install --save qrcode网上有好多的版本。比如说qrcodejs2等等。经过采坑之后才知道qscode是最可控的。qrcodejs2会生成一个位置让人凌乱的图片。 2、使用qrcode生成二维码图片推荐去看官方的api,博客什么的各种牛马蛇神都有。 2.1 引入包1import QRCode from &apos;qrcod">
 <meta name="twitter:image" content="http://long95288.github.io/2019/08/19/vue-QRCode生成二维码/gitQrcode.jpg">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
@@ -39,8 +41,8 @@
 
   
 
-</head>
-</html>
+<meta name="generator" content="Hexo 5.0.0"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -53,10 +55,8 @@
 			<img src="/images/logo.jpg" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">long</a></h1>
+		  <h1 class="header-author"><a href="/"></a></h1>
 		</hgroup>
-		
-		<p class="header-subtitle">像袍子一样傻，像狼一样奔波</p>
 		
 
 		<nav class="header-menu">
@@ -64,13 +64,13 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/笔记/">笔记</a></li>
+				<li><a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a></li>
 	        
-				<li><a href="/tags/算法/">算法</a></li>
+				<li><a href="/tags/%E7%AE%97%E6%B3%95/">算法</a></li>
 	        
-				<li><a href="/tags/爬虫/">爬虫</a></li>
+				<li><a href="/tags/%E7%88%AC%E8%99%AB/">爬虫</a></li>
 	        
-				<li><a href="/tags/周边技术">周边技术</a></li>
+				<li><a href="/tags/%E5%91%A8%E8%BE%B9%E6%8A%80%E6%9C%AF">周边技术</a></li>
 	        
 			</ul>
 		</nav>
@@ -111,10 +111,8 @@
 				<img src="/images/logo.jpg" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">long</h1>
+			  <h1 class="header-author js-header-author"></h1>
 			</hgroup>
-			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>像袍子一样傻，像狼一样奔波<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -144,13 +142,13 @@
 				
 					<li style="width: 20%"><a href="/">主页</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/笔记/">笔记</a></li>
+					<li style="width: 20%"><a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/算法/">算法</a></li>
+					<li style="width: 20%"><a href="/tags/%E7%AE%97%E6%B3%95/">算法</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/爬虫/">爬虫</a></li>
+					<li style="width: 20%"><a href="/tags/%E7%88%AC%E8%99%AB/">爬虫</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/周边技术">周边技术</a></li>
+					<li style="width: 20%"><a href="/tags/%E5%91%A8%E8%BE%B9%E6%8A%80%E6%9C%AF">周边技术</a></li>
 		        
 				</ul>
 			</nav>
@@ -177,7 +175,7 @@
   
 
         
-        <a href="/2019/08/19/vue-QRCode生成二维码/" class="archive-article-date">
+        <a href="/2019/08/19/vue-QRCode%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/" class="archive-article-date">
   	<time datetime="2019-08-19T14:31:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-19</time>
 </a>
         
@@ -299,7 +297,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/08/19/vue-QRCode生成二维码/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2019/08/19/vue-QRCode%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -313,7 +311,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/21/javascript实现的小东西/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/08/21/javascript%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%B0%8F%E4%B8%9C%E8%A5%BF/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -323,7 +321,7 @@
     </a>
   
   
-    <a href="/2019/08/18/Mybatis整合通用mapper/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/08/18/Mybatis%E6%95%B4%E5%90%88%E9%80%9A%E7%94%A8mapper/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Mybatis整合通用mapper</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -450,11 +448,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">运维</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+                <a href="javascript:void(0)" class="js-tag color3">运维</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -466,7 +464,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -474,11 +472,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color1">PyQt5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -498,11 +496,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">gorm</a>
+                <a href="javascript:void(0)" class="js-tag color4">gin</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gin</a>
+                <a href="javascript:void(0)" class="js-tag color5">gorm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -518,11 +516,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -566,15 +564,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">技术</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -586,15 +588,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">解决问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -606,6 +600,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
             
@@ -614,7 +612,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
         </div>
         <ul class="search-ul">
           <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
-            缺失模块。<br>1、请确保node版本大于6.2<br>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br> npm i hexo-generator-json-content --save<br><br>
+            缺失模块。<br/>1、请确保node版本大于6.2<br/>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
             3、在根目录_config.yml里添加配置：
 <pre style="font-size: 12px;" q-show="jsonFail">
   jsonContent:
