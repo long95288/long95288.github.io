@@ -824,13 +824,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Linux配置java的环境变量"><a href="#Linux配置java的环境变量" class="headerlink" title="Linux配置java的环境变量"></a>Linux配置java的环境变量</h3><p>1、找到jdk安装包的位置<br>2、打开profile文件<br><code># vim /etc/profile</code><br>3、添加如下的内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/java/jdk1.8.0_212-amd64</span><br><span class="line"><span class="built_in">export</span> JRE_HOME=/usr/java/jdk1.8.0_212-amd64/jre</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$JRE_HOME</span>/bin</span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$CLASSPATH</span>:<span class="variable">$JAVA_HOME</span>/lib:<span class="variable">$JRE_HOME</span>/lib</span><br></pre></td></tr></table></figure></p>
+        <h3 id="Linux配置java的环境变量"><a href="#Linux配置java的环境变量" class="headerlink" title="Linux配置java的环境变量"></a>Linux配置java的环境变量</h3><p>1、找到jdk安装包的位置<br>2、打开profile文件<br><code># vim /etc/profile</code><br>3、添加如下的内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/java/jdk1.8.0_212-amd64</span><br><span class="line"><span class="built_in">export</span> JRE_HOME=/usr/java/jdk1.8.0_212-amd64/jre</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$JRE_HOME</span>/bin</span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$CLASSPATH</span>:<span class="variable">$JAVA_HOME</span>/lib:<span class="variable">$JRE_HOME</span>/lib</span><br></pre></td></tr></table></figure>
 <p>4、更新配置<br><code>source /etc/profile</code><br>5、使用如下命令查看是否配置成功<br><code>java -version</code><br><code>echo $JAVA_HOME</code><br>6.注意分隔符在Linux中使用:(冒号),在Windows中使用;(分号)</p>
 <h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><p>一、文件夹命令</p>
 <ul>
-<li>创建同级目录<br><code>mkdir -p {a,b,c,d}</code></li>
+<li>创建同级目录<br><code>mkdir -p &#123;a,b,c,d&#125;</code></li>
 <li>创建嵌套<br><code>mkdir -p a/b/c</code></li>
-<li>删除同级目录<br><code>rm -rf {a,b,c}</code></li>
+<li>删除同级目录<br><code>rm -rf &#123;a,b,c&#125;</code></li>
 <li>强制删除嵌套目录<br><code>rm -rf dictionary</code></li>
 <li>设置目录权限<br>(1) 切换目录的权限<br><code>chmod 775 abc</code><br>(2)将abc的权限赋给root(组):root(用户)<br><code>sudo chown root:root abc</code></li>
 </ul>
@@ -838,9 +839,8 @@
 <ul>
 <li>创建用户命令<br><code>useradd -m test</code></li>
 <li>切换用户<br><code>su test</code><h4 id="shell脚本"><a href="#shell脚本" class="headerlink" title="shell脚本"></a>shell脚本</h4>一、后台运行jar包<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar xxx.jar &gt; log.txt &amp;</span><br></pre></td></tr></table></figure>
-</li>
+&amp;是后台运行的意思，但是关闭终端会退出<br>nohup 关闭终端不会退出<br>&gt; log.txt 是将日志消息打印到log.txt中</li>
 </ul>
-<p>&amp;是后台运行的意思，但是关闭终端会退出<br>nohup 关闭终端不会退出<br>> log.txt 是将日志消息打印到log.txt中</p>
 <h4 id="kali-ssh配置"><a href="#kali-ssh配置" class="headerlink" title="kali ssh配置"></a>kali ssh配置</h4><p>  kali安装之后，22端口是默认关闭的，需要自己设置开启</p>
 <h5 id="一、更改配置文件"><a href="#一、更改配置文件" class="headerlink" title="一、更改配置文件"></a>一、更改配置文件</h5><p>  修改<code>/etc/ssh/sshd_config</code>文件。</p>
 <ul>
@@ -852,7 +852,8 @@
 <h4 id="查看磁盘ID"><a href="#查看磁盘ID" class="headerlink" title="查看磁盘ID"></a>查看磁盘ID</h4><p><code>blkid</code>为查看磁盘命令<br><code>blkid /dev/sdc</code> </p>
 <h4 id="开机自动挂载"><a href="#开机自动挂载" class="headerlink" title="开机自动挂载"></a>开机自动挂载</h4><p>  需要修改<code>/etc/fstab</code><br>  参数如下<br><code>&lt;file system&gt;，&lt;mount point&gt;，&lt;type&gt;，&lt;options&gt;，&lt;dump&gt;，&lt;pass&gt;</code><br><code>&lt;file system&gt;</code> 配置好磁盘<code>UUID</code><br><code>mount point</code> 挂载路径，这个路径必须事先存在<br><code>type</code> 硬盘的文件系统类型,ntfs、ext4、fat、vfat<br><code>option</code>配置磁盘选项<br>  选项  |  说明<br>  :-: |   :-:<br>  defaults|use default options: rw, suid, dev, exec, auto, nouser, and async<br>noauto|do not mount when “mount -a” is given (e.g., at boot time)<br>user|allow a user to mount<br>owner|allow device owner to mount<br>comment or x-|for use by fstab-maintaining programs<br>nofail|do not report errors for this device if it does not exist</p>
 <p><code>dump</code> 备份，默认值为0<br><code>pass</code> 1自动扫描，0不扫描</p>
-<h4 id="Ubuntu手动安装软件创建快捷方式"><a href="#Ubuntu手动安装软件创建快捷方式" class="headerlink" title="Ubuntu手动安装软件创建快捷方式"></a>Ubuntu手动安装软件创建快捷方式</h4><p>  下载二进制Typora软件,想设置为markdown文件的默认打开器。<br>创建<code>typora.desktop</code>文件放置在<code>/usr/share/applications/</code>文件夹中。typora.desktop的文件内容如下。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Encoding=UTF-8</span><br><span class="line">Name = Typora</span><br><span class="line">GenericName=Editor</span><br><span class="line">Comment=Typora-a markdown editor</span><br><span class="line">Exec=&quot;/opt/Typora-linux-x64/Typora&quot; %U</span><br><span class="line">Icon=/opt/Typora-linux-x64/resources/app/asserts/icon/icon_256x256@2x.png</span><br><span class="line">Terminal=false</span><br><span class="line">Categories=MarkDown;</span><br><span class="line">StartupNotify=false</span><br><span class="line">Type=Application</span><br></pre></td></tr></table></figure></p>
+<h4 id="Ubuntu手动安装软件创建快捷方式"><a href="#Ubuntu手动安装软件创建快捷方式" class="headerlink" title="Ubuntu手动安装软件创建快捷方式"></a>Ubuntu手动安装软件创建快捷方式</h4><p>  下载二进制Typora软件,想设置为markdown文件的默认打开器。<br>创建<code>typora.desktop</code>文件放置在<code>/usr/share/applications/</code>文件夹中。typora.desktop的文件内容如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Encoding&#x3D;UTF-8</span><br><span class="line">Name &#x3D; Typora</span><br><span class="line">GenericName&#x3D;Editor</span><br><span class="line">Comment&#x3D;Typora-a markdown editor</span><br><span class="line">Exec&#x3D;&quot;&#x2F;opt&#x2F;Typora-linux-x64&#x2F;Typora&quot; %U</span><br><span class="line">Icon&#x3D;&#x2F;opt&#x2F;Typora-linux-x64&#x2F;resources&#x2F;app&#x2F;asserts&#x2F;icon&#x2F;icon_256x256@2x.png</span><br><span class="line">Terminal&#x3D;false</span><br><span class="line">Categories&#x3D;MarkDown;</span><br><span class="line">StartupNotify&#x3D;false</span><br><span class="line">Type&#x3D;Application</span><br></pre></td></tr></table></figure>
 <p>创建成功之后可以在软件中心中查询到,也可以添加入收藏夹。</p>
 <h4 id="Ubuntu-安装证书"><a href="#Ubuntu-安装证书" class="headerlink" title="Ubuntu 安装证书"></a>Ubuntu 安装证书</h4><p>(1) 获得crt证书<br>(2) 将证书放入<code>/usr/local/share/ca-certificates/</code>文件夹中<br>(3) 赋予证书644权限<br>(4) 更新证书<code>sudo update-ca-certificates</code></p>
 <h4 id="修改dash为bash"><a href="#修改dash为bash" class="headerlink" title="修改dash为bash"></a>修改dash为bash</h4><p>(1) 查询当前使用壳是哪一个？<code>ls -l /bin/sh</code> 返回<code>/bin/sh-&gt;dash</code>说明使用dash<br>(2) 修改为<code>bash</code>,<code>sudo dpkg-recofigure dash</code> 在页面中选择<strong>否</strong>。</p>
@@ -861,7 +862,11 @@
 <li>使用ssh登录<code>ssh user@remote-host</code></li>
 <li>使用私钥登录<br><code>ssh -i &quot;xxxx.pem&quot; user@remote-host</code></li>
 </ul>
-
+<h4 id="给文件夹配置软链接"><a href="#给文件夹配置软链接" class="headerlink" title="给文件夹配置软链接"></a>给文件夹配置软链接</h4><p><code>ln -s /work /home/tom/desktop/work</code><br>在桌面创建一个快捷方式到根目录的work中。这样在桌面便可以快速访问work文件夹。如果桌面已经存在了一个work文件夹。则会在work文件夹内创建work文件夹快捷方式。</p>
+<h4 id="shell脚本获得控制台输入"><a href="#shell脚本获得控制台输入" class="headerlink" title="shell脚本获得控制台输入"></a>shell脚本获得控制台输入</h4><p>使用<code>read name</code><br>例子:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo -n &quot;Enter name:&quot;</span><br><span class="line">read name</span><br><span class="line">echo &quot;hello,$name&quot;</span><br></pre></td></tr></table></figure>
+<p>例子2:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">read -p &quot;Enter name,addr:&quot; name addr</span><br><span class="line">echo &quot;Name $name Addr $addr&quot;</span><br></pre></td></tr></table></figure>
       
 
       
