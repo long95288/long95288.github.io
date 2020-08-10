@@ -867,6 +867,11 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo -n &quot;Enter name:&quot;</span><br><span class="line">read name</span><br><span class="line">echo &quot;hello,$name&quot;</span><br></pre></td></tr></table></figure>
 <p>例子2:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">read -p &quot;Enter name,addr:&quot; name addr</span><br><span class="line">echo &quot;Name $name Addr $addr&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="Ubuntu更改默认文件夹为英文"><a href="#Ubuntu更改默认文件夹为英文" class="headerlink" title="Ubuntu更改默认文件夹为英文"></a>Ubuntu更改默认文件夹为英文</h4><h5 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h5><p>（1）将语言调成英语，重启，提示文件夹变更。选择变更。<br>（2）然后再将语言调成中文，重启，提示变更，否。</p>
+<h5 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h5><p>（1）输入以下命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> LANG=en_US</span><br><span class="line">xdg-user-dirs-gtk-update</span><br></pre></td></tr></table></figure>
+<p>(2) 提示文件夹转换，确认转换。<br>(3) 输入命令<code>export LANG=zh_CN</code><br>(4) 重启,提示变更文件夹，选择否。不再提示。</p>
+
       
 
       
