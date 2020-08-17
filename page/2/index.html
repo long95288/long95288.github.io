@@ -158,6 +158,90 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-go-mysql" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/17/go-mysql/">go-mysql</a>
+    </h1>
+  
+
+        
+        <a href="/2020/06/17/go-mysql/" class="archive-article-date">
+  	<time datetime="2020-06-17T09:10:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  golang连接mysql数据库简单demo</p>
+<h4 id="引入相关依赖包"><a href="#引入相关依赖包" class="headerlink" title="引入相关依赖包"></a>引入相关依赖包</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">  <span class="string">"database/sql"</span></span><br><span class="line">  <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line">  _ <span class="string">"github.com/go-sql-driver/mysql"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="初始化连接"><a href="#初始化连接" class="headerlink" title="初始化连接"></a>初始化连接</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> db *sql.DB</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">initDB</span><span class="params">()</span> <span class="params">(error)</span></span> &#123;</span><br><span class="line">  dsn := <span class="string">"user:password@(127.0.0.1:3306)/dbname?charset=utf8"</span></span><br><span class="line">  <span class="keyword">var</span> err error</span><br><span class="line">  <span class="comment">//db,err := sql.Open("mysql",dsn)会出现作用域覆盖导致空指针</span></span><br><span class="line">  <span class="comment">// 创建新的指针会把全局的db指针给覆盖掉</span></span><br><span class="line">  db, err = sql.Open(<span class="string">"mysql"</span>, dsn)</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> err</span><br><span class="line">  &#125;</span><br><span class="line">  err = db.Ping()</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> err</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="数据库表结构映射"><a href="#数据库表结构映射" class="headerlink" title="数据库表结构映射"></a>数据库表结构映射</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">  id   <span class="keyword">int64</span></span><br><span class="line">  name <span class="keyword">string</span></span><br><span class="line">  age  <span class="keyword">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="添加数据DEMO"><a href="#添加数据DEMO" class="headerlink" title="添加数据DEMO"></a>添加数据DEMO</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">InsertRowDemo</span><span class="params">()</span></span> &#123;</span><br><span class="line">  sqlStr := <span class="string">"insert into user(name,age) value (?,?)"</span></span><br><span class="line">  ret, err := db.Exec(sqlStr, <span class="string">"王五"</span>, <span class="number">23</span>)</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"insert failed ,err :%v\n"</span>, err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  theID, err := ret.LastInsertId()</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"get lastinsert ID failed ,err :%v \n"</span>, err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  fmt.Printf(<span class="string">"insert success,the id is %d.\n"</span>, theID)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="删除数据DEMO"><a href="#删除数据DEMO" class="headerlink" title="删除数据DEMO"></a>删除数据DEMO</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">DeleteRowDemo</span><span class="params">()</span></span>&#123;</span><br><span class="line">  sqlStr := <span class="string">"Delete FROM user where id = ?"</span></span><br><span class="line">  ret,err := db.Exec(sqlStr,<span class="number">3</span>)</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"Delete failed ,err :%v\n"</span>,err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  n,err := ret.RowsAffected()</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"get RowAffected failed ,err :%v\n"</span>,err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  fmt.Printf(<span class="string">"delete success ,affect rows : %d\n"</span>,n)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="更改数据DEMO"><a href="#更改数据DEMO" class="headerlink" title="更改数据DEMO"></a>更改数据DEMO</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">UpdateRowDemo</span><span class="params">()</span></span>&#123;</span><br><span class="line">  sqlStr := <span class="string">"update user set age=? where id = ?"</span></span><br><span class="line">  ret,err := db.Exec(sqlStr,<span class="number">33</span>,<span class="number">2</span>)</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"update failed,err : %v\n"</span>,err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 更新影响的行数</span></span><br><span class="line">  n,err := ret.RowsAffected()</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"get RowAffected failed,err:%v\n"</span>,err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  fmt.Printf(<span class="string">"update success,affected rows : %d\n"</span>,n)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="查询数据DEMO"><a href="#查询数据DEMO" class="headerlink" title="查询数据DEMO"></a>查询数据DEMO</h4><h5 id="查询单条数据"><a href="#查询单条数据" class="headerlink" title="查询单条数据"></a>查询单条数据</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">QueryRowDemo</span><span class="params">()</span></span> &#123;</span><br><span class="line">  sqlStr := <span class="string">"select id,name,age from user where id = ?"</span></span><br><span class="line">  <span class="keyword">var</span> u User = User&#123;&#125;</span><br><span class="line">  err := db.QueryRow(sqlStr, <span class="number">1</span>).Scan(&amp;u.id, &amp;u.name, &amp;u.age)</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"scan failed,err:%v\n"</span>, err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  fmt.Printf(<span class="string">"user:%v"</span>, u)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="查询多条数据"><a href="#查询多条数据" class="headerlink" title="查询多条数据"></a>查询多条数据</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">QueryMultiDemo</span><span class="params">()</span></span>&#123;</span><br><span class="line">  sqlStr := <span class="string">"select id,name,age from user where id &gt; ?"</span></span><br><span class="line">  rows,err := db.Query(sqlStr,<span class="number">1</span>)</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"query failed,err :%v\n"</span>,err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">defer</span> rows.Close()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> rows.Next()&#123;</span><br><span class="line">    <span class="keyword">var</span> u User</span><br><span class="line">    err := rows.Scan(&amp;u.id,&amp;u.name,&amp;u.age)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">      fmt.Printf(<span class="string">"Scan failed,err:\v\n"</span>,err)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Printf(<span class="string">"u:%v"</span>,u)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="带预处理的查询"><a href="#带预处理的查询" class="headerlink" title="带预处理的查询"></a>带预处理的查询</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">PrepareQueryDemo</span><span class="params">()</span></span>  &#123;</span><br><span class="line">  sqlStr := <span class="string">"Select id,name,age from user where id &gt; ?"</span></span><br><span class="line">  stmt,err := db.Prepare(sqlStr)</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"Prepare failed,err :%v \n"</span>,err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">defer</span> stmt.Close()</span><br><span class="line">  <span class="comment">// 放置参数</span></span><br><span class="line">  rows,err := stmt.Query(<span class="number">0</span>)</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"prepare failed,err :%v\n"</span>,err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">defer</span> rows.Close()</span><br><span class="line">  <span class="keyword">for</span> rows.Next()&#123;</span><br><span class="line">    <span class="keyword">var</span> u User</span><br><span class="line">    err := rows.Scan(&amp;u.id,&amp;u.name,&amp;u.age)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">      fmt.Printf(<span class="string">"Scan failed ,err: %v\n"</span>,err)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Printf(<span class="string">"user: %v\n"</span>,u)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="gorm使用"><a href="#gorm使用" class="headerlink" title="gorm使用"></a>gorm使用</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"github.com/jinzhu/gorm"</span></span><br><span class="line">    _ <span class="string">"github.com/jinzhu/gorm/dialects/mysql"</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">type</span> UserTb <span class="keyword">struct</span> &#123;</span><br><span class="line">    Account <span class="keyword">string</span> <span class="string">`gorm:"column:account;primary_key"`</span></span><br><span class="line">    Password <span class="keyword">string</span> <span class="string">`gorm:"column:password"`</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">    db *gorm.DB</span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(u *UserTb)</span> <span class="title">TableName</span><span class="params">()</span> <span class="title">string</span></span>  &#123;</span><br><span class="line">    <span class="comment">// 返回的值是数据库中数据库表名</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"usertb"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">InsertDemo</span><span class="params">()</span></span> &#123;</span><br><span class="line">    insertUser := UserTb&#123;</span><br><span class="line">        Account:  <span class="string">"testUserAccount"</span>,</span><br><span class="line">        Password: <span class="string">"testPassword"</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 判断主键是否为空</span></span><br><span class="line">    <span class="comment">// 只是对值进行非空(零值)判断,并不会涉及数据库查询</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    re := db.NewRecord(insertUser)</span><br><span class="line">    <span class="keyword">if</span> re &#123;</span><br><span class="line">        <span class="comment">// 插入数据</span></span><br><span class="line">        <span class="keyword">if</span> err := db.Create(&amp;insertUser).Error;err == <span class="literal">nil</span>&#123;</span><br><span class="line">            fmt.Println(<span class="string">"insert success"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SelectDemo</span><span class="params">()</span></span>&#123;</span><br><span class="line">    user := UserTb&#123;&#125;</span><br><span class="line">    db.Where(<span class="string">"account=?"</span>,<span class="string">"testUserAccount"</span>).Find(&amp;user)</span><br><span class="line">    fmt.Println(user)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">UpdateDemo</span><span class="params">()</span></span>&#123;</span><br><span class="line">    user := UserTb&#123;Account: <span class="string">"testUserAccount"</span>&#125;</span><br><span class="line">    db.Where(<span class="string">"account=?"</span>,<span class="string">"testUserAccount"</span>).First(&amp;user)</span><br><span class="line">    fmt.Println(<span class="string">"find : "</span>,user)</span><br><span class="line">    user.Password = <span class="string">"testUserPasswordUpdate"</span></span><br><span class="line">    <span class="comment">// db.Save(&amp;user)</span></span><br><span class="line">    db.Model(&amp;user).Update(<span class="string">"password"</span>,<span class="string">"testUserPasswordUpdate2"</span>)</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    fmt.Println(<span class="string">"update"</span>)</span><br><span class="line">    fmt.Println(user)</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    fmt.Println(<span class="string">"find : "</span>)</span><br><span class="line">    db.Where(<span class="string">"account"</span>,<span class="string">"testUserAccount"</span>).First(&amp;user)</span><br><span class="line">    fmt.Println(user)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">DeleteDemo</span><span class="params">()</span></span> &#123;</span><br><span class="line">    user := UserTb&#123;Account: <span class="string">"testUserAccount"</span>&#125;</span><br><span class="line">    db.Delete(&amp;user)</span><br><span class="line">    fmt.Println(<span class="string">"Delete success"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> err error</span><br><span class="line">    db,err = gorm.Open(<span class="string">"mysql"</span>,<span class="string">"root:root1234@(localhost:3306)/gamedb?charset=utf8mb4&amp;parseTime=True&amp;loc=Local"</span>)</span><br><span class="line">    <span class="keyword">if</span> err!= <span class="literal">nil</span>&#123;</span><br><span class="line">        <span class="built_in">panic</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">defer</span> db.Close()</span><br><span class="line">    usr := UserTb&#123;&#125;</span><br><span class="line">    db.First(&amp;usr)</span><br><span class="line">    fmt.Println(usr)</span><br><span class="line">    users := []UserTb&#123;&#125;</span><br><span class="line">    db.Find(&amp;users)</span><br><span class="line">    fmt.Println(users)</span><br><span class="line">    InsertDemo()</span><br><span class="line">    SelectDemo()</span><br><span class="line">    UpdateDemo()</span><br><span class="line">    DeleteDemo()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/06/17/go-mysql/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-go笔记-一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -909,85 +993,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/04/09/Mysql%E5%A4%A7%E5%B0%8F%E5%86%99%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vmware出现Device-Credential-Guard问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/27/vmware%E5%87%BA%E7%8E%B0Device-Credential-Guard%E9%97%AE%E9%A2%98/">vmware出现Device/Credential Guard问题</a>
-    </h1>
-  
-
-        
-        <a href="/2020/03/27/vmware%E5%87%BA%E7%8E%B0Device-Credential-Guard%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-03-27T12:59:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>今日开启vmware的时候,出现Device/Credential Guard.问题如下所示<br><img src="/2020/03/27/vmware出现Device-Credential-Guard问题/problem.jpg" alt="问题截图"></p>
-<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p> 由于之前开启了windows 的沙箱模式。先将程序与功能中的沙箱给禁用了。然后cmd(管理员模式)输入如下代码。<br><code>bcdedit /set hypervisorlanuchtype off</code><br>重启计算机,成功进入虚拟机</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">问题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/03/27/vmware%E5%87%BA%E7%8E%B0Device-Credential-Guard%E9%97%AE%E9%A2%98/">展开全文 >></a>
         </p>
       
 
