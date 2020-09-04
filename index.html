@@ -158,6 +158,115 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-C-宏注入及其应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/04/C-%E5%AE%8F%E6%B3%A8%E5%85%A5%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/">C-宏注入及其应用</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/04/C-%E5%AE%8F%E6%B3%A8%E5%85%A5%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2020-09-04T14:40:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="基础：GCC编译时注入宏"><a href="#基础：GCC编译时注入宏" class="headerlink" title="基础：GCC编译时注入宏"></a>基础：GCC编译时注入宏</h3><h4 id="类型1-gcc控制宏的开关"><a href="#类型1-gcc控制宏的开关" class="headerlink" title="类型1 gcc控制宏的开关"></a>类型1 gcc控制宏的开关</h4><p><strong>源码main.c</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> MC</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;===MC 宏开启 \n&quot;</span>);   </span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> DMC</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;===DMC 宏开启\n&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;===MC 宏未开启\n&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>说明</strong></p>
+<p>有宏MC控制代码的编译分支，MC宏可以由gcc编译的时候定义。使用 “-D宏名”，开启宏。</p>
+<p><strong>编译1-未开启宏</strong></p>
+<p><code>gcc main.c -o main.out </code></p>
+<p><strong>编译2-开启宏MC</strong></p>
+<p><code>gcc main.c -DMC -o main.out</code></p>
+<p><strong>编译3-开启宏MC和DMC</strong></p>
+<p><code>gcc main.c -DMC -DDMC -o main.out</code></p>
+<h4 id="类型2-gcc-注入宏值"><a href="#类型2-gcc-注入宏值" class="headerlink" title="类型2 gcc 注入宏值"></a>类型2 gcc 注入宏值</h4><p><strong>源码main.c</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printData</span><span class="params">(<span class="keyword">uint8_t</span> *data,<span class="keyword">int32_t</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%2x &quot;</span>,(<span class="keyword">uint8_t</span>)data[i]);</span><br><span class="line">        <span class="keyword">if</span>(j % <span class="number">16</span> == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> MC_NUM</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">22</span>;</span><br><span class="line">    <span class="keyword">int</span> result = i + MC_NUM;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d = %d + %d &quot;</span>,result,i,MC_NUM);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;MC_NUM 未开启&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> MC_STR</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;MC_STR = %s\n&quot;</span>,MC_STR);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span>    </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> MC_BYTE</span></span><br><span class="line">    <span class="keyword">uint8_t</span> data21[] = &#123;MC_BYTE&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n=========字节宏==========\n&quot;</span>);</span><br><span class="line">    printData(data21,<span class="keyword">sizeof</span>(data21));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n==========================\n&quot;</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>编译1-设置宏MC_NUM值</strong></p>
+<p><code>gcc main.c  -DMC_NUM=123 -o macro_demo.out</code></p>
+<p>注意:”=”两边不能有空格。</p>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">145 &#x3D; 22 + 123 </span><br></pre></td></tr></table></figure>
+
+<p><strong>编译2-设置宏MC_STR值</strong></p>
+<p><code>gcc main.c  -DMC_NUM=123 -DMC_STR=\&quot;Hello\ World\\nWelcome\ c\&quot; -o macro_demo.out</code></p>
+<p>注意:字符需要使用转义字符，双引号和空格都要。</p>
+<p><strong>输出</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;&#x3D;&#x3D;DMC 宏开启</span><br><span class="line">145 &#x3D; 22 + 123 </span><br><span class="line">MC_STR &#x3D; Hello World</span><br><span class="line">Welcome c</span><br></pre></td></tr></table></figure>
+
+<p><strong>编译3-注入16进制数据</strong></p>
+<p><code> gcc main.c  -DMC_BYTE=0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0xa,0xb,0xc,0xd,0xe,0xf,0xff</code></p>
+<p><strong>输出</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;字节宏&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> 1  2  3  4  5  6  7  8  9  a  b  c  d  e  f ff</span><br><span class="line"> </span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="应用：CMakeLists和makefile宏注入"><a href="#应用：CMakeLists和makefile宏注入" class="headerlink" title="应用：CMakeLists和makefile宏注入"></a>应用：CMakeLists和makefile宏注入</h3><h4 id="CMakeLists-txt"><a href="#CMakeLists-txt" class="headerlink" title="CMakeLists.txt"></a>CMakeLists.txt</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_compile_options</span>(-DMC  -DMC_NUM=<span class="number">123</span> -DMC_STR=\<span class="string">&quot;Hello\ World\\nWelcomffe\ c\&quot; -DMC_BYTE=0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0xa,0xb,0xc,0xd,0xe,0xf,0xff)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="makefile"><a href="#makefile" class="headerlink" title="makefile"></a>makefile</h4><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS += -DMC</span><br><span class="line">CFLAGS += -DMC_NUM=123</span><br></pre></td></tr></table></figure>
+
+<p><strong>字节类有如下方式</strong></p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 秘钥注入方式1 -成功</span></span><br><span class="line"><span class="comment">#CFLAGS += &quot;-DBYTE1=0x01,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0xa,0xb,0xc,0xd,0xe,0xf&quot;</span></span><br><span class="line"><span class="comment">#CFLAGS += &quot;-DBYTE2=0x02,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0xa,0xb,0xc,0xd,0xe,0xf&quot;</span></span><br><span class="line"><span class="comment">#CFLAGS += &quot;-DBYTE3=0x03,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0xa,0xb,0xc,0xd,0xe,0xf&quot;</span></span><br><span class="line"><span class="comment">#CFLAGS += &quot;-DBYTE4=0x04,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0xa,0xb,0xc,0xd,0xe,0xf&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 秘钥注入方式2 -成功</span></span><br><span class="line"><span class="comment">#CFLAGS += -DBYTE1=0x01,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0xa,0xb,0xc,0xd,0xe,0xf</span></span><br><span class="line"><span class="comment">#CFLAGS += -DBYTE2=0x02,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0xa,0xb,0xc,0xd,0xe,0xf</span></span><br><span class="line"><span class="comment">#CFLAGS += -DBYTE3=0x03,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0xa,0xb,0xc,0xd,0xe,0xf</span></span><br><span class="line"><span class="comment">#CFLAGS += -DBYTE4=0x04,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0xa,0xb,0xc,0xd,0xe,0xf</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 秘钥注入方式3 -成功</span></span><br><span class="line">BYTE1 = -DBYTE1=0x01,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0xa,0xb,0xc,0xd,0xe,0xf</span><br><span class="line">BYTE2 = -DBYTE2=0x02,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0xa,0xb,0xc,0xd,0xe,0xf</span><br><span class="line">BYTE3 = -DBYTE3=0x03,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0xa,0xb,0xc,0xd,0xe,0xf</span><br><span class="line">BYTE4 = -DBYTE4=0x04,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0xa,0xb,0xc,0xd,0xe,0xf</span><br><span class="line">CFLAGS += $&#123;BYTE1&#125;</span><br><span class="line">CFLAGS += $&#123;BYTE2&#125;</span><br><span class="line">CFLAGS += $&#123;BYTE3&#125;</span><br><span class="line">CFLAGS += $&#123;BYTE4&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/04/C-%E5%AE%8F%E6%B3%A8%E5%85%A5%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-C-Base" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1112,105 +1221,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/07/23/go-reflect/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-go-file" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/25/go-file/">go-file</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/25/go-file/" class="archive-article-date">
-  	<time datetime="2020-06-25T03:55:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Golang-文件夹相关操作"><a href="#Golang-文件夹相关操作" class="headerlink" title="Golang 文件夹相关操作"></a>Golang 文件夹相关操作</h3><h4 id="文件夹的创建"><a href="#文件夹的创建" class="headerlink" title="文件夹的创建"></a>文件夹的创建</h4><h5 id="创建一级文件夹"><a href="#创建一级文件夹" class="headerlink" title="创建一级文件夹"></a>创建一级文件夹</h5><p>  如果文件夹已经存在会返回错误<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在所在盘的根目录创建文件夹,如果运行在F盘,则在F盘创建 F://oneLevelDir</span></span><br><span class="line">err := os.Mkdir(<span class="string">"/oneLevelDir"</span>,<span class="number">0666</span>)</span><br><span class="line"><span class="comment">// 在特定盘符创建文件夹</span></span><br><span class="line">err = os.Mkdir(<span class="string">"D://oneLevelDir"</span>,<span class="number">0666</span>)</span><br><span class="line"><span class="comment">// 在当前目录下创建文件夹</span></span><br><span class="line">err = os.Mkdir(<span class="string">"oneLevelDir"</span>,<span class="number">0666</span>)</span><br></pre></td></tr></table></figure></p>
-<h5 id="创建多级文件夹"><a href="#创建多级文件夹" class="headerlink" title="创建多级文件夹"></a>创建多级文件夹</h5><p>想要在不同的位置创建文件夹,和创建一级文件夹一致。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">err := os.MkdirAll(<span class="string">"multiDir1/second/third"</span>,<span class="number">0666</span>)</span><br></pre></td></tr></table></figure></p>
-<h4 id="文件-夹-重命名"><a href="#文件-夹-重命名" class="headerlink" title="文件(夹)重命名"></a>文件(夹)重命名</h4><h5 id="文件夹重命名"><a href="#文件夹重命名" class="headerlink" title="文件夹重命名"></a>文件夹重命名</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">err := os.Rename(<span class="string">"oneLevelDir"</span>,<span class="string">"oneLevelDir2"</span>)</span><br></pre></td></tr></table></figure>
-<h5 id="文件重命名"><a href="#文件重命名" class="headerlink" title="文件重命名"></a>文件重命名</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">err := os.Rename(<span class="string">"test.txt"</span>,<span class="string">"test2.txt"</span>)</span><br></pre></td></tr></table></figure>
-<h4 id="移动文件-夹"><a href="#移动文件-夹" class="headerlink" title="移动文件(夹)"></a>移动文件(夹)</h4><p>  可以用Rename完成文件移动操作,将test2.txt移到oneLevelDir2中<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">err := os.Rename(<span class="string">"test2.txt"</span>,<span class="string">"oneLevelDir2/test2.txt"</span>)</span><br></pre></td></tr></table></figure></p>
-<h4 id="复制文件"><a href="#复制文件" class="headerlink" title="复制文件"></a>复制文件</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 源文件</span></span><br><span class="line">srcFile,err := os.Open(<span class="string">"oneLevelDir2/test2.txt"</span>)</span><br><span class="line"><span class="keyword">defer</span> srcFile.Close()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 目标文件</span></span><br><span class="line">desFile,err := os.OpenFile(<span class="string">"test2.txt"</span>,os.O_CREATE|os.O_TRUNC|os.O_RDWR,<span class="number">0666</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line">n,err := io.Copy(desFile,srcFile)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(n)</span><br></pre></td></tr></table></figure>
-<p>复制文件夹可以先创建文件夹，然后再遍历复制文件便可。</p>
-<h4 id="查询文件夹"><a href="#查询文件夹" class="headerlink" title="查询文件夹"></a>查询文件夹</h4><h5 id="方法一使用file-Readdir-n-获得信息"><a href="#方法一使用file-Readdir-n-获得信息" class="headerlink" title="方法一使用file.Readdir(n)获得信息"></a>方法一使用file.Readdir(n)获得信息</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当前文件夹</span></span><br><span class="line">file,err := os.Open(<span class="string">"./"</span>)</span><br><span class="line"><span class="comment">// 获得当前文件夹下文件列表</span></span><br><span class="line"><span class="keyword">var</span> n <span class="keyword">int</span> = <span class="number">0</span></span><br><span class="line"><span class="comment">// n &lt;=0获得全部文件,n&gt;0获得相应个数的文件</span></span><br><span class="line">fileList,err := file.Readdir(n)</span><br><span class="line"><span class="comment">// 输出文件夹信息</span></span><br><span class="line"><span class="keyword">for</span> _,f := <span class="keyword">range</span> fileList &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"%v\t\t%v\t\t%v\t\t%v\t\t%v\n"</span>,f.Name(),f.IsDir(),f.Size(),f.Mode(),f.ModTime())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="只获得文件夹名"><a href="#只获得文件夹名" class="headerlink" title="只获得文件夹名"></a>只获得文件夹名</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fileNameList,err := file.Readdirnames(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<p>返回文件名字符串数组</p>
-<h4 id="删除文件-夹"><a href="#删除文件-夹" class="headerlink" title="删除文件(夹)"></a>删除文件(夹)</h4><h5 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">err :=os.Remove(<span class="string">"test2.txt"</span>)</span><br></pre></td></tr></table></figure>
-<h5 id="删除文件夹"><a href="#删除文件夹" class="headerlink" title="删除文件夹"></a>删除文件夹</h5><p>删除文件夹及文件夹下所有数据<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">err = os.RemoveAll(<span class="string">"oneLevelDir2"</span>)</span><br></pre></td></tr></table></figure></p>
-<h3 id="Golang-文件相关操作"><a href="#Golang-文件相关操作" class="headerlink" title="Golang 文件相关操作"></a>Golang 文件相关操作</h3><h4 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h4><p>使用<code>OpenFile</code>中<code>os.OCREATE</code>选项可以创建文件<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_,err := os.OpenFile(<span class="string">"test2.txt"</span>,os.O_CREATE,<span class="number">0666</span>)</span><br></pre></td></tr></table></figure></p>
-<h4 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h4><h5 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h5><p>可以读取出全部的数据<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">file,err := os.Open(<span class="string">"test2.txt"</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line">data := <span class="built_in">make</span>([]<span class="keyword">byte</span>,<span class="number">0</span>)</span><br><span class="line">buffer := <span class="built_in">make</span>([]<span class="keyword">byte</span>,<span class="number">1024</span>)</span><br><span class="line"><span class="keyword">for</span> &#123;</span><br><span class="line">    n,err := file.Read(buffer)</span><br><span class="line">    <span class="keyword">if</span> err == io.EOF &#123;</span><br><span class="line">        <span class="comment">// 读取完成</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 循环赋值</span></span><br><span class="line">    <span class="keyword">for</span> i:=<span class="number">0</span>;i&lt;n;i++&#123;</span><br><span class="line">        data = <span class="built_in">append</span>(data,buffer[i])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">fmt.Printf(<span class="string">"%q"</span>,<span class="keyword">string</span>(data))</span><br></pre></td></tr></table></figure></p>
-<h5 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h5><p>使用<code>bufio</code>带缓冲读取<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">file,err := os.Open(<span class="string">"test2.txt"</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 带缓冲的</span></span><br><span class="line">r:= bufio.NewReader(file)</span><br><span class="line">sb := strings.Builder&#123;&#125;</span><br><span class="line"><span class="keyword">for</span> <span class="literal">true</span> &#123;</span><br><span class="line">    tmp,err := r.ReadString(<span class="string">'\n'</span>)</span><br><span class="line">    <span class="keyword">if</span> err == io.EOF &#123;</span><br><span class="line">        <span class="comment">// 如果最后一行数据没有\n符也要加进去</span></span><br><span class="line">        sb.WriteString(tmp)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    &#125;</span><br><span class="line">    sb.WriteString(tmp)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Printf(<span class="string">"%q"</span>,sb.String())</span><br></pre></td></tr></table></figure></p>
-<p><strong>注意</strong> 当出现EOF错误时只是说明读取的行没有’\n’结尾,通常是文件末尾,但是还有一种情况是最后一行末尾没有换行符。这一行的数据也要存进去。</p>
-<h5 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h5><p>使用ioutil工具包<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data,err := ioutil.ReadFile(<span class="string">"test2.txt"</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line">fmt.Printf(<span class="string">"%q"</span>,<span class="keyword">string</span>(data))</span><br></pre></td></tr></table></figure></p>
-<p>ReadFile()实现是使用os.Open()函数加上bytes.Buffer.ReadFrom()函数完成</p>
-<h4 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h4><h5 id="方法一-1"><a href="#方法一-1" class="headerlink" title="方法一"></a>方法一</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">file,err := os.OpenFile(<span class="string">"test3.txt"</span>,os.O_RDWR|os.O_CREATE|os.O_TRUNC,<span class="number">0666</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">defer</span> file.Close()</span><br><span class="line"><span class="comment">// n,err := file.Write([]byte("Welcome"))</span></span><br><span class="line">n,err := file.WriteString(<span class="string">"Hello World \r\n"</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(n)</span><br><span class="line"><span class="comment">// 偏移插入,覆盖写入</span></span><br><span class="line">_,err = file.WriteAt([]<span class="keyword">byte</span>(<span class="string">"Append"</span>),<span class="number">6</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="方法二-1"><a href="#方法二-1" class="headerlink" title="方法二"></a>方法二</h5><p>带缓冲的写入<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> file,err := os.OpenFile(<span class="string">"test3.txt"</span>,os.O_RDWR|os.O_CREATE|os.O_TRUNC,<span class="number">0666</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">defer</span> file.Close()</span><br><span class="line">r := bufio.NewWriter(file)</span><br><span class="line">r.WriteString(<span class="string">"Hello,World"</span>)</span><br><span class="line">r.Flush()</span><br></pre></td></tr></table></figure></p>
-<h5 id="方法三-1"><a href="#方法三-1" class="headerlink" title="方法三"></a>方法三</h5><p><code>ioutil.WriteFile</code>写入<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">err := ioutil.WriteFile(<span class="string">"test3.txt"</span>,[]<span class="keyword">byte</span>(<span class="string">"Hello,World3"</span>),<span class="number">0666</span>)</span><br></pre></td></tr></table></figure></p>
-<p>实现方法是OpenFile()写入.golang官方实现如下,和方法一类似，但是更好。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">WriteFile</span><span class="params">(filename <span class="keyword">string</span>, data []<span class="keyword">byte</span>, perm os.FileMode)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">  f, err := os.OpenFile(filename, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, perm)</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> err</span><br><span class="line">  &#125;</span><br><span class="line">  n, err := f.Write(data)</span><br><span class="line">  <span class="keyword">if</span> err == <span class="literal">nil</span> &amp;&amp; n &lt; <span class="built_in">len</span>(data) &#123;</span><br><span class="line">    err = io.ErrShortWrite</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> err1 := f.Close(); err == <span class="literal">nil</span> &#123;</span><br><span class="line">    err = err1</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> err</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>File默认实现了io.Writer和io.Reader的接口。所以bufio可以直接传file过去。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Reader <span class="keyword">interface</span> &#123;</span><br><span class="line">  Read(p []<span class="keyword">byte</span>) (n <span class="keyword">int</span>, err error)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Writer <span class="keyword">interface</span> &#123;</span><br><span class="line">  Write(p []<span class="keyword">byte</span>) (n <span class="keyword">int</span>, err error)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="其它小技巧"><a href="#其它小技巧" class="headerlink" title="其它小技巧"></a>其它小技巧</h4><h5 id="string转Reader"><a href="#string转Reader" class="headerlink" title="string转Reader"></a>string转Reader</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w := strings.NewReader(<span class="string">"Hello World"</span>)</span><br></pre></td></tr></table></figure>
-<p>用途,当需要流转换的时候。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 转换成Reader对象</span></span><br><span class="line">r1 := strings.NewReader(<span class="string">"Hello World"</span>)</span><br><span class="line"><span class="comment">// 使用bufio读出数据</span></span><br><span class="line">br := bufio.NewReader(r1)</span><br><span class="line">data := <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> <span class="literal">true</span> &#123;</span><br><span class="line">  s,err := br.ReadString(<span class="string">'\n'</span>)</span><br><span class="line">  <span class="keyword">if</span> err == io.EOF &#123;</span><br><span class="line">      data += s</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">  &#125;</span><br><span class="line">  data += s</span><br><span class="line">&#125;</span><br><span class="line">fmt.Printf(<span class="string">"%q"</span>,data)</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/25/go-file/">展开全文 >></a>
         </p>
       
 
