@@ -158,6 +158,122 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-扫雷项目相关笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/13/%E6%89%AB%E9%9B%B7%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/">扫雷项目相关笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/13/%E6%89%AB%E9%9B%B7%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2019-05-13T12:09:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="vector-是线程安全的"><a href="#vector-是线程安全的" class="headerlink" title="vector 是线程安全的"></a>vector 是线程安全的</h4><p>在发送数据到服务器的时候，发送数据线程，从共享变量<code>senddatas</code>中取出要发送的数值并发送到服务器，但是这时候可能有新的数据加入，这时候需要保证数据的线程安全，而arrarylist不是线程安全的。</p>
+<h4 id="开启发送线程的原因"><a href="#开启发送线程的原因" class="headerlink" title="开启发送线程的原因"></a>开启发送线程的原因</h4><p>数据突发太大，会将还没发送出去的信息覆盖。设置发送数据时间间隔大于30ms才不至于被覆盖。</p>
+<h4 id="客户端与服务器数据请求格式json"><a href="#客户端与服务器数据请求格式json" class="headerlink" title="客户端与服务器数据请求格式json"></a>客户端与服务器数据请求格式json</h4><p><strong>1、type</strong> 数据类型<br><strong>2、value</strong> 数据的值<br><strong>从客户端请求的数据类型如下</strong><br>1、登入请求<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="attr">"type"</span> : <span class="string">"Login"</span>,</span><br><span class="line">    <span class="attr">"account"</span> : <span class="string">"1234556"</span>,</span><br><span class="line">    <span class="attr">"password"</span> : <span class="string">"21fefefefesdfs"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、登出请求<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span> : <span class="string">"Logout"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3、转发数据请求(更新雷区)<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span> : <span class="string">"Transmit"</span>,</span><br><span class="line">    <span class="attr">"x"</span>:<span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"y"</span>:<span class="string">"2"</span>,</span><br><span class="line">    <span class="attr">"value"</span>:<span class="string">"1 | 2| -1"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>4、游戏结束请求<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span>: <span class="string">"GameOver"</span>,</span><br><span class="line">    <span class="attr">"status"</span>: <span class="string">"win|defeat"</span>,</span><br><span class="line">    <span class="attr">"costTime"</span>: <span class="string">"34323 | -1"</span>,</span><br><span class="line">    <span class="attr">"description"</span>:<span class="string">"关于游戏结束的描述"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>5、匹配游戏请求<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span>: <span class="string">"Math"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="服务器返回数据类型"><a href="#服务器返回数据类型" class="headerlink" title="服务器返回数据类型"></a>服务器返回数据类型</h3><p>1、登陆成功<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span>:<span class="string">"LoginSuccess"</span>,</span><br><span class="line">    <span class="attr">"value"</span>: <span class="string">"account"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、登陆失败<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span>:<span class="string">"LoginFailure"</span>,</span><br><span class="line">    <span class="attr">"value"</span>:<span class="string">"failure-type"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="责任链产生请求和处理请求说明"><a href="#责任链产生请求和处理请求说明" class="headerlink" title="责任链产生请求和处理请求说明"></a>责任链产生请求和处理请求说明</h3><p>1、<code>EvenType.SENDDATA</code> 发送数据的请求<br>2、<code>EvenType.UPDATE</code> 更新雷区的请求<br>3、<code>EvenType.LOGIN</code> 登陆游戏请求<br>4、<code>EvenType.CLICK</code> 鼠标点击雷区请求</p>
+<hr>
+<p>MyMouseListener.java 鼠标监听类</p>
+<blockquote>
+<p>产生: 点击雷区之后，产生鼠标点击请求(EvenType.CLICK)<br>处理: 无</p>
+</blockquote>
+<p>Conection.java 连接服务器类</p>
+<blockquote>
+<p>产生:<br>1、更新数据请求(EvenType.UPDATE) 这个更新信息是从服务器传送过来的<br>处理:<br>1、发送的数据请求(EvenType.SENDDATA)将数据发送到服务器<br>2、登陆请求(EvenType.LOGIN) 将登陆信息发送到服务器?两者是否能合并？</p>
+</blockquote>
+<p>Core.java 游戏核心类</p>
+<blockquote>
+<p>产生:<br>      1、更新雷区请求（EvenType.UPDATE）经过计算之后需要更新雷区数据<br>      2、游戏结束请求()<br>处理:<br>      1、鼠标的点击请求(EvenType.CLICK) 调用函数计算该请求导致的结果</p>
+</blockquote>
+<p>MineFile.java 雷区显示类</p>
+<blockquote>
+<p>产生: 发送数据请求(EvenType.SENDDATA)，主要是将雷区更新的数据发送到服务器，<br>处理: 更新雷区的请求(EvenType.UPDATE)，根据传过来的数据更新雷区的显示</p>
+</blockquote>
+<p>LoginPanel.java 登陆面板</p>
+<blockquote>
+<p>产生: 登陆游戏请求(EvenType.LOGIN),传递的数据是账号和hash取值后的密码<br>处理: 无</p>
+</blockquote>
+<p>OperatePanel.java 操作面板</p>
+<blockquote>
+<p>产生: 开始匹配游戏请求<br>处理: 待定</p>
+</blockquote>
+<h3 id="责任链中数据传输格式"><a href="#责任链中数据传输格式" class="headerlink" title="责任链中数据传输格式"></a>责任链中数据传输格式</h3><p><strong>旧版</strong><br>MineFile.java </p>
+<p>###java引用调用和按值调用<br>对象引用调用，类似于C中的指针。这样可以在B类对象中引入A类对象，这样便可以调用A类对象中的函数，代码如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.test;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引用调用</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> a = <span class="number">99</span>;</span><br><span class="line">    A()&#123;</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.a += i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">    B()&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addA</span><span class="params">(A a)</span></span>&#123;</span><br><span class="line">        a.add(<span class="number">1</span>); <span class="comment">// 引用a</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInt</span><span class="params">(<span class="keyword">int</span> i2, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        i2 = i2 + j;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">testReference</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] argv)</span></span>&#123;</span><br><span class="line">        A a = <span class="keyword">new</span>  A();</span><br><span class="line">        B b = <span class="keyword">new</span> B();</span><br><span class="line">        b.addA(a);</span><br><span class="line">        a.print(); <span class="comment">// 输出100</span></span><br><span class="line">        A a1 = a; <span class="comment">//</span></span><br><span class="line">        b.addA(a1);</span><br><span class="line">        a1.print(); <span class="comment">// 预计是101</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line">        b.addInt(i,<span class="number">19</span>);</span><br><span class="line">        System.out.println(i); <span class="comment">// 结果为1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在b中操作a的函数。这样可以在core类中调用Login中的关闭函数</p>
+<h3 id="使用implement-runable-和继承线程extend-Thread-的一些区别"><a href="#使用implement-runable-和继承线程extend-Thread-的一些区别" class="headerlink" title="使用implement runable 和继承线程extend Thread 的一些区别"></a>使用implement runable 和继承线程extend Thread 的一些区别</h3><p>使用实现接口的话，对象调用run函数之后。该对象之后的语句并不会执行，直到run执行完毕。而使用继承的话，线程对象调用，start函数之后。该对象之后的语句可以执行。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/13/%E6%89%AB%E9%9B%B7%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-git常用操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -992,79 +1108,9 @@
 
 
   
-    <article id="post-第一篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/11/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">hexo 基本用法</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/11/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2019-03-11T13:17:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="常用的hexo命令"><a href="#常用的hexo命令" class="headerlink" title="常用的hexo命令"></a>常用的hexo命令</h4><h5 id="hexo-new-“newpostname”-新建文章"><a href="#hexo-new-“newpostname”-新建文章" class="headerlink" title="hexo new “newpostname” 新建文章"></a>hexo new “newpostname” 新建文章</h5><p>缩写：hexo n<br>hexo new page “newpagename” </p>
-<h5 id="hexo-generate-生成静态界面至public目录"><a href="#hexo-generate-生成静态界面至public目录" class="headerlink" title="hexo generate 生成静态界面至public目录"></a>hexo generate 生成静态界面至public目录</h5><p>缩写: hexo g</p>
-<h5 id="hexo-server-打开预览端口"><a href="#hexo-server-打开预览端口" class="headerlink" title="hexo server 打开预览端口"></a>hexo server 打开预览端口</h5><p>缩写：hexo s</p>
-<h5 id="hexo-deploy-部署到github中"><a href="#hexo-deploy-部署到github中" class="headerlink" title="hexo deploy 部署到github中"></a>hexo deploy 部署到github中</h5><p>缩写：hexo d</p>
-<h4 id="npm-使用淘宝映像"><a href="#npm-使用淘宝映像" class="headerlink" title="npm 使用淘宝映像"></a>npm 使用淘宝映像</h4><p><code>npm install --registry=https://registry.npm.taobao.org</code></p>
-<h4 id="本地hexo-s无法访问"><a href="#本地hexo-s无法访问" class="headerlink" title="本地hexo s无法访问"></a>本地hexo s无法访问</h4><h5 id="查询端口"><a href="#查询端口" class="headerlink" title="查询端口"></a>查询端口</h5><p><code>netstat -o -n -a | findstr :4000</code><br>输出:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\mydesktop&gt;netstat -o -n -a | findstr :4000</span><br><span class="line">  TCP    127.0.0.1:3391         127.0.0.1:4000         FIN_WAIT_2      11504</span><br><span class="line">  TCP    127.0.0.1:3392         127.0.0.1:4000         FIN_WAIT_2      11504</span><br><span class="line">  TCP    127.0.0.1:3393         127.0.0.1:4000         FIN_WAIT_2      11504</span><br><span class="line">  TCP    127.0.0.1:3395         127.0.0.1:4000         FIN_WAIT_2      11504</span><br><span class="line">  TCP    127.0.0.1:3397         127.0.0.1:4000         FIN_WAIT_2      11504</span><br><span class="line">  TCP    127.0.0.1:3482         127.0.0.1:4000         FIN_WAIT_2      9924</span><br><span class="line">  TCP    127.0.0.1:3483         127.0.0.1:4000         FIN_WAIT_2      9924</span><br><span class="line">  TCP    127.0.0.1:3549         127.0.0.1:4000         ESTABLISHED     9924</span><br><span class="line">  TCP    127.0.0.1:4000         0.0.0.0:0              LISTENING       4888</span><br><span class="line">  TCP    127.0.0.1:4000         127.0.0.1:3391         CLOSE_WAIT      4888</span><br><span class="line">  TCP    127.0.0.1:4000         127.0.0.1:3392         CLOSE_WAIT      4888</span><br><span class="line">  TCP    127.0.0.1:4000         127.0.0.1:3393         CLOSE_WAIT      4888</span><br><span class="line">  TCP    127.0.0.1:4000         127.0.0.1:3395         CLOSE_WAIT      4888</span><br><span class="line">  TCP    127.0.0.1:4000         127.0.0.1:3397         CLOSE_WAIT      4888</span><br><span class="line">  TCP    127.0.0.1:4000         127.0.0.1:3482         CLOSE_WAIT      4888</span><br><span class="line">  TCP    127.0.0.1:4000         127.0.0.1:3483         CLOSE_WAIT      4888</span><br><span class="line">  TCP    127.0.0.1:4000         127.0.0.1:3549         ESTABLISHED     4888</span><br></pre></td></tr></table></figure></p>
-<h5 id="关闭占用端口进程"><a href="#关闭占用端口进程" class="headerlink" title="关闭占用端口进程"></a>关闭占用端口进程</h5><p><code>taskkill /F /PID 4888</code></p>
-<h5 id="如果无法关闭-使用其它端口启动"><a href="#如果无法关闭-使用其它端口启动" class="headerlink" title="如果无法关闭,使用其它端口启动"></a>如果无法关闭,使用其它端口启动</h5><p>使用8080端口启动.<code>hexo s -p 8080</code></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/11/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/7/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span>
+      <a class="extend prev" rel="prev" href="/page/7/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/9/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1324,6 +1370,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">加解密</a>
               </li>
             
             <div class="clearfix"></div>
