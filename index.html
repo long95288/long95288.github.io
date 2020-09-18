@@ -892,8 +892,7 @@
 <th>说明</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>TB</td>
 <td>Top-&gt;Bottom</td>
 </tr>
@@ -909,12 +908,16 @@
 <td>RL</td>
 <td>Right-&gt;Left</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>使用<code>--&gt;</code>连接两个节点，名称一致为一个节点.<code>--&gt;</code>中间不能有空格</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line">A--&gt;B</span><br><span class="line">B--&gt;A</span><br><span class="line">A--&gt;C</span><br></pre></td></tr></table></figure>
+
+
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A--&gt;B</span><br><span class="line">B--&gt;C</span><br></pre></td></tr></table></figure>
-<h4 id="绘制流程图"><a href="#绘制流程图" class="headerlink" title="绘制流程图"></a>绘制流程图</h4><h4 id="绘制时序图"><a href="#绘制时序图" class="headerlink" title="绘制时序图"></a>绘制时序图</h4>
+
+<h4 id="绘制流程图"><a href="#绘制流程图" class="headerlink" title="绘制流程图"></a>绘制流程图</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">  participant z as 张三</span><br><span class="line">  participant l as 李四</span><br><span class="line">  z-&gt;&gt;l:吃饭没?</span><br><span class="line">  l--&gt;&gt;z:没吃。</span><br><span class="line">  </span><br><span class="line">  Note left of z: 张三左边做标记</span><br><span class="line"></span><br><span class="line">  Note rigth of z: 张三右边标记</span><br><span class="line">  </span><br><span class="line">  loop 每天</span><br><span class="line">    z-&gt;&gt;l:又是无聊的一天</span><br><span class="line">    l--&gt;&gt;z:是啊,又是无聊的一天</span><br><span class="line">    activate z</span><br><span class="line">   </span><br><span class="line">  end</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="绘制时序图"><a href="#绘制时序图" class="headerlink" title="绘制时序图"></a>绘制时序图</h4>
       
 
       
