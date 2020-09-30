@@ -158,6 +158,148 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-C-内存和类型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/29/C-%E5%86%85%E5%AD%98%E5%92%8C%E7%B1%BB%E5%9E%8B/">C-内存和类型</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/29/C-%E5%86%85%E5%AD%98%E5%92%8C%E7%B1%BB%E5%9E%8B/" class="archive-article-date">
+  	<time datetime="2020-09-29T12:45:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="C内存和类型"><a href="#C内存和类型" class="headerlink" title="C内存和类型"></a>C内存和类型</h3><h4 id="测试源码"><a href="#测试源码" class="headerlink" title="测试源码"></a>测试源码</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> *vp = <span class="built_in">calloc</span>(<span class="number">4</span>,<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *int_arr = vp;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;int array[%d] =&gt; %d\n&quot;</span>, i, int_arr[i]);</span><br><span class="line">    int_arr[i] = i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;int array[%d] =&gt; %d\n&quot;</span>, i, int_arr[i]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> *char_arr = (<span class="keyword">char</span> *)vp;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">16</span>; ++i) &#123;</span><br><span class="line">    char_arr[i] = <span class="string">&#x27;a&#x27;</span> + i;</span><br><span class="line">&#125;</span><br><span class="line">char_arr[<span class="number">15</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;char_arr = %s\n&quot;</span>, char_arr);</span><br><span class="line"></span><br><span class="line"><span class="built_in">memset</span>(vp,<span class="number">0</span>,<span class="number">16</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">memset</span>(vp, <span class="number">12</span>, <span class="number">1</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(vp+<span class="number">4</span>,<span class="string">&quot;Tom Jerry&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">person</span> &#123;</span></span><br><span class="line">    <span class="keyword">int32_t</span> age;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">12</span>];</span><br><span class="line">&#125; *person_ptr;</span><br><span class="line"></span><br><span class="line">person_ptr = vp;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;person age:%d, name : %s\n&quot;</span>,person_ptr-&gt;age, person_ptr-&gt;name);</span><br><span class="line"></span><br><span class="line"><span class="built_in">memset</span>(vp+<span class="number">4</span>,<span class="number">0</span>,<span class="number">12</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(vp+<span class="number">4</span>, <span class="string">&quot;man&quot;</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(vp + <span class="number">4</span> + <span class="number">6</span>,<span class="string">&quot;fat&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">annimal</span> &#123;</span></span><br><span class="line">    <span class="keyword">int32_t</span> type;</span><br><span class="line">    <span class="keyword">char</span> type_name[<span class="number">6</span>];</span><br><span class="line">    <span class="keyword">char</span> description[<span class="number">6</span>];</span><br><span class="line">&#125; *annimal_ptr;</span><br><span class="line">annimal_ptr = (struct annimal *)person_ptr;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;annimal type: %d, type_name: %s, description: %s\n&quot;</span>,annimal_ptr-&gt;type, annimal_ptr-&gt;type_name, annimal_ptr-&gt;description);</span><br><span class="line"><span class="built_in">free</span>(vp);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int array[0] &#x3D;&gt; 0</span><br><span class="line">int array[1] &#x3D;&gt; 0</span><br><span class="line">int array[2] &#x3D;&gt; 0</span><br><span class="line">int array[3] &#x3D;&gt; 0</span><br><span class="line">int array[0] &#x3D;&gt; 0</span><br><span class="line">int array[1] &#x3D;&gt; 1</span><br><span class="line">int array[2] &#x3D;&gt; 2</span><br><span class="line">int array[3] &#x3D;&gt; 3</span><br><span class="line">char_arr &#x3D; abcdefghijklmno</span><br><span class="line">person age:12, name : Tom Jerry</span><br><span class="line">annimal type: 12, type_name: man, description: fat</span><br></pre></td></tr></table></figure>
+
+<h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><p>关于变量类型和内存。申请了4×4字节的内存，内存是与变量无关的，初始化时的内存值为。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00 00 00 00   00 00 00 00   00 00 00 00   00 00 00 00   │ ················ │</span><br></pre></td></tr></table></figure>
+
+<h5 id="16字节内存作为整型数组使用"><a href="#16字节内存作为整型数组使用" class="headerlink" title="16字节内存作为整型数组使用"></a>16字节内存作为整型数组使用</h5><p>执行到下边的代码之后的内存。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *int_arr = vp;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;int array[%d] =&gt; %d\n&quot;</span>, i, int_arr[i]);</span><br><span class="line">        int_arr[i] = i;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>memory:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00 00 00 00   01 00 00 00   02 00 00 00   03 00 00 00   │ ················ │</span><br></pre></td></tr></table></figure>
+<p>一个<code>int</code>类型大小为4个字节，所以16字节可以转成大小为4的整型数组。</p>
+<h5 id="16字节内存作为字符串数组使用"><a href="#16字节内存作为字符串数组使用" class="headerlink" title="16字节内存作为字符串数组使用"></a>16字节内存作为字符串数组使用</h5><p>执行到下面的代码，内存变化为</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *char_arr = (<span class="keyword">char</span> *)vp;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">16</span>; ++i) &#123;</span><br><span class="line">    char_arr[i] = <span class="string">&#x27;a&#x27;</span> + i;</span><br><span class="line">&#125;</span><br><span class="line">char_arr[<span class="number">15</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>memory:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">65 66 67 68   69 6a 6b 6c   6d 6e 6f 00   │ abcdefghijklmno· │</span><br></pre></td></tr></table></figure>
+<p>一个<code>char</code>类型占用1个字节,16个字节可以放16个字符。</p>
+<h5 id="16字节作为结构体变量使用"><a href="#16字节作为结构体变量使用" class="headerlink" title="16字节作为结构体变量使用"></a>16字节作为结构体变量使用</h5><p>执行到下面的代码，</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">memset</span>(vp,<span class="number">0</span>,<span class="number">16</span>);</span><br><span class="line"><span class="built_in">memset</span>(vp, <span class="number">12</span>, <span class="number">1</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(vp+<span class="number">4</span>,<span class="string">&quot;Tom Jerry&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>memory:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0c 00 00 00   54 6f 6d 20   4a 65 72 72   79 00 00 00   │ ····Tom Jerry··· │</span><br></pre></td></tr></table></figure>
+
+<p>执行下面的代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">person</span> &#123;</span></span><br><span class="line">    <span class="keyword">int32_t</span> age;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">12</span>];</span><br><span class="line">&#125; *person_ptr;</span><br><span class="line"></span><br><span class="line">person_ptr = vp;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;person age:%d, name : %s\n&quot;</span>,person_ptr-&gt;age, person_ptr-&gt;name);</span><br></pre></td></tr></table></figure>
+<p><strong>输出</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">person age:12, name : Tom Jerry</span><br></pre></td></tr></table></figure>
+<p>16字节的内存被person结构体使用了。</p>
+<h5 id="结构体间强转"><a href="#结构体间强转" class="headerlink" title="结构体间强转"></a>结构体间强转</h5><p>执行到以下代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">memset</span>(vp+<span class="number">4</span>,<span class="number">0</span>,<span class="number">12</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(vp+<span class="number">4</span>, <span class="string">&quot;man&quot;</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(vp + <span class="number">4</span> + <span class="number">6</span>,<span class="string">&quot;fat&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">annimal</span> &#123;</span></span><br><span class="line">    <span class="keyword">int32_t</span> type;</span><br><span class="line">    <span class="keyword">char</span> type_name[<span class="number">6</span>];</span><br><span class="line">    <span class="keyword">char</span> description[<span class="number">6</span>];</span><br><span class="line">&#125; *annimal_ptr;</span><br><span class="line"></span><br><span class="line">annimal_ptr = (struct annimal *)person_ptr;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;annimal type: %d, type_name: %s, description: %s\n&quot;</span>,annimal_ptr-&gt;type, annimal_ptr-&gt;type_name, annimal_ptr-&gt;description);</span><br></pre></td></tr></table></figure>
+
+<p><strong>memory:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0c 00 00 00   6d 61 6e 00   00 00 66 61   74 00 00 00   │ ····man···fat··· │</span><br></pre></td></tr></table></figure>
+
+<p><strong>输出</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">annimal type: 12, type_name: man, description: fat</span><br></pre></td></tr></table></figure>
+
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>对于申请的内存得到的内存是无类型的，谁都可以使用。变量类型的作用是用来确定内存的边界。<br><code>int</code>类型大小为4个字节,所以会以4个字节为单位进行切割。<br><code>char</code> 类型大小为1个字节,以1个字节为单位对16字节的数据进行切割。<br><code>person</code>结构体，切割成两个部分。前4个字节作为整型<code>age</code>,后12字节作为<code>char</code>数组<code>name</code>。<br><code>annimal</code>结构体，将16字节切割给 <code>type</code>、<code>type_name</code>, <code>description</code>。</p>
+<h4 id="扩展-数组"><a href="#扩展-数组" class="headerlink" title="扩展-数组"></a>扩展-数组</h4><h5 id="多维静态数组"><a href="#多维静态数组" class="headerlink" title="多维静态数组"></a>多维静态数组</h5><p>静态数组<code>int map[2][3] = &#123;&#123;1,2,3&#125;,&#123;4,5,6&#125;&#125;;</code>在内存的布局如下,前4×6 = 24个字节分别对应map中的值。根据列的长度得出行的个数。列的大小为4×3 = 12,可以将24分成2个。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">01 00 00 00   02 00 00 00   03 00 00 00   04 00 00 00   │ ················ │</span><br><span class="line">05 00 00 00   06 00 00 00   00 b5 e9 21   50 1e 21 4e   │ ···········!P·!N │</span><br></pre></td></tr></table></figure>
+
+<p>静态数组：<code>int map2[3][2] = &#123;&#123;1,2&#125;,&#123;3,4&#125;,&#123;5,6&#125;&#125;;</code>内存布局如下。和上面的<code>map</code>变量内存布局一致。不同的是解析方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">01 00 00 00   02 00 00 00   03 00 00 00   04 00 00 00   │ ················ │</span><br><span class="line">05 00 00 00   06 00 00 00   00 2a 5b 24   65 cb 71 c8   │ ·········*[$e·q· │</span><br></pre></td></tr></table></figure>
+<p>静态数组: <code>int map3[3][2][2] = &#123;&#123;&#123;1,2&#125;,&#123;3,4&#125;&#125;,&#123;&#123;5,6&#125;,&#123;7,8&#125;&#125;,&#123;&#123;9,10&#125;,&#123;11,12&#125;&#125;&#125;;</code> 内存布局如下,切割方法,最小单位为2×4字节。<code>map3[0][0][0] =&gt; 1</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">01 00 00 00   02 00 00 00   03 00 00 00   04 00 00 00   │ ················ │</span><br><span class="line">05 00 00 00   06 00 00 00   07 00 00 00   08 00 00 00   │ ················ │</span><br><span class="line">09 00 00 00   0a 00 00 00   0b 00 00 00   0c 00 00 00   │ ················ │</span><br></pre></td></tr></table></figure>
+
+<p>字符串数组：<code>char names[3][16] = &#123;&quot;AAA&quot;,&quot;BBBB&quot;,&quot;CCCCCCCCCCCCCCC&quot;&#125;; </code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">41 41 41 00   00 00 00 00   00 00 00 00   00 00 00 00   │ AAA············· │</span><br><span class="line">42 42 42 42   00 00 00 00   00 00 00 00   00 00 00 00   │ BBBB············ │</span><br><span class="line">43 43 43 43   43 43 43 43   43 43 43 43   43 43 43 00   │ CCCCCCCCCCCCCCC· │</span><br></pre></td></tr></table></figure>
+
+<h5 id="多维动态数组"><a href="#多维动态数组" class="headerlink" title="多维动态数组"></a>多维动态数组</h5><p>二维字符串数组创建方法一：<br>代码如下，4个字符串指针，决定了字符串的个数，指针所指向的地址由自己定义。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">void *vp &#x3D; malloc(16);</span><br><span class="line">memset(vp, 0, 16);</span><br><span class="line">memcpy(vp,&quot;AAA&quot;,4);</span><br><span class="line">memcpy(vp + 4, &quot;BBB&quot;, 4);</span><br><span class="line">memcpy(vp + 8, &quot;CCC&quot;, 4);</span><br><span class="line">memcpy(vp + 12, &quot;DDD&quot;, 4);</span><br><span class="line"></span><br><span class="line">char *str_arr_ptr[4];</span><br><span class="line">str_arr_ptr[0] &#x3D; vp;</span><br><span class="line">str_arr_ptr[1] &#x3D; vp + 4;</span><br><span class="line">str_arr_ptr[2] &#x3D; vp + 8;</span><br><span class="line">str_arr_ptr[3] &#x3D; vp + 12;</span><br><span class="line">for (int i &#x3D; 0; i &lt; 4;i ++)&#123;</span><br><span class="line">    printf(&quot;str_arr_ptr_%d &#x3D;&gt; %s\n&quot;,i,str_arr_ptr[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>内存</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">41 41 41 00   42 42 42 00   43 43 43 00   44 44 44 00   │ AAA·BBB·CCC·DDD· │</span><br></pre></td></tr></table></figure>
+<p><strong>输出</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str_arr_ptr_0 &#x3D;&gt; AAA</span><br><span class="line">str_arr_ptr_1 &#x3D;&gt; BBB</span><br><span class="line">str_arr_ptr_2 &#x3D;&gt; CCC</span><br><span class="line">str_arr_ptr_3 &#x3D;&gt; DDD</span><br></pre></td></tr></table></figure>
+
+<p>二维字符串数组创建方法二：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">void *vp &#x3D; malloc(16);</span><br><span class="line">memset(vp, 0, 16);</span><br><span class="line">memcpy(vp,&quot;AAA&quot;,4);</span><br><span class="line">memcpy(vp + 4, &quot;BBB&quot;, 4);</span><br><span class="line">memcpy(vp + 8, &quot;CCC&quot;, 4);</span><br><span class="line">memcpy(vp + 12, &quot;DDD&quot;, 4);</span><br><span class="line"></span><br><span class="line">char **str_arr_ptr2 &#x3D; NULL;</span><br><span class="line">&#x2F;&#x2F; 申请了4个指针</span><br><span class="line">str_arr_ptr2 &#x3D; calloc(4,sizeof(char *));</span><br><span class="line"></span><br><span class="line">str_arr_ptr2[0] &#x3D; vp;</span><br><span class="line"></span><br><span class="line">str_arr_ptr2[1] &#x3D; vp + 4;</span><br><span class="line"></span><br><span class="line">str_arr_ptr2[2] &#x3D; vp + 8;</span><br><span class="line"></span><br><span class="line">str_arr_ptr2[3] &#x3D; vp + 12;</span><br><span class="line">for (int i &#x3D; 0; i &lt; 4;i ++)&#123;</span><br><span class="line">    printf(&quot;str_arr_ptr_%d &#x3D;&gt; %s\n&quot;,i,str_arr_ptr2[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>说明</strong><br>与第一种不同的是，每个指向字符串数组的指针都要自己去申请。但是，好处是动态的，大小可以自己决定。C指针编程实际上是对内存操作的编程。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">内存</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">指针</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/29/C-%E5%86%85%E5%AD%98%E5%92%8C%E7%B1%BB%E5%9E%8B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-linux自动更换壁纸" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1067,90 +1209,6 @@ B-->C</pre>
 
 
   
-    <article id="post-go-gin-请求处理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/26/go-gin-%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86/">go-gin-请求处理</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/26/go-gin-%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86/" class="archive-article-date">
-  	<time datetime="2020-07-26T11:39:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="gin框架各种请求方式处理demo"><a href="#gin框架各种请求方式处理demo" class="headerlink" title="gin框架各种请求方式处理demo"></a>gin框架各种请求方式处理demo</h4><ul>
-<li>url参数获取</li>
-<li>form表单获取</li>
-<li>body中json数据获取</li>
-<li>文件上传</li>
-</ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;github.com/gin-gonic/gin&quot;</span></span><br><span class="line">    <span class="string">&quot;log&quot;</span></span><br><span class="line">    <span class="string">&quot;net/http&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    r := gin.Default()</span><br><span class="line">    <span class="comment">// 1、获得URL参数</span></span><br><span class="line">    r.GET(<span class="string">&quot;/p1&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">        param1 := c.DefaultQuery(<span class="string">&quot;param1&quot;</span>,<span class="string">&quot;no exit&quot;</span>)</span><br><span class="line">        param2 := c.Query(<span class="string">&quot;param2&quot;</span>)</span><br><span class="line">        c.JSON(http.StatusOK,gin.H&#123;</span><br><span class="line">            <span class="string">&quot;param1&quot;</span>:param1,</span><br><span class="line">            <span class="string">&quot;param2&quot;</span>:param2,</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 请求:http://localhost:8080/p1?param1=11&amp;param2=22</span></span><br><span class="line">    <span class="comment">// 返回:&#123;&quot;param1&quot;:&quot;11&quot;,&quot;param2&quot;:&quot;22&quot;&#125;</span></span><br><span class="line">    <span class="comment">// 请求:http://localhost:8080/p1?param2=22</span></span><br><span class="line">    <span class="comment">// 返回:&#123;&quot;param1&quot;:&quot;no exit&quot;,&quot;param2&quot;:&quot;22&quot;&#125;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2.form参数</span></span><br><span class="line">    r.POST(<span class="string">&quot;/p2&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">        param1 := c.PostForm(<span class="string">&quot;param1&quot;</span>)</span><br><span class="line">        param2 := c.PostForm(<span class="string">&quot;param2&quot;</span>)</span><br><span class="line">        c.JSON(http.StatusOK,gin.H&#123;</span><br><span class="line">            <span class="string">&quot;param1&quot;</span>:param1,</span><br><span class="line">            <span class="string">&quot;param2&quot;</span>:param2,</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 3.获得path参数</span></span><br><span class="line">    r.GET(<span class="string">&quot;/p3/:param1/:param2&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">        param1 := c.Param(<span class="string">&quot;param1&quot;</span>)</span><br><span class="line">        param2 := c.Param(<span class="string">&quot;param2&quot;</span>)</span><br><span class="line">        c.JSON(http.StatusOK,gin.H&#123;</span><br><span class="line">            <span class="string">&quot;param1&quot;</span>:param1,</span><br><span class="line">            <span class="string">&quot;param2&quot;</span>:param2,</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 请求:http://localhost:8080/p3/pp1/pp2</span></span><br><span class="line">    <span class="comment">// 返回:&#123;&quot;param1&quot;:&quot;pp1&quot;,&quot;param2&quot;:&quot;pp2&quot;&#125;</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// shouldBind()会根据请求的content-type自动选择绑定器</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 4.获得json数据</span></span><br><span class="line">    <span class="keyword">type</span> s1 <span class="keyword">struct</span> &#123;</span><br><span class="line">        Name <span class="keyword">string</span> <span class="string">`json:&quot;name&quot; form:&quot;name&quot; binding:&quot;required&quot;`</span></span><br><span class="line">        Age <span class="keyword">int</span> <span class="string">`json:&quot;age&quot; form:&quot;age&quot; binding:&quot;required&quot;`</span></span><br><span class="line">    &#125;</span><br><span class="line">    r.POST(<span class="string">&quot;/p4&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> s s1</span><br><span class="line">        <span class="keyword">if</span> err := c.ShouldBind(&amp;s);err == <span class="literal">nil</span>&#123;</span><br><span class="line">            c.JSON(http.StatusOK,s)</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            c.JSON(http.StatusBadRequest,gin.H&#123;</span><br><span class="line">                <span class="string">&quot;err&quot;</span>:err.Error(),</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 5.绑定form表单数据</span></span><br><span class="line">    r.POST(<span class="string">&quot;/p5&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> s s1</span><br><span class="line">        <span class="keyword">if</span> err := c.ShouldBind(&amp;s);err == <span class="literal">nil</span>&#123;</span><br><span class="line">            c.JSON(http.StatusOK,s)</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            c.JSON(http.StatusBadRequest,gin.H&#123;</span><br><span class="line">                <span class="string">&quot;err&quot;</span>:err.Error(),</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 6.url路径绑定</span></span><br><span class="line">    <span class="comment">// 请求:http://localhost:8080/p6?name=fff&amp;age=12</span></span><br><span class="line">    <span class="comment">// 响应:&#123;&quot;name&quot;:&quot;fff&quot;,&quot;age&quot;:12&#125;</span></span><br><span class="line">    r.GET(<span class="string">&quot;/p6&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> s s1</span><br><span class="line">        <span class="keyword">if</span> err := c.ShouldBind(&amp;s);err == <span class="literal">nil</span>&#123;</span><br><span class="line">            c.JSON(http.StatusOK,s)</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            c.JSON(http.StatusBadRequest,gin.H&#123;</span><br><span class="line">                <span class="string">&quot;err&quot;</span>:err.Error(),</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 7.单文件上传</span></span><br><span class="line">    r.POST(<span class="string">&quot;/upload&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">        file,err := c.FormFile(<span class="string">&quot;file1&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</span><br><span class="line">            c.JSON(http.StatusInternalServerError, gin.H&#123;</span><br><span class="line">                <span class="string">&quot;err&quot;</span>:err.Error(),</span><br><span class="line">            &#125;)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        log.Println(<span class="string">&quot;上传文件名:&quot;</span>,file.Filename)</span><br><span class="line">        <span class="comment">//  保存文件</span></span><br><span class="line">        err = c.SaveUploadedFile(file,file.Filename)</span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            log.Println(err)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            c.JSON(http.StatusOK,gin.H&#123;</span><br><span class="line">                <span class="string">&quot;message&quot;</span>:fmt.Sprintf(<span class="string">&quot;%s 上传成功&quot;</span>,file.Filename),</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 8.多文件上传</span></span><br><span class="line">    <span class="comment">//r.MaxMultipartMemory =</span></span><br><span class="line">    r.POST(<span class="string">&quot;/uploads&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">        form ,err := c.MultipartForm()</span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            c.JSON(http.StatusInternalServerError,gin.H&#123;</span><br><span class="line">                <span class="string">&quot;err&quot;</span>:err.Error(),</span><br><span class="line">            &#125;)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        files := form.File[<span class="string">&quot;file&quot;</span>]</span><br><span class="line">        <span class="keyword">for</span> index,file := <span class="keyword">range</span> files&#123;</span><br><span class="line">            log.Println(index,<span class="string">&quot; &quot;</span>,file.Filename)</span><br><span class="line">            c.SaveUploadedFile(file,file.Filename)</span><br><span class="line">        &#125;</span><br><span class="line">        c.JSON(http.StatusOK,gin.H&#123;</span><br><span class="line">            <span class="string">&quot;message&quot;</span>:fmt.Sprintf(<span class="string">&quot;上传%d个文件成功&quot;</span>,<span class="built_in">len</span>(files)),</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    r.Run(<span class="string">&quot;:8080&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">gin</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/26/go-gin-%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1425,6 +1483,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">内存</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">指针</a>
               </li>
             
             <div class="clearfix"></div>
