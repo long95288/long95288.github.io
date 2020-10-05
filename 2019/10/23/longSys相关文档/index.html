@@ -16,7 +16,7 @@
 <meta property="og:description" content="问题定义  个人资源管理平台 需求分析  需要一个软件平台来管理自己日益复杂和丰富的资源。包括但不限于个人文档、积累的电子书、下载的音乐、下载的视频教程，一些常用的功能。日记、笔记等。一些相关的人工智能的资源整合。如车标识别、orc等常用的接口。未来可能要接入物联网的相关设备、由于腾讯云的服务器的存储资源有限，未来需要将自己本地的文件外挂到该平台，即可以减小服务器的开销，还可以保护文档的私密性。服">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-10-23T14:33:34.000Z">
-<meta property="article:modified_time" content="2020-09-20T15:45:38.361Z">
+<meta property="article:modified_time" content="2020-10-05T12:13:23.514Z">
 <meta property="article:author" content="long">
 <meta property="article:tag" content="笔记">
 <meta property="article:tag" content="软件设计">
@@ -210,7 +210,30 @@
 <li><input disabled type="checkbox"> 删除<br>….</li>
 </ul>
 <h4 id="音乐模块"><a href="#音乐模块" class="headerlink" title="音乐模块"></a>音乐模块</h4><p>….</p>
-<h4 id="在线笔记模块"><a href="#在线笔记模块" class="headerlink" title="在线笔记模块"></a>在线笔记模块</h4><h4 id="小说模块"><a href="#小说模块" class="headerlink" title="小说模块"></a>小说模块</h4><h4 id="TODO模块"><a href="#TODO模块" class="headerlink" title="TODO模块"></a>TODO模块</h4><h4 id="人工智能接口"><a href="#人工智能接口" class="headerlink" title="人工智能接口"></a>人工智能接口</h4><h4 id="物联网设备"><a href="#物联网设备" class="headerlink" title="物联网设备"></a>物联网设备</h4><h3 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h3>
+<h4 id="在线笔记模块"><a href="#在线笔记模块" class="headerlink" title="在线笔记模块"></a>在线笔记模块</h4><h4 id="小说模块"><a href="#小说模块" class="headerlink" title="小说模块"></a>小说模块</h4><h4 id="TODO模块"><a href="#TODO模块" class="headerlink" title="TODO模块"></a>TODO模块</h4><h4 id="人工智能接口"><a href="#人工智能接口" class="headerlink" title="人工智能接口"></a>人工智能接口</h4><h4 id="物联网设备"><a href="#物联网设备" class="headerlink" title="物联网设备"></a>物联网设备</h4><h3 id="前端流程设计"><a href="#前端流程设计" class="headerlink" title="前端流程设计"></a>前端流程设计</h3><h4 id="登录流程设计"><a href="#登录流程设计" class="headerlink" title="登录流程设计"></a>登录流程设计</h4><pre class="mermaid">sequenceDiagram
+    participant user as 用户
+    participant front as 前端
+    participant backend as 后端
+
+    user->>front: 填写账号和密码
+    front->>front: 校验账号密码
+    front->>backend: 登录请求
+    backend->>backend: 处理登录请求
+    backend-->>front: 返回token
+    front->>front: 保存token
+    front->>front: 进入首页
+    front->>backend: 根据token获得用户数据
+    backend-->>front: 返回用户数据,包括用户名，头像，路由等
+    front->>front: 保存用户数据,处理路由数据动态渲染。
+    front->>front: 进入系统
+    front-->>user: 完成登录</pre>
+
+<h5 id="请求接口"><a href="#请求接口" class="headerlink" title="请求接口"></a>请求接口</h5><ul>
+<li>Api/User/Login </li>
+<li>Api/User/GetInfo</li>
+<li>Api/User/Logout</li>
+</ul>
+<h3 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h3>
       
 
       
