@@ -158,6 +158,87 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Linux命令总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/18/Linux%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">Linux命令总结</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/18/Linux%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2020-10-17T18:23:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="关机、重启、注销"><a href="#关机、重启、注销" class="headerlink" title="关机、重启、注销"></a>关机、重启、注销</h3><p><code>shutdown -h now</code>: 立即关机<br><code>shutdown -h 1</code>: 1分钟后关机<br><code>shutdown -r now</code>: 立即重启<br><code>h</code>表示:halt、<code>r</code>表示:reboot、<code>syn</code>:内存数据同步至磁盘</p>
+<p><code>logout</code>: 注销，只在级别3下面有效</p>
+<h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3><h4 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h4><p>useradd [选项] 用户名</p>
+<p>例子:<code>useradd zhangsan</code> 创建一个zhangsan的用户自动创建和用户名相同的home目录。<br>使用选项<code>-d</code>可以指定用户的home目录<br>例子:<code>useradd -d /home/wangwu zhangsan</code>,将用户<code>zhangsan</code>的home目录指定为<code>/home/wangwu</code></p>
+<h4 id="指定或修改用户密码"><a href="#指定或修改用户密码" class="headerlink" title="指定或修改用户密码"></a>指定或修改用户密码</h4><p>passwd 用户名</p>
+<p>例子: <code>passwd zs</code></p>
+<h4 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h4><p>userdel 用户名</p>
+<p>例子:<code>userdel zhangsan</code> 删除zhangsan用户,但保留用户home目录。<br>例子:<code>userdel -r zhangsan</code> 删除zhangsan用户，同时删除用户home目录。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/18/Linux%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-C-内存和类型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1055,131 +1136,6 @@ Struct和map作为查询条件<figure class="highlight go"><table><tr><td class=
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/07/31/go-gorm/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-markdown画图" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/29/markdown%E7%94%BB%E5%9B%BE/">markdown画图</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/29/markdown%E7%94%BB%E5%9B%BE/" class="archive-article-date">
-  	<time datetime="2020-07-29T15:19:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="绘制图关系"><a href="#绘制图关系" class="headerlink" title="绘制图关系"></a>绘制图关系</h4><p>选择<code>mermaid</code>，在里面选择<code>graph</code>。有下列选项方向选择</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>TB</td>
-<td>Top-&gt;Bottom</td>
-</tr>
-<tr>
-<td>BT</td>
-<td>Bottom-&gt;Top</td>
-</tr>
-<tr>
-<td>LR</td>
-<td>Left-&gt;Right</td>
-</tr>
-<tr>
-<td>RL</td>
-<td>Right-&gt;Left</td>
-</tr>
-</tbody></table>
-<p>使用<code>--&gt;</code>连接两个节点，名称一致为一个节点.<code>--&gt;</code>中间不能有空格</p>
-<pre class="mermaid">graph TB
-A-->B
-B-->A
-A-->C</pre>
-
-
-<pre class="mermaid">graph LR
-A-->B
-B-->C</pre>
-
-<h4 id="绘制流程图"><a href="#绘制流程图" class="headerlink" title="绘制流程图"></a>绘制流程图</h4><pre class="mermaid">sequenceDiagram
-  participant z as 张三
-  participant l as 李四
-  z-->>l:吃饭没?
-  l-->>z:没吃。
-
-  loop 每天
-    z-->>l:又是无聊的一天
-    l-->>z:是啊,又是无聊的一天
-    activate z
-  end</pre>
-
-<h4 id="绘制时序图"><a href="#绘制时序图" class="headerlink" title="绘制时序图"></a>绘制时序图</h4>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">markdown</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/29/markdown%E7%94%BB%E5%9B%BE/">展开全文 >></a>
         </p>
       
 
