@@ -180,17 +180,31 @@
       
         <h3 id="关机、重启、注销"><a href="#关机、重启、注销" class="headerlink" title="关机、重启、注销"></a>关机、重启、注销</h3><p><code>shutdown -h now</code>: 立即关机<br><code>shutdown -h 1</code>: 1分钟后关机<br><code>shutdown -r now</code>: 立即重启<br><code>h</code>表示:halt、<code>r</code>表示:reboot、<code>syn</code>:内存数据同步至磁盘</p>
 <p><code>logout</code>: 注销，只在级别3下面有效</p>
-<h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3><h4 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h4><p>useradd [选项] 用户名</p>
+<h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3><h4 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h4><blockquote>
+<p>useradd [选项] 用户名</p>
+</blockquote>
 <p>例子:<code>useradd zhangsan</code> 创建一个zhangsan的用户自动创建和用户名相同的home目录。<br>使用选项<code>-d</code>可以指定用户的home目录<br>例子:<code>useradd -d /home/wangwu zhangsan</code>,将用户<code>zhangsan</code>的home目录指定为<code>/home/wangwu</code></p>
-<h4 id="指定或修改用户密码"><a href="#指定或修改用户密码" class="headerlink" title="指定或修改用户密码"></a>指定或修改用户密码</h4><p>passwd 用户名</p>
+<h4 id="指定或修改用户密码"><a href="#指定或修改用户密码" class="headerlink" title="指定或修改用户密码"></a>指定或修改用户密码</h4><blockquote>
+<p>passwd 用户名</p>
+</blockquote>
 <p>例子: <code>passwd zs</code></p>
-<h4 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h4><p>userdel 用户名</p>
+<h4 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h4><blockquote>
+<p>userdel 用户名</p>
+</blockquote>
 <p>例子:<code>userdel zhangsan</code> 删除zhangsan用户,但保留用户home目录。<br>例子:<code>userdel -r zhangsan</code> 删除zhangsan用户，同时删除用户home目录。</p>
 <h4 id="切换用户"><a href="#切换用户" class="headerlink" title="切换用户"></a>切换用户</h4><p><code>su - zhangsan</code> 切换到zhangsan用户<br>返回原来的用户<code>exit</code>命令<br>高权限用户=&gt;低权限用户:不需要密码，反之需要。</p>
-<h4 id="用户组"><a href="#用户组" class="headerlink" title="用户组"></a>用户组</h4><h5 id="添加新组"><a href="#添加新组" class="headerlink" title="添加新组"></a>添加新组</h5><p><code>groupadd xiaoming</code></p>
-<h5 id="删除新组"><a href="#删除新组" class="headerlink" title="删除新组"></a>删除新组</h5><p><code>groupdel xiaoming</code></p>
-<h5 id="添加用户时设置组"><a href="#添加用户时设置组" class="headerlink" title="添加用户时设置组"></a>添加用户时设置组</h5><p>useradd -g 用户组 用户名</p>
-<h5 id="修改已有的用户组"><a href="#修改已有的用户组" class="headerlink" title="修改已有的用户组"></a>修改已有的用户组</h5><p>usermod -g 用户组 用户名</p>
+<h4 id="用户组"><a href="#用户组" class="headerlink" title="用户组"></a>用户组</h4><h5 id="添加新组"><a href="#添加新组" class="headerlink" title="添加新组"></a>添加新组</h5><blockquote>
+<p> <code>groupadd xiaoming</code></p>
+</blockquote>
+<h5 id="删除新组"><a href="#删除新组" class="headerlink" title="删除新组"></a>删除新组</h5><blockquote>
+<p> <code>groupdel xiaoming</code></p>
+</blockquote>
+<h5 id="添加用户时设置组"><a href="#添加用户时设置组" class="headerlink" title="添加用户时设置组"></a>添加用户时设置组</h5><blockquote>
+<p> useradd -g 用户组 用户名</p>
+</blockquote>
+<h5 id="修改已有的用户组"><a href="#修改已有的用户组" class="headerlink" title="修改已有的用户组"></a>修改已有的用户组</h5><blockquote>
+<p> usermod -g 用户组 用户名</p>
+</blockquote>
 <h5 id="用户相关文件"><a href="#用户相关文件" class="headerlink" title="用户相关文件"></a>用户相关文件</h5><p><code>/etc/passwd</code>文件，用户配置文件<br>一行的含义: 用户名:口令:用户标识号:注释性描述:主目录:登录shell</p>
 <p><code>/etc/shadow</code> 文件<br>登录名:加密口令:最后一次修改时间:最小时间间隔:最大时间间隔:警告时间:不活动时间:失效时间:标志</p>
 <p><code>/etc/group</code> 文件<br>组名:口令:组标识号:组内用户列表</p>
@@ -265,6 +279,24 @@
 <p>rm -rf 目录</p>
 </blockquote>
 <p>强制递归删除目录，包括里面的文件</p>
+<blockquote>
+<p>touch xxx.txt</p>
+</blockquote>
+<p>创建一个空的文件</p>
+<blockquote>
+<p>cp [选项] source dest</p>
+</blockquote>
+<p>赋值文件到指定目录，加上<code>-r</code>选项，递归整个文件夹。</p>
+<blockquote>
+<p>rm [选项] 待删除的文件或目录</p>
+</blockquote>
+<p><code>-r</code> 递归整个文件夹</p>
+<p><code>-f</code>强制删除不再提示</p>
+<blockquote>
+<p>mv oldNameFile newNameFile 重命名文件</p>
+<p>mv /xx/xxx /target/xx/xx 移动文件</p>
+</blockquote>
+<p>文件移动或者重命名操作。</p>
 
       
 
