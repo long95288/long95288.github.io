@@ -1931,6 +1931,31 @@ es6写法<figure class="highlight javascript"><table><tr><td class="gutter"><pre
 
 <p>只查询一次</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">isFlipedString</span><span class="params">(s1 <span class="keyword">string</span>, s2 <span class="keyword">string</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(s1) != <span class="built_in">len</span>(s2)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> strings.Contains(s2+s2, s1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="696-计数二进制子串-简单"><a href="#696-计数二进制子串-简单" class="headerlink" title="696. 计数二进制子串[简单]"></a>696. 计数二进制子串[简单]</h3><p>给定一个字符串 s，计算具有相同数量0和1的非空(连续)子字符串的数量，并且这些子字符串中的所有0和所有1都是组合在一起的。</p>
+<p>重复出现的子串要计算它们出现的次数。</p>
+<p>示例 1 :</p>
+<p>输入: “00110011”<br>输出: 6<br>解释: 有6个子串具有相同数量的连续1和0：“0011”，“01”，“1100”，“10”，“0011” 和 “01”。</p>
+<p>请注意，一些重复出现的子串要计算它们出现的次数。</p>
+<p>另外，“00110011”不是有效的子串，因为所有的0（和1）没有组合在一起。<br>示例 2 :</p>
+<p>输入: “10101”<br>输出: 4<br>解释: 有4个子串：“10”，“01”，“10”，“01”，它们具有相同数量的连续1和0。<br>注意：</p>
+<p>s.length 在1到50,000之间。<br>s 只包含“0”或“1”字符。<br>通过次数40,719提交次数65,356</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/count-binary-substrings">https://leetcode-cn.com/problems/count-binary-substrings</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h4 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h4><p>方法一：按字符分组<br>思路与算法</p>
+<p>我们可以将字符串 ss 按照 00 和 11 的连续段分组，存在 \rm countscounts 数组中，例如 s = 00111011s=00111011，可以得到这样的 \rm countscounts 数组：{\rm counts} = {2, 3, 1, 2}counts={2,3,1,2}。</p>
+<p>这里 \rm countscounts 数组中两个相邻的数一定代表的是两种不同的字符。假设 \rm countscounts 数组中两个相邻的数字为 uu 或者 vv，它们对应着 uu 个 00 和 vv 个 11，或者 uu 个 11 和 vv 个 00。它们能组成的满足条件的子串数目为 \min { u, v }min{u,v}，即一对相邻的数字对答案的贡献。</p>
+<p>我们只要遍历所有相邻的数对，求它们的贡献总和，即可得到答案。</p>
+<p>不难得到这样的实现：</p>
+<p>C++JavaJavaScriptGolangC</p>
+<p>class Solution {<br>public:<br>    int countBinarySubstrings(string s) {<br>        vector<int> counts;<br>        int ptr = 0, n = s.size();<br>        while (ptr &lt; n) {<br>            char c = s[ptr];<br>            int count = 0;<br>            while (ptr &lt; n &amp;&amp; s[ptr] == c) {<br>                ++ptr;<br>                ++count;<br>            }<br>            counts.push_back(count);<br>        }<br>        int ans = 0;<br>        for (int i = 1; i &lt; counts.size(); ++i) {<br>            ans += min(counts[i], counts[i - 1]);<br>        }<br>        return ans;<br>    }<br>};<br>这个实现的时间复杂度和空间复杂度都是 O(n)O(n)。</int></p>
+<p>对于某一个位置 ii，其实我们只关心 i - 1i−1 位置的 \rm countscounts 值是多少，所以可以用一个 \rm lastlast 变量来维护当前位置的前一个位置，这样可以省去一个 \rm countscounts 数组的空间。</p>
+<p>代码如下。</p>
+<p>代码</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">countBinarySubstrings</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> ptr, last, ans <span class="keyword">int</span></span><br><span class="line">    n := <span class="built_in">len</span>(s)</span><br><span class="line">    <span class="keyword">for</span> ptr &lt; n &#123;</span><br><span class="line">        c := s[ptr]</span><br><span class="line">        count := <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> ptr &lt; n &amp;&amp; s[ptr] == c &#123;</span><br><span class="line">            ptr++</span><br><span class="line">            count++</span><br><span class="line">        &#125;</span><br><span class="line">        ans += min(count, last)</span><br><span class="line">        last = count</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">min</span><span class="params">(x, y <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> x &lt; y &#123;</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>复杂度分析</p>
+<p>时间复杂度：O(n)O(n)。<br>空间复杂度：O(1)O(1)。</p>
+<p>作者：LeetCode-Solution<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/count-binary-substrings/solution/ji-shu-er-jin-zhi-zi-chuan-by-leetcode-solution/">https://leetcode-cn.com/problems/count-binary-substrings/solution/ji-shu-er-jin-zhi-zi-chuan-by-leetcode-solution/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
       
 
       
