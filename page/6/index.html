@@ -711,6 +711,109 @@ es6写法<figure class="highlight javascript"><table><tr><td class="gutter"><pre
 
 
   
+    <article id="post-基础算法2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/11/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%952/">基础算法2</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/11/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%952/" class="archive-article-date">
+  	<time datetime="2019-08-11T13:29:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="华为精英202010OD-第一题"><a href="#华为精英202010OD-第一题" class="headerlink" title="华为精英202010OD[第一题]"></a>华为精英202010OD[第一题]</h4><p>题意:给一个数n,寻找两个质数相乘等于n,按从小到大输出这两个数。<br>例子<br>输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">15</span><br></pre></td></tr></table></figure>
+<p>输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3 5</span><br></pre></td></tr></table></figure>
+<p>输入:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">27</span><br></pre></td></tr></table></figure>
+<p>输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-1 -1</span><br></pre></td></tr></table></figure>
+
+<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 寻找由两个素数相乘得到的数据</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">isP</span><span class="params">(n <span class="keyword">int</span>, pMap <span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">struct</span>&#123;&#125;)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> _,ok := pMap[n];ok&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> n &lt; <span class="number">2</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">2</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> j := <span class="number">2</span>; j &lt; n; j ++ &#123;</span><br><span class="line">        <span class="keyword">if</span> n % j == <span class="number">0</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    pMap[n] = <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 计算所有的素数</span></span><br><span class="line">    <span class="keyword">var</span> inputN = <span class="number">0</span></span><br><span class="line">    fmt.Scanf(<span class="string">&quot;%d&quot;</span>, &amp;inputN)</span><br><span class="line">    <span class="comment">//fmt.Printf(&quot;%d&quot;, inputN)</span></span><br><span class="line">    pMap := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line">    max := inputN</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">2</span>; i &lt;= max; i++&#123;</span><br><span class="line">        <span class="keyword">if</span> isP(i, pMap) &amp;&amp; max % i == <span class="number">0</span> &#123;</span><br><span class="line">            sub :=  max / i</span><br><span class="line">            <span class="keyword">if</span> isP(sub, pMap) &#123;</span><br><span class="line">                <span class="comment">//fmt.Println(pMap)</span></span><br><span class="line">                <span class="keyword">if</span> i &lt; sub &#123;</span><br><span class="line">                    fmt.Printf(<span class="string">&quot;%d %d&quot;</span>, i, sub)</span><br><span class="line">                    <span class="keyword">return</span></span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    fmt.Printf(<span class="string">&quot;%d %d&quot;</span>, sub, i)</span><br><span class="line">                    <span class="keyword">return</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">&quot;-1 -1&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>问题:大数据会占用非常多的时间，导致超时。</p>
+<h3 id="华为精英202010OD-第二题"><a href="#华为精英202010OD-第二题" class="headerlink" title="华为精英202010OD[第二题]"></a>华为精英202010OD[第二题]</h3><p>题意: 返回特定水仙花个数,如果没有对应的水仙花数。返回最后一个水仙花乘上个数m。<br>例子:<br>输入:第一行是位数，第二行是第n个水仙花数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+<p><code>100 - 999</code><br><code>153</code>为第一个水仙花数。<br>输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">153</span><br></pre></td></tr></table></figure>
+
+<h4 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;strconv&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">isFlowers</span><span class="params">(n <span class="keyword">int</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">    ns := strconv.Itoa(n)</span><br><span class="line">    ret := <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> _,i := <span class="keyword">range</span> ns &#123;</span><br><span class="line">        ni,_ := strconv.Atoi(<span class="keyword">string</span>(i))</span><br><span class="line">        tmp := <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> j:=<span class="number">0</span>; j &lt; <span class="built_in">len</span>(ns); j++&#123;</span><br><span class="line">            tmp *= ni</span><br><span class="line">        &#125;</span><br><span class="line">        ret += tmp</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret == n</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 1 数字位数</span></span><br><span class="line">    <span class="comment">// 2 第几个水仙花</span></span><br><span class="line">    <span class="keyword">var</span> n = <span class="number">0</span></span><br><span class="line">    <span class="keyword">var</span> m = <span class="number">0</span></span><br><span class="line">    fmt.Scan(&amp;n)</span><br><span class="line">    fmt.Scan(&amp;m)</span><br><span class="line">    <span class="keyword">if</span> n &gt; <span class="number">7</span> || n &lt; <span class="number">3</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">&quot;-1&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    start := <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i:=<span class="number">0</span>; i &lt; n - <span class="number">1</span>;i ++&#123;</span><br><span class="line">        start *= <span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">    res := []<span class="keyword">int</span>&#123;&#125;</span><br><span class="line">    end := <span class="number">10</span> * start <span class="number">-1</span></span><br><span class="line">    <span class="comment">//fmt.Printf(&quot;%d %d\n&quot;, start, end)</span></span><br><span class="line">    <span class="comment">// 计算数据</span></span><br><span class="line">    <span class="keyword">for</span> i := start;i &lt;= end;i++&#123;</span><br><span class="line">        <span class="keyword">if</span> isFlowers(i) &#123;</span><br><span class="line">            res = <span class="built_in">append</span>(res, i)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(res) &gt; m &#123;</span><br><span class="line">                fmt.Println(res[m])</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(res) &lt;= <span class="number">0</span>&#123;</span><br><span class="line">        fmt.Println(<span class="string">&quot;-1&quot;</span>)</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> <span class="built_in">len</span>(res) &lt; m &#123;</span><br><span class="line">        fmt.Println(res[<span class="built_in">len</span>(res) <span class="number">-1</span>] * m)</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        fmt.Println(res[m])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="华为精英202010OD-第三题"><a href="#华为精英202010OD-第三题" class="headerlink" title="华为精英202010OD[第三题]"></a>华为精英202010OD[第三题]</h3><p>模拟内存申请和释放。<br>输入:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">REQUEST&#x3D;10</span><br><span class="line">REQUEST&#x3D;20</span><br></pre></td></tr></table></figure>
+<p>输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0</span><br><span class="line">10</span><br></pre></td></tr></table></figure>
+<h4 id="解法-1"><a href="#解法-1" class="headerlink" title="解法"></a>解法</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;bufio&quot;</span></span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;os&quot;</span></span><br><span class="line">    <span class="string">&quot;strconv&quot;</span></span><br><span class="line">    <span class="string">&quot;strings&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模拟内存分配</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> mem <span class="keyword">struct</span> &#123;</span><br><span class="line">    firstp <span class="keyword">int</span></span><br><span class="line">    lastp <span class="keyword">int</span></span><br><span class="line">    callocable <span class="keyword">bool</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Memory <span class="keyword">struct</span> &#123;</span><br><span class="line">    firstP <span class="keyword">int</span></span><br><span class="line">    lastP <span class="keyword">int</span></span><br><span class="line">    callocTable []mem</span><br><span class="line">    idleTable []mem</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">allocMem</span><span class="params">(m Memory, n <span class="keyword">int</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;error&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> i:=<span class="number">0</span>; i&lt;<span class="built_in">len</span>(m.idleTable); i++&#123;</span><br><span class="line">        <span class="keyword">if</span> m.idleTable[i].lastp - m.idleTable[i].firstp + <span class="number">1</span> &gt; n &#123;</span><br><span class="line">            m.callocTable = <span class="built_in">append</span>(m.callocTable, mem&#123;</span><br><span class="line">                firstp:     m.idleTable[i].firstp,</span><br><span class="line">                lastp:      m.idleTable[i].firstp + n - <span class="number">1</span>,</span><br><span class="line">                callocable: <span class="literal">false</span>,</span><br><span class="line">            &#125;)</span><br><span class="line">            p := strconv.Itoa(m.idleTable[i].firstp)</span><br><span class="line">            m.idleTable[i].firstp = m.idleTable[i].firstp + n</span><br><span class="line">            <span class="keyword">return</span> p</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;error&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">freeMem</span><span class="params">(m Memory, n <span class="keyword">int</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i:=<span class="number">0</span>; i &lt; <span class="built_in">len</span>(m.callocTable); i-- &#123;</span><br><span class="line">        <span class="keyword">if</span> m.callocTable[i].firstp == n &#123;</span><br><span class="line">            <span class="keyword">for</span> j:=<span class="number">0</span>; j &lt; <span class="built_in">len</span>(m.idleTable); j++ &#123;</span><br><span class="line">                <span class="keyword">if</span> m.idleTable[j].lastp + <span class="number">1</span> == m.callocTable[i].firstp &#123;</span><br><span class="line">                    m.idleTable[j].lastp = m.callocTable[i].lastp</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> m.idleTable[j].firstp == m.callocTable[i].lastp + <span class="number">1</span> &#123;</span><br><span class="line">                    m.idleTable[j].firstp = m.callocTable[i].firstp</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            m.idleTable = <span class="built_in">append</span>(m.idleTable, m.callocTable[i])</span><br><span class="line">            m.callocTable = <span class="built_in">append</span>(m.callocTable[ :i], m.callocTable[i+<span class="number">1</span>:]...)</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;error&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 维护一个分配表和空闲表</span></span><br><span class="line">    op := []<span class="keyword">string</span>&#123;&#125;</span><br><span class="line">    m := Memory&#123;</span><br><span class="line">        firstP:      <span class="number">0</span>,</span><br><span class="line">        lastP:       <span class="number">99</span>,</span><br><span class="line">        callocTable: []mem&#123;&#125;,</span><br><span class="line">        idleTable: []mem&#123;&#123;</span><br><span class="line">            firstp:     <span class="number">0</span>,</span><br><span class="line">            lastp:      <span class="number">99</span>,</span><br><span class="line">            callocable: <span class="literal">false</span>,</span><br><span class="line">        &#125;&#125;,</span><br><span class="line">    &#125;</span><br><span class="line">    in := bufio.NewReader(os.Stdin)</span><br><span class="line">    <span class="keyword">for</span> str,err := in.ReadString(<span class="string">&#x27;\n&#x27;</span>);err == <span class="literal">nil</span>;str,err = in.ReadString(<span class="string">&#x27;\n&#x27;</span>) &#123;</span><br><span class="line">        str = strings.Replace(str,<span class="string">&quot;\r\n&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="number">-1</span>)</span><br><span class="line">        str = strings.Replace(str,<span class="string">&quot;\n&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;&quot;</span> == str &#123;</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">        op = <span class="built_in">append</span>(op, str)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">1</span>; i &lt; <span class="built_in">len</span>(op); i++&#123;</span><br><span class="line">        cmd :=strings.Split(op[i], <span class="string">&quot;=&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;REQUEST&quot;</span> == cmd[<span class="number">0</span>] &#123;</span><br><span class="line">            n,_ := strconv.Atoi(cmd[<span class="number">1</span>])</span><br><span class="line">            fmt.Println(allocMem(m, n))</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> <span class="string">&quot;RELEASE&quot;</span> == cmd[<span class="number">0</span>] &#123;</span><br><span class="line">            n, _ := strconv.Atoi(cmd[<span class="number">1</span>])</span><br><span class="line">            fmt.Println(freeMem(m, n))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/11/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%952/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-基础算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2368,90 +2471,6 @@ es6写法<figure class="highlight javascript"><table><tr><td class="gutter"><pre
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/08/09/npm%E7%9B%B8%E5%85%B3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-java实例化几种方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/05/java%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">java实例化几种方式</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/05/java%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2019-08-05T13:32:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="实例化的几种方式"><a href="#实例化的几种方式" class="headerlink" title="实例化的几种方式"></a>实例化的几种方式</h4><p>1、HelloWorld类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;name=&quot;</span>+name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>2、主类三种实例化</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 第一种实例化</span></span><br><span class="line">            HelloWorld h1 = HelloWorld.class.newInstance();</span><br><span class="line">            h1.setName(<span class="string">&quot;h1&quot;</span>);</span><br><span class="line">            h1.sayName();</span><br><span class="line">            <span class="comment">// 使用类加载器实例化</span></span><br><span class="line">            String name = <span class="string">&quot;com.longquanxiao.instance.HelloWorld&quot;</span>;</span><br><span class="line">            Class hClass = Class.forName(name);</span><br><span class="line">            HelloWorld h2 =(HelloWorld) hClass.newInstance();</span><br><span class="line">            h2.setName(<span class="string">&quot;h2&quot;</span>);</span><br><span class="line">            h2.sayName();</span><br><span class="line">            <span class="comment">// 传统的new实例化</span></span><br><span class="line">            HelloWorld h3 = <span class="keyword">new</span> HelloWorld();</span><br><span class="line">            h3.setName(<span class="string">&quot;h3&quot;</span>);</span><br><span class="line">            h3.sayName();</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行结果:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name&#x3D;h1</span><br><span class="line">name&#x3D;h2</span><br><span class="line">name&#x3D;h3</span><br></pre></td></tr></table></figure>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>1、使用<code>Class#newInstance()</code>返回实例化的对象<br>2、使用<code>Class.forName(classpath)</code>获得class对象。然后再使用newInstance()方法进行实例化<br>3、使用new的传统方式来实例化对象<br>4、使用newInstance时必须保证（1）这个类已经加载了(2)这个类已经完成连接了<br>使用class.forName()保证了上述两个条件。使用new就没有那么那么多的限制。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/05/java%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">展开全文 >></a>
         </p>
       
 
