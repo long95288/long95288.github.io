@@ -578,7 +578,45 @@
 <p>usermod -g 组名:用户名</p>
 </blockquote>
 <p>改变用户所在的组。</p>
-
+<h5 id="权限说明"><a href="#权限说明" class="headerlink" title="权限说明"></a>权限说明</h5><p><code>-rwxrw-r-</code></p>
+<ul>
+<li>第0位 确定文件类型(d,-,l,c,b) <code>d</code>:目录,<code>-</code>:普通文件, <code>l</code>:软连接,<code>c</code>:字符设备(键盘、鼠标),<code>b</code>:块文件,硬盘</li>
+<li>第1-3位 确定所有者拥有的文件权限 –User</li>
+<li>第4-6位 确定所在组拥有的该文件的权限 –Group</li>
+<li>第7-9位 确定其他用户拥有该文件的权限 –Other</li>
+</ul>
+<blockquote>
+<p>rwx说明</p>
+</blockquote>
+<ul>
+<li>r 读(4)</li>
+<li>w 写(2)</li>
+<li>x 可执行(1)</li>
+</ul>
+<p><code>-rwxrw-r-- 1 root root 1213 Feb 2 09:39 abc</code><br>其它信息:<br><code>1</code>: 硬链接或者子目录个数<br><code>root</code>: 用户<br><code>root</code>: 组<br><code>1213</code>: 文件的大小(字节)<br><code>Feb 2 09:39</code>: 最后修改日期<br><code>abc</code>: 文件名</p>
+<h5 id="权限修改-chmod"><a href="#权限修改-chmod" class="headerlink" title="权限修改-chmod"></a>权限修改-chmod</h5><p> 其中u为用户,g为组,o为other,a为所有<br>（1）方式一: + ,-, =变更</p>
+<blockquote>
+<p>chmod u=rwx,g=rx,o=x 文件/目录名<br>chmod o + w 文件目录<br>chmod a - x 文件目录</p>
+</blockquote>
+<p> (2) 方式二: 数字变更</p>
+<blockquote>
+<p>chmod 751 文件目录</p>
+</blockquote>
+<p> 等价于</p>
+<blockquote>
+<p>chmod u=rwx,g=rx,o=x 文件目录</p>
+</blockquote>
+<h5 id="修改文件所有者"><a href="#修改文件所有者" class="headerlink" title="修改文件所有者"></a>修改文件所有者</h5><blockquote>
+<p>chown newonwer file 改变文件的所有者</p>
+</blockquote>
+<blockquote>
+<p>chown newower:newgroup file 改变文件所属的所有者和所有组，-R递归变更。</p>
+</blockquote>
+<h5 id="修改文件所在组"><a href="#修改文件所在组" class="headerlink" title="修改文件所在组"></a>修改文件所在组</h5><blockquote>
+<p>chgrp newgroup file</p>
+</blockquote>
+<p>参数<code>-R</code>,递归修改。</p>
+<h3 id="crond任务调度"><a href="#crond任务调度" class="headerlink" title="crond任务调度"></a>crond任务调度</h3>
       
 
       
