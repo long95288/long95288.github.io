@@ -905,7 +905,7 @@ MyHandler实现InvocationHandler的接口<figure class="highlight java"><table><
 <li>使用ssh登录<code>ssh user@remote-host</code></li>
 <li>使用私钥登录<br><code>ssh -i &quot;xxxx.pem&quot; user@remote-host</code></li>
 </ul>
-<h4 id="给文件夹配置软链接"><a href="#给文件夹配置软链接" class="headerlink" title="给文件夹配置软链接"></a>给文件夹配置软链接</h4><p><code>ln -s /work /home/tom/desktop/work</code><br>在桌面创建一个快捷方式到根目录的work中。这样在桌面便可以快速访问work文件夹。如果桌面已经存在了一个work文件夹。则会在work文件夹内创建work文件夹快捷方式。</p>
+<h4 id="给文件夹配置软链接"><a href="#给文件夹配置软链接" class="headerlink" title="给文件夹配置软链接"></a>给文件夹配置软链接</h4><p><code>ln -s /work /home/tom/desktop/work</code><br>在桌面创建一个快捷方式到根目录的work中。这样在桌面便可以快速访问work文件夹。如果桌面已经存在了一个work文件夹。则会在work文件夹内创建work文件夹快捷方式。<br>如果出现<code>链接层数过多</code>,可能是使用相对路径,需要使用绝对路径就可以解决该问题。</p>
 <h4 id="shell脚本获得控制台输入"><a href="#shell脚本获得控制台输入" class="headerlink" title="shell脚本获得控制台输入"></a>shell脚本获得控制台输入</h4><p>使用<code>read name</code><br>例子:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo -n &quot;Enter name:&quot;</span><br><span class="line">read name</span><br><span class="line">echo &quot;hello,$name&quot;</span><br></pre></td></tr></table></figure>
 <p>例子2:</p>
