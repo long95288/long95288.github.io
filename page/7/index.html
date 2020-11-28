@@ -896,10 +896,110 @@
 <p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/4sum-ii">https://leetcode-cn.com/problems/4sum-ii</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 <h4 id="解法-59"><a href="#解法-59" class="headerlink" title="解法"></a>解法</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">fourSumCount</span><span class="params">(A []<span class="keyword">int</span>, B []<span class="keyword">int</span>, C []<span class="keyword">int</span>, D []<span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    ans := <span class="number">0</span></span><br><span class="line">    abMap := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">int</span>)</span><br><span class="line">    <span class="keyword">for</span> _,v := <span class="keyword">range</span> A &#123;</span><br><span class="line">        <span class="keyword">for</span> _,v2 := <span class="keyword">range</span> B &#123;</span><br><span class="line">            abMap[v + v2] += <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> _,c := <span class="keyword">range</span> C &#123;</span><br><span class="line">        <span class="keyword">for</span> _,d := <span class="keyword">range</span> D &#123;</span><br><span class="line">            <span class="keyword">if</span> v,ok := abMap[-(c + d)];ok &#123;</span><br><span class="line">                ans += v</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h3 id="617-合并二叉树-简单"><a href="#617-合并二叉树-简单" class="headerlink" title="617. 合并二叉树[简单]"></a>617. 合并二叉树[简单]</h3><p>给定两个二叉树，想象当你将它们中的一个覆盖到另一个上时，两个二叉树的一些节点便会重叠。</p>
+<p>你需要将他们合并为一个新的二叉树。合并的规则是如果两个节点重叠，那么将他们的值相加作为节点合并后的新值，否则不为 NULL 的节点将直接作为新二叉树的节点。</p>
+<p>示例 1:</p>
+<p>输入:<br>    Tree 1                     Tree 2<br>          1                         2<br>         / \                       / \<br>        3   2                     1   3<br>       /                           \   \<br>      5                             4   7<br>输出:<br>合并后的树:<br>         3<br>        / <br>       4   5<br>      / \   \<br>     5   4   7<br>注意: 合并必须从两个树的根节点开始。</p>
+<p>通过次数109,219提交次数139,216</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-two-binary-trees">https://leetcode-cn.com/problems/merge-two-binary-trees</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h4 id="解法-60"><a href="#解法-60" class="headerlink" title="解法"></a>解法</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mergeTrees</span><span class="params">(t1 *TreeNode, t2 *TreeNode)</span> *<span class="title">TreeNode</span></span> &#123;</span><br><span class="line">    tree := &amp;TreeNode&#123;</span><br><span class="line">        Val:   <span class="number">0</span>,</span><br><span class="line">        Left:  <span class="literal">nil</span>,</span><br><span class="line">        Right: <span class="literal">nil</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> t1 == <span class="literal">nil</span> &amp;&amp; t2 == <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> t1 != <span class="literal">nil</span> &amp;&amp; t2 != <span class="literal">nil</span> &#123;</span><br><span class="line">        tree.Val = t1.Val + t2.Val</span><br><span class="line">        tree.Left = mergeTrees(t1.Left,t2.Left)</span><br><span class="line">        tree.Right = mergeTrees(t1.Right,t2.Right)</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> t1 != <span class="literal">nil</span> &amp;&amp; t2 == <span class="literal">nil</span>&#123;</span><br><span class="line">        tree.Val = t1.Val</span><br><span class="line">        tree.Left = mergeTrees(t1.Left,<span class="literal">nil</span>)</span><br><span class="line">        tree.Right = mergeTrees(t1.Right, <span class="literal">nil</span>)</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> t1 == <span class="literal">nil</span> &amp;&amp; t2 != <span class="literal">nil</span> &#123;</span><br><span class="line">        tree.Val = t2.Val</span><br><span class="line">        tree.Left = mergeTrees(<span class="literal">nil</span>,t2.Left)</span><br><span class="line">        tree.Right = mergeTrees(<span class="literal">nil</span>, t2.Right)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tree</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h3 id="剑指-Offer-07-重建二叉树-中等"><a href="#剑指-Offer-07-重建二叉树-中等" class="headerlink" title="剑指 Offer 07. 重建二叉树[中等]"></a>剑指 Offer 07. 重建二叉树[中等]</h3><p>输入某二叉树的前序遍历和中序遍历的结果，请重建该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。</p>
+<p> </p>
+<p>例如，给出</p>
+<p>前序遍历 preorder = [3,9,20,15,7]<br>中序遍历 inorder = [9,3,15,20,7]<br>返回如下的二叉树：</p>
+<pre><code>3</code></pre>
+<p>   / <br>  9  20<br>    /  <br>   15   7
+ </p>
+<p>限制：</p>
+<p>0 &lt;= 节点个数 &lt;= 5000</p>
+<p> </p>
+<p>注意：本题与主站 105 题重复：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/">https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/</a></p>
+<p>通过次数81,512提交次数118,783</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof">https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h4 id="解法-61"><a href="#解法-61" class="headerlink" title="解法"></a>解法</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">buildTree</span><span class="params">(preorder []<span class="keyword">int</span>, inorder []<span class="keyword">int</span>)</span> *<span class="title">TreeNode</span></span> &#123;</span><br><span class="line">    <span class="comment">// 前序定节点,中序定左右</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(preorder) &lt;= <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line">    nodeVal := preorder[<span class="number">0</span>]</span><br><span class="line">    left := []<span class="keyword">int</span>&#123;&#125;</span><br><span class="line">    right := []<span class="keyword">int</span>&#123;&#125;</span><br><span class="line">    <span class="comment">// 取中序左右</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>;i &lt; <span class="built_in">len</span>(inorder);i ++&#123;</span><br><span class="line">        <span class="keyword">if</span> inorder[i] == nodeVal &#123;</span><br><span class="line">            left = inorder[:i]</span><br><span class="line">            right = inorder[i + <span class="number">1</span>:]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 取前序左右</span></span><br><span class="line">    tree := &amp;TreeNode&#123;</span><br><span class="line">        Val:   nodeVal,</span><br><span class="line">        Left:  buildTree(preorder[<span class="number">1</span>: <span class="built_in">len</span>(left) + <span class="number">1</span>], left),</span><br><span class="line">        Right: buildTree(preorder[<span class="number">1</span> + <span class="built_in">len</span>(left):], right),</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tree</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="493-翻转对-困难"><a href="#493-翻转对-困难" class="headerlink" title="493. 翻转对[困难]"></a>493. 翻转对[困难]</h3><p>给定一个数组 nums ，如果 i &lt; j 且 nums[i] &gt; 2*nums[j] 我们就将 (i, j) 称作一个重要翻转对。</p>
+<p>你需要返回给定数组中的重要翻转对的数量。</p>
+<p>示例 1:</p>
+<p>输入: [1,3,2,3,1]<br>输出: 2<br>示例 2:</p>
+<p>输入: [2,4,3,5,1]<br>输出: 3<br>注意:</p>
+<p>给定数组的长度不会超过50000。<br>输入数组中的所有数字都在32位整数的表示范围内。<br>通过次数16,072提交次数51,612</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-pairs">https://leetcode-cn.com/problems/reverse-pairs</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h4 id="解法-62"><a href="#解法-62" class="headerlink" title="解法"></a>解法</h4><p>前言<br>本题与「327. 区间和的个数」非常相像。</p>
+<p>在 327 题中，我们要对前缀和数组的每一个元素 \textit{preSum}[i]preSum[i]，找出所有位于 ii 左侧的下标 jj 的数量，要求 jj 满足 \textit{preSum}[j] \in [\textit{preSum}[i]-\textit{upper}, \textit{preSum}[i]-\textit{lower}]preSum[j]∈[preSum[i]−upper,preSum[i]−lower]。而在此题中，我们则要对数组中的每一个元素 \textit{sum}[i]sum[i]，找出位于 ii 左侧，且满足 \textit{nums}[j] &gt; 2\cdot \textit{nums}[i]nums[j]&gt;2⋅nums[i] 的下标 jj。</p>
+<p>不难发现，二者都是要对数组中的每一个元素，统计「在它左侧，且取值位于某个区间」的元素数量。两个问题唯一的区别仅仅在于取值区间的不同，因此可以用相似的方法解决这两个问题。</p>
+<p>在「327 题的题解：区间和的个数」中，我们介绍了归并排序、线段树、树状数组以及平衡搜索树等多种解法。对于本题，我们只给出基于归并排序与树状数组的方法，感兴趣的读者可以参照前面给出的链接，自行完成其他方法的代码。</p>
+<p>方法一：归并排序<br>思路及解法</p>
+<p>在归并排序的过程中，假设对于数组 \textit{nums}[l..r]nums[l..r] 而言，我们已经分别求出了子数组 \textit{nums}[l..m]nums[l..m] 与 \textit{nums}[m+1..r]nums[m+1..r] 的翻转对数目，并已将两个子数组分别排好序，则 \textit{nums}[l..r]nums[l..r] 中的翻转对数目，就等于两个子数组的翻转对数目之和，加上左右端点分别位于两个子数组的翻转对数目。</p>
+<p>我们可以为两个数组分别维护指针 i,ji,j。对于任意给定的 ii 而言，我们不断地向右移动 jj，直到 \textit{nums}[i] \le 2\cdot \textit{nums}[j]nums[i]≤2⋅nums[j]。此时，意味着以 ii 为左端点的翻转对数量为 j-m-1j−m−1。随后，我们再将 ii 向右移动一个单位，并用相同的方式计算以 ii 为左端点的翻转对数量。不断重复这样的过程，就能够求出所有左右端点分别位于两个子数组的翻转对数目。</p>
+<p>代码</p>
+<p>C++JavaGolangCJavaScript</p>
+<p>func reversePairs(nums []int) int {<br>    n := len(nums)<br>    if n &lt;= 1 {<br>        return 0<br>    }</p>
+<pre><code>n1 := append([]int(nil), nums[:n/2]...)
+n2 := append([]int(nil), nums[n/2:]...)
+cnt := reversePairs(n1) + reversePairs(n2) // 递归完毕后，n1 和 n2 均为有序
 
+// 统计重要翻转对 (i,j) 的数量
+// 由于 n1 和 n2 均为有序，可以用两个指针同时遍历
+j := 0
+for _, v := range n1 &#123;
+    for j &lt; len(n2) &amp;&amp; v &gt; 2*n2[j] &#123;
+        j++
+    &#125;
+    cnt += j
+&#125;
 
+// n1 和 n2 归并填入 nums
+p1, p2 := 0, 0
+for i := range nums &#123;
+    if p1 &lt; len(n1) &amp;&amp; (p2 == len(n2) || n1[p1] &lt;= n2[p2]) &#123;
+        nums[i] = n1[p1]
+        p1++
+    &#125; else &#123;
+        nums[i] = n2[p2]
+        p2++
+    &#125;
+&#125;
+return cnt</code></pre>
+<p>}<br>复杂度分析</p>
+<p>时间复杂度：O(N\log N)O(NlogN)，其中 NN 为数组的长度。</p>
+<p>空间复杂度：O(N)O(N)，其中 NN 为数组的长度。</p>
+<p>方法二：树状数组<br>思路及解法</p>
+<p>树状数组支持的基本查询为求出 [1, \textit{val}][1,val] 之间的整数数量。因此，对于 \textit{nums}[i]nums[i] 而言，我们首先查询 [1,2\cdot\textit{nums}[i]][1,2⋅nums[i]] 的数量，再求出 [1,\textit{maxValue}][1,maxValue] 的数量（其中 \textit{maxValue}maxValue 为数组中最大元素的二倍）。二者相减，就能够得到以 ii 为右端点的翻转对数量。</p>
+<p>由于数组中整数的范围可能很大，故在使用树状数组解法之前，需要利用哈希表将所有可能出现的整数，映射到连续的整数区间内。</p>
+<p>代码</p>
+<p>C++JavaGolangCJavaScript</p>
+<p>type fenwick struct {<br>    tree []int<br>}</p>
+<p>func newFenwickTree(n int) fenwick {<br>    return fenwick{make([]int, n+1)}<br>}</p>
+<p>func (f fenwick) add(i int) {<br>    for ; i &lt; len(f.tree); i += i &amp; -i {<br>        f.tree[i]++<br>    }<br>}</p>
+<p>func (f fenwick) sum(i int) (res int) {<br>    for ; i &gt; 0; i &amp;= i - 1 {<br>        res += f.tree[i]<br>    }<br>    return<br>}</p>
+<p>func reversePairs(nums []int) (cnt int) {<br>    n := len(nums)<br>    if n &lt;= 1 {<br>        return<br>    }</p>
+<pre><code>// 离散化所有下面统计时会出现的元素
+allNums := make([]int, 0, 2*n)
+for _, v := range nums &#123;
+    allNums = append(allNums, v, 2*v)
+&#125;
+sort.Ints(allNums)
+k := 1
+kth := map[int]int&#123;allNums[0]: k&#125;
+for i := 1; i &lt; 2*n; i++ &#123;
+    if allNums[i] != allNums[i-1] &#123;
+        k++
+        kth[allNums[i]] = k
+    &#125;
+&#125;
 
+t := newFenwickTree(k)
+for i, v := range nums &#123;
+    // 统计之前插入了多少个比 2*v 大的数
+    cnt += i - t.sum(kth[2*v])
+    t.add(kth[v])
+&#125;
+return</code></pre>
+<p>}<br>复杂度分析</p>
+<p>时间复杂度：O(N\log N)O(NlogN)，其中 NN 为数组的长度。</p>
+<p>空间复杂度：O(N)O(N)，其中 NN 为数组的长度。</p>
+<p>作者：LeetCode-Solution<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-pairs/solution/fan-zhuan-dui-by-leetcode-solution/">https://leetcode-cn.com/problems/reverse-pairs/solution/fan-zhuan-dui-by-leetcode-solution/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 
       
 
