@@ -158,6 +158,86 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-右键更换壁纸" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/11/%E5%8F%B3%E9%94%AE%E6%9B%B4%E6%8D%A2%E5%A3%81%E7%BA%B8/">右键更换壁纸</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/11/%E5%8F%B3%E9%94%AE%E6%9B%B4%E6%8D%A2%E5%A3%81%E7%BA%B8/" class="archive-article-date">
+  	<time datetime="2020-04-11T15:39:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="python文件"><a href="#python文件" class="headerlink" title="python文件"></a>python文件</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> win32api</span><br><span class="line"><span class="keyword">import</span> win32gui</span><br><span class="line"><span class="keyword">import</span> win32con</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">day = datetime.datetime.now().strftime(<span class="string">&#x27;%Y%m%d&#x27;</span>)</span><br><span class="line">log_filename = day+<span class="string">&quot;_log.txt&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log</span>(<span class="params">value,print_flag = True</span>):</span></span><br><span class="line">    log_path = os.getcwd() + <span class="string">&quot;\\log&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(log_path) :</span><br><span class="line">        os.mkdir(log_path)</span><br><span class="line">    log_file_path = log_path + <span class="string">&quot;\\&quot;</span> + log_filename</span><br><span class="line">    logfile = open(log_file_path, <span class="string">&#x27;a&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> logfile.writable():</span><br><span class="line">        now_data = datetime.datetime.now().strftime(<span class="string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>)</span><br><span class="line">        log_message = <span class="string">&quot;时间:&#123;&#125; : log : &#123;&#125;\n&quot;</span>.format(now_data, value)</span><br><span class="line">        <span class="keyword">if</span> print_flag:</span><br><span class="line">            print(log_message)</span><br><span class="line">        logfile.write(log_message)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        logfile.close()</span><br><span class="line">    <span class="keyword">except</span> IOError:</span><br><span class="line">        print(<span class="string">&quot;写入日志错误&#123;&#125;&quot;</span>.format(IOError))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setWallPaper</span>(<span class="params">wallpaper</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        key = win32api.RegOpenKeyEx(win32con.HKEY_CURRENT_USER,</span><br><span class="line">                                    <span class="string">&quot;Control Panel\\Desktop&quot;</span>, <span class="number">0</span>, win32con.KEY_SET_VALUE)</span><br><span class="line">        win32api.RegSetValueEx(key, <span class="string">&quot;WallpaperStyle&quot;</span>, <span class="number">0</span>, win32con.REG_SZ, <span class="string">&quot;2&quot;</span>)</span><br><span class="line">        win32api.RegSetValueEx(key, <span class="string">&quot;TileWallPaper&quot;</span>, <span class="number">0</span>, win32con.REG_SZ, <span class="string">&quot;0&quot;</span>)</span><br><span class="line">        win32gui.SystemParametersInfo(win32con.SPI_SETDESKWALLPAPER, wallpaper, <span class="number">1</span> + <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">except</span> EnvironmentError:</span><br><span class="line">        log(<span class="string">&quot;except:&#123;&#125;错误&quot;</span>.format(EnvironmentError))</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">过滤图片文件</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">image_filter</span>(<span class="params">file_list</span>):</span></span><br><span class="line">    image_list = []</span><br><span class="line">    <span class="comment"># 图片后缀</span></span><br><span class="line">    image_suffix = [<span class="string">&quot;jpg&quot;</span>,<span class="string">&quot;png&quot;</span>,<span class="string">&quot;bmp&quot;</span>]</span><br><span class="line">    <span class="keyword">for</span> file <span class="keyword">in</span> file_list:</span><br><span class="line">        <span class="keyword">if</span> file.split(<span class="string">&quot;.&quot;</span>)[<span class="number">-1</span>] <span class="keyword">in</span> image_suffix:</span><br><span class="line">            image_list.append(file)</span><br><span class="line">    <span class="keyword">return</span> image_list</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    image_dir = os.getcwd() + <span class="string">&quot;\images&quot;</span></span><br><span class="line">    <span class="keyword">if</span> os.path.exists(image_dir):</span><br><span class="line">        file_list = os.listdir(image_dir)</span><br><span class="line">        print(file_list)</span><br><span class="line">        image_list = image_filter(file_list)</span><br><span class="line">        print(image_list)</span><br><span class="line">        <span class="keyword">if</span> len(image_list) &gt; <span class="number">0</span>:</span><br><span class="line">            wallpaper_path = image_dir + <span class="string">&quot;\\&quot;</span> + random.choice(image_list)</span><br><span class="line">            <span class="keyword">if</span> os.path.exists(wallpaper_path):</span><br><span class="line">                <span class="keyword">if</span> setWallPaper(wallpaper_path):</span><br><span class="line">                    log(<span class="string">&quot;设置壁纸成功:path = &#123;&#125;&quot;</span>.format(wallpaper_path))</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    log(<span class="string">&quot;设置壁纸失败,详情查看日志。path = &#123;&#125;&quot;</span>.format(wallpaper_path))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                log(<span class="string">&quot;无效路径:&#123;&#125;&quot;</span>.format(wallpaper_path))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            log(<span class="string">&quot;文件夹中没有图片文件:path = &#123;&#125;&quot;</span>.format(image_dir))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        log(<span class="string">&quot;不存在路径:&#123;&#125;&quot;</span>.format(image_dir))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="启动文件"><a href="#启动文件" class="headerlink" title="启动文件"></a>启动文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">set curdir=%~dp0</span><br><span class="line">cd /d %curdir%</span><br><span class="line"></span><br><span class="line">@echo off</span><br><span class="line">if &quot;%1&quot; == &quot;h&quot; goto begin</span><br><span class="line">start mshta vbscript:createobject(&quot;wscript.shell&quot;).run(&quot;%~nx0 h&quot;,0)(window.close)&amp;&amp;exit</span><br><span class="line">:begin</span><br><span class="line"></span><br><span class="line">python main.py</span><br></pre></td></tr></table></figure>
+<h4 id="设置右键项的"><a href="#设置右键项的" class="headerlink" title="设置右键项的"></a>设置右键项的</h4><p><img src="/2020/04/11/%E5%8F%B3%E9%94%AE%E6%9B%B4%E6%8D%A2%E5%A3%81%E7%BA%B8/set.png" alt="设置右键图片"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">windows</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">注册列表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/11/%E5%8F%B3%E9%94%AE%E6%9B%B4%E6%8D%A2%E5%A3%81%E7%BA%B8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-windows右键添加项" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1413,300 +1493,9 @@
 
 
   
-    <article id="post-longSys相关文档" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/23/longSys%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3/">longSys相关文档</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/23/longSys%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3/" class="archive-article-date">
-  	<time datetime="2019-10-23T14:33:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h3><p>  个人资源管理平台</p>
-<h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><p>  需要一个软件平台来管理自己日益复杂和丰富的资源。包括但不限于个人文档、积累的电子书、下载的音乐、下载的视频教程，一些常用的功能。日记、笔记等。一些相关的人工智能的资源整合。如车标识别、orc等常用的接口。未来可能要接入物联网的相关设备、由于腾讯云的服务器的存储资源有限，未来需要将自己本地的文件外挂到该平台，即可以减小服务器的开销，还可以保护文档的私密性。服务器只做数据中转，而不是数据存储。服务器算力也有限,需要将算力分到本地外挂的设备。</p>
-<h4 id="一、文件管理需求"><a href="#一、文件管理需求" class="headerlink" title="一、文件管理需求"></a>一、文件管理需求</h4><ul>
-<li>该平台需要能够存储文件，解决U盘的不便携性。一些小的文档可以上传至该平台。当需要的时候可以上传和下载。大文件管理，由于设备原因，不可能将所有的文件上传到远端的服务器。所以需要一个功能，能够在该平台管理自己的本地的文件。包括，添加、删除、读取等常用功能。</li>
-<li>该平台的界面应该是非常友好的</li>
-</ul>
-<h4 id="二、图片管理需求"><a href="#二、图片管理需求" class="headerlink" title="二、图片管理需求"></a>二、图片管理需求</h4><p>  宅男喜欢二次元、现在积累了几个G的图片文件。但是很杂，该平台提供相册、分类的功能</p>
-<ul>
-<li>相册功能 将图片分类到相册中</li>
-<li>添加、删除、修改相册。</li>
-<li>查看图片和编辑分开。</li>
-</ul>
-<h4 id="三、音乐管理需求"><a href="#三、音乐管理需求" class="headerlink" title="三、音乐管理需求"></a>三、音乐管理需求</h4><p>  音乐很多,想要有自己的音乐播放器，类似于网易云音乐那种。</p>
-<ul>
-<li>曲库 全部的音乐，可以搜索。一首歌可以放入很多的歌单中。</li>
-<li>歌单 将音乐分类，在管理界面可以添加、编辑、删除歌单</li>
-<li>上传音乐 上传的音乐会出现在曲库中，上传音乐的时候会添加相应的歌曲数据。</li>
-</ul>
-<h4 id="四、视频管理需求"><a href="#四、视频管理需求" class="headerlink" title="四、视频管理需求"></a>四、视频管理需求</h4><p>  视频很多、非常多。需要有效的管理<br>  1、能够看视频(宽带问题，无法流畅的看视频)<br>  2、用户能够根据名字搜索视频<br>  3、用户能够创建自己的栏目，并且往里面添加视频(类似于blibli的收藏夹功能)<br>  4、用户能够删除视频</p>
-<h4 id="五、日记和笔记的需求"><a href="#五、日记和笔记的需求" class="headerlink" title="五、日记和笔记的需求"></a>五、日记和笔记的需求</h4><p>  笔记有很多成熟的产品，但是数据不可控。自己不想把数据放在他们的服务器上。所以需要一个支持多端编写的文档的功能。数据放在自己的数据库中。支持富文本和markdown格式的语法。</p>
-<ul>
-<li>文档的导入和导出 可以将数据库的中笔记文档导出pdf格式，保存备份在磁盘中。</li>
-<li>定期生成备份文件,后期可以调用多个网盘的api多端备份。</li>
-</ul>
-<h4 id="六、常用工具的需求"><a href="#六、常用工具的需求" class="headerlink" title="六、常用工具的需求"></a>六、常用工具的需求</h4><p>  学习工作中有很多工具的需求，图片转文字、开发中json格式化、还有很多的开发手册。这些都是用得到的，并且自己已经实现了车标的识别并且建立了模型。可以将该功能整合<br>  到平台中<br>  1、二维码工具。能够根据字符串生成二维码，也能识别二维码为字符串。<br>  2、车标识别工具。能够根据上传的图片识别相应的车标。<br>  3、</p>
-<h4 id="七、物联网设备管理需求"><a href="#七、物联网设备管理需求" class="headerlink" title="七、物联网设备管理需求"></a>七、物联网设备管理需求</h4><p>  未来自己会将家里的物联网的设备挂在该平台中，并且能够在该平台进行管理。空调、冰箱、台灯、电视机。自己梦想中的家。需要一个同一的管理平台，而不是各自为政。<br>  添加设备，每个设备都有自己的id码，并且有相应的命令。</p>
-<h4 id="八、计划跟踪平台"><a href="#八、计划跟踪平台" class="headerlink" title="八、计划跟踪平台"></a>八、计划跟踪平台</h4><p>  用来记录自己的计划和执行情况，主要借鉴TODO List的功能<br>  添加计划，一个计划会有开始时间、截止时间、完成时间(用户完成)，具体内容，轻重缓急。<br>  编辑、删除计划，只有未开始的计划才能编辑和删除<br>  生成报表，可以按周、按月生成报表。记录计划的预计完成时间和实际完成时间，计算完成工作计划的轻重缓急的比例。</p>
-<h3 id="概要设计"><a href="#概要设计" class="headerlink" title="概要设计"></a>概要设计</h3><h3 id="详细设计"><a href="#详细设计" class="headerlink" title="详细设计"></a>详细设计</h3><h4 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h4><h5 id="笔记管理"><a href="#笔记管理" class="headerlink" title="笔记管理"></a>笔记管理</h5><p><strong>笔记本：t_notebook</strong></p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>属性</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>id</td>
-<td>bigint</td>
-<td>主键</td>
-</tr>
-<tr>
-<td>notebook_name</td>
-<td>varchar</td>
-<td>笔记本名</td>
-</tr>
-<tr>
-<td>notebook_description</td>
-<td>varchar</td>
-<td>笔记本描述</td>
-</tr>
-<tr>
-<td>create_id</td>
-<td>bigint</td>
-<td>创建者id</td>
-</tr>
-<tr>
-<td>created_time</td>
-<td>timestamp</td>
-<td>创建时间戳</td>
-</tr>
-<tr>
-<td>modify_time</td>
-<td>timestamp</td>
-<td>修改时间戳</td>
-</tr>
-<tr>
-<td>del</td>
-<td>tinyint</td>
-<td>删除标记</td>
-</tr>
-</tbody></table>
-<p><strong>笔记条目：t_notebook_item</strong></p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>属性</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>id</td>
-<td>bigint</td>
-<td>主键</td>
-</tr>
-<tr>
-<td>notebook_id</td>
-<td>bigint</td>
-<td>主键</td>
-</tr>
-<tr>
-<td>notebook_item_title</td>
-<td>varchar</td>
-<td>笔记条目标题</td>
-</tr>
-<tr>
-<td>notebook_item_content</td>
-<td>text</td>
-<td>笔记条目内容</td>
-</tr>
-<tr>
-<td>create_time</td>
-<td>timestamp</td>
-<td>创建时间</td>
-</tr>
-<tr>
-<td>modify_time</td>
-<td>timestamp</td>
-<td>修改时间</td>
-</tr>
-<tr>
-<td>del</td>
-<td>tinyint</td>
-<td>删除标记</td>
-</tr>
-</tbody></table>
-<h3 id="平台原型"><a href="#平台原型" class="headerlink" title="平台原型"></a>平台原型</h3><h3 id="后端实现进度"><a href="#后端实现进度" class="headerlink" title="后端实现进度"></a>后端实现进度</h3><h4 id="鉴权模块"><a href="#鉴权模块" class="headerlink" title="鉴权模块"></a>鉴权模块</h4><ul>
-<li><input checked disabled type="checkbox"> shiro鉴权<br>….<h4 id="用户模块"><a href="#用户模块" class="headerlink" title="用户模块"></a>用户模块</h4></li>
-<li><input checked disabled type="checkbox"> 用户登录接口</li>
-</ul>
-<p>Request URL: <code>127.0.0.1:8080/Api/User/Login</code><br>Request Method:<code>post</code><br>Request Body:</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;username&quot;</span>:<span class="string">&quot;username&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;password&quot;</span>:<span class="string">&quot;password&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Response Body:</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;code&quot;</span>: <span class="number">20000</span>,</span><br><span class="line">  <span class="attr">&quot;version&quot;</span>: <span class="literal">null</span>,</span><br><span class="line">  <span class="attr">&quot;message&quot;</span>: <span class="string">&quot;登录成功&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;data&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;token&quot;</span>: <span class="string">&quot;c594ff92e47955527823259beafb5b2e65c26f7a233f8542736d1c1937b8bf442137a1aa1cc11b3aa1a0ba56aa1be6d91cb11ce03e9de58a48c608178ea1684de54b084713655ae8750010a822afb420ede8f6f92539da5c20d8a5434f82533b016768c39901ffe9f51ab82a83c9379193f624651a797131a4840581ddc855183260f708a41c7309&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><input checked disabled type="checkbox"> 用户登出接口</li>
-</ul>
-<p>Request URL: <code>127.0.0.1:8080/Api/User/Logout</code><br>Request Method: <code>post</code><br>Request Body: <code>null</code><br>Response Body:</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;code&quot;</span>: <span class="number">20000</span>,</span><br><span class="line">    <span class="attr">&quot;version&quot;</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">&quot;message&quot;</span>: <span class="string">&quot;请求成功&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;data&quot;</span>: <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><input checked disabled type="checkbox"> 获得用户信息</li>
-</ul>
-<p>Request URL: <code>127.0.0.1:8080/Api/User/UserInfo?token=usertoken-token</code><br>Request Method: <code>get</code><br>Response Body:</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">&quot;version&quot;</span>: <span class="literal">null</span>,</span><br><span class="line"><span class="attr">&quot;message&quot;</span>: <span class="string">&quot;请求成功&quot;</span>,</span><br><span class="line"><span class="attr">&quot;code&quot;</span>:<span class="number">20000</span>,</span><br><span class="line"><span class="attr">&quot;data&quot;</span>:&#123;</span><br><span class="line">  <span class="attr">&quot;roles&quot;</span>:[<span class="string">&quot;admin&quot;</span>],</span><br><span class="line">  <span class="attr">&quot;introduction&quot;</span>:<span class="string">&quot;I am a super administrator&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;avatar&quot;</span>:<span class="string">&quot;https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;Super Admin&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><input disabled type="checkbox"> 用户管理</li>
-<li><input disabled type="checkbox"> 权限角色管理<br>….<h4 id="文件模块"><a href="#文件模块" class="headerlink" title="文件模块"></a>文件模块</h4></li>
-<li><input checked disabled type="checkbox"> 文件上传</li>
-<li><input checked disabled type="checkbox"> 查询文件列表</li>
-<li><input checked disabled type="checkbox"> 删除文件</li>
-<li><input disabled type="checkbox"> 文件分类</li>
-</ul>
-<h4 id="图片模块"><a href="#图片模块" class="headerlink" title="图片模块"></a>图片模块</h4><ul>
-<li><input disabled type="checkbox"> 创建相册</li>
-<li><input disabled type="checkbox"> 更新相册</li>
-<li><input disabled type="checkbox"> 添加图片至相册</li>
-<li><input disabled type="checkbox"> 删除某个相册下的图片</li>
-<li><input disabled type="checkbox"> 删除相册</li>
-</ul>
-<h4 id="音乐模块"><a href="#音乐模块" class="headerlink" title="音乐模块"></a>音乐模块</h4><ul>
-<li><input disabled type="checkbox"> 获得曲库列表</li>
-<li><input disabled type="checkbox"> 获得歌单列表</li>
-<li><input disabled type="checkbox"> 获得歌单对应的曲目</li>
-<li><input disabled type="checkbox"> 添加新的歌曲</li>
-<li><input disabled type="checkbox"> 修改歌曲</li>
-<li><input disabled type="checkbox"> 删除歌曲</li>
-<li><input disabled type="checkbox"> 添加新的歌单</li>
-<li><input disabled type="checkbox"> 更新歌单</li>
-<li><input disabled type="checkbox"> 删除歌单</li>
-</ul>
-<h4 id="在线笔记模块"><a href="#在线笔记模块" class="headerlink" title="在线笔记模块"></a>在线笔记模块</h4><ul>
-<li><input checked disabled type="checkbox"> 获得笔记列表</li>
-<li><input checked disabled type="checkbox"> 获得特定笔记的内容</li>
-<li><input checked disabled type="checkbox"> 添加新的笔记本</li>
-<li><input checked disabled type="checkbox"> 为某个笔记本添加新的条目</li>
-<li><input checked disabled type="checkbox"> 更新笔记本</li>
-<li><input checked disabled type="checkbox"> 更新笔记本特定条目</li>
-<li><input checked disabled type="checkbox"> 删除笔记本</li>
-<li><input checked disabled type="checkbox"> 删除笔记本特定条目</li>
-<li><input disabled type="checkbox"> 前端支持Markdown语法渲染</li>
-</ul>
-<h4 id="小说模块-转码"><a href="#小说模块-转码" class="headerlink" title="小说模块-转码"></a>小说模块-转码</h4><ul>
-<li><input disabled type="checkbox"> 添加新的解析模块</li>
-<li><input disabled type="checkbox"> 变更解析模块</li>
-<li><input disabled type="checkbox"> 删除解析模块</li>
-</ul>
-<h4 id="TODO模块"><a href="#TODO模块" class="headerlink" title="TODO模块"></a>TODO模块</h4><h4 id="人工智能接口"><a href="#人工智能接口" class="headerlink" title="人工智能接口"></a>人工智能接口</h4><ul>
-<li><input disabled type="checkbox"> 车标识别接口</li>
-<li><input disabled type="checkbox"> 车标检测接口</li>
-<li><input disabled type="checkbox"> 文字识别接口[待训练模型]</li>
-<li><input disabled type="checkbox"> 人脸检测接口[待训练模型]</li>
-</ul>
-<h4 id="物联网设备"><a href="#物联网设备" class="headerlink" title="物联网设备"></a>物联网设备</h4><ul>
-<li><input disabled type="checkbox"> 查询所有设备状态</li>
-<li><input disabled type="checkbox"> 添加新的设备</li>
-<li><input disabled type="checkbox"> 删除设备</li>
-<li><input disabled type="checkbox"> 控制特定的设备</li>
-</ul>
-<h3 id="前端流程设计"><a href="#前端流程设计" class="headerlink" title="前端流程设计"></a>前端流程设计</h3><h4 id="登录流程设计"><a href="#登录流程设计" class="headerlink" title="登录流程设计"></a>登录流程设计</h4><pre class="mermaid">sequenceDiagram
-    participant user as 用户
-    participant front as 前端
-    participant backend as 后端
-
-    user->>front: 填写账号和密码
-    front->>front: 校验账号密码
-    front->>backend: 登录请求
-    backend->>backend: 处理登录请求
-    backend-->>front: 返回token
-    front->>front: 保存token
-    front->>front: 进入首页
-    front->>backend: 根据token获得用户数据
-    backend-->>front: 返回用户数据,包括用户名，头像，路由等
-    front->>front: 保存用户数据,处理路由数据动态渲染。
-    front->>front: 进入系统
-    front-->>user: 完成登录</pre>
-
-<h5 id="请求接口"><a href="#请求接口" class="headerlink" title="请求接口"></a>请求接口</h5><ul>
-<li>Api/User/Login </li>
-<li>Api/User/GetInfo</li>
-<li>Api/User/Logout</li>
-</ul>
-<h3 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h3>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件设计</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/23/longSys%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1994,6 +1783,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">读书笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">dns</a>
               </li>
             
             <div class="clearfix"></div>
