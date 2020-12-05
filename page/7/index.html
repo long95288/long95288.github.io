@@ -1275,6 +1275,88 @@ return</code></pre>
 <p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/na-ying-bi">https://leetcode-cn.com/problems/na-ying-bi</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 <h4 id="解法-75"><a href="#解法-75" class="headerlink" title="解法"></a>解法</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">minCount</span><span class="params">(coins []<span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    nMap := <span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">int</span>&#123;</span><br><span class="line">        <span class="number">1</span>:<span class="number">1</span>,</span><br><span class="line">        <span class="number">2</span>:<span class="number">1</span>,</span><br><span class="line">        <span class="number">3</span>:<span class="number">2</span>,</span><br><span class="line">        <span class="number">4</span>:<span class="number">2</span>,</span><br><span class="line">        <span class="number">5</span>:<span class="number">3</span>,</span><br><span class="line">        <span class="number">6</span>:<span class="number">3</span>,</span><br><span class="line">        <span class="number">7</span>:<span class="number">4</span>,</span><br><span class="line">        <span class="number">8</span>:<span class="number">4</span>,</span><br><span class="line">        <span class="number">9</span>:<span class="number">5</span>,</span><br><span class="line">        <span class="number">10</span>:<span class="number">5</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    ans := <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> _,v := <span class="keyword">range</span> coins &#123;</span><br><span class="line">        ans += nMap[v]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h3 id="621-任务调度器-中等"><a href="#621-任务调度器-中等" class="headerlink" title="621. 任务调度器[中等]"></a>621. 任务调度器[中等]</h3><p>给你一个用字符数组 tasks 表示的 CPU 需要执行的任务列表。其中每个字母表示一种不同种类的任务。任务可以以任意顺序执行，并且每个任务都可以在 1 个单位时间内执行完。在任何一个单位时间，CPU 可以完成一个任务，或者处于待命状态。</p>
+<p>然而，两个 相同种类 的任务之间必须有长度为整数 n 的冷却时间，因此至少有连续 n 个单位时间内 CPU 在执行不同的任务，或者在待命状态。</p>
+<p>你需要计算完成所有任务所需要的 最短时间 。</p>
+<p> </p>
+<p>示例 1：</p>
+<p>输入：tasks = [“A”,”A”,”A”,”B”,”B”,”B”], n = 2<br>输出：8<br>解释：A -&gt; B -&gt; (待命) -&gt; A -&gt; B -&gt; (待命) -&gt; A -&gt; B<br>     在本示例中，两个相同类型任务之间必须间隔长度为 n = 2 的冷却时间，而执行一个任务只需要一个单位时间，所以中间出现了（待命）状态。<br>示例 2：</p>
+<p>输入：tasks = [“A”,”A”,”A”,”B”,”B”,”B”], n = 0<br>输出：6<br>解释：在这种情况下，任何大小为 6 的排列都可以满足要求，因为 n = 0<br>[“A”,”A”,”A”,”B”,”B”,”B”]<br>[“A”,”B”,”A”,”B”,”A”,”B”]<br>[“B”,”B”,”B”,”A”,”A”,”A”]<br>…<br>诸如此类<br>示例 3：</p>
+<p>输入：tasks = [“A”,”A”,”A”,”A”,”A”,”A”,”B”,”C”,”D”,”E”,”F”,”G”], n = 2<br>输出：16<br>解释：一种可能的解决方案是：<br>     A -&gt; B -&gt; C -&gt; A -&gt; D -&gt; E -&gt; A -&gt; F -&gt; G -&gt; A -&gt; (待命) -&gt; (待命) -&gt; A -&gt; (待命) -&gt; (待命) -&gt; A
+ </p>
+<p>提示：</p>
+<p>1 &lt;= task.length &lt;= 104<br>tasks[i] 是大写英文字母<br>n 的取值范围为 [0, 100]<br>通过次数46,923提交次数86,906</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/task-scheduler">https://leetcode-cn.com/problems/task-scheduler</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h4 id="解法-76"><a href="#解法-76" class="headerlink" title="解法"></a>解法</h4><p>方法一：模拟<br>思路与算法</p>
+<p>一种容易想到的方法是，我们按照时间顺序，依次给每一个时间单位分配任务。</p>
+<p>那么如果当前有多种任务不在冷却中，那么我们应该如何挑选执行的任务呢？直觉上，我们应当选择剩余执行次数最多的那个任务，将每种任务的剩余执行次数尽可能平均，使得 CPU 处于待命状态的时间尽可能少。当然这也是可以证明的，详细证明见下一个小标题。</p>
+<p>因此我们可以用二元组 (\textit{nextValid}_i, \textit{rest}_i)(nextValid<br>i<br>​<br> ,rest<br>i<br>​<br> ) 表示第 ii 个任务，其中 \textit{nextValid}_inextValid<br>i<br>​<br>  表示其因冷却限制，最早可以执行的时间；\textit{rest}_irest<br>i<br>​<br>  表示其剩余执行次数。初始时，所有的 \textit{nextValid}_inextValid<br>i<br>​<br>  均为 11，而 \textit{rest}_irest<br>i<br>​<br>  即为任务 ii 在数组 \textit{tasks}tasks 中出现的次数。</p>
+<p>我们用 \textit{time}time 记录当前的时间。根据我们的策略，我们需要选择不在冷却中并且剩余执行次数最多的那个任务，也就是说，我们需要找到满足 \textit{nextValid}_i \leq \textit{time}nextValid<br>i<br>​<br> ≤time 的并且 \textit{rest}_irest<br>i<br>​<br>  最大的索引 ii。因此我们只需要遍历所有的二元组，即可找到 ii。在这之后，我们将 (\textit{nextValid}_i, \textit{rest}_i)(nextValid<br>i<br>​<br> ,rest<br>i<br>​<br> ) 更新为 (\textit{time}+n+1, \textit{rest}_i-1)(time+n+1,rest<br>i<br>​<br> −1)，记录任务 ii 下一次冷却结束的时间以及剩余执行次数。如果更新后的 \textit{rest}_i=0rest<br>i<br>​<br> =0，那么任务 ii 全部做完，我们在遍历二元组时也就可以忽略它了。</p>
+<p>而对于 \textit{time}time 的更新，我们可以选择将其不断增加 11，模拟每一个时间片。但这会导致我们在 CPU 处于待命状态时，对二元组进行不必要的遍历。为了减少时间复杂度，我们可以在每一次遍历之前，将 \textit{time}time 更新为所有 \textit{nextValid}_inextValid<br>i<br>​<br>  中的最小值，直接「跳过」待命状态，保证每一次对二元组的遍历都是有效的。需要注意的是，只有当这个最小值大于 \textit{time}time 时，才需要这样快速更新。</p>
+<p>证明</p>
+<p>对于某个时间点 tt，设任务 aa 和 bb 均不在冷却中，并且它们分别剩余 pp 和 qq 次。不失一般性，假设 p&gt;qp&gt;q，那么我们应当在此时选择任务 aa，但我们选择了任务 bb。我们需要证明，存在一种交换方法，使得将此时的任务 bb「变成」任务 aa 后，总时间不会增加。</p>
+<p>为了叙述方便，设 a_1, a_2, \cdots, a_pa<br>1<br>​<br> ,a<br>2<br>​<br> ,⋯,a<br>p<br>​<br>  为选择任务 aa 的时间点，b_1, b_2, \cdots, b_qb<br>1<br>​<br> ,b<br>2<br>​<br> ,⋯,b<br>q<br>​<br>  为选择任务 bb 的时间点，根据假设有</p>
+<p>a_1 &gt; b_1 = t<br>a<br>1<br>​    </p>
+<blockquote>
+<p>b<br>1<br>​<br> =t</p>
+</blockquote>
+<p>以及对于任意相邻的两项 a_i, a_{i+1}a<br>i<br>​<br> ,a<br>i+1<br>​<br>  或者 b_j, b_{j+1}b<br>j<br>​<br> ,b<br>j+1<br>​<br> ，均有</p>
+<p>a_{i+1} - a_i &gt; n<br>a<br>i+1<br>​<br> −a<br>i<br>​    </p>
+<blockquote>
+<p>n</p>
+</blockquote>
+<p>以及</p>
+<p>b_{j+1} - b_j &gt; n<br>b<br>j+1<br>​<br> −b<br>j<br>​    </p>
+<blockquote>
+<p>n</p>
+</blockquote>
+<p>接下来我们分情况讨论：</p>
+<p>如果 \exists k’ \in [2, q]∃k<br>′<br> ∈[2,q] 使得 a_{k’} &lt; b_{k’}a<br>k<br>′</p>
+<p>​<br> &lt;b<br>k<br>′</p>
+<p>​<br> ，那么我们找出其中最小的那个 k’k<br>′<br>  记为 kk。此时我们有</p>
+<p>\begin{cases} a_1 &gt; b_1 \ a_2 &gt; b_2 \ \cdots \ a_{k-1} &gt; b_{k-1} \ a_k &lt; b_k \end{cases}<br>⎩<br>⎪<br>⎪<br>⎪<br>⎪<br>⎪<br>⎪<br>⎪<br>⎨<br>⎪<br>⎪<br>⎪<br>⎪<br>⎪<br>⎪<br>⎪<br>⎧<br>​    </p>
+<p>a<br>1<br>​    </p>
+<blockquote>
+<p>b<br>1<br>​    </p>
+</blockquote>
+<p>a<br>2<br>​    </p>
+<blockquote>
+<p>b<br>2<br>​    </p>
+</blockquote>
+<p>⋯<br>a<br>k−1<br>​    </p>
+<blockquote>
+<p>b<br>k−1<br>​    </p>
+</blockquote>
+<p>a<br>k<br>​<br> &lt;b<br>k<br>​    </p>
+<p>​    </p>
+<p>那么我们可以构造序列：</p>
+<p>b_1, b_2, \cdots, b_{k-1}, a_k, a_{k+1}, \cdots, a_pb<br>1<br>​<br> ,b<br>2<br>​<br> ,⋯,b<br>k−1<br>​<br> ,a<br>k<br>​<br> ,a<br>k+1<br>​<br> ,⋯,a<br>p<br>​<br>  作为交换后选择任务 aa 的时间点；<br>a_1, a_2, \cdots, a_{k-1}, b_k, b_{k+1}, \cdots, b_qa<br>1<br>​<br> ,a<br>2<br>​<br> ,⋯,a<br>k−1<br>​<br> ,b<br>k<br>​<br> ,b<br>k+1<br>​<br> ,⋯,b<br>q<br>​<br>  作为交换后选择任务 bb 的时间点。<br>对于交换后任务 aa 的序列，其一共有 pp 项，并且有</p>
+<p>a_k - b_{k-1} &gt; a_k - a_{k-1} &gt; n<br>a<br>k<br>​<br> −b<br>k−1<br>​    </p>
+<blockquote>
+<p>a<br>k<br>​<br> −a<br>k−1<br>​<br>n</p>
+</blockquote>
+<p>因此其满足任意相邻两项之差大于 nn，不会违反冷却时间的规则。</p>
+<p>同理对于对于交换后任务 bb 的序列，其一共有 qq 项，并且有</p>
+<p>b_k - a_{k-1} &gt; a_k - a_{k-1} &gt; n<br>b<br>k<br>​<br> −a<br>k−1<br>​    </p>
+<blockquote>
+<p>a<br>k<br>​<br> −a<br>k−1<br>​<br>n</p>
+</blockquote>
+<p>同样不会违反冷却时间的规则。</p>
+<p>如果 \forall k’ \in [2, q]∀k<br>′<br> ∈[2,q] 均有 a_{k’} &gt; b_{k’}a<br>k<br>′</p>
+<p>​    </p>
+<blockquote>
+<p>b<br>k<br>′</p>
+</blockquote>
+<p>​<br> ，那么我们只要构造序列：</p>
+<p>b_1, b_2, \cdots, b_kb<br>1<br>​<br> ,b<br>2<br>​<br> ,⋯,b<br>k<br>​<br>  作为交换后选择任务 aa 的时间点；<br>a_1, a_2, \cdots, a_k, b_{k+1}, \cdots, b_na<br>1<br>​<br> ,a<br>2<br>​<br> ,⋯,a<br>k<br>​<br> ,b<br>k+1<br>​<br> ,⋯,b<br>n<br>​<br>  作为交换后选择任务 bb 的时间点。<br>由于 b_{k+1} - a_k &gt; b_{k+1} - b_k &gt; nb<br>k+1<br>​<br> −a<br>k<br>​    </p>
+<blockquote>
+<p>b<br>k+1<br>​<br> −b<br>k<br>​<br>n，因此不会违反冷却时间的规则。</p>
+</blockquote>
+<p>无论哪一种情况，我们都将 b_1=tb<br>1<br>​<br> =t 变成了选择任务 aa 的时间点，并且由于我们只在任务 aa 和 bb 的内部进行交换，因此交换后总时间一定不会增加。这样就证明了一定存在一种总时间最少的方法，是通过不断地选择不在冷却中并且剩余执行次数最多的那个任务得到的。</p>
+<p>作者：LeetCode-Solution<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/task-scheduler/solution/ren-wu-diao-du-qi-by-leetcode-solution-ur9w/">https://leetcode-cn.com/problems/task-scheduler/solution/ren-wu-diao-du-qi-by-leetcode-solution-ur9w/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">leastInterval</span><span class="params">(tasks []<span class="keyword">byte</span>, n <span class="keyword">int</span>)</span> <span class="params">(minTime <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    cnt := <span class="keyword">map</span>[<span class="keyword">byte</span>]<span class="keyword">int</span>&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> _, t := <span class="keyword">range</span> tasks &#123;</span><br><span class="line">        cnt[t]++</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    nextValid := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">0</span>, <span class="built_in">len</span>(cnt))</span><br><span class="line">    rest := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">0</span>, <span class="built_in">len</span>(cnt))</span><br><span class="line">    <span class="keyword">for</span> _, c := <span class="keyword">range</span> cnt &#123;</span><br><span class="line">        nextValid = <span class="built_in">append</span>(nextValid, <span class="number">1</span>)</span><br><span class="line">        rest = <span class="built_in">append</span>(rest, c)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> <span class="keyword">range</span> tasks &#123;</span><br><span class="line">        minTime++</span><br><span class="line">        minNextValid := math.MaxInt64</span><br><span class="line">        <span class="keyword">for</span> i, r := <span class="keyword">range</span> rest &#123;</span><br><span class="line">            <span class="keyword">if</span> r &gt; <span class="number">0</span> &amp;&amp; nextValid[i] &lt; minNextValid &#123;</span><br><span class="line">                minNextValid = nextValid[i]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> minNextValid &gt; minTime &#123;</span><br><span class="line">            minTime = minNextValid</span><br><span class="line">        &#125;</span><br><span class="line">        best := <span class="number">-1</span></span><br><span class="line">        <span class="keyword">for</span> i, r := <span class="keyword">range</span> rest &#123;</span><br><span class="line">            <span class="keyword">if</span> r &gt; <span class="number">0</span> &amp;&amp; nextValid[i] &lt;= minTime &amp;&amp; (best == <span class="number">-1</span> || r &gt; rest[best]) &#123;</span><br><span class="line">                best = i</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        nextValid[best] = minTime + n + <span class="number">1</span></span><br><span class="line">        rest[best]--</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 
       
 
