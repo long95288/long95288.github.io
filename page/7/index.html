@@ -1378,9 +1378,39 @@ return</code></pre>
 <p>用返回一个整数列表来代替打印<br>n 为正整数<br>通过次数70,318提交次数89,741</p>
 <p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof">https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 <h4 id="解法-78"><a href="#解法-78" class="headerlink" title="解法"></a>解法</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printNumbers</span><span class="params">(n <span class="keyword">int</span>)</span> []<span class="title">int</span></span> &#123;</span><br><span class="line">    ans := []<span class="keyword">int</span>&#123;&#125;</span><br><span class="line">    base := <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>;i &lt; n;i ++&#123;</span><br><span class="line">        base *= <span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">1</span>;i &lt; base;i ++ &#123;</span><br><span class="line">        ans = <span class="built_in">append</span>(ans, i)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
+<h3 id="861-翻转矩阵后的得分-中等"><a href="#861-翻转矩阵后的得分-中等" class="headerlink" title="861. 翻转矩阵后的得分[中等]"></a>861. 翻转矩阵后的得分[中等]</h3><p>有一个二维矩阵 A 其中每个元素的值为 0 或 1 。</p>
+<p>移动是指选择任一行或列，并转换该行或列中的每一个值：将所有 0 都更改为 1，将所有 1 都更改为 0。</p>
+<p>在做出任意次数的移动后，将该矩阵的每一行都按照二进制数来解释，矩阵的得分就是这些数字的总和。</p>
+<p>返回尽可能高的分数。</p>
+<p> </p>
+<p>示例：</p>
+<p>输入：[[0,0,1,1],[1,0,1,0],[1,1,0,0]]<br>输出：39<br>解释：<br>转换为 [[1,1,1,1],[1,0,0,1],[1,1,1,1]]<br>0b1111 + 0b1001 + 0b1111 = 15 + 9 + 15 = 39
+ </p>
+<p>提示：</p>
+<p>1 &lt;= A.length &lt;= 20<br>1 &lt;= A[0].length &lt;= 20<br>A[i][j] 是 0 或 1<br>通过次数21,908提交次数27,082</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/score-after-flipping-matrix">https://leetcode-cn.com/problems/score-after-flipping-matrix</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h4 id="解法-79"><a href="#解法-79" class="headerlink" title="解法"></a>解法</h4><p>方法一：贪心<br>根据题意，能够知道一个重要的事实：给定一个翻转方案，则它们之间任意交换顺序后，得到的结果保持不变。因此，我们总可以先考虑所有的行翻转，再考虑所有的列翻转。</p>
+<p>不难发现一点：为了得到最高的分数，矩阵的每一行的最左边的数都必须为 11。为了做到这一点，我们可以翻转那些最左边的数不为 11 的那些行，而其他的行则保持不动。</p>
+<p>当将每一行的最左边的数都变为 11 之后，就只能进行列翻转了。为了使得总得分最大，我们要让每个列中 11 的数目尽可能多。因此，我们扫描除了最左边的列以外的每一列，如果该列 00 的数目多于 11 的数目，就翻转该列，其他的列则保持不变。</p>
+<p>实际编写代码时，我们无需修改原矩阵，而是可以计算每一列对总分数的「贡献」，从而直接计算出最高的分数。假设矩阵共有 mm 行 nn 列，计算方法如下：</p>
+<p>对于最左边的列而言，由于最优情况下，它们的取值都为 11，因此每个元素对分数的贡献都为 2^{n-1}2<br>n−1<br> ，总贡献为 m \times 2^{n-1}m×2<br>n−1<br> 。</p>
+<p>对于第 jj 列（j&gt;0j&gt;0，此处规定最左边的列是第 00 列）而言，我们统计这一列 0,10,1 的数量，令其中的最大值为 kk，则 kk 是列翻转后的 11 的数量，该列的总贡献为 k \times 2^{n-j-1}k×2<br>n−j−1<br> 。需要注意的是，在统计 0,10,1 的数量的时候，要考虑最初进行的行反转。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">matrixScore</span><span class="params">(a [][]<span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    m, n := <span class="built_in">len</span>(a), <span class="built_in">len</span>(a[<span class="number">0</span>])</span><br><span class="line">    ans := <span class="number">1</span> &lt;&lt; (n - <span class="number">1</span>) * m</span><br><span class="line">    <span class="keyword">for</span> j := <span class="number">1</span>; j &lt; n; j++ &#123;</span><br><span class="line">        ones := <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> _, row := <span class="keyword">range</span> a &#123;</span><br><span class="line">            <span class="keyword">if</span> row[j] == row[<span class="number">0</span>] &#123;</span><br><span class="line">                ones++</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ones &lt; m-ones &#123;</span><br><span class="line">            ones = m - ones</span><br><span class="line">        &#125;</span><br><span class="line">        ans += <span class="number">1</span> &lt;&lt; (n - <span class="number">1</span> - j) * ones</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>复杂度分析</p>
+<p>时间复杂度：O(mn)O(mn)，其中 mm 为矩阵行数，nn 为矩阵列数。</p>
+<p>空间复杂度：O(1)O(1)。</p>
+<p>作者：LeetCode-Solution<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/score-after-flipping-matrix/solution/fan-zhuan-ju-zhen-hou-de-de-fen-by-leetc-cxma/">https://leetcode-cn.com/problems/score-after-flipping-matrix/solution/fan-zhuan-ju-zhen-hou-de-de-fen-by-leetc-cxma/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h3 id="1680-连接连续二进制数字-中等"><a href="#1680-连接连续二进制数字-中等" class="headerlink" title="1680. 连接连续二进制数字[中等]"></a>1680. 连接连续二进制数字[中等]</h3><p>给你一个整数 n ，请你将 1 到 n 的二进制表示连接起来，并返回连接结果对应的 十进制 数字对 109 + 7 取余的结果。</p>
+<p> </p>
+<p>示例 1：</p>
+<p>输入：n = 1<br>输出：1<br>解释：二进制的 “1” 对应着十进制的 1 。<br>示例 2：</p>
+<p>输入：n = 3<br>输出：27<br>解释：二进制下，1，2 和 3 分别对应 “1” ，”10” 和 “11” 。<br>将它们依次连接，我们得到 “11011” ，对应着十进制的 27 。<br>示例 3：</p>
+<p>输入：n = 12<br>输出：505379714<br>解释：连接结果为 “1101110010111011110001001101010111100” 。<br>对应的十进制数字为 118505380540 。<br>对 109 + 7 取余后，结果为 505379714 。
+ </p>
+<p>提示：</p>
+<p>1 &lt;= n &lt;= 105</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/concatenation-of-consecutive-binary-numbers">https://leetcode-cn.com/problems/concatenation-of-consecutive-binary-numbers</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h4 id="解法-80"><a href="#解法-80" class="headerlink" title="解法"></a>解法</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">concatenatedBinary</span><span class="params">(n <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    ans := <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">1</span>;i &lt;= n;i ++ &#123;</span><br><span class="line">        bitlen := bits.Len(<span class="keyword">uint</span>(i))</span><br><span class="line">        <span class="comment">// 左移空位，然后加</span></span><br><span class="line">        ans = <span class="keyword">int</span>((ans&lt;&lt;bitlen) + i) % (<span class="number">1e9</span>+<span class="number">7</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
