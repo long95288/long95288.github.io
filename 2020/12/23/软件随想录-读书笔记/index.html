@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://long95288.github.io">
-  <title>风兮木落</title>
+  <title>软件随想录-读书笔记 | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="代码和文学本来就是一个世界的，寻找文学和code的和谐统一">
-<meta property="og:type" content="website">
-<meta property="og:title" content="风兮木落">
-<meta property="og:url" content="http://long95288.github.io/page/5/index.html">
+  <meta name="description" content="软件随想录-读书笔记人员管理 优秀程序员不会在招聘市场找工作。 招聘优秀程序员:走出去（论坛、会议寻找优秀程序员）、实习生、建立社区。 私人办公室、工作环境、玩具(显示屏？)、社交生活(如何被对待、同事、独立自主、不搞政治)、新奇的技术 军事化、经济利益、认同法管理方法  写给未来程序员的建议 练好写作 学好C语言 学好微观经济学 不要因为枯燥就不选修非计算机专业的课程 选修有大量编程实践的课程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件随想录-读书笔记">
+<meta property="og:url" content="http://long95288.github.io/2020/12/23/%E8%BD%AF%E4%BB%B6%E9%9A%8F%E6%83%B3%E5%BD%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="代码和文学本来就是一个世界的，寻找文学和code的和谐统一">
+<meta property="og:description" content="软件随想录-读书笔记人员管理 优秀程序员不会在招聘市场找工作。 招聘优秀程序员:走出去（论坛、会议寻找优秀程序员）、实习生、建立社区。 私人办公室、工作环境、玩具(显示屏？)、社交生活(如何被对待、同事、独立自主、不搞政治)、新奇的技术 军事化、经济利益、认同法管理方法  写给未来程序员的建议 练好写作 学好C语言 学好微观经济学 不要因为枯燥就不选修非计算机专业的课程 选修有大量编程实践的课程">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-12-23T12:20:29.000Z">
+<meta property="article:modified_time" content="2020-12-23T12:20:56.761Z">
 <meta property="article:author" content="long">
+<meta property="article:tag" content="读书笔记">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
@@ -156,933 +159,108 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-查看和解除端口占用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-软件随想录-读书笔记" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/31/%E6%9F%A5%E7%9C%8B%E5%92%8C%E8%A7%A3%E9%99%A4%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8/">查看和解除端口占用</a>
+    <h1 class="article-title" itemprop="name">
+      软件随想录-读书笔记
     </h1>
   
 
         
-        <a href="/2019/10/31/%E6%9F%A5%E7%9C%8B%E5%92%8C%E8%A7%A3%E9%99%A4%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2019-10-31T02:17:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-31</time>
+        <a href="/2020/12/23/%E8%BD%AF%E4%BB%B6%E9%9A%8F%E6%83%B3%E5%BD%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2020-12-23T12:20:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>  今天想打开steam社区工具，发现443端口被占用了。需要先关掉占用的程序\服务</p>
-<h3 id="解决步骤"><a href="#解决步骤" class="headerlink" title="解决步骤"></a>解决步骤</h3><h4 id="查找端口对应的PID"><a href="#查找端口对应的PID" class="headerlink" title="查找端口对应的PID"></a>查找端口对应的PID</h4><p>  在命令行下使用<code>netstat -ano</code>。列出所端口使用的列表。<br><img src="/2019/10/31/%E6%9F%A5%E7%9C%8B%E5%92%8C%E8%A7%A3%E9%99%A4%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8/list.png" alt="端口列表"><br>找到相应的端口对应的PID</p>
-<h4 id="根据PID停止对应的程序"><a href="#根据PID停止对应的程序" class="headerlink" title="根据PID停止对应的程序"></a>根据PID停止对应的程序</h4><h5 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h5><p>  使用<code>tasklist|findstr &quot;6864&quot;</code>找到运行的程序<br>  <img src="/2019/10/31/%E6%9F%A5%E7%9C%8B%E5%92%8C%E8%A7%A3%E9%99%A4%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8/task.png" alt="运行程序"><br>  知道是vmware在占用该端口。直接进入任务管理器，进入服务中，找到相应的PID对应的应用服务，停止掉。</p>
-<h5 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h5><p>  使用<code>tskill 6864</code>停止掉进程。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">解决问题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/31/%E6%9F%A5%E7%9C%8B%E5%92%8C%E8%A7%A3%E9%99%A4%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-软件管理平台" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/28/%E8%BD%AF%E4%BB%B6%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0/">软件管理平台</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/28/%E8%BD%AF%E4%BB%B6%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0/" class="archive-article-date">
-  	<time datetime="2019-10-28T13:48:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="问题提出"><a href="#问题提出" class="headerlink" title="问题提出"></a>问题提出</h3><p>  最近整理桌面的时候发现一个问题，就是一些软件找不到启动方式，可能快捷方式已经被删除了。桌面上又有许多的东西。这时候就想有一个平台，将自己的软件管理起来。这个功能类似于软件管家，但是只是进行软件的启动。分类。这是在有时间的前提下才进行创造。</p>
-<h3 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h3><p>  结合现有的技术，可以使用electron来搭建。里面有相应的函数接口可以使用</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">计划</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">设计</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/28/%E8%BD%AF%E4%BB%B6%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-longSys相关文档" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/23/longSys%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3/">longSys相关文档</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/23/longSys%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3/" class="archive-article-date">
-  	<time datetime="2019-10-23T14:33:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h3><p>  个人资源管理平台</p>
-<h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><p>  需要一个软件平台来管理自己日益复杂和丰富的资源。包括但不限于个人文档、积累的电子书、下载的音乐、下载的视频教程，一些常用的功能。日记、笔记等。一些相关的人工智能的资源整合。如车标识别、orc等常用的接口。未来可能要接入物联网的相关设备、由于腾讯云的服务器的存储资源有限，未来需要将自己本地的文件外挂到该平台，即可以减小服务器的开销，还可以保护文档的私密性。服务器只做数据中转，而不是数据存储。服务器算力也有限,需要将算力分到本地外挂的设备。</p>
-<h4 id="一、文件管理需求"><a href="#一、文件管理需求" class="headerlink" title="一、文件管理需求"></a>一、文件管理需求</h4><ul>
-<li>该平台需要能够存储文件，解决U盘的不便携性。一些小的文档可以上传至该平台。当需要的时候可以上传和下载。大文件管理，由于设备原因，不可能将所有的文件上传到远端的服务器。所以需要一个功能，能够在该平台管理自己的本地的文件。包括，添加、删除、读取等常用功能。</li>
-<li>该平台的界面应该是非常友好的</li>
+        <h2 id="软件随想录-读书笔记"><a href="#软件随想录-读书笔记" class="headerlink" title="软件随想录-读书笔记"></a>软件随想录-读书笔记</h2><h3 id="人员管理"><a href="#人员管理" class="headerlink" title="人员管理"></a>人员管理</h3><ul>
+<li>优秀程序员不会在招聘市场找工作。</li>
+<li>招聘优秀程序员:走出去（论坛、会议寻找优秀程序员）、实习生、建立社区。</li>
+<li>私人办公室、工作环境、玩具(显示屏？)、社交生活(如何被对待、同事、独立自主、不搞政治)、新奇的技术</li>
+<li>军事化、经济利益、认同法管理方法</li>
 </ul>
-<h4 id="二、图片管理需求"><a href="#二、图片管理需求" class="headerlink" title="二、图片管理需求"></a>二、图片管理需求</h4><p>  宅男喜欢二次元、现在积累了几个G的图片文件。但是很杂，该平台提供相册、分类的功能</p>
-<ul>
-<li>相册功能 将图片分类到相册中</li>
-<li>添加、删除、修改相册。</li>
-<li>查看图片和编辑分开。</li>
+<h3 id="写给未来程序员的建议"><a href="#写给未来程序员的建议" class="headerlink" title="写给未来程序员的建议"></a>写给未来程序员的建议</h3><ul>
+<li>练好写作</li>
+<li>学好C语言</li>
+<li>学好微观经济学</li>
+<li>不要因为枯燥就不选修非计算机专业的课程</li>
+<li>选修有大量编程实践的课程</li>
+<li>别担心所有工作被印度人抢走？？</li>
+<li>找好一份好的暑期实习工作</li>
+<li>寻找专业人士的帮助，培养自信心</li>
 </ul>
-<h4 id="三、音乐管理需求"><a href="#三、音乐管理需求" class="headerlink" title="三、音乐管理需求"></a>三、音乐管理需求</h4><p>  音乐很多,想要有自己的音乐播放器，类似于网易云音乐那种。</p>
-<ul>
-<li>曲库 全部的音乐，可以搜索。一首歌可以放入很多的歌单中。</li>
-<li>歌单 将音乐分类，在管理界面可以添加、编辑、删除歌单</li>
-<li>上传音乐 上传的音乐会出现在曲库中，上传音乐的时候会添加相应的歌曲数据。</li>
+<h3 id="设计的作用"><a href="#设计的作用" class="headerlink" title="设计的作用"></a>设计的作用</h3><ul>
+<li>如果你问人们喜欢什么样的风格和设计，除非这些人受过专门训练，否则他们一般会选择自己最熟悉的品种。大多数人根本不知道应该怎么选择，他们只好选一个自己最熟悉的答案。</li>
+<li>商业软件-就是一种寸土必争的游戏。”创造一个有使用价值的软件，你必须时时刻刻都在奋斗，每一次的修补，每一个功能，每一处小小的改进，你都在奋斗，目的是为了再多创造一点空间，可以再多吸引一个用户加入。没有捷径可走。你需要一点运气，但是这不取决于你是否幸运。你之所以会有好运气，那是因为你寸土必争”</li>
+<li>为了发现可以改进的地方，你必须有一个思维定势，始终如一地用批判的眼光看世界。</li>
+<li>世界上只有一件事比你自己设计软件更困难，那就是一个团队一起设计软件。（深有体会）</li>
+<li>别给用户太多选择，选择太多反而不好用。</li>
+<li>易用性是不够的，如果一个应用程序具备确实非常重要的功能，而且用户真地非常需要这个功能，那么即使这个程序难用得令人感到可悲，它仍然会大受欢迎。反过来说，有一个应用程序，被做成是世界上最容易使用的东西，但是如果它对任何人毫无用处，那么它照样会完蛋。</li>
+<li>社会化软件、社会化界面。不要禁止伟哥广告，而是让这个广告没被人看到。装死，让发广告的人觉得已经成功了，但是只有自己能够看到广告。你可以发，但是别人看不到。</li>
 </ul>
-<h4 id="四、视频管理需求"><a href="#四、视频管理需求" class="headerlink" title="四、视频管理需求"></a>四、视频管理需求</h4><p>  视频很多、非常多。需要有效的管理<br>  1、能够看视频(宽带问题，无法流畅的看视频)<br>  2、用户能够根据名字搜索视频<br>  3、用户能够创建自己的栏目，并且往里面添加视频(类似于blibli的收藏夹功能)<br>  4、用户能够删除视频</p>
-<h4 id="五、日记和笔记的需求"><a href="#五、日记和笔记的需求" class="headerlink" title="五、日记和笔记的需求"></a>五、日记和笔记的需求</h4><p>  笔记有很多成熟的产品，但是数据不可控。自己不想把数据放在他们的服务器上。所以需要一个支持多端编写的文档的功能。数据放在自己的数据库中。支持富文本和markdown格式的语法。</p>
-<ul>
-<li>文档的导入和导出 可以将数据库的中笔记文档导出pdf格式，保存备份在磁盘中。</li>
-<li>定期生成备份文件,后期可以调用多个网盘的api多端备份。</li>
+<h3 id="管理大型项目"><a href="#管理大型项目" class="headerlink" title="管理大型项目"></a>管理大型项目</h3><ul>
+<li>要挣钱，就别怕脏。如果你为了”麻烦事”找到了解决办法，市场就会向你支付报酬。轻而易举的事情是拿不到钱的。</li>
+<li>许许多多的创业公司所有的产品并不解决任何“麻烦事”，别人很容易做出复制品。这类公司中相当一部分，给人的感觉就是不实和空洞，因为他们没有解决实际中迫切需要解决的任何困难问题。只有等到他们解决了困难问题，他们对用户才是有用的。用户只会向解决困难问题的公司付钱。</li>
+<li>如果你想保持增长，不管是个人，还是公司，那么唯一的方法就是扩张自己擅长处理的业务边界。</li>
+<li>每当你新解决了一件“麻烦事”，你的业务和市场都会有巨大的增长。</li>
 </ul>
-<h4 id="六、常用工具的需求"><a href="#六、常用工具的需求" class="headerlink" title="六、常用工具的需求"></a>六、常用工具的需求</h4><p>  学习工作中有很多工具的需求，图片转文字、开发中json格式化、还有很多的开发手册。这些都是用得到的，并且自己已经实现了车标的识别并且建立了模型。可以将该功能整合<br>  到平台中<br>  1、二维码工具。能够根据字符串生成二维码，也能识别二维码为字符串。<br>  2、车标识别工具。能够根据上传的图片识别相应的车标。<br>  3、</p>
-<h4 id="七、物联网设备管理需求"><a href="#七、物联网设备管理需求" class="headerlink" title="七、物联网设备管理需求"></a>七、物联网设备管理需求</h4><p>  未来自己会将家里的物联网的设备挂在该平台中，并且能够在该平台进行管理。空调、冰箱、台灯、电视机。自己梦想中的家。需要一个同一的管理平台，而不是各自为政。<br>  添加设备，每个设备都有自己的id码，并且有相应的命令。</p>
-<h4 id="八、计划跟踪平台"><a href="#八、计划跟踪平台" class="headerlink" title="八、计划跟踪平台"></a>八、计划跟踪平台</h4><p>  用来记录自己的计划和执行情况，主要借鉴TODO List的功能<br>  添加计划，一个计划会有开始时间、截止时间、完成时间(用户完成)，具体内容，轻重缓急。<br>  编辑、删除计划，只有未开始的计划才能编辑和删除<br>  生成报表，可以按周、按月生成报表。记录计划的预计完成时间和实际完成时间，计算完成工作计划的轻重缓急的比例。</p>
-<h3 id="概要设计"><a href="#概要设计" class="headerlink" title="概要设计"></a>概要设计</h3><h3 id="详细设计"><a href="#详细设计" class="headerlink" title="详细设计"></a>详细设计</h3><h4 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h4><h5 id="笔记管理"><a href="#笔记管理" class="headerlink" title="笔记管理"></a>笔记管理</h5><p><strong>笔记本：t_notebook</strong></p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>属性</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>id</td>
-<td>bigint</td>
-<td>主键</td>
-</tr>
-<tr>
-<td>notebook_name</td>
-<td>varchar</td>
-<td>笔记本名</td>
-</tr>
-<tr>
-<td>notebook_description</td>
-<td>varchar</td>
-<td>笔记本描述</td>
-</tr>
-<tr>
-<td>create_id</td>
-<td>bigint</td>
-<td>创建者id</td>
-</tr>
-<tr>
-<td>created_time</td>
-<td>timestamp</td>
-<td>创建时间戳</td>
-</tr>
-<tr>
-<td>modify_time</td>
-<td>timestamp</td>
-<td>修改时间戳</td>
-</tr>
-<tr>
-<td>del</td>
-<td>tinyint</td>
-<td>删除标记</td>
-</tr>
-</tbody></table>
-<p><strong>笔记条目：t_notebook_item</strong></p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>属性</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>id</td>
-<td>bigint</td>
-<td>主键</td>
-</tr>
-<tr>
-<td>notebook_id</td>
-<td>bigint</td>
-<td>主键</td>
-</tr>
-<tr>
-<td>notebook_item_title</td>
-<td>varchar</td>
-<td>笔记条目标题</td>
-</tr>
-<tr>
-<td>notebook_item_content</td>
-<td>text</td>
-<td>笔记条目内容</td>
-</tr>
-<tr>
-<td>create_time</td>
-<td>timestamp</td>
-<td>创建时间</td>
-</tr>
-<tr>
-<td>modify_time</td>
-<td>timestamp</td>
-<td>修改时间</td>
-</tr>
-<tr>
-<td>del</td>
-<td>tinyint</td>
-<td>删除标记</td>
-</tr>
-</tbody></table>
-<h3 id="平台原型"><a href="#平台原型" class="headerlink" title="平台原型"></a>平台原型</h3><h3 id="后端实现进度"><a href="#后端实现进度" class="headerlink" title="后端实现进度"></a>后端实现进度</h3><h4 id="鉴权模块"><a href="#鉴权模块" class="headerlink" title="鉴权模块"></a>鉴权模块</h4><ul>
-<li><input checked disabled type="checkbox"> shiro鉴权<br>….<h4 id="用户模块"><a href="#用户模块" class="headerlink" title="用户模块"></a>用户模块</h4></li>
-<li><input checked disabled type="checkbox"> 用户登录接口</li>
-</ul>
-<p>Request URL: <code>127.0.0.1:8080/Api/User/Login</code><br>Request Method:<code>post</code><br>Request Body:</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;username&quot;</span>:<span class="string">&quot;username&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;password&quot;</span>:<span class="string">&quot;password&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Response Body:</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;code&quot;</span>: <span class="number">20000</span>,</span><br><span class="line">  <span class="attr">&quot;version&quot;</span>: <span class="literal">null</span>,</span><br><span class="line">  <span class="attr">&quot;message&quot;</span>: <span class="string">&quot;登录成功&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;data&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;token&quot;</span>: <span class="string">&quot;c594ff92e47955527823259beafb5b2e65c26f7a233f8542736d1c1937b8bf442137a1aa1cc11b3aa1a0ba56aa1be6d91cb11ce03e9de58a48c608178ea1684de54b084713655ae8750010a822afb420ede8f6f92539da5c20d8a5434f82533b016768c39901ffe9f51ab82a83c9379193f624651a797131a4840581ddc855183260f708a41c7309&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><input checked disabled type="checkbox"> 用户登出接口</li>
-</ul>
-<p>Request URL: <code>127.0.0.1:8080/Api/User/Logout</code><br>Request Method: <code>post</code><br>Request Body: <code>null</code><br>Response Body:</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;code&quot;</span>: <span class="number">20000</span>,</span><br><span class="line">    <span class="attr">&quot;version&quot;</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">&quot;message&quot;</span>: <span class="string">&quot;请求成功&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;data&quot;</span>: <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><input checked disabled type="checkbox"> 获得用户信息</li>
-</ul>
-<p>Request URL: <code>127.0.0.1:8080/Api/User/UserInfo?token=usertoken-token</code><br>Request Method: <code>get</code><br>Response Body:</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">&quot;version&quot;</span>: <span class="literal">null</span>,</span><br><span class="line"><span class="attr">&quot;message&quot;</span>: <span class="string">&quot;请求成功&quot;</span>,</span><br><span class="line"><span class="attr">&quot;code&quot;</span>:<span class="number">20000</span>,</span><br><span class="line"><span class="attr">&quot;data&quot;</span>:&#123;</span><br><span class="line">  <span class="attr">&quot;roles&quot;</span>:[<span class="string">&quot;admin&quot;</span>],</span><br><span class="line">  <span class="attr">&quot;introduction&quot;</span>:<span class="string">&quot;I am a super administrator&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;avatar&quot;</span>:<span class="string">&quot;https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;Super Admin&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><input disabled type="checkbox"> 用户管理</li>
-<li><input disabled type="checkbox"> 权限角色管理<br>….<h4 id="文件模块"><a href="#文件模块" class="headerlink" title="文件模块"></a>文件模块</h4></li>
-<li><input checked disabled type="checkbox"> 文件上传</li>
-<li><input checked disabled type="checkbox"> 查询文件列表</li>
-<li><input checked disabled type="checkbox"> 删除文件</li>
-<li><input disabled type="checkbox"> 文件分类</li>
-</ul>
-<h4 id="图片模块"><a href="#图片模块" class="headerlink" title="图片模块"></a>图片模块</h4><ul>
-<li><input disabled type="checkbox"> 创建相册</li>
-<li><input disabled type="checkbox"> 更新相册</li>
-<li><input disabled type="checkbox"> 添加图片至相册</li>
-<li><input disabled type="checkbox"> 删除某个相册下的图片</li>
-<li><input disabled type="checkbox"> 删除相册</li>
-</ul>
-<h4 id="音乐模块"><a href="#音乐模块" class="headerlink" title="音乐模块"></a>音乐模块</h4><ul>
-<li><input disabled type="checkbox"> 获得曲库列表</li>
-<li><input disabled type="checkbox"> 获得歌单列表</li>
-<li><input disabled type="checkbox"> 获得歌单对应的曲目</li>
-<li><input disabled type="checkbox"> 添加新的歌曲</li>
-<li><input disabled type="checkbox"> 修改歌曲</li>
-<li><input disabled type="checkbox"> 删除歌曲</li>
-<li><input disabled type="checkbox"> 添加新的歌单</li>
-<li><input disabled type="checkbox"> 更新歌单</li>
-<li><input disabled type="checkbox"> 删除歌单</li>
-</ul>
-<h4 id="在线笔记模块"><a href="#在线笔记模块" class="headerlink" title="在线笔记模块"></a>在线笔记模块</h4><ul>
-<li><input checked disabled type="checkbox"> 获得笔记列表</li>
-<li><input checked disabled type="checkbox"> 获得特定笔记的内容</li>
-<li><input checked disabled type="checkbox"> 添加新的笔记本</li>
-<li><input checked disabled type="checkbox"> 为某个笔记本添加新的条目</li>
-<li><input checked disabled type="checkbox"> 更新笔记本</li>
-<li><input checked disabled type="checkbox"> 更新笔记本特定条目</li>
-<li><input checked disabled type="checkbox"> 删除笔记本</li>
-<li><input checked disabled type="checkbox"> 删除笔记本特定条目</li>
-<li><input disabled type="checkbox"> 前端支持Markdown语法渲染</li>
-</ul>
-<h4 id="小说模块-转码"><a href="#小说模块-转码" class="headerlink" title="小说模块-转码"></a>小说模块-转码</h4><ul>
-<li><input disabled type="checkbox"> 添加新的解析模块</li>
-<li><input disabled type="checkbox"> 变更解析模块</li>
-<li><input disabled type="checkbox"> 删除解析模块</li>
-</ul>
-<h4 id="TODO模块"><a href="#TODO模块" class="headerlink" title="TODO模块"></a>TODO模块</h4><h4 id="人工智能接口"><a href="#人工智能接口" class="headerlink" title="人工智能接口"></a>人工智能接口</h4><ul>
-<li><input disabled type="checkbox"> 车标识别接口</li>
-<li><input disabled type="checkbox"> 车标检测接口</li>
-<li><input disabled type="checkbox"> 文字识别接口[待训练模型]</li>
-<li><input disabled type="checkbox"> 人脸检测接口[待训练模型]</li>
-</ul>
-<h4 id="物联网设备"><a href="#物联网设备" class="headerlink" title="物联网设备"></a>物联网设备</h4><ul>
-<li><input disabled type="checkbox"> 查询所有设备状态</li>
-<li><input disabled type="checkbox"> 添加新的设备</li>
-<li><input disabled type="checkbox"> 删除设备</li>
-<li><input disabled type="checkbox"> 控制特定的设备</li>
-</ul>
-<h3 id="前端流程设计"><a href="#前端流程设计" class="headerlink" title="前端流程设计"></a>前端流程设计</h3><h4 id="登录流程设计"><a href="#登录流程设计" class="headerlink" title="登录流程设计"></a>登录流程设计</h4><pre class="mermaid">sequenceDiagram
-    participant user as 用户
-    participant front as 前端
-    participant backend as 后端
-
-    user->>front: 填写账号和密码
-    front->>front: 校验账号密码
-    front->>backend: 登录请求
-    backend->>backend: 处理登录请求
-    backend-->>front: 返回token
-    front->>front: 保存token
-    front->>front: 进入首页
-    front->>backend: 根据token获得用户数据
-    backend-->>front: 返回用户数据,包括用户名，头像，路由等
-    front->>front: 保存用户数据,处理路由数据动态渲染。
-    front->>front: 进入系统
-    front-->>user: 完成登录</pre>
-
-<h5 id="请求接口"><a href="#请求接口" class="headerlink" title="请求接口"></a>请求接口</h5><ul>
-<li>Api/User/Login </li>
-<li>Api/User/GetInfo</li>
-<li>Api/User/Logout</li>
-</ul>
-<h3 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h3>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件设计</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/23/longSys%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-book118预览文档下载" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/10/book118%E9%A2%84%E8%A7%88%E6%96%87%E6%A1%A3%E4%B8%8B%E8%BD%BD/">book118预览文档下载</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/10/book118%E9%A2%84%E8%A7%88%E6%96%87%E6%A1%A3%E4%B8%8B%E8%BD%BD/" class="archive-article-date">
-  	<time datetime="2019-10-10T15:17:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="获得预览文档的图片的全部url"><a href="#获得预览文档的图片的全部url" class="headerlink" title="获得预览文档的图片的全部url"></a>获得预览文档的图片的全部url</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 以下代码在</span></span><br><span class="line"><span class="comment"> * https://max.book118.com</span></span><br><span class="line"><span class="comment"> * 控制台中执行，复制到控制台就可以了</span></span><br><span class="line"><span class="comment"> * !!!!需要注意的是每张图片都渲染到页面中(预览全部)了再运行,否则会出现部分的图片路径获取不了</span></span><br><span class="line"><span class="comment"> * 从控制台中复制路径字符串</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getAllImageURL</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> allImageDivs = <span class="built_in">document</span>.getElementsByClassName(<span class="string">&quot;webpreview-item&quot;</span>);</span><br><span class="line">  <span class="keyword">var</span> urls = [];</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;allImageDivs.length;i++)&#123;</span><br><span class="line">    <span class="keyword">var</span> url = allImageDivs[i].children[<span class="number">0</span>].src;</span><br><span class="line">    <span class="comment">// 打印每张图片的url</span></span><br><span class="line">    <span class="built_in">console</span>.log(i+<span class="string">&quot;:&quot;</span>+url);</span><br><span class="line">    urls.push(url);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">localStorage</span>.setItem(<span class="string">&quot;urls&quot;</span>,urls);</span><br><span class="line">&#125;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  getAllImageURL();</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;==以下内容是图片的路径字符串===&quot;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">localStorage</span>.getItem(<span class="string">&quot;urls&quot;</span>));</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;=============================&quot;</span>);</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="comment">//===================================================================</span></span><br></pre></td></tr></table></figure>
-<p>运行的结果:<br><img src="/2019/10/10/book118%E9%A2%84%E8%A7%88%E6%96%87%E6%A1%A3%E4%B8%8B%E8%BD%BD/geturllist.png"></p>
-<p>右键复制的得到的字符串,后面要用</p>
-<h3 id="根据url字符串下载图片"><a href="#根据url字符串下载图片" class="headerlink" title="根据url字符串下载图片"></a>根据url字符串下载图片</h3><p> 由于跨域问题，下载图片需要在图片所在的域名下下载。。。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 以下代码在 </span></span><br><span class="line"><span class="comment"> * https://view-cache.book118.com/</span></span><br><span class="line"><span class="comment"> * 的控制台中执行。</span></span><br><span class="line"><span class="comment"> * !!!! 执行前需要将获得的url字符串粘贴到list中</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="built_in">window</span>.downloadImage = <span class="function"><span class="keyword">function</span> (<span class="params">url,filename</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 请求延迟,最好设置大一点 64000ms</span></span><br><span class="line">  <span class="keyword">var</span> timeout = <span class="built_in">Math</span>.random() * <span class="number">64000</span>;</span><br><span class="line">  <span class="built_in">this</span>.setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    xhr.open(<span class="string">&quot;get&quot;</span>, url, <span class="literal">true</span>);</span><br><span class="line">    xhr.responseType = <span class="string">&quot;blob&quot;</span>;</span><br><span class="line">    xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">this</span>.status == <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> blob = <span class="built_in">this</span>.response;</span><br><span class="line">        <span class="keyword">var</span> downloadElement = <span class="built_in">document</span>.createElement(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">        <span class="keyword">var</span> href = <span class="built_in">window</span>.URL.createObjectURL(blob); <span class="comment">//创建下载的链接</span></span><br><span class="line">        downloadElement.href = href;</span><br><span class="line">        downloadElement.download = filename; <span class="comment">//下载后文件名</span></span><br><span class="line">        <span class="built_in">document</span>.body.appendChild(downloadElement);</span><br><span class="line">        downloadElement.click(); <span class="comment">//点击下载</span></span><br><span class="line">        <span class="built_in">document</span>.body.removeChild(downloadElement); <span class="comment">//下载完成移除元素</span></span><br><span class="line">        <span class="built_in">window</span>.URL.revokeObjectURL(href); <span class="comment">//释放掉blob对象</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    xhr.send()</span><br><span class="line">  &#125;, timeout);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getAllImage</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 将路径url字符串粘贴到list中</span></span><br><span class="line">  <span class="keyword">var</span> list = <span class="string">&quot;这里要将上一步的url字符串放在这里&quot;</span>;</span><br><span class="line">  <span class="keyword">var</span> urls = list.split(<span class="string">&quot;,&quot;</span>);</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;urls.length;i++)&#123;</span><br><span class="line">    <span class="comment">// 图片后缀</span></span><br><span class="line">    <span class="keyword">var</span> suffix = urls[i].split(<span class="string">&quot;.&quot;</span>)[urls[i].split(<span class="string">&quot;.&quot;</span>).length<span class="number">-1</span>];</span><br><span class="line">    <span class="comment">// 图片序列名</span></span><br><span class="line">    <span class="keyword">var</span> filename = i+<span class="string">&quot;.&quot;</span>+suffix;</span><br><span class="line">    downloadImage(urls[i],filename);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  getAllImage();</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="comment">// =======================================</span></span><br></pre></td></tr></table></figure>
-<p>请求结果:<br><img src="/2019/10/10/book118%E9%A2%84%E8%A7%88%E6%96%87%E6%A1%A3%E4%B8%8B%E8%BD%BD/downloadresult.png" alt="请求结果"><br><strong>需要开启chorme的连续下载</strong><br>下载结果<br><img src="/2019/10/10/book118%E9%A2%84%E8%A7%88%E6%96%87%E6%A1%A3%E4%B8%8B%E8%BD%BD/images.png" alt="下载结果"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/10/book118%E9%A2%84%E8%A7%88%E6%96%87%E6%A1%A3%E4%B8%8B%E8%BD%BD/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-m3u8j解码和合并工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/09/m3u8j%E8%A7%A3%E7%A0%81%E5%92%8C%E5%90%88%E5%B9%B6%E5%B7%A5%E5%85%B7/">m3u8解码和合并工具</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/09/m3u8j%E8%A7%A3%E7%A0%81%E5%92%8C%E5%90%88%E5%B9%B6%E5%B7%A5%E5%85%B7/" class="archive-article-date">
-  	<time datetime="2019-10-09T14:30:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="AES-128解密函数"><a href="#AES-128解密函数" class="headerlink" title="AES-128解密函数"></a>AES-128解密函数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 解密文件</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> sourcePath 源文件</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> destinationPath 保存的文件</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> key 密钥</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">decryptFile</span><span class="params">(String sourcePath,String destinationPath,String key)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    File outFile = <span class="keyword">new</span> File(destinationPath);</span><br><span class="line">    <span class="keyword">if</span> (!outFile.exists())&#123;</span><br><span class="line">        outFile.createNewFile();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 待解密的文件输入流</span></span><br><span class="line">    FileInputStream fis = <span class="keyword">new</span> FileInputStream(sourcePath);</span><br><span class="line">    FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(outFile);</span><br><span class="line"></span><br><span class="line">    Cipher cipher = Cipher.getInstance(<span class="string">&quot;AES/CBC/PKCS5Padding&quot;</span>);</span><br><span class="line">      <span class="keyword">byte</span>[] bytes = key.getBytes();</span><br><span class="line">    SecretKeySpec secretKey = <span class="keyword">new</span> SecretKeySpec(bytes,<span class="string">&quot;AES&quot;</span>);</span><br><span class="line">    IvParameterSpec iv = <span class="keyword">new</span> IvParameterSpec(key.getBytes());</span><br><span class="line">    cipher.init(Cipher.DECRYPT_MODE,secretKey,iv);</span><br><span class="line">    <span class="comment">// 解密流</span></span><br><span class="line">    CipherInputStream cis = <span class="keyword">new</span> CipherInputStream(fis,cipher);</span><br><span class="line">    <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> ((n = cis.read(buffer)) != -<span class="number">1</span>)&#123;</span><br><span class="line">        fos.write(buffer,<span class="number">0</span>,n);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">&quot;解密成功:&quot;</span>);</span><br><span class="line">    cis.close();</span><br><span class="line">    fos.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="主类"><a href="#主类" class="headerlink" title="主类"></a>主类</h3><p>  用来识别m3u8文件</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    String sourcePath =<span class="string">&quot;G:\\win下载\\m3u8\\&quot;</span>;</span><br><span class="line">    String destination = <span class="string">&quot;G:\\win下载\\m3u8\\&quot;</span>;</span><br><span class="line">    String m3u8 = <span class="string">&quot;G:\\win下载\\m3u8\\m3u8.m3u8&quot;</span>;</span><br><span class="line">    String key = <span class="string">&quot;tkr87ysao6qehn95&quot;</span>;</span><br><span class="line">    FileReader fileReader = <span class="keyword">null</span>;</span><br><span class="line">    BufferedReader reader = <span class="keyword">null</span>;</span><br><span class="line">    ArrayList&lt;String&gt; files = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        fileReader = <span class="keyword">new</span> FileReader(m3u8);</span><br><span class="line">        reader = <span class="keyword">new</span> BufferedReader(fileReader);</span><br><span class="line">        String filename = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">while</span> (( filename = reader.readLine())!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(filename.charAt(<span class="number">0</span>)!=<span class="string">&#x27;#&#x27;</span>)&#123;</span><br><span class="line">                files.add(filename);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(fileReader!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            fileReader.close();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(reader!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            reader.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">catch</span> (IOException e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> partSize = files.size();</span><br><span class="line">    String sourceFile;</span><br><span class="line">    String destFile;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i &lt; partSize ;i++)&#123;</span><br><span class="line">            sourceFile = sourcePath + files.get(i);</span><br><span class="line">            destFile = destination + <span class="string">&quot;e&quot;</span>+files.get(i);</span><br><span class="line">            EncryFileUtil.decryptFile(sourceFile,destFile,key);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;========全部解密成功============&quot;</span>);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 合并数据</span></span><br><span class="line">        String mergeFilePath = sourcePath+<span class="string">&quot;merge.ts&quot;</span>;</span><br><span class="line">        FileOutputStream mergeFile = <span class="keyword">new</span> FileOutputStream(mergeFilePath);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;partSize;i++)&#123;</span><br><span class="line">            String encodeFile = sourcePath +<span class="string">&quot;e&quot;</span>+files.get(i);</span><br><span class="line">            FileInputStream inputStream = <span class="keyword">new</span> FileInputStream(encodeFile);</span><br><span class="line">            <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="keyword">int</span> n=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> ((n = inputStream.read(buffer))!= -<span class="number">1</span>)&#123;</span><br><span class="line">                mergeFile.write(buffer,<span class="number">0</span>,n);</span><br><span class="line">            &#125;</span><br><span class="line">            inputStream.close();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;合并数据成功&quot;</span>);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (IOException e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/09/m3u8j%E8%A7%A3%E7%A0%81%E5%92%8C%E5%90%88%E5%B9%B6%E5%B7%A5%E5%85%B7/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-blibli动态9宫格图片下载脚本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/07/blibli%E5%8A%A8%E6%80%819%E5%AE%AB%E6%A0%BC%E5%9B%BE%E7%89%87%E4%B8%8B%E8%BD%BD%E8%84%9A%E6%9C%AC/">blibli动态9宫格图片下载脚本</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/07/blibli%E5%8A%A8%E6%80%819%E5%AE%AB%E6%A0%BC%E5%9B%BE%E7%89%87%E4%B8%8B%E8%BD%BD%E8%84%9A%E6%9C%AC/" class="archive-article-date">
-  	<time datetime="2019-10-07T11:38:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>涉及到的技术点</p>
-<ul>
-<li>js控制样式和类</li>
-<li>DOM的节点添加和删除</li>
-<li>原生的xhr</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.downloadImage = <span class="function"><span class="keyword">function</span> (<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> timeout = <span class="built_in">Math</span>.random() * <span class="number">5000</span>;</span><br><span class="line">  <span class="built_in">this</span>.setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    xhr.open(<span class="string">&quot;get&quot;</span>, url, <span class="literal">true</span>);</span><br><span class="line">    xhr.responseType = <span class="string">&quot;blob&quot;</span>;</span><br><span class="line">    xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">this</span>.status == <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> blob = <span class="built_in">this</span>.response;</span><br><span class="line">        <span class="keyword">var</span> downloadElement = <span class="built_in">document</span>.createElement(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">        <span class="keyword">var</span> href = <span class="built_in">window</span>.URL.createObjectURL(blob); <span class="comment">//创建下载的链接</span></span><br><span class="line">        downloadElement.href = href;</span><br><span class="line">        downloadElement.download = name; <span class="comment">//下载后文件名</span></span><br><span class="line">        <span class="built_in">document</span>.body.appendChild(downloadElement);</span><br><span class="line">        downloadElement.click(); <span class="comment">//点击下载</span></span><br><span class="line">        <span class="built_in">document</span>.body.removeChild(downloadElement); <span class="comment">//下载完成移除元素</span></span><br><span class="line">        <span class="built_in">window</span>.URL.revokeObjectURL(href); <span class="comment">//释放掉blob对象</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    xhr.send()</span><br><span class="line">  &#125;, timeout);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.insertButtons = <span class="function"><span class="keyword">function</span> (<span class="params">element</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;=== element =======&quot;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(element);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;=== end ========== &quot;</span>);</span><br><span class="line">  <span class="keyword">var</span> button = <span class="built_in">document</span>.createElement(<span class="string">&quot;button&quot;</span>);</span><br><span class="line">  button.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(element);</span><br><span class="line">    <span class="comment">// 获得该box的9个图片的url</span></span><br><span class="line">    <span class="keyword">var</span> urlList = element.firstElementChild.firstElementChild.children;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; urlList.length; i++) &#123;</span><br><span class="line">      <span class="keyword">var</span> url = <span class="string">&quot;https:&quot;</span> + urlList[i].firstElementChild.style.backgroundImage.split(<span class="string">&quot;url&quot;</span>)[<span class="number">1</span>].replace(<span class="regexp">/[\(\)\&quot;]/g</span>, <span class="string">&quot;&quot;</span>).split(<span class="string">&quot;@&quot;</span>)[<span class="number">0</span>].trim();</span><br><span class="line">      <span class="built_in">console</span>.log(url);</span><br><span class="line">      <span class="comment">// console.log(timeout);</span></span><br><span class="line">      <span class="built_in">window</span>.downloadImage(url);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">// button.style.backgroundColor = &quot;#3388ff&quot;;</span></span><br><span class="line">  <span class="comment">// button.style.color = &quot;white&quot;;</span></span><br><span class="line">  button.style.borderRadius=<span class="string">&quot;10px&quot;</span>;</span><br><span class="line">  button.style.height = <span class="string">&quot;35px&quot;</span>;</span><br><span class="line">  button.style.backgroundColor=<span class="string">&quot;white&quot;</span>;</span><br><span class="line">  button.style.opacity= <span class="string">&quot;0.5&quot;</span>;</span><br><span class="line">  button.style.borderWidth=<span class="string">&quot;thin&quot;</span>;</span><br><span class="line">  button.style.position=<span class="string">&quot;absolute&quot;</span>;</span><br><span class="line">  button.classList.add(<span class="string">&quot;downBtn&quot;</span>);</span><br><span class="line">  button.innerText = <span class="string">&quot;下载该九宫格的图片&quot;</span>;</span><br><span class="line">  element.append(button);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.initImageBox = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 先清除按钮</span></span><br><span class="line">  <span class="keyword">var</span> allDownBtn = <span class="built_in">document</span>.getElementsByClassName(<span class="string">&quot;downBtn&quot;</span>);</span><br><span class="line">  <span class="keyword">var</span> btnLength = allDownBtn.length;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>;i &lt; btnLength;i++)&#123;</span><br><span class="line">      allDownBtn[<span class="number">0</span>].remove();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> allImagesBox = <span class="built_in">document</span>.getElementsByClassName(<span class="string">&quot;imagesbox&quot;</span>);</span><br><span class="line">  <span class="comment">// 每个动态插入下载图片按钮</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;=======allImagesBox======&quot;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(allImagesBox);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;=======end============&quot;</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; allImagesBox.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> element22 = allImagesBox[i];</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;i=&quot;</span>+i);</span><br><span class="line">    <span class="built_in">window</span>.insertButtons(element22);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;call back initImageBox&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertFreshButton</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> freshButton = <span class="built_in">document</span>.createElement(<span class="string">&quot;button&quot;</span>);</span><br><span class="line">    freshButton.style.backgroundColor = <span class="string">&quot;#ABD6E6&quot;</span>;</span><br><span class="line">    freshButton.style.position = <span class="string">&quot;fixed&quot;</span>;</span><br><span class="line">    freshButton.style.right=<span class="string">&quot;60px&quot;</span>;</span><br><span class="line">    <span class="comment">// var buttonTop = screen.height / 2;</span></span><br><span class="line">    <span class="comment">// freshButton.style.top= buttonTop +&quot;px&quot;;</span></span><br><span class="line">    freshButton.style.bottom=<span class="string">&quot;40px&quot;</span>;</span><br><span class="line">    freshButton.style.zIndex=<span class="string">&quot;99&quot;</span>;</span><br><span class="line">    freshButton.style.color = <span class="string">&quot;white&quot;</span>;</span><br><span class="line">    freshButton.style.borderWidth=<span class="string">&quot;thin&quot;</span>;</span><br><span class="line">    freshButton.style.height = <span class="string">&quot;40px&quot;</span>;</span><br><span class="line">    freshButton.innerText = <span class="string">&quot;刷新/查看下载按钮&quot;</span>;</span><br><span class="line">    freshButton.setAttribute(<span class="string">&quot;onclick&quot;</span>,<span class="string">&quot;initImageBox()&quot;</span>);</span><br><span class="line">    <span class="built_in">document</span>.body.append(freshButton);</span><br><span class="line">&#125;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    &#x27;use strict&#x27;</span>;</span><br><span class="line">    <span class="comment">// Your code here...</span></span><br><span class="line">    insertFreshButton()</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/07/blibli%E5%8A%A8%E6%80%819%E5%AE%AB%E6%A0%BC%E5%9B%BE%E7%89%87%E4%B8%8B%E8%BD%BD%E8%84%9A%E6%9C%AC/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-一键下载blibli的专栏图片" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/05/%E4%B8%80%E9%94%AE%E4%B8%8B%E8%BD%BDblibli%E7%9A%84%E4%B8%93%E6%A0%8F%E5%9B%BE%E7%89%87/">一键下载blibli的专栏图片</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/05/%E4%B8%80%E9%94%AE%E4%B8%8B%E8%BD%BDblibli%E7%9A%84%E4%B8%93%E6%A0%8F%E5%9B%BE%E7%89%87/" class="archive-article-date">
-  	<time datetime="2019-10-05T10:17:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.downloadImage = <span class="function"><span class="keyword">function</span> (<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(url);</span><br><span class="line">  <span class="keyword">var</span> timeout = <span class="built_in">Math</span>.random() * <span class="number">5000</span>;</span><br><span class="line">  <span class="comment">// return;</span></span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    xhr.open(<span class="string">&quot;get&quot;</span>, url, <span class="literal">true</span>);</span><br><span class="line">    xhr.responseType = <span class="string">&quot;blob&quot;</span>;</span><br><span class="line">    xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">this</span>.status == <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> blob = <span class="built_in">this</span>.response;</span><br><span class="line">        <span class="keyword">var</span> downloadElement = <span class="built_in">document</span>.createElement(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">        <span class="keyword">var</span> href = <span class="built_in">window</span>.URL.createObjectURL(blob); <span class="comment">//创建下载的链接</span></span><br><span class="line">        downloadElement.href = href;</span><br><span class="line">        downloadElement.download = name; <span class="comment">//下载后文件名</span></span><br><span class="line">        <span class="built_in">document</span>.body.appendChild(downloadElement);</span><br><span class="line">        downloadElement.click(); <span class="comment">//点击下载</span></span><br><span class="line">        <span class="built_in">document</span>.body.removeChild(downloadElement); <span class="comment">//下载完成移除元素</span></span><br><span class="line">        <span class="built_in">window</span>.URL.revokeObjectURL(href); <span class="comment">//释放掉blob对象</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    xhr.send()</span><br><span class="line">  &#125;, timeout);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.getImage =<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> imageBox = <span class="built_in">document</span>.getElementsByClassName(<span class="string">&quot;img-box&quot;</span>);</span><br><span class="line">  <span class="keyword">var</span> message = <span class="string">&quot;确认下载该cv的图片?&quot;</span></span><br><span class="line">  <span class="keyword">if</span> (confirm(message) === <span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; imageBox.length; i++) &#123;</span><br><span class="line">      <span class="keyword">var</span> html = imageBox[i].innerHTML;</span><br><span class="line">      <span class="comment">// console.log(html);</span></span><br><span class="line">      <span class="keyword">var</span> pattern = <span class="regexp">/src=[\&#x27;\&quot;]?([^\&#x27;\&quot;]*)[\&#x27;\&quot;]/i</span></span><br><span class="line">      <span class="keyword">var</span> srcs = pattern.exec(html)</span><br><span class="line">      <span class="built_in">console</span>.log(srcs[<span class="number">0</span>]);</span><br><span class="line">      <span class="keyword">var</span> imgSrc = <span class="string">&quot;https:&quot;</span> + srcs[<span class="number">0</span>].split(<span class="string">&quot;=&quot;</span>)[<span class="number">1</span>].replace(<span class="regexp">/\&quot;/g</span>, <span class="string">&quot;&quot;</span>).split(<span class="string">&quot;@&quot;</span>)[<span class="number">0</span>].trim();</span><br><span class="line">      <span class="built_in">window</span>.downloadImage(imgSrc);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertButton</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> button = <span class="built_in">document</span>.createElement(<span class="string">&quot;button&quot;</span>);</span><br><span class="line">  button.setAttribute(<span class="string">&quot;value&quot;</span>,<span class="string">&quot;下载图片&quot;</span>);</span><br><span class="line">  button.setAttribute(<span class="string">&quot;onclick&quot;</span>,<span class="string">&quot;getImage()&quot;</span>);</span><br><span class="line">  button.style.backgroundColor=<span class="string">&quot;#66C6E7&quot;</span>;</span><br><span class="line">  button.style.height=<span class="string">&quot;40px&quot;</span>;</span><br><span class="line">  button.style.color=<span class="string">&quot;white&quot;</span>;</span><br><span class="line">  button.innerText = <span class="string">&quot;下载该cv的图片&quot;</span></span><br><span class="line">  <span class="built_in">document</span>.getElementsByClassName(<span class="string">&quot;fixed-box&quot;</span>)[<span class="number">0</span>].append(button);</span><br><span class="line">&#125;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    insertButton();</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/05/%E4%B8%80%E9%94%AE%E4%B8%8B%E8%BD%BDblibli%E7%9A%84%E4%B8%93%E6%A0%8F%E5%9B%BE%E7%89%87/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-shiro使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/23/shiro%E4%BD%BF%E7%94%A8/">shiro使用</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/23/shiro%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2019-09-23T15:30:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="shiro核心对象和方法"><a href="#shiro核心对象和方法" class="headerlink" title="shiro核心对象和方法"></a>shiro核心对象和方法</h3><h4 id="核心对象-Subject"><a href="#核心对象-Subject" class="headerlink" title="核心对象 Subject"></a>核心对象 Subject</h4><p>使用<code>Subject currentUser = SecurityUtils.getSubject();</code><br>该条语句是获得当前的用户。</p>
-<h5 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h5><ul>
-<li><code>subject.login(AuthenticationToken token)</code>登陆。这种登陆是给shiro的认证机制登陆的。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">AuthenticationToken token =</span><br><span class="line"><span class="keyword">new</span> UsernamePasswordToken(username, password);</span><br><span class="line"></span><br><span class="line"><span class="comment">//2. 获取当前 Subject：</span></span><br><span class="line">Subject currentUser = SecurityUtils.getSubject();</span><br><span class="line"><span class="comment">//3. 登录： </span></span><br><span class="line">currentUser.login(token);</span><br></pre></td></tr></table></figure></li>
-<li><code>boolean subject.hasRole(&quot;administrator&quot;)</code><br>判断是否有某个角色.</li>
-<li>权限检查 <code>boolean subject.isPermitted(&quot;user:create&quot;)</code><br>是否有user的create权限<h3 id="shiro使用"><a href="#shiro使用" class="headerlink" title="shiro使用"></a>shiro使用</h3>工作流程如下:<br>Subject是我们可以操作的接口。<br>Realm是配置shiro的核心领域。包括账号验证、加密解密、权限的配置<br><img src="/2019/09/23/shiro%E4%BD%BF%E7%94%A8/process.png" alt="流程"><br>内部的架构如下<br><img src="/2019/09/23/shiro%E4%BD%BF%E7%94%A8/struct.png"><br>相关说明:</li>
-<li>SecurityManager:相当于SpringMVC 中的 DispatcherServlet；是 Shiro 的心脏;所有具体的交互都通过 SecurityManager 进行控制；它管理着所有 Subject、且负责进行认证、授权、会话及缓存的管理</li>
-<li>Authenticator: 负责 Subject 认证，是一个扩展点，可以自定义实现；可以使用认证策略（Authentication Strategy），即什么情况下算用户认证通过了</li>
-<li>Authorizer: 授权器、 即访问控制器，用来决定主体是否有权限进行相应的操作；即控制着用户能访问应用中的哪些功能</li>
-<li>Realm:可以有一个或多个Realm,可以认为是安全实体数据源，即用于获得安全实体的;可以是JDBC实现，也可以是内存实现等。由用户提供，应用中要自己实现自己的Realm;</li>
-<li>SessionManager: 管理Session生命周期的组件;Shiro不仅可以用在Web环境。普通的JavaSE环境也可以使用session.和httpServletSession差不多的接口。</li>
-<li>CacheManager:缓存控制器，用来管理用户、角色、权限等的缓存;</li>
-<li>Cryptography:加密和解密模块。内置了加密和解密的模块,不需要自己将前台的明文密码加密后再和数据中的加密的密码比较。shiro会自动调用加密模块然后完成比较。</li>
-</ul>
-<h5 id="shiro默认过滤器"><a href="#shiro默认过滤器" class="headerlink" title="shiro默认过滤器"></a>shiro默认过滤器</h5><ul>
-<li><code>anon</code> 所属类:org.apache.shiro.web.filter.authc.AnonymousFilter 没有参数,可以匿名使用。例如: /admin/** = anon</li>
-<li><code>authc</code> 所属类:org.apache.shiro.web.filter.authc.FormAuthenticationFilter 没有参数，需要认证(登陆)之后才能访问 例如:/user/** = authc</li>
-<li><code>authcBasic</code> org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter 没有参数，表示需要通过HttpBasic验证。如果不通过验证，跳转到登陆页面。 例如: /user/** = authcBasic</li>
-<li><code>logout</code> org.apache.shiro.web.filter.authc.LogoutFilter 注销登陆的时候，完成一定功能：任何现有的session都将会失效，任何身份都会失去关联。(web应用程序中，RememberMe cookie将被删除)</li>
-<li><code>noSessionCreation</code> org.apache.shiro.web.filter.authc.NoSessionCreationFiler 阻止在请求期间创建新的会话，保证无状态体验。</li>
-<li><code>perms</code> org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter 可以写多个。多个时加上引号。用逗号分隔。多个参数需要通过全部的参数才算通过。相当于isPermitedAll()方法。 例如:/admin/** = perms[user:add:<em>] /admin/** = perms[“user:add:</em>,user:delete:*”]</li>
-<li><code>port</code> org.apache.shiro.web.filter.authz.PortFilter 指定访问的端口。如果不匹配跳转到登陆界面。 例如:/admin/** = port[8080]</li>
-<li><code>rest</code> org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter 根据请求方法 例如:/admins/user/** = perms[user.method] method为post、get、delete等请求方法</li>
-<li><code>roles</code> org.apache.shiro.web.filter.authz.RolesAuthorizationFilter 角色过滤。判断当前用户是否指定角色。多个参数需通过所有的角色。 例如:/admins/** = roles[“admin,guest”]</li>
-<li><code>ssl</code> org.apache.shiro.web.filter.authz.SslFilter 使用协议为Https</li>
-<li><code>user</code> org.apache.shiro.web.filter.authc.UserFilter 缓存必须存在用户<h4 id="URL匹配模式"><a href="#URL匹配模式" class="headerlink" title="URL匹配模式"></a>URL匹配模式</h4>url模式使用Ant风格模式，支持<code>？</code>，<code>*</code>，<code>**</code>。通配符匹配不了包括目录分隔符<code>&quot;\&quot;</code></li>
-<li><code>?</code>:匹配一个字符，如/admin?。将匹配/admin1，但是不匹配/admin 或 /admin/</li>
-<li><code>*</code>:匹配0个或n个字符串.如/admin* 匹配/admin、/admin123。但不匹配/admin/1、/admin/</li>
-<li><code>**</code>: 匹配路径中的0或n路径。如/admin/** 匹配/admin/a or /admin/a/b</li>
-</ul>
-<p>URL权限采取第一次匹配优先的方式。所以需要一些不要认证的路径放在前面。将需要认证的路径放在后面。否则会被覆盖的。</p>
-<h4 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h4><h5 id="身份验证"><a href="#身份验证" class="headerlink" title="身份验证"></a>身份验证</h5><p>在shiro中我们需要提供两个对象(principals和credentials)用来完成身份的验证</p>
-<ul>
-<li><code>principals</code> 身份,主体的标识属性，可以是任何的属性。用户名、邮箱等。具备唯一性。可以有多个principals.但只有一个Primary principals。一般是用户名/邮箱/手机号</li>
-<li><code>credentials</code> 证明/凭证。证明主体标识的，如密码和数字证书等。<br>最常使用的就是用户名和密码来组合成principals和credentials</li>
-</ul>
-<h5 id="身份验证的基本流程"><a href="#身份验证的基本流程" class="headerlink" title="身份验证的基本流程"></a>身份验证的基本流程</h5><p>1、收集用户的身份/凭证。一般是从前端获得用户名和密码<br>2、调用<code>Subject.login</code>进行登陆。失败会抛出响应的异常信息<br>3、创建自定义的<code>Realm</code>类。继承<code>org.apache.shiro.realm.AuthorizingRealm类。实现doGetAuthenticationInfo()</code>方法<br>官方给的认证示例代码:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// let&#x27;s login the current user so we can check against roles and permissions:</span></span><br><span class="line"><span class="comment">// 测试当前的用户是否已经被认证. 即是否已经登录. </span></span><br><span class="line"><span class="comment">// 调动 Subject 的 isAuthenticated() </span></span><br><span class="line"><span class="keyword">if</span> (!currentUser.isAuthenticated()) &#123;</span><br><span class="line"><span class="comment">// 把用户名和密码封装为 UsernamePasswordToken 对象</span></span><br><span class="line">  UsernamePasswordToken token = <span class="keyword">new</span> UsernamePasswordToken(<span class="string">&quot;lonestarr&quot;</span>, <span class="string">&quot;vespa&quot;</span>);</span><br><span class="line">  <span class="comment">// rememberme</span></span><br><span class="line">  token.setRememberMe(<span class="keyword">true</span>);</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 执行登录. </span></span><br><span class="line">      currentUser.login(token);</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="comment">// 若没有指定的账户, 则 shiro 将会抛出 UnknownAccountException 异常. </span></span><br><span class="line">  <span class="keyword">catch</span> (UnknownAccountException uae) &#123;</span><br><span class="line">      log.info(<span class="string">&quot;----&gt; There is no user with username of &quot;</span> + token.getPrincipal());</span><br><span class="line">      <span class="keyword">return</span>; </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="comment">// 若账户存在, 但密码不匹配, 则 shiro 会抛出 IncorrectCredentialsException 异常。 </span></span><br><span class="line">  <span class="keyword">catch</span> (IncorrectCredentialsException ice) &#123;</span><br><span class="line">      log.info(<span class="string">&quot;----&gt; Password for account &quot;</span> + token.getPrincipal() + <span class="string">&quot; was incorrect!&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span>; </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="comment">// 用户被锁定的异常 LockedAccountException</span></span><br><span class="line">  <span class="keyword">catch</span> (LockedAccountException lae) &#123;</span><br><span class="line">      log.info(<span class="string">&quot;The account for username &quot;</span> + token.getPrincipal() + <span class="string">&quot; is locked.  &quot;</span> +</span><br><span class="line">              <span class="string">&quot;Please contact your administrator to unlock it.&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ... catch more exceptions here (maybe custom ones specific to your application?</span></span><br><span class="line">  <span class="comment">// 所有认证时异常的父类. </span></span><br><span class="line">  <span class="keyword">catch</span> (AuthenticationException ae) &#123;</span><br><span class="line">      <span class="comment">//unexpected condition?  error?</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="身份认证的流程"><a href="#身份认证的流程" class="headerlink" title="身份认证的流程"></a>身份认证的流程</h5><p><img src="/2019/09/23/shiro%E4%BD%BF%E7%94%A8/authenticationprocess.png" alt="流程图"></p>
-<p>1、首先调用 Subject.login(token) 进行登录，其会自动委托给SecurityManager<br>2、 SecurityManager 负责真正的身份验证逻辑；它会委托给Authenticator 进行身份验证；<br>3、 Authenticator 才是真正的身份验证者，Shiro API 中核心的身份认证入口点，此处可以自定义插入自己的实现；<br>4、 Authenticator 可能会委托给相应的 AuthenticationStrategy 进行多 Realm 身份验证，默认 ModularRealmAuthenticator 会调用AuthenticationStrategy 进行多 Realm 身份验证；<br>5、 Authenticator 会把相应的 token 传入 Realm，从 Realm 获取身份验证信息，如果没有返回/抛出异常表示身份验证失败了。此处可以配置多个Realm，将按照相应的顺序及策略进行访问。</p>
-<h4 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h4><h4 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h4>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/23/shiro%E4%BD%BF%E7%94%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-element使用javascript触发表单校验" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/15/element%E4%BD%BF%E7%94%A8javascript%E8%A7%A6%E5%8F%91%E8%A1%A8%E5%8D%95%E6%A0%A1%E9%AA%8C/">element使用javascript触发表单校验</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/15/element%E4%BD%BF%E7%94%A8javascript%E8%A7%A6%E5%8F%91%E8%A1%A8%E5%8D%95%E6%A0%A1%E9%AA%8C/" class="archive-article-date">
-  	<time datetime="2019-09-15T15:37:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="需求说明"><a href="#需求说明" class="headerlink" title="需求说明"></a>需求说明</h4><p>在用户没有填写表单数据,没有产生输入框的焦点时点击提交。在提交前进行触发表单校验</p>
-<h5 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h5><p>调用element表单对象中的<code>validateField(prop:string, callback)</code><br>函数来触发表单校验.<br>prop是需要校验的属性。与表单中的属性一致。该函数接收一个回调函数。入口参数是校验规则中的message<br>例子</p>
-<ul>
-<li>设置一个引用<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-form</span> <span class="attr">:model</span>=<span class="string">&quot;dialogForm&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;formData&quot;</span>  <span class="attr">:rules</span>=<span class="string">&quot;rules&quot;</span> <span class="attr">size</span>=<span class="string">&quot;small&quot;</span> <span class="attr">label-position</span>=<span class="string">&quot;left&quot;</span> <span class="attr">label-width</span>=<span class="string">&quot;120px&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li>需要校验的属性为title<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">label</span>=<span class="string">&quot;考试标题:&quot;</span> <span class="attr">prop</span>=<span class="string">&quot;title&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-col</span> <span class="attr">:span</span>=<span class="string">&quot;16&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">v-model</span>=<span class="string">&quot;dialogForm.title&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">el-col</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li>手动触发校验规则<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.$refs.formData.validateField(<span class="string">&#x27;title&#x27;</span>, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-校验通过不会返回任何的东西。err为空。校验不通过返回title校验规则中的message<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: [</span><br><span class="line">    &#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">&#x27;必须输入考试标题&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;</span><br><span class="line">  ],</span><br></pre></td></tr></table></figure>
-
+<h3 id="编程建议"><a href="#编程建议" class="headerlink" title="编程建议"></a>编程建议</h3><ul>
+<li><p>循证式日程规划（分解时间、追踪时间用途、模拟未来情况、不要有强迫症、积极管理你的项目、范围渐变）</p>
+</li>
+<li><p>只有第一线的程序员才能提出完成日期的估计值。一发现错误就立即修正，将用时算入原始任务用时之中。防止管理层向程序员施加压力，要求加快开发速度。一份日程规划就是一个装满木块的盒子。</p>
+</li>
+<li><p>改善代码的质量规则:</p>
+<p>(1) 尽量将函数写得简短</p>
+<p>(2)变量声明的位置离使用的位置越近越好</p>
+<p>(3)不要使用宏去创建你自己的编程语言</p>
+<p>(4)不要使用goto</p>
+<p>(5)不要让右括号与对应的左括号之间的距离超过一个显示屏</p>
+</li>
+<li><p>匈牙利命名法（应用型命名法）</p>
 </li>
 </ul>
-
+<h3 id="开办软件公司"><a href="#开办软件公司" class="headerlink" title="开办软件公司"></a>开办软件公司</h3><ul>
+<li>如果你不清楚你的软件解决了什么棘手问题，就不要去开软件公司。</li>
+<li>不要独自一人创办公司。</li>
+<li>一开始不要抱太高期望。</li>
+<li>最好的工作条件–&gt;最好的程序员–&gt;最好的软件–&gt;利润</li>
+</ul>
+<h3 id="经营软件公司"><a href="#经营软件公司" class="headerlink" title="经营软件公司"></a>经营软件公司</h3><ul>
+<li>仿生学办公室，程序员真正以办公室为家的程度。</li>
+<li>他山之石，不可以攻玉。对你最重要、最关键的部分，你一定要使用更原始的工具。一旦我认识到这一点，我就决定不再信任任何其他人写出的糟糕的应用服务器，而要自己重新用C++和Netscape Server的底层API写一个。因为我想通了，这样的话，假设某个地方出错了，那就是我自己的代码出错了，我能加以处理，并且最终解决问题。</li>
+<li>代码重构:(1)不添加任何新功能。(2)无论何时向源码库提交代码，都要保证程序依旧能够完美地运行。（3）我所要做的只是一些合乎逻辑的变换，几乎都是机械性的，而且能够立刻确定不会改变代码行为。</li>
+<li>组织bata测试的二十个最高秘诀:（1）开放式的beta测试是没用的。（2）要想找到那些能够向你反馈意见的测试者，最好的方法是诉诸他们“言行一致”的心理。（3）不要妄想一次完整的Bata测试的所有步骤能够少于8~10周的时间内完成。（4）不要妄想在测试中发布新的软件版本的频率能够快于每两周一次。（5）一次bate测试中计划发布版本不要少于4个。（6）如果在测试过程中你为软件添加了一个功能，那么哪怕这个功能非常微小，整个8个星期的测试也要回到起点。（7）即使你有一个申请参加bate测试的步骤，最后也只有五分之一的测试者会向你提交反馈意见。（8）我们制定了一条政策，所有向我们提交反馈意见的测试都将免费获赠一份正版软件授权。（9）你需要的严肃测试者的最小数量</li>
+</ul>
+<h3 id="发布软件"><a href="#发布软件" class="headerlink" title="发布软件"></a>发布软件</h3>
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -1093,11 +271,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">读书笔记</a>
         		</li>
       		
 		</ul>
@@ -1106,16 +280,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/15/element%E4%BD%BF%E7%94%A8javascript%E8%A7%A6%E5%8F%91%E8%A1%A8%E5%8D%95%E6%A0%A1%E9%AA%8C/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2020/12/23/%E8%BD%AF%E4%BB%B6%E9%9A%8F%E6%83%B3%E5%BD%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/12/22/%E7%AE%97%E6%B3%95%E5%A5%A5%E7%A7%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">&lt;&lt;算法奥秘 读书笔记&gt;&gt;</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -1135,101 +368,14 @@
 
 
 
-
-  
-    <article id="post-jvm相关" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/11/jvm%E7%9B%B8%E5%85%B3/">jvm相关</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/11/jvm%E7%9B%B8%E5%85%B3/" class="archive-article-date">
-  	<time datetime="2019-09-11T11:54:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="堆的分代"><a href="#堆的分代" class="headerlink" title="堆的分代"></a>堆的分代</h4><ul>
-<li>新生代(Young Generation)<br>使用newSize和MaxNewSize来控制新生代的初始大小和最大大小</li>
-<li>老年代(Old Generation)</li>
-<li>永生代(Permanent Generation) 1.8之后使用元空间，不在堆中了.</li>
-</ul>
-<h4 id="对象是否被引用判断-能不能被回收"><a href="#对象是否被引用判断-能不能被回收" class="headerlink" title="对象是否被引用判断(能不能被回收)"></a>对象是否被引用判断(能不能被回收)</h4><ul>
-<li>引用计数法<br>核心思想:当对象被引用的时候就加1,引用失效的时候就减1。当值为0时就可以回收了。<br>优点:简单高效<br>缺点:如果两个对象循环依赖，各自的引用数都不为0.但是应该是被回收的才对。</li>
-<li>可达性分析算法<br>从GC Roots为起始点。当从根节点开始遍历依赖树，无法到达某个对象的时候。则该对象是可以被回收了。<h4 id="回收算法-怎么回收"><a href="#回收算法-怎么回收" class="headerlink" title="回收算法(怎么回收)"></a>回收算法(怎么回收)</h4></li>
-<li>标记/清除算法<br>给GC ROOTS 依赖树上的节点打上标记。发身份标识。然后去找没有身份标识的对象进行回收。</li>
-<li>复制算法<br>将内存分成两个块，每次只使用其中的一块。当这块内存用完的时候。将GC ROOTS树拎到另一块内存(复制)。然后将掉落的叶子给清掉。</li>
-<li>标记/整理算法<br>将还在树上的叶子整理得紧凑起来。然后就腾出空间了。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/11/jvm%E7%9B%B8%E5%85%B3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -1252,8 +398,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
