@@ -1010,7 +1010,158 @@ B-->C</pre>
     activate z
   end</pre>
 
-<h4 id="绘制时序图"><a href="#绘制时序图" class="headerlink" title="绘制时序图"></a>绘制时序图</h4>
+<h4 id="绘制时序图"><a href="#绘制时序图" class="headerlink" title="绘制时序图"></a>绘制时序图</h4><h3 id="参与者"><a href="#参与者" class="headerlink" title="参与者"></a>参与者</h3><ul>
+<li>代码-需要设置语言为<code>mermaid</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">participant 参与者 as P1</span><br><span class="line">participant 参与者2 as P2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>效果</li>
+</ul>
+<pre class="mermaid">sequenceDiagram
+participant 参与者 as P1
+participant 参与者2 as P2</pre>
+
+<h3 id="消息"><a href="#消息" class="headerlink" title="消息"></a>消息</h3><p>实线表示主动发消息<code>A-&gt;&gt;B</code></p>
+<p>虚线代表响应<code>B--&gt;&gt;A</code></p>
+<p>末尾带x表示异步消息</p>
+<ul>
+<li>代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">participant Boss as 老总</span><br><span class="line">participant 工具人 as 员工</span><br><span class="line">Boss -&gt;&gt; 工具人: “我们都是兄弟”</span><br><span class="line">Boss -x工具人: 马上上市，准备财富自由了</span><br><span class="line">工具人--&gt;&gt;Boss: 鼓掌</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>效果</li>
+</ul>
+<pre class="mermaid">sequenceDiagram
+participant Boss as 老总
+participant 工具人 as 员工
+Boss ->> 工具人: “我们都是兄弟”
+Boss -x工具人: 马上上市，准备财富自由了
+工具人-->>Boss: 鼓掌</pre>
+
+<h3 id="激活框"><a href="#激活框" class="headerlink" title="激活框"></a>激活框</h3><ul>
+<li>代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">participant Boss as 老板</span><br><span class="line">participant Staff as 员工</span><br><span class="line">Boss -&gt;&gt;+ Staff: 我对钱不感兴趣</span><br><span class="line">Staff--&gt;&gt;- Boss: 鼓掌</span><br><span class="line">Boss-&gt;&gt;+ Staff: 你们要快速成长</span><br><span class="line">Staff--&gt;&gt;- Boss: 今晚月亮不睡我不睡</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>效果</li>
+</ul>
+<pre class="mermaid">sequenceDiagram
+participant Boss as 老板
+participant Staff as 员工
+Boss ->>+ Staff: 我对钱不感兴趣
+Staff-->>- Boss: 鼓掌
+Boss->>+ Staff: 你们要快速成长
+Staff-->>- Boss: 今晚月亮不睡我不睡</pre>
+
+
+
+<h3 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h3><ul>
+<li>代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Note left of  BossA : 不知妻美</span><br><span class="line">Note right of BossB: 没见过钱</span><br><span class="line">Note over BossA,BossB: 996都是福报</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>效果</li>
+</ul>
+<pre class="mermaid">sequenceDiagram
+Note left of  BossA : 不知妻美
+Note right of BossB: 没见过钱
+Note over BossA,BossB: 996都是福报</pre>
+
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><ul>
+<li>代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">loop 无限循环 </span><br><span class="line">我-&gt;&gt;+csgo: rushB</span><br><span class="line">csgo--&gt;&gt;-我:白给</span><br><span class="line">end</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>效果</li>
+</ul>
+<pre class="mermaid">sequenceDiagram
+loop 无限循环 
+我->>+csgo: rushB
+csgo-->>-我:白给
+end</pre>
+
+
+
+
+
+<h3 id="选择框"><a href="#选择框" class="headerlink" title="选择框"></a>选择框</h3><ul>
+<li>代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">alt 运行成功</span><br><span class="line">    我-&gt;&gt;代码:小样,随便就解决</span><br><span class="line">    代码--&gt;&gt;我:????</span><br><span class="line">else 运行失败</span><br><span class="line">   代码--&gt;&gt;我: 小样，这种弱智问题竟然解决不了</span><br><span class="line">else 结果不一致</span><br><span class="line">   我-&gt;&gt;+ 代码: ???</span><br><span class="line">   代码--&gt;&gt;- 我: ？？？</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>效果</li>
+</ul>
+<pre class="mermaid">sequenceDiagram
+alt 运行成功
+    我->>代码:小样,随便就解决
+    代码-->>我:????
+else 运行失败
+   代码-->>我: 小样，这种弱智问题竟然解决不了
+else 结果不一致
+   我->>+ 代码: ???
+   代码-->>- 我: ？？？
+end</pre>
+
+<h3 id="可选"><a href="#可选" class="headerlink" title="可选"></a>可选</h3><ul>
+<li>代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">老板-&gt;&gt;工具人: 我没挣过钱</span><br><span class="line">opt 是否鼓掌</span><br><span class="line">工具人--&gt;&gt;老板:拍拍 </span><br><span class="line">end</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>效果</li>
+</ul>
+<pre class="mermaid">sequenceDiagram
+老板->>工具人: 我没挣过钱
+opt 是否鼓掌
+工具人-->>老板:拍拍 
+end</pre>
+
+
+
+
+
+<h3 id="并行"><a href="#并行" class="headerlink" title="并行"></a>并行</h3><ul>
+<li>代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">    老板 -&gt;&gt; 员工 : 开始实行996</span><br><span class="line">    </span><br><span class="line">    par 并行</span><br><span class="line">        员工 -&gt;&gt; 员工 : 刷知乎</span><br><span class="line">    and</span><br><span class="line">        员工-&gt;&gt;员工:上厕所</span><br><span class="line">    and</span><br><span class="line">        员工 -&gt;&gt; 员工 : 工作</span><br><span class="line">    and</span><br><span class="line">        员工 -&gt;&gt; 员工:逛淘宝 </span><br><span class="line">    end</span><br><span class="line">   </span><br><span class="line">    员工--&gt;&gt; 老板 : 9点下班</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>效果</li>
+</ul>
+<pre class="mermaid">sequenceDiagram
+    老板 ->> 员工 : 开始实行996
+
+    par 并行
+        员工 ->> 员工 : 刷知乎
+    and
+        员工->>员工:上厕所
+    and
+        员工 ->> 员工 : 工作
+    and
+        员工 ->> 员工:逛淘宝 
+    end
+
+    员工-->> 老板 : 9点下班</pre>
+
+
+
+
+
+
+
+
+
+
       
 
       
