@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2020/11/04/robot1.jpg">
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2020/11/04/robot2.jpg">
 <meta property="article:published_time" content="2019-08-11T13:29:17.000Z">
-<meta property="article:modified_time" content="2020-12-30T12:10:10.839Z">
+<meta property="article:modified_time" content="2020-12-31T12:41:30.105Z">
 <meta property="article:author" content="long">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -1775,6 +1775,7 @@ return</code></pre>
 <h4 id="解法-112"><a href="#解法-112" class="headerlink" title="解法"></a>解法</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">lastStoneWeight</span><span class="params">(stones []<span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(stones) &lt;= <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">    temp := stones</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">len</span>(temp) &gt;= <span class="number">2</span> &#123;</span><br><span class="line">        sort.Slice(temp, <span class="function"><span class="keyword">func</span><span class="params">(i, j <span class="keyword">int</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">            <span class="keyword">return</span> temp[i] &gt;= temp[j]</span><br><span class="line">        &#125;)</span><br><span class="line">        temp = <span class="built_in">append</span>([]<span class="keyword">int</span>&#123;temp[<span class="number">0</span>] - temp[<span class="number">1</span>]&#125;, temp[<span class="number">2</span>:]...)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> temp[<span class="number">0</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
+
       
 
       
@@ -1932,7 +1933,7 @@ return</code></pre>
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 long
+    		&copy; 2021 long
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
