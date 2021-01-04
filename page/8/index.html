@@ -669,6 +669,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 系统资源管理器</span></span><br><span class="line">sudo snap remove gnome-system-monitor</span><br><span class="line">sudo apt install gnome-system-monitor</span><br><span class="line"><span class="comment"># 计算器</span></span><br><span class="line">sudo snap remove gnome-calculator</span><br><span class="line">sudo apt install gnome-calculator</span><br></pre></td></tr></table></figure>
 <h2 id="profile、bashrc文件区别"><a href="#profile、bashrc文件区别" class="headerlink" title="profile、bashrc文件区别"></a>profile、bashrc文件区别</h2><h3 id="profile"><a href="#profile" class="headerlink" title="profile"></a>profile</h3><p><code>/etc/profile</code>系统级配置文件，对所有用户、所有终端shell都起作用。<br><code>~/.profile</code> 用户级别配置文件，对该用户的所有终端shell都起作用。</p>
 <h3 id="bashrc"><a href="#bashrc" class="headerlink" title="bashrc"></a>bashrc</h3><p><code>/etc/bash.bashrc</code> 系统级配置文件，对所有用户的bash终端起作用<br><code>~/.bashrc</code> 用户级别配置文件，对用户的bash终端起作用。<br>如果使用额外的终端，如<code>zsh</code>终端，想要环境变量只对该<code>zsh</code>起作用，需要将环境变量配置到<code>~/.zshrc</code></p>
+<h3 id="dns"><a href="#dns" class="headerlink" title="dns"></a>dns</h3><p>配置dns服务器路径<code>/etc/resolve.conf</code></p>
 
       
 
