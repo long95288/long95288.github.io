@@ -158,6 +158,327 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Linux高性能服务器编程-读书笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/06/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">Linux高性能服务器编程-读书笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2021/01/06/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2021-01-06T12:11:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="第一章-TCP-IP协议族"><a href="#第一章-TCP-IP协议族" class="headerlink" title="第一章 TCP/IP协议族"></a>第一章 TCP/IP协议族</h1><h2 id="1-1-TCP-IP-体系结构以及主要协议"><a href="#1-1-TCP-IP-体系结构以及主要协议" class="headerlink" title="1.1 TCP/IP 体系结构以及主要协议"></a>1.1 TCP/IP 体系结构以及主要协议</h2><p>数据链路层（ARP、Data Link RARP）、网络层(ICMP IP)、传输层(TCP UDP SCTP)、应用层(ping telnet OSPF DNS)四层协议组成TCP/IP协议族。</p>
+<h3 id="1-1-1-数据链路层"><a href="#1-1-1-数据链路层" class="headerlink" title="1.1.1 数据链路层"></a>1.1.1 数据链路层</h3><p>数据链路层实现了网卡几口的网络驱动程序，不同网卡设备有不同的驱动，数据链路层抽象了数据在物理媒介的传输。提供给上层统一的接口。</p>
+<p>ARP协议（Address Resolve Protocal, 地址解析协议）、RARP(Reverse Address Resolve Protocal, 逆地址解析协议) 实现IP地址和物理地址（通常是MAC地址）相互转换。ARP协议负责 IP =&gt; MAC映射、RARP协议负责MAC =&gt; IP转换。</p>
+<h3 id="1-1-2-网络层"><a href="#1-1-2-网络层" class="headerlink" title="1.1.2 网络层"></a>1.1.2 网络层</h3><p>网络层实现数据包的选路和转发，即负责数据包从那条链路发送数据包。</p>
+<p>IP协议(Internet Protocol, 因特网协议)，根据数据包中的IP地址投递到目标主机。</p>
+<p>ICMP协议(Internet Control Message Protocol, 因特网控制报文协议)，用以检测网络连接，报文格式由8位类型+8位代码+16位校验和+不定长报文内容组成。报文类型: </p>
+<ul>
+<li>差错控制报文: 回应网络错误，类型3-网络不可达，类型5-重定向(代码0 - 网络重定向，1-主机重定向)</li>
+<li>查询报文:查询网络信息，类型8-目标是否可达</li>
+</ul>
+<p>校验和: 对整个报文（头部和内容）进行循环冗余校验(Cyclic Redundancy Check, CRC)。ICMP协议标准文档RFC 792。</p>
+<h3 id="1-1-3-传输层"><a href="#1-1-3-传输层" class="headerlink" title="1.1.3 传输层"></a>1.1.3 传输层</h3><p>为主机程序提供端到端（end to end）的通讯。传输层为应用程序封装了一条端到端的逻辑通讯链路，负责数据的收发、链路的超时重连。网络层封装网络连接的细节，数据链路层（驱动)封装物理网络的电气细节。</p>
+<p>TCP协议(Transmission Control Protocol, 传输控制协议)，提供可靠的、面向连接和基于流（stream）的服务。使用超时重传、数据确认保证数据包被正确地发送到目的端，没有传输长度限制。</p>
+<p>UDP协议(User Datagram Protocol, 用户数据报协议)，不可靠、无连接基于数据报的服务，无法保证数据正确传到目的端，目的端通过校验发现数据错误则丢弃，并通知程序数据发送失败。</p>
+<p>SCTP协议（Stream Control Transmission Protocal, 流控制传输协议）用来在Internet传输网络信号设计的。</p>
+<h3 id="1-1-4-应用层"><a href="#1-1-4-应用层" class="headerlink" title="1.1.4 应用层"></a>1.1.4 应用层</h3><p>应用层负责处理应用程序的逻辑，用户态中实现的。</p>
+<p>ping 利用ICMP报文检测网络连接</p>
+<p>telnet协议：远程登录协议</p>
+<p>OSPF(Open Shortest Path First, 开放最短路径优先)协议是一种动态路由更新协议，路由器之间的通信，告知对方各自的路由信息。</p>
+<p>DNS(Domain Name Service, 域名解析服务)协议域名到IP地址的转换。</p>
+<h2 id="1-2-封装"><a href="#1-2-封装" class="headerlink" title="1.2 封装"></a>1.2 封装</h2><p>本层协议通过将在上层数据的基础上加上自己的头部信息（有时候包含尾部信息），以实现该层的功能，该过程称为封装。从应用层到链路层，层层添加数据。</p>
+<p>TCP封装后的数据称为TCP报文，UDP封装后称为UDP数据包，IP数据包，数据链路层封装为帧(frame)。</p>
+<p>帧的最大传输单元（Max  Transmit Unit, MTU), 即帧最多能携带多少上层协议数据，受网络类型限制，以太网帧的MTU是1500字节。</p>
+<h2 id="1-3-分用"><a href="#1-3-分用" class="headerlink" title="1.3 分用"></a>1.3 分用</h2><p>当帧数据到达目的主机时，从链路层到应用层，层层解析数据。这个过程称为分用（demultiplexing）。对于上层来说，下层的分用是透明的。不需要考虑下层的处理流程，只要该层发送的数据能够正确的发送到目的端的对应的层就行。</p>
+<p>以太网帧类型值0x800说明帧数据为IP数据报。</p>
+<p>以太网帧类型值0x806说明帧数据为ARP请求或应答报文。</p>
+<h1 id="第2章-IP协议详解"><a href="#第2章-IP协议详解" class="headerlink" title="第2章 IP协议详解"></a>第2章 IP协议详解</h1><h1 id="第5章-Linux网络编程基础API"><a href="#第5章-Linux网络编程基础API" class="headerlink" title="第5章 Linux网络编程基础API"></a>第5章 Linux网络编程基础API</h1><p>socket地址API: socket包含一个IP地址和端口对(ip,port)，唯一表示了TCP通信的一端。</p>
+<p>socket基础API: 位于<code>sys/sockect.h</code>头文件中，包括创建socket,命名socket,监听socket,接受连接，发起连接，读写数据，获取地址信息，检测外带标记，读取和设置socket选项。</p>
+<p>网络信息API: Linux提供一套网络信息API,主机名和IP地址之间的转换，服务名称和端口号之间的转换。在<code>netdb.h</code>。</p>
+<h2 id="5-1-socket地址API"><a href="#5-1-socket地址API" class="headerlink" title="5.1 socket地址API"></a>5.1 socket地址API</h2><h3 id="5-1-1-主机字节序和网络字节序"><a href="#5-1-1-主机字节序和网络字节序" class="headerlink" title="5.1.1 主机字节序和网络字节序"></a>5.1.1 主机字节序和网络字节序</h3><p>大端序(big endian)和小端序(little endian)。大端序整数高位字节（23~31bit）存储在内存的低地址，低位字节放在高位地址。小端序，高位放高位，低位放低位。</p>
+<p>整数<code>0xffee</code>在内存块中存储如下为大端序。ff为整数大端，放在了内存的低位。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0+++++++16+++++31</span><br><span class="line">| ff              | ee           |</span><br><span class="line">++++++++++++++++</span><br></pre></td></tr></table></figure>
+
+<p>判断大小端，只要看内存低位存储的是高位数据和低位数据。检查机器字节序代码。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">byteorder</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">union</span> &#123;</span><br><span class="line">        <span class="keyword">short</span> value;</span><br><span class="line">        <span class="keyword">char</span> union_bytes[<span class="keyword">sizeof</span>(<span class="keyword">short</span>)];</span><br><span class="line">    &#125; test;</span><br><span class="line">    test.value = <span class="number">0x0102</span>;</span><br><span class="line">    <span class="keyword">if</span> ((test.union_bytes[<span class="number">0</span>] == <span class="number">1</span>) &amp;&amp; test.union_bytes[<span class="number">1</span>] == <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;big endian\n&quot;</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> (test.union_bytes[<span class="number">0</span>] == <span class="number">2</span> &amp;&amp; test.union_bytes[<span class="number">1</span>] == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;little endian\n&quot;</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;unknown...\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通常PC都是采用小端序，也称为主机字节序。</p>
+<p>发送端将数据转换成大端字节序发送，接收端根据自身使用的字节序对数据进行处理。大端序也称为网络序。相同机器的两个进程通信也要考虑节序问题。（JAVA虚拟机采用大端序）</p>
+<p>linux常用的主机字节序和网络字节序之间的转换。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="comment">/*host to network long*/</span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">int</span> <span class="title">htonl</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">int</span> hostlong)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">short</span> <span class="keyword">int</span> <span class="title">htons</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">short</span> <span class="keyword">int</span> hostshort)</span></span>;</span><br><span class="line"><span class="comment">/*net to host long*/</span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">int</span> <span class="title">ntohl</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">int</span> netlong)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">short</span> <span class="keyword">int</span> <span class="title">ntohs</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">short</span> <span class="keyword">int</span> netshort)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-1-2-通用socket地址"><a href="#5-1-2-通用socket地址" class="headerlink" title="5.1.2 通用socket地址"></a>5.1.2 通用socket地址</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/socket.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">sa_family_t</span> sa_family;</span><br><span class="line">    <span class="keyword">char</span> sa_data[<span class="number">14</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>sa_family成员是地址族类型(sa_family_t)的变量，地址族类型通常和协议族对应，协议族(protocol family,也称为domain)和地址族对应</p>
+<table>
+<thead>
+<tr>
+<th>协议族</th>
+<th>地址族</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PF_UNIX</td>
+<td>AF_UNIX</td>
+<td>UNIX本地域协议族</td>
+</tr>
+<tr>
+<td>PF_INET</td>
+<td>AF_INET</td>
+<td>TCP/IPv4协议族</td>
+</tr>
+<tr>
+<td>PF_INET6</td>
+<td>AF_INET6</td>
+<td>TCP/IPv6协议族</td>
+</tr>
+</tbody></table>
+<p><code>PF_*</code>和<code>AF_*</code>定义<code>bits/socket.h</code>文件中，前后者有完全相同的值，两者通常混用。</p>
+<p>sa_data用来存放socket地址值，不同协议族有不同的地址。</p>
+<table>
+<thead>
+<tr>
+<th>协议族</th>
+<th>地址值含义和长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PF_UNIX</td>
+<td>文件的路径名，长度可达108字节</td>
+</tr>
+<tr>
+<td>PF_INET</td>
+<td>16bit端口号和32bitIPv4地址，共16字节</td>
+</tr>
+<tr>
+<td>PF_INET6</td>
+<td>16bit端口号,32bit流标识，128bitIPV6地址，32bit范围id,共26字节</td>
+</tr>
+</tbody></table>
+<p>14字节的sa_data不能满足需求，所以定义下面的通用结构体。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/socket.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_storage</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">sa_family_t</span> sa_family;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">int</span> __ss_align;</span><br><span class="line">    <span class="keyword">char</span> __ss_padding[<span class="number">128</span> - <span class="keyword">sizeof</span>(__ss_align)];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-1-3-专用socket地址"><a href="#5-1-3-专用socket地址" class="headerlink" title="5.1.3 专用socket地址"></a>5.1.3 专用socket地址</h3><p>UNIX本地域协议族使用下面的结构体</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/un.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_un</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">sa_family_t</span> sin_family; <span class="comment">/*地址族:AF_UNIX*/</span></span><br><span class="line">    <span class="keyword">char</span> sun_path[<span class="number">108</span>];        <span class="comment">/*文件路径名*/</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>TCP/IP协议族sockaddr_in和sockaddr_in6两个专用socket地址结构体，它们分别用于IPv4和IPv6。</p>
+<p>IPv4</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">sa_family_t</span> sin_family;     <span class="comment">/* 地址族: AF_INET*/</span></span><br><span class="line">    <span class="keyword">u_int16_t</span> sin_port;             <span class="comment">/* 端口号: 网络字节序*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span> <span class="title">sin_addr</span>;</span>   <span class="comment">/* IPv4结构体*/</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">u_int32_t</span> s_addr;              <span class="comment">/* IPv4地址,要用网络字节序表示*/</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>IPv6</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in6</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">sa_family_t</span> sin6_family;          <span class="comment">/*地址族: AF_INET6*/</span></span><br><span class="line">    <span class="keyword">u_int16_t</span> sin6_port;                  <span class="comment">/*端口号: 网络字序*/</span></span><br><span class="line">    <span class="keyword">u_int32_t</span> sin6_flowinfo;          <span class="comment">/*流信息，设置为0*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">in6_addr</span> <span class="title">sin6_addr</span>;</span>     <span class="comment">/*IPv6地址结构体*/</span></span><br><span class="line">    <span class="keyword">u_int32_t</span> sin6_scope_id;        <span class="comment">/*scope ID 实验阶段*/</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">in6_addr</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> sa_addr[<span class="number">16</span>];   <span class="comment">/*IPv6地址， 网络字节序表示*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-1-4-IP地址转换函数"><a href="#5-1-4-IP地址转换函数" class="headerlink" title="5.1.4 IP地址转换函数"></a>5.1.4 IP地址转换函数</h3><p>字符串的ip地址转成数字，数字转成ip地址。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="comment">/*点分十进制字符串转化网络字节整数表示，失败返回INADDR_NONE*/</span></span><br><span class="line"><span class="function">in_addr <span class="title">inet_addr</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* strptr)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*点分十进制转换为网络字节整数表示，成功返回１，失败返回０*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">inet_aton</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *cp, struct in_addr* inp)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*网络字节整数转换为点分十进制字符串，不可重人*/</span></span><br><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">inet_ntoa</span><span class="params">(struct in_addr in)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*网络IP字符串转换成整数的IP地址，由af确定是IPv4或IPv6,成功返回1，失败返回0，并设置errno*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">inet_pton</span><span class="params">(<span class="keyword">int</span> af, <span class="keyword">const</span> <span class="keyword">char</span>* src, <span class="keyword">void</span> *src)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*整数地址转换成IP字符串,af确定IPv4还是IPv6,,cnt 目标存储单元的大小。成功时返回地址，失败返回NULL,并设置errno*/</span></span><br><span class="line"><span class="function"><span class="keyword">const</span> <span class="keyword">char</span>* <span class="title">inet_ntop</span><span class="params">(<span class="keyword">int</span> af, <span class="keyword">const</span> <span class="keyword">void</span>* src, <span class="keyword">char</span> *dst, <span class="keyword">socklent_t</span> cnt)</span></span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*af常用宏*/</span></span><br><span class="line"><span class="comment">// AF_INET/AF_INET6</span></span><br><span class="line"> <span class="comment">/*cnt 常用宏*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INET_ADDRESTRLEN 16 <span class="comment">/*ipv4*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INET6_ADDRSTRLEN 46 <span class="comment">/*ipv6*/</span></span></span><br></pre></td></tr></table></figure>
+
+<p><code>inet_ntoa</code>函数不可重入测试代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inet_ntoa_test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span> <span class="title">addr</span>;</span></span><br><span class="line">    addr.s_addr = <span class="number">195512</span>;</span><br><span class="line">    <span class="keyword">char</span> *szValue1 = inet_ntoa(addr);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;address[%p] 1 : %s\n&quot;</span>, szValue1, szValue1);</span><br><span class="line">    addr.s_addr = <span class="number">10043424</span>;</span><br><span class="line">    <span class="keyword">char</span> *szValue2 = inet_ntoa(addr);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;address[%p] 1 : %s\n&quot;</span>, szValue1, szValue1);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;address[%p] 2 : %s\n&quot;</span>, szValue2, szValue2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">address[0x7f531625e4d0] 1 : 184.251.2.0</span><br><span class="line">address[0x7f531625e4d0] 1 : 32.64.153.0</span><br><span class="line">address[0x7f531625e4d0] 2 : 32.64.153.0</span><br></pre></td></tr></table></figure>
+
+<p>可以看得出来，返回的字符串指向的地址是一样的，调用之后需要复制生成的值。</p>
+<h2 id="5-2-创建socket"><a href="#5-2-创建socket" class="headerlink" title="5.2 创建socket"></a>5.2 创建socket</h2><p>socket是可读、可写、可控制、可关闭的文件描述符。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socket</span><span class="params">(<span class="keyword">int</span> domain, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>domain参数告诉系统使用协议族TCP/IP协议族使用PF_INET(ipv4)、PF_INET6(ipv6)。本地协议族PF_UNIX.</li>
+<li>type参数指定服务类型。SOCK_STREAM流服务，SOCK_DGRAM数据报服务。TCP/IP协议族而言SOCK_STREAM表示使用TCP协议，SOCK_DGRAM表示使用UDP协议。非阻塞socket类型SOCK_NONBLOCK，fork调用创建子进程中关闭该socket的类型SOCK_CLOEXEC。</li>
+<li>protocol协议表示在前两个参数构成的协议集合下，再进一步确定具体的协议。一般是设为0.</li>
+</ul>
+<p>socket系统调用成功返回socket文件描述符，失败返回-1,并设置errno。</p>
+<h2 id="5-3-命名socket"><a href="#5-3-命名socket" class="headerlink" title="5.3 命名socket"></a>5.3 命名socket</h2><p>   创建了socket指定了地址族，但是并没有指定地址族中的具体socket地址。创建了一个TCP的socket,但是并没有指定这个socket的具体地址。将一个socket与socket地址绑定（bind）称为给socket命名。作为服务端的话需要绑定一个固定的地址，方便其他人连。作为客户端可以不绑定socket，使用自动分配的socket去连接服务器。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bind</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> struct sockaddr* my_addr, <span class="keyword">socketlen_t</span> addr_len)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>bind函数将my_addr所对应的地址绑定到sockfd描述符中，addrlen该socket地址的长度。</p>
+<p>绑定成功返回0，失败返回-1，并设置errno.常见的errno，EACCES(地址是受保护的地址，普通用户绑定到0~1024端口中)和EADDRINUSE(被绑定的地址正在使用中).</p>
+<h2 id="5-4-监听socket"><a href="#5-4-监听socket" class="headerlink" title="5.4 监听socket"></a>5.4 监听socket</h2><p>socket绑定之后需要开启监听队列才能处理客户连接。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">listen</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">int</span> backlog)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>sockfd被监听的socket, backlog内核监听队列的最大长度，监听队列长度超过backlog，服务器不在受理新的客户连接，客户端收到ECONNREFUSED错误信息。2.2的内核版本之前的linux,backlog参数表示处于半连接（SYN_REVD）和完全连接状态(ESTABLISHED)的socket的上限。2.2内核版本之后，只表示处于完全连接状态的socket的上限，处于半连接状态的socket上限由<code>/proc/sys/net/ipv4/tcp_max_syn_backlog</code>内核参数定义。典型的值为5。完整的连接最多有(backlog + 1)个。</p>
+<h2 id="5-5-接受连接"><a href="#5-5-接受连接" class="headerlink" title="5.5 接受连接"></a>5.5 接受连接</h2><p>从listen监听队列中接受一个连接</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">accept</span><span class="params">(<span class="keyword">int</span> sockfd, struct sockaddr *addr, <span class="keyword">socklen_t</span> *addrlen)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>sockfd执行listen系统调用的监听的socket。addr参数接收连接端的socket地址，长度由addrlen参数决定。accept成功时返回一个新的连接socket,这个socket唯一的标识了被接受的这个连接。这个socket和监听的socket不一样，可以读写该socket与客户端通信。accept失败返回-1并设置errno。测试的代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;libgen.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;strings.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (argc &lt;= <span class="number">2</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;usage: %s ip_address port_number\n&quot;</span>, basename(argv[<span class="number">0</span>]));</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *ip = argv[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">int</span> port = atoi(argv[<span class="number">2</span>]);</span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">address</span>;</span></span><br><span class="line">    bzero(&amp;address, <span class="keyword">sizeof</span>(address));</span><br><span class="line">    address.sin_family = AF_INET;</span><br><span class="line">    inet_pton(AF_INET, ip, &amp;address.sin_addr);</span><br><span class="line">    address.sin_port = htons(port);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建socket</span></span><br><span class="line">    <span class="keyword">int</span> sock = socket(PF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;create sockect %d.\n&quot;</span>, sock);</span><br><span class="line">    assert(sock &gt;= <span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 绑定socket</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;bind socket %d.\n&quot;</span>, sock);</span><br><span class="line">    <span class="keyword">int</span> ret = bind(sock, (struct sockaddr *)&amp;address, <span class="keyword">sizeof</span>(address));</span><br><span class="line">    assert(ret != <span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 监听socket</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;listen socket %d.\n&quot;</span>, sock);</span><br><span class="line">    ret = listen(sock, <span class="number">5</span>);</span><br><span class="line">    assert(ret != <span class="number">-1</span>);</span><br><span class="line">    </span><br><span class="line">    sleep(<span class="number">20</span>);</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">client</span>;</span></span><br><span class="line">    <span class="keyword">socklen_t</span> client_addrlenght = <span class="keyword">sizeof</span>(client);</span><br><span class="line">    <span class="keyword">int</span> connfd = accept(sock, (struct sockaddr*)&amp;client, &amp;client_addrlenght);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;accept socket %d\n&quot;</span>, connfd);</span><br><span class="line">    <span class="keyword">if</span> (connfd &lt; <span class="number">0</span> )&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;errno is: %d\n&quot;</span>, errno);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">char</span> remote[INET_ADDRSTRLEN];</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;connected with ip: %s and port: %d\n&quot;</span>, inet_ntop(AF_INET, &amp;client.sin_addr,remote, INET_ADDRSTRLEN), ntohs(client.sin_port));</span><br><span class="line">        close(connfd);</span><br><span class="line">    &#125;</span><br><span class="line">    close(sock);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;accept_test 127.0.0.1 12345</span><br><span class="line">create sockect 3.</span><br><span class="line">bind socket 3.</span><br><span class="line">listen socket 3.</span><br><span class="line">accept socket 4</span><br><span class="line">connected with ip: 127.0.0.1 and port: 53064</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-6-发起连接"><a href="#5-6-发起连接" class="headerlink" title="5.6 发起连接"></a>5.6 发起连接</h2><p>客户端通过系统调用来主动连接服务器</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">connect</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> struct sockaddr *serv_addr, <span class="keyword">socklen_t</span> addrlen)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>sockfd由socket系统调用返回的一个socket,serv_addr参数是服务器监听的socket地址，addrlen指定这个地址长度。connect成功返回0， 建立成功后sockfd唯一的标识这个链接。建立连接错误返回-1并设置errno。常见的errno是ECONNERFUSED目标端口不存在，连接被拒绝。ETIMEDOUT连接超时。</p>
+<h2 id="5-7-连接关闭"><a href="#5-7-连接关闭" class="headerlink" title="5.7 连接关闭"></a>5.7 连接关闭</h2><p>关闭连接对应的socket,可以使用普通文件描述符的系统调用完成。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span><span class="params">(<span class="keyword">int</span> fd)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>fd为待关闭的socket,close是将fd的引用技术减1。当fd的引用计数为0时，才真正的关闭连接。在多进程程序中，一次fork系统调用默认将使父进程中打开的socket+1,我们必须在父进程和子进程中都对该socket执行close调用才能将连接关闭。无论如何都要立即终止连接,可以使用shutdown系统调用。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shutdown</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">int</span> howto)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>sockfd为待关闭的socket,howto决定怎么关闭。</p>
+<table>
+<thead>
+<tr>
+<th>可选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SHUT_RD</td>
+<td>关闭sockfd的读一半，程序不能再对这个sockdf文件描述符进行读操作，并且该socket接收缓冲区中的数据都被丢弃。</td>
+</tr>
+<tr>
+<td>SHUT_WR</td>
+<td>关闭sockfd的写一半，socket的发送缓冲区数据会在真正关闭连接之前全部发送出去，应用程序不能再对该连接进行写操作，连接处于半关闭状态。</td>
+</tr>
+<tr>
+<td>SHUT_RDWR</td>
+<td>同时关闭读写</td>
+</tr>
+</tbody></table>
+<p>shutdown成功时返回0，失败则返回-1，并设置errno。</p>
+<h2 id="5-8-数据读写"><a href="#5-8-数据读写" class="headerlink" title="5.8 数据读写"></a>5.8 数据读写</h2><p>对文件的读写操作read和write同样适用于socket。还提供了专门的函数。</p>
+<p>TCP流数据读写系统调用</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">recv</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> len, <span class="keyword">int</span> flags)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">send</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> len, <span class="keyword">int</span> flags )</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>recv读取sockfd上的数据，buf和len参数分别指定读缓冲区的位置和大小，flag通常设置为0,recv成功时返回实际读取到的数据的长度，可能小于期望的长度，需要多次调用recv才能读取到完整数据。recv返回0说明对方关闭连接，出错返回-1并设置errno。</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+<th>send</th>
+<th>recv</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MSG_CONFIRM</td>
+<td>数据链路层协议持续监听对方的回应，直到得到答复。只能用于SOCK_DGRAM和SOCK_RAW类型的socket</td>
+<td>Y</td>
+<td>N</td>
+</tr>
+<tr>
+<td>MSG_DONTROUTE</td>
+<td>不查看路由表，直接将数据发送给本地局域网络内的主机。表示发送者确切的知道目标 主机就在本地网络上。</td>
+<td>Y</td>
+<td>N</td>
+</tr>
+<tr>
+<td>MSG_DONTWAIT</td>
+<td>对socket的此次操作是非阻塞的。</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>MSG_MORE</td>
+<td>告诉内核应用程序还有更多数据要发送，内核将超时等待新的数据写入TCP发送缓冲区后一并发送，这样可防止TCP发送过小的报文段，从而提高传输效率。</td>
+<td>Y</td>
+<td>N</td>
+</tr>
+<tr>
+<td>MSG_WAITALL</td>
+<td>读操作仅在读取到指定数量的字节后才返回</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>MSG_PEEK</td>
+<td>窥探读缓冲中的数据，此次操作不会导致这些数据被清除。</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>MSG_OOB</td>
+<td>发送或接收紧急数据</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>MSG_NOSIGNAL</td>
+<td>往读端关闭的管道或socket连接中写数据时不引发SIGPIPE信号</td>
+<td>Y</td>
+<td>N</td>
+</tr>
+</tbody></table>
+<p>使用MSG_OOB发送和接收数据</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">读书笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/01/06/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-软件随想录-读书笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1580,148 +1901,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/10/18/Linux%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-C-内存和类型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/29/C-%E5%86%85%E5%AD%98%E5%92%8C%E7%B1%BB%E5%9E%8B/">C-内存和类型</a>
-    </h1>
-  
-
-        
-        <a href="/2020/09/29/C-%E5%86%85%E5%AD%98%E5%92%8C%E7%B1%BB%E5%9E%8B/" class="archive-article-date">
-  	<time datetime="2020-09-29T12:45:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="C内存和类型"><a href="#C内存和类型" class="headerlink" title="C内存和类型"></a>C内存和类型</h3><h4 id="测试源码"><a href="#测试源码" class="headerlink" title="测试源码"></a>测试源码</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> *vp = <span class="built_in">calloc</span>(<span class="number">4</span>,<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *int_arr = vp;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;int array[%d] =&gt; %d\n&quot;</span>, i, int_arr[i]);</span><br><span class="line">    int_arr[i] = i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;int array[%d] =&gt; %d\n&quot;</span>, i, int_arr[i]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> *char_arr = (<span class="keyword">char</span> *)vp;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">16</span>; ++i) &#123;</span><br><span class="line">    char_arr[i] = <span class="string">&#x27;a&#x27;</span> + i;</span><br><span class="line">&#125;</span><br><span class="line">char_arr[<span class="number">15</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;char_arr = %s\n&quot;</span>, char_arr);</span><br><span class="line"></span><br><span class="line"><span class="built_in">memset</span>(vp,<span class="number">0</span>,<span class="number">16</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">memset</span>(vp, <span class="number">12</span>, <span class="number">1</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(vp+<span class="number">4</span>,<span class="string">&quot;Tom Jerry&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">person</span> &#123;</span></span><br><span class="line">    <span class="keyword">int32_t</span> age;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">12</span>];</span><br><span class="line">&#125; *person_ptr;</span><br><span class="line"></span><br><span class="line">person_ptr = vp;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;person age:%d, name : %s\n&quot;</span>,person_ptr-&gt;age, person_ptr-&gt;name);</span><br><span class="line"></span><br><span class="line"><span class="built_in">memset</span>(vp+<span class="number">4</span>,<span class="number">0</span>,<span class="number">12</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(vp+<span class="number">4</span>, <span class="string">&quot;man&quot;</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(vp + <span class="number">4</span> + <span class="number">6</span>,<span class="string">&quot;fat&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">annimal</span> &#123;</span></span><br><span class="line">    <span class="keyword">int32_t</span> type;</span><br><span class="line">    <span class="keyword">char</span> type_name[<span class="number">6</span>];</span><br><span class="line">    <span class="keyword">char</span> description[<span class="number">6</span>];</span><br><span class="line">&#125; *annimal_ptr;</span><br><span class="line">annimal_ptr = (struct annimal *)person_ptr;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;annimal type: %d, type_name: %s, description: %s\n&quot;</span>,annimal_ptr-&gt;type, annimal_ptr-&gt;type_name, annimal_ptr-&gt;description);</span><br><span class="line"><span class="built_in">free</span>(vp);</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int array[0] &#x3D;&gt; 0</span><br><span class="line">int array[1] &#x3D;&gt; 0</span><br><span class="line">int array[2] &#x3D;&gt; 0</span><br><span class="line">int array[3] &#x3D;&gt; 0</span><br><span class="line">int array[0] &#x3D;&gt; 0</span><br><span class="line">int array[1] &#x3D;&gt; 1</span><br><span class="line">int array[2] &#x3D;&gt; 2</span><br><span class="line">int array[3] &#x3D;&gt; 3</span><br><span class="line">char_arr &#x3D; abcdefghijklmno</span><br><span class="line">person age:12, name : Tom Jerry</span><br><span class="line">annimal type: 12, type_name: man, description: fat</span><br></pre></td></tr></table></figure>
-
-<h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><p>关于变量类型和内存。申请了4×4字节的内存，内存是与变量无关的，初始化时的内存值为。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00 00 00 00   00 00 00 00   00 00 00 00   00 00 00 00   │ ················ │</span><br></pre></td></tr></table></figure>
-
-<h5 id="16字节内存作为整型数组使用"><a href="#16字节内存作为整型数组使用" class="headerlink" title="16字节内存作为整型数组使用"></a>16字节内存作为整型数组使用</h5><p>执行到下边的代码之后的内存。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *int_arr = vp;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;int array[%d] =&gt; %d\n&quot;</span>, i, int_arr[i]);</span><br><span class="line">        int_arr[i] = i;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>memory:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00 00 00 00   01 00 00 00   02 00 00 00   03 00 00 00   │ ················ │</span><br></pre></td></tr></table></figure>
-<p>一个<code>int</code>类型大小为4个字节，所以16字节可以转成大小为4的整型数组。</p>
-<h5 id="16字节内存作为字符串数组使用"><a href="#16字节内存作为字符串数组使用" class="headerlink" title="16字节内存作为字符串数组使用"></a>16字节内存作为字符串数组使用</h5><p>执行到下面的代码，内存变化为</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *char_arr = (<span class="keyword">char</span> *)vp;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">16</span>; ++i) &#123;</span><br><span class="line">    char_arr[i] = <span class="string">&#x27;a&#x27;</span> + i;</span><br><span class="line">&#125;</span><br><span class="line">char_arr[<span class="number">15</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<p>memory:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">65 66 67 68   69 6a 6b 6c   6d 6e 6f 00   │ abcdefghijklmno· │</span><br></pre></td></tr></table></figure>
-<p>一个<code>char</code>类型占用1个字节,16个字节可以放16个字符。</p>
-<h5 id="16字节作为结构体变量使用"><a href="#16字节作为结构体变量使用" class="headerlink" title="16字节作为结构体变量使用"></a>16字节作为结构体变量使用</h5><p>执行到下面的代码，</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">memset</span>(vp,<span class="number">0</span>,<span class="number">16</span>);</span><br><span class="line"><span class="built_in">memset</span>(vp, <span class="number">12</span>, <span class="number">1</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(vp+<span class="number">4</span>,<span class="string">&quot;Tom Jerry&quot;</span>);</span><br></pre></td></tr></table></figure>
-<p>memory:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0c 00 00 00   54 6f 6d 20   4a 65 72 72   79 00 00 00   │ ····Tom Jerry··· │</span><br></pre></td></tr></table></figure>
-
-<p>执行下面的代码</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">person</span> &#123;</span></span><br><span class="line">    <span class="keyword">int32_t</span> age;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">12</span>];</span><br><span class="line">&#125; *person_ptr;</span><br><span class="line"></span><br><span class="line">person_ptr = vp;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;person age:%d, name : %s\n&quot;</span>,person_ptr-&gt;age, person_ptr-&gt;name);</span><br></pre></td></tr></table></figure>
-<p><strong>输出</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">person age:12, name : Tom Jerry</span><br></pre></td></tr></table></figure>
-<p>16字节的内存被person结构体使用了。</p>
-<h5 id="结构体间强转"><a href="#结构体间强转" class="headerlink" title="结构体间强转"></a>结构体间强转</h5><p>执行到以下代码</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">memset</span>(vp+<span class="number">4</span>,<span class="number">0</span>,<span class="number">12</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(vp+<span class="number">4</span>, <span class="string">&quot;man&quot;</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(vp + <span class="number">4</span> + <span class="number">6</span>,<span class="string">&quot;fat&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">annimal</span> &#123;</span></span><br><span class="line">    <span class="keyword">int32_t</span> type;</span><br><span class="line">    <span class="keyword">char</span> type_name[<span class="number">6</span>];</span><br><span class="line">    <span class="keyword">char</span> description[<span class="number">6</span>];</span><br><span class="line">&#125; *annimal_ptr;</span><br><span class="line"></span><br><span class="line">annimal_ptr = (struct annimal *)person_ptr;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;annimal type: %d, type_name: %s, description: %s\n&quot;</span>,annimal_ptr-&gt;type, annimal_ptr-&gt;type_name, annimal_ptr-&gt;description);</span><br></pre></td></tr></table></figure>
-
-<p><strong>memory:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0c 00 00 00   6d 61 6e 00   00 00 66 61   74 00 00 00   │ ····man···fat··· │</span><br></pre></td></tr></table></figure>
-
-<p><strong>输出</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">annimal type: 12, type_name: man, description: fat</span><br></pre></td></tr></table></figure>
-
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>对于申请的内存得到的内存是无类型的，谁都可以使用。变量类型的作用是用来确定内存的边界。<br><code>int</code>类型大小为4个字节,所以会以4个字节为单位进行切割。<br><code>char</code> 类型大小为1个字节,以1个字节为单位对16字节的数据进行切割。<br><code>person</code>结构体，切割成两个部分。前4个字节作为整型<code>age</code>,后12字节作为<code>char</code>数组<code>name</code>。<br><code>annimal</code>结构体，将16字节切割给 <code>type</code>、<code>type_name</code>, <code>description</code>。</p>
-<h4 id="扩展-数组"><a href="#扩展-数组" class="headerlink" title="扩展-数组"></a>扩展-数组</h4><h5 id="多维静态数组"><a href="#多维静态数组" class="headerlink" title="多维静态数组"></a>多维静态数组</h5><p>静态数组<code>int map[2][3] = &#123;&#123;1,2,3&#125;,&#123;4,5,6&#125;&#125;;</code>在内存的布局如下,前4×6 = 24个字节分别对应map中的值。根据列的长度得出行的个数。列的大小为4×3 = 12,可以将24分成2个。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">01 00 00 00   02 00 00 00   03 00 00 00   04 00 00 00   │ ················ │</span><br><span class="line">05 00 00 00   06 00 00 00   00 b5 e9 21   50 1e 21 4e   │ ···········!P·!N │</span><br></pre></td></tr></table></figure>
-
-<p>静态数组：<code>int map2[3][2] = &#123;&#123;1,2&#125;,&#123;3,4&#125;,&#123;5,6&#125;&#125;;</code>内存布局如下。和上面的<code>map</code>变量内存布局一致。不同的是解析方法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">01 00 00 00   02 00 00 00   03 00 00 00   04 00 00 00   │ ················ │</span><br><span class="line">05 00 00 00   06 00 00 00   00 2a 5b 24   65 cb 71 c8   │ ·········*[$e·q· │</span><br></pre></td></tr></table></figure>
-<p>静态数组: <code>int map3[3][2][2] = &#123;&#123;&#123;1,2&#125;,&#123;3,4&#125;&#125;,&#123;&#123;5,6&#125;,&#123;7,8&#125;&#125;,&#123;&#123;9,10&#125;,&#123;11,12&#125;&#125;&#125;;</code> 内存布局如下,切割方法,最小单位为2×4字节。<code>map3[0][0][0] =&gt; 1</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">01 00 00 00   02 00 00 00   03 00 00 00   04 00 00 00   │ ················ │</span><br><span class="line">05 00 00 00   06 00 00 00   07 00 00 00   08 00 00 00   │ ················ │</span><br><span class="line">09 00 00 00   0a 00 00 00   0b 00 00 00   0c 00 00 00   │ ················ │</span><br></pre></td></tr></table></figure>
-
-<p>字符串数组：<code>char names[3][16] = &#123;&quot;AAA&quot;,&quot;BBBB&quot;,&quot;CCCCCCCCCCCCCCC&quot;&#125;; </code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">41 41 41 00   00 00 00 00   00 00 00 00   00 00 00 00   │ AAA············· │</span><br><span class="line">42 42 42 42   00 00 00 00   00 00 00 00   00 00 00 00   │ BBBB············ │</span><br><span class="line">43 43 43 43   43 43 43 43   43 43 43 43   43 43 43 00   │ CCCCCCCCCCCCCCC· │</span><br></pre></td></tr></table></figure>
-
-<h5 id="多维动态数组"><a href="#多维动态数组" class="headerlink" title="多维动态数组"></a>多维动态数组</h5><p>二维字符串数组创建方法一：<br>代码如下，4个字符串指针，决定了字符串的个数，指针所指向的地址由自己定义。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">void *vp &#x3D; malloc(16);</span><br><span class="line">memset(vp, 0, 16);</span><br><span class="line">memcpy(vp,&quot;AAA&quot;,4);</span><br><span class="line">memcpy(vp + 4, &quot;BBB&quot;, 4);</span><br><span class="line">memcpy(vp + 8, &quot;CCC&quot;, 4);</span><br><span class="line">memcpy(vp + 12, &quot;DDD&quot;, 4);</span><br><span class="line"></span><br><span class="line">char *str_arr_ptr[4];</span><br><span class="line">str_arr_ptr[0] &#x3D; vp;</span><br><span class="line">str_arr_ptr[1] &#x3D; vp + 4;</span><br><span class="line">str_arr_ptr[2] &#x3D; vp + 8;</span><br><span class="line">str_arr_ptr[3] &#x3D; vp + 12;</span><br><span class="line">for (int i &#x3D; 0; i &lt; 4;i ++)&#123;</span><br><span class="line">    printf(&quot;str_arr_ptr_%d &#x3D;&gt; %s\n&quot;,i,str_arr_ptr[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>内存</strong>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">41 41 41 00   42 42 42 00   43 43 43 00   44 44 44 00   │ AAA·BBB·CCC·DDD· │</span><br></pre></td></tr></table></figure>
-<p><strong>输出</strong>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str_arr_ptr_0 &#x3D;&gt; AAA</span><br><span class="line">str_arr_ptr_1 &#x3D;&gt; BBB</span><br><span class="line">str_arr_ptr_2 &#x3D;&gt; CCC</span><br><span class="line">str_arr_ptr_3 &#x3D;&gt; DDD</span><br></pre></td></tr></table></figure>
-
-<p>二维字符串数组创建方法二：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">void *vp &#x3D; malloc(16);</span><br><span class="line">memset(vp, 0, 16);</span><br><span class="line">memcpy(vp,&quot;AAA&quot;,4);</span><br><span class="line">memcpy(vp + 4, &quot;BBB&quot;, 4);</span><br><span class="line">memcpy(vp + 8, &quot;CCC&quot;, 4);</span><br><span class="line">memcpy(vp + 12, &quot;DDD&quot;, 4);</span><br><span class="line"></span><br><span class="line">char **str_arr_ptr2 &#x3D; NULL;</span><br><span class="line">&#x2F;&#x2F; 申请了4个指针</span><br><span class="line">str_arr_ptr2 &#x3D; calloc(4,sizeof(char *));</span><br><span class="line"></span><br><span class="line">str_arr_ptr2[0] &#x3D; vp;</span><br><span class="line"></span><br><span class="line">str_arr_ptr2[1] &#x3D; vp + 4;</span><br><span class="line"></span><br><span class="line">str_arr_ptr2[2] &#x3D; vp + 8;</span><br><span class="line"></span><br><span class="line">str_arr_ptr2[3] &#x3D; vp + 12;</span><br><span class="line">for (int i &#x3D; 0; i &lt; 4;i ++)&#123;</span><br><span class="line">    printf(&quot;str_arr_ptr_%d &#x3D;&gt; %s\n&quot;,i,str_arr_ptr2[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>说明</strong><br>与第一种不同的是，每个指向字符串数组的指针都要自己去申请。但是，好处是动态的，大小可以自己决定。C指针编程实际上是对内存操作的编程。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">内存</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">指针</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/29/C-%E5%86%85%E5%AD%98%E5%92%8C%E7%B1%BB%E5%9E%8B/">展开全文 >></a>
         </p>
       
 
