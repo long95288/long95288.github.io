@@ -299,6 +299,7 @@
 <h3 id="解决步骤"><a href="#解决步骤" class="headerlink" title="解决步骤"></a>解决步骤</h3><h4 id="查找端口对应的PID"><a href="#查找端口对应的PID" class="headerlink" title="查找端口对应的PID"></a>查找端口对应的PID</h4><p>  在命令行下使用<code>netstat -ano</code>。列出所端口使用的列表。<br><img src="/2019/10/31/%E6%9F%A5%E7%9C%8B%E5%92%8C%E8%A7%A3%E9%99%A4%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8/list.png" alt="端口列表"><br>找到相应的端口对应的PID</p>
 <h4 id="根据PID停止对应的程序"><a href="#根据PID停止对应的程序" class="headerlink" title="根据PID停止对应的程序"></a>根据PID停止对应的程序</h4><h5 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h5><p>  使用<code>tasklist|findstr &quot;6864&quot;</code>找到运行的程序<br>  <img src="/2019/10/31/%E6%9F%A5%E7%9C%8B%E5%92%8C%E8%A7%A3%E9%99%A4%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8/task.png" alt="运行程序"><br>  知道是vmware在占用该端口。直接进入任务管理器，进入服务中，找到相应的PID对应的应用服务，停止掉。</p>
 <h5 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h5><p>  使用<code>tskill 6864</code>停止掉进程。</p>
+<h4 id="停止某个进程"><a href="#停止某个进程" class="headerlink" title="停止某个进程"></a>停止某个进程</h4><p><code>taskill /im wmware-hostd.exe /f</code>,如果出现拒绝等情况,可以使用管理员身份运行。</p>
 
       
 
