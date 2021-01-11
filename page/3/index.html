@@ -158,6 +158,282 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-markdown画图" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/29/markdown%E7%94%BB%E5%9B%BE/">markdown画图</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/29/markdown%E7%94%BB%E5%9B%BE/" class="archive-article-date">
+  	<time datetime="2020-07-29T15:19:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="绘制图关系"><a href="#绘制图关系" class="headerlink" title="绘制图关系"></a>绘制图关系</h4><p>选择<code>mermaid</code>，在里面选择<code>graph</code>。有下列选项方向选择</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TB</td>
+<td>Top-&gt;Bottom</td>
+</tr>
+<tr>
+<td>BT</td>
+<td>Bottom-&gt;Top</td>
+</tr>
+<tr>
+<td>LR</td>
+<td>Left-&gt;Right</td>
+</tr>
+<tr>
+<td>RL</td>
+<td>Right-&gt;Left</td>
+</tr>
+</tbody></table>
+<p>使用<code>--&gt;</code>连接两个节点，名称一致为一个节点.<code>--&gt;</code>中间不能有空格</p>
+<pre class="mermaid">graph TB
+A-->B
+B-->A
+A-->C</pre>
+
+
+<pre class="mermaid">graph LR
+A-->B
+B-->C</pre>
+
+<h4 id="绘制流程图"><a href="#绘制流程图" class="headerlink" title="绘制流程图"></a>绘制流程图</h4><pre class="mermaid">sequenceDiagram
+  participant z as 张三
+  participant l as 李四
+  z-->>l:吃饭没?
+  l-->>z:没吃。
+
+  loop 每天
+    z-->>l:又是无聊的一天
+    l-->>z:是啊,又是无聊的一天
+    activate z
+  end</pre>
+
+<h4 id="绘制时序图"><a href="#绘制时序图" class="headerlink" title="绘制时序图"></a>绘制时序图</h4><h3 id="参与者"><a href="#参与者" class="headerlink" title="参与者"></a>参与者</h3><ul>
+<li>代码-需要设置语言为<code>mermaid</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">participant 参与者 as P1</span><br><span class="line">participant 参与者2 as P2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>效果</li>
+</ul>
+<pre class="mermaid">sequenceDiagram
+participant 参与者 as P1
+participant 参与者2 as P2</pre>
+
+<h3 id="消息"><a href="#消息" class="headerlink" title="消息"></a>消息</h3><p>实线表示主动发消息<code>A-&gt;&gt;B</code></p>
+<p>虚线代表响应<code>B--&gt;&gt;A</code></p>
+<p>末尾带x表示异步消息</p>
+<ul>
+<li>代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">participant Boss as 老总</span><br><span class="line">participant 工具人 as 员工</span><br><span class="line">Boss -&gt;&gt; 工具人: “我们都是兄弟”</span><br><span class="line">Boss -x工具人: 马上上市，准备财富自由了</span><br><span class="line">工具人--&gt;&gt;Boss: 鼓掌</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>效果</li>
+</ul>
+<pre class="mermaid">sequenceDiagram
+participant Boss as 老总
+participant 工具人 as 员工
+Boss ->> 工具人: “我们都是兄弟”
+Boss -x工具人: 马上上市，准备财富自由了
+工具人-->>Boss: 鼓掌</pre>
+
+<h3 id="激活框"><a href="#激活框" class="headerlink" title="激活框"></a>激活框</h3><ul>
+<li>代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">participant Boss as 老板</span><br><span class="line">participant Staff as 员工</span><br><span class="line">Boss -&gt;&gt;+ Staff: 我对钱不感兴趣</span><br><span class="line">Staff--&gt;&gt;- Boss: 鼓掌</span><br><span class="line">Boss-&gt;&gt;+ Staff: 你们要快速成长</span><br><span class="line">Staff--&gt;&gt;- Boss: 今晚月亮不睡我不睡</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>效果</li>
+</ul>
+<pre class="mermaid">sequenceDiagram
+participant Boss as 老板
+participant Staff as 员工
+Boss ->>+ Staff: 我对钱不感兴趣
+Staff-->>- Boss: 鼓掌
+Boss->>+ Staff: 你们要快速成长
+Staff-->>- Boss: 今晚月亮不睡我不睡</pre>
+
+
+
+<h3 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h3><ul>
+<li>代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Note left of  BossA : 不知妻美</span><br><span class="line">Note right of BossB: 没见过钱</span><br><span class="line">Note over BossA,BossB: 996都是福报</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>效果</li>
+</ul>
+<pre class="mermaid">sequenceDiagram
+Note left of  BossA : 不知妻美
+Note right of BossB: 没见过钱
+Note over BossA,BossB: 996都是福报</pre>
+
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><ul>
+<li>代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">loop 无限循环 </span><br><span class="line">我-&gt;&gt;+csgo: rushB</span><br><span class="line">csgo--&gt;&gt;-我:白给</span><br><span class="line">end</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>效果</li>
+</ul>
+<pre class="mermaid">sequenceDiagram
+loop 无限循环 
+我->>+csgo: rushB
+csgo-->>-我:白给
+end</pre>
+
+
+
+
+
+<h3 id="选择框"><a href="#选择框" class="headerlink" title="选择框"></a>选择框</h3><ul>
+<li>代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">alt 运行成功</span><br><span class="line">    我-&gt;&gt;代码:小样,随便就解决</span><br><span class="line">    代码--&gt;&gt;我:????</span><br><span class="line">else 运行失败</span><br><span class="line">   代码--&gt;&gt;我: 小样，这种弱智问题竟然解决不了</span><br><span class="line">else 结果不一致</span><br><span class="line">   我-&gt;&gt;+ 代码: ???</span><br><span class="line">   代码--&gt;&gt;- 我: ？？？</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>效果</li>
+</ul>
+<pre class="mermaid">sequenceDiagram
+alt 运行成功
+    我->>代码:小样,随便就解决
+    代码-->>我:????
+else 运行失败
+   代码-->>我: 小样，这种弱智问题竟然解决不了
+else 结果不一致
+   我->>+ 代码: ???
+   代码-->>- 我: ？？？
+end</pre>
+
+<h3 id="可选"><a href="#可选" class="headerlink" title="可选"></a>可选</h3><ul>
+<li>代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">老板-&gt;&gt;工具人: 我没挣过钱</span><br><span class="line">opt 是否鼓掌</span><br><span class="line">工具人--&gt;&gt;老板:拍拍 </span><br><span class="line">end</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>效果</li>
+</ul>
+<pre class="mermaid">sequenceDiagram
+老板->>工具人: 我没挣过钱
+opt 是否鼓掌
+工具人-->>老板:拍拍 
+end</pre>
+
+
+
+
+
+<h3 id="并行"><a href="#并行" class="headerlink" title="并行"></a>并行</h3><ul>
+<li>代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">    老板 -&gt;&gt; 员工 : 开始实行996</span><br><span class="line">    </span><br><span class="line">    par 并行</span><br><span class="line">        员工 -&gt;&gt; 员工 : 刷知乎</span><br><span class="line">    and</span><br><span class="line">        员工-&gt;&gt;员工:上厕所</span><br><span class="line">    and</span><br><span class="line">        员工 -&gt;&gt; 员工 : 工作</span><br><span class="line">    and</span><br><span class="line">        员工 -&gt;&gt; 员工:逛淘宝 </span><br><span class="line">    end</span><br><span class="line">   </span><br><span class="line">    员工--&gt;&gt; 老板 : 9点下班</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>效果</li>
+</ul>
+<pre class="mermaid">sequenceDiagram
+    老板 ->> 员工 : 开始实行996
+
+    par 并行
+        员工 ->> 员工 : 刷知乎
+    and
+        员工->>员工:上厕所
+    and
+        员工 ->> 员工 : 工作
+    and
+        员工 ->> 员工:逛淘宝 
+    end
+
+    员工-->> 老板 : 9点下班</pre>
+
+
+
+
+
+
+
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">markdown</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/29/markdown%E7%94%BB%E5%9B%BE/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-go-gin-请求处理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1091,81 +1367,6 @@
 
 
   
-    <article id="post-下载bing首页图片" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/09/%E4%B8%8B%E8%BD%BDbing%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/">下载bing首页图片</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/09/%E4%B8%8B%E8%BD%BDbing%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/" class="archive-article-date">
-  	<time datetime="2020-05-09T14:39:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUrl</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// console.log(&quot;geturl&quot;);</span></span><br><span class="line">    <span class="keyword">var</span> bgurl = <span class="built_in">document</span>.getElementById(<span class="string">&quot;bgImgProgLoad&quot;</span>).getAttribute(<span class="string">&quot;data-ultra-definition-src&quot;</span>);</span><br><span class="line">    <span class="keyword">var</span> bgDivUrl = <span class="built_in">document</span>.getElementById(<span class="string">&quot;bgDiv&quot;</span>).style.backgroundImage;</span><br><span class="line">    <span class="keyword">if</span>(bgDivUrl != <span class="literal">undefined</span> || bgDivUrl != <span class="string">&quot;&quot;</span>)&#123;</span><br><span class="line">        bgurl = bgDivUrl.replace(<span class="string">&quot;url(\&quot;&quot;</span>,<span class="string">&quot;&quot;</span>).replace(<span class="string">&quot;\&quot;)&quot;</span>,<span class="string">&quot;&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line">    <span class="keyword">return</span> bgurl;</span><br><span class="line">&#125;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    &#x27;use strict&#x27;</span>;</span><br><span class="line">    <span class="comment">// add download btn</span></span><br><span class="line">    <span class="keyword">var</span> downloadButton = <span class="built_in">document</span>.createElement(<span class="string">&quot;button&quot;</span>);</span><br><span class="line">    downloadButton.style.borderRadius=<span class="string">&quot;6px&quot;</span>;</span><br><span class="line">    downloadButton.style.zIndex=<span class="string">&quot;99&quot;</span>;</span><br><span class="line">    downloadButton.style.borderWidth=<span class="string">&quot;thin&quot;</span>;</span><br><span class="line">    downloadButton.style.height = <span class="string">&quot;55px&quot;</span>;</span><br><span class="line">    downloadButton.style.marginLeft=<span class="string">&quot;20px&quot;</span>;</span><br><span class="line">    downloadButton.innerText = <span class="string">&quot;下载图片&quot;</span>;</span><br><span class="line">    downloadButton.addEventListener(<span class="string">&quot;click&quot;</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> bgurl = getUrl();</span><br><span class="line">        <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">        xhr.open(<span class="string">&quot;get&quot;</span>,bgurl,<span class="literal">true</span>);</span><br><span class="line">        xhr.responseType = <span class="string">&quot;blob&quot;</span>;</span><br><span class="line">        xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">           <span class="keyword">if</span> (<span class="built_in">this</span>.status == <span class="number">200</span>) &#123;</span><br><span class="line">               <span class="keyword">var</span> blob = <span class="built_in">this</span>.response;</span><br><span class="line">               <span class="keyword">var</span> downloadElement = <span class="built_in">document</span>.createElement(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">               <span class="keyword">var</span> href = <span class="built_in">window</span>.URL.createObjectURL(blob); <span class="comment">//创建下载的链接</span></span><br><span class="line">               downloadElement.href = href;</span><br><span class="line">               downloadElement.download = name; <span class="comment">//下载后文件名</span></span><br><span class="line">               <span class="built_in">document</span>.body.appendChild(downloadElement);</span><br><span class="line">               downloadElement.click(); <span class="comment">//点击下载</span></span><br><span class="line">               <span class="built_in">document</span>.body.removeChild(downloadElement); <span class="comment">//下载完成移除元素</span></span><br><span class="line">               <span class="built_in">window</span>.URL.revokeObjectURL(href); <span class="comment">//释放掉blob对象</span></span><br><span class="line">          &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">              alert(<span class="string">&quot;下载失败&quot;</span>);</span><br><span class="line">          &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       xhr.send();</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">var</span> sbox = <span class="built_in">document</span>.getElementById(<span class="string">&quot;sbox&quot;</span>);</span><br><span class="line">    sbox.appendChild(downloadButton);</span><br><span class="line">    <span class="comment">// Your code here...</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-<h5 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h5><p><img src="/2020/05/09/%E4%B8%8B%E8%BD%BDbing%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/%E4%B8%8B%E8%BD%BDbing%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87%5Cresult.png" alt="效果"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/09/%E4%B8%8B%E8%BD%BDbing%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1464,6 +1665,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">dns</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
             
             <div class="clearfix"></div>

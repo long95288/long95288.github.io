@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://long95288.github.io">
-  <title>Tag: 内存 | 风兮木落</title>
+  <title>C-Protoc | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="代码和文学本来就是一个世界的，寻找文学和code的和谐统一">
-<meta property="og:type" content="website">
-<meta property="og:title" content="风兮木落">
-<meta property="og:url" content="http://long95288.github.io/tags/%E5%86%85%E5%AD%98/index.html">
+  <meta name="description" content="protoc支持向下兼容TestProtocV1 123message TestProtocV1&amp;#123;  required uint32 a;&amp;#125; TestProtocV2 1234message TestProtocV2_Request&amp;#123;  required uint32 a;  repeate uint32 arr;&amp;#125; V1编码–&gt;V2可以解码:arr没">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C-Protoc">
+<meta property="og:url" content="http://long95288.github.io/2021/01/11/C-Protoc/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="代码和文学本来就是一个世界的，寻找文学和code的和谐统一">
+<meta property="og:description" content="protoc支持向下兼容TestProtocV1 123message TestProtocV1&amp;#123;  required uint32 a;&amp;#125; TestProtocV2 1234message TestProtocV2_Request&amp;#123;  required uint32 a;  repeate uint32 arr;&amp;#125; V1编码–&gt;V2可以解码:arr没">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-11T12:07:08.000Z">
+<meta property="article:modified_time" content="2021-01-11T12:12:25.831Z">
 <meta property="article:author" content="long">
+<meta property="article:tag" content="c">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
@@ -156,68 +159,171 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-C-Protoc" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/29/C-%E5%86%85%E5%AD%98%E5%92%8C%E7%B1%BB%E5%9E%8B/" class="archive-article-date">
-  	<time datetime="2020-09-29T12:45:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/29/C-%E5%86%85%E5%AD%98%E5%92%8C%E7%B1%BB%E5%9E%8B/">C-内存和类型</a>
+    <h1 class="article-title" itemprop="name">
+      C-Protoc
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/01/11/C-Protoc/" class="archive-article-date">
+  	<time datetime="2021-01-11T12:07:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="protoc支持向下兼容"><a href="#protoc支持向下兼容" class="headerlink" title="protoc支持向下兼容"></a>protoc支持向下兼容</h3><p>TestProtocV1</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">message TestProtocV1&#123;</span><br><span class="line">  required uint32 a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>TestProtocV2</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">message TestProtocV2_Request&#123;</span><br><span class="line">  required uint32 a;</span><br><span class="line">  repeate uint32 arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>V1编码–&gt;V2可以解码:arr没有值<br>V2编码–&gt;V1可以解码:a值正确</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">内存</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">指针</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2021/01/11/C-Protoc/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2021/01/06/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux高性能服务器编程-读书笔记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -240,9 +346,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
