@@ -181,7 +181,7 @@
         <h3 id="protoc支持向下兼容"><a href="#protoc支持向下兼容" class="headerlink" title="protoc支持向下兼容"></a>protoc支持向下兼容</h3><p>TestProtocV1</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">message TestProtocV1&#123;</span><br><span class="line">  required uint32 a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>TestProtocV2</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">message TestProtocV2_Request&#123;</span><br><span class="line">  required uint32 a;</span><br><span class="line">  repeate uint32 arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">message TestProtocV2_Request&#123;</span><br><span class="line">  required uint32 a;</span><br><span class="line">  repeated uint32 arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>V1编码–&gt;V2可以解码:arr没有值<br>V2编码–&gt;V1可以解码:a值正确</p>
 
       
