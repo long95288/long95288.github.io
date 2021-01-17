@@ -831,6 +831,8 @@
 <p>错误码转成字符串形式</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;netdb.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">const</span> <span class="keyword">char</span>* <span class="title">gai_strerror</span><span class="params">(<span class="keyword">int</span> error)</span></span>;</span><br></pre></td></tr></table></figure>
 
+<h1 id="第6章-高级I-O函数"><a href="#第6章-高级I-O函数" class="headerlink" title="第6章 高级I/O函数"></a>第6章 高级I/O函数</h1><h2 id="6-1-pip函数"><a href="#6-1-pip函数" class="headerlink" title="6.1 pip函数"></a>6.1 pip函数</h2><p>单端读写,fd[0]读端,fd[1]写端。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pipe</span><span class="params">(<span class="keyword">int</span> fd[<span class="number">2</span>])</span></span>;</span><br></pre></td></tr></table></figure>
 
       
 
