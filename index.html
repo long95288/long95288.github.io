@@ -844,6 +844,7 @@
 
 <p>前3个入参socket函数含义一致。domain使用<code>AF_UNIX</code>，只能本地使用双向管道。fd[2]参数可读可写。</p>
 <h2 id="6-2-dup函数和dup2函数"><a href="#6-2-dup函数和dup2函数" class="headerlink" title="6.2 dup函数和dup2函数"></a>6.2 dup函数和dup2函数</h2><p>把标准输入重定向到一个文件或标准输出重定向到一个网络连接。使用dup或dup2函数完成。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dup</span><span class="params">(<span class="keyword">int</span> file_descriptor)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dup2</span><span class="params">(<span class="keyword">int</span> file_descriptor_one, <span class="keyword">int</span> file_descriptor_two)</span></span>;</span><br></pre></td></tr></table></figure>
 
       
 
