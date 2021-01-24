@@ -776,6 +776,8 @@ MyHandler实现InvocationHandler的接口<figure class="highlight java"><table><
 <li>切换用户<br><code>su test</code><h4 id="shell脚本"><a href="#shell脚本" class="headerlink" title="shell脚本"></a>shell脚本</h4>一、后台运行jar包<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar xxx.jar &gt; log.txt &amp;</span><br></pre></td></tr></table></figure>
 &amp;是后台运行的意思，但是关闭终端会退出<br>nohup 关闭终端不会退出<br>&gt; log.txt 是将日志消息打印到log.txt中</li>
 </ul>
+<h3 id="ubuntu安装ssh"><a href="#ubuntu安装ssh" class="headerlink" title="ubuntu安装ssh"></a>ubuntu安装ssh</h3><p>使用命令<code>sudo apt-get install openssh-server</code>进行安装。</p>
+<h3 id="ubuntu右键终端快捷方式"><a href="#ubuntu右键终端快捷方式" class="headerlink" title="ubuntu右键终端快捷方式"></a>ubuntu右键终端快捷方式</h3><p>使用命令<code>sudo apt-get install nautilus-open-terminal</code>进行安装。<br>注销登录或者重新加载文件管理器,使用命令<code>nautilus -q</code>重新加载文件管理器。</p>
 <h4 id="kali-ssh配置"><a href="#kali-ssh配置" class="headerlink" title="kali ssh配置"></a>kali ssh配置</h4><p>  kali安装之后，22端口是默认关闭的，需要自己设置开启</p>
 <h5 id="一、更改配置文件"><a href="#一、更改配置文件" class="headerlink" title="一、更改配置文件"></a>一、更改配置文件</h5><p>  修改<code>/etc/ssh/sshd_config</code>文件。</p>
 <ul>
@@ -850,6 +852,15 @@ MyHandler实现InvocationHandler的接口<figure class="highlight java"><table><
 <h2 id="vim编辑修改二进制"><a href="#vim编辑修改二进制" class="headerlink" title="vim编辑修改二进制"></a>vim编辑修改二进制</h2><h3 id="打开二进制文件"><a href="#打开二进制文件" class="headerlink" title="打开二进制文件"></a>打开二进制文件</h3><p><code>vim -b filename</code></p>
 <h3 id="显示二进制文件内容"><a href="#显示二进制文件内容" class="headerlink" title="显示二进制文件内容"></a>显示二进制文件内容</h3><p>命令模式输入:<code>:%!xdd</code>,只修改左边数据有效</p>
 <h3 id="显示原始数据"><a href="#显示原始数据" class="headerlink" title="显示原始数据"></a>显示原始数据</h3><p>命令模式输入:<code>:%!xdd -r</code></p>
+<h2 id="zsh和oh-my-zsh安装"><a href="#zsh和oh-my-zsh安装" class="headerlink" title="zsh和oh-my-zsh安装"></a>zsh和oh-my-zsh安装</h2><p>使用<code>sudo apt-get install zsh</code>命令安装zsh。然后上oh-my-zsh官网安装。</p>
+<h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><p>常用主题<code>ys</code></p>
+<h3 id="常用插件"><a href="#常用插件" class="headerlink" title="常用插件:"></a>常用插件:</h3><ul>
+<li>z 跳转</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zsh-users/zsh-syntax-highlighting.git">zsh-syntax-highlighting</a> 用于查看命令是否正确</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zsh-users/zsh-autosuggestions">zsh-autosuggestions</a> 命令自动补全</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装脚本</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git <span class="variable">$ZSH_CUSTOM</span>/plugins/zsh-syntax-highlighting</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">$ZSH_CUSTOM</span>/plugins/zsh-autosuggestions</span><br></pre></td></tr></table></figure>
+
 
       
 
