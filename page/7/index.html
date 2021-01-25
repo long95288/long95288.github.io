@@ -158,6 +158,104 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-spring踩坑日志" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/22/spring%E8%B8%A9%E5%9D%91%E6%97%A5%E5%BF%97/">spring踩坑日志</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/22/spring%E8%B8%A9%E5%9D%91%E6%97%A5%E5%BF%97/" class="archive-article-date">
+  	<time datetime="2019-08-22T08:29:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1、文件上传大小限制问题"><a href="#1、文件上传大小限制问题" class="headerlink" title="1、文件上传大小限制问题"></a>1、文件上传大小限制问题</h4><p>问题描述:使用application.properties配置文件上传大小限制不起作用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spring.servlet.multipart.max-request-size=-<span class="number">1</span></span><br><span class="line">spring.servlet.multipart.max-file-size=-<span class="number">1</span></span><br><span class="line">spring.servlet.multipart.location=/home/trainee/springboot/document</span><br></pre></td></tr></table></figure>
+<p>解决办法:新建一个bean的配置<br>可以在启动类中添加如下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> MultipartConfigElement <span class="title">multipartConfigElement</span><span class="params">()</span></span>&#123;</span><br><span class="line">    MultipartConfigFactory factory = <span class="keyword">new</span> MultipartConfigFactory();</span><br><span class="line">    <span class="comment">// 设置最大文件的大小</span></span><br><span class="line">    factory.setMaxFileSize(DataSize.of(<span class="number">2000</span>, DataUnit.MEGABYTES));</span><br><span class="line">    <span class="comment">// 设置最大请求大小</span></span><br><span class="line">    factory.setMaxRequestSize(DataSize.of(<span class="number">2000</span>,DataUnit.MEGABYTES));</span><br><span class="line">    <span class="keyword">return</span> factory.createMultipartConfig();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2、springBoot跨域请求问题"><a href="#2、springBoot跨域请求问题" class="headerlink" title="2、springBoot跨域请求问题"></a>2、springBoot跨域请求问题</h4><p>使用<code>@CrossOrigin(&quot;*&quot;)</code>无法实现跨域<br>解决办法，在控制层使用如下注解就可以实现跨域<br><code>@CrossOrigin(origins = &quot;*&quot;,allowCredentials = &quot;true&quot;,methods = &#123;&#125;)</code></p>
+<h4 id="3、时区出现错误解决办法"><a href="#3、时区出现错误解决办法" class="headerlink" title="3、时区出现错误解决办法"></a>3、时区出现错误解决办法</h4><p>（1）出现连接时区错误<br>（2）插入时间数据时出现错误<br>解决办法：在连接的url之后设置时间属性<br><code>jdbc:mysql://127.0.0.1:3306/trainee?serverTimezone=GMT%2B8</code><br>将时区设置成北京的时区</p>
+<h4 id="4、接收前端返回json对象自动打包问题"><a href="#4、接收前端返回json对象自动打包问题" class="headerlink" title="4、接收前端返回json对象自动打包问题"></a>4、接收前端返回json对象自动打包问题</h4><p>需要在接收的处声明<code>@RequestBody</code>才能自动装箱。声明<code>@Valid</code>来验证数据。</p>
+<h4 id="5、log4j配置不起作用"><a href="#5、log4j配置不起作用" class="headerlink" title="5、log4j配置不起作用"></a>5、log4j配置不起作用</h4><p>要使用自定义的log,必须将spring boot 中自带的spring.boot.start.logging给去掉。因为logback的优先级比log4j的优先级要高。(后面测试含有logback也可以加载配置文件,玄幻)<br>推荐把依赖包给去掉<br>去除包中的依赖如下</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.7.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!--排除logback依赖--&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果出现下面的错误,需要检查log4j依赖是否都添加了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SLF4J: Failed to load class &quot;org.slf4j.impl.StaticLoggerBinder&quot;.</span><br><span class="line">SLF4J: Defaulting to no-operation (NOP) logger implementation</span><br><span class="line">SLF4J: See https:&#x2F;&#x2F;www.slf4j.org&#x2F;codes.html#StaticLoggerBinder for further details.</span><br></pre></td></tr></table></figure>
+<p>能够运行的依赖如下:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--日志--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.26<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.26<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果还有错误，可能需要引入common-logging.jar</p>
+<h5 id="6、Long-类型传到前端页面的精度丢失问题"><a href="#6、Long-类型传到前端页面的精度丢失问题" class="headerlink" title="6、Long 类型传到前端页面的精度丢失问题"></a>6、Long 类型传到前端页面的精度丢失问题</h5><p>解决办法，将Long类型转换成字符串。传给前端，前端传回去从字符串转成Long类型。可以自己写函数转换。但是有现成的轮子可以用就不必造轮子了。<br>使用阿里的fastjson提供的注解便可以轻松的完成工作了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JsonSerialize(using = ToStringSerializer.class)</span></span><br><span class="line"><span class="keyword">private</span> Long id;</span><br></pre></td></tr></table></figure>
+<h5 id="7、controller返回前端的数据自动转换大小写的问题"><a href="#7、controller返回前端的数据自动转换大小写的问题" class="headerlink" title="7、controller返回前端的数据自动转换大小写的问题"></a>7、controller返回前端的数据自动转换大小写的问题</h5><p> 由于移植了一个net的项目到java。但是,前端的命名不规范,变量全部为大写。但是由于fastjson的自动转换,将本来是大写的的变量变成小写了。</p>
+<h6 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h6><p>  由于使用lombok插件,所以不能在get方法上使用<code>@JsonPropertty</code>注解。使用在属性上有一样的效果。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JsonProperty(&quot;Name&quot;)</span></span><br><span class="line"><span class="meta">@TableField(&quot;Name&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String Name;</span><br></pre></td></tr></table></figure><br>  返回前端的数据就变成了Name而不是name</p>
+<h4 id="8、mybatis-plus忽视某些实体字段。不对数据库进行映射。"><a href="#8、mybatis-plus忽视某些实体字段。不对数据库进行映射。" class="headerlink" title="8、mybatis-plus忽视某些实体字段。不对数据库进行映射。"></a>8、mybatis-plus忽视某些实体字段。不对数据库进行映射。</h4><p>在字段上使用<code>@TableField(exist = false)</code>来忽视该字段对数据库的映射。</p>
+<h4 id="9、mybatis-plus-字符串非空更新失败"><a href="#9、mybatis-plus-字符串非空更新失败" class="headerlink" title="9、mybatis-plus 字符串非空更新失败"></a>9、mybatis-plus 字符串非空更新失败</h4><p>问题描述:字符串类型非空更新失败，像密码、邮箱这些作为字符串存储。只是更新其中一部分，会导致没有值的字段更新为空。</p>
+<h5 id="解决办法-1"><a href="#解决办法-1" class="headerlink" title="解决办法"></a>解决办法</h5><p>给字段设置更新策略<code>updateStategy = FieldStrategy.NOT_EMPTY</code>。只是对字符起作用，其它的类型会使用<code>updateStategy = FieldStrategy.NOT_NULL</code></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/22/spring%E8%B8%A9%E5%9D%91%E6%97%A5%E5%BF%97/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-javascript实现的小东西" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -4009,90 +4107,6 @@ return</code></pre>
 
 
   
-    <article id="post-java实例化几种方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/05/java%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">java实例化几种方式</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/05/java%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2019-08-05T13:32:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="实例化的几种方式"><a href="#实例化的几种方式" class="headerlink" title="实例化的几种方式"></a>实例化的几种方式</h4><p>1、HelloWorld类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;name=&quot;</span>+name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>2、主类三种实例化</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 第一种实例化</span></span><br><span class="line">            HelloWorld h1 = HelloWorld.class.newInstance();</span><br><span class="line">            h1.setName(<span class="string">&quot;h1&quot;</span>);</span><br><span class="line">            h1.sayName();</span><br><span class="line">            <span class="comment">// 使用类加载器实例化</span></span><br><span class="line">            String name = <span class="string">&quot;com.longquanxiao.instance.HelloWorld&quot;</span>;</span><br><span class="line">            Class hClass = Class.forName(name);</span><br><span class="line">            HelloWorld h2 =(HelloWorld) hClass.newInstance();</span><br><span class="line">            h2.setName(<span class="string">&quot;h2&quot;</span>);</span><br><span class="line">            h2.sayName();</span><br><span class="line">            <span class="comment">// 传统的new实例化</span></span><br><span class="line">            HelloWorld h3 = <span class="keyword">new</span> HelloWorld();</span><br><span class="line">            h3.setName(<span class="string">&quot;h3&quot;</span>);</span><br><span class="line">            h3.sayName();</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行结果:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name&#x3D;h1</span><br><span class="line">name&#x3D;h2</span><br><span class="line">name&#x3D;h3</span><br></pre></td></tr></table></figure>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>1、使用<code>Class#newInstance()</code>返回实例化的对象<br>2、使用<code>Class.forName(classpath)</code>获得class对象。然后再使用newInstance()方法进行实例化<br>3、使用new的传统方式来实例化对象<br>4、使用newInstance时必须保证（1）这个类已经加载了(2)这个类已经完成连接了<br>使用class.forName()保证了上述两个条件。使用new就没有那么那么多的限制。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/05/java%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/">Next &amp;raquo;</a>
@@ -4395,6 +4409,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">kcp</a>
               </li>
             
             <div class="clearfix"></div>
