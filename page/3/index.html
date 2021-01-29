@@ -158,6 +158,109 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-go-圣经-笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/31/go-%E5%9C%A3%E7%BB%8F-%E7%AC%94%E8%AE%B0/">go-圣经-笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/31/go-%E5%9C%A3%E7%BB%8F-%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2020-07-31T15:38:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="基于共享变量的并发-笔记"><a href="#基于共享变量的并发-笔记" class="headerlink" title="基于共享变量的并发-笔记"></a>基于共享变量的并发-笔记</h3><h4 id="一、竞争条件"><a href="#一、竞争条件" class="headerlink" title="一、竞争条件"></a>一、竞争条件</h4><ul>
+<li>线性程序-&gt;顺序执行</li>
+<li>并发条件下，函数依然可以正确工作=&gt;函数并发安全</li>
+<li>文档明确函数并发安全，才可以并发的访问它<h5 id="并发无法工作"><a href="#并发无法工作" class="headerlink" title="并发无法工作"></a>并发无法工作</h5>（1）死锁（deadlock）-&gt; 干瞪眼，谁都不好过。<br>（2）活锁（livelock）-&gt;还活着，形成闭环，但没有什么进展。互相踢皮球，没有啥进展。<br>（3）饿死（resource starvation）-&gt;饭多,但是有些人没有分配到，永远处于等待，最后饿死。</li>
+</ul>
+<h5 id="数据竞争"><a href="#数据竞争" class="headerlink" title="数据竞争"></a>数据竞争</h5><p>两个以上的gorountine并发访问相同的变量，至少其中一个为写数据。<br><strong>避免方法:</strong><br>(1) 不要去写变量，在并发前完成初始化。<br>(2) 不允许多个gorountine同时访问变量，不要使用共享变量来通信，使用通信来共享数据。<br>(3) 互斥访问变量。</p>
+<h4 id="二、sync-Mutex互斥锁"><a href="#二、sync-Mutex互斥锁" class="headerlink" title="二、sync.Mutex互斥锁"></a>二、sync.Mutex互斥锁</h4><ul>
+<li>二元信号量:只能为0和1。</li>
+<li>临界区:在关锁和开锁之间形成读取安全的区域。</li>
+<li>可重入锁：go没有可重入锁。入口函数锁了，被调用的函数里再次请求锁失败造成阻塞。</li>
+<li>封装机制：在可导出的函数变量加锁，结构体不可导出可以不用加锁便可以被安全的访问。</li>
+</ul>
+<h4 id="三、sync-RWMutex读写锁"><a href="#三、sync-RWMutex读写锁" class="headerlink" title="三、sync.RWMutex读写锁"></a>三、sync.RWMutex读写锁</h4><p>允许多个只读操作并发执行，但写操作会完全互斥。-&gt;“多读单写锁”(multiple reader,single writer)<br>go语言提供的多读单写锁<code>sync.RWMutex</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mu sync.RWMutex</span><br><span class="line">mu.RLock()</span><br><span class="line"><span class="keyword">defer</span> mu.RUnlock()</span><br><span class="line"><span class="keyword">return</span> blance</span><br></pre></td></tr></table></figure>
+<p><code>blance</code>变量可以被多个gorountine并发访问,但是写是互斥的。<br>**缺点:**RWMutex使用更加复杂的内部记录，比无竞争的Mutex慢一些。</p>
+<h4 id="四、内存同步"><a href="#四、内存同步" class="headerlink" title="四、内存同步"></a>四、内存同步</h4><p>一个数据写入流程:cpu执行指令产生新数据-&gt;写入cpu缓存-&gt;写入主存。<br>不同的gorountine在读取共享变量的时候，都是从主存中读入数据。不加锁的变量在内存中的数据可能不一致。一个gorountine读取到的内存值可能不是另一个gorountine产生的最新数据。最新的数据还在另一个核中的缓存内，没有flush到主存中。<br>channel通信和互斥操作会使处理器将其缓存中的数据flush并commit。保证主存中的数据是最新的。</p>
+<h5 id="例子分析"><a href="#例子分析" class="headerlink" title="例子分析"></a>例子分析</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x,y <span class="keyword">int</span></span><br><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">  x = <span class="number">1</span></span><br><span class="line">  fmt.Print(<span class="string">&quot;y:&quot;</span>,y,<span class="string">&quot; &quot;</span>)</span><br><span class="line">&#125;()</span><br><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">  y = <span class="number">1</span></span><br><span class="line">  fmt.Print(<span class="string">&quot;x:&quot;</span>,x,<span class="string">&quot; &quot;</span>)</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<p>数据的数据可能为:<code>y:0 x:0</code><br><strong>原因:</strong><br>(1) 编译器优化:赋值和打印操作没有数据关联，编译器会让两条语句并发执行。先赋值还是先打印输出对于当前的gorountine执行结果是没有任何影响的。<br>(2) 缓存未更新:两个gorountine会运行在不同的核上，运行的最新结果(赋值的数据)还在cpu缓存中，未同步到主存里面。这时候另外一个gorountine从主存中获得的数据还是旧的数据</p>
+<h4 id="五、sync-Once惰性初始化"><a href="#五、sync-Once惰性初始化" class="headerlink" title="五、sync.Once惰性初始化"></a>五、sync.Once惰性初始化</h4><p>需求:<br>  （1）需要相关变量的时候才去初始化。<br>  （2）只初始化一次<br>问题:<br>  当一个gorountine发现数据未初始化时，调用初始化函数。在该协程初始化的过程中，另外一个gorountine尝试获取数据，发现数据还没初始化，又一次的调用初始化函数。<br>解决办法:<br>  （1）加互斥锁，保证初始化成功，不支持并发读。<br>  （2）读取数据部分使用RWMuntex支持并发读，初始化使用互斥锁。读得到就读，读不到就只允许一个调用初始化函数。<br>  （3）使用sync.Once-&gt;Do函数只会调用一次</p>
+<h5 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> mu sync.Once</span><br><span class="line"><span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line"><span class="keyword">var</span> config <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">initConfig</span><span class="params">()</span></span>&#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;call initConfig function&quot;</span>)</span><br><span class="line">    <span class="comment">// 加长初始化的时间</span></span><br><span class="line">    time.Sleep(<span class="number">1</span>*time.Second)</span><br><span class="line">    config = <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>&#123;</span><br><span class="line">        <span class="string">&quot;hello&quot;</span>:<span class="number">1</span>,</span><br><span class="line">        <span class="string">&quot;world&quot;</span>:<span class="number">2</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 获得配置,</span></span><br><span class="line"><span class="comment">// 如果配置没有初始化，就调用初始化函数</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getConfigure</span><span class="params">(key <span class="keyword">string</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    v,ok := config[key]</span><br><span class="line">    <span class="keyword">if</span> !ok &#123;</span><br><span class="line">        initConfig()</span><br><span class="line">        v = config[key]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> v</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 只初始化一次</span></span><br><span class="line">    mu.Do(initConfig)</span><br><span class="line">    wg.Add(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        fmt.Println(getConfigure(<span class="string">&quot;hello&quot;</span>))</span><br><span class="line">        wg.Done()</span><br><span class="line">    &#125;()</span><br><span class="line">    wg.Add(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        fmt.Println(getConfigure(<span class="string">&quot;world&quot;</span>))</span><br><span class="line">        wg.Done()</span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    wg.Wait()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="六、竞争条件检测"><a href="#六、竞争条件检测" class="headerlink" title="六、竞争条件检测"></a>六、竞争条件检测</h4><p><code>go build/run/test -race</code>生成报告文档</p>
+<h4 id="gorountine和线程"><a href="#gorountine和线程" class="headerlink" title="gorountine和线程"></a>gorountine和线程</h4><ul>
+<li>上下文切换不同</li>
+<li>调度器不同</li>
+<li>动态栈</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">《go语言圣经》</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/31/go-%E5%9C%A3%E7%BB%8F-%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-go-gorm" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1236,146 +1339,6 @@ end</pre>
 
 
   
-    <article id="post-go笔记-一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/17/go%E7%AC%94%E8%AE%B0-%E4%B8%80/">go笔记(一)</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/17/go%E7%AC%94%E8%AE%B0-%E4%B8%80/" class="archive-article-date">
-  	<time datetime="2020-05-17T10:18:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="go-get-无法使用问题解决办法"><a href="#go-get-无法使用问题解决办法" class="headerlink" title="go get 无法使用问题解决办法"></a>go get 无法使用问题解决办法</h4><h5 id="使用第三方包gopm"><a href="#使用第三方包gopm" class="headerlink" title="使用第三方包gopm"></a>使用第三方包gopm</h5><h5 id="设置代理。windows需要设置相应的环境变量"><a href="#设置代理。windows需要设置相应的环境变量" class="headerlink" title="设置代理。windows需要设置相应的环境变量"></a>设置代理。windows需要设置相应的环境变量</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go env -w GO111MODULE&#x3D;on</span><br><span class="line">go env -w GOPROXY&#x3D;https:&#x2F;&#x2F;goproxy.io,direct</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h4><ul>
-<li><p>普通函数变量</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">anon := <span class="function"><span class="keyword">func</span><span class="params">(a <span class="keyword">int</span>,b <span class="keyword">int</span>)</span><span class="title">int</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>anon是一个函数变量。</p>
-</li>
-<li><p>函数返回函数</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">annof := <span class="function"><span class="keyword">func</span><span class="params">()</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>,<span class="keyword">int</span>)</span> <span class="title">int</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(a1 <span class="keyword">int</span>, b1 <span class="keyword">int</span>)</span> <span class="title">int</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a1 + b1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">anon2 := annof()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>anon2 也是一个匿名函数，该函数是返回一个函数。</p>
-</li>
-<li><p>自启动。并且传参</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">anon3 := <span class="function"><span class="keyword">func</span><span class="params">(param <span class="keyword">string</span>)</span><span class="title">func</span><span class="params">(<span class="keyword">int</span>,<span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">  fmt.Println(<span class="string">&quot;param&quot;</span>,param)</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(a1 <span class="keyword">int</span>,b1 <span class="keyword">int</span>)</span> <span class="title">int</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a1 + b1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;(<span class="string">&quot;Hello World!&quot;</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>函数别名</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> returnFunctionType <span class="function"><span class="keyword">func</span><span class="params">(<span class="keyword">int</span>,<span class="keyword">int</span>)</span> <span class="title">int</span></span></span><br><span class="line">anon4 := <span class="function"><span class="keyword">func</span><span class="params">()</span> <span class="title">returnFunctionType</span></span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(a1 <span class="keyword">int</span>, b1 <span class="keyword">int</span>)</span> <span class="title">int</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a1 + b1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure></li>
-<li><p>调用函数</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(<span class="string">&quot;anon func =&quot;</span>,anon(<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line">fmt.Println(<span class="string">&quot;anon func2 = &quot;</span>,anon2(<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line">fmt.Println(<span class="string">&quot;anon func3 = &quot;</span>,anon3(<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line">fmt.Println(<span class="string">&quot;anon func4 = &quot;</span>,anon4(<span class="number">1</span>,<span class="number">2</span>))</span><br></pre></td></tr></table></figure></li>
-<li><p>调用结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">param Hello World!</span><br><span class="line">anon func &#x3D; 3</span><br><span class="line">anon func2 &#x3D;  3</span><br><span class="line">anon func3 &#x3D;  3</span><br><span class="line">anon func4 &#x3D;  3</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h4><ul>
-<li>累加器<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">addUper</span><span class="params">()</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>)</span><span class="title">int</span></span> &#123;</span><br><span class="line">  base := <span class="number">10</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(n1 <span class="keyword">int</span>)</span> <span class="title">int</span></span>&#123;</span><br><span class="line">    res := base + n1</span><br><span class="line">    base ++</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><strong>说明</strong> 改函数不依赖外部的数据实现累加。返回的<code>func(int)int</code>中含有一个base变量。该变量会自增。不会因为被调用而初始化。</p>
-<ul>
-<li>图片后缀<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">suffixImage</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="title">func</span><span class="params">(<span class="keyword">string</span>)</span><span class="title">string</span></span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(path <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> strings.HasSuffix(path,s) &#123;</span><br><span class="line">      <span class="keyword">return</span> path</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> path + s</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><strong>说明</strong> 该函数返回一个闭包。能够识别是否拥有对应的后缀。没有就自己添加。</p>
-<h5 id="闭包总结"><a href="#闭包总结" class="headerlink" title="闭包总结"></a>闭包总结</h5><p>闭包等价于函数，但是该函数和普通的函数不一样的是，函数内部有一个不受外部影响而变化的变量。外部调用该函数时并不会重置该闭包内的数据。</p>
-<h4 id="接口和类型断言"><a href="#接口和类型断言" class="headerlink" title="接口和类型断言"></a>接口和类型断言</h4><h5 id="1、接口"><a href="#1、接口" class="headerlink" title="1、接口"></a>1、接口</h5><p>  接口作为一种规范。接口是对继承的补充,并且通过接口可以实现上转型和下转型。golang的所有变量类型都是实现空接口,意味着可以将golang的各种类型上转成接口,然后再通过类型断言下转成具体类型。golang的空接口类似于java中的Object</p>
-<h5 id="1-1-接口的声明"><a href="#1-1-接口的声明" class="headerlink" title="1.1 接口的声明"></a>1.1 接口的声明</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Usb <span class="keyword">interface</span> &#123;</span><br><span class="line">    Start()</span><br><span class="line">    Stop()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>和java的接口一样,接口是作为一种规范，一个模板。没有具体的实现方式</p>
-<h5 id="1-2-接口的实现"><a href="#1-2-接口的实现" class="headerlink" title="1.2 接口的实现"></a>1.2 接口的实现</h5><p>和java不同的是,golang的接口实现不用显示的绑定,完全松耦合。只要一个类型或者变量实现了某个接口中定义的函数。即函数一样,就可以说该变量或者类型实现了该接口</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Phone <span class="keyword">struct</span>&#123;</span><br><span class="line">    name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Phone)</span> <span class="title">Start</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;手机开始工作。。。。&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Phone)</span> <span class="title">Stop</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;手机停止工作....&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Phone)</span> <span class="title">Call</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;手机打电话...&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Camera <span class="keyword">struct</span>&#123;</span><br><span class="line">    name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c Camera)</span> <span class="title">Start</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;相机开始工作。。。。&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c Camera)</span> <span class="title">Stop</span><span class="params">()</span></span> &#123;</span><br><span class="line">  fmt.Println(<span class="string">&quot;相机停止工作&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c Camera)</span> <span class="title">Photography</span><span class="params">()</span></span>&#123;</span><br><span class="line">  fmt.Println(<span class="string">&quot;拍照....&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>类型<code>Phone</code>和<code>Camera</code>实现了<code>Usb</code>接口。但是看起来这两个类型没有和<code>Usb</code>这个接口联系起来。根本没有任何的绑定，java至少有<code>implement</code>来说明绑定的接口。唯一能和接口联系上的就是这两个类型都有<code>Start()</code>和<code>Stop()</code>函数。通过函数一样来绑定接口。</p>
-<h5 id="1-3-接口的使用"><a href="#1-3-接口的使用" class="headerlink" title="1.3 接口的使用"></a>1.3 接口的使用</h5><p>接口可以赋值,用具体实现类来赋值。这个和java的接口一致。可以使用接口类型来承接具体的类型</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> usb Usb = Phone&#123;name: <span class="string">&quot;apple&quot;</span>&#125;</span><br><span class="line">fmt.Println(usb)</span><br><span class="line">usb = Camera&#123;name: <span class="string">&quot;尼康&quot;</span>&#125;</span><br><span class="line">fmt.Println(usb)</span><br></pre></td></tr></table></figure>
-<p>usb的接口变量可以接收具体的实现类,接口会隐藏掉具体实现类中其它的特征,<code>Phone</code>中的<code>Call()</code>函数被隐藏了。</p>
-<h5 id="2、类型断言"><a href="#2、类型断言" class="headerlink" title="2、类型断言"></a>2、类型断言</h5><p>类型断言类似于下转型,通过类型断言可以将接口下转成具体的实现类。实现接口的类型和断言的类型一致才会转换成功。<br><code>value,ok := i.(Phone)</code>转换失败由第二个参数接收,转换成功由第一个参数接收转换后的具体实现类。</p>
-<h5 id="2-1-类型断言的使用-一"><a href="#2-1-类型断言的使用-一" class="headerlink" title="2.1 类型断言的使用(一)"></a>2.1 类型断言的使用(一)</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Computer <span class="keyword">struct</span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c Computer)</span> <span class="title">Working</span><span class="params">(usb Usb)</span></span> &#123;</span><br><span class="line">    usb.Start()</span><br><span class="line">    <span class="comment">// 使用类型断言</span></span><br><span class="line">    <span class="keyword">if</span> v,flag := usb.(Phone);flag&#123;</span><br><span class="line">        v.Call()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> v, flag := usb.(Camera); flag &#123;</span><br><span class="line">        v.Photography()</span><br><span class="line">    &#125;</span><br><span class="line">    usb.Stop()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>computer</code>的<code>Working(usb Usb)</code>函数使用了,usb接口类型,如果传进来的实现类是<code>Phone</code>就调用Call()方法。如果是<code>Camera</code>就调用<code>Photography()</code></p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> usbArr [<span class="number">3</span>]Usb = [<span class="number">3</span>]Usb&#123;</span><br><span class="line">      <span class="number">0</span>:Phone&#123;</span><br><span class="line">          name: <span class="string">&quot;vivo&quot;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="number">1</span>:Camera&#123;</span><br><span class="line">          name: <span class="string">&quot;尼康&quot;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="number">2</span>:Phone&#123;</span><br><span class="line">          name: <span class="string">&quot;meizu&quot;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">var</span> computer Computer</span><br><span class="line"><span class="keyword">for</span> _,v := <span class="keyword">range</span> usbArr&#123;</span><br><span class="line">    computer.Working(v)</span><br><span class="line">    fmt.Println()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">手机开始工作。。。。</span><br><span class="line">手机打电话...</span><br><span class="line">手机停止工作....</span><br><span class="line"></span><br><span class="line">相机开始工作。。。。</span><br><span class="line">拍照....</span><br><span class="line">相机停止工作</span><br><span class="line"></span><br><span class="line">手机开始工作。。。。</span><br><span class="line">手机打电话...</span><br><span class="line">手机停止工作....</span><br></pre></td></tr></table></figure>
-<h5 id="2-2-类型断言的使用-二"><a href="#2-2-类型断言的使用-二" class="headerlink" title="2.2 类型断言的使用(二)"></a>2.2 类型断言的使用(二)</h5><p>使用一个类型判断函数</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TypeJudge</span><span class="params">(item... <span class="keyword">interface</span>&#123;&#125;)</span></span>&#123;</span><br><span class="line">  <span class="keyword">for</span> index,v := <span class="keyword">range</span> item&#123;</span><br><span class="line">    <span class="keyword">switch</span> v.(<span class="keyword">type</span>) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="keyword">bool</span>:</span><br><span class="line">          fmt.Printf(<span class="string">&quot;第%v参数 bool类型,值为:%v\n&quot;</span>,index,v)</span><br><span class="line">      <span class="keyword">case</span> <span class="keyword">float32</span>:</span><br><span class="line">          fmt.Printf(<span class="string">&quot;第%v参数 float32类型,值为:%v\n&quot;</span>,index,v)</span><br><span class="line">      <span class="keyword">case</span> <span class="keyword">float64</span>:</span><br><span class="line">          fmt.Printf(<span class="string">&quot;第%v参数 float64类型,值为:%v\n&quot;</span>,index,v)</span><br><span class="line">      <span class="keyword">case</span> <span class="keyword">int</span>, <span class="keyword">int32</span>, <span class="keyword">int64</span>:</span><br><span class="line">          fmt.Printf(<span class="string">&quot;第%v参数 int 类型,值为:%v\n&quot;</span>,index,v)</span><br><span class="line">      <span class="keyword">case</span> <span class="keyword">string</span>:</span><br><span class="line">          fmt.Printf(<span class="string">&quot;第%v参数 string类型,值为:%v\n&quot;</span>,index,v)</span><br><span class="line">      <span class="keyword">case</span> Phone:</span><br><span class="line">          fmt.Printf(<span class="string">&quot;第%v参数 Phone类型,值为:%v\n&quot;</span>,index,v)</span><br><span class="line">      <span class="keyword">case</span> Camera:</span><br><span class="line">          fmt.Printf(<span class="string">&quot;第%v参数 Camera类型,值为:%v\n&quot;</span>,index,v)</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">          fmt.Printf(<span class="string">&quot;第%v参数 未知类型,值为:%v\n&quot;</span>,index,v)</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>调用函数</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeJudge(<span class="number">1</span>,<span class="string">&quot;stringvalue&quot;</span>,<span class="number">1.1</span>,Phone&#123;<span class="string">&quot;phone&quot;</span>&#125;,Camera&#123;<span class="string">&quot;camera&quot;</span>&#125;,computer)</span><br></pre></td></tr></table></figure>
-<p>控制台输出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">第0参数 int 类型,值为:1</span><br><span class="line">第1参数 string类型,值为:stringvalue</span><br><span class="line">第2参数 float64类型,值为:1.1</span><br><span class="line">第3参数 Phone类型,值为:&#123;phone&#125;</span><br><span class="line">第4参数 Camera类型,值为:&#123;camera&#125;</span><br><span class="line">第5参数 未知类型,值为:&#123;&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="panic"><a href="#panic" class="headerlink" title="panic"></a>panic</h4><p>捕获函数panic的defer必须在调用函数之前才能捕获。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestPanic</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">//defer func() &#123;</span></span><br><span class="line">    <span class="comment">//   if err := recover();err!= nil&#123;</span></span><br><span class="line">    <span class="comment">//       fmt.Println(&quot;Function Catch Panic &quot;,err)</span></span><br><span class="line">    <span class="comment">//   &#125;</span></span><br><span class="line">    <span class="comment">//&#125;()</span></span><br><span class="line">    <span class="comment">// 抛出panic</span></span><br><span class="line">    <span class="built_in">panic</span>(errors.New(<span class="string">&quot;Test Panic&quot;</span>))</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   <span class="comment">// TestPanic() //无法捕获</span></span><br><span class="line">    <span class="comment">// defer必须在TestPanic之前才能捕获</span></span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> err := <span class="built_in">recover</span>();err!= <span class="literal">nil</span>&#123;</span><br><span class="line">            fmt.Println(<span class="string">&quot;Main catch Panic &quot;</span>,err)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    TestPanic()</span><br><span class="line">    fmt.Println(<span class="string">&quot;over&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>当一个go文件以_test.go作为后缀的时候不会参与build.使用<code>go test</code>命令会执行里面的测试函数</p>
-<ul>
-<li>测试函数:以Test开始的函数，入参为<code>(t *testing.T)</code></li>
-<li>基准测试:以Benchmark做前缀的函数,入参为<code>(t *testing.B)</code></li>
-<li>示例函数:以Example做前缀的函数。入参为空。需要有注释//Output:作为输出结果。<h5 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试函数</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestHelloWorld</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;Function Test Hello world&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkHello</span><span class="params">(t *testing.B)</span></span>  &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;Benchmark Test Hello&quot;</span>)</span><br><span class="line">   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ExampleHello</span><span class="params">()</span></span>  &#123;</span><br><span class="line">    <span class="comment">//fmt.Println(false)</span></span><br><span class="line">    fmt.Println(<span class="literal">true</span>)</span><br><span class="line">    <span class="comment">// Output:</span></span><br><span class="line">    <span class="comment">// true</span></span><br><span class="line">    <span class="comment">// false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-命令行执行:<code>go test</code>就会执行测试函数。<br>添加-bench参数，启动bench测试。<br><code>go test -bench=.</code></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">go</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/17/go%E7%AC%94%E8%AE%B0-%E4%B8%80/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1686,6 +1649,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">kcp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文章摘录</a>
               </li>
             
             <div class="clearfix"></div>

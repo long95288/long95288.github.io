@@ -158,6 +158,128 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-spring笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/15/spring%E7%AC%94%E8%AE%B0/">spring笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/15/spring%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2019-07-15T02:31:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="零碎知识点"><a href="#零碎知识点" class="headerlink" title="零碎知识点"></a>零碎知识点</h3><h5 id="1、注解配置和xml配置的优先级"><a href="#1、注解配置和xml配置的优先级" class="headerlink" title="1、注解配置和xml配置的优先级"></a>1、注解配置和xml配置的优先级</h5><ul>
+<li>xml 配置优先于注解配置。如果同时有xml和注解，则xml中会覆盖掉注解中的配置。<h6 id="2、bean的相关知识"><a href="#2、bean的相关知识" class="headerlink" title="2、bean的相关知识"></a>2、bean的相关知识</h6></li>
+</ul>
+<p>1、bean的属性</p>
+<p>（1）class bean里面的所连接的类</p>
+<p>（2）name 这个bean的标识</p>
+<p>（3）scope bean的对象的作用域</p>
+<p>​    bean的作用域：</p>
+<p>singleton 单例，只要调用该bean的都是得到同一个对象。默认的属性</p>
+<p>prototype 原型， 每次获得该bean都得到一个新的bean</p>
+<p>request http请求会产生一个新的实例bean.仅适用于WebApplicationContext环境</p>
+<p>session 同一个session共享一个bean。不同的session使用不同的bean.用于WebApplicationContext环境</p>
+<p>global-session Portlet应用环境。仅适用于WebApplicationContext环境。</p>
+<p>2、bean的生命周期</p>
+<p>（1）Bean的定义</p>
+<p>xml中配置<strong>init-method</strong> 和<strong>destroy-method</strong>参数。init-method 实例化的时候调用该方法。destroy-method 容器移除bean之后，调用该方法。</p>
+<p>在beans标签里面默认的初始化和销毁方法</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">http://www.springframework.org/schema/beans/spring-beans-3.0.xsd&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">default-init-method</span>=<span class="string">&quot;init&quot;</span> </span></span><br><span class="line"><span class="tag"><span class="attr">default-destroy-method</span>=<span class="string">&quot;destroy&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>（2）Bean的初始化</p>
+<p>（3）Bean的使用</p>
+<p>（4）Bean的销毁</p>
+<h3 id="SpringMVC-Controller"><a href="#SpringMVC-Controller" class="headerlink" title="SpringMVC Controller"></a>SpringMVC Controller</h3><h4 id="1、在dispatcher-servlet-xml中配置"><a href="#1、在dispatcher-servlet-xml中配置" class="headerlink" title="1、在dispatcher-servlet.xml中配置"></a>1、在dispatcher-servlet.xml中配置</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 扫描控制器的所在的包 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">&quot;Controller&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="2、controller配置路径的post、get请求。"><a href="#2、controller配置路径的post、get请求。" class="headerlink" title="2、controller配置路径的post、get请求。"></a>2、controller配置路径的post、get请求。</h4><p>在<code>@RequestMapping()</code>中含有一些参数可一个配置路径</p>
+<ul>
+<li>method 请求的方法<br>例如:<br>(1)post请求:<code>@RequestMapping(path=&quot;/login&quot;,method = RequestMethod.POST)</code><br>(2)get请求的简写:<code>@GetMapping(path = &quot;/login&quot;)</code>但是使用相同的方法简写post请求就出现错误了。</li>
+</ul>
+<h4 id="3、controller-Model"><a href="#3、controller-Model" class="headerlink" title="3、controller Model"></a>3、controller Model</h4><p>可以使用Model#addAttribute(K,V) 来设置传回去的值。然后在jsp页面中使用<code>$&#123;K&#125;</code>获得model中<code>V</code>的值。</p>
+<h4 id="4、controller-获得页面传过来的值"><a href="#4、controller-获得页面传过来的值" class="headerlink" title="4、controller 获得页面传过来的值"></a>4、controller 获得页面传过来的值</h4><p>直接在函数的入口参数中声明便可以获得相应的值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(path = &quot;/login&quot;,method = RequestMethod.POST)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">(Model model,String account,String password )</span> </span>&#123;</span><br><span class="line">        model.addAttribute(<span class="string">&quot;account&quot;</span>,account);</span><br><span class="line">        model.addAttribute(<span class="string">&quot;password&quot;</span>,password);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;info&quot;</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>其中的<code>info</code>是视图的名称。会将model传递到info.jsp中。</p>
+<h3 id="SpringMVC-View"><a href="#SpringMVC-View" class="headerlink" title="SpringMVC View"></a>SpringMVC View</h3><h4 id="1、在view中使用model中的数据。"><a href="#1、在view中使用model中的数据。" class="headerlink" title="1、在view中使用model中的数据。"></a>1、在view中使用model中的数据。</h4><ul>
+<li>在info.jsp中显示用户从index.jsp中传过来用户名和密码<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>账号:<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;account&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>密码:<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;password&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="2、url路径映射"><a href="#2、url路径映射" class="headerlink" title="2、url路径映射"></a>2、url路径映射</h5>@RequestMapping(“/a/{ownId})<br>获得ownId的值<br>@PathvVariable String ownId<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value = &quot;/&#123;recordId&#125;&quot;,method = RequestMethod.GET)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> PublishRecordDto <span class="title">getRecordById</span><span class="params">(<span class="meta">@PathVariable(&quot;recordId&quot;)</span> <span class="keyword">long</span> recordId)</span></span>&#123;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="spring-boot"><a href="#spring-boot" class="headerlink" title="spring boot"></a>spring boot</h3><h4 id="1、配置mybatis的坑。"><a href="#1、配置mybatis的坑。" class="headerlink" title="1、配置mybatis的坑。"></a>1、配置mybatis的坑。</h4><p>application.properties<br>自动生成的是有问题的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.data-username&#x3D;root</span><br><span class="line">spring.datasource.data-password&#x3D;root</span><br></pre></td></tr></table></figure>
+<p>正确的配置如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.driver-class-name&#x3D;com.mysql.cj.jdbc.Driver</span><br><span class="line">spring.datasource.url&#x3D;jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;train</span><br><span class="line">spring.datasource.username&#x3D;root</span><br><span class="line">spring.datasource.password&#x3D;root</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、扫描dao的包位置"><a href="#2、扫描dao的包位置" class="headerlink" title="2、扫描dao的包位置"></a>2、扫描dao的包位置</h4><p><code>@MapperScan(&quot;com.package..dao&quot;)</code><br>在dao使用接口类来定义一个dao.全部使用注解。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">**</span><br><span class="line"> * Mybatis 的dao 接口</span><br><span class="line"> * <span class="meta">@author</span> longquanxiao</span><br><span class="line"> * <span class="meta">@date</span> <span class="number">2019</span>/<span class="number">7</span>/<span class="number">26</span></span><br><span class="line"> */</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DictionaryDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 插入数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> dictionary 数据字典</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 插入的个数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Insert(&quot;INSERT INTO t_dictionary (category_id,name,category,value,remark,status,org_id,&quot; +</span></span><br><span class="line"><span class="meta">            &quot;created_by,created_time,updated_by,updated_time,version) values&quot; +</span></span><br><span class="line"><span class="meta">            &quot;(#&#123;categoryId&#125;,#&#123;name&#125;,#&#123;category&#125;,#&#123;value&#125;,#&#123;remark&#125;,#&#123;status&#125;,#&#123;orgId&#125;,&quot; +</span></span><br><span class="line"><span class="meta">            &quot;#&#123;createdBy&#125;,#&#123;createdTime&#125;,#&#123;updatedBy&#125;,#&#123;updatedTime&#125;,#&#123;version&#125;) &quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">insertUser</span><span class="params">(Dictionary dictionary)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获得所有的字典</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT * FROM t_dictionary&quot;)</span></span><br><span class="line">    <span class="meta">@Results(id = &quot;dictionaryMap&quot;,value = &#123;</span></span><br><span class="line"><span class="meta">            @Result(id = true,column = &quot;category_id&quot;,property = &quot;categoryId&quot;),</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;name&quot;,property = &quot;name&quot;),</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;category&quot;,property = &quot;category&quot;),</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;value&quot;,property = &quot;value&quot;),</span></span><br><span class="line"><span class="meta">            @Result(column = &quot;remark&quot;,property = &quot;remark&quot;),</span></span><br><span class="line"><span class="meta">            @Result(property=&quot;status&quot;,column=&quot;status&quot;),</span></span><br><span class="line"><span class="meta">            @Result(property=&quot;orgId&quot;,column=&quot;org_id&quot;),</span></span><br><span class="line"><span class="meta">            @Result(property=&quot;createdBy&quot;,column=&quot;created_by&quot;),</span></span><br><span class="line"><span class="meta">            @Result(property=&quot;createdTime&quot;,column=&quot;created_time&quot;),</span></span><br><span class="line"><span class="meta">            @Result(property=&quot;updatedBy&quot;, column=&quot;updated_by&quot;),</span></span><br><span class="line"><span class="meta">            @Result(property=&quot;updatedTime&quot;, column=&quot;updated_time&quot;),</span></span><br><span class="line"><span class="meta">            @Result(property=&quot;version&quot; ,column=&quot;version&quot;)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="function">List&lt;Dictionary&gt; <span class="title">queryAll</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/15/spring%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-maven环境变量配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1014,97 +1136,6 @@
 
 
   
-    <article id="post-关于htmlcss的笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/22/%E5%85%B3%E4%BA%8Ehtmlcss%E7%9A%84%E7%AC%94%E8%AE%B0/">关于htmlcss的笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/22/%E5%85%B3%E4%BA%8Ehtmlcss%E7%9A%84%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2019-04-22T07:41:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="1、固定悬浮框"><a href="#1、固定悬浮框" class="headerlink" title="1、固定悬浮框"></a>1、固定悬浮框</h4><p>核心语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">position:fixed;    </span><br><span class="line">z-index:99;</span><br></pre></td></tr></table></figure>
-
-<p>固定在右上方</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*固定在右上方*&#x2F;</span><br><span class="line">.fixedRight&#123;</span><br><span class="line">    background-color: limegreen;</span><br><span class="line">    height: 200px;</span><br><span class="line">    width: 200px;</span><br><span class="line">    position: fixed!important;</span><br><span class="line">    right: 20px;</span><br><span class="line">    top:20px;</span><br><span class="line">    z-index: 99;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>只要改变right、left、top、bottom的值便可以得到自己想要得</p>
-<p><strong>底部悬浮</strong></p>
-<p>只需更改bottom的值，调左右便可以了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;*固定在底部*&#x2F;</span><br><span class="line">.fixedBottom&#123;</span><br><span class="line">    background-color: greenyellow;</span><br><span class="line">    position: fixed;</span><br><span class="line">    height: 40px;</span><br><span class="line">    width: 100%;</span><br><span class="line">    bottom: 0px;</span><br><span class="line">    left: 20px;</span><br><span class="line">    z-index: 99;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="2、居中"><a href="#2、居中" class="headerlink" title="2、居中"></a>2、居中</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*居中*&#x2F;</span><br><span class="line">.center&#123;</span><br><span class="line">    display:-webkit-flex;</span><br><span class="line">    -webkit-justify-content:center;</span><br><span class="line">    -webkit-align-items: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="随鼠标移动的悬浮框的实现"><a href="#随鼠标移动的悬浮框的实现" class="headerlink" title="随鼠标移动的悬浮框的实现"></a>随鼠标移动的悬浮框的实现</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-id">#floatDiv</span>&#123;</span></span><br><span class="line">        position: absolute;</span><br><span class="line">        height: 40px;</span><br><span class="line">        width: 150px;</span><br><span class="line">        background-color: deepskyblue;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;floatDiv&quot;</span> <span class="attr">style</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">            我是悬浮的</span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.onmousemove=<span class="function"><span class="keyword">function</span>(<span class="params">even</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="comment">// 获得当前鼠标的坐标，设置浮动框坐标为鼠标坐标</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> floatDiv = <span class="built_in">document</span>.getElementById(<span class="string">&quot;floatDiv&quot;</span>);</span></span><br><span class="line"><span class="javascript">            floatDiv.style.top = even.clientY +<span class="string">&quot;px&quot;</span>;</span></span><br><span class="line"><span class="javascript">            floatDiv.style.left = even.clientX+<span class="string">&quot;px&quot;</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="雷姆蓝"><a href="#雷姆蓝" class="headerlink" title="雷姆蓝"></a>雷姆蓝</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#91bef0</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">周边技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/22/%E5%85%B3%E4%BA%8Ehtmlcss%E7%9A%84%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/8/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/">Next &amp;raquo;</a>
@@ -1415,6 +1446,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">kcp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文章摘录</a>
               </li>
             
             <div class="clearfix"></div>
