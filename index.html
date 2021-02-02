@@ -1306,14 +1306,154 @@
 </tbody></table>
 <p>将文件描述符设置为非阻塞。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setnonblocking</span><span class="params">(<span class="keyword">int</span> fd)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> old_option = fcntl(fd, F_GETFL);</span><br><span class="line">    <span class="keyword">int</span> new_option = old_option | O_NONBLOCK;</span><br><span class="line">    fcntl(fd, F_SETFL, new_option);</span><br><span class="line">    <span class="keyword">return</span> old_option;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="第7章-linux服务器程序规范"><a href="#第7章-linux服务器程序规范" class="headerlink" title="第7章 linux服务器程序规范"></a>第7章 linux服务器程序规范</h1><ul>
+<li><input disabled type="checkbox"> 一般为后台进程(守护进程daemon)，父进程通常为init进程</li>
+<li><input disabled type="checkbox"> 含有日志系统，至少能够输出到日志文件</li>
+<li><input disabled type="checkbox"> 非root身份运行，有自己的运行账户</li>
+<li><input disabled type="checkbox"> 可配置的，多命令行或配置文件启动管理</li>
+<li><input disabled type="checkbox"> 生成pid文件到<code>/var/run</code>目录中，用以记录后台进程的PID</li>
+<li><input disabled type="checkbox"> 考虑系统资源和限制，能够承受负荷（文件描述符、内存总量）</li>
+</ul>
+<h2 id="7-1-日志"><a href="#7-1-日志" class="headerlink" title="7.1 日志"></a>7.1 日志</h2><h3 id="7-1-1-Linux系统日志"><a href="#7-1-1-Linux系统日志" class="headerlink" title="7.1.1 Linux系统日志"></a>7.1.1 Linux系统日志</h3><p><code>syslogd</code>为旧版的系统使用守护进程处理系统日志，<code>rsyslogd</code>为升级版的。<code>rsyslogd</code>可以接收用户进程输出日志和内核输出日志。用户可以调用<code>syslog</code>函数生成系统日志。日志输出到<code>/dev/log</code>中。<code>rsyslogd</code>监听该文件用来监听用户进程输出。内核日志之前使用<code>rklogd</code>来管理，现在<code>rsyslogd</code>额外模块实现了相同的功能。内核使用<code>printk</code>等函数打印到内核环状缓存（ring buffer）中，环状缓存直接映射到<code>/proc/kmsg</code>文件中。<code>rsyslogd</code>读取该文件获得内核日志。<code>rsyslogd</code>得到日志之后，输出到日志文件。调试信息<code>/var/log/debug</code>文件，普通信息<code>/var/log/messages</code>文件，内核消息<code>/var/log/kern.log</code>。如何分配可在<code>rsyslogd</code>配置文件中设置。<code>/etc/rsyslog.conf</code>为<code>rsyslogd</code>配置文件。</p>
+<p>配置文件可以设置项:</p>
+<ul>
+<li>内核日志输入路径</li>
+<li>是否接收UDP日志及其监听端口(默认514,<code>/etc/service</code>文件)</li>
+<li>是否接收TCP日志及其监听端口</li>
+<li>日志文件权限，包含哪些子配置文件<code>/etc/rsyslog.d/*.conf</code></li>
+<li><code>rsyslogd</code>的子配置文件指定各类日志的目标存储文件</li>
+</ul>
+<p><img src="/2021/01/06/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/home/danale/.config/Typora/typora-user-images/image-20210202094500252.png" alt="日志系统体系"></p>
+<h3 id="7-1-2-syslog函数"><a href="#7-1-2-syslog函数" class="headerlink" title="7.1.2 syslog函数"></a>7.1.2 syslog函数</h3><p>应用程序使用<code>syslog</code>函数与<code>rsyslogd</code>守护进程通讯。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;syslog.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">syslog</span><span class="params">(<span class="keyword">int</span> priority, <span class="keyword">const</span> <span class="keyword">char</span>* message, ...)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>变参,第二个参数message和第三个参数形成结构化输出，<code>priority</code>设施值与日志级别按位或。设施值默认值是LOG_USER。</p>
+<p><strong>日志级别</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;syslog.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG_EMERG    0 <span class="comment">/*系统不可用*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG_ALERT    1 <span class="comment">/*报警，需要立即采取动作*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG_CRIT     2 <span class="comment">/*非常严重的情况*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG_ERR      3 <span class="comment">/*错误*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG_WARNING  4 <span class="comment">/*警告*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG_NOTICE     5 <span class="comment">/*通知*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG_INFO     6 <span class="comment">/*信息*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG_DEBUG    7 <span class="comment">/*调试*/</span></span></span><br></pre></td></tr></table></figure>
 
 
 
+<p><code>openlog</code>函数可以改变<code>syslog</code>的输出方式,进一步结构化日志内容</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;syslog.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">openlog</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* ident, <span class="keyword">int</span> logopt, <span class="keyword">int</span> facility)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>ident</code>参数指定的字符串被添加到日志消息的时间和日期之后，常常设置为程序的名字。<code>logopt</code>参数影响后续的<code>syslog</code>的调用行为，参数值可按位或。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG_PID    0x01  <span class="comment">/*在日志消息中包含程序PID*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG_CONS   0x02  <span class="comment">/*如果消息不能记录到日志文件,则打印至终端*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG_ODELAY 0x04  <span class="comment">/*延迟打开日志功能直到第一次调用syslog*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG_NDELAY 0x08  <span class="comment">/*不延迟打开日志功能*/</span></span></span><br></pre></td></tr></table></figure>
+
+<p><code>facility</code>可以使用<code>syslog</code>函数中设施默认值。</p>
+<p>设置日志掩码可以对特定日志级别的数据进行过滤，日志级别大于日志掩码的都被忽略掉。返回设置之前的日志掩码。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;syslog.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setlogmask</span><span class="params">(<span class="keyword">int</span> maskpri)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>closelog</code>函数可以关闭日志功能。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;syslog.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">closelog</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
 
 
 
+<h2 id="7-2-用户信息"><a href="#7-2-用户信息" class="headerlink" title="7.2 用户信息"></a>7.2 用户信息</h2><h3 id="7-2-1-UID、EUID、GID和EGID"><a href="#7-2-1-UID、EUID、GID和EGID" class="headerlink" title="7.2.1 UID、EUID、GID和EGID"></a>7.2.1 UID、EUID、GID和EGID</h3><p>大部分的服务器程序必须以root身份启动，但不能以root身份运行。下面函数可以获得和设置当前进程的真实用户ID(UID)、有效用户ID(EUID)、真实组ID(GID)和有效组ID(EGID)：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">uid_t</span> <span class="title">getuid</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">uid_t</span> <span class="title">geteuid</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">gid_t</span> <span class="title">getgid</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">gid_t</span> <span class="title">getegid</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setuid</span><span class="params">(<span class="keyword">uid_t</span> uid)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">seteuid</span><span class="params">(<span class="keyword">uid_t</span> uid)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setgid</span><span class="params">(<span class="keyword">gid_t</span> gid)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setegid</span><span class="params">(<span class="keyword">gid_t</span> gid)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>一个进程拥有两个用户ID:UID和EUID。EUID存在的目的是方便资源的访问:允许运行程序的用户拥有该程序有效用户的权限。su程序的UID是所有人，有效用户的root。所有人可以用su来修改账户信息，修改账户信息需要访问<code>/etc/passwd</code>，这个文件只有<code>root</code>用户才有权限。那么普通用户就需要依靠一个中间人来访问该文件。普通用户可以依靠中间人的身份（EUID）访问中间人的资源。同理,真实组和有效组也是一样的道理。运行该程序的用户id对应uid，该程序的所有者对应euid.</p>
+<ul>
+<li>demo</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">uid_t</span> uid = getuid();</span><br><span class="line">    <span class="keyword">uid_t</span> euid = geteuid();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;userid is : %d, effective userid is : %d\n&quot;</span>,uid, euid);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译之后执行以下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown root:root test_uid # 修改目标文件所有者为root</span><br><span class="line">sudo chmod +s test_uid    # 设置目标文件的set-user-id标志</span><br></pre></td></tr></table></figure>
+
+<p>使用普通用户运行之后结果为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userid is : 1000, effective userid is : 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-2-2-切换用户"><a href="#7-2-2-切换用户" class="headerlink" title="7.2.2 切换用户"></a>7.2.2 切换用户</h3><p>以root身份启动的进程切换为以一个普通用户身份运行</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">switch_to_user</span><span class="params">(<span class="keyword">uid_t</span> user_id, <span class="keyword">gid_t</span> gp_id)</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*目标用户不是root*/</span></span><br><span class="line">    <span class="keyword">if</span> ((user_id == <span class="number">0</span>) &amp;&amp; (gp_id == <span class="number">0</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*确保当前用户是合法用户:root或目标用户*/</span></span><br><span class="line">    <span class="keyword">gid_t</span> gid = getgid();</span><br><span class="line">    <span class="keyword">uid_t</span> uid = getuid();</span><br><span class="line">    <span class="keyword">if</span> (((gid != <span class="number">0</span>) || (uid != <span class="number">0</span>)) &amp;&amp; ((gid != gp_id) || (uid != user_id))) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*已经是目标用户了，不用切换了*/</span></span><br><span class="line">    <span class="keyword">if</span> (uid != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*切换到目标用户*/</span></span><br><span class="line">    <span class="keyword">if</span> ((setgid(gp_id) &lt; <span class="number">0</span>) || (setuid(user_id) &lt; <span class="number">0</span>))&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
+
+<h2 id="7-3-进程间关系"><a href="#7-3-进程间关系" class="headerlink" title="7.3 进程间关系"></a>7.3 进程间关系</h2><h3 id="7-3-1-进程组"><a href="#7-3-1-进程组" class="headerlink" title="7.3.1 进程组"></a>7.3.1 进程组</h3><p>linux每个进程都有自己的PID，并且每个进程都有自己的进程组的ID(PGID)。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">pid_t</span> <span class="title">getpgid</span><span class="params">(<span class="keyword">pid_t</span> pid)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>获得指定进程组的ID,失败返回-1设置errno。</p>
+<p>每隔进程组都有一个首领进程,PID和PGID相同。进程组一直存在，直到所有进程都退出或加入其他进程组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;unistd.h&gt;</span><br><span class="line">int setpgid(pid_t pid, pid_t pgid);</span><br></pre></td></tr></table></figure>
+
+<p>将pid对应的进程的进程组设置为pgid对应的进程组。pid和pgid相同，该进程设置为进程组首领。pid为0，设置当前进程的PGID为pgid。pgid为0，使用pid作为目标的PGID。设置成功返回0，失败返回-1并设置errno。</p>
+<p>一个进程只能设置自己或子进程的PGID。并且，当子进程调用exec系列函数之后，不能再在父进程中对它设置PGID。子进程开启新的进程，新的进程所属的进程组ID为创建该进程的子进程。如果这时候父进程更改子进程的PGID会影响孙子进程相关ID。</p>
+<h3 id="7-3-2-会话"><a href="#7-3-2-会话" class="headerlink" title="7.3.2 会话"></a>7.3.2 会话</h3><p>一些关联的进程组将形成一个会话(session)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">pid_t</span> <span class="title">setsid</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>该函数不能由进程组首领进程调用，会产生错误。非首领进程调用</p>
+<ul>
+<li><input disabled type="checkbox"> 创建新的会话</li>
+<li><input disabled type="checkbox"> 调用进程称为会话的首领(调用该函数的进程)，该进程是该会话的唯一成员</li>
+<li><input disabled type="checkbox"> 新建一个进程组，PGID为调用进程的PID，并且该进程成为该组的首领进程</li>
+<li><input disabled type="checkbox"> 调用进程甩开终端</li>
+</ul>
+<p>成功返回PGID，失败返回-1并设置errno。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">pid_t</span> <span class="title">getsid</span><span class="params">(<span class="keyword">pid_t</span> pid)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>获得该进程pid和sid。</p>
+<h3 id="7-3-3-用ps命令查看进程关系"><a href="#7-3-3-用ps命令查看进程关系" class="headerlink" title="7.3.3 用ps命令查看进程关系"></a>7.3.3 用ps命令查看进程关系</h3><p><code>ps -o pid,ppid,pgid,sid,comm | less</code>命令可以查看进程之间的关系。</p>
+<h2 id="7-4-系统资源限制"><a href="#7-4-系统资源限制" class="headerlink" title="7.4 系统资源限制"></a>7.4 系统资源限制</h2><p>读写资源限制</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/resource.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getrlimit</span><span class="params">(<span class="keyword">int</span> resource, struct rlimit *rlim)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setrlimit</span><span class="params">(<span class="keyword">int</span> resource, <span class="keyword">const</span> struct rlimit *rlim)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rlimit</span>&#123;</span></span><br><span class="line">  <span class="keyword">rlim_t</span> rlim_cur;</span><br><span class="line">  <span class="keyword">rlim_t</span> rlim_max;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>rlim_t为整数类型，描述资源级别。rlim_cur指定资源的软限制，rlim_max指定资源的硬限制。软限制是一个建议性的、最好不要超越的限制，超越的话，系统可能向进程发送信号以终止其运行。CPU时间超过,产生SIGXCPU信号，文件尺寸超过限制，产生SIGXFSZ信号。只有root用户才可以改变资源的硬限制。也可以通过配置文件来永久改变系统软硬件限制。</p>
+<p>常见的资源限制类型</p>
+<table>
+<thead>
+<tr>
+<th>资源限制类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RLIMIT_AS</td>
+<td>进程虚拟内存总量限制（单位字节），操过该限制将使得某些函数(mmap)产生ENOMEM错误</td>
+</tr>
+<tr>
+<td>RLIMIT_CORE</td>
+<td>进程核心转储文件（core dump）的大小限制(单位是字节)，其值为0表示不产生核心转储文件</td>
+</tr>
+<tr>
+<td>RLIMIT_CPU</td>
+<td>进程CPU时间限制(单位是秒)</td>
+</tr>
+<tr>
+<td>RLIMIT_DATA</td>
+<td>进程数据段(初始化数据data段，未初始化数据bss段和堆)限制(单位为字节)</td>
+</tr>
+<tr>
+<td>RLIMIT_FSIZE</td>
+<td>文件大小限制(单位是字节)，超过该限制将使得某些函数(write)产生EFBIG错误</td>
+</tr>
+<tr>
+<td>RLIMIT_NOFILE</td>
+<td>文件描述符数量限制，超过该限制将使得某些函数(比如pipe)产生EMFILE错误</td>
+</tr>
+<tr>
+<td>RLIMIT_NPROC</td>
+<td>用户能够创建的进程数限制，超过该限制将使得某些函数(fork)产生EAGAIN错误</td>
+</tr>
+<tr>
+<td>RLIMIT_SIGPENDING</td>
+<td>用户能够挂起的信号数量限制</td>
+</tr>
+<tr>
+<td>RLIMIT_STACK</td>
+<td>进程栈内存限制(单位是字节),超过该限制将引起SIGSEGV信号</td>
+</tr>
+</tbody></table>
+<p><code>setrlimit</code>和<code>getrlimit</code>成功返回0，失败返回-1并设置errno。</p>
+<h2 id="7-5-改变工作目录和根目录"><a href="#7-5-改变工作目录和根目录" class="headerlink" title="7.5 改变工作目录和根目录"></a>7.5 改变工作目录和根目录</h2><p>获得当前工作目录和改变进程工作目录的函数分别是</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">getcwd</span><span class="params">(<span class="keyword">char</span>* buf, <span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">chdir</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* path)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>buf</code>为存储当前工作目录，<code>size</code>指定路径长度。如果目录绝对路径（加上‘\0’）超过size,<code>gecwd</code>返回NULL并设置errno为ERANGE。如果buf为NULL，size有效。<code>getcwd</code>自动申请内存存储，并返回指针。失败返回NULL并设置errno。</p>
+<p><code>chdir</code>函数的path参数指定要切换到的目标目录。成功时返回0，失败时返回-1并设置errno。</p>
+<p>改变进程根目录的函数是<code>chroot</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">chroot</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* path)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>chroot</code>并不改变进程的当前工作目录,调用chroot之后还要使用<code>chdir(&quot;/&quot;)</code>来将工作目录切换至新的根目录。改变根目录之后可能无法访问/dev等目录了。默认根目录是”/“,更改根目录为”/tmp”之后。使用”/dev”路径访问的路径其实是”/temp/dev”路径。所以，只有特权进程才能改变根目录。</p>
+<h2 id="7-6-服务器程序后台优化"><a href="#7-6-服务器程序后台优化" class="headerlink" title="7.6 服务器程序后台优化"></a>7.6 服务器程序后台优化</h2>
       
 
       
