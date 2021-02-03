@@ -1323,7 +1323,7 @@
 <li>日志文件权限，包含哪些子配置文件<code>/etc/rsyslog.d/*.conf</code></li>
 <li><code>rsyslogd</code>的子配置文件指定各类日志的目标存储文件</li>
 </ul>
-<p><img src="/2021/01/06/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/home/danale/.config/Typora/typora-user-images/image-20210202094500252.png" alt="日志系统体系"></p>
+<p><img src="/2021/01/06/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/1.png" alt="日志系统体系"></p>
 <h3 id="7-1-2-syslog函数"><a href="#7-1-2-syslog函数" class="headerlink" title="7.1.2 syslog函数"></a>7.1.2 syslog函数</h3><p>应用程序使用<code>syslog</code>函数与<code>rsyslogd</code>守护进程通讯。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;syslog.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">syslog</span><span class="params">(<span class="keyword">int</span> priority, <span class="keyword">const</span> <span class="keyword">char</span>* message, ...)</span></span>;</span><br></pre></td></tr></table></figure>
 
