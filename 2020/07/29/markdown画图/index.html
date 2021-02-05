@@ -16,7 +16,7 @@
 <meta property="og:description" content="绘制图关系选择mermaid，在里面选择graph。有下列选项方向选择    类型 说明    TB Top-&gt;Bottom   BT Bottom-&gt;Top   LR Left-&gt;Right   RL Right-&gt;Left   使用--&gt;连接两个节点，名称一致为一个节点.--&gt;中间不能有空格 graph TB A--&gt;B B--&gt;A A--&gt;C   grap">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-07-29T15:19:34.000Z">
-<meta property="article:modified_time" content="2021-02-04T12:38:13.035Z">
+<meta property="article:modified_time" content="2021-02-05T12:25:08.064Z">
 <meta property="article:author" content="long">
 <meta property="article:tag" content="笔记">
 <meta property="article:tag" content="markdown">
@@ -399,8 +399,6 @@ title 甘特图
         测试报告                               : 48h</pre>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">gantt</span><br><span class="line">dateFormat YYYY-MM-DD</span><br><span class="line">title 甘特图</span><br><span class="line"> section 设计</span><br><span class="line">        需求                      :done,    des1, 2014-01-06,2014-01-08</span><br><span class="line">        原型                      :active,  des2, 2014-01-09, 3d</span><br><span class="line">        UI设计                     :         des3, after des2, 5d</span><br><span class="line">    未来任务                     :         des4, after des3, 5d</span><br><span class="line">        section 开发</span><br><span class="line">        学习准备理解需求                      :crit, done, 2014-01-06,24h</span><br><span class="line">        设计框架                             :crit, done, after des2, 2d</span><br><span class="line">        开发                                 :crit, active, 3d</span><br><span class="line">        未来任务                              :crit, 5d</span><br><span class="line">        耍                                   :2d</span><br><span class="line">        section 测试</span><br><span class="line">        功能测试                              :active, a1, after des3, 3d</span><br><span class="line">        压力测试                               :after a1  , 20h</span><br><span class="line">        测试报告                               : 48h</span><br></pre></td></tr></table></figure>
-
-
 
 
       
