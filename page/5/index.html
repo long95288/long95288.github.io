@@ -200,6 +200,34 @@
 <h4 id="github图片显示问题"><a href="#github图片显示问题" class="headerlink" title="github图片显示问题"></a>github图片显示问题</h4><h5 id="一-查询能够ping通的地址"><a href="#一-查询能够ping通的地址" class="headerlink" title="一 查询能够ping通的地址"></a>一 查询能够ping通的地址</h5><p><a target="_blank" rel="noopener" href="https://site.ip138.com/raw.githubusercontent.com/">查询网ip138.com</a></p>
 <h5 id="更改本地dns"><a href="#更改本地dns" class="headerlink" title="更改本地dns"></a>更改本地dns</h5><p>windows在文件夹<code>C:\Windows\System32\drivers\etc</code>中更改hosts文件,将地址放入。<br><code>151.101.76.133 raw.githubusercontent.com</code></p>
 <h5 id="刷新"><a href="#刷新" class="headerlink" title="刷新"></a>刷新</h5><p>使用命令行<code>ipconfig /flushdns</code>刷新dns.</p>
+<h2 id="windows-mklink命令详解"><a href="#windows-mklink命令详解" class="headerlink" title="windows mklink命令详解"></a>windows mklink命令详解</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">MKLINK [[&#x2F;D] | [&#x2F;H] | [&#x2F;J]] Link Target</span><br><span class="line"></span><br><span class="line">        &#x2F;D      创建目录符号链接。默认为文件</span><br><span class="line">                符号链接。</span><br><span class="line">        &#x2F;H      创建硬链接而非符号链接。</span><br><span class="line">        &#x2F;J      创建目录联接。</span><br><span class="line">        Link    指定新的符号链接名称。</span><br><span class="line">        Target  指定新链接引用的路径</span><br><span class="line">                (相对或绝对)。</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建符号链接"><a href="#创建符号链接" class="headerlink" title="创建符号链接"></a>创建符号链接</h3><p>为文件创建符号链接:</p>
+<p>假设有一个文件名为aa.txt，想要为它创建一个符号链接名为bb.txt，通过bb.txt可以访问到aa.txt。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;mklink bb.txt aa.txt</span><br></pre></td></tr></table></figure>
+
+<p>通过上述命令就为aa.txt创建了软链接。同理，有一个文件夹名为aa,想要为这个文件夹创建个符号链接bb文件夹。使用下面的命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;mklink &#x2F;D bb aa</span><br></pre></td></tr></table></figure>
+
+<p>如果link已经存在就不会创建成功。软连接的特性，删除链接的目标软连接失效。上述操作之后删除aa.txt、aa文件夹。无法通过bb.txt和bb去访问目标了。因为目标不见了。</p>
+<pre class="mermaid">graph LR
+aa.txt文件描述 --> 存储区域
+bb.txt软链接-->aa.txt文件描述
+cc.txt软链接-->aa.txt文件描述</pre>
+
+<p>删除了aa.txt之后,软链接无法再访问到存储区域。</p>
+<h3 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h3><p>硬连接是相对软连接的。</p>
+<pre class="mermaid">graph LR
+aa.txt文件-->存储区域
+bb.txt硬链接-->存储区域
+cc.txt硬连接-->存储区域</pre>
+
+<p>无论通过那种方式更改文件内容，都会同时生效。</p>
+<h3 id="目录联结"><a href="#目录联结" class="headerlink" title="目录联结"></a>目录联结</h3><p>使用下面的命令为target目录创建了一个联结</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;mklink &#x2F;J aa target</span><br></pre></td></tr></table></figure>
+
+<p>和使用<code>mklink /D aa target</code>有何不同之处，使用<code>/D</code>产生的符号链接移动到其他地方并不会影响target文件内的数据。</p>
+<p>但是使用目录联结的话，移动aa到另外一个地方，aa里面的内容也会移动过去。然后target里面的内容就被aa给挪到另一个地方了。目录链接移动的话也会影响target,符号链接的目录移动不会影响target。</p>
 
       
 
