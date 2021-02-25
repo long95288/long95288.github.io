@@ -17,7 +17,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://long95288.github.io/2020/03/23/cmd%E5%91%BD%E4%BB%A4%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/windows%E9%85%8D%E7%BD%AEdns.png">
 <meta property="article:published_time" content="2020-03-23T13:44:32.000Z">
-<meta property="article:modified_time" content="2021-02-11T11:41:12.101Z">
+<meta property="article:modified_time" content="2021-02-24T12:54:03.460Z">
 <meta property="article:author" content="long">
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
@@ -231,6 +231,13 @@ cc.txt硬连接-->存储区域</pre>
 
 <p>和使用<code>mklink /D aa target</code>有何不同之处，使用<code>/D</code>产生的符号链接移动到其他地方并不会影响target文件内的数据。</p>
 <p>但是使用目录联结的话，移动aa到另外一个地方，aa里面的内容也会移动过去。然后target里面的内容就被aa给挪到另一个地方了。目录链接移动的话也会影响target,符号链接的目录移动不会影响target。</p>
+<h2 id="命令行控制音量大小"><a href="#命令行控制音量大小" class="headerlink" title="命令行控制音量大小"></a>命令行控制音量大小</h2><p>以下是这三个键盘的相应键码：<br>VK_VOLUME_MUTE (0xAD)<br>Windows 2000/XP: Volume Mute key   音量静音切换键</p>
+<p>VK_VOLUME_DOWN (0xAE)<br>Windows 2000/XP: Volume Down key  音量递减键</p>
+<p>VK_VOLUME_UP (0xAF)<br>Windows 2000/XP: Volume Up key 音量递增键</p>
+<p>通过WIndows API的键盘发送函数，我们可以简单而快速的实现音量控制，以下是代码：</p>
+<p>/<em>音量加</em>/<br>keybd_event (0xAF, 0, 0, 0);<br>keybd_event (0xAF, 0, KEYEVENTF_KEYUP, 0)</p>
+<p>/<em>音量减</em>/<br>keybd_event (0xAE, 0, 0, 0);<br>keybd_event (0xAE, 0, KEYEVENTF_KEYUP, 0)</p>
+<p>/<em>静音切换</em>/<br>keybd_event (0xAD, 0, 0, 0);<br>keybd_event (0xAD, 0, KEYEVENTF_KEYUP, 0)</p>
 
       
 
