@@ -158,6 +158,185 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-linux安装MySql" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/15/linux%E5%AE%89%E8%A3%85MySql/">linux安装MySql</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/15/linux%E5%AE%89%E8%A3%85MySql/" class="archive-article-date">
+  	<time datetime="2019-07-15T15:18:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>转载来的哦！！</p>
+<h5 id="yum安装"><a href="#yum安装" class="headerlink" title="yum安装"></a>yum安装</h5><p>介绍Linux下使用Yum安装Mysql：</p>
+<ol>
+<li>在mysql官网下载mysql的yum源</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;repo.mysql.com&#x2F;&#x2F;mysql80-community-release-el7-3.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>上传到centos中并执行本地安装</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum localinstall mysql80-community-release-el7-3.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>安装服务</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install mysql-community-server</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>查看Mysql服务的状态</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld status</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>开启Mysql服务</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld start</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>查看配置文件，找到日志目录</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;my.cnf</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>查看日志文件，找到初始密码</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;var&#x2F;log&#x2F;mysqld.log</span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>登录MySQL</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+
+<ol start="9">
+<li>修改初始密码（Root.123）大小写字母加数字加符号</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;Root.123&#39;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="远程授权"><a href="#远程授权" class="headerlink" title="远程授权"></a>远程授权</h5><p>授权远程登录账号：</p>
+<ol>
+<li>以下是5.7版本的方法，实测在8.0以上版本不行</li>
+</ol>
+<ul>
+<li>第一个xxxx是用户名，第二个xxxx是密码，意思是通过xxxx用户和密码可以从任何主机连接到mysql服务器。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grant all privileges on *.* to &#39;xxxx&#39;@&#39;%&#39; identified by &#39;xxxxxx&#39; with grant option;</span><br><span class="line">grant all privileges on *.* to &#39;root&#39;@&#39;%&#39; identified by &#39;123456&#39; with grant option;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>权限立即生效</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="2">
+<li>以下是适用于8.0版本的授权：</li>
+</ol>
+<ul>
+<li>进入数据库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看当前用户信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select host, user, authentication_string, plugin from user;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改MySQL对密码的要求</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set global validate_password.policy&#x3D;0;</span><br><span class="line">set global validate_password.length&#x3D;1;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建远程连接的用户</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模板 create user &#x27;xxxx&#x27;@&#x27;x&#x27; identified by &#x27;xxxxxxx&#x27;;</span></span><br><span class="line">create user <span class="string">&#x27;kang&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified by <span class="string">&#x27;kang123&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改密码加密规则，mysql8.0默认的加密方式是“caching_sha2_password”，而navicat只支持以前的”mysql_native_password”</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &#39;kang&#39;@&#39;%&#39; IDENTIFIED WITH mysql_native_password BY &#39;kang123&#39;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看加密规则是否改变</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select host, user, authentication_string, plugin from user;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>给新用户添加权限，最后刷新权限。<br><code>*.*</code>说明。前一个是数据库名称，后一个是表名称。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#39;kang&#39;@&#39;%&#39;;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">mysql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/15/linux%E5%AE%89%E8%A3%85MySql/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-spring笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1049,93 +1228,6 @@
 
 
   
-    <article id="post-爬取B站的视频链接" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/22/%E7%88%AC%E5%8F%96B%E7%AB%99%E7%9A%84%E8%A7%86%E9%A2%91%E9%93%BE%E6%8E%A5/">爬取B站的视频链接</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/22/%E7%88%AC%E5%8F%96B%E7%AB%99%E7%9A%84%E8%A7%86%E9%A2%91%E9%93%BE%E6%8E%A5/" class="archive-article-date">
-  	<time datetime="2019-04-22T07:57:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="爬取目的"><a href="#爬取目的" class="headerlink" title="爬取目的"></a>爬取目的</h3><p>为了下载b站的教学视频url地址，便于使用唧唧来下载视频</p>
-<h3 id="爬取的信息"><a href="#爬取的信息" class="headerlink" title="爬取的信息"></a>爬取的信息</h3><p>视频的URL,视频的title,视频的时长length</p>
-<h3 id="存储的格式"><a href="#存储的格式" class="headerlink" title="存储的格式"></a>存储的格式</h3><p><img src="/2019/04/22/%E7%88%AC%E5%8F%96B%E7%AB%99%E7%9A%84%E8%A7%86%E9%A2%91%E9%93%BE%E6%8E%A5/dataformat.jpg"></p>
-<h3 id="关键步骤"><a href="#关键步骤" class="headerlink" title="关键步骤"></a>关键步骤</h3><p>由于使用异步加载的方式加载页面，所以不能用传统的方式来爬取</p>
-<p>1、获得所需的数据接口<br><img src="/2019/04/22/%E7%88%AC%E5%8F%96B%E7%AB%99%E7%9A%84%E8%A7%86%E9%A2%91%E9%93%BE%E6%8E%A5/api1.jpg"><br><img src="/2019/04/22/%E7%88%AC%E5%8F%96B%E7%AB%99%E7%9A%84%E8%A7%86%E9%A2%91%E9%93%BE%E6%8E%A5/api2.jpg"><br>通过更改page的值便可以获得下一个页面的视频数据<br>返回的数据是json数据<br><img src="/2019/04/22/%E7%88%AC%E5%8F%96B%E7%AB%99%E7%9A%84%E8%A7%86%E9%A2%91%E9%93%BE%E6%8E%A5/jsondata.png"></p>
-<p>vlist数据和pages数据是自己需要的数据<br>vlist数据格式<br><img src="/2019/04/22/%E7%88%AC%E5%8F%96B%E7%AB%99%E7%9A%84%E8%A7%86%E9%A2%91%E9%93%BE%E6%8E%A5/vlist.png"><br>从vlist数据中提取出<br>aid 视频的av号<br>title 视频的标题<br>length 视频的长度</p>
-<p>Python代码</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># encoding=utf-8</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">header = &#123;</span><br><span class="line">    <span class="string">&#x27;user-agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) &#x27;</span></span><br><span class="line">                  <span class="string">&#x27;Chrome/71.0.3578.98 Safari/537.36&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取文件</span></span><br><span class="line">midf = open(<span class="string">&#x27;mid.txt&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">mid = midf.readline()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成初始化的请求url </span></span><br><span class="line">page1 = <span class="string">&quot;https://space.bilibili.com/ajax/member/getSubmitVideos?mid=&quot;</span>+str(mid)+\</span><br><span class="line">                <span class="string">&quot;&amp;pagesize=30&amp;tid=0&amp;page=1&amp;keyword=&amp;order=pubdate&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入文件</span></span><br><span class="line">csvf = open(<span class="string">&#x27;data.csv&#x27;</span>,<span class="string">&#x27;w+&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">csvwriter = csv.writer(csvf)</span><br><span class="line">csvwriter.writerow((<span class="string">&#x27;URL&#x27;</span>,<span class="string">&#x27;title&#x27;</span>,<span class="string">&#x27;length&#x27;</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入数据函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">saveData</span>(<span class="params">jsondata</span>):</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> jsondata:</span><br><span class="line">        url = <span class="string">&quot;https://www.bilibili.com/video/av&quot;</span>+str(item[<span class="string">&#x27;aid&#x27;</span>])</span><br><span class="line">        title = item[<span class="string">&#x27;title&#x27;</span>]</span><br><span class="line">        length = item[<span class="string">&#x27;length&#x27;</span>]</span><br><span class="line">        csvwriter.writerow((url,title,length))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获得数据函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getTextData</span>(<span class="params">url</span>):</span></span><br><span class="line">    res = requests.get(url,headers=header)</span><br><span class="line">    <span class="keyword">return</span> res.text</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">start</span>():</span></span><br><span class="line">    jsondata = getTextData(page1)</span><br><span class="line">    s = json.loads(jsondata)</span><br><span class="line">    pages =  s[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;pages&#x27;</span>]</span><br><span class="line">    <span class="keyword">for</span> page <span class="keyword">in</span> range(<span class="number">1</span>,pages):</span><br><span class="line">        geturl = <span class="string">&quot;https://space.bilibili.com/ajax/member/getSubmitVideos?mid=&quot;</span>+str(mid)+\</span><br><span class="line">                <span class="string">&quot;&amp;pagesize=30&amp;tid=0&amp;page=&quot;</span>+\</span><br><span class="line">                str(page)+<span class="string">&quot;&amp;keyword=&amp;order=pubdate&quot;</span></span><br><span class="line">        jsondata = getTextData(geturl)</span><br><span class="line">        s1 = json.loads(jsondata)</span><br><span class="line">        saveData(s1[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;vlist&#x27;</span>])</span><br><span class="line">        time.sleep(<span class="number">2</span>+random.random())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始爬取</span></span><br><span class="line">start()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="爬取结果"><a href="#爬取结果" class="headerlink" title="爬取结果"></a>爬取结果</h3><p><img src="/2019/04/22/%E7%88%AC%E5%8F%96B%E7%AB%99%E7%9A%84%E8%A7%86%E9%A2%91%E9%93%BE%E6%8E%A5/result.png"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/22/%E7%88%AC%E5%8F%96B%E7%AB%99%E7%9A%84%E8%A7%86%E9%A2%91%E9%93%BE%E6%8E%A5/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/8/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/">Next &amp;raquo;</a>
@@ -1450,6 +1542,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文章摘录</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">备忘</a>
               </li>
             
             <div class="clearfix"></div>
