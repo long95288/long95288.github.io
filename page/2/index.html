@@ -527,7 +527,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="关机、重启、注销"><a href="#关机、重启、注销" class="headerlink" title="关机、重启、注销"></a>关机、重启、注销</h3><p><code>shutdown -h now</code>: 立即关机<br><code>shutdown -h 1</code>: 1分钟后关机<br><code>shutdown -r now</code>: 立即重启<br><code>h</code>表示:halt、<code>r</code>表示:reboot、<code>syn</code>:内存数据同步至磁盘</p>
+        <h3 id="运行脚本输入回车"><a href="#运行脚本输入回车" class="headerlink" title="运行脚本输入回车"></a>运行脚本输入回车</h3><p>假设有一个程序a,运行的时候需要连续输入几个回车才能运行结束。<br>使用命令:<code>echo &quot;\n\n\n\n\n\n&quot; -e | a</code>,可以通过管道去输入回车。</p>
+<h3 id="关机、重启、注销"><a href="#关机、重启、注销" class="headerlink" title="关机、重启、注销"></a>关机、重启、注销</h3><p><code>shutdown -h now</code>: 立即关机<br><code>shutdown -h 1</code>: 1分钟后关机<br><code>shutdown -r now</code>: 立即重启<br><code>h</code>表示:halt、<code>r</code>表示:reboot、<code>syn</code>:内存数据同步至磁盘</p>
 <p><code>logout</code>: 注销，只在级别3下面有效</p>
 <h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3><h4 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h4><blockquote>
 <p>useradd [选项] 用户名</p>
