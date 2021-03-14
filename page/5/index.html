@@ -158,6 +158,83 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Mysql大小写问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/09/Mysql%E5%A4%A7%E5%B0%8F%E5%86%99%E9%97%AE%E9%A2%98/">Mysql大小写问题</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/09/Mysql%E5%A4%A7%E5%B0%8F%E5%86%99%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2020-04-09T04:39:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Mysql复制表名自动转换大小写问题"><a href="#Mysql复制表名自动转换大小写问题" class="headerlink" title="Mysql复制表名自动转换大小写问题"></a>Mysql复制表名自动转换大小写问题</h4><p>这个问题是出现在windows平台。linux就没有出现过</p>
+<h5 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h5><p>找到mysql的配置文件my.ini<br>添加如下的kv</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lower_case_table&#x3D;2</span><br></pre></td></tr></table></figure>
+<p>进入任务管理器,找到服务,重启mysql服务。<br>如果已经是迁移完成的,可以在配置文件中找到data的路径。进入对应的路径.将小写的.fmt文件名更改成大小写就可以了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/09/Mysql%E5%A4%A7%E5%B0%8F%E5%86%99%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-vmware出现Device-Credential-Guard问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1664,86 +1741,6 @@ cc.txt硬连接-->存储区域</pre>
 
 
   
-    <article id="post-m3u8j解码和合并工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/09/m3u8j%E8%A7%A3%E7%A0%81%E5%92%8C%E5%90%88%E5%B9%B6%E5%B7%A5%E5%85%B7/">m3u8解码和合并工具</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/09/m3u8j%E8%A7%A3%E7%A0%81%E5%92%8C%E5%90%88%E5%B9%B6%E5%B7%A5%E5%85%B7/" class="archive-article-date">
-  	<time datetime="2019-10-09T14:30:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="AES-128解密函数"><a href="#AES-128解密函数" class="headerlink" title="AES-128解密函数"></a>AES-128解密函数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 解密文件</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> sourcePath 源文件</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> destinationPath 保存的文件</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> key 密钥</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">decryptFile</span><span class="params">(String sourcePath,String destinationPath,String key)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    File outFile = <span class="keyword">new</span> File(destinationPath);</span><br><span class="line">    <span class="keyword">if</span> (!outFile.exists())&#123;</span><br><span class="line">        outFile.createNewFile();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 待解密的文件输入流</span></span><br><span class="line">    FileInputStream fis = <span class="keyword">new</span> FileInputStream(sourcePath);</span><br><span class="line">    FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(outFile);</span><br><span class="line"></span><br><span class="line">    Cipher cipher = Cipher.getInstance(<span class="string">&quot;AES/CBC/PKCS5Padding&quot;</span>);</span><br><span class="line">      <span class="keyword">byte</span>[] bytes = key.getBytes();</span><br><span class="line">    SecretKeySpec secretKey = <span class="keyword">new</span> SecretKeySpec(bytes,<span class="string">&quot;AES&quot;</span>);</span><br><span class="line">    IvParameterSpec iv = <span class="keyword">new</span> IvParameterSpec(key.getBytes());</span><br><span class="line">    cipher.init(Cipher.DECRYPT_MODE,secretKey,iv);</span><br><span class="line">    <span class="comment">// 解密流</span></span><br><span class="line">    CipherInputStream cis = <span class="keyword">new</span> CipherInputStream(fis,cipher);</span><br><span class="line">    <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> ((n = cis.read(buffer)) != -<span class="number">1</span>)&#123;</span><br><span class="line">        fos.write(buffer,<span class="number">0</span>,n);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">&quot;解密成功:&quot;</span>);</span><br><span class="line">    cis.close();</span><br><span class="line">    fos.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="主类"><a href="#主类" class="headerlink" title="主类"></a>主类</h3><p>  用来识别m3u8文件</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    String sourcePath =<span class="string">&quot;G:\\win下载\\m3u8\\&quot;</span>;</span><br><span class="line">    String destination = <span class="string">&quot;G:\\win下载\\m3u8\\&quot;</span>;</span><br><span class="line">    String m3u8 = <span class="string">&quot;G:\\win下载\\m3u8\\m3u8.m3u8&quot;</span>;</span><br><span class="line">    String key = <span class="string">&quot;tkr87ysao6qehn95&quot;</span>;</span><br><span class="line">    FileReader fileReader = <span class="keyword">null</span>;</span><br><span class="line">    BufferedReader reader = <span class="keyword">null</span>;</span><br><span class="line">    ArrayList&lt;String&gt; files = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        fileReader = <span class="keyword">new</span> FileReader(m3u8);</span><br><span class="line">        reader = <span class="keyword">new</span> BufferedReader(fileReader);</span><br><span class="line">        String filename = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">while</span> (( filename = reader.readLine())!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(filename.charAt(<span class="number">0</span>)!=<span class="string">&#x27;#&#x27;</span>)&#123;</span><br><span class="line">                files.add(filename);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(fileReader!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            fileReader.close();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(reader!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            reader.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">catch</span> (IOException e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> partSize = files.size();</span><br><span class="line">    String sourceFile;</span><br><span class="line">    String destFile;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i &lt; partSize ;i++)&#123;</span><br><span class="line">            sourceFile = sourcePath + files.get(i);</span><br><span class="line">            destFile = destination + <span class="string">&quot;e&quot;</span>+files.get(i);</span><br><span class="line">            EncryFileUtil.decryptFile(sourceFile,destFile,key);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;========全部解密成功============&quot;</span>);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 合并数据</span></span><br><span class="line">        String mergeFilePath = sourcePath+<span class="string">&quot;merge.ts&quot;</span>;</span><br><span class="line">        FileOutputStream mergeFile = <span class="keyword">new</span> FileOutputStream(mergeFilePath);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;partSize;i++)&#123;</span><br><span class="line">            String encodeFile = sourcePath +<span class="string">&quot;e&quot;</span>+files.get(i);</span><br><span class="line">            FileInputStream inputStream = <span class="keyword">new</span> FileInputStream(encodeFile);</span><br><span class="line">            <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="keyword">int</span> n=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> ((n = inputStream.read(buffer))!= -<span class="number">1</span>)&#123;</span><br><span class="line">                mergeFile.write(buffer,<span class="number">0</span>,n);</span><br><span class="line">            &#125;</span><br><span class="line">            inputStream.close();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;合并数据成功&quot;</span>);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (IOException e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/09/m3u8j%E8%A7%A3%E7%A0%81%E5%92%8C%E5%90%88%E5%B9%B6%E5%B7%A5%E5%85%B7/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
@@ -2062,6 +2059,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">备忘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">图像处理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ffmpeg</a>
               </li>
             
             <div class="clearfix"></div>
