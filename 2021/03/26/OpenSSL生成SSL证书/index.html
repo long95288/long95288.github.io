@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://long95288.github.io">
-  <title>风兮木落</title>
+  <title>OpenSSL生成SSL证书 | 风兮木落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="代码和文学本来就是一个世界的，寻找文学和code的和谐统一">
-<meta property="og:type" content="website">
-<meta property="og:title" content="风兮木落">
-<meta property="og:url" content="http://long95288.github.io/page/6/index.html">
+  <meta name="description" content="OpenSSL生成证书.key格式：私有的密钥 .csr格式：证书签名请求（证书请求文件），含有公钥信息，certificate signing request的缩写 .crt格式：证书文件，certificate的缩写 .crl格式：证书吊销列表，Certificate Revocation List的缩写 .pem格式：用于导出，导入证书时候的证书的格式，有证书开头，结尾的格式 CA根证书的生">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenSSL生成SSL证书">
+<meta property="og:url" content="http://long95288.github.io/2021/03/26/OpenSSL%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6/index.html">
 <meta property="og:site_name" content="风兮木落">
-<meta property="og:description" content="代码和文学本来就是一个世界的，寻找文学和code的和谐统一">
+<meta property="og:description" content="OpenSSL生成证书.key格式：私有的密钥 .csr格式：证书签名请求（证书请求文件），含有公钥信息，certificate signing request的缩写 .crt格式：证书文件，certificate的缩写 .crl格式：证书吊销列表，Certificate Revocation List的缩写 .pem格式：用于导出，导入证书时候的证书的格式，有证书开头，结尾的格式 CA根证书的生">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-26T11:39:27.000Z">
+<meta property="article:modified_time" content="2021-03-26T11:43:20.865Z">
 <meta property="article:author" content="long">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="风兮木落" type="application/atom+xml">
@@ -156,37 +159,90 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-book118预览文档下载" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-OpenSSL生成SSL证书" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/10/book118%E9%A2%84%E8%A7%88%E6%96%87%E6%A1%A3%E4%B8%8B%E8%BD%BD/">book118预览文档下载</a>
+    <h1 class="article-title" itemprop="name">
+      OpenSSL生成SSL证书
     </h1>
   
 
         
-        <a href="/2019/10/10/book118%E9%A2%84%E8%A7%88%E6%96%87%E6%A1%A3%E4%B8%8B%E8%BD%BD/" class="archive-article-date">
-  	<time datetime="2019-10-10T15:17:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-10</time>
+        <a href="/2021/03/26/OpenSSL%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6/" class="archive-article-date">
+  	<time datetime="2021-03-26T11:39:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="获得预览文档的图片的全部url"><a href="#获得预览文档的图片的全部url" class="headerlink" title="获得预览文档的图片的全部url"></a>获得预览文档的图片的全部url</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 以下代码在</span></span><br><span class="line"><span class="comment"> * https://max.book118.com</span></span><br><span class="line"><span class="comment"> * 控制台中执行，复制到控制台就可以了</span></span><br><span class="line"><span class="comment"> * !!!!需要注意的是每张图片都渲染到页面中(预览全部)了再运行,否则会出现部分的图片路径获取不了</span></span><br><span class="line"><span class="comment"> * 从控制台中复制路径字符串</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getAllImageURL</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> allImageDivs = <span class="built_in">document</span>.getElementsByClassName(<span class="string">&quot;webpreview-item&quot;</span>);</span><br><span class="line">  <span class="keyword">var</span> urls = [];</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;allImageDivs.length;i++)&#123;</span><br><span class="line">    <span class="keyword">var</span> url = allImageDivs[i].children[<span class="number">0</span>].src;</span><br><span class="line">    <span class="comment">// 打印每张图片的url</span></span><br><span class="line">    <span class="built_in">console</span>.log(i+<span class="string">&quot;:&quot;</span>+url);</span><br><span class="line">    urls.push(url);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">localStorage</span>.setItem(<span class="string">&quot;urls&quot;</span>,urls);</span><br><span class="line">&#125;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  getAllImageURL();</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;==以下内容是图片的路径字符串===&quot;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">localStorage</span>.getItem(<span class="string">&quot;urls&quot;</span>));</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;=============================&quot;</span>);</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="comment">//===================================================================</span></span><br></pre></td></tr></table></figure>
-<p>运行的结果:<br><img src="/2019/10/10/book118%E9%A2%84%E8%A7%88%E6%96%87%E6%A1%A3%E4%B8%8B%E8%BD%BD/geturllist.png"></p>
-<p>右键复制的得到的字符串,后面要用</p>
-<h3 id="根据url字符串下载图片"><a href="#根据url字符串下载图片" class="headerlink" title="根据url字符串下载图片"></a>根据url字符串下载图片</h3><p> 由于跨域问题，下载图片需要在图片所在的域名下下载。。。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 以下代码在 </span></span><br><span class="line"><span class="comment"> * https://view-cache.book118.com/</span></span><br><span class="line"><span class="comment"> * 的控制台中执行。</span></span><br><span class="line"><span class="comment"> * !!!! 执行前需要将获得的url字符串粘贴到list中</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="built_in">window</span>.downloadImage = <span class="function"><span class="keyword">function</span> (<span class="params">url,filename</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 请求延迟,最好设置大一点 64000ms</span></span><br><span class="line">  <span class="keyword">var</span> timeout = <span class="built_in">Math</span>.random() * <span class="number">64000</span>;</span><br><span class="line">  <span class="built_in">this</span>.setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    xhr.open(<span class="string">&quot;get&quot;</span>, url, <span class="literal">true</span>);</span><br><span class="line">    xhr.responseType = <span class="string">&quot;blob&quot;</span>;</span><br><span class="line">    xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">this</span>.status == <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> blob = <span class="built_in">this</span>.response;</span><br><span class="line">        <span class="keyword">var</span> downloadElement = <span class="built_in">document</span>.createElement(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">        <span class="keyword">var</span> href = <span class="built_in">window</span>.URL.createObjectURL(blob); <span class="comment">//创建下载的链接</span></span><br><span class="line">        downloadElement.href = href;</span><br><span class="line">        downloadElement.download = filename; <span class="comment">//下载后文件名</span></span><br><span class="line">        <span class="built_in">document</span>.body.appendChild(downloadElement);</span><br><span class="line">        downloadElement.click(); <span class="comment">//点击下载</span></span><br><span class="line">        <span class="built_in">document</span>.body.removeChild(downloadElement); <span class="comment">//下载完成移除元素</span></span><br><span class="line">        <span class="built_in">window</span>.URL.revokeObjectURL(href); <span class="comment">//释放掉blob对象</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    xhr.send()</span><br><span class="line">  &#125;, timeout);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getAllImage</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 将路径url字符串粘贴到list中</span></span><br><span class="line">  <span class="keyword">var</span> list = <span class="string">&quot;这里要将上一步的url字符串放在这里&quot;</span>;</span><br><span class="line">  <span class="keyword">var</span> urls = list.split(<span class="string">&quot;,&quot;</span>);</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;urls.length;i++)&#123;</span><br><span class="line">    <span class="comment">// 图片后缀</span></span><br><span class="line">    <span class="keyword">var</span> suffix = urls[i].split(<span class="string">&quot;.&quot;</span>)[urls[i].split(<span class="string">&quot;.&quot;</span>).length<span class="number">-1</span>];</span><br><span class="line">    <span class="comment">// 图片序列名</span></span><br><span class="line">    <span class="keyword">var</span> filename = i+<span class="string">&quot;.&quot;</span>+suffix;</span><br><span class="line">    downloadImage(urls[i],filename);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  getAllImage();</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="comment">// =======================================</span></span><br></pre></td></tr></table></figure>
-<p>请求结果:<br><img src="/2019/10/10/book118%E9%A2%84%E8%A7%88%E6%96%87%E6%A1%A3%E4%B8%8B%E8%BD%BD/downloadresult.png" alt="请求结果"><br><strong>需要开启chorme的连续下载</strong><br>下载结果<br><img src="/2019/10/10/book118%E9%A2%84%E8%A7%88%E6%96%87%E6%A1%A3%E4%B8%8B%E8%BD%BD/images.png" alt="下载结果"></p>
+        <h2 id="OpenSSL生成证书"><a href="#OpenSSL生成证书" class="headerlink" title="OpenSSL生成证书"></a>OpenSSL生成证书</h2><p>.key格式：私有的密钥</p>
+<p>.csr格式：证书签名请求（证书请求文件），含有公钥信息，certificate signing request的缩写</p>
+<p>.crt格式：证书文件，certificate的缩写</p>
+<p>.crl格式：证书吊销列表，Certificate Revocation List的缩写</p>
+<p>.pem格式：用于导出，导入证书时候的证书的格式，有证书开头，结尾的格式</p>
+<h2 id="CA根证书的生成步骤"><a href="#CA根证书的生成步骤" class="headerlink" title="CA根证书的生成步骤"></a>CA根证书的生成步骤</h2><p>生成CA私钥（.key）–&gt;生成CA证书请求（.csr）–&gt;自签名得到根证书（.crt）（CA给自已颁发的证书）。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Generate CA private key </span></span><br><span class="line">openssl genrsa -out ca.key 2048 </span><br><span class="line"><span class="meta">#</span><span class="bash"> Generate CSR </span></span><br><span class="line">openssl req -new -key ca.key -out ca.csr</span><br><span class="line"><span class="meta">#</span><span class="bash"> Generate Self Signed certificate（CA 根证书）</span></span><br><span class="line">openssl x509 -req -days 365 -in ca.csr -signkey ca.key -out ca.crt</span><br></pre></td></tr></table></figure>
+
+<p>出现错误:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Can&#39;t load .&#x2F;.rnd into RNG 10504:error:2406F079:random number generator:RAND_load_file:Cannot open file:crypto\rand\randfile.c:98:Filename&#x3D;.&#x2F;.rnd</span><br></pre></td></tr></table></figure>
+
+<p>解决办法:</p>
+<p>进入<code>/etc/ssl/openssl.cnf</code>将下面的内容注释掉</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RANDFILE &#x3D; $ENV::HOME&#x2F;.rnd</span><br></pre></td></tr></table></figure>
+
+<p>注释掉之后:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#RANDFILE &#x3D; $ENV::HOME&#x2F;.rnd</span><br></pre></td></tr></table></figure>
+
+<h2 id="用户证书的生成步骤"><a href="#用户证书的生成步骤" class="headerlink" title="用户证书的生成步骤"></a>用户证书的生成步骤</h2><p>Common Name以外可以为空，Common Name必须为服务器的ip或域名</p>
+<p>生成私钥（.key）–&gt;生成证书请求（.csr）–&gt;用CA根证书签名得到证书（.crt）</p>
+<p>服务器端用户证书：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> private key</span></span><br><span class="line">openssl genrsa -des3 -out server.key 1024 </span><br><span class="line"><span class="meta">#</span><span class="bash"> generate csr</span></span><br><span class="line">openssl req -new -key server.key -out server.csr</span><br><span class="line"><span class="meta">#</span><span class="bash"> generate certificate</span></span><br><span class="line">openssl ca -in server.csr -out server.crt -cert ca.crt -keyfile ca.key</span><br></pre></td></tr></table></figure>
+
+<p>出现错误:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Using configuration from &#x2F;usr&#x2F;lib&#x2F;ssl&#x2F;openssl.cnf</span><br><span class="line">ca: .&#x2F;demoCA&#x2F;newcerts is not a directory</span><br><span class="line">.&#x2F;demoCA&#x2F;newcerts: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<p>新建文件夹<code>demoCA/newcerts</code>，在文件夹<code>demoCA</code>文件夹下新建</p>
+<p><code>index.txt</code>文件，文件为空。<code>serial</code>文件，写入01。</p>
+<p>客户端用户证书：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -des3 -out client.key 1024 </span><br><span class="line">openssl req -new -key client.key -out client.csr</span><br><span class="line">openssl ca -in client.csr -out client.crt -cert ca.crt -keyfile ca.key</span><br></pre></td></tr></table></figure>
+
+<p>生成pem格式证书<br>有时需要用到pem格式的证书，可以用以下方式合并证书文件（crt）和私钥文件（key）来生成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat client.crt client.key&gt; client.pem</span><br><span class="line">cat server.crt server.key &gt; server.pem</span><br></pre></td></tr></table></figure>
+
+<p>结果：<br>服务端证书：ca.crt, server.key, server.crt, server.pem<br>客户端证书：ca.crt, client.key, client.crt, client.pem</p>
+<h4 id="不需要生成Ca，直接生成-证书链第一层"><a href="#不需要生成Ca，直接生成-证书链第一层" class="headerlink" title="不需要生成Ca，直接生成,证书链第一层"></a>不需要生成Ca，直接生成,证书链第一层</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Generate server private key </span><br><span class="line">openssl genrsa -out server.key 2048 </span><br><span class="line"># Generate CSR </span><br><span class="line">openssl req -new -key server.key -out server.csr</span><br><span class="line"># Generate Self Signed certificate（CA 根证书）</span><br><span class="line">openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Https请求的时候会加入<code>server.crt</code>,如果证书不对客户端会reset.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN CERTIFICATE-----</span><br><span class="line">MIIDbzCCAlcCFE6b8yotCNZccECHIjYymilDYSIgMA0GCSqGSIb3DQEBCwUAMHQx</span><br><span class="line">CzAJBgNVBAYTAkNOMQswCQYDVQQIDAJHRDELMAkGA1UEBwwCU1oxDDAKBgNVBAoM</span><br><span class="line">A0xRWDEMMAoGA1UECwwDTFFYMRIwEAYDVQQDDAkxMjcuMC4wLjExGzAZBgkqhkiG</span><br><span class="line">9w0BCQEWDDExODY0QHFxLmNvbTAeFw0yMTAzMjYwOTE1MjBaFw0yMjAzMjYwOTE1</span><br><span class="line">MjBaMHQxCzAJBgNVBAYTAkNOMQswCQYDVQQIDAJHRDELMAkGA1UEBwwCU1oxDDAK</span><br><span class="line">BgNVBAoMA0xRWDEMMAoGA1UECwwDTFFYMRIwEAYDVQQDDAkxMjcuMC4wLjExGzAZ</span><br><span class="line">BgkqhkiG9w0BCQEWDDExODY0QHFxLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEP</span><br><span class="line">ADCCAQoCggEBAMDsby+XK25Gb2mFwfhOVUsGNurnGi1tYQT2wMtlV6KoYwVoFZUv</span><br><span class="line">ivDU9xq3PfhMK7ggggggggggggggggggggggjZ+Sxd7+HbrEIvLakXvuUmbmpnUZ</span><br><span class="line">2IOHn6IyqLaC&#x2F;ZZfffffffffffffffffffffZVrChIo6hB8ROaEk3D4P3PBP6HKe</span><br><span class="line">5nTSTmBdp5qDnCRsKqcOhxeTcxp14gh4FSUw2GT1GeZrcg0fZpx7PmAmUHzLKiIc</span><br><span class="line">Qb5+WP4VcC2PC6K2h0AQCWo95DipucyJQjPmEJrDdkGLc2CtjveEMju7aNGJOrDM</span><br><span class="line">8mF8QRs&#x2F;WmYBIWhEMPiVFoxdKcmitXIlXDcCAwEAATANBgkqhkiG9w0BAQsFAAOC</span><br><span class="line">AQEAeqyZmimlu4KE29nHbjAwpkeC6G5a+yk&#x2F;7rVmPhMXU4MBPBGsdFEid0lgkTue</span><br><span class="line">BzV2BvMTm+joap1F&#x2F;qg2EylVn2YXsATa7jHAZnbomxplu2yCIxHM4YOKfYab7yJc</span><br><span class="line">5MM7eeNiLe2wTjtRP23&#x2F;+RDRevIW&#x2F;UjrhO9lFHvsRr98l7kegYb&#x2F;6cKb4YyCDr5g</span><br><span class="line">e8yAUz9Z7mmdyH2mHy3CAIAk2dLTFd76Rs39V2U2ZeizBiIH80xA2sV4s+R2fm2l</span><br><span class="line">Ash9ecgsUa&#x2F;3PMlo1A+zsYyiuVaB+u4OR1c03+Gzp5zcFGsEAlP7t8sgV2zkAH33</span><br><span class="line">7YCkRG4+DWekxrOEyqIVOZiQAQ&#x3D;&#x3D;</span><br><span class="line">-----END CERTIFICATE-----</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -197,11 +253,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
         		</li>
       		
 		</ul>
@@ -210,16 +262,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/10/book118%E9%A2%84%E8%A7%88%E6%96%87%E6%A1%A3%E4%B8%8B%E8%BD%BD/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://long95288.github.io/2021/03/26/OpenSSL%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2021/03/14/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86FFmpeg%E4%B8%80%E6%8A%8A%E6%A2%AD/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">图像处理FFmpeg一把梭</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -239,875 +350,14 @@
 
 
 
-
-  
-    <article id="post-m3u8j解码和合并工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/09/m3u8j%E8%A7%A3%E7%A0%81%E5%92%8C%E5%90%88%E5%B9%B6%E5%B7%A5%E5%85%B7/">m3u8解码和合并工具</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/09/m3u8j%E8%A7%A3%E7%A0%81%E5%92%8C%E5%90%88%E5%B9%B6%E5%B7%A5%E5%85%B7/" class="archive-article-date">
-  	<time datetime="2019-10-09T14:30:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="AES-128解密函数"><a href="#AES-128解密函数" class="headerlink" title="AES-128解密函数"></a>AES-128解密函数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 解密文件</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> sourcePath 源文件</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> destinationPath 保存的文件</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> key 密钥</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">decryptFile</span><span class="params">(String sourcePath,String destinationPath,String key)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    File outFile = <span class="keyword">new</span> File(destinationPath);</span><br><span class="line">    <span class="keyword">if</span> (!outFile.exists())&#123;</span><br><span class="line">        outFile.createNewFile();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 待解密的文件输入流</span></span><br><span class="line">    FileInputStream fis = <span class="keyword">new</span> FileInputStream(sourcePath);</span><br><span class="line">    FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(outFile);</span><br><span class="line"></span><br><span class="line">    Cipher cipher = Cipher.getInstance(<span class="string">&quot;AES/CBC/PKCS5Padding&quot;</span>);</span><br><span class="line">      <span class="keyword">byte</span>[] bytes = key.getBytes();</span><br><span class="line">    SecretKeySpec secretKey = <span class="keyword">new</span> SecretKeySpec(bytes,<span class="string">&quot;AES&quot;</span>);</span><br><span class="line">    IvParameterSpec iv = <span class="keyword">new</span> IvParameterSpec(key.getBytes());</span><br><span class="line">    cipher.init(Cipher.DECRYPT_MODE,secretKey,iv);</span><br><span class="line">    <span class="comment">// 解密流</span></span><br><span class="line">    CipherInputStream cis = <span class="keyword">new</span> CipherInputStream(fis,cipher);</span><br><span class="line">    <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> ((n = cis.read(buffer)) != -<span class="number">1</span>)&#123;</span><br><span class="line">        fos.write(buffer,<span class="number">0</span>,n);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">&quot;解密成功:&quot;</span>);</span><br><span class="line">    cis.close();</span><br><span class="line">    fos.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="主类"><a href="#主类" class="headerlink" title="主类"></a>主类</h3><p>  用来识别m3u8文件</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    String sourcePath =<span class="string">&quot;G:\\win下载\\m3u8\\&quot;</span>;</span><br><span class="line">    String destination = <span class="string">&quot;G:\\win下载\\m3u8\\&quot;</span>;</span><br><span class="line">    String m3u8 = <span class="string">&quot;G:\\win下载\\m3u8\\m3u8.m3u8&quot;</span>;</span><br><span class="line">    String key = <span class="string">&quot;tkr87ysao6qehn95&quot;</span>;</span><br><span class="line">    FileReader fileReader = <span class="keyword">null</span>;</span><br><span class="line">    BufferedReader reader = <span class="keyword">null</span>;</span><br><span class="line">    ArrayList&lt;String&gt; files = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        fileReader = <span class="keyword">new</span> FileReader(m3u8);</span><br><span class="line">        reader = <span class="keyword">new</span> BufferedReader(fileReader);</span><br><span class="line">        String filename = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">while</span> (( filename = reader.readLine())!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(filename.charAt(<span class="number">0</span>)!=<span class="string">&#x27;#&#x27;</span>)&#123;</span><br><span class="line">                files.add(filename);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(fileReader!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            fileReader.close();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(reader!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            reader.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">catch</span> (IOException e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> partSize = files.size();</span><br><span class="line">    String sourceFile;</span><br><span class="line">    String destFile;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i &lt; partSize ;i++)&#123;</span><br><span class="line">            sourceFile = sourcePath + files.get(i);</span><br><span class="line">            destFile = destination + <span class="string">&quot;e&quot;</span>+files.get(i);</span><br><span class="line">            EncryFileUtil.decryptFile(sourceFile,destFile,key);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;========全部解密成功============&quot;</span>);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 合并数据</span></span><br><span class="line">        String mergeFilePath = sourcePath+<span class="string">&quot;merge.ts&quot;</span>;</span><br><span class="line">        FileOutputStream mergeFile = <span class="keyword">new</span> FileOutputStream(mergeFilePath);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;partSize;i++)&#123;</span><br><span class="line">            String encodeFile = sourcePath +<span class="string">&quot;e&quot;</span>+files.get(i);</span><br><span class="line">            FileInputStream inputStream = <span class="keyword">new</span> FileInputStream(encodeFile);</span><br><span class="line">            <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="keyword">int</span> n=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> ((n = inputStream.read(buffer))!= -<span class="number">1</span>)&#123;</span><br><span class="line">                mergeFile.write(buffer,<span class="number">0</span>,n);</span><br><span class="line">            &#125;</span><br><span class="line">            inputStream.close();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;合并数据成功&quot;</span>);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (IOException e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/09/m3u8j%E8%A7%A3%E7%A0%81%E5%92%8C%E5%90%88%E5%B9%B6%E5%B7%A5%E5%85%B7/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-blibli动态9宫格图片下载脚本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/07/blibli%E5%8A%A8%E6%80%819%E5%AE%AB%E6%A0%BC%E5%9B%BE%E7%89%87%E4%B8%8B%E8%BD%BD%E8%84%9A%E6%9C%AC/">blibli动态9宫格图片下载脚本</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/07/blibli%E5%8A%A8%E6%80%819%E5%AE%AB%E6%A0%BC%E5%9B%BE%E7%89%87%E4%B8%8B%E8%BD%BD%E8%84%9A%E6%9C%AC/" class="archive-article-date">
-  	<time datetime="2019-10-07T11:38:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>涉及到的技术点</p>
-<ul>
-<li>js控制样式和类</li>
-<li>DOM的节点添加和删除</li>
-<li>原生的xhr</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.downloadImage = <span class="function"><span class="keyword">function</span> (<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> timeout = <span class="built_in">Math</span>.random() * <span class="number">5000</span>;</span><br><span class="line">  <span class="built_in">this</span>.setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    xhr.open(<span class="string">&quot;get&quot;</span>, url, <span class="literal">true</span>);</span><br><span class="line">    xhr.responseType = <span class="string">&quot;blob&quot;</span>;</span><br><span class="line">    xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">this</span>.status == <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> blob = <span class="built_in">this</span>.response;</span><br><span class="line">        <span class="keyword">var</span> downloadElement = <span class="built_in">document</span>.createElement(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">        <span class="keyword">var</span> href = <span class="built_in">window</span>.URL.createObjectURL(blob); <span class="comment">//创建下载的链接</span></span><br><span class="line">        downloadElement.href = href;</span><br><span class="line">        downloadElement.download = name; <span class="comment">//下载后文件名</span></span><br><span class="line">        <span class="built_in">document</span>.body.appendChild(downloadElement);</span><br><span class="line">        downloadElement.click(); <span class="comment">//点击下载</span></span><br><span class="line">        <span class="built_in">document</span>.body.removeChild(downloadElement); <span class="comment">//下载完成移除元素</span></span><br><span class="line">        <span class="built_in">window</span>.URL.revokeObjectURL(href); <span class="comment">//释放掉blob对象</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    xhr.send()</span><br><span class="line">  &#125;, timeout);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.insertButtons = <span class="function"><span class="keyword">function</span> (<span class="params">element</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;=== element =======&quot;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(element);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;=== end ========== &quot;</span>);</span><br><span class="line">  <span class="keyword">var</span> button = <span class="built_in">document</span>.createElement(<span class="string">&quot;button&quot;</span>);</span><br><span class="line">  button.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(element);</span><br><span class="line">    <span class="comment">// 获得该box的9个图片的url</span></span><br><span class="line">    <span class="keyword">var</span> urlList = element.firstElementChild.firstElementChild.children;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; urlList.length; i++) &#123;</span><br><span class="line">      <span class="keyword">var</span> url = <span class="string">&quot;https:&quot;</span> + urlList[i].firstElementChild.style.backgroundImage.split(<span class="string">&quot;url&quot;</span>)[<span class="number">1</span>].replace(<span class="regexp">/[\(\)\&quot;]/g</span>, <span class="string">&quot;&quot;</span>).split(<span class="string">&quot;@&quot;</span>)[<span class="number">0</span>].trim();</span><br><span class="line">      <span class="built_in">console</span>.log(url);</span><br><span class="line">      <span class="comment">// console.log(timeout);</span></span><br><span class="line">      <span class="built_in">window</span>.downloadImage(url);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">// button.style.backgroundColor = &quot;#3388ff&quot;;</span></span><br><span class="line">  <span class="comment">// button.style.color = &quot;white&quot;;</span></span><br><span class="line">  button.style.borderRadius=<span class="string">&quot;10px&quot;</span>;</span><br><span class="line">  button.style.height = <span class="string">&quot;35px&quot;</span>;</span><br><span class="line">  button.style.backgroundColor=<span class="string">&quot;white&quot;</span>;</span><br><span class="line">  button.style.opacity= <span class="string">&quot;0.5&quot;</span>;</span><br><span class="line">  button.style.borderWidth=<span class="string">&quot;thin&quot;</span>;</span><br><span class="line">  button.style.position=<span class="string">&quot;absolute&quot;</span>;</span><br><span class="line">  button.classList.add(<span class="string">&quot;downBtn&quot;</span>);</span><br><span class="line">  button.innerText = <span class="string">&quot;下载该九宫格的图片&quot;</span>;</span><br><span class="line">  element.append(button);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.initImageBox = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 先清除按钮</span></span><br><span class="line">  <span class="keyword">var</span> allDownBtn = <span class="built_in">document</span>.getElementsByClassName(<span class="string">&quot;downBtn&quot;</span>);</span><br><span class="line">  <span class="keyword">var</span> btnLength = allDownBtn.length;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>;i &lt; btnLength;i++)&#123;</span><br><span class="line">      allDownBtn[<span class="number">0</span>].remove();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> allImagesBox = <span class="built_in">document</span>.getElementsByClassName(<span class="string">&quot;imagesbox&quot;</span>);</span><br><span class="line">  <span class="comment">// 每个动态插入下载图片按钮</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;=======allImagesBox======&quot;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(allImagesBox);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;=======end============&quot;</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; allImagesBox.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> element22 = allImagesBox[i];</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;i=&quot;</span>+i);</span><br><span class="line">    <span class="built_in">window</span>.insertButtons(element22);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;call back initImageBox&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertFreshButton</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> freshButton = <span class="built_in">document</span>.createElement(<span class="string">&quot;button&quot;</span>);</span><br><span class="line">    freshButton.style.backgroundColor = <span class="string">&quot;#ABD6E6&quot;</span>;</span><br><span class="line">    freshButton.style.position = <span class="string">&quot;fixed&quot;</span>;</span><br><span class="line">    freshButton.style.right=<span class="string">&quot;60px&quot;</span>;</span><br><span class="line">    <span class="comment">// var buttonTop = screen.height / 2;</span></span><br><span class="line">    <span class="comment">// freshButton.style.top= buttonTop +&quot;px&quot;;</span></span><br><span class="line">    freshButton.style.bottom=<span class="string">&quot;40px&quot;</span>;</span><br><span class="line">    freshButton.style.zIndex=<span class="string">&quot;99&quot;</span>;</span><br><span class="line">    freshButton.style.color = <span class="string">&quot;white&quot;</span>;</span><br><span class="line">    freshButton.style.borderWidth=<span class="string">&quot;thin&quot;</span>;</span><br><span class="line">    freshButton.style.height = <span class="string">&quot;40px&quot;</span>;</span><br><span class="line">    freshButton.innerText = <span class="string">&quot;刷新/查看下载按钮&quot;</span>;</span><br><span class="line">    freshButton.setAttribute(<span class="string">&quot;onclick&quot;</span>,<span class="string">&quot;initImageBox()&quot;</span>);</span><br><span class="line">    <span class="built_in">document</span>.body.append(freshButton);</span><br><span class="line">&#125;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    &#x27;use strict&#x27;</span>;</span><br><span class="line">    <span class="comment">// Your code here...</span></span><br><span class="line">    insertFreshButton()</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/07/blibli%E5%8A%A8%E6%80%819%E5%AE%AB%E6%A0%BC%E5%9B%BE%E7%89%87%E4%B8%8B%E8%BD%BD%E8%84%9A%E6%9C%AC/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-一键下载blibli的专栏图片" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/05/%E4%B8%80%E9%94%AE%E4%B8%8B%E8%BD%BDblibli%E7%9A%84%E4%B8%93%E6%A0%8F%E5%9B%BE%E7%89%87/">一键下载blibli的专栏图片</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/05/%E4%B8%80%E9%94%AE%E4%B8%8B%E8%BD%BDblibli%E7%9A%84%E4%B8%93%E6%A0%8F%E5%9B%BE%E7%89%87/" class="archive-article-date">
-  	<time datetime="2019-10-05T10:17:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.downloadImage = <span class="function"><span class="keyword">function</span> (<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(url);</span><br><span class="line">  <span class="keyword">var</span> timeout = <span class="built_in">Math</span>.random() * <span class="number">5000</span>;</span><br><span class="line">  <span class="comment">// return;</span></span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    xhr.open(<span class="string">&quot;get&quot;</span>, url, <span class="literal">true</span>);</span><br><span class="line">    xhr.responseType = <span class="string">&quot;blob&quot;</span>;</span><br><span class="line">    xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">this</span>.status == <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> blob = <span class="built_in">this</span>.response;</span><br><span class="line">        <span class="keyword">var</span> downloadElement = <span class="built_in">document</span>.createElement(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">        <span class="keyword">var</span> href = <span class="built_in">window</span>.URL.createObjectURL(blob); <span class="comment">//创建下载的链接</span></span><br><span class="line">        downloadElement.href = href;</span><br><span class="line">        downloadElement.download = name; <span class="comment">//下载后文件名</span></span><br><span class="line">        <span class="built_in">document</span>.body.appendChild(downloadElement);</span><br><span class="line">        downloadElement.click(); <span class="comment">//点击下载</span></span><br><span class="line">        <span class="built_in">document</span>.body.removeChild(downloadElement); <span class="comment">//下载完成移除元素</span></span><br><span class="line">        <span class="built_in">window</span>.URL.revokeObjectURL(href); <span class="comment">//释放掉blob对象</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    xhr.send()</span><br><span class="line">  &#125;, timeout);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.getImage =<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> imageBox = <span class="built_in">document</span>.getElementsByClassName(<span class="string">&quot;img-box&quot;</span>);</span><br><span class="line">  <span class="keyword">var</span> message = <span class="string">&quot;确认下载该cv的图片?&quot;</span></span><br><span class="line">  <span class="keyword">if</span> (confirm(message) === <span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; imageBox.length; i++) &#123;</span><br><span class="line">      <span class="keyword">var</span> html = imageBox[i].innerHTML;</span><br><span class="line">      <span class="comment">// console.log(html);</span></span><br><span class="line">      <span class="keyword">var</span> pattern = <span class="regexp">/src=[\&#x27;\&quot;]?([^\&#x27;\&quot;]*)[\&#x27;\&quot;]/i</span></span><br><span class="line">      <span class="keyword">var</span> srcs = pattern.exec(html)</span><br><span class="line">      <span class="built_in">console</span>.log(srcs[<span class="number">0</span>]);</span><br><span class="line">      <span class="keyword">var</span> imgSrc = <span class="string">&quot;https:&quot;</span> + srcs[<span class="number">0</span>].split(<span class="string">&quot;=&quot;</span>)[<span class="number">1</span>].replace(<span class="regexp">/\&quot;/g</span>, <span class="string">&quot;&quot;</span>).split(<span class="string">&quot;@&quot;</span>)[<span class="number">0</span>].trim();</span><br><span class="line">      <span class="built_in">window</span>.downloadImage(imgSrc);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertButton</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> button = <span class="built_in">document</span>.createElement(<span class="string">&quot;button&quot;</span>);</span><br><span class="line">  button.setAttribute(<span class="string">&quot;value&quot;</span>,<span class="string">&quot;下载图片&quot;</span>);</span><br><span class="line">  button.setAttribute(<span class="string">&quot;onclick&quot;</span>,<span class="string">&quot;getImage()&quot;</span>);</span><br><span class="line">  button.style.backgroundColor=<span class="string">&quot;#66C6E7&quot;</span>;</span><br><span class="line">  button.style.height=<span class="string">&quot;40px&quot;</span>;</span><br><span class="line">  button.style.color=<span class="string">&quot;white&quot;</span>;</span><br><span class="line">  button.innerText = <span class="string">&quot;下载该cv的图片&quot;</span></span><br><span class="line">  <span class="built_in">document</span>.getElementsByClassName(<span class="string">&quot;fixed-box&quot;</span>)[<span class="number">0</span>].append(button);</span><br><span class="line">&#125;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    insertButton();</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/05/%E4%B8%80%E9%94%AE%E4%B8%8B%E8%BD%BDblibli%E7%9A%84%E4%B8%93%E6%A0%8F%E5%9B%BE%E7%89%87/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-shiro使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/23/shiro%E4%BD%BF%E7%94%A8/">shiro使用</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/23/shiro%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2019-09-23T15:30:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="shiro核心对象和方法"><a href="#shiro核心对象和方法" class="headerlink" title="shiro核心对象和方法"></a>shiro核心对象和方法</h3><h4 id="核心对象-Subject"><a href="#核心对象-Subject" class="headerlink" title="核心对象 Subject"></a>核心对象 Subject</h4><p>使用<code>Subject currentUser = SecurityUtils.getSubject();</code><br>该条语句是获得当前的用户。</p>
-<h5 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h5><ul>
-<li><code>subject.login(AuthenticationToken token)</code>登陆。这种登陆是给shiro的认证机制登陆的。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">AuthenticationToken token =</span><br><span class="line"><span class="keyword">new</span> UsernamePasswordToken(username, password);</span><br><span class="line"></span><br><span class="line"><span class="comment">//2. 获取当前 Subject：</span></span><br><span class="line">Subject currentUser = SecurityUtils.getSubject();</span><br><span class="line"><span class="comment">//3. 登录： </span></span><br><span class="line">currentUser.login(token);</span><br></pre></td></tr></table></figure></li>
-<li><code>boolean subject.hasRole(&quot;administrator&quot;)</code><br>判断是否有某个角色.</li>
-<li>权限检查 <code>boolean subject.isPermitted(&quot;user:create&quot;)</code><br>是否有user的create权限<h3 id="shiro使用"><a href="#shiro使用" class="headerlink" title="shiro使用"></a>shiro使用</h3>工作流程如下:<br>Subject是我们可以操作的接口。<br>Realm是配置shiro的核心领域。包括账号验证、加密解密、权限的配置<br><img src="/2019/09/23/shiro%E4%BD%BF%E7%94%A8/process.png" alt="流程"><br>内部的架构如下<br><img src="/2019/09/23/shiro%E4%BD%BF%E7%94%A8/struct.png"><br>相关说明:</li>
-<li>SecurityManager:相当于SpringMVC 中的 DispatcherServlet；是 Shiro 的心脏;所有具体的交互都通过 SecurityManager 进行控制；它管理着所有 Subject、且负责进行认证、授权、会话及缓存的管理</li>
-<li>Authenticator: 负责 Subject 认证，是一个扩展点，可以自定义实现；可以使用认证策略（Authentication Strategy），即什么情况下算用户认证通过了</li>
-<li>Authorizer: 授权器、 即访问控制器，用来决定主体是否有权限进行相应的操作；即控制着用户能访问应用中的哪些功能</li>
-<li>Realm:可以有一个或多个Realm,可以认为是安全实体数据源，即用于获得安全实体的;可以是JDBC实现，也可以是内存实现等。由用户提供，应用中要自己实现自己的Realm;</li>
-<li>SessionManager: 管理Session生命周期的组件;Shiro不仅可以用在Web环境。普通的JavaSE环境也可以使用session.和httpServletSession差不多的接口。</li>
-<li>CacheManager:缓存控制器，用来管理用户、角色、权限等的缓存;</li>
-<li>Cryptography:加密和解密模块。内置了加密和解密的模块,不需要自己将前台的明文密码加密后再和数据中的加密的密码比较。shiro会自动调用加密模块然后完成比较。</li>
-</ul>
-<h5 id="shiro默认过滤器"><a href="#shiro默认过滤器" class="headerlink" title="shiro默认过滤器"></a>shiro默认过滤器</h5><ul>
-<li><code>anon</code> 所属类:org.apache.shiro.web.filter.authc.AnonymousFilter 没有参数,可以匿名使用。例如: /admin/** = anon</li>
-<li><code>authc</code> 所属类:org.apache.shiro.web.filter.authc.FormAuthenticationFilter 没有参数，需要认证(登陆)之后才能访问 例如:/user/** = authc</li>
-<li><code>authcBasic</code> org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter 没有参数，表示需要通过HttpBasic验证。如果不通过验证，跳转到登陆页面。 例如: /user/** = authcBasic</li>
-<li><code>logout</code> org.apache.shiro.web.filter.authc.LogoutFilter 注销登陆的时候，完成一定功能：任何现有的session都将会失效，任何身份都会失去关联。(web应用程序中，RememberMe cookie将被删除)</li>
-<li><code>noSessionCreation</code> org.apache.shiro.web.filter.authc.NoSessionCreationFiler 阻止在请求期间创建新的会话，保证无状态体验。</li>
-<li><code>perms</code> org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter 可以写多个。多个时加上引号。用逗号分隔。多个参数需要通过全部的参数才算通过。相当于isPermitedAll()方法。 例如:/admin/** = perms[user:add:<em>] /admin/** = perms[“user:add:</em>,user:delete:*”]</li>
-<li><code>port</code> org.apache.shiro.web.filter.authz.PortFilter 指定访问的端口。如果不匹配跳转到登陆界面。 例如:/admin/** = port[8080]</li>
-<li><code>rest</code> org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter 根据请求方法 例如:/admins/user/** = perms[user.method] method为post、get、delete等请求方法</li>
-<li><code>roles</code> org.apache.shiro.web.filter.authz.RolesAuthorizationFilter 角色过滤。判断当前用户是否指定角色。多个参数需通过所有的角色。 例如:/admins/** = roles[“admin,guest”]</li>
-<li><code>ssl</code> org.apache.shiro.web.filter.authz.SslFilter 使用协议为Https</li>
-<li><code>user</code> org.apache.shiro.web.filter.authc.UserFilter 缓存必须存在用户<h4 id="URL匹配模式"><a href="#URL匹配模式" class="headerlink" title="URL匹配模式"></a>URL匹配模式</h4>url模式使用Ant风格模式，支持<code>？</code>，<code>*</code>，<code>**</code>。通配符匹配不了包括目录分隔符<code>&quot;\&quot;</code></li>
-<li><code>?</code>:匹配一个字符，如/admin?。将匹配/admin1，但是不匹配/admin 或 /admin/</li>
-<li><code>*</code>:匹配0个或n个字符串.如/admin* 匹配/admin、/admin123。但不匹配/admin/1、/admin/</li>
-<li><code>**</code>: 匹配路径中的0或n路径。如/admin/** 匹配/admin/a or /admin/a/b</li>
-</ul>
-<p>URL权限采取第一次匹配优先的方式。所以需要一些不要认证的路径放在前面。将需要认证的路径放在后面。否则会被覆盖的。</p>
-<h4 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h4><h5 id="身份验证"><a href="#身份验证" class="headerlink" title="身份验证"></a>身份验证</h5><p>在shiro中我们需要提供两个对象(principals和credentials)用来完成身份的验证</p>
-<ul>
-<li><code>principals</code> 身份,主体的标识属性，可以是任何的属性。用户名、邮箱等。具备唯一性。可以有多个principals.但只有一个Primary principals。一般是用户名/邮箱/手机号</li>
-<li><code>credentials</code> 证明/凭证。证明主体标识的，如密码和数字证书等。<br>最常使用的就是用户名和密码来组合成principals和credentials</li>
-</ul>
-<h5 id="身份验证的基本流程"><a href="#身份验证的基本流程" class="headerlink" title="身份验证的基本流程"></a>身份验证的基本流程</h5><p>1、收集用户的身份/凭证。一般是从前端获得用户名和密码<br>2、调用<code>Subject.login</code>进行登陆。失败会抛出响应的异常信息<br>3、创建自定义的<code>Realm</code>类。继承<code>org.apache.shiro.realm.AuthorizingRealm类。实现doGetAuthenticationInfo()</code>方法<br>官方给的认证示例代码:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// let&#x27;s login the current user so we can check against roles and permissions:</span></span><br><span class="line"><span class="comment">// 测试当前的用户是否已经被认证. 即是否已经登录. </span></span><br><span class="line"><span class="comment">// 调动 Subject 的 isAuthenticated() </span></span><br><span class="line"><span class="keyword">if</span> (!currentUser.isAuthenticated()) &#123;</span><br><span class="line"><span class="comment">// 把用户名和密码封装为 UsernamePasswordToken 对象</span></span><br><span class="line">  UsernamePasswordToken token = <span class="keyword">new</span> UsernamePasswordToken(<span class="string">&quot;lonestarr&quot;</span>, <span class="string">&quot;vespa&quot;</span>);</span><br><span class="line">  <span class="comment">// rememberme</span></span><br><span class="line">  token.setRememberMe(<span class="keyword">true</span>);</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 执行登录. </span></span><br><span class="line">      currentUser.login(token);</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="comment">// 若没有指定的账户, 则 shiro 将会抛出 UnknownAccountException 异常. </span></span><br><span class="line">  <span class="keyword">catch</span> (UnknownAccountException uae) &#123;</span><br><span class="line">      log.info(<span class="string">&quot;----&gt; There is no user with username of &quot;</span> + token.getPrincipal());</span><br><span class="line">      <span class="keyword">return</span>; </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="comment">// 若账户存在, 但密码不匹配, 则 shiro 会抛出 IncorrectCredentialsException 异常。 </span></span><br><span class="line">  <span class="keyword">catch</span> (IncorrectCredentialsException ice) &#123;</span><br><span class="line">      log.info(<span class="string">&quot;----&gt; Password for account &quot;</span> + token.getPrincipal() + <span class="string">&quot; was incorrect!&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span>; </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="comment">// 用户被锁定的异常 LockedAccountException</span></span><br><span class="line">  <span class="keyword">catch</span> (LockedAccountException lae) &#123;</span><br><span class="line">      log.info(<span class="string">&quot;The account for username &quot;</span> + token.getPrincipal() + <span class="string">&quot; is locked.  &quot;</span> +</span><br><span class="line">              <span class="string">&quot;Please contact your administrator to unlock it.&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ... catch more exceptions here (maybe custom ones specific to your application?</span></span><br><span class="line">  <span class="comment">// 所有认证时异常的父类. </span></span><br><span class="line">  <span class="keyword">catch</span> (AuthenticationException ae) &#123;</span><br><span class="line">      <span class="comment">//unexpected condition?  error?</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="身份认证的流程"><a href="#身份认证的流程" class="headerlink" title="身份认证的流程"></a>身份认证的流程</h5><p><img src="/2019/09/23/shiro%E4%BD%BF%E7%94%A8/authenticationprocess.png" alt="流程图"></p>
-<p>1、首先调用 Subject.login(token) 进行登录，其会自动委托给SecurityManager<br>2、 SecurityManager 负责真正的身份验证逻辑；它会委托给Authenticator 进行身份验证；<br>3、 Authenticator 才是真正的身份验证者，Shiro API 中核心的身份认证入口点，此处可以自定义插入自己的实现；<br>4、 Authenticator 可能会委托给相应的 AuthenticationStrategy 进行多 Realm 身份验证，默认 ModularRealmAuthenticator 会调用AuthenticationStrategy 进行多 Realm 身份验证；<br>5、 Authenticator 会把相应的 token 传入 Realm，从 Realm 获取身份验证信息，如果没有返回/抛出异常表示身份验证失败了。此处可以配置多个Realm，将按照相应的顺序及策略进行访问。</p>
-<h4 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h4><h4 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h4>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/23/shiro%E4%BD%BF%E7%94%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-element使用javascript触发表单校验" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/15/element%E4%BD%BF%E7%94%A8javascript%E8%A7%A6%E5%8F%91%E8%A1%A8%E5%8D%95%E6%A0%A1%E9%AA%8C/">element使用javascript触发表单校验</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/15/element%E4%BD%BF%E7%94%A8javascript%E8%A7%A6%E5%8F%91%E8%A1%A8%E5%8D%95%E6%A0%A1%E9%AA%8C/" class="archive-article-date">
-  	<time datetime="2019-09-15T15:37:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="需求说明"><a href="#需求说明" class="headerlink" title="需求说明"></a>需求说明</h4><p>在用户没有填写表单数据,没有产生输入框的焦点时点击提交。在提交前进行触发表单校验</p>
-<h5 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h5><p>调用element表单对象中的<code>validateField(prop:string, callback)</code><br>函数来触发表单校验.<br>prop是需要校验的属性。与表单中的属性一致。该函数接收一个回调函数。入口参数是校验规则中的message<br>例子</p>
-<ul>
-<li>设置一个引用<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-form</span> <span class="attr">:model</span>=<span class="string">&quot;dialogForm&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;formData&quot;</span>  <span class="attr">:rules</span>=<span class="string">&quot;rules&quot;</span> <span class="attr">size</span>=<span class="string">&quot;small&quot;</span> <span class="attr">label-position</span>=<span class="string">&quot;left&quot;</span> <span class="attr">label-width</span>=<span class="string">&quot;120px&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li>需要校验的属性为title<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">label</span>=<span class="string">&quot;考试标题:&quot;</span> <span class="attr">prop</span>=<span class="string">&quot;title&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-col</span> <span class="attr">:span</span>=<span class="string">&quot;16&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">v-model</span>=<span class="string">&quot;dialogForm.title&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">el-col</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li>手动触发校验规则<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.$refs.formData.validateField(<span class="string">&#x27;title&#x27;</span>, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-校验通过不会返回任何的东西。err为空。校验不通过返回title校验规则中的message<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: [</span><br><span class="line">    &#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">&#x27;必须输入考试标题&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;</span><br><span class="line">  ],</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/15/element%E4%BD%BF%E7%94%A8javascript%E8%A7%A6%E5%8F%91%E8%A1%A8%E5%8D%95%E6%A0%A1%E9%AA%8C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-jvm相关" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/11/jvm%E7%9B%B8%E5%85%B3/">jvm相关</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/11/jvm%E7%9B%B8%E5%85%B3/" class="archive-article-date">
-  	<time datetime="2019-09-11T11:54:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="堆的分代"><a href="#堆的分代" class="headerlink" title="堆的分代"></a>堆的分代</h4><ul>
-<li>新生代(Young Generation)<br>使用newSize和MaxNewSize来控制新生代的初始大小和最大大小</li>
-<li>老年代(Old Generation)</li>
-<li>永生代(Permanent Generation) 1.8之后使用元空间，不在堆中了.</li>
-</ul>
-<h4 id="对象是否被引用判断-能不能被回收"><a href="#对象是否被引用判断-能不能被回收" class="headerlink" title="对象是否被引用判断(能不能被回收)"></a>对象是否被引用判断(能不能被回收)</h4><ul>
-<li>引用计数法<br>核心思想:当对象被引用的时候就加1,引用失效的时候就减1。当值为0时就可以回收了。<br>优点:简单高效<br>缺点:如果两个对象循环依赖，各自的引用数都不为0.但是应该是被回收的才对。</li>
-<li>可达性分析算法<br>从GC Roots为起始点。当从根节点开始遍历依赖树，无法到达某个对象的时候。则该对象是可以被回收了。<h4 id="回收算法-怎么回收"><a href="#回收算法-怎么回收" class="headerlink" title="回收算法(怎么回收)"></a>回收算法(怎么回收)</h4></li>
-<li>标记/清除算法<br>给GC ROOTS 依赖树上的节点打上标记。发身份标识。然后去找没有身份标识的对象进行回收。</li>
-<li>复制算法<br>将内存分成两个块，每次只使用其中的一块。当这块内存用完的时候。将GC ROOTS树拎到另一块内存(复制)。然后将掉落的叶子给清掉。</li>
-<li>标记/整理算法<br>将还在树上的叶子整理得紧凑起来。然后就腾出空间了。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/11/jvm%E7%9B%B8%E5%85%B3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-java基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/09/java%E5%9F%BA%E7%A1%80/">java基础</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/09/java%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2019-09-09T14:04:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="二维数组获得行的数量和列的数量"><a href="#二维数组获得行的数量和列的数量" class="headerlink" title="二维数组获得行的数量和列的数量"></a>二维数组获得行的数量和列的数量</h4><p>对于一个<code>int[][] array = new int[5][10];</code><br>获得行数<code>int rows = array.lenght;</code><br>获得列数<code>int columns = array[0].length;</code></p>
-<h4 id="equals-和-和-hashCode-区别和联系"><a href="#equals-和-和-hashCode-区别和联系" class="headerlink" title="equals() 和 == 和 hashCode()区别和联系"></a>equals() 和 == 和 hashCode()区别和联系</h4><p>1、<code>equals()</code>比较的是对象的内容是否相等，而<code>==</code>比较的是对象的引用是否不同。即<code>==</code>比较的是内存地址。<br>例如</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">String a1 = <span class="string">&quot;Hello World&quot;</span>;</span><br><span class="line">String a2 = <span class="string">&quot;Hello World&quot;</span>;</span><br><span class="line">System.out.println(<span class="string">&quot;a1 == a2:\t&quot;</span> + (a1 == a2));</span><br><span class="line">System.out.println(<span class="string">&quot;al equals a2:\t&quot;</span>+(a1.equals(a2)));</span><br><span class="line">String a3 = <span class="keyword">new</span> String(<span class="string">&quot;Hello World&quot;</span>);</span><br><span class="line">String a4 = <span class="keyword">new</span> String(<span class="string">&quot;Hello World&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;a3 == a4:\t&quot;</span>+(a3 == a4));</span><br><span class="line">System.out.println(<span class="string">&quot;a3 equals a4:\t&quot;</span>+(a3.equals(a4)));</span><br></pre></td></tr></table></figure>
-<p>结果:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a1 == a2:    <span class="keyword">true</span></span><br><span class="line">al equals a2:    <span class="keyword">true</span></span><br><span class="line">a3 == a4:    <span class="keyword">false</span></span><br><span class="line">a3 equals a4:    <span class="keyword">true</span></span><br></pre></td></tr></table></figure>
-<p>a1 和 a2的值Hello World都是放在常量区中。所以对应的内存地址都一样。所以== 和equals都是true<br>a3 和 a4是两个对象,对象的内存地址不一样。但是里面的值是一样的。<br>2、equals()是如何比较的?<br>Object类中equals的源码源码如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">this</span> == obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>比较的是对象的引用地址<br>String类中重写了equals方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object anObject)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> == anObject) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (anObject <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">        String anotherString = (String)anObject;</span><br><span class="line">        <span class="keyword">int</span> n = value.length;</span><br><span class="line">        <span class="keyword">if</span> (n == anotherString.value.length) &#123;</span><br><span class="line">            <span class="keyword">char</span> v1[] = value;</span><br><span class="line">            <span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line">            <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (v1[i] != v2[i])</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>第一个部分判断引用是否相等。引用相等则对象是同一个,里面的值就一定相等。<br>如果是两个对象，则取出两个对象的值一个一个的比较是否相等。<br>3、关于hashCode()<br><a target="_blank" rel="noopener" href="http://coding-geek.com/how-does-a-hashmap-work-in-java/">http://coding-geek.com/how-does-a-hashmap-work-in-java/</a><br>hashCode() 函数返回的是一个函数的hash值。两个对象相等则hashCode一定相等。两个hashCode() 相等则两个对象不一定相等。<br>为什么要重写hashCode()函数。因为有些集合框架是基于对象的hash值的。例如hashMap。如果不重写对象使用的都是父类生成的hash值。这样冲突变多,对于存储不利。<br>没有重写hashCode函数在hashMap中放置可能如下图所示<br><img src="/2019/09/09/java%E5%9F%BA%E7%A1%80/skewedHashMap.webp"><br>如果重写了hashCode()<br><img src="/2019/09/09/java%E5%9F%BA%E7%A1%80/wellBanlanced.webp"></p>
-<p>提高了访问的效率和存储的效率。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/09/java%E5%9F%BA%E7%A1%80/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-javaScanner输入数据" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/07/javaScanner%E8%BE%93%E5%85%A5%E6%95%B0%E6%8D%AE/">javaScanner输入数据</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/07/javaScanner%E8%BE%93%E5%85%A5%E6%95%B0%E6%8D%AE/" class="archive-article-date">
-  	<time datetime="2019-09-07T12:49:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Scanner类"><a href="#Scanner类" class="headerlink" title="Scanner类"></a>Scanner类</h3><p> Scanner类一般是用来接收从控制台传进去的数据的。但是往往不能使用Scanner从控制台获得想要的数据。。</p>
-<h4 id="1、想要获得控制台传进来的一个数组对象。"><a href="#1、想要获得控制台传进来的一个数组对象。" class="headerlink" title="1、想要获得控制台传进来的一个数组对象。"></a>1、想要获得控制台传进来的一个数组对象。</h4><p>需求描述将<code>1 2 3 4 5 6 7</code>从控制台转成数组对象。</p>
-<p>使用如下的代码是跳不出来循环的</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Scanner cin = <span class="keyword">new</span> Scanner(System.out);</span><br><span class="line"><span class="keyword">int</span>[] array = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(cin.hasNextInt())&#123;</span><br><span class="line">  <span class="keyword">int</span> read = cin.nextInt();</span><br><span class="line">  array[len] = read;</span><br><span class="line">  ++len;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 以下的代码不会被执行</span></span><br><span class="line"><span class="comment">// 要对数组进行操作。。</span></span><br></pre></td></tr></table></figure>
-<p>另外一种思路:<br>将控制台的输入当成一个字符串。获得该字符串之后再进行解析。<br>用空格进行正则分割.然后再依次的赋值</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line">Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">String str = scanner.nextLine();</span><br><span class="line">scanner.close();</span><br><span class="line"><span class="comment">// 自己解析字符串</span></span><br><span class="line">String strArray = str.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line"><span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++) &#123;</span><br><span class="line">  arr[i] = Integer.parseInt(strArray[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 对数组进行操作</span></span><br><span class="line"><span class="comment">// 可以执行下面的代码</span></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/07/javaScanner%E8%BE%93%E5%85%A5%E6%95%B0%E6%8D%AE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Redis笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/04/Redis%E7%AC%94%E8%AE%B0/">Redis笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/04/Redis%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2019-09-04T13:24:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Redis拿来干什么？"><a href="#Redis拿来干什么？" class="headerlink" title="Redis拿来干什么？"></a>Redis拿来干什么？</h3><p> redis是运行在内存的软件。速度快，完全基于内存。使用C语言实现，网络层使用epoll解决高并发问题。单线程模型，避免不必要的上下文切换和竞争条件浪费资源。Redis可以用在下面的场景。<br>1、缓存。常用的功能<br>2、数据排序 使用Redis的SortSet数据结构能够非常方便搞定<br>3、计算器/请求限流 秒杀的时候,将数据缓存在Redis中。减少数据库的频繁读写。<br>4、使用集合的命令获得相关的数据<br>5、简单的消息队列。使用Redis的list实现消息队列<br>6、Session共享、token实现单点验证</p>
-<h3 id="Redis数据类型"><a href="#Redis数据类型" class="headerlink" title="Redis数据类型"></a>Redis数据类型</h3><p>Redis提供8种数据类型，常用的主要是String、Hash、List、Set、SortSet这5种类型。另外还有BitMap-位图、HyperLogLog、GEO-地理信息定位。<br>存储的为Key-Value的值。</p>
-<h3 id="Redis常用命令"><a href="#Redis常用命令" class="headerlink" title="Redis常用命令"></a>Redis常用命令</h3><p>  <a target="_blank" rel="noopener" href="http://doc.redisfans.com/index.html">中文Redis命令翻译网址</a></p>
-<h4 id="1、基本操作"><a href="#1、基本操作" class="headerlink" title="1、基本操作"></a>1、基本操作</h4><ul>
-<li>启动Redis<br><code>./redis-server ../redis.conf</code></li>
-<li>启动Redis的脚本工具<br><code>./redis-cli</code></li>
-<li>存储数据的命令<br><code>&gt; set mykey myvalue</code><br>使用set语句 后面加上key值和value值</li>
-<li>查看是否含有某个key值<br><code>&gt; exists mykey</code><br>如果存在返回1 如果不存在返回0</li>
-<li>获得key值对应的value<br><code>&gt; get mykey</code></li>
-<li>查看key值对应的数据类型<br><code>&gt; type mykey</code><br>如果是字符型返回string</li>
-<li>使用正则匹配查找对应的数据<br><code>&gt; keys my*</code><br>查找含有my开头的key。查到返回对应的key列表。找不到返回empty list or set</li>
-<li>删除对应的key值<br><code>&gt; del key</code><br>也可以使用正则匹配来删除<br><code>&gt; del key*</code></li>
-<li>随机获得一个key<br><code>&gt; randomkey</code></li>
-<li>清除所有的key值<br><code>&gt; clear</code></li>
-<li>重命名key值<br><code>&gt; rename newkey oldkey</code></li>
-<li>查看当前的数据库的大小<br><code>&gt; dbsize</code><h4 id="2、Redis时间过期相关的命令"><a href="#2、Redis时间过期相关的命令" class="headerlink" title="2、Redis时间过期相关的命令"></a>2、Redis时间过期相关的命令</h4></li>
-<li>限定key的生存时间<br><code>&gt; expire key 20</code>设置key值20秒后过期</li>
-<li>查看过期时间<br><code>&gt; ttl key</code> 查看key的值还有多少秒过期<br>过期后会返回-2</li>
-<li>清除整个db<br><code>&gt; flushdb</code><br><code>&gt; flushall</code><h4 id="3、配置Redis的命令"><a href="#3、配置Redis的命令" class="headerlink" title="3、配置Redis的命令"></a>3、配置Redis的命令</h4></li>
-<li>配置requirepass<br>获得账号名<br><code>&gt; config get requirepass</code><br>设置密码<br><code>&gt; config set requirepass test123</code></li>
-<li>使用密码验证<br><code>&gt; auth test123</code><br>重新查看账号<br><code>&gt; config get requirepass</code><br>返回值如下<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1) &quot;requirepass&quot;</span><br><span class="line">2) &quot;test123&quot;</span><br></pre></td></tr></table></figure></li>
-<li>获得实体存储的相关命令<br><code>&gt; config get *max-*-entries*</code><br>返回的数据<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1) &quot;hash-max-ziplist-entries&quot;</span><br><span class="line">2) &quot;512&quot;</span><br><span class="line">3) &quot;set-max-intset-entries&quot;</span><br><span class="line">4) &quot;512&quot;</span><br><span class="line">6) &quot;zset-max-ziplist-entries&quot;</span><br><span class="line">7) &quot;128&quot;</span><br></pre></td></tr></table></figure></li>
-<li>重置配置<br><code>&gt; config resetstat</code></li>
-<li>服务器的信息<br><code>&gt; info server</code></li>
-<li>连接客户端的信息<br><code>&gt; info client</code></li>
-<li>内存的信息<br><code>&gt; info memory</code></li>
-<li>持久层数据<br><code>&gt; info persistence</code></li>
-<li>状态的数据<br><code>&gt; info stats</code></li>
-<li>从节点的信息<br><code>&gt; info replication</code></li>
-<li>cpu的信息<br><code>&gt; info cpu</code><h4 id="4、配置文件配置账号"><a href="#4、配置文件配置账号" class="headerlink" title="4、配置文件配置账号"></a>4、配置文件配置账号</h4>在配置文件redis.conf的文件中。在<code>requirepass</code>后面加上需要验证的密码<br>如:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">requirepass test1234</span><br></pre></td></tr></table></figure>
-重启redis服务器之后进入命令行就要使用<br><code>auth test1234</code> 来验证了<h4 id="5、事务的处理"><a href="#5、事务的处理" class="headerlink" title="5、事务的处理"></a>5、事务的处理</h4>使用<code>multi</code>命令开启一个事务<br>然后接下来可以进行一些命令的操作<br>使用<code>exec</code>命令批量执行操作<h4 id="6、持久化的操作"><a href="#6、持久化的操作" class="headerlink" title="6、持久化的操作"></a>6、持久化的操作</h4>将内存中的数据存储到磁盘文件中<br>使用<code>save</code>命令</li>
-</ul>
-<h3 id="Redis五大数据类型以及简单使用"><a href="#Redis五大数据类型以及简单使用" class="headerlink" title="Redis五大数据类型以及简单使用"></a>Redis五大数据类型以及简单使用</h3><h4 id="String字符串类型"><a href="#String字符串类型" class="headerlink" title="String字符串类型"></a>String字符串类型</h4><h5 id="1、添加数据"><a href="#1、添加数据" class="headerlink" title="1、添加数据"></a>1、添加数据</h5><p>  <code>set key-name value</code><br>  如果key存在则修改里面的值，如果不存在就添加</p>
-<h5 id="2、查询数据"><a href="#2、查询数据" class="headerlink" title="2、查询数据"></a>2、查询数据</h5><p><code>get key-name</code></p>
-<h5 id="3、删除数据"><a href="#3、删除数据" class="headerlink" title="3、删除数据"></a>3、删除数据</h5><p><code>del key-name</code></p>
-<h5 id="4、设置key的过期时间"><a href="#4、设置key的过期时间" class="headerlink" title="4、设置key的过期时间"></a>4、设置key的过期时间</h5><p><code>setex key-name 10 value</code><br>设置key的过期时间为10秒</p>
-<h5 id="5、设置多组值"><a href="#5、设置多组值" class="headerlink" title="5、设置多组值"></a>5、设置多组值</h5><p><code>mset key-name1 value1 key-name2 value2</code></p>
-<h5 id="6、获得多组值"><a href="#6、获得多组值" class="headerlink" title="6、获得多组值"></a>6、获得多组值</h5><p><code>mget key-name1 key-name2</code></p>
-<h4 id="Hash表"><a href="#Hash表" class="headerlink" title="Hash表"></a>Hash表</h4><h5 id="1、添加Hash表数据"><a href="#1、添加Hash表数据" class="headerlink" title="1、添加Hash表数据"></a>1、添加Hash表数据</h5><p><code>hset key-name hash-key hash-value</code><br>例如:<br><code>hset user name &quot;smith&quot;</code><br>添加一个hash表的名字为user,其中user中有[name=”smith”]的键值对</p>
-<h5 id="2、查询数据-1"><a href="#2、查询数据-1" class="headerlink" title="2、查询数据"></a>2、查询数据</h5><p><code>hget key-name hash-key</code><br>例如:<br><code>hget user name</code><br>查询user中key为name的值</p>
-<h5 id="3、获得全部的键值对"><a href="#3、获得全部的键值对" class="headerlink" title="3、获得全部的键值对"></a>3、获得全部的键值对</h5><p><code>hgetall key-name</code></p>
-<h5 id="4、一次设置多个键值对"><a href="#4、一次设置多个键值对" class="headerlink" title="4、一次设置多个键值对"></a>4、一次设置多个键值对</h5><p><code>hmset key-name hash-key1 hash-value1 hash-key2 hash-value2</code></p>
-<h5 id="5、查看数据长度"><a href="#5、查看数据长度" class="headerlink" title="5、查看数据长度"></a>5、查看数据长度</h5><p><code>hlen key-name</code><br>返回该Hash表的键值对数量</p>
-<h5 id="6、查询是否存在某个hash-key"><a href="#6、查询是否存在某个hash-key" class="headerlink" title="6、查询是否存在某个hash-key"></a>6、查询是否存在某个hash-key</h5><p><code>hexist key-name hash-key</code></p>
-<h4 id="List列表"><a href="#List列表" class="headerlink" title="List列表"></a>List列表</h4><h5 id="1、添加数据-1"><a href="#1、添加数据-1" class="headerlink" title="1、添加数据"></a>1、添加数据</h5><p><code>lpush/rpush key-name value1 value2 value3</code><br>其中lpush从左边插入数据，rpush从右边插入数据</p>
-<h5 id="2、获得数据"><a href="#2、获得数据" class="headerlink" title="2、获得数据"></a>2、获得数据</h5><p><code>lpop/rpop key-name</code><br>弹出列表最左边/右边的值。</p>
-<h5 id="3、遍历数据"><a href="#3、遍历数据" class="headerlink" title="3、遍历数据"></a>3、遍历数据</h5><p><code>lrange key-name start stop</code><br>遍历下标为[start,stop]的数据<br>例如:<br><code>lrange city 0 -1</code><br>遍历全部数据</p>
-<h5 id="4、获得列表长度"><a href="#4、获得列表长度" class="headerlink" title="4、获得列表长度"></a>4、获得列表长度</h5><p><code>llen key-name</code></p>
-<h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><p>  Set是String类型的无序集合,元素值不能重复</p>
-<h5 id="1、添加数据-2"><a href="#1、添加数据-2" class="headerlink" title="1、添加数据"></a>1、添加数据</h5><p><code>sadd key-name value1 value2</code></p>
-<h5 id="2、获得数据-1"><a href="#2、获得数据-1" class="headerlink" title="2、获得数据"></a>2、获得数据</h5><p><code>smembers key-name</code><br>获得所有数据</p>
-<h5 id="3、查询是否存在某个成员"><a href="#3、查询是否存在某个成员" class="headerlink" title="3、查询是否存在某个成员"></a>3、查询是否存在某个成员</h5><p><code>sisexist key-name member</code></p>
-<h5 id="4、移除某个成员"><a href="#4、移除某个成员" class="headerlink" title="4、移除某个成员"></a>4、移除某个成员</h5><p><code>srem key-name member</code></p>
-<h4 id="ZSet类型"><a href="#ZSet类型" class="headerlink" title="ZSet类型"></a>ZSet类型</h4><p>  zset类型可以排序，每个值都有对应的score,可以进行集合间的操作</p>
-<h5 id="1、添加数据-3"><a href="#1、添加数据-3" class="headerlink" title="1、添加数据"></a>1、添加数据</h5><p><code>zadd key-name score1 member1 score2 member2</code></p>
-<h5 id="2、移除数据"><a href="#2、移除数据" class="headerlink" title="2、移除数据"></a>2、移除数据</h5><p><code>zrem key-name member [member2...]</code><br>使用[]来标识里面的内容为可选内容</p>
-<h5 id="3、查询成员数量"><a href="#3、查询成员数量" class="headerlink" title="3、查询成员数量"></a>3、查询成员数量</h5><p><code>zcard key-name</code></p>
-<h5 id="4、查询成员的分值"><a href="#4、查询成员的分值" class="headerlink" title="4、查询成员的分值"></a>4、查询成员的分值</h5><p><code>zscore key-name member</code></p>
-<h5 id="5、修改成员的分值"><a href="#5、修改成员的分值" class="headerlink" title="5、修改成员的分值"></a>5、修改成员的分值</h5><p><code>zincrby key-name increase-num member</code><br>给成员的分值加上increase-num的值,可为正，可为负。</p>
-<h5 id="6、根据score区间查询成员"><a href="#6、根据score区间查询成员" class="headerlink" title="6、根据score区间查询成员"></a>6、根据score区间查询成员</h5><p><code>zcount key-name min max</code><br>返回分值介于[min,max]区间的成员</p>
-<h5 id="7、查询成员的排名"><a href="#7、查询成员的排名" class="headerlink" title="7、查询成员的排名"></a>7、查询成员的排名</h5><p>（1） <code>zrank key-name member</code><br>返回成员在集合中的排名,按照分值从小到大排<br>（2）<code>zrevrank key-name member</code><br>返回成员的排名，按照分值从大到小排</p>
-<h5 id="8、根据排名区间获得成员"><a href="#8、根据排名区间获得成员" class="headerlink" title="8、根据排名区间获得成员"></a>8、根据排名区间获得成员</h5><p>(1) <code>zrange key-name start stop [WITHSCORES]</code><br>返回<strong>排名</strong>处于[start stop]区间内的成员,withscores选项会返回成员的分值。成员按照分值<strong>从小到大</strong>排序<br>(2) <code>zrevrange key-name start stop [WITHSCORES]</code><br>和<code>zrange</code>一致，区别是按照分值<strong>从大到小</strong>排序</p>
-<h5 id="9、根据分数区间获得成员"><a href="#9、根据分数区间获得成员" class="headerlink" title="9、根据分数区间获得成员"></a>9、根据分数区间获得成员</h5><p>（1）<code>zrangebyscore key-name min max [WITHSCORES] [LIMIT offset count]</code><br>返回分数处于[min,max]区间的成员，按照分数<strong>从小到大</strong>排列<br>（2）<code>zrevrangebyscore key-name min max [WITHSCORES] [LIMIT offset count]</code><br>和(1)中的作用一致，不同的是成员按照分数<strong>从大到小</strong>排列</p>
-<h5 id="10、多个ZSet进行交集运算"><a href="#10、多个ZSet进行交集运算" class="headerlink" title="10、多个ZSet进行交集运算"></a>10、多个ZSet进行交集运算</h5><p><code>ZINTERSTORE destination numkeys key [key ...] [WEIGHTS weight [weight ...]] [AGGREGATE SUM|MIN|MAX]</code><br>例子：<br><code>zset zkey3 2 zkey1 zkey2</code><br>zkey3放置zkey1和zkey2进行交运算之后的结果。其中2表示有两个集合。</p>
-<h5 id="11、多个ZSet进行并集运算"><a href="#11、多个ZSet进行并集运算" class="headerlink" title="11、多个ZSet进行并集运算"></a>11、多个ZSet进行并集运算</h5><p><code>ZUNIONSTORE destination numkeys key [key ...] [WEIGHTS weight [weight ...]] [AGGREGATE SUM|MIN|MAX]</code><br>相同的成员分数相加。</p>
-<h4 id="使用Jedis来访问redis"><a href="#使用Jedis来访问redis" class="headerlink" title="使用Jedis来访问redis"></a>使用Jedis来访问redis</h4><h5 id="1、maven添加依赖"><a href="#1、maven添加依赖" class="headerlink" title="1、maven添加依赖"></a>1、maven添加依赖</h5><p>引入redis的依赖</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&lt;dependency&gt;</span></span><br><span class="line">    <span class="attr">&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span></span><br><span class="line">    <span class="attr">&lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;</span></span><br><span class="line"><span class="attr">&lt;/dependency&gt;</span></span><br></pre></td></tr></table></figure>
-<h5 id="2、连接和配置redis"><a href="#2、连接和配置redis" class="headerlink" title="2、连接和配置redis"></a>2、连接和配置redis</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># Redis 配置</span><br><span class="line">spring.redis.jedis.pool.max-idle=<span class="number">10</span></span><br><span class="line">spring.redis.jedis.pool.max-active=<span class="number">10</span></span><br><span class="line">spring.redis.jedis.pool.min-idle=<span class="number">5</span></span><br><span class="line">spring.redis.jedis.pool.max-wait=<span class="number">2000</span></span><br><span class="line">#配置Redis服务器属性</span><br><span class="line">spring.redis.port=<span class="number">6379</span></span><br><span class="line">spring.redis.host=localhost</span><br><span class="line"># 连接的密码</span><br><span class="line">spring.redis.password=password</span><br><span class="line"># 连接超时设置</span><br><span class="line">spring.redis.timeout=<span class="number">1000</span></span><br><span class="line"></span><br><span class="line"># 缓存配置</span><br><span class="line">spring.cache.type=redis</span><br><span class="line">spring.cache.cache-names=redisCache</span><br></pre></td></tr></table></figure>
-<h5 id="3、java中配置Redis的操作对象"><a href="#3、java中配置Redis的操作对象" class="headerlink" title="3、java中配置Redis的操作对象"></a>3、java中配置Redis的操作对象</h5><p>1、在启用类的类头哪里使用<code>@EnableCaching</code>注解开启redis<br>2、获得redis的模板对象</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 注入RedisTemplate对象</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> RedisTemplate redisTemplate = <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
-<p>3、在bean的构造函数中初始化模板。主要是用来设置序列化的方式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostConstruct</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    initRedisTemplate();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>初始化方法如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 设置RedisTemplate的序列化器</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initRedisTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    RedisSerializer stringSerializer = redisTemplate.getStringSerializer();</span><br><span class="line">    redisTemplate.setKeySerializer(stringSerializer);</span><br><span class="line">    redisTemplate.setHashKeySerializer(stringSerializer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>4、使用redis的模板来操作redis<br>涉及到的函数为</p>
-<ul>
-<li><code>boolean hashKey = redisTemplate.hasKey(key)</code> 判断redis中是否含有key值</li>
-<li>获得操作Redis对象的函数，其中的Dictionary是放进去的对象，redis会自动完成ORM的<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ValueOperations&lt;String,Dictionary&gt; operations = redisTemplate.opsForValue();</span><br></pre></td></tr></table></figure>
-设置key对应的值<br><code>operations.set(key,dictionary,timeout,TimeUnit.HOURS);</code><br>key为对应的String类型的key值。<br><code>dictionary</code>为设置到缓存的对象。会被序列化为stirng类型。<br><code>timeout</code>为过期时间,long类型<br><code>TimeUnit.HOURS</code>是timeout的单位.可以设置纳秒、微秒、分钟、小时、天等。<h4 id="缓存穿透和缓存雪崩"><a href="#缓存穿透和缓存雪崩" class="headerlink" title="缓存穿透和缓存雪崩"></a>缓存穿透和缓存雪崩</h4><h5 id="1、缓存穿透"><a href="#1、缓存穿透" class="headerlink" title="1、缓存穿透"></a>1、缓存穿透</h5>如何理解缓存穿透，缓存原本是放在数据库读写之前的一层缓存。用来减少数据库的io。穿透就是数据直接穿透缓存访问数据库，可以理解为缓存被穿透了。什么时候会导致缓存穿透？为什么会出现缓存穿透？读写数据的时候没有在redis中命中数据。导致访问数据库。没有命中数据 -&gt; 访问数据库。缓存的命中率太低了,导致缓存不起作用。这样就出现缓存穿透<h5 id="2、缓存雪崩"><a href="#2、缓存雪崩" class="headerlink" title="2、缓存雪崩"></a>2、缓存雪崩</h5>什么是缓存雪崩?在某一时间段，缓存中的数据集体失效，导致大量的数据库出现大量的io请求。缓存中数据在同一时间失效。这就是缓存的雪崩，缓存雪崩可能会导致数据库的崩溃。如何避免缓存雪崩？雪崩的原因是同一时间失效，设置随机失效时间。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/04/Redis%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/7/">Next &amp;raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -1130,8 +380,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

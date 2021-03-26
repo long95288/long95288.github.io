@@ -158,6 +158,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-go-rpc" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/24/go-rpc/">go-rpc</a>
+    </h1>
+  
+
+        
+        <a href="/2020/06/24/go-rpc/" class="archive-article-date">
+  	<time datetime="2020-06-23T16:04:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Http-RPC-例子"><a href="#Http-RPC-例子" class="headerlink" title="Http RPC 例子"></a>Http RPC 例子</h4><h5 id="rpc-server"><a href="#rpc-server" class="headerlink" title="rpc server"></a>rpc server</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;errors&quot;</span></span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;net/http&quot;</span></span><br><span class="line">    <span class="string">&quot;net/rpc&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Args <span class="keyword">struct</span> &#123;</span><br><span class="line">    A,B <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Quotient <span class="keyword">struct</span>&#123;</span><br><span class="line">    Quo, Rem <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// rpc 的结构对象</span></span><br><span class="line"><span class="keyword">type</span> Arith <span class="keyword">int</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">两数相乘函数，被调用</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Arith)</span> <span class="title">Multiply</span><span class="params">(args *Args, reply *<span class="keyword">int</span>)</span> <span class="title">error</span></span>&#123;</span><br><span class="line">    *reply = args.A + args.B</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">两数相除函数，被调用</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Arith)</span> <span class="title">Divide</span><span class="params">(args *Args, quo *Quotient)</span> <span class="title">error</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> args.B == <span class="number">0</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> errors.New(<span class="string">&quot;Divide by zero&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    quo.Quo = args.A / args.B</span><br><span class="line">    quo.Rem = args.A % args.B</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    arith := <span class="built_in">new</span>(Arith)</span><br><span class="line">    rpc.Register(arith)</span><br><span class="line">    rpc.HandleHTTP()</span><br><span class="line">    </span><br><span class="line">    err := http.ListenAndServe(<span class="string">&quot;:1234&quot;</span>,<span class="literal">nil</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(err.Error())</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="rpc-client"><a href="#rpc-client" class="headerlink" title="rpc client"></a>rpc client</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;log&quot;</span></span><br><span class="line">    <span class="string">&quot;net/rpc&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Args <span class="keyword">struct</span> &#123;</span><br><span class="line">    A,B <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Quotient <span class="keyword">struct</span> &#123;</span><br><span class="line">    Quo,Rem <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   </span><br><span class="line">    client,err := rpc.DialHTTP(<span class="string">&quot;tcp&quot;</span>,<span class="string">&quot;localhost:1234&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Fatal(<span class="string">&quot;Dialing: &quot;</span>,err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    args := Args&#123;<span class="number">17</span>,<span class="number">8</span>&#125;</span><br><span class="line">    <span class="keyword">var</span> reply <span class="keyword">int</span></span><br><span class="line">    <span class="comment">// 远程过程调用</span></span><br><span class="line">    err = client.Call(<span class="string">&quot;Arith.Multiply&quot;</span>,args,&amp;reply)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Fatal(<span class="string">&quot;arith error :&quot;</span>,err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 输出回调信息</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;Arith: %d * % d = %d \n&quot;</span>,args.A,args.B,reply)</span><br><span class="line">    <span class="keyword">var</span> quot Quotient</span><br><span class="line">    err = client.Call(<span class="string">&quot;Arith.Divide&quot;</span>,args,&amp;quot)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Fatal(<span class="string">&quot;arith error :&quot;</span>,err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Printf(<span class="string">&quot;Arith: %d / %d = %d remainder %d \n&quot;</span>,args.A,args.B,quot.Quo,quot.Rem)</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h5><p>  使用<code>rpc.Call()</code>函数像调用本地函数一样,至于中间网络请求过程已经被隐藏了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/06/24/go-rpc/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-go-redis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -917,88 +993,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/04/11/%E5%8F%B3%E9%94%AE%E6%9B%B4%E6%8D%A2%E5%A3%81%E7%BA%B8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-windows右键添加项" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/09/windows%E5%8F%B3%E9%94%AE%E6%B7%BB%E5%8A%A0%E9%A1%B9/">windows右键添加项</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/09/windows%E5%8F%B3%E9%94%AE%E6%B7%BB%E5%8A%A0%E9%A1%B9/" class="archive-article-date">
-  	<time datetime="2020-04-09T14:42:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h5 id="1、进入注册列表"><a href="#1、进入注册列表" class="headerlink" title="1、进入注册列表"></a>1、进入注册列表</h5><p>运行regedit.注册列表编辑器</p>
-<h5 id="2、定位"><a href="#2、定位" class="headerlink" title="2、定位"></a>2、定位</h5><p><code>\HKEY_CLASSES_ROOT\Directory\Background\shell</code></p>
-<h5 id="3、新建一个子项"><a href="#3、新建一个子项" class="headerlink" title="3、新建一个子项"></a>3、新建一个子项</h5><p>名称为右键所看见得项</p>
-<h5 id="4、在新建子项下面添加command项"><a href="#4、在新建子项下面添加command项" class="headerlink" title="4、在新建子项下面添加command项"></a>4、在新建子项下面添加command项</h5><p>command项为固定项。项的数据便是命令行。当你点击的时候便会运行该数据</p>
-<h5 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h5><p><img src="/2020/04/09/windows%E5%8F%B3%E9%94%AE%E6%B7%BB%E5%8A%A0%E9%A1%B9/step.png" alt="步骤"><br><img src="/2020/04/09/windows%E5%8F%B3%E9%94%AE%E6%B7%BB%E5%8A%A0%E9%A1%B9/result.png" alt="结果"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">windows</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">注册列表</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/09/windows%E5%8F%B3%E9%94%AE%E6%B7%BB%E5%8A%A0%E9%A1%B9/">展开全文 >></a>
         </p>
       
 

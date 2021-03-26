@@ -158,6 +158,92 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-docker学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/20/docker%E5%AD%A6%E4%B9%A0/">docker学习</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/20/docker%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
+  	<time datetime="2020-11-20T11:49:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="docker-常用命令"><a href="#docker-常用命令" class="headerlink" title="docker 常用命令"></a>docker 常用命令</h2><h3 id="映像相关操作"><a href="#映像相关操作" class="headerlink" title="映像相关操作"></a>映像相关操作</h3><ul>
+<li>获得在线映像<code>$docker pull imagename:verision</code></li>
+</ul>
+<h3 id="容器相关操作"><a href="#容器相关操作" class="headerlink" title="容器相关操作"></a>容器相关操作</h3><ul>
+<li>创建容器:<code>$docker run -itd --name haha -p 9999:8080 centos:6.7 /bin/bash</code>,    <code>-i</code>:交互式操作,<code>-t</code>:终端,<code>-d</code>:后台运行,指定<code>--name</code>容器名称为:<code>haha</code>,<code>-p 8080:8080</code>将容器中的<code>8080</code>端口映射为宿主机的<code>9999</code>端口.</li>
+<li>查看当前所有容器的状态:<code>$docker ps -a</code></li>
+<li>启动容器:<code>$docker start [id/names]</code></li>
+<li>停止容器:<code>$docker stop [id/names]</code></li>
+<li>重启容器:<code>$docker restart [id/names]</code></li>
+<li>进入容器:<code>$docker attach [id/names]</code>或<code>$docker exec -it [id/names] /bin/bash</code>,第一种方式退出容器的时候容器也会退出.</li>
+<li>查看容器日志:<code>$docker logs -f [id/names]</code></li>
+<li>删除容器:<code>$docker rm -f [id/names] </code> </li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">docker</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/20/docker%E5%AD%A6%E4%B9%A0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-高效程序员的45个习惯-读书笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1466,125 +1552,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/09/04/C-%E5%AE%8F%E6%B3%A8%E5%85%A5%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-C-Base" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/03/C-Base/">C-Base</a>
-    </h1>
-  
-
-        
-        <a href="/2020/09/03/C-Base/" class="archive-article-date">
-  	<time datetime="2020-09-03T12:23:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="计算数组的大小"><a href="#计算数组的大小" class="headerlink" title="计算数组的大小"></a>计算数组的大小</h4><p><code>sizeof(数组名)</code> 获得这个数组占用内存的总长度。二维数组是全部元素占用的总长度。</p>
-<p><code>长度 = sizeof(数组名) / sizeof(数组类型)</code></p>
-<p><code>元素个数 = 总的占用字节大小 / 每个元素占用的字节大小</code></p>
-<p>64位指针占用8字节，8×8=64，内存寻址。</p>
-<h5 id="计算一维数组长度"><a href="#计算一维数组长度" class="headerlink" title="计算一维数组长度"></a>计算一维数组长度</h5><p>例子1：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *sc4[] =&#123;<span class="string">&quot;hello&quot;</span>,<span class="string">&quot;world&quot;</span>,<span class="string">&quot;Welcome&quot;</span>,<span class="string">&quot;C&quot;</span>&#125;;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;arr total byte = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(sc4));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;arr single element byte = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(sc4[<span class="number">0</span>]));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;arr length = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(sc4)/<span class="keyword">sizeof</span>(sc4[<span class="number">0</span>]));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;arr length = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(sc4)/<span class="keyword">sizeof</span>(*sc4));</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">arr total byte &#x3D; 32</span><br><span class="line">arr single element byte &#x3D; 8</span><br><span class="line">arr length &#x3D; 4</span><br><span class="line">arr length &#x3D; 4</span><br><span class="line">arr total byte &#x3D; 32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>例子2：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n[<span class="number">8</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;arr total byte = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(n));</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;arr single element byte = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(n[<span class="number">0</span>]));</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;arr length = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(n)/<span class="keyword">sizeof</span>(n[<span class="number">0</span>]));</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;arr length = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(n)/<span class="keyword">sizeof</span>(*n));</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">arr total byte &#x3D; 32</span><br><span class="line">arr single element byte &#x3D; 4</span><br><span class="line">arr length &#x3D; 8</span><br><span class="line">arr length &#x3D; 8</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="计算二维数组长度"><a href="#计算二维数组长度" class="headerlink" title="计算二维数组长度"></a>计算二维数组长度</h5><p>例子1：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span>* arr2[<span class="number">2</span>][<span class="number">3</span>];</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;total byte = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(arr2));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;row byte = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(arr2[<span class="number">0</span>]));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;column byte = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(arr2[<span class="number">0</span>][<span class="number">0</span>]));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;rows = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(arr2) / <span class="keyword">sizeof</span>(arr2[<span class="number">0</span>]));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;rows = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(arr2) / <span class="keyword">sizeof</span>(*arr2));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;columns = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(arr2[<span class="number">0</span>])/<span class="keyword">sizeof</span>(arr2[<span class="number">0</span>][<span class="number">0</span>]));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;columns = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(*arr2)/<span class="keyword">sizeof</span>(**arr2));</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">total byte &#x3D; 48</span><br><span class="line">row byte &#x3D; 24</span><br><span class="line">column byte &#x3D; 8</span><br><span class="line">rows &#x3D; 2</span><br><span class="line">rows &#x3D; 2</span><br><span class="line">columns &#x3D; 3</span><br><span class="line">columns &#x3D; 3</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>例子2：</p>
-<p>定义一个结构体：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">People_s</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> *name;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">&#125;People;</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">People arr3[<span class="number">3</span>][<span class="number">9</span>];</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;total byte = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(arr3));</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;row byte = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(arr3[<span class="number">0</span>]));</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;column byte = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(arr3[<span class="number">0</span>][<span class="number">0</span>]));</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;rows = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(arr3) / <span class="keyword">sizeof</span>(arr3[<span class="number">0</span>]));</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;rows = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(arr3) / <span class="keyword">sizeof</span>(*arr3));</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;columns = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(arr3[<span class="number">0</span>])/<span class="keyword">sizeof</span>(arr3[<span class="number">0</span>][<span class="number">0</span>]));</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;columns = %ld\n&quot;</span>,<span class="keyword">sizeof</span>(*arr3)/<span class="keyword">sizeof</span>(**arr3));</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">total byte &#x3D; 432</span><br><span class="line">row byte &#x3D; 144</span><br><span class="line">column byte &#x3D; 16</span><br><span class="line">rows &#x3D; 3</span><br><span class="line">rows &#x3D; 3</span><br><span class="line">columns &#x3D; 9</span><br><span class="line">columns &#x3D; 9</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/03/C-Base/">展开全文 >></a>
         </p>
       
 

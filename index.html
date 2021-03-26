@@ -158,6 +158,119 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-OpenSSL生成SSL证书" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/26/OpenSSL%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6/">OpenSSL生成SSL证书</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/26/OpenSSL%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6/" class="archive-article-date">
+  	<time datetime="2021-03-26T11:39:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="OpenSSL生成证书"><a href="#OpenSSL生成证书" class="headerlink" title="OpenSSL生成证书"></a>OpenSSL生成证书</h2><p>.key格式：私有的密钥</p>
+<p>.csr格式：证书签名请求（证书请求文件），含有公钥信息，certificate signing request的缩写</p>
+<p>.crt格式：证书文件，certificate的缩写</p>
+<p>.crl格式：证书吊销列表，Certificate Revocation List的缩写</p>
+<p>.pem格式：用于导出，导入证书时候的证书的格式，有证书开头，结尾的格式</p>
+<h2 id="CA根证书的生成步骤"><a href="#CA根证书的生成步骤" class="headerlink" title="CA根证书的生成步骤"></a>CA根证书的生成步骤</h2><p>生成CA私钥（.key）–&gt;生成CA证书请求（.csr）–&gt;自签名得到根证书（.crt）（CA给自已颁发的证书）。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Generate CA private key </span></span><br><span class="line">openssl genrsa -out ca.key 2048 </span><br><span class="line"><span class="meta">#</span><span class="bash"> Generate CSR </span></span><br><span class="line">openssl req -new -key ca.key -out ca.csr</span><br><span class="line"><span class="meta">#</span><span class="bash"> Generate Self Signed certificate（CA 根证书）</span></span><br><span class="line">openssl x509 -req -days 365 -in ca.csr -signkey ca.key -out ca.crt</span><br></pre></td></tr></table></figure>
+
+<p>出现错误:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Can&#39;t load .&#x2F;.rnd into RNG 10504:error:2406F079:random number generator:RAND_load_file:Cannot open file:crypto\rand\randfile.c:98:Filename&#x3D;.&#x2F;.rnd</span><br></pre></td></tr></table></figure>
+
+<p>解决办法:</p>
+<p>进入<code>/etc/ssl/openssl.cnf</code>将下面的内容注释掉</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RANDFILE &#x3D; $ENV::HOME&#x2F;.rnd</span><br></pre></td></tr></table></figure>
+
+<p>注释掉之后:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#RANDFILE &#x3D; $ENV::HOME&#x2F;.rnd</span><br></pre></td></tr></table></figure>
+
+<h2 id="用户证书的生成步骤"><a href="#用户证书的生成步骤" class="headerlink" title="用户证书的生成步骤"></a>用户证书的生成步骤</h2><p>Common Name以外可以为空，Common Name必须为服务器的ip或域名</p>
+<p>生成私钥（.key）–&gt;生成证书请求（.csr）–&gt;用CA根证书签名得到证书（.crt）</p>
+<p>服务器端用户证书：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> private key</span></span><br><span class="line">openssl genrsa -des3 -out server.key 1024 </span><br><span class="line"><span class="meta">#</span><span class="bash"> generate csr</span></span><br><span class="line">openssl req -new -key server.key -out server.csr</span><br><span class="line"><span class="meta">#</span><span class="bash"> generate certificate</span></span><br><span class="line">openssl ca -in server.csr -out server.crt -cert ca.crt -keyfile ca.key</span><br></pre></td></tr></table></figure>
+
+<p>出现错误:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Using configuration from &#x2F;usr&#x2F;lib&#x2F;ssl&#x2F;openssl.cnf</span><br><span class="line">ca: .&#x2F;demoCA&#x2F;newcerts is not a directory</span><br><span class="line">.&#x2F;demoCA&#x2F;newcerts: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<p>新建文件夹<code>demoCA/newcerts</code>，在文件夹<code>demoCA</code>文件夹下新建</p>
+<p><code>index.txt</code>文件，文件为空。<code>serial</code>文件，写入01。</p>
+<p>客户端用户证书：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -des3 -out client.key 1024 </span><br><span class="line">openssl req -new -key client.key -out client.csr</span><br><span class="line">openssl ca -in client.csr -out client.crt -cert ca.crt -keyfile ca.key</span><br></pre></td></tr></table></figure>
+
+<p>生成pem格式证书<br>有时需要用到pem格式的证书，可以用以下方式合并证书文件（crt）和私钥文件（key）来生成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat client.crt client.key&gt; client.pem</span><br><span class="line">cat server.crt server.key &gt; server.pem</span><br></pre></td></tr></table></figure>
+
+<p>结果：<br>服务端证书：ca.crt, server.key, server.crt, server.pem<br>客户端证书：ca.crt, client.key, client.crt, client.pem</p>
+<h4 id="不需要生成Ca，直接生成-证书链第一层"><a href="#不需要生成Ca，直接生成-证书链第一层" class="headerlink" title="不需要生成Ca，直接生成,证书链第一层"></a>不需要生成Ca，直接生成,证书链第一层</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Generate server private key </span><br><span class="line">openssl genrsa -out server.key 2048 </span><br><span class="line"># Generate CSR </span><br><span class="line">openssl req -new -key server.key -out server.csr</span><br><span class="line"># Generate Self Signed certificate（CA 根证书）</span><br><span class="line">openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Https请求的时候会加入<code>server.crt</code>,如果证书不对客户端会reset.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN CERTIFICATE-----</span><br><span class="line">MIIDbzCCAlcCFE6b8yotCNZccECHIjYymilDYSIgMA0GCSqGSIb3DQEBCwUAMHQx</span><br><span class="line">CzAJBgNVBAYTAkNOMQswCQYDVQQIDAJHRDELMAkGA1UEBwwCU1oxDDAKBgNVBAoM</span><br><span class="line">A0xRWDEMMAoGA1UECwwDTFFYMRIwEAYDVQQDDAkxMjcuMC4wLjExGzAZBgkqhkiG</span><br><span class="line">9w0BCQEWDDExODY0QHFxLmNvbTAeFw0yMTAzMjYwOTE1MjBaFw0yMjAzMjYwOTE1</span><br><span class="line">MjBaMHQxCzAJBgNVBAYTAkNOMQswCQYDVQQIDAJHRDELMAkGA1UEBwwCU1oxDDAK</span><br><span class="line">BgNVBAoMA0xRWDEMMAoGA1UECwwDTFFYMRIwEAYDVQQDDAkxMjcuMC4wLjExGzAZ</span><br><span class="line">BgkqhkiG9w0BCQEWDDExODY0QHFxLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEP</span><br><span class="line">ADCCAQoCggEBAMDsby+XK25Gb2mFwfhOVUsGNurnGi1tYQT2wMtlV6KoYwVoFZUv</span><br><span class="line">ivDU9xq3PfhMK7ggggggggggggggggggggggjZ+Sxd7+HbrEIvLakXvuUmbmpnUZ</span><br><span class="line">2IOHn6IyqLaC&#x2F;ZZfffffffffffffffffffffZVrChIo6hB8ROaEk3D4P3PBP6HKe</span><br><span class="line">5nTSTmBdp5qDnCRsKqcOhxeTcxp14gh4FSUw2GT1GeZrcg0fZpx7PmAmUHzLKiIc</span><br><span class="line">Qb5+WP4VcC2PC6K2h0AQCWo95DipucyJQjPmEJrDdkGLc2CtjveEMju7aNGJOrDM</span><br><span class="line">8mF8QRs&#x2F;WmYBIWhEMPiVFoxdKcmitXIlXDcCAwEAATANBgkqhkiG9w0BAQsFAAOC</span><br><span class="line">AQEAeqyZmimlu4KE29nHbjAwpkeC6G5a+yk&#x2F;7rVmPhMXU4MBPBGsdFEid0lgkTue</span><br><span class="line">BzV2BvMTm+joap1F&#x2F;qg2EylVn2YXsATa7jHAZnbomxplu2yCIxHM4YOKfYab7yJc</span><br><span class="line">5MM7eeNiLe2wTjtRP23&#x2F;+RDRevIW&#x2F;UjrhO9lFHvsRr98l7kegYb&#x2F;6cKb4YyCDr5g</span><br><span class="line">e8yAUz9Z7mmdyH2mHy3CAIAk2dLTFd76Rs39V2U2ZeizBiIH80xA2sV4s+R2fm2l</span><br><span class="line">Ash9ecgsUa&#x2F;3PMlo1A+zsYyiuVaB+u4OR1c03+Gzp5zcFGsEAlP7t8sgV2zkAH33</span><br><span class="line">7YCkRG4+DWekxrOEyqIVOZiQAQ&#x3D;&#x3D;</span><br><span class="line">-----END CERTIFICATE-----</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/26/OpenSSL%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-图像处理FFmpeg一把梭" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2429,92 +2542,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/12/04/dns%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E8%A7%A3%E6%9E%90/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-docker学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/20/docker%E5%AD%A6%E4%B9%A0/">docker学习</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/20/docker%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
-  	<time datetime="2020-11-20T11:49:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="docker-常用命令"><a href="#docker-常用命令" class="headerlink" title="docker 常用命令"></a>docker 常用命令</h2><h3 id="映像相关操作"><a href="#映像相关操作" class="headerlink" title="映像相关操作"></a>映像相关操作</h3><ul>
-<li>获得在线映像<code>$docker pull imagename:verision</code></li>
-</ul>
-<h3 id="容器相关操作"><a href="#容器相关操作" class="headerlink" title="容器相关操作"></a>容器相关操作</h3><ul>
-<li>创建容器:<code>$docker run -itd --name haha -p 9999:8080 centos:6.7 /bin/bash</code>,    <code>-i</code>:交互式操作,<code>-t</code>:终端,<code>-d</code>:后台运行,指定<code>--name</code>容器名称为:<code>haha</code>,<code>-p 8080:8080</code>将容器中的<code>8080</code>端口映射为宿主机的<code>9999</code>端口.</li>
-<li>查看当前所有容器的状态:<code>$docker ps -a</code></li>
-<li>启动容器:<code>$docker start [id/names]</code></li>
-<li>停止容器:<code>$docker stop [id/names]</code></li>
-<li>重启容器:<code>$docker restart [id/names]</code></li>
-<li>进入容器:<code>$docker attach [id/names]</code>或<code>$docker exec -it [id/names] /bin/bash</code>,第一种方式退出容器的时候容器也会退出.</li>
-<li>查看容器日志:<code>$docker logs -f [id/names]</code></li>
-<li>删除容器:<code>$docker rm -f [id/names] </code> </li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">docker</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/20/docker%E5%AD%A6%E4%B9%A0/">展开全文 >></a>
         </p>
       
 
