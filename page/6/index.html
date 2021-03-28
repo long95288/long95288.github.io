@@ -158,6 +158,297 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-longSys相关文档" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/23/longSys%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3/">longSys相关文档</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/23/longSys%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3/" class="archive-article-date">
+  	<time datetime="2019-10-23T14:33:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h3><p>  个人资源管理平台</p>
+<h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><p>  需要一个软件平台来管理自己日益复杂和丰富的资源。包括但不限于个人文档、积累的电子书、下载的音乐、下载的视频教程，一些常用的功能。日记、笔记等。一些相关的人工智能的资源整合。如车标识别、orc等常用的接口。未来可能要接入物联网的相关设备、由于腾讯云的服务器的存储资源有限，未来需要将自己本地的文件外挂到该平台，即可以减小服务器的开销，还可以保护文档的私密性。服务器只做数据中转，而不是数据存储。服务器算力也有限,需要将算力分到本地外挂的设备。</p>
+<h4 id="一、文件管理需求"><a href="#一、文件管理需求" class="headerlink" title="一、文件管理需求"></a>一、文件管理需求</h4><ul>
+<li>该平台需要能够存储文件，解决U盘的不便携性。一些小的文档可以上传至该平台。当需要的时候可以上传和下载。大文件管理，由于设备原因，不可能将所有的文件上传到远端的服务器。所以需要一个功能，能够在该平台管理自己的本地的文件。包括，添加、删除、读取等常用功能。</li>
+<li>该平台的界面应该是非常友好的</li>
+</ul>
+<h4 id="二、图片管理需求"><a href="#二、图片管理需求" class="headerlink" title="二、图片管理需求"></a>二、图片管理需求</h4><p>  宅男喜欢二次元、现在积累了几个G的图片文件。但是很杂，该平台提供相册、分类的功能</p>
+<ul>
+<li>相册功能 将图片分类到相册中</li>
+<li>添加、删除、修改相册。</li>
+<li>查看图片和编辑分开。</li>
+</ul>
+<h4 id="三、音乐管理需求"><a href="#三、音乐管理需求" class="headerlink" title="三、音乐管理需求"></a>三、音乐管理需求</h4><p>  音乐很多,想要有自己的音乐播放器，类似于网易云音乐那种。</p>
+<ul>
+<li>曲库 全部的音乐，可以搜索。一首歌可以放入很多的歌单中。</li>
+<li>歌单 将音乐分类，在管理界面可以添加、编辑、删除歌单</li>
+<li>上传音乐 上传的音乐会出现在曲库中，上传音乐的时候会添加相应的歌曲数据。</li>
+</ul>
+<h4 id="四、视频管理需求"><a href="#四、视频管理需求" class="headerlink" title="四、视频管理需求"></a>四、视频管理需求</h4><p>  视频很多、非常多。需要有效的管理<br>  1、能够看视频(宽带问题，无法流畅的看视频)<br>  2、用户能够根据名字搜索视频<br>  3、用户能够创建自己的栏目，并且往里面添加视频(类似于blibli的收藏夹功能)<br>  4、用户能够删除视频</p>
+<h4 id="五、日记和笔记的需求"><a href="#五、日记和笔记的需求" class="headerlink" title="五、日记和笔记的需求"></a>五、日记和笔记的需求</h4><p>  笔记有很多成熟的产品，但是数据不可控。自己不想把数据放在他们的服务器上。所以需要一个支持多端编写的文档的功能。数据放在自己的数据库中。支持富文本和markdown格式的语法。</p>
+<ul>
+<li>文档的导入和导出 可以将数据库的中笔记文档导出pdf格式，保存备份在磁盘中。</li>
+<li>定期生成备份文件,后期可以调用多个网盘的api多端备份。</li>
+</ul>
+<h4 id="六、常用工具的需求"><a href="#六、常用工具的需求" class="headerlink" title="六、常用工具的需求"></a>六、常用工具的需求</h4><p>  学习工作中有很多工具的需求，图片转文字、开发中json格式化、还有很多的开发手册。这些都是用得到的，并且自己已经实现了车标的识别并且建立了模型。可以将该功能整合<br>  到平台中<br>  1、二维码工具。能够根据字符串生成二维码，也能识别二维码为字符串。<br>  2、车标识别工具。能够根据上传的图片识别相应的车标。<br>  3、</p>
+<h4 id="七、物联网设备管理需求"><a href="#七、物联网设备管理需求" class="headerlink" title="七、物联网设备管理需求"></a>七、物联网设备管理需求</h4><p>  未来自己会将家里的物联网的设备挂在该平台中，并且能够在该平台进行管理。空调、冰箱、台灯、电视机。自己梦想中的家。需要一个同一的管理平台，而不是各自为政。<br>  添加设备，每个设备都有自己的id码，并且有相应的命令。</p>
+<h4 id="八、计划跟踪平台"><a href="#八、计划跟踪平台" class="headerlink" title="八、计划跟踪平台"></a>八、计划跟踪平台</h4><p>  用来记录自己的计划和执行情况，主要借鉴TODO List的功能<br>  添加计划，一个计划会有开始时间、截止时间、完成时间(用户完成)，具体内容，轻重缓急。<br>  编辑、删除计划，只有未开始的计划才能编辑和删除<br>  生成报表，可以按周、按月生成报表。记录计划的预计完成时间和实际完成时间，计算完成工作计划的轻重缓急的比例。</p>
+<h3 id="概要设计"><a href="#概要设计" class="headerlink" title="概要设计"></a>概要设计</h3><h3 id="详细设计"><a href="#详细设计" class="headerlink" title="详细设计"></a>详细设计</h3><h4 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h4><h5 id="笔记管理"><a href="#笔记管理" class="headerlink" title="笔记管理"></a>笔记管理</h5><p><strong>笔记本：t_notebook</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>bigint</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>notebook_name</td>
+<td>varchar</td>
+<td>笔记本名</td>
+</tr>
+<tr>
+<td>notebook_description</td>
+<td>varchar</td>
+<td>笔记本描述</td>
+</tr>
+<tr>
+<td>create_id</td>
+<td>bigint</td>
+<td>创建者id</td>
+</tr>
+<tr>
+<td>created_time</td>
+<td>timestamp</td>
+<td>创建时间戳</td>
+</tr>
+<tr>
+<td>modify_time</td>
+<td>timestamp</td>
+<td>修改时间戳</td>
+</tr>
+<tr>
+<td>del</td>
+<td>tinyint</td>
+<td>删除标记</td>
+</tr>
+</tbody></table>
+<p><strong>笔记条目：t_notebook_item</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>bigint</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>notebook_id</td>
+<td>bigint</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>notebook_item_title</td>
+<td>varchar</td>
+<td>笔记条目标题</td>
+</tr>
+<tr>
+<td>notebook_item_content</td>
+<td>text</td>
+<td>笔记条目内容</td>
+</tr>
+<tr>
+<td>create_time</td>
+<td>timestamp</td>
+<td>创建时间</td>
+</tr>
+<tr>
+<td>modify_time</td>
+<td>timestamp</td>
+<td>修改时间</td>
+</tr>
+<tr>
+<td>del</td>
+<td>tinyint</td>
+<td>删除标记</td>
+</tr>
+</tbody></table>
+<h3 id="平台原型"><a href="#平台原型" class="headerlink" title="平台原型"></a>平台原型</h3><h3 id="后端实现进度"><a href="#后端实现进度" class="headerlink" title="后端实现进度"></a>后端实现进度</h3><h4 id="鉴权模块"><a href="#鉴权模块" class="headerlink" title="鉴权模块"></a>鉴权模块</h4><ul>
+<li><input checked disabled type="checkbox"> shiro鉴权<br>….<h4 id="用户模块"><a href="#用户模块" class="headerlink" title="用户模块"></a>用户模块</h4></li>
+<li><input checked disabled type="checkbox"> 用户登录接口</li>
+</ul>
+<p>Request URL: <code>127.0.0.1:8080/Api/User/Login</code><br>Request Method:<code>post</code><br>Request Body:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;username&quot;</span>:<span class="string">&quot;username&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;password&quot;</span>:<span class="string">&quot;password&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Response Body:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;code&quot;</span>: <span class="number">20000</span>,</span><br><span class="line">  <span class="attr">&quot;version&quot;</span>: <span class="literal">null</span>,</span><br><span class="line">  <span class="attr">&quot;message&quot;</span>: <span class="string">&quot;登录成功&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;data&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;token&quot;</span>: <span class="string">&quot;c594ff92e47955527823259beafb5b2e65c26f7a233f8542736d1c1937b8bf442137a1aa1cc11b3aa1a0ba56aa1be6d91cb11ce03e9de58a48c608178ea1684de54b084713655ae8750010a822afb420ede8f6f92539da5c20d8a5434f82533b016768c39901ffe9f51ab82a83c9379193f624651a797131a4840581ddc855183260f708a41c7309&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><input checked disabled type="checkbox"> 用户登出接口</li>
+</ul>
+<p>Request URL: <code>127.0.0.1:8080/Api/User/Logout</code><br>Request Method: <code>post</code><br>Request Body: <code>null</code><br>Response Body:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;code&quot;</span>: <span class="number">20000</span>,</span><br><span class="line">    <span class="attr">&quot;version&quot;</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">&quot;message&quot;</span>: <span class="string">&quot;请求成功&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;data&quot;</span>: <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><input checked disabled type="checkbox"> 获得用户信息</li>
+</ul>
+<p>Request URL: <code>127.0.0.1:8080/Api/User/UserInfo?token=usertoken-token</code><br>Request Method: <code>get</code><br>Response Body:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">&quot;version&quot;</span>: <span class="literal">null</span>,</span><br><span class="line"><span class="attr">&quot;message&quot;</span>: <span class="string">&quot;请求成功&quot;</span>,</span><br><span class="line"><span class="attr">&quot;code&quot;</span>:<span class="number">20000</span>,</span><br><span class="line"><span class="attr">&quot;data&quot;</span>:&#123;</span><br><span class="line">  <span class="attr">&quot;roles&quot;</span>:[<span class="string">&quot;admin&quot;</span>],</span><br><span class="line">  <span class="attr">&quot;introduction&quot;</span>:<span class="string">&quot;I am a super administrator&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;avatar&quot;</span>:<span class="string">&quot;https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;Super Admin&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><input disabled type="checkbox"> 用户管理</li>
+<li><input disabled type="checkbox"> 权限角色管理<br>….<h4 id="文件模块"><a href="#文件模块" class="headerlink" title="文件模块"></a>文件模块</h4></li>
+<li><input checked disabled type="checkbox"> 文件上传</li>
+<li><input checked disabled type="checkbox"> 查询文件列表</li>
+<li><input checked disabled type="checkbox"> 删除文件</li>
+<li><input disabled type="checkbox"> 文件分类</li>
+</ul>
+<h4 id="图片模块"><a href="#图片模块" class="headerlink" title="图片模块"></a>图片模块</h4><ul>
+<li><input disabled type="checkbox"> 创建相册</li>
+<li><input disabled type="checkbox"> 更新相册</li>
+<li><input disabled type="checkbox"> 添加图片至相册</li>
+<li><input disabled type="checkbox"> 删除某个相册下的图片</li>
+<li><input disabled type="checkbox"> 删除相册</li>
+</ul>
+<h4 id="音乐模块"><a href="#音乐模块" class="headerlink" title="音乐模块"></a>音乐模块</h4><ul>
+<li><input disabled type="checkbox"> 获得曲库列表</li>
+<li><input disabled type="checkbox"> 获得歌单列表</li>
+<li><input disabled type="checkbox"> 获得歌单对应的曲目</li>
+<li><input disabled type="checkbox"> 添加新的歌曲</li>
+<li><input disabled type="checkbox"> 修改歌曲</li>
+<li><input disabled type="checkbox"> 删除歌曲</li>
+<li><input disabled type="checkbox"> 添加新的歌单</li>
+<li><input disabled type="checkbox"> 更新歌单</li>
+<li><input disabled type="checkbox"> 删除歌单</li>
+</ul>
+<h4 id="在线笔记模块"><a href="#在线笔记模块" class="headerlink" title="在线笔记模块"></a>在线笔记模块</h4><ul>
+<li><input checked disabled type="checkbox"> 获得笔记列表</li>
+<li><input checked disabled type="checkbox"> 获得特定笔记的内容</li>
+<li><input checked disabled type="checkbox"> 添加新的笔记本</li>
+<li><input checked disabled type="checkbox"> 为某个笔记本添加新的条目</li>
+<li><input checked disabled type="checkbox"> 更新笔记本</li>
+<li><input checked disabled type="checkbox"> 更新笔记本特定条目</li>
+<li><input checked disabled type="checkbox"> 删除笔记本</li>
+<li><input checked disabled type="checkbox"> 删除笔记本特定条目</li>
+<li><input disabled type="checkbox"> 前端支持Markdown语法渲染</li>
+</ul>
+<h4 id="小说模块-转码"><a href="#小说模块-转码" class="headerlink" title="小说模块-转码"></a>小说模块-转码</h4><ul>
+<li><input disabled type="checkbox"> 添加新的解析模块</li>
+<li><input disabled type="checkbox"> 变更解析模块</li>
+<li><input disabled type="checkbox"> 删除解析模块</li>
+</ul>
+<h4 id="TODO模块"><a href="#TODO模块" class="headerlink" title="TODO模块"></a>TODO模块</h4><h4 id="人工智能接口"><a href="#人工智能接口" class="headerlink" title="人工智能接口"></a>人工智能接口</h4><ul>
+<li><input disabled type="checkbox"> 车标识别接口</li>
+<li><input disabled type="checkbox"> 车标检测接口</li>
+<li><input disabled type="checkbox"> 文字识别接口[待训练模型]</li>
+<li><input disabled type="checkbox"> 人脸检测接口[待训练模型]</li>
+</ul>
+<h4 id="物联网设备"><a href="#物联网设备" class="headerlink" title="物联网设备"></a>物联网设备</h4><ul>
+<li><input disabled type="checkbox"> 查询所有设备状态</li>
+<li><input disabled type="checkbox"> 添加新的设备</li>
+<li><input disabled type="checkbox"> 删除设备</li>
+<li><input disabled type="checkbox"> 控制特定的设备</li>
+</ul>
+<h3 id="前端流程设计"><a href="#前端流程设计" class="headerlink" title="前端流程设计"></a>前端流程设计</h3><h4 id="登录流程设计"><a href="#登录流程设计" class="headerlink" title="登录流程设计"></a>登录流程设计</h4><pre class="mermaid">sequenceDiagram
+    participant user as 用户
+    participant front as 前端
+    participant backend as 后端
+
+    user->>front: 填写账号和密码
+    front->>front: 校验账号密码
+    front->>backend: 登录请求
+    backend->>backend: 处理登录请求
+    backend-->>front: 返回token
+    front->>front: 保存token
+    front->>front: 进入首页
+    front->>backend: 根据token获得用户数据
+    backend-->>front: 返回用户数据,包括用户名，头像，路由等
+    front->>front: 保存用户数据,处理路由数据动态渲染。
+    front->>front: 进入系统
+    front-->>user: 完成登录</pre>
+
+<h5 id="请求接口"><a href="#请求接口" class="headerlink" title="请求接口"></a>请求接口</h5><ul>
+<li>Api/User/Login </li>
+<li>Api/User/GetInfo</li>
+<li>Api/User/Logout</li>
+</ul>
+<h4 id="物联网相关"><a href="#物联网相关" class="headerlink" title="物联网相关"></a>物联网相关</h4><h3 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件设计</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/23/longSys%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-book118预览文档下载" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -947,166 +1238,9 @@
 
 
   
-    <article id="post-Redis笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/04/Redis%E7%AC%94%E8%AE%B0/">Redis笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/04/Redis%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2019-09-04T13:24:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Redis拿来干什么？"><a href="#Redis拿来干什么？" class="headerlink" title="Redis拿来干什么？"></a>Redis拿来干什么？</h3><p> redis是运行在内存的软件。速度快，完全基于内存。使用C语言实现，网络层使用epoll解决高并发问题。单线程模型，避免不必要的上下文切换和竞争条件浪费资源。Redis可以用在下面的场景。<br>1、缓存。常用的功能<br>2、数据排序 使用Redis的SortSet数据结构能够非常方便搞定<br>3、计算器/请求限流 秒杀的时候,将数据缓存在Redis中。减少数据库的频繁读写。<br>4、使用集合的命令获得相关的数据<br>5、简单的消息队列。使用Redis的list实现消息队列<br>6、Session共享、token实现单点验证</p>
-<h3 id="Redis数据类型"><a href="#Redis数据类型" class="headerlink" title="Redis数据类型"></a>Redis数据类型</h3><p>Redis提供8种数据类型，常用的主要是String、Hash、List、Set、SortSet这5种类型。另外还有BitMap-位图、HyperLogLog、GEO-地理信息定位。<br>存储的为Key-Value的值。</p>
-<h3 id="Redis常用命令"><a href="#Redis常用命令" class="headerlink" title="Redis常用命令"></a>Redis常用命令</h3><p>  <a target="_blank" rel="noopener" href="http://doc.redisfans.com/index.html">中文Redis命令翻译网址</a></p>
-<h4 id="1、基本操作"><a href="#1、基本操作" class="headerlink" title="1、基本操作"></a>1、基本操作</h4><ul>
-<li>启动Redis<br><code>./redis-server ../redis.conf</code></li>
-<li>启动Redis的脚本工具<br><code>./redis-cli</code></li>
-<li>存储数据的命令<br><code>&gt; set mykey myvalue</code><br>使用set语句 后面加上key值和value值</li>
-<li>查看是否含有某个key值<br><code>&gt; exists mykey</code><br>如果存在返回1 如果不存在返回0</li>
-<li>获得key值对应的value<br><code>&gt; get mykey</code></li>
-<li>查看key值对应的数据类型<br><code>&gt; type mykey</code><br>如果是字符型返回string</li>
-<li>使用正则匹配查找对应的数据<br><code>&gt; keys my*</code><br>查找含有my开头的key。查到返回对应的key列表。找不到返回empty list or set</li>
-<li>删除对应的key值<br><code>&gt; del key</code><br>也可以使用正则匹配来删除<br><code>&gt; del key*</code></li>
-<li>随机获得一个key<br><code>&gt; randomkey</code></li>
-<li>清除所有的key值<br><code>&gt; clear</code></li>
-<li>重命名key值<br><code>&gt; rename newkey oldkey</code></li>
-<li>查看当前的数据库的大小<br><code>&gt; dbsize</code><h4 id="2、Redis时间过期相关的命令"><a href="#2、Redis时间过期相关的命令" class="headerlink" title="2、Redis时间过期相关的命令"></a>2、Redis时间过期相关的命令</h4></li>
-<li>限定key的生存时间<br><code>&gt; expire key 20</code>设置key值20秒后过期</li>
-<li>查看过期时间<br><code>&gt; ttl key</code> 查看key的值还有多少秒过期<br>过期后会返回-2</li>
-<li>清除整个db<br><code>&gt; flushdb</code><br><code>&gt; flushall</code><h4 id="3、配置Redis的命令"><a href="#3、配置Redis的命令" class="headerlink" title="3、配置Redis的命令"></a>3、配置Redis的命令</h4></li>
-<li>配置requirepass<br>获得账号名<br><code>&gt; config get requirepass</code><br>设置密码<br><code>&gt; config set requirepass test123</code></li>
-<li>使用密码验证<br><code>&gt; auth test123</code><br>重新查看账号<br><code>&gt; config get requirepass</code><br>返回值如下<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1) &quot;requirepass&quot;</span><br><span class="line">2) &quot;test123&quot;</span><br></pre></td></tr></table></figure></li>
-<li>获得实体存储的相关命令<br><code>&gt; config get *max-*-entries*</code><br>返回的数据<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1) &quot;hash-max-ziplist-entries&quot;</span><br><span class="line">2) &quot;512&quot;</span><br><span class="line">3) &quot;set-max-intset-entries&quot;</span><br><span class="line">4) &quot;512&quot;</span><br><span class="line">6) &quot;zset-max-ziplist-entries&quot;</span><br><span class="line">7) &quot;128&quot;</span><br></pre></td></tr></table></figure></li>
-<li>重置配置<br><code>&gt; config resetstat</code></li>
-<li>服务器的信息<br><code>&gt; info server</code></li>
-<li>连接客户端的信息<br><code>&gt; info client</code></li>
-<li>内存的信息<br><code>&gt; info memory</code></li>
-<li>持久层数据<br><code>&gt; info persistence</code></li>
-<li>状态的数据<br><code>&gt; info stats</code></li>
-<li>从节点的信息<br><code>&gt; info replication</code></li>
-<li>cpu的信息<br><code>&gt; info cpu</code><h4 id="4、配置文件配置账号"><a href="#4、配置文件配置账号" class="headerlink" title="4、配置文件配置账号"></a>4、配置文件配置账号</h4>在配置文件redis.conf的文件中。在<code>requirepass</code>后面加上需要验证的密码<br>如:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">requirepass test1234</span><br></pre></td></tr></table></figure>
-重启redis服务器之后进入命令行就要使用<br><code>auth test1234</code> 来验证了<h4 id="5、事务的处理"><a href="#5、事务的处理" class="headerlink" title="5、事务的处理"></a>5、事务的处理</h4>使用<code>multi</code>命令开启一个事务<br>然后接下来可以进行一些命令的操作<br>使用<code>exec</code>命令批量执行操作<h4 id="6、持久化的操作"><a href="#6、持久化的操作" class="headerlink" title="6、持久化的操作"></a>6、持久化的操作</h4>将内存中的数据存储到磁盘文件中<br>使用<code>save</code>命令</li>
-</ul>
-<h3 id="Redis五大数据类型以及简单使用"><a href="#Redis五大数据类型以及简单使用" class="headerlink" title="Redis五大数据类型以及简单使用"></a>Redis五大数据类型以及简单使用</h3><h4 id="String字符串类型"><a href="#String字符串类型" class="headerlink" title="String字符串类型"></a>String字符串类型</h4><h5 id="1、添加数据"><a href="#1、添加数据" class="headerlink" title="1、添加数据"></a>1、添加数据</h5><p>  <code>set key-name value</code><br>  如果key存在则修改里面的值，如果不存在就添加</p>
-<h5 id="2、查询数据"><a href="#2、查询数据" class="headerlink" title="2、查询数据"></a>2、查询数据</h5><p><code>get key-name</code></p>
-<h5 id="3、删除数据"><a href="#3、删除数据" class="headerlink" title="3、删除数据"></a>3、删除数据</h5><p><code>del key-name</code></p>
-<h5 id="4、设置key的过期时间"><a href="#4、设置key的过期时间" class="headerlink" title="4、设置key的过期时间"></a>4、设置key的过期时间</h5><p><code>setex key-name 10 value</code><br>设置key的过期时间为10秒</p>
-<h5 id="5、设置多组值"><a href="#5、设置多组值" class="headerlink" title="5、设置多组值"></a>5、设置多组值</h5><p><code>mset key-name1 value1 key-name2 value2</code></p>
-<h5 id="6、获得多组值"><a href="#6、获得多组值" class="headerlink" title="6、获得多组值"></a>6、获得多组值</h5><p><code>mget key-name1 key-name2</code></p>
-<h4 id="Hash表"><a href="#Hash表" class="headerlink" title="Hash表"></a>Hash表</h4><h5 id="1、添加Hash表数据"><a href="#1、添加Hash表数据" class="headerlink" title="1、添加Hash表数据"></a>1、添加Hash表数据</h5><p><code>hset key-name hash-key hash-value</code><br>例如:<br><code>hset user name &quot;smith&quot;</code><br>添加一个hash表的名字为user,其中user中有[name=”smith”]的键值对</p>
-<h5 id="2、查询数据-1"><a href="#2、查询数据-1" class="headerlink" title="2、查询数据"></a>2、查询数据</h5><p><code>hget key-name hash-key</code><br>例如:<br><code>hget user name</code><br>查询user中key为name的值</p>
-<h5 id="3、获得全部的键值对"><a href="#3、获得全部的键值对" class="headerlink" title="3、获得全部的键值对"></a>3、获得全部的键值对</h5><p><code>hgetall key-name</code></p>
-<h5 id="4、一次设置多个键值对"><a href="#4、一次设置多个键值对" class="headerlink" title="4、一次设置多个键值对"></a>4、一次设置多个键值对</h5><p><code>hmset key-name hash-key1 hash-value1 hash-key2 hash-value2</code></p>
-<h5 id="5、查看数据长度"><a href="#5、查看数据长度" class="headerlink" title="5、查看数据长度"></a>5、查看数据长度</h5><p><code>hlen key-name</code><br>返回该Hash表的键值对数量</p>
-<h5 id="6、查询是否存在某个hash-key"><a href="#6、查询是否存在某个hash-key" class="headerlink" title="6、查询是否存在某个hash-key"></a>6、查询是否存在某个hash-key</h5><p><code>hexist key-name hash-key</code></p>
-<h4 id="List列表"><a href="#List列表" class="headerlink" title="List列表"></a>List列表</h4><h5 id="1、添加数据-1"><a href="#1、添加数据-1" class="headerlink" title="1、添加数据"></a>1、添加数据</h5><p><code>lpush/rpush key-name value1 value2 value3</code><br>其中lpush从左边插入数据，rpush从右边插入数据</p>
-<h5 id="2、获得数据"><a href="#2、获得数据" class="headerlink" title="2、获得数据"></a>2、获得数据</h5><p><code>lpop/rpop key-name</code><br>弹出列表最左边/右边的值。</p>
-<h5 id="3、遍历数据"><a href="#3、遍历数据" class="headerlink" title="3、遍历数据"></a>3、遍历数据</h5><p><code>lrange key-name start stop</code><br>遍历下标为[start,stop]的数据<br>例如:<br><code>lrange city 0 -1</code><br>遍历全部数据</p>
-<h5 id="4、获得列表长度"><a href="#4、获得列表长度" class="headerlink" title="4、获得列表长度"></a>4、获得列表长度</h5><p><code>llen key-name</code></p>
-<h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><p>  Set是String类型的无序集合,元素值不能重复</p>
-<h5 id="1、添加数据-2"><a href="#1、添加数据-2" class="headerlink" title="1、添加数据"></a>1、添加数据</h5><p><code>sadd key-name value1 value2</code></p>
-<h5 id="2、获得数据-1"><a href="#2、获得数据-1" class="headerlink" title="2、获得数据"></a>2、获得数据</h5><p><code>smembers key-name</code><br>获得所有数据</p>
-<h5 id="3、查询是否存在某个成员"><a href="#3、查询是否存在某个成员" class="headerlink" title="3、查询是否存在某个成员"></a>3、查询是否存在某个成员</h5><p><code>sisexist key-name member</code></p>
-<h5 id="4、移除某个成员"><a href="#4、移除某个成员" class="headerlink" title="4、移除某个成员"></a>4、移除某个成员</h5><p><code>srem key-name member</code></p>
-<h4 id="ZSet类型"><a href="#ZSet类型" class="headerlink" title="ZSet类型"></a>ZSet类型</h4><p>  zset类型可以排序，每个值都有对应的score,可以进行集合间的操作</p>
-<h5 id="1、添加数据-3"><a href="#1、添加数据-3" class="headerlink" title="1、添加数据"></a>1、添加数据</h5><p><code>zadd key-name score1 member1 score2 member2</code></p>
-<h5 id="2、移除数据"><a href="#2、移除数据" class="headerlink" title="2、移除数据"></a>2、移除数据</h5><p><code>zrem key-name member [member2...]</code><br>使用[]来标识里面的内容为可选内容</p>
-<h5 id="3、查询成员数量"><a href="#3、查询成员数量" class="headerlink" title="3、查询成员数量"></a>3、查询成员数量</h5><p><code>zcard key-name</code></p>
-<h5 id="4、查询成员的分值"><a href="#4、查询成员的分值" class="headerlink" title="4、查询成员的分值"></a>4、查询成员的分值</h5><p><code>zscore key-name member</code></p>
-<h5 id="5、修改成员的分值"><a href="#5、修改成员的分值" class="headerlink" title="5、修改成员的分值"></a>5、修改成员的分值</h5><p><code>zincrby key-name increase-num member</code><br>给成员的分值加上increase-num的值,可为正，可为负。</p>
-<h5 id="6、根据score区间查询成员"><a href="#6、根据score区间查询成员" class="headerlink" title="6、根据score区间查询成员"></a>6、根据score区间查询成员</h5><p><code>zcount key-name min max</code><br>返回分值介于[min,max]区间的成员</p>
-<h5 id="7、查询成员的排名"><a href="#7、查询成员的排名" class="headerlink" title="7、查询成员的排名"></a>7、查询成员的排名</h5><p>（1） <code>zrank key-name member</code><br>返回成员在集合中的排名,按照分值从小到大排<br>（2）<code>zrevrank key-name member</code><br>返回成员的排名，按照分值从大到小排</p>
-<h5 id="8、根据排名区间获得成员"><a href="#8、根据排名区间获得成员" class="headerlink" title="8、根据排名区间获得成员"></a>8、根据排名区间获得成员</h5><p>(1) <code>zrange key-name start stop [WITHSCORES]</code><br>返回<strong>排名</strong>处于[start stop]区间内的成员,withscores选项会返回成员的分值。成员按照分值<strong>从小到大</strong>排序<br>(2) <code>zrevrange key-name start stop [WITHSCORES]</code><br>和<code>zrange</code>一致，区别是按照分值<strong>从大到小</strong>排序</p>
-<h5 id="9、根据分数区间获得成员"><a href="#9、根据分数区间获得成员" class="headerlink" title="9、根据分数区间获得成员"></a>9、根据分数区间获得成员</h5><p>（1）<code>zrangebyscore key-name min max [WITHSCORES] [LIMIT offset count]</code><br>返回分数处于[min,max]区间的成员，按照分数<strong>从小到大</strong>排列<br>（2）<code>zrevrangebyscore key-name min max [WITHSCORES] [LIMIT offset count]</code><br>和(1)中的作用一致，不同的是成员按照分数<strong>从大到小</strong>排列</p>
-<h5 id="10、多个ZSet进行交集运算"><a href="#10、多个ZSet进行交集运算" class="headerlink" title="10、多个ZSet进行交集运算"></a>10、多个ZSet进行交集运算</h5><p><code>ZINTERSTORE destination numkeys key [key ...] [WEIGHTS weight [weight ...]] [AGGREGATE SUM|MIN|MAX]</code><br>例子：<br><code>zset zkey3 2 zkey1 zkey2</code><br>zkey3放置zkey1和zkey2进行交运算之后的结果。其中2表示有两个集合。</p>
-<h5 id="11、多个ZSet进行并集运算"><a href="#11、多个ZSet进行并集运算" class="headerlink" title="11、多个ZSet进行并集运算"></a>11、多个ZSet进行并集运算</h5><p><code>ZUNIONSTORE destination numkeys key [key ...] [WEIGHTS weight [weight ...]] [AGGREGATE SUM|MIN|MAX]</code><br>相同的成员分数相加。</p>
-<h4 id="使用Jedis来访问redis"><a href="#使用Jedis来访问redis" class="headerlink" title="使用Jedis来访问redis"></a>使用Jedis来访问redis</h4><h5 id="1、maven添加依赖"><a href="#1、maven添加依赖" class="headerlink" title="1、maven添加依赖"></a>1、maven添加依赖</h5><p>引入redis的依赖</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&lt;dependency&gt;</span></span><br><span class="line">    <span class="attr">&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span></span><br><span class="line">    <span class="attr">&lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;</span></span><br><span class="line"><span class="attr">&lt;/dependency&gt;</span></span><br></pre></td></tr></table></figure>
-<h5 id="2、连接和配置redis"><a href="#2、连接和配置redis" class="headerlink" title="2、连接和配置redis"></a>2、连接和配置redis</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># Redis 配置</span><br><span class="line">spring.redis.jedis.pool.max-idle=<span class="number">10</span></span><br><span class="line">spring.redis.jedis.pool.max-active=<span class="number">10</span></span><br><span class="line">spring.redis.jedis.pool.min-idle=<span class="number">5</span></span><br><span class="line">spring.redis.jedis.pool.max-wait=<span class="number">2000</span></span><br><span class="line">#配置Redis服务器属性</span><br><span class="line">spring.redis.port=<span class="number">6379</span></span><br><span class="line">spring.redis.host=localhost</span><br><span class="line"># 连接的密码</span><br><span class="line">spring.redis.password=password</span><br><span class="line"># 连接超时设置</span><br><span class="line">spring.redis.timeout=<span class="number">1000</span></span><br><span class="line"></span><br><span class="line"># 缓存配置</span><br><span class="line">spring.cache.type=redis</span><br><span class="line">spring.cache.cache-names=redisCache</span><br></pre></td></tr></table></figure>
-<h5 id="3、java中配置Redis的操作对象"><a href="#3、java中配置Redis的操作对象" class="headerlink" title="3、java中配置Redis的操作对象"></a>3、java中配置Redis的操作对象</h5><p>1、在启用类的类头哪里使用<code>@EnableCaching</code>注解开启redis<br>2、获得redis的模板对象</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 注入RedisTemplate对象</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> RedisTemplate redisTemplate = <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
-<p>3、在bean的构造函数中初始化模板。主要是用来设置序列化的方式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostConstruct</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    initRedisTemplate();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>初始化方法如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 设置RedisTemplate的序列化器</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initRedisTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    RedisSerializer stringSerializer = redisTemplate.getStringSerializer();</span><br><span class="line">    redisTemplate.setKeySerializer(stringSerializer);</span><br><span class="line">    redisTemplate.setHashKeySerializer(stringSerializer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>4、使用redis的模板来操作redis<br>涉及到的函数为</p>
-<ul>
-<li><code>boolean hashKey = redisTemplate.hasKey(key)</code> 判断redis中是否含有key值</li>
-<li>获得操作Redis对象的函数，其中的Dictionary是放进去的对象，redis会自动完成ORM的<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ValueOperations&lt;String,Dictionary&gt; operations = redisTemplate.opsForValue();</span><br></pre></td></tr></table></figure>
-设置key对应的值<br><code>operations.set(key,dictionary,timeout,TimeUnit.HOURS);</code><br>key为对应的String类型的key值。<br><code>dictionary</code>为设置到缓存的对象。会被序列化为stirng类型。<br><code>timeout</code>为过期时间,long类型<br><code>TimeUnit.HOURS</code>是timeout的单位.可以设置纳秒、微秒、分钟、小时、天等。<h4 id="缓存穿透和缓存雪崩"><a href="#缓存穿透和缓存雪崩" class="headerlink" title="缓存穿透和缓存雪崩"></a>缓存穿透和缓存雪崩</h4><h5 id="1、缓存穿透"><a href="#1、缓存穿透" class="headerlink" title="1、缓存穿透"></a>1、缓存穿透</h5>如何理解缓存穿透，缓存原本是放在数据库读写之前的一层缓存。用来减少数据库的io。穿透就是数据直接穿透缓存访问数据库，可以理解为缓存被穿透了。什么时候会导致缓存穿透？为什么会出现缓存穿透？读写数据的时候没有在redis中命中数据。导致访问数据库。没有命中数据 -&gt; 访问数据库。缓存的命中率太低了,导致缓存不起作用。这样就出现缓存穿透<h5 id="2、缓存雪崩"><a href="#2、缓存雪崩" class="headerlink" title="2、缓存雪崩"></a>2、缓存雪崩</h5>什么是缓存雪崩?在某一时间段，缓存中的数据集体失效，导致大量的数据库出现大量的io请求。缓存中数据在同一时间失效。这就是缓存的雪崩，缓存雪崩可能会导致数据库的崩溃。如何避免缓存雪崩？雪崩的原因是同一时间失效，设置随机失效时间。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/04/Redis%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/7/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/5/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/7/">Next &amp;raquo;</a>
     </nav>
   
 
