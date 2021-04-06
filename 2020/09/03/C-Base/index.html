@@ -16,7 +16,7 @@
 <meta property="og:description" content="计算数组的大小sizeof(数组名) 获得这个数组占用内存的总长度。二维数组是全部元素占用的总长度。 长度 &#x3D; sizeof(数组名) &#x2F; sizeof(数组类型) 元素个数 &#x3D; 总的占用字节大小 &#x2F; 每个元素占用的字节大小 64位指针占用8字节，8×8&#x3D;64，内存寻址。 计算一维数组长度例子1： 12345char *sc4[] &#x3D;&amp;#123;&quot;hello&quot;,&quot;wo">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-03T12:23:21.000Z">
-<meta property="article:modified_time" content="2021-04-05T14:58:27.936Z">
+<meta property="article:modified_time" content="2021-04-06T11:47:31.313Z">
 <meta property="article:author" content="long">
 <meta property="article:tag" content="C">
 <meta property="article:tag" content="笔记">
@@ -221,7 +221,7 @@
 
 <h4 id="valgrind-检查内存泄漏"><a href="#valgrind-检查内存泄漏" class="headerlink" title="valgrind 检查内存泄漏"></a>valgrind 检查内存泄漏</h4><p><code>valgrind --leak-check=full --track-origin=yes ./test</code></p>
 <h4 id="C的字符串数组"><a href="#C的字符串数组" class="headerlink" title="C的字符串数组"></a>C的字符串数组</h4><p>第一种情况,每一个都是指针</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> **arr = <span class="literal">NULL</span>;</span><br><span class="line"><span class="comment">// 10 个字符串</span></span><br><span class="line">arr = <span class="built_in">calloc</span>(<span class="number">10</span>, <span class="keyword">sizeof</span>(<span class="keyword">char</span> *));</span><br><span class="line">arr[<span class="number">0</span>] = <span class="built_in">calloc</span>(<span class="number">1</span>, <span class="number">100</span>);</span><br><span class="line">arr[<span class="number">1</span>] = <span class="built_in">calloc</span>(<span class="number">1</span>, <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> **arr = <span class="literal">NULL</span>;</span><br><span class="line"><span class="comment">// 10 个字符串</span></span><br><span class="line">arr = <span class="built_in">calloc</span>(<span class="number">10</span>, <span class="keyword">sizeof</span>(<span class="keyword">char</span> *));</span><br><span class="line">arr[<span class="number">0</span>] = <span class="built_in">calloc</span>(<span class="number">1</span>, <span class="number">100</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(arr[<span class="number">0</span>], <span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">arr[<span class="number">1</span>] = <span class="built_in">calloc</span>(<span class="number">1</span>, <span class="number">100</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(arr[<span class="number">1</span>], <span class="string">&quot;World&quot;</span>);</span><br></pre></td></tr></table></figure>
 
 
 
