@@ -158,6 +158,89 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-go-加解密" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/12/go-%E5%8A%A0%E8%A7%A3%E5%AF%86/">go-加解密</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/12/go-%E5%8A%A0%E8%A7%A3%E5%AF%86/" class="archive-article-date">
+  	<time datetime="2021-04-12T12:34:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="AESCBC256加解密DEMO"><a href="#AESCBC256加解密DEMO" class="headerlink" title="AESCBC256加解密DEMO"></a>AESCBC256加解密DEMO</h3><p>注意:IV和Salt的大小为16,迭代次数可以自己定义</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;bytes&quot;</span></span><br><span class="line">    <span class="string">&quot;crypto/aes&quot;</span></span><br><span class="line">    <span class="string">&quot;crypto/cipher&quot;</span></span><br><span class="line">    <span class="string">&quot;crypto/sha256&quot;</span></span><br><span class="line">    <span class="string">&quot;errors&quot;</span></span><br><span class="line">    <span class="string">&quot;golang.org/x/crypto/pbkdf2&quot;</span></span><br><span class="line">    <span class="string">&quot;log&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">PKCS7Padding</span><span class="params">(cipherText []<span class="keyword">byte</span>, blockSize <span class="keyword">int</span>)</span> []<span class="title">byte</span></span>&#123;</span><br><span class="line">    paddingLength := blockSize - <span class="built_in">len</span>(cipherText) % blockSize</span><br><span class="line">    paddingCtx := bytes.Repeat([]<span class="keyword">byte</span>&#123;<span class="keyword">byte</span>(paddingLength)&#125;, paddingLength)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">append</span>(cipherText, paddingCtx...)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">PKCS7UnPadding</span><span class="params">(cipherText []<span class="keyword">byte</span>)</span> <span class="params">([]<span class="keyword">byte</span>, error)</span></span> &#123;</span><br><span class="line">    length := <span class="built_in">len</span>(cipherText)</span><br><span class="line">    <span class="keyword">if</span> length &lt;= <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span> ,errors.New(<span class="string">&quot;unpadding context is invalid&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    unPaddingLength := <span class="keyword">int</span>(cipherText[length - <span class="number">1</span>])</span><br><span class="line">    <span class="keyword">if</span> unPaddingLength &gt; length &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, errors.New(<span class="string">&quot;unPadding length over origin data&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cipherText[:(length - unPaddingLength)], <span class="literal">nil</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">AESCBCEncrypt</span><span class="params">(plainText []<span class="keyword">byte</span>, key, iv []<span class="keyword">byte</span>)</span> <span class="params">([]<span class="keyword">byte</span>, error)</span></span> &#123;</span><br><span class="line">    block, err := aes.NewCipher(key)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">    &#125;</span><br><span class="line">    blockSize := block.BlockSize()</span><br><span class="line">    paddingText := PKCS7Padding(plainText, blockSize)</span><br><span class="line">    </span><br><span class="line">    blockMode := cipher.NewCBCEncrypter(block, iv)</span><br><span class="line">    encryptText := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="built_in">len</span>(paddingText))</span><br><span class="line">    blockMode.CryptBlocks(encryptText, paddingText)</span><br><span class="line">    <span class="keyword">return</span> encryptText, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">AesCBCDecrypt</span><span class="params">(encryptText []<span class="keyword">byte</span>, key, iv []<span class="keyword">byte</span>)</span><span class="params">([]<span class="keyword">byte</span>, error)</span></span> &#123;</span><br><span class="line">    block, err := aes.NewCipher(key)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">    &#125;</span><br><span class="line">    blockMode := cipher.NewCBCDecrypter(block, iv)</span><br><span class="line">    decryptLen := <span class="built_in">len</span>(encryptText)</span><br><span class="line">    decryptText := <span class="built_in">make</span>([]<span class="keyword">byte</span>, decryptLen)</span><br><span class="line">    blockMode.CryptBlocks(decryptText, encryptText)</span><br><span class="line">    unPaddingText, err := PKCS7UnPadding(decryptText)</span><br><span class="line">    <span class="keyword">return</span> unPaddingText, err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getPbkdf2Key</span><span class="params">(securityKey, salt []<span class="keyword">byte</span>)</span> []<span class="title">byte</span></span> &#123;</span><br><span class="line">    key := pbkdf2.Key(securityKey, salt, <span class="number">1</span>, <span class="built_in">len</span>(securityKey), sha256.New)</span><br><span class="line">    <span class="keyword">return</span> key</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    salt := []<span class="keyword">byte</span>(<span class="string">&quot;ABCDEF0123456789&quot;</span>)</span><br><span class="line">    iv := []<span class="keyword">byte</span>(<span class="string">&quot;0123456789ABCDEF&quot;</span>)</span><br><span class="line">    key := getPbkdf2Key([]<span class="keyword">byte</span>(<span class="string">&quot;MYPasswordxfaewfaewfaewfaeafeawf&quot;</span>),salt)</span><br><span class="line">    plainText := <span class="string">&quot;Hello World&quot;</span></span><br><span class="line">    encrypt, err := AESCBCEncrypt([]<span class="keyword">byte</span>(plainText), key, iv)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Println(err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    decrypt, err := AesCBCDecrypt(encrypt, key, iv)</span><br><span class="line">    </span><br><span class="line">    log.Printf(<span class="string">&quot;encrypt  value : %q&quot;</span>, encrypt)</span><br><span class="line">    log.Printf(<span class="string">&quot;plainText value %q: &quot;</span>, plainText)</span><br><span class="line">    log.Printf(<span class="string">&quot;decrypt value %q: &quot;</span>, decrypt)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> err == <span class="literal">nil</span> &amp;&amp; <span class="keyword">string</span>(decrypt) == plainText  &#123;</span><br><span class="line">        log.Println(<span class="string">&quot;TEST PASS&quot;</span>)</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        log.Fatal(<span class="string">&quot;TEST FAILED&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">加解密</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">aes</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/12/go-%E5%8A%A0%E8%A7%A3%E5%AF%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-go-net" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2372,109 +2455,6 @@
 
 
   
-    <article id="post-算法奥秘" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/22/%E7%AE%97%E6%B3%95%E5%A5%A5%E7%A7%98/">&lt;&lt;算法奥秘 读书笔记&gt;&gt;</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/22/%E7%AE%97%E6%B3%95%E5%A5%A5%E7%A7%98/" class="archive-article-date">
-  	<time datetime="2020-12-22T12:08:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="第2章"><a href="#第2章" class="headerlink" title="第2章"></a>第2章</h2><h3 id="2-1-操作最右边的位元"><a href="#2-1-操作最右边的位元" class="headerlink" title="2.1 操作最右边的位元"></a>2.1 操作最右边的位元</h3><h4 id="x-amp-x-1"><a href="#x-amp-x-1" class="headerlink" title="x&amp;(x - 1)"></a>x&amp;(x - 1)</h4><p><strong>作用1</strong>：将字组中值为1且最靠右边的位元变为0，没有1结果就是0。(例如:0101 1110[最靠右边的1是倒数第二位] =&gt; 0101 1100,0101 0001[最靠右边的1是倒数第一位] =&gt; 0101 0000)。其他位置数据变更不确定</p>
-<p><strong>作用2</strong>：判断无符号整数x是否是2的幂或0，运行之后的结果为0说明x = 2^n 或 0。例子:</p>
-<p>2(10)&amp;1(01) = 0,4(100)&amp;3(011)=0,16(10000) &amp;15(01111) = 0</p>
-<h4 id="x-x-1"><a href="#x-x-1" class="headerlink" title="x | (x + 1)"></a>x | (x + 1)</h4><p><strong>作用</strong>:将字组中值为0且最靠右边的位元变为1，没有0，结果都是1，（例如：1010 0111 [最靠右边的是顺数第5位] =&gt; 1010 1111, 1010 0001[最靠右边的是倒数第二位] =&gt; 1010 0011，1010 1111 =&gt; 1011 1111)。也可以理解为从右往左数，将第一个为0的位转为1。</p>
-<h4 id="x-amp-x-1-1"><a href="#x-amp-x-1-1" class="headerlink" title="x&amp;(x + 1)"></a>x&amp;(x + 1)</h4><p><strong>作用</strong>: 将x字组尾部的连续一组1变成0，如果尾部没有1,值不变。</p>
-<p>例子: </p>
-<p>1010 0111[尾部有3个1] &amp; 1010 1000 =&gt; 1010 0000[尾部3个1全部变为0]</p>
-<p>1010 0110[尾部没有1] &amp; 1010 0111 =&gt; 1010 0110[不变]</p>
-<h4 id="x-x-1-1"><a href="#x-x-1-1" class="headerlink" title="x | (x - 1)"></a>x | (x - 1)</h4><p>**作用:**将x字组尾部的连续一组0变成1，尾部没有0，值不变。</p>
-<p>例子：</p>
-<p>1010 0100[尾部3个0] | 1010 0011 =&gt; 1010 0111[尾部3个0全部变为1]</p>
-<p>1010 0111[尾部没有0] | 1010 0110 =&gt; 1010 0111[不变]</p>
-<h4 id="x-amp-x-1-2"><a href="#x-amp-x-1-2" class="headerlink" title="~x&amp;(x + 1)"></a>~x&amp;(x + 1)</h4><p><strong>作用</strong>: 将x中最靠右且值为0的位元变为1，并将其余位置0。如果x中没有值为0的位元，结果为0。</p>
-<p>例子：x = 1010 0111 最靠右的0为第5位。</p>
-<p>~x &amp; (x + 1) =&gt; ~1010 0111 &amp; (1010 0111 + 1) =&gt; 0101 1000 &amp; (1010 1000) =&gt; 0000 1000,x顺数第5位的0变为1，其余位为0。</p>
-<h4 id="x-x-1-2"><a href="#x-x-1-2" class="headerlink" title="~x | (x -1)"></a>~x | (x -1)</h4><p><strong>作用</strong>: 将x最靠右且值为1的位元变为0，其余位置变为1。</p>
-<p>例子：x = 1010 1000 最靠右的1为顺数第5位</p>
-<p>~x | (x - 1) = ~1010 1000 | (1010 1000 - 1) =&gt; 0101 0111 | 1010 0111 =&gt; 1111 0111</p>
-<h4 id="x-amp-x-1-、-x-x-、-x-amp-x-1"><a href="#x-amp-x-1-、-x-x-、-x-amp-x-1" class="headerlink" title="x&amp;(x - 1)、(x | -x)、(x &amp; -x) -1"></a><del>x&amp;(x - 1)、</del>(x | -x)、(x &amp; -x) -1</h4><p><strong>作用</strong>：将字组尾部所有值为0的位元全都变成1，其余位元设为0。没有值为0的位元，结果为0</p>
-<p>例子: 0101 1000[尾部3个0] =&gt; 0000 0111</p>
-<h4 id="x-x-1-3"><a href="#x-x-1-3" class="headerlink" title="~x | (x + 1)"></a>~x | (x + 1)</h4><p><strong>作用</strong>: 将字组尾部所有值为1的位元全都变成0，其余位设为1。没有1的位元，运算结果都为1。</p>
-<p>例子: 1010 0111 =&gt; 1111 1000</p>
-<h4 id="x-amp-x"><a href="#x-amp-x" class="headerlink" title="x &amp; (-x)"></a>x &amp; (-x)</h4><p><strong>作用</strong>:保留字组中最靠右且值为1的位元，并将其余位置置0。x不存在1位元，运算结果为0。</p>
-<p><strong>例子</strong>: 0101 1000 =&gt; 0000 1000</p>
-<h4 id="x-x-1-4"><a href="#x-x-1-4" class="headerlink" title="x ^ (x - 1)"></a>x ^ (x - 1)</h4><p><strong>作用</strong>:  以最靠右且值为1的位元做分割点，分割点右边值为0的位元全部设成1，分割点左边全部设成0。没有值为1的位元，运算结果每一位都是1。尾部没有值为0的位元，值为1。因为只剩下分割点，并且分割点在最后一位。</p>
-<p>例子: 0101 1000[分割点为顺数第5位] =&gt; 0000 1111</p>
-<h4 id="x-x-1-5"><a href="#x-x-1-5" class="headerlink" title="x ^ (x + 1)"></a>x ^ (x + 1)</h4><p><strong>作用</strong>: 将字组最靠右且值为0的位元，及其右方所有值为1的位元都设为1，左方位元全设为0，x没有值为0的位元，运算结果的每一位都是1，x的尾部没有值为1的位元时，运算结果为1。分割点为最靠近右边的0，运算的时候将分割点和分割点右边的位元设为1，分割点左边的位元设为0。</p>
-<p>例子: 0101 0111[分割点顺数第5位] =&gt; 0000 1111</p>
-<h4 id="x-x-1-1-amp-x-、-x-amp-x-x-amp-x"><a href="#x-x-1-1-amp-x-、-x-amp-x-x-amp-x" class="headerlink" title="((x|(x -1)) + 1)&amp; x)、((x &amp; -x) + x) &amp; x"></a>((x|(x -1)) + 1)&amp; x)、((x &amp; -x) + x) &amp; x</h4><p><strong>作用</strong>: 将字组右侧连续出现且值为1的位元设为0，如果x是非负数，使用该公式运算结果为0，说明x = 2 ^ j - 2 ^ k形式, j &gt;= k &gt;= 0。</p>
-<p>例子: 0101 1100 [顺数第4 - 6位为连续的1] =&gt; 0100 0000</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">读书笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/22/%E7%AE%97%E6%B3%95%E5%A5%A5%E7%A7%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -2801,6 +2781,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ffmpeg</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">aes</a>
               </li>
             
             <div class="clearfix"></div>
