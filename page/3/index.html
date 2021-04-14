@@ -158,6 +158,83 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-linux自动更换壁纸" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/22/linux%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%8D%A2%E5%A3%81%E7%BA%B8/">linux自动更换壁纸</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/22/linux%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%8D%A2%E5%A3%81%E7%BA%B8/" class="archive-article-date">
+  	<time datetime="2020-09-22T11:43:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="功能描述"><a href="#功能描述" class="headerlink" title="功能描述"></a>功能描述</h4><p>每隔一段时间更换linux的壁纸。</p>
+<h4 id="golang-实现"><a href="#golang-实现" class="headerlink" title="golang 实现"></a>golang 实现</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;encoding/json&quot;</span></span><br><span class="line">    <span class="string">&quot;io/ioutil&quot;</span></span><br><span class="line">    <span class="string">&quot;log&quot;</span></span><br><span class="line">    <span class="string">&quot;math/rand&quot;</span></span><br><span class="line">    <span class="string">&quot;os/exec&quot;</span></span><br><span class="line">    <span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">type</span> Config <span class="keyword">struct</span> &#123;</span><br><span class="line">    List []<span class="keyword">string</span></span><br><span class="line">    Interval <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> config = Config&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">randomPaper</span><span class="params">(args []<span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">    index := rand.Int31n(<span class="keyword">int32</span>(<span class="built_in">len</span>(config.List)))</span><br><span class="line">    args[<span class="number">3</span>] = config.List[index]</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">    data,err := ioutil.ReadFile(<span class="string">&quot;config.json&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Fatal(<span class="string">&quot;read config file err:&quot;</span>,err)</span><br><span class="line">    &#125;</span><br><span class="line">    err = json.Unmarshal(data,&amp;config)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</span><br><span class="line">        log.Fatal(<span class="string">&quot;unmarshal err:&quot;</span>,err)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(config.List) &lt;= <span class="number">0</span> &#123;</span><br><span class="line">        log.Fatal(<span class="string">&quot;list no exist&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> config.Interval &lt; <span class="number">3</span> &#123;</span><br><span class="line">        log.Fatal(<span class="string">&quot;interval is too fast&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    args := []<span class="keyword">string</span>&#123;</span><br><span class="line">        <span class="string">&quot;set&quot;</span>,<span class="string">&quot;org.gnome.desktop.background&quot;</span>,<span class="string">&quot;picture-uri&quot;</span>,<span class="string">&quot;&quot;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        randomPaper(args)</span><br><span class="line">        cmd := exec.Command(<span class="string">&quot;gsettings&quot;</span>,args...)</span><br><span class="line">        cmd.Run()</span><br><span class="line">        i := time.Second * (time.Duration(config.Interval))</span><br><span class="line">        time.Sleep(i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;list&quot;</span>: [</span><br><span class="line">    <span class="string">&quot;file:/home/test/Downloads/th2.jpeg&quot;</span>,</span><br><span class="line">    <span class="string">&quot;file:/home/test/Downloads/th1.jpg&quot;</span>,</span><br><span class="line">    <span class="string">&quot;file:/home/test/Downloads/th.jpeg&quot;</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">&quot;interval&quot;</span>:<span class="number">10</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/22/linux%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%8D%A2%E5%A3%81%E7%BA%B8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-C-AES加解密" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1261,188 +1338,6 @@ title 甘特图
 
 
   
-    <article id="post-go-module" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/24/go-module/">go-module</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/24/go-module/" class="archive-article-date">
-  	<time datetime="2020-07-24T14:08:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="go-module介绍"><a href="#go-module介绍" class="headerlink" title="go module介绍"></a>go module介绍</h4><p>​    go module 是从1.11版本开始支持的官方包管理工具。不用go module的话，所有的项目必须在gopath下创建，版本依赖无法处理。通过使用go module可以摆脱GoPath开发，可以通过配置go.mod文件来自已定义依赖包的版本。</p>
-<h4 id="go-module的三种模式"><a href="#go-module的三种模式" class="headerlink" title="go module的三种模式"></a>go module的三种模式</h4><p> <code>off</code>、<code>on</code>、<code>auto</code></p>
-<table>
-<thead>
-<tr>
-<th>模式</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>off</td>
-<td>关闭，使用在GoPath下开发的模式</td>
-</tr>
-<tr>
-<td>on</td>
-<td>开启module,默认开启</td>
-</tr>
-<tr>
-<td>auto</td>
-<td>项目在GoPath之外，根目录有go.mod文件</td>
-</tr>
-</tbody></table>
-<p>可以在系统环境变量中配置如下变量:<code>GO111MODULE=auto</code></p>
-<p>使用go module必须使用代理才能顺利的上网，环境变量中配置代理。需要配置如下的环境变量</p>
-<p><code>GOPROXY=https://goproxy.cn,direct</code></p>
-<p>go1.13之后GOPROXY的默认值是<code>https://proxy.golang.org</code>,国内无法访问。</p>
-<h4 id="go-mod-常用命令"><a href="#go-mod-常用命令" class="headerlink" title="go mod 常用命令"></a>go mod 常用命令</h4><table>
-<thead>
-<tr>
-<th align="center">命令</th>
-<th align="left">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">go mod init [modulename]</td>
-<td align="left">创建go.mod文件，如果该项目是在GoPath下面的，不用自己指定包名。如果不是在GoPath下的项目，必须提供包名，否则无法创建。</td>
-</tr>
-<tr>
-<td align="center">go mod download</td>
-<td align="left">根据go.mod文件下载依赖。</td>
-</tr>
-<tr>
-<td align="center">go mod tidy</td>
-<td align="left">整理依赖项，代码中用不到的依赖会被删除，新的依赖会被下载。</td>
-</tr>
-<tr>
-<td align="center">go mod graph</td>
-<td align="left">打印模块依赖</td>
-</tr>
-<tr>
-<td align="center">go mod vendor</td>
-<td align="left">将依赖复制到vendor下</td>
-</tr>
-<tr>
-<td align="center">go mod why</td>
-<td align="left">为什么需要依赖</td>
-</tr>
-<tr>
-<td align="center">go mod edit -fmt</td>
-<td align="left">格式化go.mod文件</td>
-</tr>
-<tr>
-<td align="center">go mod edit -require=golang.xx.xx</td>
-<td align="left">添加依赖项</td>
-</tr>
-</tbody></table>
-<h4 id="go-mod文件"><a href="#go-mod文件" class="headerlink" title="go.mod文件"></a>go.mod文件</h4><p>go.mod文件中包含该项目所有的依赖信息，和Java项目中的pom.xml文件类似。</p>
-<p>以下为常用关键字和说明</p>
-<table>
-<thead>
-<tr>
-<th>关键字</th>
-<th>关键字说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>module</td>
-<td>包名说明</td>
-</tr>
-<tr>
-<td>require</td>
-<td>项目的依赖包及版本</td>
-</tr>
-<tr>
-<td>indirect</td>
-<td>间接引用</td>
-</tr>
-<tr>
-<td>replace</td>
-<td>依赖替换</td>
-</tr>
-</tbody></table>
-<h4 id="go-module导入本地包"><a href="#go-module导入本地包" class="headerlink" title="go module导入本地包"></a>go module导入本地包</h4><h5 id="一、同一个项目下"><a href="#一、同一个项目下" class="headerlink" title="一、同一个项目下"></a>一、同一个项目下</h5><p>一个项目有如下的目录结构，main.go需要引用subpackage中的sb.go中的函数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── go.mod</span><br><span class="line">├── main.go</span><br><span class="line">├── subpackage</span><br><span class="line">│   └── sb.go</span><br></pre></td></tr></table></figure>
-
-<p>go.mod文件不用任何配置，只需要在main.go中添加<code>import &quot;package1/subpackage&quot;</code>便可以引用了。</p>
-<h5 id="二、不同项目下"><a href="#二、不同项目下" class="headerlink" title="二、不同项目下"></a>二、不同项目下</h5><p>有如下的目录结构</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── moduledemo</span><br><span class="line">│   ├── go.mod</span><br><span class="line">│   └── main.go</span><br><span class="line">├── package1</span><br><span class="line">│   ├── go.mod</span><br><span class="line">│   └── package1.go</span><br><span class="line">├── package2</span><br><span class="line">│   ├── go.mod</span><br><span class="line">│   └── package2.go</span><br></pre></td></tr></table></figure>
-
-<p>说明：</p>
-<p>在mouledemo项目main.go中想要调用package1包中的函数。需要在module项目的go.mod中添加如下配置。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">require package1 v0.0.0</span><br><span class="line">replace package1 &#x3D;&gt; ..&#x2F;package1</span><br></pre></td></tr></table></figure>
-
-<p>在main.go文件中导入，<code>import &quot;package1&quot;</code>便可以调用package1中的内容了。</p>
-<p><strong>极端调用</strong>：在main.go中导入了<code>&quot;subprint.com/sbp&quot;</code>项目,并取别名为<code>sbp</code>，但是这个项目并不在goPath中，也不在网上，而是在本地的package2中。需要在go.mod中配置如下信息便可以调用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">require subprint.com&#x2F;sbp v0.0.0</span><br><span class="line">replace subprint.com&#x2F;sbp &#x3D;&gt; ..&#x2F;package2</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/24/go-module/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1773,6 +1668,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">aes</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">物联网</a>
               </li>
             
             <div class="clearfix"></div>
