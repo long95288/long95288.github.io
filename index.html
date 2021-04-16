@@ -905,9 +905,10 @@
 </li>
 <li><p>屏幕送流和摄像头送流类似<br><code>ffmpeg -f gdigrab -i desktop -r 5 -vcodec mpeg2video -f mpeg2video udp://localhost:6666</code></p>
 </li>
-<li><p>抓取屏幕特定窗口<br><code>ffmpeg -f gdigrab -i title=&quot;C:\WINDOWS\system32\cmd.exe&quot; -r 5 -vcodec libx264 -preset:v ultrafast -tune:v zerolatency Desktop.mkv</code> </p>
+<li><p>抓取屏幕特定窗口<br><code>ffmpeg -f gdigrab -i title=&quot;C:\WINDOWS\system32\cmd.exe&quot; -r 5 -vcodec libx264 -preset:v ultrafast -tune:v zerolatency Desktop.mkv</code></p>
 </li>
 </ul>
+<p>使用上述的方法生成H264流无法正常传送,需要重新设置sps,pps</p>
 
       
 
