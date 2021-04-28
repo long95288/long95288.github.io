@@ -16,7 +16,7 @@
 <meta property="og:description" content="Linux配置java的环境变量1、找到jdk安装包的位置2、打开profile文件# vim &#x2F;etc&#x2F;profile3、添加如下的内容 1234export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk1.8.0_212-amd64export JRE_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk1.8.0_212-amd64&#x2F;jreexport PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin:">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-07-16T13:28:26.000Z">
-<meta property="article:modified_time" content="2021-04-27T14:43:26.826Z">
+<meta property="article:modified_time" content="2021-04-28T13:22:54.977Z">
 <meta property="article:author" content="long">
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
@@ -397,6 +397,11 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">syntax: rewrite regex replacement \[flag\]</span><br><span class="line">Default: —</span><br><span class="line">Context: server, location, if</span><br></pre></td></tr></table></figure>
 
 <h3 id="问题解决方案-1"><a href="#问题解决方案-1" class="headerlink" title="问题解决方案"></a>问题解决方案</h3><p>出现301的错误，缓冲问题，客户端请求加参数，要么在后面添加斜杠。</p>
+<h2 id="Nignx配置AriaNG"><a href="#Nignx配置AriaNG" class="headerlink" title="Nignx配置AriaNG"></a>Nignx配置AriaNG</h2><p>需求：想要通过访问:<a target="_blank" rel="noopener" href="http://localhost/AriaNg%E5%8E%BB%E8%AE%BF%E9%97%AE,%E9%9D%99%E6%80%81%E7%9A%84ariaNg">http://localhost/AriaNg去访问,静态的ariaNg</a><br>根目录已经被占用了</p>
+<h3 id="1-下载ariaNg静态文件"><a href="#1-下载ariaNg静态文件" class="headerlink" title="1.下载ariaNg静态文件"></a>1.下载ariaNg静态文件</h3><p>github仓库 <a target="_blank" rel="noopener" href="https://github.com/mayswind/AriaNg">https://github.com/mayswind/AriaNg</a><br>下载地址<a target="_blank" rel="noopener" href="https://github.com/mayswind/AriaNg-DailyBuild/archive/master.zip">https://github.com/mayswind/AriaNg-DailyBuild/archive/master.zip</a></p>
+<h3 id="2-解压到想要的文件夹。"><a href="#2-解压到想要的文件夹。" class="headerlink" title="2.解压到想要的文件夹。"></a>2.解压到想要的文件夹。</h3><h3 id="3-配置nginx"><a href="#3-配置nginx" class="headerlink" title="3.配置nginx"></a>3.配置nginx</h3><p>配置项如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F;AriaNg &#123;</span><br><span class="line">    alias &#x2F;work&#x2F;mywork&#x2F;soft&#x2F;AriaNg-DailyBuild-master&#x2F;;</span><br><span class="line">    index index.html index.html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样,访问<a target="_blank" rel="noopener" href="http://localhost/AriaNg">http://localhost/AriaNg</a>就会自动去文件夹里面找index了。</p>
 
       
 
@@ -875,6 +880,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">物联网</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
               </li>
             
             <div class="clearfix"></div>
