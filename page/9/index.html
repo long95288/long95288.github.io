@@ -889,6 +889,9 @@
 <p>将可执行程序软连接到<code>/usr/bin/frps</code>和<code>/usr/bin/frpc</code>中.路径需要和service文件内标识的一致.<br><code>sudo ln -s /work/soft/frp/frpc /usr/bin/frpc</code><br><code>sudo ln -s /work/soft/frp/frps /usr/bin/frps</code><br>赋予可执行权限,可以不需要:<br><code>sudo chmod +x /usr/bin/frpc</code><br><code>sudo chmod +x /usr/bin/frps</code></p>
 <p>将ini文件软连接到<code>/etc/frp/</code>文件夹下对应的文件中.<br><code>sudo ln -s /work/soft/frp/frpc.ini /etc/frp/frpc.ini</code><br><code>sudo ln -s /work/soft/frp/frps.ini /etc/frp/frps.ini</code></p>
 <p>客户端和服务端有自己的对应的二进制和配置文件.<br>启动frp<br><code>sudo systemctl start frpc</code><br>开机自启动<br><code>sudo systemctl enable frpc</code></p>
+<h3 id="scp指定端口"><a href="#scp指定端口" class="headerlink" title="scp指定端口"></a>scp指定端口</h3><p>使用-P来指定远端的端口</p>
+<p><code>spc -P 8080 filename username@ip:/xxx/doc/</code></p>
+<p><code>spc -P 8080 username@ip:/xxx/xxx/text.txt ./doc</code></p>
 
       
 
