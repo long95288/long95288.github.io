@@ -158,6 +158,90 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-go-routine" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/05/01/go-routine/">go-routine</a>
+    </h1>
+  
+
+        
+        <a href="/2021/05/01/go-routine/" class="archive-article-date">
+  	<time datetime="2021-05-01T09:50:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="需求如下"><a href="#需求如下" class="headerlink" title="需求如下"></a>需求如下</h5><p>有一个应用程序,需要执行不定量的协程数,要求主线程要等待各个协程全部完成之后退出</p>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>1.使用锁和协程计数器,主线程循环等待协程计数器为0,<br>2.使用waitGroup</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> main() &#123;</span><br><span class="line">    wg := sync.WaitGroup&#123;&#125;</span><br><span class="line">    wg.Add(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// gorountine 1</span></span><br><span class="line">        <span class="comment">// code...</span></span><br><span class="line">        wg.Done()</span><br><span class="line">    &#125;()</span><br><span class="line">    </span><br><span class="line">    wg.Add(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// gorountine 2</span></span><br><span class="line">        <span class="comment">// code...</span></span><br><span class="line">        wg.Done()</span><br><span class="line">    &#125;()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 等待协程完成之后退出</span></span><br><span class="line">    wg.Wait()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">协程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/05/01/go-routine/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-vim那些事" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1297,87 +1381,6 @@
 
 
   
-    <article id="post-C-Protoc" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/11/C-Protoc/">C-Protoc</a>
-    </h1>
-  
-
-        
-        <a href="/2021/01/11/C-Protoc/" class="archive-article-date">
-  	<time datetime="2021-01-11T12:07:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="protoc简介"><a href="#protoc简介" class="headerlink" title="protoc简介"></a>protoc简介</h3><p><a target="_blank" rel="noopener" href="https://github.com/protocolbuffers/protobuf">github地址</a><br>windows平台下载win32的压缩包,然后将可执行文件的目录设置进path就可以使用了。</p>
-<h3 id="protoc支持向下兼容"><a href="#protoc支持向下兼容" class="headerlink" title="protoc支持向下兼容"></a>protoc支持向下兼容</h3><p>TestProtocV1</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">message TestProtocV1&#123;</span><br><span class="line">  required uint32 a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>TestProtocV2</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">message TestProtocV2_Request&#123;</span><br><span class="line">  required uint32 a;</span><br><span class="line">  repeated uint32 arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>V1编码–&gt;V2可以解码:arr没有值<br>V2编码–&gt;V1可以解码:a值正确</p>
-<h3 id="使用protocal进行通讯"><a href="#使用protocal进行通讯" class="headerlink" title="使用protocal进行通讯"></a>使用protocal进行通讯</h3><h4 id="app端"><a href="#app端" class="headerlink" title="app端"></a>app端</h4><p>语言:java<br>编码和解码</p>
-<h4 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h4><p>语言:golang<br>编码和解码</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/11/C-Protoc/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1716,6 +1719,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">协程</a>
               </li>
             
             <div class="clearfix"></div>
