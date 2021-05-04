@@ -16,7 +16,7 @@
 <meta property="og:description" content="VIM列复制需求:想要批量注释代码 1234int main() &amp;#123;    int a;    return 0;&amp;#125; 注释掉代码: 1234&#x2F;&#x2F;int main() &amp;#123;&#x2F;&#x2F;    int a;&#x2F;&#x2F;    return 0;&#x2F;&#x2F;&amp;#125; 操作命令:1.Ctl+V进入块选2.选择对应的列3.Shit + a 进入插入模式4.输入数据,位置和选块位置无关,只会从当前插入">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-04-28T13:23:33.000Z">
-<meta property="article:modified_time" content="2021-04-28T13:23:52.416Z">
+<meta property="article:modified_time" content="2021-05-04T14:07:28.208Z">
 <meta property="article:author" content="long">
 <meta property="article:tag" content="vim">
 <meta name="twitter:card" content="summary">
@@ -185,6 +185,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//int main() &#123;</span></span><br><span class="line"><span class="comment">//    int a;</span></span><br><span class="line"><span class="comment">//    return 0;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br></pre></td></tr></table></figure>
 <p>操作命令:<br>1.Ctl+V进入块选<br>2.选择对应的列<br>3.Shit + a 进入插入模式<br>4.输入数据,位置和选块位置无关,只会从当前插入字符串的位置，往下复制。<br>5.按两次esc</p>
 <h3 id="VIM宏录制"><a href="#VIM宏录制" class="headerlink" title="VIM宏录制"></a>VIM宏录制</h3><p>1.normal模式输入qa,将操作的宏放入寄存器a。开始录制。<br>2.正常操作,记录命令，包括复制粘贴<br>3.normal模式输入q。接收宏录制。<br>4.normal模式输入@a,使用一次录制好的宏。100@a,执行100次录制的宏。</p>
+<h3 id="VIM行号"><a href="#VIM行号" class="headerlink" title="VIM行号"></a>VIM行号</h3><p>显示行号<code>:set number</code><br>不显示行号<code>:set nonumber</code></p>
 
       
 

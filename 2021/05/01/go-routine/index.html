@@ -16,7 +16,7 @@
 <meta property="og:description" content="需求如下有一个应用程序,需要执行不定量的协程数,要求主线程要等待各个协程全部完成之后退出 方法1.使用锁和协程计数器,主线程循环等待协程计数器为0,2.使用waitGroup 12345678910111213141516171819int main() &amp;#123;    wg :&#x3D; sync.WaitGroup&amp;#123;&amp;#125;    wg.Add(1)    go func()&amp;#12">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-05-01T09:50:28.000Z">
-<meta property="article:modified_time" content="2021-05-01T09:52:25.372Z">
+<meta property="article:modified_time" content="2021-05-04T14:00:28.372Z">
 <meta property="article:author" content="long">
 <meta property="article:tag" content="golang">
 <meta property="article:tag" content="协程">
@@ -183,6 +183,8 @@
         <h5 id="需求如下"><a href="#需求如下" class="headerlink" title="需求如下"></a>需求如下</h5><p>有一个应用程序,需要执行不定量的协程数,要求主线程要等待各个协程全部完成之后退出</p>
 <h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>1.使用锁和协程计数器,主线程循环等待协程计数器为0,<br>2.使用waitGroup</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> main() &#123;</span><br><span class="line">    wg := sync.WaitGroup&#123;&#125;</span><br><span class="line">    wg.Add(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// gorountine 1</span></span><br><span class="line">        <span class="comment">// code...</span></span><br><span class="line">        wg.Done()</span><br><span class="line">    &#125;()</span><br><span class="line">    </span><br><span class="line">    wg.Add(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// gorountine 2</span></span><br><span class="line">        <span class="comment">// code...</span></span><br><span class="line">        wg.Done()</span><br><span class="line">    &#125;()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 等待协程完成之后退出</span></span><br><span class="line">    wg.Wait()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 
 
 
