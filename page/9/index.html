@@ -990,6 +990,32 @@ MyHandler实现InvocationHandler的接口<figure class="highlight java"><table><
 <h3 id="scp指定端口"><a href="#scp指定端口" class="headerlink" title="scp指定端口"></a>scp指定端口</h3><p>使用-P来指定远端的端口</p>
 <p><code>spc -P 8080 filename username@ip:/xxx/doc/</code></p>
 <p><code>spc -P 8080 username@ip:/xxx/xxx/text.txt ./doc</code></p>
+<h2 id="ARM环境安装jupyter"><a href="#ARM环境安装jupyter" class="headerlink" title="ARM环境安装jupyter"></a>ARM环境安装jupyter</h2><p><a target="_blank" rel="noopener" href="https://collaborate.linaro.org/display/BDTS/Install+and+Running+Jupyter+notebook+on+ARM64">https://collaborate.linaro.org/display/BDTS/Install+and+Running+Jupyter+notebook+on+ARM64</a></p>
+<h3 id="安装python3"><a href="#安装python3" class="headerlink" title="安装python3"></a>安装python3</h3><p><code>sudo apt-get install libzmq3-dev python3-venv python3-dev python3-pip -y</code></p>
+<h3 id="创建jupyter环境目录"><a href="#创建jupyter环境目录" class="headerlink" title="创建jupyter环境目录"></a>创建jupyter环境目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~&#x2F;jupyter&#x2F;</span><br><span class="line">python3 -m venv ~&#x2F;jupyter&#x2F;jupyter-env</span><br></pre></td></tr></table></figure>
+<h3 id="安装zeromq"><a href="#安装zeromq" class="headerlink" title="安装zeromq"></a>安装zeromq</h3><p><code>wget https://github.com/zeromq/libzmq/releases/download/v4.2.2/zeromq-4.2.2.tar.gz</code></p>
+<p>安装相关依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update &amp;&amp; sudo apt-get install -y libtool pkg-config build-essential autoconf automake uuid-dev</span><br></pre></td></tr></table></figure>
+<p>编译</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd zeromq-4.2.2</span><br><span class="line">.&#x2F;configure</span><br><span class="line">sudo make install</span><br><span class="line">sudo ldconfig</span><br></pre></td></tr></table></figure>
+<p>查看编译结果:<br><code>ldconfig -p | grep zmq</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="安装jupyter"><a href="#安装jupyter" class="headerlink" title="安装jupyter"></a>安装jupyter</h3><p><code>pip install --upgrade --force-reinstall --no-cache-dir jupyter</code><br>或<code>sudo pip3 install jupyter</code></p>
+<p>运行<br><code>jupyter notebook</code></p>
+<p>生成配置文件:<br><code>jupyter notebook --generate-config</code></p>
+<p>output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Writing default config to: &#x2F;home&#x2F;ubuntu&#x2F;.jupyter&#x2F;jupyter_notebook_config.py</span><br></pre></td></tr></table></figure>
+<p>修改配置文件:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">c.NotebookApp.ip = <span class="string">&#x27;0.0.0.0&#x27;</span>​​​​​​​</span><br><span class="line">c.NotebookApp.open_browser = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">c.NotebookApp.port = <span class="number">8888</span> // 开放的端口号</span><br><span class="line"></span><br><span class="line">c.NotebookApp.notebook_dir = <span class="string">&#x27;/home/ubuntu/&#x27;</span> // 可以访问的目录</span><br></pre></td></tr></table></figure>
+<p>设置密码:<br><code>jupyter notebook password</code></p>
+<p>经过上述配置之后,可以通过局域网访问了。</p>
+<h3 id="配置自动启动"><a href="#配置自动启动" class="headerlink" title="配置自动启动"></a>配置自动启动</h3><p>安装supervisor<br><code>apt-get install supervisor</code></p>
+<p>配置启动脚本:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">source ~/jupyter/jupyter-env/bin/activate</span><br><span class="line">jupyter notebook</span><br><span class="line">deactivate</span><br></pre></td></tr></table></figure>
+
+<p>配置supervisor的jupyter-notebook.conf<br>进入<code>/etc/supervisor/conf.d</code><br>编写文件:jupyter-notebook.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[program:jupyter-notebook]</span><br><span class="line">directory&#x3D;&#x2F;home&#x2F;ubuntu&#x2F;jupyter&#x2F;contents</span><br><span class="line">command&#x3D;&#x2F;bin&#x2F;bash -E -c ..&#x2F;run-jupyter-notebook.sh</span><br><span class="line">autostart&#x3D;true</span><br><span class="line">autorestart&#x3D;true</span><br><span class="line">stopsignal&#x3D;INT</span><br><span class="line">stopasgroup&#x3D;true</span><br><span class="line">killasgroup&#x3D;true</span><br><span class="line">user&#x3D;ubuntu</span><br></pre></td></tr></table></figure>
+<p>重启服务<br><code>sudo systemctl restart supervisor.service</code><br>这时候jupyter-notebook会自动被拉起来了。</p>
 
       
 
