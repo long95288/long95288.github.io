@@ -1020,7 +1020,12 @@ MyHandler实现InvocationHandler的接口<figure class="highlight java"><table><
 <h3 id="ubuntu-locale错误"><a href="#ubuntu-locale错误" class="headerlink" title="ubuntu locale错误"></a>ubuntu locale错误</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">locale: Cannot set LC_CTYPE to default locale: No such file or directory</span><br><span class="line">locale: Cannot set LC_MESSAGES to default locale: No such file or directory</span><br><span class="line">locale: Cannot set LC_ALL to default locale: No such file or directory</span><br></pre></td></tr></table></figure>
 <p>查看系统字符:<code>locale -a</code><br>重新生成:<code>sudo locale-gen zh_CN.UTF-8</code></p>
 <h3 id="使用MobaXterm出现终端中文乱码"><a href="#使用MobaXterm出现终端中文乱码" class="headerlink" title="使用MobaXterm出现终端中文乱码"></a>使用MobaXterm出现终端中文乱码</h3><p>编辑session,将文字样式改成utf-8</p>
-<h3 id="Postgres多级备份"><a href="#Postgres多级备份" class="headerlink" title="Postgres多级备份"></a>Postgres多级备份</h3><h3 id="树莓派蓝牙模块"><a href="#树莓派蓝牙模块" class="headerlink" title="树莓派蓝牙模块"></a>树莓派蓝牙模块</h3>
+<h3 id="Postgres多级备份"><a href="#Postgres多级备份" class="headerlink" title="Postgres多级备份"></a>Postgres多级备份</h3><h3 id="树莓派蓝牙模块"><a href="#树莓派蓝牙模块" class="headerlink" title="树莓派蓝牙模块"></a>树莓派蓝牙模块</h3><ol>
+<li>首先查看蓝牙服务是否开启<br><code>systemctl status bluetooth</code></li>
+<li>开启<code>pulseaudio</code><br>关闭原来的<code>pulseaudio -k</code><br>重启<code>pulseaudio --start</code></li>
+<li>进入bluetoothctl,连接蓝牙音箱</li>
+</ol>
+
       
 
       
