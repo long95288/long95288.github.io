@@ -1034,6 +1034,10 @@ MyHandler实现InvocationHandler的接口<figure class="highlight java"><table><
 <li>开启<code>pulseaudio</code><br>关闭原来的<code>pulseaudio -k</code><br>重启<code>pulseaudio --start</code></li>
 <li>进入bluetoothctl,连接蓝牙音箱</li>
 </ol>
+<h3 id="crontab设置定时任务"><a href="#crontab设置定时任务" class="headerlink" title="crontab设置定时任务"></a>crontab设置定时任务</h3><p>修改默认编译器<br><code>select-editor</code><br>查看用户当前的定时计划<br><code>crontab -l [user]</code></p>
+<p>编辑用户目前的定时计划<br><code>crontab -e</code></p>
+<h4 id="定时计划表示"><a href="#定时计划表示" class="headerlink" title="定时计划表示"></a>定时计划表示</h4><p>*　　*　　*　　*　　*　　command<br>分　时　日　月　周　命令<br>第1列表示分钟1～59 每分钟用*或者 */1表示<br>第2列表示小时1～23（0表示0点）<br>第3列表示日期1～31<br>第4列表示月份1～12<br>第5列标识号星期0～6（0表示星期天）<br>第6列要运行的命令</p>
+<h5 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h5><p>每天晚上22:30播放睡眠音乐<br>30 22 * * * /work/music/play_evening_music.sh</p>
 
       
 
