@@ -16,7 +16,7 @@
 <meta property="og:description" content="运行脚本输入回车假设有一个程序a,运行的时候需要连续输入几个回车才能运行结束。使用命令:echo &quot;\n\n\n\n\n\n&quot; -e | a,可以通过管道去输入回车。 关机、重启、注销shutdown -h now: 立即关机shutdown -h 1: 1分钟后关机shutdown -r now: 立即重启h表示:halt、r表示:reboot、syn:内存数据同步至磁盘 l">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-10-17T18:23:25.000Z">
-<meta property="article:modified_time" content="2021-03-12T12:18:42.386Z">
+<meta property="article:modified_time" content="2021-05-21T13:49:07.246Z">
 <meta property="article:author" content="long">
 <meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
@@ -490,6 +490,20 @@
 </blockquote>
 <p>打包目录,压缩后的文件格式为<code>tar.gz</code>,<br>选项说明<br>|选项|说明|<br>|—-|—-|<br>| -c | 产生tar打包文件|<br>| -v | 显示详细信息|<br>| -f | 指定压缩后的文件名|<br>| -z | 打包同时压缩|<br>| -x | 解包tar文件 |</p>
 <p>例子:<br><code>tar -zcvf a.tar.gz a.txt b.txt</code> 将<code>a.txt</code>文件和<code>b.txt</code>文件压缩为<code>a.tar.gz</code><br><code>tar -zxvf a.tar.gz -C /opt/</code> 将<code>a.tar.gz</code>解压到<code>/opt</code>文件夹内,注意文件夹必须事先存在。</p>
+<h3 id="xz压缩和解压缩"><a href="#xz压缩和解压缩" class="headerlink" title="xz压缩和解压缩"></a>xz压缩和解压缩</h3><p>解压.xz的压缩包<br>快速解压:<code>tar -xJvf xxxx.tar.xz</code></p>
+<h4 id="压缩文件"><a href="#压缩文件" class="headerlink" title="压缩文件"></a>压缩文件</h4><p><code>xz -z -k -9 文件</code><br>参数说明<br>-k 保留文件，压缩完成之后不会删除<br>-9 压缩等级 [-0, -9]，默认-6</p>
+<h4 id="解压文件"><a href="#解压文件" class="headerlink" title="解压文件"></a>解压文件</h4><p>xz解压文件方法或命令<br>xz -d 要解压的文件</p>
+<p>同样使用 -k 参数来保留被解压缩的文件。</p>
+<p>创建或解压tar.xz文件的方法<br>习惯了tar czvf或tar xzvf的人可能碰到tar.xz也会想用单一命令搞定解压或压缩。其实不行tar里面没有征对xz格式的参数比如 z是针对 gzip，j是针对 bzip2。</p>
+<p>创建tar.xz文件：只要先 tar cvf xxx.tar xxx/ 这样创建xxx.tar文件先，然后使用 xz -z xxx.tar 来将 xxx.tar压缩成为 xxx.tar.xz</p>
+<p>解压tar.xz文件：先 xz -d xxx.tar.xz 将 xxx.tar.xz解压成 xxx.tar 然后，再用 tar xvf xxx.tar来解包。</p>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><ul>
+<li><p>压缩<br>创建tar文件<br><code>tar -cvf cJSON-1.7.14.tar ./cJSON-1.7.14</code><br>创建xz文件<br><code>xz -z -k -9 cJSON-1.7.14.tar</code><br>生成<code>cJSON-1.7.14.tar.xz</code>文件</p>
+</li>
+<li><p>解压<br>获得tar文件<br><code>xz -d -k cJSON-1.7.14.tar.xz</code><br>生成<code>cJSON-1.7.14.tar</code></p>
+</li>
+</ul>
+<p>解压tar文件<br><code>tar -xvf cJSON-1.7.14.tar</code></p>
 <h4 id="组管理和权限管理"><a href="#组管理和权限管理" class="headerlink" title="组管理和权限管理"></a>组管理和权限管理</h4><blockquote>
 <p>chown 用户名:组名 文件名</p>
 </blockquote>
