@@ -158,6 +158,90 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-java实例化几种方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/05/java%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">java实例化几种方式</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/05/java%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2019-08-05T13:32:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="实例化的几种方式"><a href="#实例化的几种方式" class="headerlink" title="实例化的几种方式"></a>实例化的几种方式</h4><p>1、HelloWorld类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;name=&quot;</span>+name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、主类三种实例化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 第一种实例化</span></span><br><span class="line">            HelloWorld h1 = HelloWorld.class.newInstance();</span><br><span class="line">            h1.setName(<span class="string">&quot;h1&quot;</span>);</span><br><span class="line">            h1.sayName();</span><br><span class="line">            <span class="comment">// 使用类加载器实例化</span></span><br><span class="line">            String name = <span class="string">&quot;com.longquanxiao.instance.HelloWorld&quot;</span>;</span><br><span class="line">            Class hClass = Class.forName(name);</span><br><span class="line">            HelloWorld h2 =(HelloWorld) hClass.newInstance();</span><br><span class="line">            h2.setName(<span class="string">&quot;h2&quot;</span>);</span><br><span class="line">            h2.sayName();</span><br><span class="line">            <span class="comment">// 传统的new实例化</span></span><br><span class="line">            HelloWorld h3 = <span class="keyword">new</span> HelloWorld();</span><br><span class="line">            h3.setName(<span class="string">&quot;h3&quot;</span>);</span><br><span class="line">            h3.sayName();</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name&#x3D;h1</span><br><span class="line">name&#x3D;h2</span><br><span class="line">name&#x3D;h3</span><br></pre></td></tr></table></figure>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>1、使用<code>Class#newInstance()</code>返回实例化的对象<br>2、使用<code>Class.forName(classpath)</code>获得class对象。然后再使用newInstance()方法进行实例化<br>3、使用new的传统方式来实例化对象<br>4、使用newInstance时必须保证（1）这个类已经加载了(2)这个类已经完成连接了<br>使用class.forName()保证了上述两个条件。使用new就没有那么那么多的限制。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/05/java%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-java反射和动态代理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1392,92 +1476,6 @@ MyHandler实现InvocationHandler的接口<figure class="highlight java"><table><
 
 
   
-    <article id="post-maven环境变量配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/13/maven%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/">maven环境变量配置</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/13/maven%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2019-07-13T09:47:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="第一步-下载"><a href="#第一步-下载" class="headerlink" title="第一步 下载"></a>第一步 下载</h4><p>从官网下载自己想要的maven版本，然后解压。<br><a target="_blank" rel="noopener" href="http://maven.apache.org/download.cgi">官网</a></p>
-<h4 id="第二步-配环境变量"><a href="#第二步-配环境变量" class="headerlink" title="第二步 配环境变量"></a>第二步 配环境变量</h4><p>1、添加系统环境变量<br>name: M2_HOME<br>value:指向解压的地址<br>2、添加系统环境变量<br>name: MAVEN_HOME<br>value:指向解压的地址<br>3、添加path路径<br>value: %M2_HOME%/bin<br><em>注</em>:经过path之后,可以在cmd中运行bin文件夹中的软件。<br>测试:cmd + mvn -v<br>输出:版本，jdk,地址等信息便可<br><strong>问题</strong>: M2_HOME和MAVEN_HOME两个之间有什么不同？？</p>
-<h4 id="第三步-更改映像地址"><a href="#第三步-更改映像地址" class="headerlink" title="第三步 更改映像地址"></a>第三步 更改映像地址</h4><p>定位到解压的目录,进入conf文件夹，打开setting.xml文件<br>在<code>&lt;mirrors&gt;</code>标签中添加新的映像地址<br>例如:阿里的地址</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置阿里云的服务器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>至此，安装和配置环境变量完成</p>
-<h3 id="Maven使用命令"><a href="#Maven使用命令" class="headerlink" title="Maven使用命令"></a>Maven使用命令</h3><p>1、启动spring boot<br><code>mvn spring-boot:run </code></p>
-<p>2、创建项目命令<br><code>mvn archetype:generate</code></p>
-<p>3、将项目转成idea项目<br><code>mvn idea:idea</code></p>
-<p>4、编译项目<br><code>mvn complie</code></p>
-<p>5、清除旧的class文件<br><code>mvn clean</code></p>
-<p>6、生成测试报告<br><code>mvn test</code></p>
-<p>7、打包<br><code>mvn package</code></p>
-<p>8、安装到仓库<br><code>mvn install</code></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/13/maven%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/8/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/10/">Next &amp;raquo;</a>
@@ -1820,6 +1818,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">协程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">net</a>
               </li>
             
             <div class="clearfix"></div>

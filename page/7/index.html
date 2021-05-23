@@ -158,6 +158,122 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-shiro使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/23/shiro%E4%BD%BF%E7%94%A8/">shiro使用</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/23/shiro%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2019-09-23T15:30:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="shiro核心对象和方法"><a href="#shiro核心对象和方法" class="headerlink" title="shiro核心对象和方法"></a>shiro核心对象和方法</h3><h4 id="核心对象-Subject"><a href="#核心对象-Subject" class="headerlink" title="核心对象 Subject"></a>核心对象 Subject</h4><p>使用<code>Subject currentUser = SecurityUtils.getSubject();</code><br>该条语句是获得当前的用户。</p>
+<h5 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h5><ul>
+<li><code>subject.login(AuthenticationToken token)</code>登陆。这种登陆是给shiro的认证机制登陆的。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">AuthenticationToken token =</span><br><span class="line"><span class="keyword">new</span> UsernamePasswordToken(username, password);</span><br><span class="line"></span><br><span class="line"><span class="comment">//2. 获取当前 Subject：</span></span><br><span class="line">Subject currentUser = SecurityUtils.getSubject();</span><br><span class="line"><span class="comment">//3. 登录： </span></span><br><span class="line">currentUser.login(token);</span><br></pre></td></tr></table></figure></li>
+<li><code>boolean subject.hasRole(&quot;administrator&quot;)</code><br>判断是否有某个角色.</li>
+<li>权限检查 <code>boolean subject.isPermitted(&quot;user:create&quot;)</code><br>是否有user的create权限<h3 id="shiro使用"><a href="#shiro使用" class="headerlink" title="shiro使用"></a>shiro使用</h3>工作流程如下:<br>Subject是我们可以操作的接口。<br>Realm是配置shiro的核心领域。包括账号验证、加密解密、权限的配置<br><img src="/2019/09/23/shiro%E4%BD%BF%E7%94%A8/process.png" alt="流程"><br>内部的架构如下<br><img src="/2019/09/23/shiro%E4%BD%BF%E7%94%A8/struct.png"><br>相关说明:</li>
+<li>SecurityManager:相当于SpringMVC 中的 DispatcherServlet；是 Shiro 的心脏;所有具体的交互都通过 SecurityManager 进行控制；它管理着所有 Subject、且负责进行认证、授权、会话及缓存的管理</li>
+<li>Authenticator: 负责 Subject 认证，是一个扩展点，可以自定义实现；可以使用认证策略（Authentication Strategy），即什么情况下算用户认证通过了</li>
+<li>Authorizer: 授权器、 即访问控制器，用来决定主体是否有权限进行相应的操作；即控制着用户能访问应用中的哪些功能</li>
+<li>Realm:可以有一个或多个Realm,可以认为是安全实体数据源，即用于获得安全实体的;可以是JDBC实现，也可以是内存实现等。由用户提供，应用中要自己实现自己的Realm;</li>
+<li>SessionManager: 管理Session生命周期的组件;Shiro不仅可以用在Web环境。普通的JavaSE环境也可以使用session.和httpServletSession差不多的接口。</li>
+<li>CacheManager:缓存控制器，用来管理用户、角色、权限等的缓存;</li>
+<li>Cryptography:加密和解密模块。内置了加密和解密的模块,不需要自己将前台的明文密码加密后再和数据中的加密的密码比较。shiro会自动调用加密模块然后完成比较。</li>
+</ul>
+<h5 id="shiro默认过滤器"><a href="#shiro默认过滤器" class="headerlink" title="shiro默认过滤器"></a>shiro默认过滤器</h5><ul>
+<li><code>anon</code> 所属类:org.apache.shiro.web.filter.authc.AnonymousFilter 没有参数,可以匿名使用。例如: /admin/** = anon</li>
+<li><code>authc</code> 所属类:org.apache.shiro.web.filter.authc.FormAuthenticationFilter 没有参数，需要认证(登陆)之后才能访问 例如:/user/** = authc</li>
+<li><code>authcBasic</code> org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter 没有参数，表示需要通过HttpBasic验证。如果不通过验证，跳转到登陆页面。 例如: /user/** = authcBasic</li>
+<li><code>logout</code> org.apache.shiro.web.filter.authc.LogoutFilter 注销登陆的时候，完成一定功能：任何现有的session都将会失效，任何身份都会失去关联。(web应用程序中，RememberMe cookie将被删除)</li>
+<li><code>noSessionCreation</code> org.apache.shiro.web.filter.authc.NoSessionCreationFiler 阻止在请求期间创建新的会话，保证无状态体验。</li>
+<li><code>perms</code> org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter 可以写多个。多个时加上引号。用逗号分隔。多个参数需要通过全部的参数才算通过。相当于isPermitedAll()方法。 例如:/admin/** = perms[user:add:<em>] /admin/** = perms[“user:add:</em>,user:delete:*”]</li>
+<li><code>port</code> org.apache.shiro.web.filter.authz.PortFilter 指定访问的端口。如果不匹配跳转到登陆界面。 例如:/admin/** = port[8080]</li>
+<li><code>rest</code> org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter 根据请求方法 例如:/admins/user/** = perms[user.method] method为post、get、delete等请求方法</li>
+<li><code>roles</code> org.apache.shiro.web.filter.authz.RolesAuthorizationFilter 角色过滤。判断当前用户是否指定角色。多个参数需通过所有的角色。 例如:/admins/** = roles[“admin,guest”]</li>
+<li><code>ssl</code> org.apache.shiro.web.filter.authz.SslFilter 使用协议为Https</li>
+<li><code>user</code> org.apache.shiro.web.filter.authc.UserFilter 缓存必须存在用户<h4 id="URL匹配模式"><a href="#URL匹配模式" class="headerlink" title="URL匹配模式"></a>URL匹配模式</h4>url模式使用Ant风格模式，支持<code>？</code>，<code>*</code>，<code>**</code>。通配符匹配不了包括目录分隔符<code>&quot;\&quot;</code></li>
+<li><code>?</code>:匹配一个字符，如/admin?。将匹配/admin1，但是不匹配/admin 或 /admin/</li>
+<li><code>*</code>:匹配0个或n个字符串.如/admin* 匹配/admin、/admin123。但不匹配/admin/1、/admin/</li>
+<li><code>**</code>: 匹配路径中的0或n路径。如/admin/** 匹配/admin/a or /admin/a/b</li>
+</ul>
+<p>URL权限采取第一次匹配优先的方式。所以需要一些不要认证的路径放在前面。将需要认证的路径放在后面。否则会被覆盖的。</p>
+<h4 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h4><h5 id="身份验证"><a href="#身份验证" class="headerlink" title="身份验证"></a>身份验证</h5><p>在shiro中我们需要提供两个对象(principals和credentials)用来完成身份的验证</p>
+<ul>
+<li><code>principals</code> 身份,主体的标识属性，可以是任何的属性。用户名、邮箱等。具备唯一性。可以有多个principals.但只有一个Primary principals。一般是用户名/邮箱/手机号</li>
+<li><code>credentials</code> 证明/凭证。证明主体标识的，如密码和数字证书等。<br>最常使用的就是用户名和密码来组合成principals和credentials</li>
+</ul>
+<h5 id="身份验证的基本流程"><a href="#身份验证的基本流程" class="headerlink" title="身份验证的基本流程"></a>身份验证的基本流程</h5><p>1、收集用户的身份/凭证。一般是从前端获得用户名和密码<br>2、调用<code>Subject.login</code>进行登陆。失败会抛出响应的异常信息<br>3、创建自定义的<code>Realm</code>类。继承<code>org.apache.shiro.realm.AuthorizingRealm类。实现doGetAuthenticationInfo()</code>方法<br>官方给的认证示例代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// let&#x27;s login the current user so we can check against roles and permissions:</span></span><br><span class="line"><span class="comment">// 测试当前的用户是否已经被认证. 即是否已经登录. </span></span><br><span class="line"><span class="comment">// 调动 Subject 的 isAuthenticated() </span></span><br><span class="line"><span class="keyword">if</span> (!currentUser.isAuthenticated()) &#123;</span><br><span class="line"><span class="comment">// 把用户名和密码封装为 UsernamePasswordToken 对象</span></span><br><span class="line">  UsernamePasswordToken token = <span class="keyword">new</span> UsernamePasswordToken(<span class="string">&quot;lonestarr&quot;</span>, <span class="string">&quot;vespa&quot;</span>);</span><br><span class="line">  <span class="comment">// rememberme</span></span><br><span class="line">  token.setRememberMe(<span class="keyword">true</span>);</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 执行登录. </span></span><br><span class="line">      currentUser.login(token);</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="comment">// 若没有指定的账户, 则 shiro 将会抛出 UnknownAccountException 异常. </span></span><br><span class="line">  <span class="keyword">catch</span> (UnknownAccountException uae) &#123;</span><br><span class="line">      log.info(<span class="string">&quot;----&gt; There is no user with username of &quot;</span> + token.getPrincipal());</span><br><span class="line">      <span class="keyword">return</span>; </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="comment">// 若账户存在, 但密码不匹配, 则 shiro 会抛出 IncorrectCredentialsException 异常。 </span></span><br><span class="line">  <span class="keyword">catch</span> (IncorrectCredentialsException ice) &#123;</span><br><span class="line">      log.info(<span class="string">&quot;----&gt; Password for account &quot;</span> + token.getPrincipal() + <span class="string">&quot; was incorrect!&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span>; </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="comment">// 用户被锁定的异常 LockedAccountException</span></span><br><span class="line">  <span class="keyword">catch</span> (LockedAccountException lae) &#123;</span><br><span class="line">      log.info(<span class="string">&quot;The account for username &quot;</span> + token.getPrincipal() + <span class="string">&quot; is locked.  &quot;</span> +</span><br><span class="line">              <span class="string">&quot;Please contact your administrator to unlock it.&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ... catch more exceptions here (maybe custom ones specific to your application?</span></span><br><span class="line">  <span class="comment">// 所有认证时异常的父类. </span></span><br><span class="line">  <span class="keyword">catch</span> (AuthenticationException ae) &#123;</span><br><span class="line">      <span class="comment">//unexpected condition?  error?</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="身份认证的流程"><a href="#身份认证的流程" class="headerlink" title="身份认证的流程"></a>身份认证的流程</h5><p><img src="/2019/09/23/shiro%E4%BD%BF%E7%94%A8/authenticationprocess.png" alt="流程图"></p>
+<p>1、首先调用 Subject.login(token) 进行登录，其会自动委托给SecurityManager<br>2、 SecurityManager 负责真正的身份验证逻辑；它会委托给Authenticator 进行身份验证；<br>3、 Authenticator 才是真正的身份验证者，Shiro API 中核心的身份认证入口点，此处可以自定义插入自己的实现；<br>4、 Authenticator 可能会委托给相应的 AuthenticationStrategy 进行多 Realm 身份验证，默认 ModularRealmAuthenticator 会调用AuthenticationStrategy 进行多 Realm 身份验证；<br>5、 Authenticator 会把相应的 token 传入 Realm，从 Realm 获取身份验证信息，如果没有返回/抛出异常表示身份验证失败了。此处可以配置多个Realm，将按照相应的顺序及策略进行访问。</p>
+<h4 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h4><h4 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h4>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/23/shiro%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-element使用javascript触发表单校验" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1038,104 +1154,6 @@
 
 
   
-    <article id="post-spring踩坑日志" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/22/spring%E8%B8%A9%E5%9D%91%E6%97%A5%E5%BF%97/">spring踩坑日志</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/22/spring%E8%B8%A9%E5%9D%91%E6%97%A5%E5%BF%97/" class="archive-article-date">
-  	<time datetime="2019-08-22T08:29:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="1、文件上传大小限制问题"><a href="#1、文件上传大小限制问题" class="headerlink" title="1、文件上传大小限制问题"></a>1、文件上传大小限制问题</h4><p>问题描述:使用application.properties配置文件上传大小限制不起作用</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spring.servlet.multipart.max-request-size=-<span class="number">1</span></span><br><span class="line">spring.servlet.multipart.max-file-size=-<span class="number">1</span></span><br><span class="line">spring.servlet.multipart.location=/home/trainee/springboot/document</span><br></pre></td></tr></table></figure>
-<p>解决办法:新建一个bean的配置<br>可以在启动类中添加如下代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> MultipartConfigElement <span class="title">multipartConfigElement</span><span class="params">()</span></span>&#123;</span><br><span class="line">    MultipartConfigFactory factory = <span class="keyword">new</span> MultipartConfigFactory();</span><br><span class="line">    <span class="comment">// 设置最大文件的大小</span></span><br><span class="line">    factory.setMaxFileSize(DataSize.of(<span class="number">2000</span>, DataUnit.MEGABYTES));</span><br><span class="line">    <span class="comment">// 设置最大请求大小</span></span><br><span class="line">    factory.setMaxRequestSize(DataSize.of(<span class="number">2000</span>,DataUnit.MEGABYTES));</span><br><span class="line">    <span class="keyword">return</span> factory.createMultipartConfig();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="2、springBoot跨域请求问题"><a href="#2、springBoot跨域请求问题" class="headerlink" title="2、springBoot跨域请求问题"></a>2、springBoot跨域请求问题</h4><p>使用<code>@CrossOrigin(&quot;*&quot;)</code>无法实现跨域<br>解决办法，在控制层使用如下注解就可以实现跨域<br><code>@CrossOrigin(origins = &quot;*&quot;,allowCredentials = &quot;true&quot;,methods = &#123;&#125;)</code></p>
-<h4 id="3、时区出现错误解决办法"><a href="#3、时区出现错误解决办法" class="headerlink" title="3、时区出现错误解决办法"></a>3、时区出现错误解决办法</h4><p>（1）出现连接时区错误<br>（2）插入时间数据时出现错误<br>解决办法：在连接的url之后设置时间属性<br><code>jdbc:mysql://127.0.0.1:3306/trainee?serverTimezone=GMT%2B8</code><br>将时区设置成北京的时区</p>
-<h4 id="4、接收前端返回json对象自动打包问题"><a href="#4、接收前端返回json对象自动打包问题" class="headerlink" title="4、接收前端返回json对象自动打包问题"></a>4、接收前端返回json对象自动打包问题</h4><p>需要在接收的处声明<code>@RequestBody</code>才能自动装箱。声明<code>@Valid</code>来验证数据。</p>
-<h4 id="5、log4j配置不起作用"><a href="#5、log4j配置不起作用" class="headerlink" title="5、log4j配置不起作用"></a>5、log4j配置不起作用</h4><p>要使用自定义的log,必须将spring boot 中自带的spring.boot.start.logging给去掉。因为logback的优先级比log4j的优先级要高。(后面测试含有logback也可以加载配置文件,玄幻)<br>推荐把依赖包给去掉<br>去除包中的依赖如下</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.7.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!--排除logback依赖--&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>如果出现下面的错误,需要检查log4j依赖是否都添加了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SLF4J: Failed to load class &quot;org.slf4j.impl.StaticLoggerBinder&quot;.</span><br><span class="line">SLF4J: Defaulting to no-operation (NOP) logger implementation</span><br><span class="line">SLF4J: See https:&#x2F;&#x2F;www.slf4j.org&#x2F;codes.html#StaticLoggerBinder for further details.</span><br></pre></td></tr></table></figure>
-<p>能够运行的依赖如下:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--日志--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.26<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.26<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>如果还有错误，可能需要引入common-logging.jar</p>
-<h5 id="6、Long-类型传到前端页面的精度丢失问题"><a href="#6、Long-类型传到前端页面的精度丢失问题" class="headerlink" title="6、Long 类型传到前端页面的精度丢失问题"></a>6、Long 类型传到前端页面的精度丢失问题</h5><p>解决办法，将Long类型转换成字符串。传给前端，前端传回去从字符串转成Long类型。可以自己写函数转换。但是有现成的轮子可以用就不必造轮子了。<br>使用阿里的fastjson提供的注解便可以轻松的完成工作了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JsonSerialize(using = ToStringSerializer.class)</span></span><br><span class="line"><span class="keyword">private</span> Long id;</span><br></pre></td></tr></table></figure>
-<h5 id="7、controller返回前端的数据自动转换大小写的问题"><a href="#7、controller返回前端的数据自动转换大小写的问题" class="headerlink" title="7、controller返回前端的数据自动转换大小写的问题"></a>7、controller返回前端的数据自动转换大小写的问题</h5><p> 由于移植了一个net的项目到java。但是,前端的命名不规范,变量全部为大写。但是由于fastjson的自动转换,将本来是大写的的变量变成小写了。</p>
-<h6 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h6><p>  由于使用lombok插件,所以不能在get方法上使用<code>@JsonPropertty</code>注解。使用在属性上有一样的效果。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JsonProperty(&quot;Name&quot;)</span></span><br><span class="line"><span class="meta">@TableField(&quot;Name&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String Name;</span><br></pre></td></tr></table></figure><br>  返回前端的数据就变成了Name而不是name</p>
-<h4 id="8、mybatis-plus忽视某些实体字段。不对数据库进行映射。"><a href="#8、mybatis-plus忽视某些实体字段。不对数据库进行映射。" class="headerlink" title="8、mybatis-plus忽视某些实体字段。不对数据库进行映射。"></a>8、mybatis-plus忽视某些实体字段。不对数据库进行映射。</h4><p>在字段上使用<code>@TableField(exist = false)</code>来忽视该字段对数据库的映射。</p>
-<h4 id="9、mybatis-plus-字符串非空更新失败"><a href="#9、mybatis-plus-字符串非空更新失败" class="headerlink" title="9、mybatis-plus 字符串非空更新失败"></a>9、mybatis-plus 字符串非空更新失败</h4><p>问题描述:字符串类型非空更新失败，像密码、邮箱这些作为字符串存储。只是更新其中一部分，会导致没有值的字段更新为空。</p>
-<h5 id="解决办法-1"><a href="#解决办法-1" class="headerlink" title="解决办法"></a>解决办法</h5><p>给字段设置更新策略<code>updateStategy = FieldStrategy.NOT_EMPTY</code>。只是对字符起作用，其它的类型会使用<code>updateStategy = FieldStrategy.NOT_NULL</code></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/22/spring%E8%B8%A9%E5%9D%91%E6%97%A5%E5%BF%97/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/8/">Next &amp;raquo;</a>
@@ -1478,6 +1496,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">协程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">net</a>
               </li>
             
             <div class="clearfix"></div>
