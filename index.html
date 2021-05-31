@@ -1223,7 +1223,7 @@ C-->|IP3:PORT3|NAT3</pre>
 </li>
 </ul>
 <p>使用上述的方法生成H264流无法正常传送,需要重新设置sps,pps和编码的格式,才顺利的在手机端播放。得先转成yuv,再使用yuv编成h264,这样就可以顺利的使用mediacodec进行编码。</p>
-<h3 id="多张图片合成mp4"><a href="#多张图片合成mp4" class="headerlink" title="多张图片合成mp4"></a>多张图片合成mp4</h3><p><code>ffmpeg -r 25 -i %04d.png -vcodec mpeg4 -b:v 6000k test.mp4</code><br>图片文件的名称为<code>0000.png,0001.png</code>,四个数字的</p>
+<h3 id="多张图片合成mp4"><a href="#多张图片合成mp4" class="headerlink" title="多张图片合成mp4"></a>多张图片合成mp4</h3><p><code>ffmpeg -r 25 -i %04d.png -vcodec mpeg4 -b:v 6000k test.mp4</code><br>图片文件的名称为<code>0000.png,0001.png</code>,四个数字的顺序的png图片.</p>
 
       
 

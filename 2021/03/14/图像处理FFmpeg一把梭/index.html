@@ -46,7 +46,7 @@
 <meta property="og:image" content="http://long95288.github.io/2021/03/14/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86FFmpeg%E4%B8%80%E6%8A%8A%E6%A2%AD/h264_3.webp">
 <meta property="og:image" content="http://long95288.github.io/2021/03/14/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86FFmpeg%E4%B8%80%E6%8A%8A%E6%A2%AD/nalu_1.png">
 <meta property="article:published_time" content="2021-03-14T13:25:54.000Z">
-<meta property="article:modified_time" content="2021-05-30T05:51:21.365Z">
+<meta property="article:modified_time" content="2021-05-31T13:09:09.687Z">
 <meta property="article:author" content="long">
 <meta property="article:tag" content="图像处理">
 <meta property="article:tag" content="ffmpeg">
@@ -549,7 +549,7 @@
 </li>
 </ul>
 <p>使用上述的方法生成H264流无法正常传送,需要重新设置sps,pps和编码的格式,才顺利的在手机端播放。得先转成yuv,再使用yuv编成h264,这样就可以顺利的使用mediacodec进行编码。</p>
-<h3 id="多张图片合成mp4"><a href="#多张图片合成mp4" class="headerlink" title="多张图片合成mp4"></a>多张图片合成mp4</h3><p><code>ffmpeg -r 25 -i %04d.png -vcodec mpeg4 -b:v 6000k test.mp4</code><br>图片文件的名称为<code>0000.png,0001.png</code>,四个数字的</p>
+<h3 id="多张图片合成mp4"><a href="#多张图片合成mp4" class="headerlink" title="多张图片合成mp4"></a>多张图片合成mp4</h3><p><code>ffmpeg -r 25 -i %04d.png -vcodec mpeg4 -b:v 6000k test.mp4</code><br>图片文件的名称为<code>0000.png,0001.png</code>,四个数字的顺序的png图片.</p>
 
       
 
