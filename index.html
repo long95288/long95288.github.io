@@ -393,13 +393,7 @@ C-->|IP3:PORT3|NAT3</pre>
         <h5 id="需求如下"><a href="#需求如下" class="headerlink" title="需求如下"></a>需求如下</h5><p>有一个应用程序,需要执行不定量的协程数,要求主线程要等待各个协程全部完成之后退出</p>
 <h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>1.使用锁和协程计数器,主线程循环等待协程计数器为0,<br>2.使用waitGroup</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> main() &#123;</span><br><span class="line">    wg := sync.WaitGroup&#123;&#125;</span><br><span class="line">    wg.Add(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// gorountine 1</span></span><br><span class="line">        <span class="comment">// code...</span></span><br><span class="line">        wg.Done()</span><br><span class="line">    &#125;()</span><br><span class="line">    </span><br><span class="line">    wg.Add(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// gorountine 2</span></span><br><span class="line">        <span class="comment">// code...</span></span><br><span class="line">        wg.Done()</span><br><span class="line">    &#125;()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 等待协程完成之后退出</span></span><br><span class="line">    wg.Wait()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
+<h3 id="golang调度"><a href="#golang调度" class="headerlink" title="golang调度"></a>golang调度</h3>
       
 
       
