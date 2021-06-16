@@ -1454,7 +1454,7 @@ cc.txt硬连接-->存储区域</pre>
 <h3 id="配置项变更"><a href="#配置项变更" class="headerlink" title="配置项变更"></a>配置项变更</h3><p>使用链表将每个软件和节点对应起来,拥有前后指针,方便增删改查</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root &lt;--&gt; classNode &lt;--&gt; class2 &lt;----&gt; class3</span><br><span class="line">            |</span><br><span class="line">          SoftNode-&gt;SoftNode-&gt;....</span><br></pre></td></tr></table></figure>
 <p>关于样式的设置,有可选项,可以使用极简，也可以使用自定义的配置<br>自定义更换背景图片,获取文件,读取文件,更换渲染.<br>软件布局的计算,自己计算还是使用官方的布局器,可以自己确定整个应用的宽高,然后一行最多能够放下多少个组件,然后将剩下的空间计算间距。<br>使用自定义的组件,有图标,下面有软件名称。</p>
-<h2 id="平台相关"><a href="#平台相关" class="headerlink" title="平台相关"></a>平台相关</h2><p>多设备组装成物联网,每个设备均有不同的属性功能,如何在抽象层统一管理设备？<br>如果将设备看作是由多个服务组合而成的结构体,服务之间的调用作为设备间的交互。<br>APP,PC,PI,CAMERA。设备之间的差异是什么？<br>服务的差异？一个APP和PC中运行的软件是否可以一致？一个Camera视乎只能提供音视频的服务。<br>文件相互传输可能就是APP和PC之间的服务调用。<br>难点:<br>设备的基础能力定义是什么？每个设备都必须存在的基础服务是什么？注册登录心跳<br>设备之间如何相互发现？设备与设备之间如何联动？</p>
+<h2 id="平台相关"><a href="#平台相关" class="headerlink" title="平台相关"></a>平台相关</h2><p>多设备组装成物联网,每个设备均有不同的属性功能,如何在抽象层统一管理设备？<br>如果将设备看作是由多个服务组合而成的结构体,服务之间的调用作为设备间的交互。<br>APP,PC,PI,CAMERA。设备之间的差异是什么？<br>服务的差异？一个APP和PC中运行的软件是否可以一致？一个Camera视乎只能提供音视频的服务。<br>文件相互传输可能就是APP和PC之间的服务调用。<br>难点:<br>设备的基础能力定义是什么？每个设备都必须存在的基础服务是什么？注册登录心跳<br>设备之间如何相互发现？设备与设备之间如何联动？<br>多设备协同,算力如何分配？能否将流式定义计算任务？将计算任务分配在不同的设备上？？</p>
 
       
 
