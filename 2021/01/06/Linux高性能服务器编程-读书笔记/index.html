@@ -17,7 +17,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://long95288.github.io/2021/01/06/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/1.png">
 <meta property="article:published_time" content="2021-01-06T12:11:47.000Z">
-<meta property="article:modified_time" content="2021-02-03T13:44:33.150Z">
+<meta property="article:modified_time" content="2021-06-17T13:37:26.518Z">
 <meta property="article:author" content="long">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="读书笔记">
@@ -1238,7 +1238,21 @@
 <li><input disabled type="checkbox"> 逻辑单元。两种高效并发模式，高效的逻辑处理方式–有限状态机</li>
 <li><input disabled type="checkbox"> 存储单元。不讲</li>
 </ul>
-<h2 id="8-1-服务器模型"><a href="#8-1-服务器模型" class="headerlink" title="8.1　服务器模型"></a>8.1　服务器模型</h2><h3 id="8-1-1-C-S模型"><a href="#8-1-1-C-S模型" class="headerlink" title="8.1.1 C/S模型"></a>8.1.1 C/S模型</h3><h3 id="8-1-2-P2P模型"><a href="#8-1-2-P2P模型" class="headerlink" title="8.1.2 P2P模型"></a>8.1.2 P2P模型</h3><h2 id="8-2-服务器编程框架"><a href="#8-2-服务器编程框架" class="headerlink" title="8.2 服务器编程框架"></a>8.2 服务器编程框架</h2><h2 id="8-3-I-O模型"><a href="#8-3-I-O模型" class="headerlink" title="8.3 I/O模型"></a>8.3 I/O模型</h2><h2 id="8-4"><a href="#8-4" class="headerlink" title="8.4"></a>8.4</h2>
+<h2 id="8-1-服务器模型"><a href="#8-1-服务器模型" class="headerlink" title="8.1　服务器模型"></a>8.1　服务器模型</h2><h3 id="8-1-1-C-S模型"><a href="#8-1-1-C-S模型" class="headerlink" title="8.1.1 C/S模型"></a>8.1.1 C/S模型</h3><h3 id="8-1-2-P2P模型"><a href="#8-1-2-P2P模型" class="headerlink" title="8.1.2 P2P模型"></a>8.1.2 P2P模型</h3><h2 id="8-2-服务器编程框架"><a href="#8-2-服务器编程框架" class="headerlink" title="8.2 服务器编程框架"></a>8.2 服务器编程框架</h2><h2 id="8-3-I-O模型"><a href="#8-3-I-O模型" class="headerlink" title="8.3 I/O模型"></a>8.3 I/O模型</h2><h2 id="8-4"><a href="#8-4" class="headerlink" title="8.4"></a>8.4</h2><h1 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h1><h2 id="发送信号"><a href="#发送信号" class="headerlink" title="发送信号"></a>发送信号</h2><p>使用kill函数发送信号</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">kill</span><span class="params">(<span class="keyword">pid_t</span> pid, <span class="keyword">int</span> sig)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>pid取值定义<br>|范围|说明|<br>|—–|—–|<br>|pid&gt;0| 发送信号给pid的进程|<br>|pid=0|发送信号给本进程组内的其他进程|<br>|pid=-1|发送信号给除init进程之外的所有进程,需要发送者拥有对目标进程发送的信号的权限|<br>|pid &lt; -1|发送信号给组ID为-pid的进程组中的所有成员|</p>
+<p>使用sig=0可以作为一种检测目标进程或进程组是否存在。但不可靠,1.进程PID回绕，2.检测方法不是原子操作。<br>函数成功反0，失败返回-1，设置errno<br>|errno|description|<br>|—–|—–|<br>|EINVAL|无效信号|<br>|EPERM|没有权限|<br>|ESRCH|目标进程或进程组不存在|</p>
+<h2 id="接收信号"><a href="#接收信号" class="headerlink" title="接收信号"></a>接收信号</h2><p>信号接收函数的定义原型</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*<span class="keyword">__sighander_t</span>)</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>用户可以自定义也可以使用系统函数SIG_IGN(忽略目标信号)/SIG_DEL(使用信号的默认处理方式： 结束进程Term, 忽略信号Ign，结束进程转储Core, 暂停进程Stop, 继续进程Cont).</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/signum.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIG_DEF ((__sighander_t) 0)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIG_IGN ((__sighander_t) 1)</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
       
 
       
