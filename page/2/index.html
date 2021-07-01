@@ -2052,6 +2052,11 @@
 <li>执行<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo docker run --name web3 -d -p 80:80 -p 8088:8088 mysoft:latest</span></span><br><span class="line">0bc7ef9a4875de4cb6968271fde10f075d7397b6a42ceb256da3a37b78dfd99f</span><br></pre></td></tr></table></figure>
 这样可以从浏览器访问服务了。<br>还有另外一种方法,将程序发送到容器中,然后将整个容器打包。</li>
 </ul>
+<h3 id="docker-build命令"><a href="#docker-build命令" class="headerlink" title="docker build命令"></a>docker build命令</h3><p>构建的命令格式<br><code>docker build [选项] &lt;上下文路径/url/-&gt;</code><br>Docker运行时分成Docker引擎和客户端</p>
+<pre class="mermaid">
+graph LR
+client --> server</pre>
+<p>Docker引擎提供一组REST API接口，称为<code>Docker Remote API</code>.docker命令作为客户端工具。调用的docker命令其实调用远端Docker引擎的服务。由于Docker引擎是服务端,服务端需要获取本机的文件。需要指定上下文路径。那么可以将Dockerfile文件挪到外部的文件夹中，将需要构建的数据放在另一个文件夹。指定上下文路径为资源路径。<br>``</p>
 <h3 id="docker上下文路径"><a href="#docker上下文路径" class="headerlink" title="docker上下文路径"></a>docker上下文路径</h3><p>build后面的.表示上下文路径为当前路径</p>
 
       
