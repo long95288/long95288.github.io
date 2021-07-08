@@ -2199,9 +2199,7 @@ client --> server</pre>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHELL</span><span class="bash"> [<span class="string">&quot;/bin/sh&quot;</span>, <span class="string">&quot;-cex&quot;</span>]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># /bin/sh -cex &quot;nginx&quot;</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> nginx</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHELL</span><span class="bash"> [<span class="string">&quot;/bin/sh&quot;</span>, <span class="string">&quot;-cex&quot;</span>]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># /bin/sh -cex &quot;nginx&quot;</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> nginx</span></span><br></pre></td></tr></table></figure>
-
-
-
+<h2 id="Dockerfile多阶段编译"><a href="#Dockerfile多阶段编译" class="headerlink" title="Dockerfile多阶段编译"></a>Dockerfile多阶段编译</h2><p>Docker 17.05版本之前,可以将所有构建放入一个Dockerfile中,也可以分开写Dockerfile,然后使用脚本整合起来.Docker v17.05开始支持多阶段构建。<br>使用<code>as</code>命令为某一阶段命名,在构建的时候添加<code>target=xxx</code>参数就可以了</p>
 
       
 
