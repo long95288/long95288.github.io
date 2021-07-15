@@ -2281,6 +2281,12 @@ client --> server</pre>
 <h2 id="挂载一个本地主机文件作为数据卷"><a href="#挂载一个本地主机文件作为数据卷" class="headerlink" title="挂载一个本地主机文件作为数据卷"></a>挂载一个本地主机文件作为数据卷</h2><p>挂载单个文件到容器中</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker run --rm -it \</span></span><br><span class="line"><span class="meta">   #</span><span class="bash"> -v <span class="variable">$HOME</span>/.bash_history:/root/.bash_history \</span></span><br><span class="line">   --mount type=bind,source=$HOME/.bash_history,target=/root/.bash_history \</span><br><span class="line">   ubuntu:18.04 \</span><br><span class="line">   bash</span><br></pre></td></tr></table></figure>
 
+<h3 id="例子-挂载nginx的配置文件"><a href="#例子-挂载nginx的配置文件" class="headerlink" title="例子:挂载nginx的配置文件"></a>例子:挂载nginx的配置文件</h3><p>对于nginx:alpine镜像来说,配置文件路径<code>/etc/nginx/nginx.conf</code>,那么可以把本地的配置挂载到容器中,让容器使用一套配置来运行,使用相同的静态界面,也可以挂载上去</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 80:80 --name web --mount type=bind,source=/work/soft/nginx/nginx.conf,target=/etc/nginx/nginx.conf --mount type=bind,source=/work/soft/nginx/www,target=/usr/share/nginx/html nginx:alpine</span><br></pre></td></tr></table></figure>
+
+<p>一个完整例子:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">docker stop web</span><br><span class="line">docker rm web</span><br><span class="line">docker run -d -p 80:80 --name web --mount type=bind,source=/work/mywork/soft/nginx/nginx.conf,target=/etc/nginx/nginx.conf --mount type=bind,source=/work/mywork/soft/nginx/www,target=/usr/share/nginx/html nginx:alpine</span><br></pre></td></tr></table></figure>
+<p>会将原来的容器关闭删除并且重启容器。</p>
 
       
 
