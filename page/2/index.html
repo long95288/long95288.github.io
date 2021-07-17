@@ -2287,6 +2287,10 @@ client --> server</pre>
 <p>一个完整例子:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">docker stop web</span><br><span class="line">docker rm web</span><br><span class="line">docker run -d -p 80:80 --name web --mount type=bind,source=/work/mywork/soft/nginx/nginx.conf,target=/etc/nginx/nginx.conf --mount type=bind,source=/work/mywork/soft/nginx/www,target=/usr/share/nginx/html nginx:alpine</span><br></pre></td></tr></table></figure>
 <p>会将原来的容器关闭删除并且重启容器。</p>
+<p>docker容器需要访问外部网络,需要本地系统转发和支持。linux检查网络转发功能是否打开</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">sysctl net.ipv4.ip_forward</span></span><br><span class="line">net.ipv4.ip_forward = 1</span><br></pre></td></tr></table></figure>
+<p>0为未打开,1为打开。手动打开转发的服务设定<code>sysctl -w net.ipv4.ip_forward=1</code>。启动Docker服务的时候设定<code>--ip-forward=true</code>,docker也会将系统<code>ip_forward</code>参数。 </p>
+<h2 id="容器之间访问"><a href="#容器之间访问" class="headerlink" title="容器之间访问"></a>容器之间访问</h2><p>容器之间相互访问,需要容器网络拓扑已经相连,所有容器连接到<code>docker0</code>网桥上并且本地系统的防火墙软件–<code>iptables</code>是否允许通过。ip分配机制是怎么样的？如何让容器每次执行都能获得固定的ip?</p>
 
       
 
