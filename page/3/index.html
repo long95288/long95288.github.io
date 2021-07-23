@@ -158,6 +158,168 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-C-printf显示字符颜色" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/18/C-printf%E6%98%BE%E7%A4%BA%E5%AD%97%E7%AC%A6%E9%A2%9C%E8%89%B2/">C-printf显示字符颜色</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/18/C-printf%E6%98%BE%E7%A4%BA%E5%AD%97%E7%AC%A6%E9%A2%9C%E8%89%B2/" class="archive-article-date">
+  	<time datetime="2020-11-18T12:57:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>printf打印不同格式的字符,<br>  <code>printf(&quot;\x1b[%d;%dm%s\x1b[%dm&quot;, backcolor, frountcolor, str, control);</code></p>
+<table>
+<thead>
+<tr>
+<th>ANSI控制码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>\x1b[0m</code></td>
+<td>关闭所有属性</td>
+</tr>
+<tr>
+<td><code>\x1b[1m</code></td>
+<td>设置高亮度</td>
+</tr>
+<tr>
+<td><code>\x1b[4m</code></td>
+<td>下划线</td>
+</tr>
+<tr>
+<td><code>\x1b[5m</code></td>
+<td>闪烁</td>
+</tr>
+<tr>
+<td><code>\x1b[7m</code></td>
+<td>反显</td>
+</tr>
+<tr>
+<td><code>\x1b[8m</code></td>
+<td>消隐</td>
+</tr>
+<tr>
+<td><code>\x1b[30m  -- \x1b[37m</code></td>
+<td>设置前景色</td>
+</tr>
+<tr>
+<td><code>\x1b[40m  -- \x1b[47m</code></td>
+<td>设置背景色</td>
+</tr>
+<tr>
+<td><code>\x1b[nA</code></td>
+<td>光标上移n行</td>
+</tr>
+<tr>
+<td><code>\x1b[nB</code></td>
+<td>光标下移n行</td>
+</tr>
+<tr>
+<td><code>\x1b[nC</code></td>
+<td>光标右移n行</td>
+</tr>
+<tr>
+<td><code>\x1b[nD</code></td>
+<td>光标左移n行</td>
+</tr>
+<tr>
+<td><code>\x1b[y;xH</code></td>
+<td>设置光标位置</td>
+</tr>
+<tr>
+<td><code>\x1b[2J</code></td>
+<td>清屏</td>
+</tr>
+<tr>
+<td><code>\x1b[K</code></td>
+<td>清除从光标到行尾的内容</td>
+</tr>
+<tr>
+<td><code>\x1b[s</code></td>
+<td>保存光标位置</td>
+</tr>
+<tr>
+<td><code>\x1b[u</code></td>
+<td>恢复光标位置</td>
+</tr>
+<tr>
+<td><code>\x1b[?25l</code></td>
+<td>隐藏光标</td>
+</tr>
+<tr>
+<td><code>\x1b[?25h</code></td>
+<td>显示光标</td>
+</tr>
+</tbody></table>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/18/C-printf%E6%98%BE%E7%A4%BA%E5%AD%97%E7%AC%A6%E9%A2%9C%E8%89%B2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-C-IO" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1456,136 +1618,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/09/03/C-%E5%A4%9A%E7%BA%BF%E7%A8%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-git代码提交规范" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/17/git%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83/">git代码提交规范</a>
-    </h1>
-  
-
-        
-        <a href="/2020/08/17/git%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83/" class="archive-article-date">
-  	<time datetime="2020-08-17T14:25:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="阿里git提交规范"><a href="#阿里git提交规范" class="headerlink" title="阿里git提交规范"></a>阿里git提交规范</h4><p>提交的git commit message 格式 <code>&lt;type&gt;(&lt;scope&gt;):&lt;subject&gt;</code></p>
-<h5 id="type-必须"><a href="#type-必须" class="headerlink" title="type 必须"></a>type 必须</h5><table>
-<thead>
-<tr>
-<th>Type类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>feat</td>
-<td>新功能</td>
-</tr>
-<tr>
-<td>fix/to</td>
-<td>修复bug,QA发现bug,也可以是研发自己发现bug,fix:产生diff并自动修复此问题，适合一次提交直接修复问题。to:只产生diff,不自动修复此问题。适合多次提交，最终修复时使用fix。</td>
-</tr>
-<tr>
-<td>docs</td>
-<td>文档（documentation）</td>
-</tr>
-<tr>
-<td>style</td>
-<td>格式，不影响代码运行的变动</td>
-</tr>
-<tr>
-<td>refactor</td>
-<td>重构，不是新增功能，也不是修改bug的变动</td>
-</tr>
-<tr>
-<td>pref</td>
-<td>优化相关，提升性能，体验</td>
-</tr>
-<tr>
-<td>test</td>
-<td>增加测试</td>
-</tr>
-<tr>
-<td>chore</td>
-<td>构建过程或辅助工具的变动</td>
-</tr>
-<tr>
-<td>revert</td>
-<td>回滚到上一个版本</td>
-</tr>
-<tr>
-<td>merge</td>
-<td>代码合并</td>
-</tr>
-<tr>
-<td>sync</td>
-<td>同步主线或分支的bug</td>
-</tr>
-</tbody></table>
-<h5 id="lt-scope-gt-commit-影响的范围"><a href="#lt-scope-gt-commit-影响的范围" class="headerlink" title="&lt;scope&gt; commit 影响的范围"></a><code>&lt;scope&gt;</code> commit 影响的范围</h5><p>这个commit影响了dao层，controller,service层</p>
-<h5 id="subject-commit目的的简短描述"><a href="#subject-commit目的的简短描述" class="headerlink" title="subject commit目的的简短描述"></a><code>subject</code> commit目的的简短描述</h5><p>不超过50个字符，建议使用中文提交，结尾不加句号或者其它标点符号。</p>
-<h5 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h5><p>fix(DAO):用户查询缺少username属性</p>
-<p>feat(Controller):用户查询接口开发</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/17/git%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83/">展开全文 >></a>
         </p>
       
 
