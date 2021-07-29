@@ -16,7 +16,7 @@
 <meta property="og:description" content="计算数组的大小sizeof(数组名) 获得这个数组占用内存的总长度。二维数组是全部元素占用的总长度。 长度 &#x3D; sizeof(数组名) &#x2F; sizeof(数组类型) 元素个数 &#x3D; 总的占用字节大小 &#x2F; 每个元素占用的字节大小 64位指针占用8字节，8×8&#x3D;64，内存寻址。 计算一维数组长度例子1： 12345char *sc4[] &#x3D;&amp;#123;&quot;hello&quot;,&quot;wo">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-03T12:23:21.000Z">
-<meta property="article:modified_time" content="2021-07-27T15:01:12.305Z">
+<meta property="article:modified_time" content="2021-07-29T12:38:39.318Z">
 <meta property="article:author" content="long">
 <meta property="article:tag" content="C">
 <meta property="article:tag" content="笔记">
@@ -276,6 +276,11 @@
 <h3 id="c语言得UTC时间戳"><a href="#c语言得UTC时间戳" class="headerlink" title="c语言得UTC时间戳"></a>c语言得UTC时间戳</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">time_t</span> utc_time;</span><br><span class="line">time(&amp;utc_time);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;timestamp %ld\n&quot;</span>, utc_time);</span><br></pre></td></tr></table></figure>
 
 <p>未定义的行为引发的问题:memcpy能不能用作移动数据的函数,不能。<br>比如想要将data数据往前移动2个字节<code>memcpy(data, data+2, data_size -2)</code><br>这样会出现什么问题?有些编译器是支持的,但是有些编译器是将data的值清空之后再赋值。这个是未定义的行为。</p>
+<h3 id="关于函数引用问题"><a href="#关于函数引用问题" class="headerlink" title="关于函数引用问题"></a>关于函数引用问题</h3><p>两个.c文件里面的函数里面可以相互引用吗？可以。<br>a.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y )</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>b.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, add(<span class="number">3</span>, <span class="number">4</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>声明和定义的具体区别。</p>
 
       
 
