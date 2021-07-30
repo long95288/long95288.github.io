@@ -1492,7 +1492,8 @@
 <p>b.c</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, add(<span class="number">3</span>, <span class="number">4</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>声明和定义的具体区别。</p>
-
+<h2 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h2><p>为了并发读不受影响,使用读写锁进行共享变量的处理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int pthread_rwlock_init(pthread_rwlock_t *rwlock);</span><br><span class="line">int pthread_rwlock_rdlock(pthread_rwlock_t *rwlock);</span><br><span class="line">int pthread_rwlock_tryrdlock(pthread_rwlock_t *rwlock);</span><br><span class="line"></span><br><span class="line">int pthread_rwlock_wrlock(pthread_rwlock_t *rwlock);</span><br><span class="line">int pthread_rwlock_unlock(pthread_rwlock_t *rwlock);</span><br></pre></td></tr></table></figure>
       
 
       
