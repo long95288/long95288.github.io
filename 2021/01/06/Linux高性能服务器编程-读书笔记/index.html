@@ -896,12 +896,12 @@
 <p>将文件描述符设置为非阻塞。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">setnonblocking</span><span class="params">(<span class="type">int</span> fd)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> old_option = fcntl(fd, F_GETFL);</span><br><span class="line">    <span class="type">int</span> new_option = old_option | O_NONBLOCK;</span><br><span class="line">    fcntl(fd, F_SETFL, new_option);</span><br><span class="line">    <span class="keyword">return</span> old_option;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="第7章-linux服务器程序规范"><a href="#第7章-linux服务器程序规范" class="headerlink" title="第7章 linux服务器程序规范"></a>第7章 linux服务器程序规范</h1><ul>
-<li><input disabled type="checkbox"> 一般为后台进程(守护进程daemon)，父进程通常为init进程</li>
-<li><input disabled type="checkbox"> 含有日志系统，至少能够输出到日志文件</li>
-<li><input disabled type="checkbox"> 非root身份运行，有自己的运行账户</li>
-<li><input disabled type="checkbox"> 可配置的，多命令行或配置文件启动管理</li>
-<li><input disabled type="checkbox"> 生成pid文件到<code>/var/run</code>目录中，用以记录后台进程的PID</li>
-<li><input disabled type="checkbox"> 考虑系统资源和限制，能够承受负荷（文件描述符、内存总量）</li>
+<li><input disabled="" type="checkbox"> 一般为后台进程(守护进程daemon)，父进程通常为init进程</li>
+<li><input disabled="" type="checkbox"> 含有日志系统，至少能够输出到日志文件</li>
+<li><input disabled="" type="checkbox"> 非root身份运行，有自己的运行账户</li>
+<li><input disabled="" type="checkbox"> 可配置的，多命令行或配置文件启动管理</li>
+<li><input disabled="" type="checkbox"> 生成pid文件到<code>/var/run</code>目录中，用以记录后台进程的PID</li>
+<li><input disabled="" type="checkbox"> 考虑系统资源和限制，能够承受负荷（文件描述符、内存总量）</li>
 </ul>
 <h2 id="7-1-日志"><a href="#7-1-日志" class="headerlink" title="7.1 日志"></a>7.1 日志</h2><h3 id="7-1-1-Linux系统日志"><a href="#7-1-1-Linux系统日志" class="headerlink" title="7.1.1 Linux系统日志"></a>7.1.1 Linux系统日志</h3><p><code>syslogd</code>为旧版的系统使用守护进程处理系统日志，<code>rsyslogd</code>为升级版的。<code>rsyslogd</code>可以接收用户进程输出日志和内核输出日志。用户可以调用<code>syslog</code>函数生成系统日志。日志输出到<code>/dev/log</code>中。<code>rsyslogd</code>监听该文件用来监听用户进程输出。内核日志之前使用<code>rklogd</code>来管理，现在<code>rsyslogd</code>额外模块实现了相同的功能。内核使用<code>printk</code>等函数打印到内核环状缓存（ring buffer）中，环状缓存直接映射到<code>/proc/kmsg</code>文件中。<code>rsyslogd</code>读取该文件获得内核日志。<code>rsyslogd</code>得到日志之后，输出到日志文件。调试信息<code>/var/log/debug</code>文件，普通信息<code>/var/log/messages</code>文件，内核消息<code>/var/log/kern.log</code>。如何分配可在<code>rsyslogd</code>配置文件中设置。<code>/etc/rsyslog.conf</code>为<code>rsyslogd</code>配置文件。</p>
 <p>配置文件可以设置项:</p>
@@ -912,7 +912,10 @@
 <li>日志文件权限，包含哪些子配置文件<code>/etc/rsyslog.d/*.conf</code></li>
 <li><code>rsyslogd</code>的子配置文件指定各类日志的目标存储文件</li>
 </ul>
-<p><img src="/.io//1.png" alt="日志系统体系"></p>
+<img src="/2021/01/06/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/1.png" class="" title="日志系统体系">
+
+
+
 <h3 id="7-1-2-syslog函数"><a href="#7-1-2-syslog函数" class="headerlink" title="7.1.2 syslog函数"></a>7.1.2 syslog函数</h3><p>应用程序使用<code>syslog</code>函数与<code>rsyslogd</code>守护进程通讯。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;syslog.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">syslog</span><span class="params">(<span class="type">int</span> priority, <span class="type">const</span> <span class="type">char</span>* message, ...)</span>;</span><br></pre></td></tr></table></figure>
 
@@ -971,10 +974,10 @@
 
 <p>该函数不能由进程组首领进程调用，会产生错误。非首领进程调用</p>
 <ul>
-<li><input disabled type="checkbox"> 创建新的会话</li>
-<li><input disabled type="checkbox"> 调用进程称为会话的首领(调用该函数的进程)，该进程是该会话的唯一成员</li>
-<li><input disabled type="checkbox"> 新建一个进程组，PGID为调用进程的PID，并且该进程成为该组的首领进程</li>
-<li><input disabled type="checkbox"> 调用进程甩开终端</li>
+<li><input disabled="" type="checkbox"> 创建新的会话</li>
+<li><input disabled="" type="checkbox"> 调用进程称为会话的首领(调用该函数的进程)，该进程是该会话的唯一成员</li>
+<li><input disabled="" type="checkbox"> 新建一个进程组，PGID为调用进程的PID，并且该进程成为该组的首领进程</li>
+<li><input disabled="" type="checkbox"> 调用进程甩开终端</li>
 </ul>
 <p>成功返回PGID，失败返回-1并设置errno。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="type">pid_t</span> <span class="title function_">getsid</span><span class="params">(<span class="type">pid_t</span> pid)</span>;</span><br></pre></td></tr></table></figure>
@@ -1051,8 +1054,8 @@
 <p><code>nochdir</code>参数用于指定是否改变工作目录，如果给它传递0，则工作目录将被设置为”&#x2F;“，否则使用当前工作目录。noclose参数为0时，标准输入、标准输出、标准错误输出都被重定向到<code>/dev/null</code>文件。否则使用原来的设备。成功反0，失败-1设置errno。</p>
 <h1 id="第8章-高性能服务器程序框架"><a href="#第8章-高性能服务器程序框架" class="headerlink" title="第8章 高性能服务器程序框架"></a>第8章 高性能服务器程序框架</h1><p>服务器解构为如下三个主要模块:</p>
 <ul>
-<li><input disabled type="checkbox"> I&#x2F;O处理单元。四种I&#x2F;O模型和两种高效事件处理模式</li>
-<li><input disabled type="checkbox"> 逻辑单元。两种高效并发模式，高效的逻辑处理方式–有限状态机</li>
-<li><input disabled type="checkbox"> 存储单元。不讲</li>
+<li><input disabled="" type="checkbox"> I&#x2F;O处理单元。四种I&#x2F;O模型和两种高效事件处理模式</li>
+<li><input disabled="" type="checkbox"> 逻辑单元。两种高效并发模式，高效的逻辑处理方式–有限状态机</li>
+<li><input disabled="" type="checkbox"> 存储单元。不讲</li>
 </ul>
 <h2 id="8-1-服务器模型"><a href="#8-1-服务器模型" class="headerlink" title="8.1　服务器模型"></a>8.1　服务器模型</h2><h3 id="8-1-1-C-S模型"><a href="#8-1-1-C-S模型" class="headerlink" title="8.1.1 C&#x2F;S模型"></a>8.1.1 C&#x2F;S模型</h3><h3 id="8-1-2-P2P模型"><a href="#8-1-2-P2P模型" class="headerlink" title="8.1.2 P2P模型"></a>8.1.2 P2P模型</h3><h2 id="8-2-服务器编程框架"><a href="#8-2-服务器编程框架" class="headerlink" title="8.2 服务器编程框架"></a>8.2 服务器编程框架</h2><h2 id="8-3-I-O模型"><a href="#8-3-I-O模型" class="headerlink" title="8.3 I&#x2F;O模型"></a>8.3 I&#x2F;O模型</h2><h2 id="8-4"><a href="#8-4" class="headerlink" title="8.4"></a>8.4</h2></p></div><div class="share"><span>Share</span>&nbsp;<span class="soc"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></span><span class="soc"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></span><span class="soc"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=https://long95288.github.io/2021/01/06/Linux高性能服务器编程-读书笔记/%20风兮木落%20Linux高性能服务器编程-读书笔记"></a></span></div><div class="pagination"><p class="clearfix"><span class="pre pagbuttons"><a role="navigation" href="/2021/01/11/C-Protoc/" title="C-Protoc"><i class="fa fa-angle-double-left"></i>&nbsp;Previous post: C-Protoc</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/2020/12/23/%E8%BD%AF%E4%BB%B6%E9%9A%8F%E6%83%B3%E5%BD%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" title="软件随想录-读书笔记">Next post: 软件随想录-读书笔记&nbsp;<i class="fa fa-angle-double-right"></i></a></span></p></div></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2025&nbsp;<a target="_blank" href="https://long95288.github.io" rel="noopener noreferrer">long</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.js"></script></body></html>
