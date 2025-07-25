@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>风兮木落</title>
+  
+  
+  <link href="https://long95288.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://long95288.github.io/"/>
+  <updated>2022-06-19T06:41:22.658Z</updated>
+  <id>https://long95288.github.io/</id>
+  
+  <author>
+    <name>long</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="https://long95288.github.io/2025/07/25/README/"/>
+    <id>https://long95288.github.io/2025/07/25/README/</id>
+    <published>2025-07-25T14:17:46.904Z</published>
+    <updated>2022-06-19T06:41:22.658Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt; </summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>iot网络协议</title>
+    <link href="https://long95288.github.io/2021/04/14/iot%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"/>
+    <id>https://long95288.github.io/2021/04/14/iot%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</id>
+    <published>2021-04-14T14:22:01.000Z</published>
+    <updated>2022-06-19T06:41:23.434Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;IOT网络协议&quot;&gt;&lt;a href=&quot;#IOT网络协议&quot; class=&quot;headerlink&quot; title=&quot;IOT网络协议&quot;&gt;&lt;/a&gt;IOT网络协议&lt;/h1&gt;&lt;h2 id=&quot;MQTT协议&quot;&gt;&lt;a href=&quot;#MQTT协议&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="网络" scheme="https://long95288.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+    <category term="物联网" scheme="https://long95288.github.io/tags/%E7%89%A9%E8%81%94%E7%BD%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>go-加解密</title>
+    <link href="https://long95288.github.io/2021/04/12/go-%E5%8A%A0%E8%A7%A3%E5%AF%86/"/>
+    <id>https://long95288.github.io/2021/04/12/go-%E5%8A%A0%E8%A7%A3%E5%AF%86/</id>
+    <published>2021-04-12T12:34:24.000Z</published>
+    <updated>2022-06-19T06:41:23.434Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;AESCBC256加解密DEMO&quot;&gt;&lt;a href=&quot;#AESCBC256加解密DEMO&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="加解密" scheme="https://long95288.github.io/tags/%E5%8A%A0%E8%A7%A3%E5%AF%86/"/>
+    
+    <category term="golang" scheme="https://long95288.github.io/tags/golang/"/>
+    
+    <category term="aes" scheme="https://long95288.github.io/tags/aes/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>go-net</title>
+    <link href="https://long95288.github.io/2021/03/28/go-net/"/>
+    <id>https://long95288.github.io/2021/03/28/go-net/</id>
+    <published>2021-03-28T11:26:16.000Z</published>
+    <updated>2022-06-19T06:41:23.431Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;golang-TCP-UDP连接&quot;&gt;&lt;a href=&quot;#golang-TCP-UDP连接&quot; class=&quot;headerlink&quot; title=&quot;golang TCP&amp;#x2F;UDP连接&quot;&gt;&lt;/a&gt;golang</summary>
+        
+      
+    
+    
+    
+    
+    <category term="网络" scheme="https://long95288.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+    <category term="golang" scheme="https://long95288.github.io/tags/golang/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenSSL生成SSL证书</title>
+    <link href="https://long95288.github.io/2021/03/26/OpenSSL%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6/"/>
+    <id>https://long95288.github.io/2021/03/26/OpenSSL%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6/</id>
+    <published>2021-03-26T11:39:27.000Z</published>
+    <updated>2022-06-19T06:41:22.374Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;OpenSSL生成证书&quot;&gt;&lt;a href=&quot;#OpenSSL生成证书&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="linux" scheme="https://long95288.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图像处理FFmpeg一把梭</title>
+    <link href="https://long95288.github.io/2021/03/14/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86FFmpeg%E4%B8%80%E6%8A%8A%E6%A2%AD/"/>
+    <id>https://long95288.github.io/2021/03/14/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86FFmpeg%E4%B8%80%E6%8A%8A%E6%A2%AD/</id>
+    <published>2021-03-14T13:25:54.000Z</published>
+    <updated>2022-06-19T06:41:23.633Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;图像视频基本知识&quot;&gt;&lt;a href=&quot;#图像视频基本知识&quot; class=&quot;headerlink&quot; title=&quot;图像视频基本知识&quot;&gt;&lt;/a&gt;图像视频基本知识&lt;/h2&gt;&lt;h3 id=&quot;BMP文件格式解析&quot;&gt;&lt;a href=&quot;#BMP文件格式解析&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="图像处理" scheme="https://long95288.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="ffmpeg" scheme="https://long95288.github.io/tags/ffmpeg/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>github有趣项目</title>
+    <link href="https://long95288.github.io/2021/03/08/github%E6%9C%89%E8%B6%A3%E9%A1%B9%E7%9B%AE/"/>
+    <id>https://long95288.github.io/2021/03/08/github%E6%9C%89%E8%B6%A3%E9%A1%B9%E7%9B%AE/</id>
+    <published>2021-03-08T13:12:02.000Z</published>
+    <updated>2022-06-19T06:41:23.430Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;安卓开发相关&quot;&gt;&lt;a href=&quot;#安卓开发相关&quot; class=&quot;headerlink&quot; title=&quot;安卓开发相关&quot;&gt;&lt;/a&gt;安卓开发相关&lt;/h2&gt;&lt;h3 id=&quot;加载框&quot;&gt;&lt;a href=&quot;#加载框&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="备忘" scheme="https://long95288.github.io/tags/%E5%A4%87%E5%BF%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>碎片化生存</title>
+    <link href="https://long95288.github.io/2021/01/29/%E7%A2%8E%E7%89%87%E5%8C%96%E7%94%9F%E5%AD%98/"/>
+    <id>https://long95288.github.io/2021/01/29/%E7%A2%8E%E7%89%87%E5%8C%96%E7%94%9F%E5%AD%98/</id>
+    <published>2021-01-29T12:27:02.000Z</published>
+    <updated>2025-07-25T14:11:57.729Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;和菜头：碎片化生存&quot;&gt;&lt;a href=&quot;#和菜头：碎片化生存&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="文章摘录" scheme="https://long95288.github.io/tags/%E6%96%87%E7%AB%A0%E6%91%98%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>KCP网络</title>
+    <link href="https://long95288.github.io/2021/01/25/KCP%E7%BD%91%E7%BB%9C/"/>
+    <id>https://long95288.github.io/2021/01/25/KCP%E7%BD%91%E7%BB%9C/</id>
+    <published>2021-01-25T12:15:15.000Z</published>
+    <updated>2025-07-25T14:11:57.364Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="网络" scheme="https://long95288.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+    <category term="kcp" scheme="https://long95288.github.io/tags/kcp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C-Protoc</title>
+    <link href="https://long95288.github.io/2021/01/11/C-Protoc/"/>
+    <id>https://long95288.github.io/2021/01/11/C-Protoc/</id>
+    <published>2021-01-11T12:07:08.000Z</published>
+    <updated>2025-07-25T14:11:57.096Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;protoc简介&quot;&gt;&lt;a href=&quot;#protoc简介&quot; class=&quot;headerlink&quot; title=&quot;protoc简介&quot;&gt;&lt;/a&gt;protoc简介&lt;/h3&gt;&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="c" scheme="https://long95288.github.io/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux高性能服务器编程-读书笔记</title>
+    <link href="https://long95288.github.io/2021/01/06/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    <id>https://long95288.github.io/2021/01/06/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</id>
+    <published>2021-01-06T12:11:47.000Z</published>
+    <updated>2022-06-19T06:41:20.871Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;第一章-TCP-IP协议族&quot;&gt;&lt;a href=&quot;#第一章-TCP-IP协议族&quot; class=&quot;headerlink&quot; title=&quot;第一章 TCP&amp;#x2F;IP协议族&quot;&gt;&lt;/a&gt;第一章 TCP&amp;#x2F;IP协议族&lt;/h1&gt;&lt;h2</summary>
+        
+      
+    
+    
+    
+    
+    <category term="linux" scheme="https://long95288.github.io/tags/linux/"/>
+    
+    <category term="读书笔记" scheme="https://long95288.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>软件随想录-读书笔记</title>
+    <link href="https://long95288.github.io/2020/12/23/%E8%BD%AF%E4%BB%B6%E9%9A%8F%E6%83%B3%E5%BD%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    <id>https://long95288.github.io/2020/12/23/%E8%BD%AF%E4%BB%B6%E9%9A%8F%E6%83%B3%E5%BD%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</id>
+    <published>2020-12-23T12:20:29.000Z</published>
+    <updated>2022-06-19T06:41:23.744Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;软件随想录-读书笔记&quot;&gt;&lt;a href=&quot;#软件随想录-读书笔记&quot; class=&quot;headerlink&quot; title=&quot;软件随想录-读书笔记&quot;&gt;&lt;/a&gt;软件随想录-读书笔记&lt;/h2&gt;&lt;h3 id=&quot;人员管理&quot;&gt;&lt;a href=&quot;#人员管理&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="读书笔记" scheme="https://long95288.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>&lt;&lt;算法奥秘 读书笔记&gt;&gt;</title>
+    <link href="https://long95288.github.io/2020/12/22/%E7%AE%97%E6%B3%95%E5%A5%A5%E7%A7%98/"/>
+    <id>https://long95288.github.io/2020/12/22/%E7%AE%97%E6%B3%95%E5%A5%A5%E7%A7%98/</id>
+    <published>2020-12-22T12:08:15.000Z</published>
+    <updated>2025-07-25T14:11:57.729Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;第2章&quot;&gt;&lt;a href=&quot;#第2章&quot; class=&quot;headerlink&quot; title=&quot;第2章&quot;&gt;&lt;/a&gt;第2章&lt;/h2&gt;&lt;h3 id=&quot;2-1-操作最右边的位元&quot;&gt;&lt;a href=&quot;#2-1-操作最右边的位元&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="读书笔记" scheme="https://long95288.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>dns查询和响应报文解析</title>
+    <link href="https://long95288.github.io/2020/12/04/dns%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E8%A7%A3%E6%9E%90/"/>
+    <id>https://long95288.github.io/2020/12/04/dns%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E8%A7%A3%E6%9E%90/</id>
+    <published>2020-12-04T13:32:02.000Z</published>
+    <updated>2025-07-25T14:11:57.391Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;dns查询和响应报文解析&quot;&gt;&lt;a href=&quot;#dns查询和响应报文解析&quot; class=&quot;headerlink&quot; title=&quot;dns查询和响应报文解析&quot;&gt;&lt;/a&gt;dns查询和响应报文解析&lt;/h2&gt;&lt;h3 id=&quot;报文格式如下&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="计算机网络" scheme="https://long95288.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    <category term="dns" scheme="https://long95288.github.io/tags/dns/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker学习</title>
+    <link href="https://long95288.github.io/2020/11/20/docker%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://long95288.github.io/2020/11/20/docker%E5%AD%A6%E4%B9%A0/</id>
+    <published>2020-11-20T11:49:59.000Z</published>
+    <updated>2025-07-25T14:11:57.395Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;docker-常用命令&quot;&gt;&lt;a href=&quot;#docker-常用命令&quot; class=&quot;headerlink&quot; title=&quot;docker 常用命令&quot;&gt;&lt;/a&gt;docker 常用命令&lt;/h2&gt;&lt;h3 id=&quot;映像相关操作&quot;&gt;&lt;a href=&quot;#映像相关操作&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="docker" scheme="https://long95288.github.io/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>&lt;&lt;高效程序员的45个习惯&gt;&gt;-读书笔记</title>
+    <link href="https://long95288.github.io/2020/11/20/%E9%AB%98%E6%95%88%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%8445%E4%B8%AA%E4%B9%A0%E6%83%AF-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    <id>https://long95288.github.io/2020/11/20/%E9%AB%98%E6%95%88%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%8445%E4%B8%AA%E4%B9%A0%E6%83%AF-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</id>
+    <published>2020-11-20T11:48:34.000Z</published>
+    <updated>2025-07-25T14:11:57.733Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;如何跟上技术变化的步伐&quot;&gt;&lt;a href=&quot;#如何跟上技术变化的步伐&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="读书笔记" scheme="https://long95288.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C-printf显示字符颜色</title>
+    <link href="https://long95288.github.io/2020/11/18/C-printf%E6%98%BE%E7%A4%BA%E5%AD%97%E7%AC%A6%E9%A2%9C%E8%89%B2/"/>
+    <id>https://long95288.github.io/2020/11/18/C-printf%E6%98%BE%E7%A4%BA%E5%AD%97%E7%AC%A6%E9%A2%9C%E8%89%B2/</id>
+    <published>2020-11-18T12:57:20.000Z</published>
+    <updated>2025-07-25T14:11:57.097Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;printf打印不同格式的字符,&lt;br&gt;  &lt;code&gt;printf(&amp;quot;&#92;x1b[%d;%dm%s&#92;x1b[%dm&amp;quot;, backcolor, frountcolor, str,</summary>
+        
+      
+    
+    
+    
+    
+    <category term="C" scheme="https://long95288.github.io/tags/C/"/>
+    
+    <category term="linux" scheme="https://long95288.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C-IO</title>
+    <link href="https://long95288.github.io/2020/11/18/C-IO/"/>
+    <id>https://long95288.github.io/2020/11/18/C-IO/</id>
+    <published>2020-11-18T12:54:59.000Z</published>
+    <updated>2025-07-25T14:11:57.096Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h4 id=&quot;方法一&quot;&gt;&lt;a href=&quot;#方法一&quot; class=&quot;headerlink&quot; title=&quot;方法一&quot;&gt;&lt;/a&gt;方法一&lt;/h4&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</summary>
+        
+      
+    
+    
+    
+    
+    <category term="C" scheme="https://long95288.github.io/tags/C/"/>
+    
+    <category term="linux" scheme="https://long95288.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux安装微信</title>
+    <link href="https://long95288.github.io/2020/10/25/linux%E5%AE%89%E8%A3%85%E5%BE%AE%E4%BF%A1/"/>
+    <id>https://long95288.github.io/2020/10/25/linux%E5%AE%89%E8%A3%85%E5%BE%AE%E4%BF%A1/</id>
+    <published>2020-10-25T11:38:21.000Z</published>
+    <updated>2022-06-19T06:41:23.438Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;方法一&quot;&gt;&lt;a href=&quot;#方法一&quot; class=&quot;headerlink&quot; title=&quot;方法一&quot;&gt;&lt;/a&gt;方法一&lt;/h3&gt;&lt;h4 id=&quot;第一步&quot;&gt;&lt;a href=&quot;#第一步&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="linux" scheme="https://long95288.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux命令总结</title>
+    <link href="https://long95288.github.io/2020/10/18/Linux%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/"/>
+    <id>https://long95288.github.io/2020/10/18/Linux%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/</id>
+    <published>2020-10-17T18:23:25.000Z</published>
+    <updated>2022-06-19T06:41:20.870Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;运行脚本输入回车&quot;&gt;&lt;a href=&quot;#运行脚本输入回车&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="linux" scheme="https://long95288.github.io/tags/linux/"/>
+    
+  </entry>
+  
+</feed>

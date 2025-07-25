@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author"><title>longSys相关文档 · 风兮木落</title><meta name="description" content="问题定义  个人资源管理平台
+需求分析  需要一个软件平台来管理自己日益复杂和丰富的资源。包括但不限于个人文档、积累的电子书、下载的音乐、下载的视频教程，一些常用的功能。日记、笔记等。一些相关的人工智能的资源整合。如车标识别、orc等常用的接口。未来可能要接入物联网的相关设备、由于腾讯云的服务器的存"><meta name="og:description" content="问题定义  个人资源管理平台
+需求分析  需要一个软件平台来管理自己日益复杂和丰富的资源。包括但不限于个人文档、积累的电子书、下载的音乐、下载的视频教程，一些常用的功能。日记、笔记等。一些相关的人工智能的资源整合。如车标识别、orc等常用的接口。未来可能要接入物联网的相关设备、由于腾讯云的服务器的存"><meta name="twitter:site" content="风兮木落"><meta name="twitter:title" content="longSys相关文档"><meta name="twitter:card" content="summary"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/css/prism.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><div class="container" id="stage"><div class="row"><div class="col-sm-3 col-xs-12 side-container invisible" id="side-bar"><div class="vertical-text site-title"><h3 class="site-title-small" tabindex="-1"><a class="a-title" href="/">long blogs</a></h3><h1 class="site-title-large" tabindex="-1"><a class="a-title" href="/">进一步有进一步惊喜</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div class="site-title-links" id="site-nav"><ul><li><a href="/">Home</a></li><li><a href="/archives">Archive</a></li><li><a href="/tags">Tags</a></li><li class="soc"><a href="https://long95288.github.io/atom.xml" target="_blank" rel="noopener noreferrer" aria-label="RSS"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2025&nbsp;<a target="_blank" href="https://long95288.github.io" rel="noopener noreferrer">long</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div class="col-sm-9 col-xs-12 main-container invisible" id="main-container"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post-container"><p class="post-title"><a>longSys相关文档</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-10-23</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/笔记/" title="笔记">笔记</a><span>&nbsp;</span><a class="a-tag" href="/tags/软件设计/" title="软件设计">软件设计</a><span>&nbsp;</span></span></p><p class="post-abstract"><h3 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h3><p>  个人资源管理平台</p>
+<h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><p>  需要一个软件平台来管理自己日益复杂和丰富的资源。包括但不限于个人文档、积累的电子书、下载的音乐、下载的视频教程，一些常用的功能。日记、笔记等。一些相关的人工智能的资源整合。如车标识别、orc等常用的接口。未来可能要接入物联网的相关设备、由于腾讯云的服务器的存储资源有限，未来需要将自己本地的文件外挂到该平台，即可以减小服务器的开销，还可以保护文档的私密性。服务器只做数据中转，而不是数据存储。服务器算力也有限,需要将算力分到本地外挂的设备。</p>
+<h4 id="一、文件管理需求"><a href="#一、文件管理需求" class="headerlink" title="一、文件管理需求"></a>一、文件管理需求</h4><ul>
+<li>该平台需要能够存储文件，解决U盘的不便携性。一些小的文档可以上传至该平台。当需要的时候可以上传和下载。大文件管理，由于设备原因，不可能将所有的文件上传到远端的服务器。所以需要一个功能，能够在该平台管理自己的本地的文件。包括，添加、删除、读取等常用功能。</li>
+<li>该平台的界面应该是非常友好的</li>
+</ul>
+<h4 id="二、图片管理需求"><a href="#二、图片管理需求" class="headerlink" title="二、图片管理需求"></a>二、图片管理需求</h4><p>  宅男喜欢二次元、现在积累了几个G的图片文件。但是很杂，该平台提供相册、分类的功能</p>
+<ul>
+<li>相册功能 将图片分类到相册中</li>
+<li>添加、删除、修改相册。</li>
+<li>查看图片和编辑分开。</li>
+</ul>
+<h4 id="三、音乐管理需求"><a href="#三、音乐管理需求" class="headerlink" title="三、音乐管理需求"></a>三、音乐管理需求</h4><p>  音乐很多,想要有自己的音乐播放器，类似于网易云音乐那种。</p>
+<ul>
+<li>曲库 全部的音乐，可以搜索。一首歌可以放入很多的歌单中。</li>
+<li>歌单 将音乐分类，在管理界面可以添加、编辑、删除歌单</li>
+<li>上传音乐 上传的音乐会出现在曲库中，上传音乐的时候会添加相应的歌曲数据。</li>
+</ul>
+<h4 id="四、视频管理需求"><a href="#四、视频管理需求" class="headerlink" title="四、视频管理需求"></a>四、视频管理需求</h4><p>  视频很多、非常多。需要有效的管理<br>  1、能够看视频(宽带问题，无法流畅的看视频)<br>  2、用户能够根据名字搜索视频<br>  3、用户能够创建自己的栏目，并且往里面添加视频(类似于blibli的收藏夹功能)<br>  4、用户能够删除视频</p>
+<h4 id="五、日记和笔记的需求"><a href="#五、日记和笔记的需求" class="headerlink" title="五、日记和笔记的需求"></a>五、日记和笔记的需求</h4><p>  笔记有很多成熟的产品，但是数据不可控。自己不想把数据放在他们的服务器上。所以需要一个支持多端编写的文档的功能。数据放在自己的数据库中。支持富文本和markdown格式的语法。</p>
+<ul>
+<li>文档的导入和导出 可以将数据库的中笔记文档导出pdf格式，保存备份在磁盘中。</li>
+<li>定期生成备份文件,后期可以调用多个网盘的api多端备份。</li>
+</ul>
+<h4 id="六、常用工具的需求"><a href="#六、常用工具的需求" class="headerlink" title="六、常用工具的需求"></a>六、常用工具的需求</h4><p>  学习工作中有很多工具的需求，图片转文字、开发中json格式化、还有很多的开发手册。这些都是用得到的，并且自己已经实现了车标的识别并且建立了模型。可以将该功能整合<br>  到平台中<br>  1、二维码工具。能够根据字符串生成二维码，也能识别二维码为字符串。<br>  2、车标识别工具。能够根据上传的图片识别相应的车标。<br>  3、</p>
+<h4 id="七、物联网设备管理需求"><a href="#七、物联网设备管理需求" class="headerlink" title="七、物联网设备管理需求"></a>七、物联网设备管理需求</h4><p>  未来自己会将家里的物联网的设备挂在该平台中，并且能够在该平台进行管理。空调、冰箱、台灯、电视机。自己梦想中的家。需要一个同一的管理平台，而不是各自为政。<br>  添加设备，每个设备都有自己的id码，并且有相应的命令。</p>
+<h4 id="八、计划跟踪平台"><a href="#八、计划跟踪平台" class="headerlink" title="八、计划跟踪平台"></a>八、计划跟踪平台</h4><p>  用来记录自己的计划和执行情况，主要借鉴TODO List的功能<br>  添加计划，一个计划会有开始时间、截止时间、完成时间(用户完成)，具体内容，轻重缓急。<br>  编辑、删除计划，只有未开始的计划才能编辑和删除<br>  生成报表，可以按周、按月生成报表。记录计划的预计完成时间和实际完成时间，计算完成工作计划的轻重缓急的比例。</p>
+<h3 id="概要设计"><a href="#概要设计" class="headerlink" title="概要设计"></a>概要设计</h3><h3 id="详细设计"><a href="#详细设计" class="headerlink" title="详细设计"></a>详细设计</h3><h4 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h4><h5 id="笔记管理"><a href="#笔记管理" class="headerlink" title="笔记管理"></a>笔记管理</h5><p><strong>笔记本：t_notebook</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>bigint</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>notebook_name</td>
+<td>varchar</td>
+<td>笔记本名</td>
+</tr>
+<tr>
+<td>notebook_description</td>
+<td>varchar</td>
+<td>笔记本描述</td>
+</tr>
+<tr>
+<td>create_id</td>
+<td>bigint</td>
+<td>创建者id</td>
+</tr>
+<tr>
+<td>created_time</td>
+<td>timestamp</td>
+<td>创建时间戳</td>
+</tr>
+<tr>
+<td>modify_time</td>
+<td>timestamp</td>
+<td>修改时间戳</td>
+</tr>
+<tr>
+<td>del</td>
+<td>tinyint</td>
+<td>删除标记</td>
+</tr>
+</tbody></table>
+<p><strong>笔记条目：t_notebook_item</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>bigint</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>notebook_id</td>
+<td>bigint</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>notebook_item_title</td>
+<td>varchar</td>
+<td>笔记条目标题</td>
+</tr>
+<tr>
+<td>notebook_item_content</td>
+<td>text</td>
+<td>笔记条目内容</td>
+</tr>
+<tr>
+<td>create_time</td>
+<td>timestamp</td>
+<td>创建时间</td>
+</tr>
+<tr>
+<td>modify_time</td>
+<td>timestamp</td>
+<td>修改时间</td>
+</tr>
+<tr>
+<td>del</td>
+<td>tinyint</td>
+<td>删除标记</td>
+</tr>
+</tbody></table>
+<h3 id="平台原型"><a href="#平台原型" class="headerlink" title="平台原型"></a>平台原型</h3><h3 id="后端实现进度"><a href="#后端实现进度" class="headerlink" title="后端实现进度"></a>后端实现进度</h3><h4 id="鉴权模块"><a href="#鉴权模块" class="headerlink" title="鉴权模块"></a>鉴权模块</h4><ul>
+<li><input checked="" disabled="" type="checkbox"> shiro鉴权<br>….</li>
+</ul>
+<h4 id="用户模块"><a href="#用户模块" class="headerlink" title="用户模块"></a>用户模块</h4><ul>
+<li><input checked="" disabled="" type="checkbox"> 用户登录接口</li>
+</ul>
+<p>Request URL: <code>127.0.0.1:8080/Api/User/Login</code><br>Request Method:<code>post</code><br>Request Body:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;username&quot;</span><span class="punctuation">:</span><span class="string">&quot;username&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;password&quot;</span><span class="punctuation">:</span><span class="string">&quot;password&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>Response Body:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span> <span class="number">20000</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;message&quot;</span><span class="punctuation">:</span> <span class="string">&quot;登录成功&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;token&quot;</span><span class="punctuation">:</span> <span class="string">&quot;c594ff92e47955527823259beafb5b2e65c26f7a233f8542736d1c1937b8bf442137a1aa1cc11b3aa1a0ba56aa1be6d91cb11ce03e9de58a48c608178ea1684de54b084713655ae8750010a822afb420ede8f6f92539da5c20d8a5434f82533b016768c39901ffe9f51ab82a83c9379193f624651a797131a4840581ddc855183260f708a41c7309&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 用户登出接口</li>
+</ul>
+<p>Request URL: <code>127.0.0.1:8080/Api/User/Logout</code><br>Request Method: <code>post</code><br>Request Body: <code>null</code><br>Response Body:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span> <span class="number">20000</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;message&quot;</span><span class="punctuation">:</span> <span class="string">&quot;请求成功&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 获得用户信息</li>
+</ul>
+<p>Request URL: <code>127.0.0.1:8080/Api/User/UserInfo?token=usertoken-token</code><br>Request Method: <code>get</code><br>Response Body:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line"><span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;message&quot;</span><span class="punctuation">:</span> <span class="string">&quot;请求成功&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;code&quot;</span><span class="punctuation">:</span><span class="number">20000</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;data&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;roles&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span><span class="string">&quot;admin&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;introduction&quot;</span><span class="punctuation">:</span><span class="string">&quot;I am a super administrator&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;avatar&quot;</span><span class="punctuation">:</span><span class="string">&quot;https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span><span class="string">&quot;Super Admin&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><input disabled="" type="checkbox"> 用户管理</li>
+<li><input disabled="" type="checkbox"> 权限角色管理<br>….</li>
+</ul>
+<h4 id="文件模块"><a href="#文件模块" class="headerlink" title="文件模块"></a>文件模块</h4><ul>
+<li><input checked="" disabled="" type="checkbox"> 文件上传</li>
+<li><input checked="" disabled="" type="checkbox"> 查询文件列表</li>
+<li><input checked="" disabled="" type="checkbox"> 删除文件</li>
+<li><input disabled="" type="checkbox"> 文件分类</li>
+</ul>
+<h4 id="图片模块"><a href="#图片模块" class="headerlink" title="图片模块"></a>图片模块</h4><ul>
+<li><input disabled="" type="checkbox"> 创建相册</li>
+<li><input disabled="" type="checkbox"> 更新相册</li>
+<li><input disabled="" type="checkbox"> 添加图片至相册</li>
+<li><input disabled="" type="checkbox"> 删除某个相册下的图片</li>
+<li><input disabled="" type="checkbox"> 删除相册</li>
+</ul>
+<h4 id="音乐模块"><a href="#音乐模块" class="headerlink" title="音乐模块"></a>音乐模块</h4><ul>
+<li><input disabled="" type="checkbox"> 获得曲库列表</li>
+<li><input disabled="" type="checkbox"> 获得歌单列表</li>
+<li><input disabled="" type="checkbox"> 获得歌单对应的曲目</li>
+<li><input disabled="" type="checkbox"> 添加新的歌曲</li>
+<li><input disabled="" type="checkbox"> 修改歌曲</li>
+<li><input disabled="" type="checkbox"> 删除歌曲</li>
+<li><input disabled="" type="checkbox"> 添加新的歌单</li>
+<li><input disabled="" type="checkbox"> 更新歌单</li>
+<li><input disabled="" type="checkbox"> 删除歌单</li>
+</ul>
+<h4 id="在线笔记模块"><a href="#在线笔记模块" class="headerlink" title="在线笔记模块"></a>在线笔记模块</h4><ul>
+<li><input checked="" disabled="" type="checkbox"> 获得笔记列表</li>
+<li><input checked="" disabled="" type="checkbox"> 获得特定笔记的内容</li>
+<li><input checked="" disabled="" type="checkbox"> 添加新的笔记本</li>
+<li><input checked="" disabled="" type="checkbox"> 为某个笔记本添加新的条目</li>
+<li><input checked="" disabled="" type="checkbox"> 更新笔记本</li>
+<li><input checked="" disabled="" type="checkbox"> 更新笔记本特定条目</li>
+<li><input checked="" disabled="" type="checkbox"> 删除笔记本</li>
+<li><input checked="" disabled="" type="checkbox"> 删除笔记本特定条目</li>
+<li><input disabled="" type="checkbox"> 前端支持Markdown语法渲染</li>
+</ul>
+<h4 id="小说模块-转码"><a href="#小说模块-转码" class="headerlink" title="小说模块-转码"></a>小说模块-转码</h4><ul>
+<li><input disabled="" type="checkbox"> 添加新的解析模块</li>
+<li><input disabled="" type="checkbox"> 变更解析模块</li>
+<li><input disabled="" type="checkbox"> 删除解析模块</li>
+</ul>
+<h4 id="TODO模块"><a href="#TODO模块" class="headerlink" title="TODO模块"></a>TODO模块</h4><h4 id="人工智能接口"><a href="#人工智能接口" class="headerlink" title="人工智能接口"></a>人工智能接口</h4><ul>
+<li><input disabled="" type="checkbox"> 车标识别接口</li>
+<li><input disabled="" type="checkbox"> 车标检测接口</li>
+<li><input disabled="" type="checkbox"> 文字识别接口[待训练模型]</li>
+<li><input disabled="" type="checkbox"> 人脸检测接口[待训练模型]</li>
+</ul>
+<h4 id="物联网设备"><a href="#物联网设备" class="headerlink" title="物联网设备"></a>物联网设备</h4><ul>
+<li><input disabled="" type="checkbox"> 查询所有设备状态</li>
+<li><input disabled="" type="checkbox"> 添加新的设备</li>
+<li><input disabled="" type="checkbox"> 删除设备</li>
+<li><input disabled="" type="checkbox"> 控制特定的设备</li>
+</ul>
+<h3 id="前端流程设计"><a href="#前端流程设计" class="headerlink" title="前端流程设计"></a>前端流程设计</h3><h4 id="登录流程设计"><a href="#登录流程设计" class="headerlink" title="登录流程设计"></a>登录流程设计</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">	participant user as 用户</span><br><span class="line">	participant front as 前端</span><br><span class="line">	participant backend as 后端</span><br><span class="line">	</span><br><span class="line">	user-&gt;&gt;front: 填写账号和密码</span><br><span class="line">    front-&gt;&gt;front: 校验账号密码</span><br><span class="line">    front-&gt;&gt;backend: 登录请求</span><br><span class="line">    backend-&gt;&gt;backend: 处理登录请求</span><br><span class="line">    backend--&gt;&gt;front: 返回token</span><br><span class="line">    front-&gt;&gt;front: 保存token</span><br><span class="line">    front-&gt;&gt;front: 进入首页</span><br><span class="line">    front-&gt;&gt;backend: 根据token获得用户数据</span><br><span class="line">    backend--&gt;&gt;front: 返回用户数据,包括用户名，头像，路由等</span><br><span class="line">    front-&gt;&gt;front: 保存用户数据,处理路由数据动态渲染。</span><br><span class="line">    front-&gt;&gt;front: 进入系统</span><br><span class="line">    front--&gt;&gt;user: 完成登录</span><br></pre></td></tr></table></figure>
+
+<h5 id="请求接口"><a href="#请求接口" class="headerlink" title="请求接口"></a>请求接口</h5><ul>
+<li>Api&#x2F;User&#x2F;Login </li>
+<li>Api&#x2F;User&#x2F;GetInfo</li>
+<li>Api&#x2F;User&#x2F;Logout</li>
+</ul>
+<h4 id="物联网相关"><a href="#物联网相关" class="headerlink" title="物联网相关"></a>物联网相关</h4><h3 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h3><h3 id="数据流设计"><a href="#数据流设计" class="headerlink" title="数据流设计"></a>数据流设计</h3><p>大数据量数据传输TCP的有序也不能自己分割数据组<br>数据分割协议:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数据总长度(4bit) + 数据流</span><br></pre></td></tr></table></figure>
+<p>使用一个缓冲区先存数据,看是否已经可以拿回数据了。</p>
+</p></div><div class="share"><span>Share</span>&nbsp;<span class="soc"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></span><span class="soc"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></span><span class="soc"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=https://long95288.github.io/2019/10/23/longSys相关文档/%20风兮木落%20longSys相关文档"></a></span></div><div class="pagination"><p class="clearfix"><span class="pre pagbuttons"><a role="navigation" href="/2019/10/28/%E8%BD%AF%E4%BB%B6%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0/" title="软件管理平台"><i class="fa fa-angle-double-left"></i>&nbsp;Previous post: 软件管理平台</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/2019/10/10/book118%E9%A2%84%E8%A7%88%E6%96%87%E6%A1%A3%E4%B8%8B%E8%BD%BD/" title="book118预览文档下载">Next post: book118预览文档下载&nbsp;<i class="fa fa-angle-double-right"></i></a></span></p></div></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2025&nbsp;<a target="_blank" href="https://long95288.github.io" rel="noopener noreferrer">long</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.js"></script></body></html>
