@@ -31,13 +31,13 @@ QR
 
 QR
 报文类型 【0】 查询报文【1】 响应报文"><meta name="twitter:site" content="风兮木落"><meta name="twitter:title" content="dns查询和响应报文解析"><meta name="twitter:card" content="summary"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/css/prism.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><div class="container" id="stage"><div class="row"><div class="col-sm-3 col-xs-12 side-container invisible" id="side-bar"><div class="vertical-text site-title"><h3 class="site-title-small" tabindex="-1"><a class="a-title" href="/">long blogs</a></h3><h1 class="site-title-large" tabindex="-1"><a class="a-title" href="/">进一步有进一步惊喜</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div class="site-title-links" id="site-nav"><ul><li><a href="/">Home</a></li><li><a href="/archives">Archive</a></li><li><a href="/tags">Tags</a></li><li class="soc"><a href="https://long95288.github.io/atom.xml" target="_blank" rel="noopener noreferrer" aria-label="RSS"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2025&nbsp;<a target="_blank" href="https://long95288.github.io" rel="noopener noreferrer">long</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div class="col-sm-9 col-xs-12 main-container invisible" id="main-container"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post-container"><p class="post-title"><a>dns查询和响应报文解析</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2020-12-04</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/计算机网络/" title="计算机网络">计算机网络</a><span>&nbsp;</span><a class="a-tag" href="/tags/dns/" title="dns">dns</a><span>&nbsp;</span></span></p><p class="post-abstract"><h2 id="dns查询和响应报文解析"><a href="#dns查询和响应报文解析" class="headerlink" title="dns查询和响应报文解析"></a>dns查询和响应报文解析</h2><h3 id="报文格式如下"><a href="#报文格式如下" class="headerlink" title="报文格式如下"></a>报文格式如下</h3><p><img src="/dns%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E8%A7%A3%E6%9E%90/1.jpg"></p>
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><div class="container" id="stage"><div class="row"><div class="col-sm-3 col-xs-12 side-container invisible" id="side-bar"><div class="vertical-text site-title"><h3 class="site-title-small" tabindex="-1"><a class="a-title" href="/">long blogs</a></h3><h1 class="site-title-large" tabindex="-1"><a class="a-title" href="/">进一步有进一步惊喜</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div class="site-title-links" id="site-nav"><ul><li><a href="/">Home</a></li><li><a href="/archives">Archive</a></li><li><a href="/tags">Tags</a></li><li class="soc"><a href="https://long95288.github.io/atom.xml" target="_blank" rel="noopener noreferrer" aria-label="RSS"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2025&nbsp;<a target="_blank" href="https://long95288.github.io" rel="noopener noreferrer">long</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div class="col-sm-9 col-xs-12 main-container invisible" id="main-container"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post-container"><p class="post-title"><a>dns查询和响应报文解析</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2020-12-04</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/计算机网络/" title="计算机网络">计算机网络</a><span>&nbsp;</span><a class="a-tag" href="/tags/dns/" title="dns">dns</a><span>&nbsp;</span></span></p><p class="post-abstract"><h2 id="dns查询和响应报文解析"><a href="#dns查询和响应报文解析" class="headerlink" title="dns查询和响应报文解析"></a>dns查询和响应报文解析</h2><h3 id="报文格式如下"><a href="#报文格式如下" class="headerlink" title="报文格式如下"></a>报文格式如下</h3><p><img src="/.io//1.jpg"></p>
 <h4 id="报文详细说明"><a href="#报文详细说明" class="headerlink" title="报文详细说明"></a>报文详细说明</h4><p><strong>头部12字节说明</strong></p>
 <ul>
 <li>标识(2byte)：由客户端请求的时候设置，用来唯一的确定请求和响应的报文，可以做请求id标识。</li>
 <li>标志(2byte): 16个比特位，用来确定报文类型</li>
 </ul>
-<p><img src="/dns%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E8%A7%A3%E6%9E%90/2.jpg"></p>
+<p><img src="/.io//2.jpg"></p>
 <table>
 <thead>
 <tr>
@@ -87,10 +87,10 @@ QR
 <p> <strong>4个长度可变的字段说明</strong></p>
 <ul>
 <li><p>查询问题</p>
-<p><img src="/dns%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E8%A7%A3%E6%9E%90/3.jpg" alt="报文格式"></p>
+<p><img src="/.io//3.jpg" alt="报文格式"></p>
 <ul>
 <li><p>查询名:需要查找的名字， 可变长。当前对于每一级域名长度的限制是63个字符，域名总长度不能超过253个字符。查询名由一个或多个标识符序列组成，每个标识符序列用首字节数的计数值来说明标识符的长度，例如：【6】abcdef【2】cc。6标识后面6个字符是属于该序列的。计数值必须是0~63(每一级域名长度最多是63)。用【0】来表示该名称结束。然后下一个名字也可以用这种情况进行解析。</p>
-<p><img src="/dns%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E8%A7%A3%E6%9E%90/4.jpg"></p>
+<p><img src="/.io//4.jpg"></p>
 </li>
 <li><p>查询类型：</p>
 <ul>
@@ -114,7 +114,7 @@ QR
 </ul>
 <p><strong>资源记录数说明</strong>：</p>
 <p>​	回答、授权、额外信息字段都采用资源记录<strong>RR</strong>（ResourceRecord）格式，格式如下：</p>
-<p>​	<img src="/dns%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E8%A7%A3%E6%9E%90/5.jpg"></p>
+<p>​	<img src="/.io//5.jpg"></p>
 <p>​	</p>
 <table>
 <thead>

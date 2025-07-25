@@ -119,82 +119,82 @@
 </tr>
 </tbody></table>
 <h3 id="平台原型"><a href="#平台原型" class="headerlink" title="平台原型"></a>平台原型</h3><h3 id="后端实现进度"><a href="#后端实现进度" class="headerlink" title="后端实现进度"></a>后端实现进度</h3><h4 id="鉴权模块"><a href="#鉴权模块" class="headerlink" title="鉴权模块"></a>鉴权模块</h4><ul>
-<li><input checked="" disabled="" type="checkbox"> shiro鉴权<br>….</li>
+<li><input checked disabled type="checkbox"> shiro鉴权<br>….</li>
 </ul>
 <h4 id="用户模块"><a href="#用户模块" class="headerlink" title="用户模块"></a>用户模块</h4><ul>
-<li><input checked="" disabled="" type="checkbox"> 用户登录接口</li>
+<li><input checked disabled type="checkbox"> 用户登录接口</li>
 </ul>
 <p>Request URL: <code>127.0.0.1:8080/Api/User/Login</code><br>Request Method:<code>post</code><br>Request Body:</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;username&quot;</span><span class="punctuation">:</span><span class="string">&quot;username&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;password&quot;</span><span class="punctuation">:</span><span class="string">&quot;password&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 <p>Response Body:</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span> <span class="number">20000</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;message&quot;</span><span class="punctuation">:</span> <span class="string">&quot;登录成功&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;token&quot;</span><span class="punctuation">:</span> <span class="string">&quot;c594ff92e47955527823259beafb5b2e65c26f7a233f8542736d1c1937b8bf442137a1aa1cc11b3aa1a0ba56aa1be6d91cb11ce03e9de58a48c608178ea1684de54b084713655ae8750010a822afb420ede8f6f92539da5c20d8a5434f82533b016768c39901ffe9f51ab82a83c9379193f624651a797131a4840581ddc855183260f708a41c7309&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li><input checked="" disabled="" type="checkbox"> 用户登出接口</li>
+<li><input checked disabled type="checkbox"> 用户登出接口</li>
 </ul>
 <p>Request URL: <code>127.0.0.1:8080/Api/User/Logout</code><br>Request Method: <code>post</code><br>Request Body: <code>null</code><br>Response Body:</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span> <span class="number">20000</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;message&quot;</span><span class="punctuation">:</span> <span class="string">&quot;请求成功&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><input checked="" disabled="" type="checkbox"> 获得用户信息</li>
+<li><input checked disabled type="checkbox"> 获得用户信息</li>
 </ul>
 <p>Request URL: <code>127.0.0.1:8080/Api/User/UserInfo?token=usertoken-token</code><br>Request Method: <code>get</code><br>Response Body:</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line"><span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;message&quot;</span><span class="punctuation">:</span> <span class="string">&quot;请求成功&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;code&quot;</span><span class="punctuation">:</span><span class="number">20000</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;data&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;roles&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span><span class="string">&quot;admin&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;introduction&quot;</span><span class="punctuation">:</span><span class="string">&quot;I am a super administrator&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;avatar&quot;</span><span class="punctuation">:</span><span class="string">&quot;https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span><span class="string">&quot;Super Admin&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><input disabled="" type="checkbox"> 用户管理</li>
-<li><input disabled="" type="checkbox"> 权限角色管理<br>….</li>
+<li><input disabled type="checkbox"> 用户管理</li>
+<li><input disabled type="checkbox"> 权限角色管理<br>….</li>
 </ul>
 <h4 id="文件模块"><a href="#文件模块" class="headerlink" title="文件模块"></a>文件模块</h4><ul>
-<li><input checked="" disabled="" type="checkbox"> 文件上传</li>
-<li><input checked="" disabled="" type="checkbox"> 查询文件列表</li>
-<li><input checked="" disabled="" type="checkbox"> 删除文件</li>
-<li><input disabled="" type="checkbox"> 文件分类</li>
+<li><input checked disabled type="checkbox"> 文件上传</li>
+<li><input checked disabled type="checkbox"> 查询文件列表</li>
+<li><input checked disabled type="checkbox"> 删除文件</li>
+<li><input disabled type="checkbox"> 文件分类</li>
 </ul>
 <h4 id="图片模块"><a href="#图片模块" class="headerlink" title="图片模块"></a>图片模块</h4><ul>
-<li><input disabled="" type="checkbox"> 创建相册</li>
-<li><input disabled="" type="checkbox"> 更新相册</li>
-<li><input disabled="" type="checkbox"> 添加图片至相册</li>
-<li><input disabled="" type="checkbox"> 删除某个相册下的图片</li>
-<li><input disabled="" type="checkbox"> 删除相册</li>
+<li><input disabled type="checkbox"> 创建相册</li>
+<li><input disabled type="checkbox"> 更新相册</li>
+<li><input disabled type="checkbox"> 添加图片至相册</li>
+<li><input disabled type="checkbox"> 删除某个相册下的图片</li>
+<li><input disabled type="checkbox"> 删除相册</li>
 </ul>
 <h4 id="音乐模块"><a href="#音乐模块" class="headerlink" title="音乐模块"></a>音乐模块</h4><ul>
-<li><input disabled="" type="checkbox"> 获得曲库列表</li>
-<li><input disabled="" type="checkbox"> 获得歌单列表</li>
-<li><input disabled="" type="checkbox"> 获得歌单对应的曲目</li>
-<li><input disabled="" type="checkbox"> 添加新的歌曲</li>
-<li><input disabled="" type="checkbox"> 修改歌曲</li>
-<li><input disabled="" type="checkbox"> 删除歌曲</li>
-<li><input disabled="" type="checkbox"> 添加新的歌单</li>
-<li><input disabled="" type="checkbox"> 更新歌单</li>
-<li><input disabled="" type="checkbox"> 删除歌单</li>
+<li><input disabled type="checkbox"> 获得曲库列表</li>
+<li><input disabled type="checkbox"> 获得歌单列表</li>
+<li><input disabled type="checkbox"> 获得歌单对应的曲目</li>
+<li><input disabled type="checkbox"> 添加新的歌曲</li>
+<li><input disabled type="checkbox"> 修改歌曲</li>
+<li><input disabled type="checkbox"> 删除歌曲</li>
+<li><input disabled type="checkbox"> 添加新的歌单</li>
+<li><input disabled type="checkbox"> 更新歌单</li>
+<li><input disabled type="checkbox"> 删除歌单</li>
 </ul>
 <h4 id="在线笔记模块"><a href="#在线笔记模块" class="headerlink" title="在线笔记模块"></a>在线笔记模块</h4><ul>
-<li><input checked="" disabled="" type="checkbox"> 获得笔记列表</li>
-<li><input checked="" disabled="" type="checkbox"> 获得特定笔记的内容</li>
-<li><input checked="" disabled="" type="checkbox"> 添加新的笔记本</li>
-<li><input checked="" disabled="" type="checkbox"> 为某个笔记本添加新的条目</li>
-<li><input checked="" disabled="" type="checkbox"> 更新笔记本</li>
-<li><input checked="" disabled="" type="checkbox"> 更新笔记本特定条目</li>
-<li><input checked="" disabled="" type="checkbox"> 删除笔记本</li>
-<li><input checked="" disabled="" type="checkbox"> 删除笔记本特定条目</li>
-<li><input disabled="" type="checkbox"> 前端支持Markdown语法渲染</li>
+<li><input checked disabled type="checkbox"> 获得笔记列表</li>
+<li><input checked disabled type="checkbox"> 获得特定笔记的内容</li>
+<li><input checked disabled type="checkbox"> 添加新的笔记本</li>
+<li><input checked disabled type="checkbox"> 为某个笔记本添加新的条目</li>
+<li><input checked disabled type="checkbox"> 更新笔记本</li>
+<li><input checked disabled type="checkbox"> 更新笔记本特定条目</li>
+<li><input checked disabled type="checkbox"> 删除笔记本</li>
+<li><input checked disabled type="checkbox"> 删除笔记本特定条目</li>
+<li><input disabled type="checkbox"> 前端支持Markdown语法渲染</li>
 </ul>
 <h4 id="小说模块-转码"><a href="#小说模块-转码" class="headerlink" title="小说模块-转码"></a>小说模块-转码</h4><ul>
-<li><input disabled="" type="checkbox"> 添加新的解析模块</li>
-<li><input disabled="" type="checkbox"> 变更解析模块</li>
-<li><input disabled="" type="checkbox"> 删除解析模块</li>
+<li><input disabled type="checkbox"> 添加新的解析模块</li>
+<li><input disabled type="checkbox"> 变更解析模块</li>
+<li><input disabled type="checkbox"> 删除解析模块</li>
 </ul>
 <h4 id="TODO模块"><a href="#TODO模块" class="headerlink" title="TODO模块"></a>TODO模块</h4><h4 id="人工智能接口"><a href="#人工智能接口" class="headerlink" title="人工智能接口"></a>人工智能接口</h4><ul>
-<li><input disabled="" type="checkbox"> 车标识别接口</li>
-<li><input disabled="" type="checkbox"> 车标检测接口</li>
-<li><input disabled="" type="checkbox"> 文字识别接口[待训练模型]</li>
-<li><input disabled="" type="checkbox"> 人脸检测接口[待训练模型]</li>
+<li><input disabled type="checkbox"> 车标识别接口</li>
+<li><input disabled type="checkbox"> 车标检测接口</li>
+<li><input disabled type="checkbox"> 文字识别接口[待训练模型]</li>
+<li><input disabled type="checkbox"> 人脸检测接口[待训练模型]</li>
 </ul>
 <h4 id="物联网设备"><a href="#物联网设备" class="headerlink" title="物联网设备"></a>物联网设备</h4><ul>
-<li><input disabled="" type="checkbox"> 查询所有设备状态</li>
-<li><input disabled="" type="checkbox"> 添加新的设备</li>
-<li><input disabled="" type="checkbox"> 删除设备</li>
-<li><input disabled="" type="checkbox"> 控制特定的设备</li>
+<li><input disabled type="checkbox"> 查询所有设备状态</li>
+<li><input disabled type="checkbox"> 添加新的设备</li>
+<li><input disabled type="checkbox"> 删除设备</li>
+<li><input disabled type="checkbox"> 控制特定的设备</li>
 </ul>
 <h3 id="前端流程设计"><a href="#前端流程设计" class="headerlink" title="前端流程设计"></a>前端流程设计</h3><h4 id="登录流程设计"><a href="#登录流程设计" class="headerlink" title="登录流程设计"></a>登录流程设计</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">	participant user as 用户</span><br><span class="line">	participant front as 前端</span><br><span class="line">	participant backend as 后端</span><br><span class="line">	</span><br><span class="line">	user-&gt;&gt;front: 填写账号和密码</span><br><span class="line">    front-&gt;&gt;front: 校验账号密码</span><br><span class="line">    front-&gt;&gt;backend: 登录请求</span><br><span class="line">    backend-&gt;&gt;backend: 处理登录请求</span><br><span class="line">    backend--&gt;&gt;front: 返回token</span><br><span class="line">    front-&gt;&gt;front: 保存token</span><br><span class="line">    front-&gt;&gt;front: 进入首页</span><br><span class="line">    front-&gt;&gt;backend: 根据token获得用户数据</span><br><span class="line">    backend--&gt;&gt;front: 返回用户数据,包括用户名，头像，路由等</span><br><span class="line">    front-&gt;&gt;front: 保存用户数据,处理路由数据动态渲染。</span><br><span class="line">    front-&gt;&gt;front: 进入系统</span><br><span class="line">    front--&gt;&gt;user: 完成登录</span><br></pre></td></tr></table></figure>
 
