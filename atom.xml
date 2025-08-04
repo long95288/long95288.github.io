@@ -154,11 +154,11 @@
   </entry>
   
   <entry>
-    <title>AnAndroid-JNI-日志输出代理</title>
+    <title>Android-JNI-日志输出代理</title>
     <link href="https://long95288.github.io/2024/08/24/android/Android-JNI-%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA/"/>
     <id>https://long95288.github.io/2024/08/24/android/Android-JNI-%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA/</id>
     <published>2024-08-23T16:00:00.000Z</published>
-    <updated>2025-08-04T15:06:43.774Z</updated>
+    <updated>2025-08-04T15:12:29.314Z</updated>
     
     
       
@@ -166,6 +166,169 @@
         
         
     <summary type="html">&lt;h3 id=&quot;引入&quot;&gt;&lt;a href=&quot;#引入&quot; class=&quot;headerlink&quot; title=&quot;引入&quot;&gt;&lt;/a&gt;引入&lt;/h3&gt;&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
+        
+      
+    
+    
+    
+    
+    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android-Studio升级之后开启崩溃报错</title>
+    <link href="https://long95288.github.io/2022/11/26/android/Android-Studio%E5%8D%87%E7%BA%A7%E4%B9%8B%E5%90%8E%E5%BC%80%E5%90%AF%E5%B4%A9%E6%BA%83%E6%8A%A5%E9%94%99/"/>
+    <id>https://long95288.github.io/2022/11/26/android/Android-Studio%E5%8D%87%E7%BA%A7%E4%B9%8B%E5%90%8E%E5%BC%80%E5%90%AF%E5%B4%A9%E6%BA%83%E6%8A%A5%E9%94%99/</id>
+    <published>2022-11-25T16:00:00.000Z</published>
+    <updated>2025-08-04T15:15:43.136Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;有如下报错信息&quot;&gt;&lt;a href=&quot;#有如下报错信息&quot; class=&quot;headerlink&quot; title=&quot;有如下报错信息&quot;&gt;&lt;/a&gt;有如下报错信息&lt;/h3&gt;&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
+        
+      
+    
+    
+    
+    
+    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android-WebView与js交互</title>
+    <link href="https://long95288.github.io/2022/11/23/android/Android-WebView%E4%B8%8Ejs%E4%BA%A4%E4%BA%92/"/>
+    <id>https://long95288.github.io/2022/11/23/android/Android-WebView%E4%B8%8Ejs%E4%BA%A4%E4%BA%92/</id>
+    <published>2022-11-22T16:00:00.000Z</published>
+    <updated>2025-08-04T15:17:32.585Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android-intent组件</title>
+    <link href="https://long95288.github.io/2022/10/18/android/Android-intent%E7%BB%84%E4%BB%B6/"/>
+    <id>https://long95288.github.io/2022/10/18/android/Android-intent%E7%BB%84%E4%BB%B6/</id>
+    <published>2022-10-17T16:00:00.000Z</published>
+    <updated>2025-08-04T15:19:17.546Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h4 id=&quot;android跳转到新的Activity页面&quot;&gt;&lt;a href=&quot;#android跳转到新的Activity页面&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android-BroadcastReceiver组件</title>
+    <link href="https://long95288.github.io/2022/10/10/android/Android-BroadcastReceiver%E7%BB%84%E4%BB%B6/"/>
+    <id>https://long95288.github.io/2022/10/10/android/Android-BroadcastReceiver%E7%BB%84%E4%BB%B6/</id>
+    <published>2022-10-09T16:00:00.000Z</published>
+    <updated>2025-08-04T15:20:35.245Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerlink&quot; title=&quot;说明&quot;&gt;&lt;/a&gt;说明&lt;/h3&gt;&lt;p&gt;接收系统事件变更广播,网络变更,WIFI切换等广播事件。&lt;/p&gt;
+&lt;h3 id=&quot;简单使用&quot;&gt;&lt;a href=&quot;#简单使用&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android-Handler组件</title>
+    <link href="https://long95288.github.io/2022/10/09/android/Android-Handler%E7%BB%84%E4%BB%B6/"/>
+    <id>https://long95288.github.io/2022/10/09/android/Android-Handler%E7%BB%84%E4%BB%B6/</id>
+    <published>2022-10-08T16:00:00.000Z</published>
+    <updated>2025-08-04T15:21:43.733Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;实例化方式&quot;&gt;&lt;a href=&quot;#实例化方式&quot; class=&quot;headerlink&quot; title=&quot;实例化方式&quot;&gt;&lt;/a&gt;实例化方式&lt;/h3&gt;&lt;p&gt;有几种实例化方式已经过时,需要使用&lt;code&gt;public Handler(@NonNull Looper</summary>
+        
+      
+    
+    
+    
+    
+    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android-Toast组件</title>
+    <link href="https://long95288.github.io/2022/10/09/android/Android-Toast%E7%BB%84%E4%BB%B6/"/>
+    <id>https://long95288.github.io/2022/10/09/android/Android-Toast%E7%BB%84%E4%BB%B6/</id>
+    <published>2022-10-08T16:00:00.000Z</published>
+    <updated>2025-08-04T15:22:48.589Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;使用例子&quot;&gt;&lt;a href=&quot;#使用例子&quot; class=&quot;headerlink&quot; title=&quot;使用例子&quot;&gt;&lt;/a&gt;使用例子&lt;/h3&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
+        
+      
+    
+    
+    
+    
+    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android-HTTP请求响应解析工具</title>
+    <link href="https://long95288.github.io/2022/09/26/android/Android-HTTP%E8%AF%B7%E6%B1%82%E5%93%8D%E5%BA%94%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7/"/>
+    <id>https://long95288.github.io/2022/09/26/android/Android-HTTP%E8%AF%B7%E6%B1%82%E5%93%8D%E5%BA%94%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7/</id>
+    <published>2022-09-25T16:00:00.000Z</published>
+    <updated>2025-08-04T15:25:13.752Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h3&gt;&lt;p&gt;请求的通用数据如下,&lt;/p&gt;
+&lt;figure class=&quot;highlight json&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
         
       
     
@@ -321,173 +484,6 @@
     
     
     <category term="备忘" scheme="https://long95288.github.io/tags/%E5%A4%87%E5%BF%98/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>碎片化生存</title>
-    <link href="https://long95288.github.io/2021/01/29/%E7%A2%8E%E7%89%87%E5%8C%96%E7%94%9F%E5%AD%98/"/>
-    <id>https://long95288.github.io/2021/01/29/%E7%A2%8E%E7%89%87%E5%8C%96%E7%94%9F%E5%AD%98/</id>
-    <published>2021-01-29T12:27:02.000Z</published>
-    <updated>2025-07-25T14:11:57.729Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;和菜头：碎片化生存&quot;&gt;&lt;a href=&quot;#和菜头：碎片化生存&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="文章摘录" scheme="https://long95288.github.io/tags/%E6%96%87%E7%AB%A0%E6%91%98%E5%BD%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>KCP网络</title>
-    <link href="https://long95288.github.io/2021/01/25/KCP%E7%BD%91%E7%BB%9C/"/>
-    <id>https://long95288.github.io/2021/01/25/KCP%E7%BD%91%E7%BB%9C/</id>
-    <published>2021-01-25T12:15:15.000Z</published>
-    <updated>2025-07-25T14:11:57.364Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    
-    <category term="网络" scheme="https://long95288.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
-    
-    <category term="kcp" scheme="https://long95288.github.io/tags/kcp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C-Protoc</title>
-    <link href="https://long95288.github.io/2021/01/11/C-Protoc/"/>
-    <id>https://long95288.github.io/2021/01/11/C-Protoc/</id>
-    <published>2021-01-11T12:07:08.000Z</published>
-    <updated>2025-07-25T14:11:57.096Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;protoc简介&quot;&gt;&lt;a href=&quot;#protoc简介&quot; class=&quot;headerlink&quot; title=&quot;protoc简介&quot;&gt;&lt;/a&gt;protoc简介&lt;/h3&gt;&lt;p&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    
-    <category term="c" scheme="https://long95288.github.io/tags/c/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux高性能服务器编程-读书笔记</title>
-    <link href="https://long95288.github.io/2021/01/06/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    <id>https://long95288.github.io/2021/01/06/Linux%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</id>
-    <published>2021-01-06T12:11:47.000Z</published>
-    <updated>2022-06-19T06:41:20.871Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;第一章-TCP-IP协议族&quot;&gt;&lt;a href=&quot;#第一章-TCP-IP协议族&quot; class=&quot;headerlink&quot; title=&quot;第一章 TCP&amp;#x2F;IP协议族&quot;&gt;&lt;/a&gt;第一章 TCP&amp;#x2F;IP协议族&lt;/h1&gt;&lt;h2</summary>
-        
-      
-    
-    
-    
-    
-    <category term="linux" scheme="https://long95288.github.io/tags/linux/"/>
-    
-    <category term="读书笔记" scheme="https://long95288.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>软件随想录-读书笔记</title>
-    <link href="https://long95288.github.io/2020/12/23/%E8%BD%AF%E4%BB%B6%E9%9A%8F%E6%83%B3%E5%BD%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    <id>https://long95288.github.io/2020/12/23/%E8%BD%AF%E4%BB%B6%E9%9A%8F%E6%83%B3%E5%BD%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</id>
-    <published>2020-12-23T12:20:29.000Z</published>
-    <updated>2022-06-19T06:41:23.744Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;软件随想录-读书笔记&quot;&gt;&lt;a href=&quot;#软件随想录-读书笔记&quot; class=&quot;headerlink&quot; title=&quot;软件随想录-读书笔记&quot;&gt;&lt;/a&gt;软件随想录-读书笔记&lt;/h2&gt;&lt;h3 id=&quot;人员管理&quot;&gt;&lt;a href=&quot;#人员管理&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="读书笔记" scheme="https://long95288.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>&lt;&lt;算法奥秘 读书笔记&gt;&gt;</title>
-    <link href="https://long95288.github.io/2020/12/22/%E7%AE%97%E6%B3%95%E5%A5%A5%E7%A7%98/"/>
-    <id>https://long95288.github.io/2020/12/22/%E7%AE%97%E6%B3%95%E5%A5%A5%E7%A7%98/</id>
-    <published>2020-12-22T12:08:15.000Z</published>
-    <updated>2025-07-25T14:11:57.729Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;第2章&quot;&gt;&lt;a href=&quot;#第2章&quot; class=&quot;headerlink&quot; title=&quot;第2章&quot;&gt;&lt;/a&gt;第2章&lt;/h2&gt;&lt;h3 id=&quot;2-1-操作最右边的位元&quot;&gt;&lt;a href=&quot;#2-1-操作最右边的位元&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="读书笔记" scheme="https://long95288.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>dns查询和响应报文解析</title>
-    <link href="https://long95288.github.io/2020/12/04/dns%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E8%A7%A3%E6%9E%90/"/>
-    <id>https://long95288.github.io/2020/12/04/dns%E6%9F%A5%E8%AF%A2%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E8%A7%A3%E6%9E%90/</id>
-    <published>2020-12-04T13:32:02.000Z</published>
-    <updated>2025-07-25T14:11:57.391Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;dns查询和响应报文解析&quot;&gt;&lt;a href=&quot;#dns查询和响应报文解析&quot; class=&quot;headerlink&quot; title=&quot;dns查询和响应报文解析&quot;&gt;&lt;/a&gt;dns查询和响应报文解析&lt;/h2&gt;&lt;h3 id=&quot;报文格式如下&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    
-    <category term="计算机网络" scheme="https://long95288.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    
-    <category term="dns" scheme="https://long95288.github.io/tags/dns/"/>
     
   </entry>
   
