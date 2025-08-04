@@ -38,6 +38,145 @@
   </entry>
   
   <entry>
+    <title>Android-开发的环境配置坑</title>
+    <link href="https://long95288.github.io/2025/03/13/android/Android-%E5%BC%80%E5%8F%91%E7%9A%84%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%9D%91/"/>
+    <id>https://long95288.github.io/2025/03/13/android/Android-%E5%BC%80%E5%8F%91%E7%9A%84%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%9D%91/</id>
+    <published>2025-03-12T16:00:00.000Z</published>
+    <updated>2025-08-04T14:57:19.396Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;一些必要的开发环境变量&quot;&gt;&lt;a href=&quot;#一些必要的开发环境变量&quot; class=&quot;headerlink&quot; title=&quot;一些必要的开发环境变量&quot;&gt;&lt;/a&gt;一些必要的开发环境变量&lt;/h3&gt;&lt;figure class=&quot;highlight</summary>
+        
+      
+    
+    
+    
+    
+    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AndroidStudio-一直弹窗代理解决方案</title>
+    <link href="https://long95288.github.io/2025/03/05/android/AndroidStudio-%E4%B8%80%E7%9B%B4%E5%BC%B9%E7%AA%97%E4%BB%A3%E7%90%86%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    <id>https://long95288.github.io/2025/03/05/android/AndroidStudio-%E4%B8%80%E7%9B%B4%E5%BC%B9%E7%AA%97%E4%BB%A3%E7%90%86%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</id>
+    <published>2025-03-04T16:00:00.000Z</published>
+    <updated>2025-08-04T15:04:24.427Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;注释掉gradle配置文件中代理&quot;&gt;&lt;a href=&quot;#注释掉gradle配置文件中代理&quot; class=&quot;headerlink&quot; title=&quot;注释掉gradle配置文件中代理&quot;&gt;&lt;/a&gt;注释掉gradle配置文件中代理&lt;/h3&gt;&lt;figure</summary>
+        
+      
+    
+    
+    
+    
+    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AndroidStudio-请求网络失败</title>
+    <link href="https://long95288.github.io/2025/03/05/android/AndroidStudio-%E8%AF%B7%E6%B1%82%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5/"/>
+    <id>https://long95288.github.io/2025/03/05/android/AndroidStudio-%E8%AF%B7%E6%B1%82%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5/</id>
+    <published>2025-03-04T16:00:00.000Z</published>
+    <updated>2025-08-04T15:01:37.408Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;注释掉代理配置&quot;&gt;&lt;a href=&quot;#注释掉代理配置&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Gradle-环境变量配置</title>
+    <link href="https://long95288.github.io/2025/03/05/android/Gradle-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/"/>
+    <id>https://long95288.github.io/2025/03/05/android/Gradle-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/</id>
+    <published>2025-03-04T16:00:00.000Z</published>
+    <updated>2025-08-04T15:00:20.131Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;配置环境变量&quot;&gt;&lt;a href=&quot;#配置环境变量&quot; class=&quot;headerlink&quot; title=&quot;配置环境变量&quot;&gt;&lt;/a&gt;配置环境变量&lt;/h3&gt;&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
+        
+      
+    
+    
+    
+    
+    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Gradle-配置镜像</title>
+    <link href="https://long95288.github.io/2025/03/05/android/Gradle-%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F/"/>
+    <id>https://long95288.github.io/2025/03/05/android/Gradle-%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F/</id>
+    <published>2025-03-04T16:00:00.000Z</published>
+    <updated>2025-08-04T14:57:23.941Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;在项目的&lt;code&gt;build.gradle&lt;/code&gt;文件中加入如下配置&lt;/p&gt;
+&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</summary>
+        
+      
+    
+    
+    
+    
+    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AnAndroid-JNI-日志输出代理</title>
+    <link href="https://long95288.github.io/2024/08/24/android/Android-JNI-%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA/"/>
+    <id>https://long95288.github.io/2024/08/24/android/Android-JNI-%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA/</id>
+    <published>2024-08-23T16:00:00.000Z</published>
+    <updated>2025-08-04T15:06:43.774Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;引入&quot;&gt;&lt;a href=&quot;#引入&quot; class=&quot;headerlink&quot; title=&quot;引入&quot;&gt;&lt;/a&gt;引入&lt;/h3&gt;&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
+        
+      
+    
+    
+    
+    
+    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
+    
+  </entry>
+  
+  <entry>
     <title>iot网络协议</title>
     <link href="https://long95288.github.io/2021/04/14/iot%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"/>
     <id>https://long95288.github.io/2021/04/14/iot%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</id>
@@ -349,148 +488,6 @@
     <category term="计算机网络" scheme="https://long95288.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
     <category term="dns" scheme="https://long95288.github.io/tags/dns/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker学习</title>
-    <link href="https://long95288.github.io/2020/11/20/docker%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://long95288.github.io/2020/11/20/docker%E5%AD%A6%E4%B9%A0/</id>
-    <published>2020-11-20T11:49:59.000Z</published>
-    <updated>2025-07-25T14:11:57.395Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;docker-常用命令&quot;&gt;&lt;a href=&quot;#docker-常用命令&quot; class=&quot;headerlink&quot; title=&quot;docker 常用命令&quot;&gt;&lt;/a&gt;docker 常用命令&lt;/h2&gt;&lt;h3 id=&quot;映像相关操作&quot;&gt;&lt;a href=&quot;#映像相关操作&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="docker" scheme="https://long95288.github.io/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>&lt;&lt;高效程序员的45个习惯&gt;&gt;-读书笔记</title>
-    <link href="https://long95288.github.io/2020/11/20/%E9%AB%98%E6%95%88%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%8445%E4%B8%AA%E4%B9%A0%E6%83%AF-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    <id>https://long95288.github.io/2020/11/20/%E9%AB%98%E6%95%88%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%8445%E4%B8%AA%E4%B9%A0%E6%83%AF-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</id>
-    <published>2020-11-20T11:48:34.000Z</published>
-    <updated>2025-07-25T14:11:57.733Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;如何跟上技术变化的步伐&quot;&gt;&lt;a href=&quot;#如何跟上技术变化的步伐&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="读书笔记" scheme="https://long95288.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C-printf显示字符颜色</title>
-    <link href="https://long95288.github.io/2020/11/18/C-printf%E6%98%BE%E7%A4%BA%E5%AD%97%E7%AC%A6%E9%A2%9C%E8%89%B2/"/>
-    <id>https://long95288.github.io/2020/11/18/C-printf%E6%98%BE%E7%A4%BA%E5%AD%97%E7%AC%A6%E9%A2%9C%E8%89%B2/</id>
-    <published>2020-11-18T12:57:20.000Z</published>
-    <updated>2025-07-25T14:11:57.097Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;printf打印不同格式的字符,&lt;br&gt;  &lt;code&gt;printf(&amp;quot;&#92;x1b[%d;%dm%s&#92;x1b[%dm&amp;quot;, backcolor, frountcolor, str,</summary>
-        
-      
-    
-    
-    
-    
-    <category term="C" scheme="https://long95288.github.io/tags/C/"/>
-    
-    <category term="linux" scheme="https://long95288.github.io/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C-IO</title>
-    <link href="https://long95288.github.io/2020/11/18/C-IO/"/>
-    <id>https://long95288.github.io/2020/11/18/C-IO/</id>
-    <published>2020-11-18T12:54:59.000Z</published>
-    <updated>2025-07-25T14:11:57.096Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h4 id=&quot;方法一&quot;&gt;&lt;a href=&quot;#方法一&quot; class=&quot;headerlink&quot; title=&quot;方法一&quot;&gt;&lt;/a&gt;方法一&lt;/h4&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</summary>
-        
-      
-    
-    
-    
-    
-    <category term="C" scheme="https://long95288.github.io/tags/C/"/>
-    
-    <category term="linux" scheme="https://long95288.github.io/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>linux安装微信</title>
-    <link href="https://long95288.github.io/2020/10/25/linux%E5%AE%89%E8%A3%85%E5%BE%AE%E4%BF%A1/"/>
-    <id>https://long95288.github.io/2020/10/25/linux%E5%AE%89%E8%A3%85%E5%BE%AE%E4%BF%A1/</id>
-    <published>2020-10-25T11:38:21.000Z</published>
-    <updated>2022-06-19T06:41:23.438Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;方法一&quot;&gt;&lt;a href=&quot;#方法一&quot; class=&quot;headerlink&quot; title=&quot;方法一&quot;&gt;&lt;/a&gt;方法一&lt;/h3&gt;&lt;h4 id=&quot;第一步&quot;&gt;&lt;a href=&quot;#第一步&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="linux" scheme="https://long95288.github.io/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux命令总结</title>
-    <link href="https://long95288.github.io/2020/10/18/Linux%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/"/>
-    <id>https://long95288.github.io/2020/10/18/Linux%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/</id>
-    <published>2020-10-17T18:23:25.000Z</published>
-    <updated>2022-06-19T06:41:20.870Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;运行脚本输入回车&quot;&gt;&lt;a href=&quot;#运行脚本输入回车&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="linux" scheme="https://long95288.github.io/tags/linux/"/>
     
   </entry>
   
