@@ -1,60 +1,48 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author"><title>风兮木落</title><meta name="description" content="A Blog Powered By Hexo"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/css/prism.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><div class="container" id="stage"><div class="row"><div class="col-sm-3 col-xs-12 side-container invisible" id="side-bar"><div class="vertical-text site-title"><h3 class="site-title-small" tabindex="-1"><a class="a-title" href="/">long blogs</a></h3><h1 class="site-title-large" tabindex="-1"><a class="a-title" href="/">进一步有进一步惊喜</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div class="site-title-links" id="site-nav"><ul><li><a class="current" href="/">Home</a></li><li><a href="/archives">Archive</a></li><li><a href="/tags">Tags</a></li><li class="soc"><a href="https://long95288.github.io/atom.xml" target="_blank" rel="noopener noreferrer" aria-label="RSS"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2025&nbsp;<a target="_blank" href="https://long95288.github.io" rel="noopener noreferrer">long</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div class="col-sm-9 col-xs-12 main-container invisible" id="main-container"><div class="autopagerize_page_element"><div class="content"><div class="post-container"><p class="post-title"><a href="/2022/10/18/android/Android-intent%E7%BB%84%E4%BB%B6/">Android-intent组件</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2022-10-18</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/android/" title="android">android</a><span>&nbsp;</span></span></p><p class="post-abstract">android跳转到新的Activity页面  
-在新的界面里面获取传递的消息.
-  
-</p></div><div class="post-container"><p class="post-title"><a href="/2022/10/10/android/Android-BroadcastReceiver%E7%BB%84%E4%BB%B6/">Android-BroadcastReceiver组件</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2022-10-10</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/android/" title="android">android</a><span>&nbsp;</span></span></p><p class="post-abstract">说明接收系统事件变更广播,网络变更,WIFI切换等广播事件。
-简单使用只需要实现BroadcastReceiver::onReceive函数便可以了.
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><div class="container" id="stage"><div class="row"><div class="col-sm-3 col-xs-12 side-container invisible" id="side-bar"><div class="vertical-text site-title"><h3 class="site-title-small" tabindex="-1"><a class="a-title" href="/">long blogs</a></h3><h1 class="site-title-large" tabindex="-1"><a class="a-title" href="/">进一步有进一步惊喜</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div class="site-title-links" id="site-nav"><ul><li><a class="current" href="/">Home</a></li><li><a href="/archives">Archive</a></li><li><a href="/tags">Tags</a></li><li class="soc"><a href="https://long95288.github.io/atom.xml" target="_blank" rel="noopener noreferrer" aria-label="RSS"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2025&nbsp;<a target="_blank" href="https://long95288.github.io" rel="noopener noreferrer">long</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div class="col-sm-9 col-xs-12 main-container invisible" id="main-container"><div class="autopagerize_page_element"><div class="content"><div class="post-container"><p class="post-title"><a href="/2025/07/17/soft/perf%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">perf使用指南</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2025-07-17</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/软件使用/" title="软件使用">软件使用</a><span>&nbsp;</span></span></p><p class="post-abstract">抓取程序执行日志  
+
+解析日志获取火焰图工具:
   
 
-订阅感兴趣的事件
+解析文件:
   
 
-如果在onCreate函数里面进行registerReceiver,需要在onDestroy里面进行unregisterRece...</p></div><div class="post-container"><p class="post-title"><a href="/2022/10/09/android/Android-Handler%E7%BB%84%E4%BB%B6/">Android-Handler组件</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2022-10-09</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/android/" title="android">android</a><span>&nbsp;</span></span></p><p class="post-abstract">实例化方式有几种实例化方式已经过时,需要使用public Handler(@NonNull Looper looper, @Nullable Callback callback)的实例化方式。
-looper可以从主线程里面获取.
+将获取到的svg文件放入浏染器中预览</p></div><div class="post-container"><p class="post-title"><a href="/2025/07/14/read/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%BA%E5%85%AC%E5%8F%B8%E7%9A%84%E7%AC%94%E8%AE%B0/">关于一人公司的笔记</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2025-07-14</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/阅读/" title="阅读">阅读</a><span>&nbsp;</span></span></p><p class="post-abstract">可参考书籍《开启你的创意天赋》、《Everything I Know》、《Company of One》
+一些摘要
+即使是为别人工作，本质上你也是唯一关心自己最佳利益的人，所以我们每个人都可以把自己想象成是一间公司，想办法解决自己面对的问题，并将其化成现金流。
+一人公司最重要的就是热情和创新自主的能力。当创造力与...</p></div><div class="post-container"><p class="post-title"><a href="/2025/03/13/android/Android-%E5%BC%80%E5%8F%91%E7%9A%84%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%9D%91/">Android-开发的环境配置坑</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2025-03-13</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/android/" title="android">android</a><span>&nbsp;</span></span></p><p class="post-abstract">一些必要的开发环境变量  
+
+安装特定版本的ndk需要选上Show Package Details选项才能看到具体的版本
+使用阿里云镜像来提高gradle下载速度  
+
+gradle和gradle插件的版本对应gradle版本和gradle插件是有版本对应要求的。
+</p></div><div class="post-container"><p class="post-title"><a href="/2025/03/05/android/AndroidStudio-%E4%B8%80%E7%9B%B4%E5%BC%B9%E7%AA%97%E4%BB%A3%E7%90%86%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">AndroidStudio-一直弹窗代理解决方案</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2025-03-05</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/android/" title="android">android</a><span>&nbsp;</span></span></p><p class="post-abstract">注释掉gradle配置文件中代理  
+
+</p></div><div class="post-container"><p class="post-title"><a href="/2025/03/05/android/AndroidStudio-%E8%AF%B7%E6%B1%82%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5/">AndroidStudio-请求网络失败</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2025-03-05</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/android/" title="android">android</a><span>&nbsp;</span></span></p><p class="post-abstract">注释掉代理配置在~/.gradle/gradle.properties和$&#123;$GRADLE_USER_HOME&#125;/gradle.properties的代理配置
+</p></div><div class="post-container"><p class="post-title"><a href="/2025/03/05/android/Gradle-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/">Gradle-环境变量配置</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2025-03-05</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/android/" title="android">android</a><span>&nbsp;</span></span></p><p class="post-abstract">配置环境变量  
+</p></div><div class="post-container"><p class="post-title"><a href="/2025/03/05/android/Gradle-%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F/">Gradle-配置镜像</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2025-03-05</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/android/" title="android">android</a><span>&nbsp;</span></span></p><p class="post-abstract">在项目的build.gradle文件中加入如下配置
   
 
-callback除了直接使用new构建,也可以直接在主类上进行实现imple...</p></div><div class="post-container"><p class="post-title"><a href="/2022/10/09/android/Android-Toast%E7%BB%84%E4%BB%B6/">Android-Toast组件</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2022-10-09</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/android/" title="android">android</a><span>&nbsp;</span></span></p><p class="post-abstract">使用例子  
-</p></div><div class="post-container"><p class="post-title"><a href="/2022/09/26/android/Android-HTTP%E8%AF%B7%E6%B1%82%E5%93%8D%E5%BA%94%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7/">Android-HTTP请求响应解析工具</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2022-09-26</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/android/" title="android">android</a><span>&nbsp;</span></span></p><p class="post-abstract">需求请求的通用数据如下,
+依赖生效问题:
+</p></div><div class="post-container"><p class="post-title"><a href="/2024/08/24/android/Android-JNI-%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA/">Android-JNI-日志输出代理</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2024-08-24</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/android/" title="android">android</a><span>&nbsp;</span></span></p><p class="post-abstract">引入  
+在cmakelist.txt中加入库以来
   
-其中body字段为特定请求方法的请求数据.响应的通用数据如下
-  
-每个接口只需要关注body的内容,可能是object,字符串,数组。
-设计实现依赖
-  
+代码使用  
+封装  
 
-通用请求部分
-  
-
-通用响应部分
-  
-
-解析工具包
-  
-
-HelloWorld接口测试请求
-  
-
-响应
-  
-ap...</p></div><div class="post-container"><p class="post-title"><a href="/2021/04/14/iot%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">iot网络协议</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2021-04-14</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/网络/" title="网络">网络</a><span>&nbsp;</span><a class="a-tag" href="/tags/物联网/" title="物联网">物联网</a><span>&nbsp;</span></span></p><p class="post-abstract">IOT网络协议MQTT协议消息队列遥测传输协议(MQTT,Message Queuing Telemetry Transport), ISO标准(ISO&#x2F;IEC PRF 20922)。介绍
-基于发布（Public）&#x2F;订阅（Subscribe）范式的消息协议，
-工作在TCP&#x2F;IP协议族...</p></div><div class="post-container"><p class="post-title"><a href="/2021/04/12/go-%E5%8A%A0%E8%A7%A3%E5%AF%86/">go-加解密</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2021-04-12</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/加解密/" title="加解密">加解密</a><span>&nbsp;</span><a class="a-tag" href="/tags/golang/" title="golang">golang</a><span>&nbsp;</span><a class="a-tag" href="/tags/aes/" title="aes">aes</a><span>&nbsp;</span></span></p><p class="post-abstract">AESCBC256加解密DEMO注意:IV和Salt的大小为16,迭代次数可以自己定义
-  
-</p></div><div class="post-container"><p class="post-title"><a href="/2021/03/28/go-net/">go-net</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2021-03-28</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/网络/" title="网络">网络</a><span>&nbsp;</span><a class="a-tag" href="/tags/golang/" title="golang">golang</a><span>&nbsp;</span></span></p><p class="post-abstract">golang TCP&#x2F;UDP连接  
-
-Golang HttpRequest使用golang构建Http请求
-  
-Https免认证证书
-  
-aira2c简单调用  
-
-go-MQTT客户端demo  
+</p></div><div class="post-container"><p class="post-title"><a href="/2024/04/16/read/%E9%82%A3%E4%BA%9B%E6%91%98%E6%8A%84%E7%9A%84%E5%8F%A5%E5%AD%90/">那些摘抄的句子</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2024-04-16</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/阅读/" title="阅读">阅读</a><span>&nbsp;</span></span></p><p class="post-abstract">关于自由
+知道后果，并且愿意去承担责任，接受后果。
+好像有什么赶着你往前跑，害怕停下来就被淘汰。
+让恐惧当作束缚，不敢做出选择。
+真正的自由是勇于承担选择的后果。
 
 
-</p></div><div class="post-container"><p class="post-title"><a href="/2021/03/26/OpenSSL%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6/">OpenSSL生成SSL证书</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2021-03-26</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/linux/" title="linux">linux</a><span>&nbsp;</span></span></p><p class="post-abstract">OpenSSL生成证书.key格式：私有的密钥
-.csr格式：证书签名请求（证书请求文件），含有公钥信息，certificate signing request的缩写
-.crt格式：证书文件，certificate的缩写
-.crl格式：证书吊销列表，Certificate Revocation List的缩写
-....</p></div><div class="post-container"><p class="post-title"><a href="/2021/03/14/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86FFmpeg%E4%B8%80%E6%8A%8A%E6%A2%AD/">图像处理FFmpeg一把梭</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2021-03-14</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/图像处理/" title="图像处理">图像处理</a><span>&nbsp;</span><a class="a-tag" href="/tags/ffmpeg/" title="ffmpeg">ffmpeg</a><span>&nbsp;</span></span></p><p class="post-abstract">图像视频基本知识BMP文件格式解析由于开源的bmp不能解析使用GDI获得BMP文件,所以自己使用golang解析BMP文件
+断舍离
+选择物品的窍门，不是“能不能用”,而是“我要不要用”。
+关注不扔东西造成的损失
+扔掉多余的信息，就能尽早从头脑的“便秘”中解脱出来。
+希望...</p></div><div class="post-container"><p class="post-title"><a href="/2022/11/26/android/Android-Studio%E5%8D%87%E7%BA%A7%E4%B9%8B%E5%90%8E%E5%BC%80%E5%90%AF%E5%B4%A9%E6%BA%83%E6%8A%A5%E9%94%99/">Android-Studio升级之后开启崩溃报错</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2022-11-26</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/android/" title="android">android</a><span>&nbsp;</span></span></p><p class="post-abstract">有如下报错信息  
+解决办法:在ubuntu下需要删除~/.config/Google目录下Android的配置。
   
-yuv文件使用RGBA表示一张图像占用的存储空间太大了,人对色调和饱和度不敏感。对亮度敏感。所以色调和饱和度可以压缩更狠。一张图像,转成yuv格式。亮度y的大小为长*宽。u和v长宽只需...</p></div><div class="pagination no-margin-bottom"><p class="clearfix"><p> Page 2 / 13 &nbsp;</p><p><span class="pre pagbuttons"><i class="fa fa-angle-double-left"></i>&nbsp;<a role="navigation" href="/" aria-label="Previous">Previous</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/page/3/" aria-label="Next">Next</a>&nbsp;<i class="fa fa-angle-double-right"></i></span></p></p></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2025&nbsp;<a target="_blank" href="https://long95288.github.io" rel="noopener noreferrer">long</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.js"></script></body></html>
+
+</p></div><div class="pagination no-margin-bottom"><p class="clearfix"><p> Page 2 / 14 &nbsp;</p><p><span class="pre pagbuttons"><i class="fa fa-angle-double-left"></i>&nbsp;<a role="navigation" href="/" aria-label="Previous">Previous</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/page/3/" aria-label="Next">Next</a>&nbsp;<i class="fa fa-angle-double-right"></i></span></p></p></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2025&nbsp;<a target="_blank" href="https://long95288.github.io" rel="noopener noreferrer">long</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.js"></script></body></html>

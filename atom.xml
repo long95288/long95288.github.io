@@ -6,7 +6,7 @@
   <link href="https://long95288.github.io/atom.xml" rel="self"/>
   
   <link href="https://long95288.github.io/"/>
-  <updated>2022-06-19T06:41:22.658Z</updated>
+  <updated>2025-08-21T15:11:10.068Z</updated>
   <id>https://long95288.github.io/</id>
   
   <author>
@@ -15,6 +15,180 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>EE学习</title>
+    <link href="https://long95288.github.io/2025/08/21/ee/EE%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://long95288.github.io/2025/08/21/ee/EE%E5%AD%A6%E4%B9%A0/</id>
+    <published>2025-08-21T15:10:41.000Z</published>
+    <updated>2025-08-21T15:11:10.068Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;电子器件概念学习&quot;&gt;&lt;a href=&quot;#电子器件概念学习&quot; class=&quot;headerlink&quot; title=&quot;电子器件概念学习&quot;&gt;&lt;/a&gt;电子器件概念学习&lt;/h3&gt;&lt;h4 id=&quot;电阻&quot;&gt;&lt;a href=&quot;#电阻&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="ee" scheme="https://long95288.github.io/tags/ee/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>巴拉巴西成功定律</title>
+    <link href="https://long95288.github.io/2025/08/21/read/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%B7%B4%E6%8B%89%E5%B7%B4%E8%A5%BF%E6%88%90%E5%8A%9F%E5%AE%9A%E5%BE%8B/"/>
+    <id>https://long95288.github.io/2025/08/21/read/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%B7%B4%E6%8B%89%E5%B7%B4%E8%A5%BF%E6%88%90%E5%8A%9F%E5%AE%9A%E5%BE%8B/</id>
+    <published>2025-08-21T14:56:39.000Z</published>
+    <updated>2025-08-21T14:57:10.008Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;成功的度量:</summary>
+        
+      
+    
+    
+    
+    
+    <category term="阅读" scheme="https://long95288.github.io/tags/%E9%98%85%E8%AF%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>允许一切发生</title>
+    <link href="https://long95288.github.io/2025/08/21/read/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%85%81%E8%AE%B8%E4%B8%80%E5%88%87%E5%8F%91%E7%94%9F/"/>
+    <id>https://long95288.github.io/2025/08/21/read/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%85%81%E8%AE%B8%E4%B8%80%E5%88%87%E5%8F%91%E7%94%9F/</id>
+    <published>2025-08-21T14:53:17.000Z</published>
+    <updated>2025-08-21T14:54:03.178Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;面对生活的挑战，你会选择被动接受还是主动出击。&lt;/li&gt;
+&lt;li&gt;很多的精神错乱来源于人们内心的慌张不安和意识混乱。&lt;/li&gt;
+&lt;li&gt;人们需要感知自己真正存在于这个世界上，才能更好的生存下去。&lt;/li&gt;
+&lt;li&gt;要努力寻找“与世界的天然联系”。世界本来没有任何</summary>
+        
+      
+    
+    
+    
+    
+    <category term="阅读" scheme="https://long95288.github.io/tags/%E9%98%85%E8%AF%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>labelIm的bug修复</title>
+    <link href="https://long95288.github.io/2025/08/11/python/labelIm%E7%9A%84bug%E4%BF%AE%E5%A4%8D/"/>
+    <id>https://long95288.github.io/2025/08/11/python/labelIm%E7%9A%84bug%E4%BF%AE%E5%A4%8D/</id>
+    <published>2025-08-11T15:01:11.000Z</published>
+    <updated>2025-08-21T15:01:36.776Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;在新的python版本中,编译labelImg会崩溃。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;解决方案&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="python" scheme="https://long95288.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>yolov5自己训练数据使用指南</title>
+    <link href="https://long95288.github.io/2025/08/07/python/yolov5%E8%87%AA%E5%B7%B1%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"/>
+    <id>https://long95288.github.io/2025/08/07/python/yolov5%E8%87%AA%E5%B7%B1%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</id>
+    <published>2025-08-07T15:02:54.000Z</published>
+    <updated>2025-08-21T15:03:55.651Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;准备如下&quot;&gt;&lt;a href=&quot;#准备如下&quot; class=&quot;headerlink&quot; title=&quot;准备如下&quot;&gt;&lt;/a&gt;准备如下&lt;/h3&gt;&lt;h4 id=&quot;训练集准备&quot;&gt;&lt;a href=&quot;#训练集准备&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="python" scheme="https://long95288.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数字极简</title>
+    <link href="https://long95288.github.io/2025/08/05/read/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%95%B0%E5%AD%97%E6%9E%81%E7%AE%80/"/>
+    <id>https://long95288.github.io/2025/08/05/read/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%95%B0%E5%AD%97%E6%9E%81%E7%AE%80/</id>
+    <published>2025-08-05T15:06:58.000Z</published>
+    <updated>2025-08-21T15:07:39.335Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;反抗数字技术控制的最佳办法，就是信奉一种基于自己根本价值观的技术使用理念。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;三条核心原则:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;把自己的时间和注意力分散到过多的数字设备、应用程序和服务上，造成的负面影响远超它们带来的微小益处。&lt;/l</summary>
+        
+      
+    
+    
+    
+    
+    <category term="阅读" scheme="https://long95288.github.io/tags/%E9%98%85%E8%AF%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>showyourwork</title>
+    <link href="https://long95288.github.io/2025/07/26/read/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-showyourwork/"/>
+    <id>https://long95288.github.io/2025/07/26/read/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-showyourwork/</id>
+    <published>2025-07-26T14:59:28.000Z</published>
+    <updated>2025-08-21T15:00:16.522Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;读《show your work》笔记摘抄，始于2025&amp;#x2F;07&amp;#x2F;26.&lt;/p&gt;
+&lt;h3 id=&quot;一些tips&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="阅读" scheme="https://long95288.github.io/tags/%E9%98%85%E8%AF%BB/"/>
+    
+  </entry>
   
   <entry>
     <title></title>
@@ -34,6 +208,100 @@
     
     
     
+    
+  </entry>
+  
+  <entry>
+    <title>如何找到想做的事</title>
+    <link href="https://long95288.github.io/2025/07/23/read/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0%E6%83%B3%E5%81%9A%E7%9A%84%E4%BA%8B/"/>
+    <id>https://long95288.github.io/2025/07/23/read/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0%E6%83%B3%E5%81%9A%E7%9A%84%E4%BA%8B/</id>
+    <published>2025-07-23T14:55:12.000Z</published>
+    <updated>2025-08-21T14:55:55.675Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;读《如何找到想做的事》的笔记，时间: 2025&amp;#x2F;07&amp;#x2F;23。&lt;/p&gt;
+&lt;h3 id=&quot;摘录&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="阅读" scheme="https://long95288.github.io/tags/%E9%98%85%E8%AF%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>coqui-ai-tts踩坑指南</title>
+    <link href="https://long95288.github.io/2025/07/21/python/coqui-ai-tts%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97/"/>
+    <id>https://long95288.github.io/2025/07/21/python/coqui-ai-tts%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97/</id>
+    <published>2025-07-21T15:04:14.000Z</published>
+    <updated>2025-08-21T15:05:30.733Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="python" scheme="https://long95288.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>perf使用指南</title>
+    <link href="https://long95288.github.io/2025/07/17/soft/perf%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"/>
+    <id>https://long95288.github.io/2025/07/17/soft/perf%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</id>
+    <published>2025-07-17T15:09:05.000Z</published>
+    <updated>2025-08-21T15:09:56.583Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;抓取程序执行日志&quot;&gt;&lt;a href=&quot;#抓取程序执行日志&quot; class=&quot;headerlink&quot; title=&quot;抓取程序执行日志&quot;&gt;&lt;/a&gt;抓取程序执行日志&lt;/h3&gt;&lt;figure class=&quot;highlight</summary>
+        
+      
+    
+    
+    
+    
+    <category term="软件使用" scheme="https://long95288.github.io/tags/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于一人公司的笔记</title>
+    <link href="https://long95288.github.io/2025/07/14/read/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%BA%E5%85%AC%E5%8F%B8%E7%9A%84%E7%AC%94%E8%AE%B0/"/>
+    <id>https://long95288.github.io/2025/07/14/read/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%BA%E5%85%AC%E5%8F%B8%E7%9A%84%E7%AC%94%E8%AE%B0/</id>
+    <published>2025-07-14T14:57:58.000Z</published>
+    <updated>2025-08-21T14:58:52.301Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;可参考书籍&quot;&gt;&lt;a href=&quot;#可参考书籍&quot; class=&quot;headerlink&quot; title=&quot;可参考书籍&quot;&gt;&lt;/a&gt;可参考书籍&lt;/h3&gt;&lt;p&gt;《开启你的创意天赋》、《Everything I Know》、《Company of One》&lt;/p&gt;
+&lt;h3</summary>
+        
+      
+    
+    
+    
+    
+    <category term="阅读" scheme="https://long95288.github.io/tags/%E9%98%85%E8%AF%BB/"/>
     
   </entry>
   
@@ -181,7 +449,7 @@
     <link href="https://long95288.github.io/2024/04/16/read/%E9%82%A3%E4%BA%9B%E6%91%98%E6%8A%84%E7%9A%84%E5%8F%A5%E5%AD%90/"/>
     <id>https://long95288.github.io/2024/04/16/read/%E9%82%A3%E4%BA%9B%E6%91%98%E6%8A%84%E7%9A%84%E5%8F%A5%E5%AD%90/</id>
     <published>2024-04-16T07:34:00.000Z</published>
-    <updated>2025-08-16T09:46:20.596Z</updated>
+    <updated>2025-08-21T14:50:36.789Z</updated>
     
     
       
@@ -219,271 +487,6 @@
     
     
     <category term="android" scheme="https://long95288.github.io/tags/android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android-WebView与js交互</title>
-    <link href="https://long95288.github.io/2022/11/23/android/Android-WebView%E4%B8%8Ejs%E4%BA%A4%E4%BA%92/"/>
-    <id>https://long95288.github.io/2022/11/23/android/Android-WebView%E4%B8%8Ejs%E4%BA%A4%E4%BA%92/</id>
-    <published>2022-11-22T16:00:00.000Z</published>
-    <updated>2025-08-04T15:17:32.585Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android-intent组件</title>
-    <link href="https://long95288.github.io/2022/10/18/android/Android-intent%E7%BB%84%E4%BB%B6/"/>
-    <id>https://long95288.github.io/2022/10/18/android/Android-intent%E7%BB%84%E4%BB%B6/</id>
-    <published>2022-10-17T16:00:00.000Z</published>
-    <updated>2025-08-04T15:19:17.546Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h4 id=&quot;android跳转到新的Activity页面&quot;&gt;&lt;a href=&quot;#android跳转到新的Activity页面&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android-BroadcastReceiver组件</title>
-    <link href="https://long95288.github.io/2022/10/10/android/Android-BroadcastReceiver%E7%BB%84%E4%BB%B6/"/>
-    <id>https://long95288.github.io/2022/10/10/android/Android-BroadcastReceiver%E7%BB%84%E4%BB%B6/</id>
-    <published>2022-10-09T16:00:00.000Z</published>
-    <updated>2025-08-04T15:20:35.245Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerlink&quot; title=&quot;说明&quot;&gt;&lt;/a&gt;说明&lt;/h3&gt;&lt;p&gt;接收系统事件变更广播,网络变更,WIFI切换等广播事件。&lt;/p&gt;
-&lt;h3 id=&quot;简单使用&quot;&gt;&lt;a href=&quot;#简单使用&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android-Handler组件</title>
-    <link href="https://long95288.github.io/2022/10/09/android/Android-Handler%E7%BB%84%E4%BB%B6/"/>
-    <id>https://long95288.github.io/2022/10/09/android/Android-Handler%E7%BB%84%E4%BB%B6/</id>
-    <published>2022-10-08T16:00:00.000Z</published>
-    <updated>2025-08-04T15:21:43.733Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;实例化方式&quot;&gt;&lt;a href=&quot;#实例化方式&quot; class=&quot;headerlink&quot; title=&quot;实例化方式&quot;&gt;&lt;/a&gt;实例化方式&lt;/h3&gt;&lt;p&gt;有几种实例化方式已经过时,需要使用&lt;code&gt;public Handler(@NonNull Looper</summary>
-        
-      
-    
-    
-    
-    
-    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android-Toast组件</title>
-    <link href="https://long95288.github.io/2022/10/09/android/Android-Toast%E7%BB%84%E4%BB%B6/"/>
-    <id>https://long95288.github.io/2022/10/09/android/Android-Toast%E7%BB%84%E4%BB%B6/</id>
-    <published>2022-10-08T16:00:00.000Z</published>
-    <updated>2025-08-04T15:22:48.589Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;使用例子&quot;&gt;&lt;a href=&quot;#使用例子&quot; class=&quot;headerlink&quot; title=&quot;使用例子&quot;&gt;&lt;/a&gt;使用例子&lt;/h3&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
-        
-      
-    
-    
-    
-    
-    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android-HTTP请求响应解析工具</title>
-    <link href="https://long95288.github.io/2022/09/26/android/Android-HTTP%E8%AF%B7%E6%B1%82%E5%93%8D%E5%BA%94%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7/"/>
-    <id>https://long95288.github.io/2022/09/26/android/Android-HTTP%E8%AF%B7%E6%B1%82%E5%93%8D%E5%BA%94%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7/</id>
-    <published>2022-09-25T16:00:00.000Z</published>
-    <updated>2025-08-04T15:25:13.752Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h3&gt;&lt;p&gt;请求的通用数据如下,&lt;/p&gt;
-&lt;figure class=&quot;highlight json&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
-        
-      
-    
-    
-    
-    
-    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>iot网络协议</title>
-    <link href="https://long95288.github.io/2021/04/14/iot%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"/>
-    <id>https://long95288.github.io/2021/04/14/iot%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</id>
-    <published>2021-04-14T14:22:01.000Z</published>
-    <updated>2022-06-19T06:41:23.434Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;IOT网络协议&quot;&gt;&lt;a href=&quot;#IOT网络协议&quot; class=&quot;headerlink&quot; title=&quot;IOT网络协议&quot;&gt;&lt;/a&gt;IOT网络协议&lt;/h1&gt;&lt;h2 id=&quot;MQTT协议&quot;&gt;&lt;a href=&quot;#MQTT协议&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="网络" scheme="https://long95288.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
-    
-    <category term="物联网" scheme="https://long95288.github.io/tags/%E7%89%A9%E8%81%94%E7%BD%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>go-加解密</title>
-    <link href="https://long95288.github.io/2021/04/12/go-%E5%8A%A0%E8%A7%A3%E5%AF%86/"/>
-    <id>https://long95288.github.io/2021/04/12/go-%E5%8A%A0%E8%A7%A3%E5%AF%86/</id>
-    <published>2021-04-12T12:34:24.000Z</published>
-    <updated>2022-06-19T06:41:23.434Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;AESCBC256加解密DEMO&quot;&gt;&lt;a href=&quot;#AESCBC256加解密DEMO&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="加解密" scheme="https://long95288.github.io/tags/%E5%8A%A0%E8%A7%A3%E5%AF%86/"/>
-    
-    <category term="golang" scheme="https://long95288.github.io/tags/golang/"/>
-    
-    <category term="aes" scheme="https://long95288.github.io/tags/aes/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>go-net</title>
-    <link href="https://long95288.github.io/2021/03/28/go-net/"/>
-    <id>https://long95288.github.io/2021/03/28/go-net/</id>
-    <published>2021-03-28T11:26:16.000Z</published>
-    <updated>2022-06-19T06:41:23.431Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;golang-TCP-UDP连接&quot;&gt;&lt;a href=&quot;#golang-TCP-UDP连接&quot; class=&quot;headerlink&quot; title=&quot;golang TCP&amp;#x2F;UDP连接&quot;&gt;&lt;/a&gt;golang</summary>
-        
-      
-    
-    
-    
-    
-    <category term="网络" scheme="https://long95288.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
-    
-    <category term="golang" scheme="https://long95288.github.io/tags/golang/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>OpenSSL生成SSL证书</title>
-    <link href="https://long95288.github.io/2021/03/26/OpenSSL%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6/"/>
-    <id>https://long95288.github.io/2021/03/26/OpenSSL%E7%94%9F%E6%88%90SSL%E8%AF%81%E4%B9%A6/</id>
-    <published>2021-03-26T11:39:27.000Z</published>
-    <updated>2022-06-19T06:41:22.374Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;OpenSSL生成证书&quot;&gt;&lt;a href=&quot;#OpenSSL生成证书&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="linux" scheme="https://long95288.github.io/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图像处理FFmpeg一把梭</title>
-    <link href="https://long95288.github.io/2021/03/14/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86FFmpeg%E4%B8%80%E6%8A%8A%E6%A2%AD/"/>
-    <id>https://long95288.github.io/2021/03/14/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86FFmpeg%E4%B8%80%E6%8A%8A%E6%A2%AD/</id>
-    <published>2021-03-14T13:25:54.000Z</published>
-    <updated>2025-07-25T15:40:49.428Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;图像视频基本知识&quot;&gt;&lt;a href=&quot;#图像视频基本知识&quot; class=&quot;headerlink&quot; title=&quot;图像视频基本知识&quot;&gt;&lt;/a&gt;图像视频基本知识&lt;/h2&gt;&lt;h3 id=&quot;BMP文件格式解析&quot;&gt;&lt;a href=&quot;#BMP文件格式解析&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="图像处理" scheme="https://long95288.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
-    
-    <category term="ffmpeg" scheme="https://long95288.github.io/tags/ffmpeg/"/>
     
   </entry>
   

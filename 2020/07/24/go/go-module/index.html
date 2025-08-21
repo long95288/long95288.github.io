@@ -1,0 +1,109 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author"><title>go-module · 风兮木落</title><meta name="description" content="go module介绍​	go module 是从1.11版本开始支持的官方包管理工具。不用go module的话，所有的项目必须在gopath下创建，版本依赖无法处理。通过使用go module可以摆脱GoPath开发，可以通过配置go.mod文件来自已定义依赖包的版本。
+go module的三种"><meta name="og:description" content="go module介绍​	go module 是从1.11版本开始支持的官方包管理工具。不用go module的话，所有的项目必须在gopath下创建，版本依赖无法处理。通过使用go module可以摆脱GoPath开发，可以通过配置go.mod文件来自已定义依赖包的版本。
+go module的三种"><meta name="twitter:site" content="风兮木落"><meta name="twitter:title" content="go-module"><meta name="twitter:card" content="summary"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/css/prism.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><div class="container" id="stage"><div class="row"><div class="col-sm-3 col-xs-12 side-container invisible" id="side-bar"><div class="vertical-text site-title"><h3 class="site-title-small" tabindex="-1"><a class="a-title" href="/">long blogs</a></h3><h1 class="site-title-large" tabindex="-1"><a class="a-title" href="/">进一步有进一步惊喜</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div class="site-title-links" id="site-nav"><ul><li><a href="/">Home</a></li><li><a href="/archives">Archive</a></li><li><a href="/tags">Tags</a></li><li class="soc"><a href="https://long95288.github.io/atom.xml" target="_blank" rel="noopener noreferrer" aria-label="RSS"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2025&nbsp;<a target="_blank" href="https://long95288.github.io" rel="noopener noreferrer">long</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div class="col-sm-9 col-xs-12 main-container invisible" id="main-container"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post-container"><p class="post-title"><a>go-module</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2020-07-24</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/笔记/" title="笔记">笔记</a><span>&nbsp;</span><a class="a-tag" href="/tags/golang/" title="golang">golang</a><span>&nbsp;</span></span></p><p class="post-abstract"><h4 id="go-module介绍"><a href="#go-module介绍" class="headerlink" title="go module介绍"></a>go module介绍</h4><p>​	go module 是从1.11版本开始支持的官方包管理工具。不用go module的话，所有的项目必须在gopath下创建，版本依赖无法处理。通过使用go module可以摆脱GoPath开发，可以通过配置go.mod文件来自已定义依赖包的版本。</p>
+<h4 id="go-module的三种模式"><a href="#go-module的三种模式" class="headerlink" title="go module的三种模式"></a>go module的三种模式</h4><p> <code>off</code>、<code>on</code>、<code>auto</code></p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>off</td>
+<td>关闭，使用在GoPath下开发的模式</td>
+</tr>
+<tr>
+<td>on</td>
+<td>开启module,默认开启</td>
+</tr>
+<tr>
+<td>auto</td>
+<td>项目在GoPath之外，根目录有go.mod文件</td>
+</tr>
+</tbody></table>
+<p>可以在系统环境变量中配置如下变量:<code>GO111MODULE=auto</code></p>
+<p>使用go module必须使用代理才能顺利的上网，环境变量中配置代理。需要配置如下的环境变量</p>
+<p><code>GOPROXY=https://goproxy.cn,direct</code></p>
+<p>go1.13之后GOPROXY的默认值是<code>https://proxy.golang.org</code>,国内无法访问。</p>
+<h4 id="go-mod-常用命令"><a href="#go-mod-常用命令" class="headerlink" title="go mod 常用命令"></a>go mod 常用命令</h4><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">go mod init [modulename]</td>
+<td align="left">创建go.mod文件，如果该项目是在GoPath下面的，不用自己指定包名。如果不是在GoPath下的项目，必须提供包名，否则无法创建。</td>
+</tr>
+<tr>
+<td align="center">go mod download</td>
+<td align="left">根据go.mod文件下载依赖。</td>
+</tr>
+<tr>
+<td align="center">go mod tidy</td>
+<td align="left">整理依赖项，代码中用不到的依赖会被删除，新的依赖会被下载。</td>
+</tr>
+<tr>
+<td align="center">go mod graph</td>
+<td align="left">打印模块依赖</td>
+</tr>
+<tr>
+<td align="center">go mod vendor</td>
+<td align="left">将依赖复制到vendor下</td>
+</tr>
+<tr>
+<td align="center">go mod why</td>
+<td align="left">为什么需要依赖</td>
+</tr>
+<tr>
+<td align="center">go mod edit -fmt</td>
+<td align="left">格式化go.mod文件</td>
+</tr>
+<tr>
+<td align="center">go mod edit -require&#x3D;golang.xx.xx</td>
+<td align="left">添加依赖项</td>
+</tr>
+</tbody></table>
+<h4 id="go-mod文件"><a href="#go-mod文件" class="headerlink" title="go.mod文件"></a>go.mod文件</h4><p>go.mod文件中包含该项目所有的依赖信息，和Java项目中的pom.xml文件类似。</p>
+<p>以下为常用关键字和说明</p>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>关键字说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>module</td>
+<td>包名说明</td>
+</tr>
+<tr>
+<td>require</td>
+<td>项目的依赖包及版本</td>
+</tr>
+<tr>
+<td>indirect</td>
+<td>间接引用</td>
+</tr>
+<tr>
+<td>replace</td>
+<td>依赖替换</td>
+</tr>
+</tbody></table>
+<h4 id="go-module导入本地包"><a href="#go-module导入本地包" class="headerlink" title="go module导入本地包"></a>go module导入本地包</h4><h5 id="一、同一个项目下"><a href="#一、同一个项目下" class="headerlink" title="一、同一个项目下"></a>一、同一个项目下</h5><p>一个项目有如下的目录结构，main.go需要引用subpackage中的sb.go中的函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── go.mod</span><br><span class="line">├── main.go</span><br><span class="line">├── subpackage</span><br><span class="line">│   └── sb.go</span><br></pre></td></tr></table></figure>
+
+<p>go.mod文件不用任何配置，只需要在main.go中添加<code>import &quot;package1/subpackage&quot;</code>便可以引用了。</p>
+<h5 id="二、不同项目下"><a href="#二、不同项目下" class="headerlink" title="二、不同项目下"></a>二、不同项目下</h5><p>有如下的目录结构</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── moduledemo</span><br><span class="line">│   ├── go.mod</span><br><span class="line">│   └── main.go</span><br><span class="line">├── package1</span><br><span class="line">│   ├── go.mod</span><br><span class="line">│   └── package1.go</span><br><span class="line">├── package2</span><br><span class="line">│   ├── go.mod</span><br><span class="line">│   └── package2.go</span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<p>在mouledemo项目main.go中想要调用package1包中的函数。需要在module项目的go.mod中添加如下配置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">require package1 v0.0.0</span><br><span class="line">replace package1 =&gt; ../package1</span><br></pre></td></tr></table></figure>
+
+<p>在main.go文件中导入，<code>import &quot;package1&quot;</code>便可以调用package1中的内容了。</p>
+<p><strong>极端调用</strong>：在main.go中导入了<code>&quot;subprint.com/sbp&quot;</code>项目,并取别名为<code>sbp</code>，但是这个项目并不在goPath中，也不在网上，而是在本地的package2中。需要在go.mod中配置如下信息便可以调用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">require subprint.com/sbp v0.0.0</span><br><span class="line">replace subprint.com/sbp =&gt; ../package2</span><br></pre></td></tr></table></figure></p></div><div class="share"><span>Share</span>&nbsp;<span class="soc"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></span><span class="soc"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></span><span class="soc"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=https://long95288.github.io/2020/07/24/go/go-module/%20风兮木落%20go-module"></a></span></div><div class="pagination"><p class="clearfix"><span class="pre pagbuttons"><a role="navigation" href="/2020/07/26/go/go-gin-%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86/" title="go-gin-请求处理"><i class="fa fa-angle-double-left"></i>&nbsp;Previous post: go-gin-请求处理</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/2020/07/23/go/go-reflect/" title="go-reflect">Next post: go-reflect&nbsp;<i class="fa fa-angle-double-right"></i></a></span></p></div></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2025&nbsp;<a target="_blank" href="https://long95288.github.io" rel="noopener noreferrer">long</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.js"></script></body></html>

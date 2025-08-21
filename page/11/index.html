@@ -1,62 +1,47 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author"><title>风兮木落</title><meta name="description" content="A Blog Powered By Hexo"><meta name="keywords" content=""><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/css/prism.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><div class="container" id="stage"><div class="row"><div class="col-sm-3 col-xs-12 side-container invisible" id="side-bar"><div class="vertical-text site-title"><h3 class="site-title-small" tabindex="-1"><a class="a-title" href="/">long blogs</a></h3><h1 class="site-title-large" tabindex="-1"><a class="a-title" href="/">进一步有进一步惊喜</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div class="site-title-links" id="site-nav"><ul><li><a class="current" href="/">Home</a></li><li><a href="/archives">Archive</a></li><li><a href="/tags">Tags</a></li><li class="soc"><a href="https://long95288.github.io/atom.xml" target="_blank" rel="noopener noreferrer" aria-label="RSS"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2025&nbsp;<a target="_blank" href="https://long95288.github.io" rel="noopener noreferrer">long</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div class="col-sm-9 col-xs-12 main-container invisible" id="main-container"><div class="autopagerize_page_element"><div class="content"><div class="post-container"><p class="post-title"><a href="/2019/07/17/dom4j-xml%E8%A7%A3%E6%9E%90/">dom4j-xml解析</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-07-17</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/笔记/" title="笔记">笔记</a><span>&nbsp;</span></span></p><p class="post-abstract">maven 添加依赖  
-读取xml文件1、获得读取文件的对象SAXReader reader = new SAXReader();2、读取文件，返回一个Element对象
-  
-3、获得根元素
-  
-4、获得元素的列表
-  
-相关的函数说明1、getRootElement获得Document文件的根元素2、El...</p></div><div class="post-container"><p class="post-title"><a href="/2019/07/16/linux%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">linux环境配置</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-07-16</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/笔记/" title="笔记">笔记</a><span>&nbsp;</span></span></p><p class="post-abstract">Linux配置java的环境变量1、找到jdk安装包的位置2、打开profile文件# vim /etc/profile3、添加如下的内容
-  
-4、更新配置source /etc/profile5、使用如下命令查看是否配置成功java -versionecho $JAVA_HOME6.注意分隔符在Linux中使...</p></div><div class="post-container"><p class="post-title"><a href="/2019/07/15/linux%E5%AE%89%E8%A3%85MySql/">linux安装MySql</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-07-15</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/笔记/" title="笔记">笔记</a><span>&nbsp;</span><a class="a-tag" href="/tags/mysql/" title="mysql">mysql</a><span>&nbsp;</span></span></p><p class="post-abstract">转载来的哦！！
-yum安装介绍Linux下使用Yum安装Mysql：
-
-在mysql官网下载mysql的yum源
-
-  
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><div class="container" id="stage"><div class="row"><div class="col-sm-3 col-xs-12 side-container invisible" id="side-bar"><div class="vertical-text site-title"><h3 class="site-title-small" tabindex="-1"><a class="a-title" href="/">long blogs</a></h3><h1 class="site-title-large" tabindex="-1"><a class="a-title" href="/">进一步有进一步惊喜</a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div class="site-title-links" id="site-nav"><ul><li><a class="current" href="/">Home</a></li><li><a href="/archives">Archive</a></li><li><a href="/tags">Tags</a></li><li class="soc"><a href="https://long95288.github.io/atom.xml" target="_blank" rel="noopener noreferrer" aria-label="RSS"><i class="fa fa-rss">&nbsp;</i></a></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2025&nbsp;<a target="_blank" href="https://long95288.github.io" rel="noopener noreferrer">long</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div class="col-sm-9 col-xs-12 main-container invisible" id="main-container"><div class="autopagerize_page_element"><div class="content"><div class="post-container"><p class="post-title"><a href="/2019/08/14/UML%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99/">UML文档编写</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-08-14</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/笔记/" title="笔记">笔记</a><span>&nbsp;</span><a class="a-tag" href="/tags/UML/" title="UML">UML</a><span>&nbsp;</span></span></p><p class="post-abstract">时序图画法规则
+时序图的对象生命线只有一个。就是不能分段
 
 
-上传到centos中并执行本地安装
+上面的时序图controller层和service层的生命线分成了三段。这是错误的。需要将生命线合在一起。正确的画法如下
 
+
+
+</p></div><div class="post-container"><p class="post-title"><a href="/2019/08/11/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%952/">基础算法2</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-08-11</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/算法/" title="算法">算法</a><span>&nbsp;</span></span></p><p class="post-abstract">华为精英202010OD[第一题]题意:给一个数n,寻找两个质数相乘等于n,按从小到大输出这两个数。例子输入
+  
+输出:
+  
+输入:
+  
+输出:
   
 
+题解  
+问题:大数据会占用非常多的时间，导致超时。
+华为精英202010OD[第二题]题意: 返回特定水仙花个数,如果没有对应的水仙花数。返回最后一个水...</p></div><div class="post-container"><p class="post-title"><a href="/2019/08/11/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/">基础算法</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-08-11</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/算法/" title="算法">算法</a><span>&nbsp;</span></span></p><p class="post-abstract">递归实现累加和累乘1、实现n+(n-1)+(n-2)+..3+2+1最佳办法是使用等差求和公式:n(n+1)&#x2F;2
+  
+2、实现n!
+  
+排序算法关键路径算法核心概念
+节点最早开始时间,做这项最早开工干活。可以开工干活的前提是该工序之前的全部节点(工序)已经全部完成，如果是汇聚节点。需要选择消耗时间最...</p></div><div class="post-container"><p class="post-title"><a href="/2019/08/10/java/springBootAop%E4%BD%BF%E7%94%A8/">springBootAop使用</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-08-10</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/笔记/" title="笔记">笔记</a><span>&nbsp;</span><a class="a-tag" href="/tags/spring/" title="spring">spring</a><span>&nbsp;</span></span></p><p class="post-abstract">pom引入aop的依赖  
+application.properties配置aop  
+ProceedingJoinPoint joinPoint继承JoinPoint常用方法1、JoinPoint#getArgs()-&gt;Objcet[]返回参数列表2、ProceedingJoinPoint#proceed...</p></div><div class="post-container"><p class="post-title"><a href="/2019/08/09/npm%E7%9B%B8%E5%85%B3/">npm相关</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-08-09</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/笔记/" title="笔记">笔记</a><span>&nbsp;</span><a class="a-tag" href="/tags/前端/" title="前端">前端</a><span>&nbsp;</span></span></p><p class="post-abstract">npm 相关命令1、安装更新插件npm install -g npm-check-updates2、npm-check-updates 缩写命令为ncu3、ncu 查看可以更新的包4、ncu -u 更新package.json中的依赖5、更新之后使用npm instal来安装依赖
+eslint 配置文件  </p></div><div class="post-container"><p class="post-title"><a href="/2019/08/05/java%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">java实例化几种方式</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-08-05</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/笔记/" title="笔记">笔记</a><span>&nbsp;</span><a class="a-tag" href="/tags/java/" title="java">java</a><span>&nbsp;</span></span></p><p class="post-abstract">实例化的几种方式1、HelloWorld类
+  
+2、主类三种实例化
+  
+运行结果:
+  
+小结1、使用Class#newInstance()返回实例化的对象2、使用Class.forName(classpath)获得class对象。然后再使用newInstance()方法进行实例化3、使用new的传统方式来实...</p></div><div class="post-container"><p class="post-title"><a href="/2019/08/05/java%E5%8F%8D%E5%B0%84%E5%92%8C%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/">java反射和动态代理</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-08-05</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/笔记/" title="笔记">笔记</a><span>&nbsp;</span><a class="a-tag" href="/tags/java/" title="java">java</a><span>&nbsp;</span></span></p><p class="post-abstract">Java反射机制   java的反射机制是一种逆向的思维。通常来所，知道一个类，然后new一个对象。而反射便是从一个对象开始，然后反推出它所在的类。前者是抽象到具体的过程。后者是从具体到抽象的过程。1、类对象Class
 
-安装服务
+通过类的实例获得该类的类对象。使用instance#getClass()方法。即通过具体获得...</p></div><div class="post-container"><p class="post-title"><a href="/2019/07/25/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95junit/">单元测试unit</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-07-25</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/笔记/" title="笔记">笔记</a><span>&nbsp;</span></span></p><p class="post-abstract">要求1、不用捕获异常2、不要输出控制台3、使用断言
+常用的断言方法1、assertArrayEquals(expecteds, actuals) 数组相等判断2、assertEquals(expected, actual) 对象相等判断3、assertNotEquals(first, second) 不相等判断4...</p></div><div class="post-container"><p class="post-title"><a href="/2019/07/25/Mybatis%E7%AC%94%E8%AE%B0/">Mybatis笔记</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-07-25</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/笔记/" title="笔记">笔记</a><span>&nbsp;</span></span></p><p class="post-abstract">一、MyBatis的简单使用1、maven项目依赖简单的使用Mybatis只需要引入依赖包便可以了。
+  
+
+2、需要配置的文件1、mybatis的配置文件2、数据库的连接配置文件3、数据库和Do的实体映射文件
+
+mybatis配置文件 configuration.xml名字自定。
 
   
 
-
-查看Mysql服务的状态
-
-  
-
-
-开启Mysql服务
-
-  
-
-
-查看配置文件，找到日志目录
-
-  
-
-
-查看日志...</p></div><div class="post-container"><p class="post-title"><a href="/2019/07/15/spring%E7%AC%94%E8%AE%B0/">spring笔记</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-07-15</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/笔记/" title="笔记">笔记</a><span>&nbsp;</span><a class="a-tag" href="/tags/spring/" title="spring">spring</a><span>&nbsp;</span></span></p><p class="post-abstract">零碎知识点1、注解配置和xml配置的优先级
-xml 配置优先于注解配置。如果同时有xml和注解，则xml中会覆盖掉注解中的配置。
-
-2、bean的相关知识1、bean的属性
-（1）class bean里面的所连接的类
-（2）name 这个bean的标识
-（3）scope bean的对象的作用域
-​	bean的作用...</p></div><div class="post-container"><p class="post-title"><a href="/2019/07/13/maven%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/">maven环境变量配置</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-07-13</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/笔记/" title="笔记">笔记</a><span>&nbsp;</span></span></p><p class="post-abstract">第一步 下载从官网下载自己想要的maven版本，然后解压。官网
-第二步 配环境变量1、添加系统环境变量name: M2_HOMEvalue:指向解压的地址2、添加系统环境变量name: MAVEN_HOMEvalue:指向解压的地址3、添加path路径value: %M2_HOME%&#x2F;bin注:经过pa...</p></div><div class="post-container"><p class="post-title"><a href="/2019/07/07/java%E6%B3%9B%E5%9E%8B/">java泛型</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-07-07</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/笔记/" title="笔记">笔记</a><span>&nbsp;</span><a class="a-tag" href="/tags/java/" title="java">java</a><span>&nbsp;</span></span></p><p class="post-abstract">一、泛型的声明 使用”class 名称 &lt;泛型列表&gt;”声明一个泛型类。例如    声明了一个Node的泛型类。这个节点中的E可以是任何对象和接口。但不能是基本数据类型。
-二、泛型的使用 (1) 泛型的使用和常用类的使用是一致。泛型列表中的泛型可以看作任何对象。可以做函数的参数，也可以做函数的返回值.例...</p></div><div class="post-container"><p class="post-title"><a href="/2019/06/13/%E5%9B%BE%E5%BD%A2%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">图形图像处理</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-06-13</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/python/" title="python">python</a><span>&nbsp;</span><a class="a-tag" href="/tags/深度学习/" title="深度学习">深度学习</a><span>&nbsp;</span></span></p><p class="post-abstract">pytorch 学习识别特征从点到线，最后到面。Lenet5 卷积神经网络识别车标1、网络结构
-2、
-基于Pytorch yolov3 的车标检测</p></div><div class="post-container"><p class="post-title"><a href="/2019/06/05/pip-%E6%9B%B4%E6%94%B9%E6%98%A0%E5%83%8F%E6%BA%90/">pip 更改映像源</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-06-05</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/笔记/" title="笔记">笔记</a><span>&nbsp;</span><a class="a-tag" href="/tags/python/" title="python">python</a><span>&nbsp;</span></span></p><p class="post-abstract">第一步在用户文件夹下新建一个名为pip的文件夹
-第二步在文件夹中新建一个文件名为pip.ini
-第三步在初始配置文件中加入如下的代码
-  
-这里的地址是清华的源
-</p></div><div class="post-container"><p class="post-title"><a href="/2019/05/25/Payload%E7%88%AC%E8%99%AB/">Payload爬虫</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-05-25</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/笔记/" title="笔记">笔记</a><span>&nbsp;</span><a class="a-tag" href="/tags/爬虫/" title="爬虫">爬虫</a><span>&nbsp;</span></span></p><p class="post-abstract">  
-</p></div><div class="post-container"><p class="post-title"><a href="/2019/05/13/%E6%89%AB%E9%9B%B7%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/">扫雷项目相关笔记</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-05-13</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/笔记/" title="笔记">笔记</a><span>&nbsp;</span><a class="a-tag" href="/tags/java/" title="java">java</a><span>&nbsp;</span></span></p><p class="post-abstract">vector 是线程安全的在发送数据到服务器的时候，发送数据线程，从共享变量senddatas中取出要发送的数值并发送到服务器，但是这时候可能有新的数据加入，这时候需要保证数据的线程安全，而arrarylist不是线程安全的。
-开启发送线程的原因数据突发太大，会将还没发送出去的信息覆盖。设置发送数据时间间隔大于3...</p></div><div class="pagination no-margin-bottom"><p class="clearfix"><p> Page 11 / 13 &nbsp;</p><p><span class="pre pagbuttons"><i class="fa fa-angle-double-left"></i>&nbsp;<a role="navigation" href="/page/10/" aria-label="Previous">Previous</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/page/12/" aria-label="Next">Next</a>&nbsp;<i class="fa fa-angle-double-right"></i></span></p></p></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2025&nbsp;<a target="_blank" href="https://long95288.github.io" rel="noopener noreferrer">long</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.js"></script></body></html>
+连接配置文件jdbc...</p></div><div class="post-container"><p class="post-title"><a href="/2019/07/21/Ideas%E4%BD%BF%E7%94%A8%E7%9A%84%E5%9D%91/">Ideas使用的坑</a></p><p class="post-meta"><span class="date meta-item">Posted at&nbsp;2019-07-21</span><span class="meta-item"><i class="fa fa-tag"></i><span>&nbsp;</span><a class="a-tag" href="/tags/笔记/" title="笔记">笔记</a><span>&nbsp;</span></span></p><p class="post-abstract">关于无法读取配置文件的解决办法1、问题描述  在使用idea开发web项目的时候，读取数据连接的配置文件的时候出现FileNotFound的错误。并且尝试了配置pom.xml文件之后，将配置文件放置在根目录。但都是出现了无法找到文件的错误。2、解决过程（1）由于web项目的部署问题，需要定位到目前项目运行的根目录...</p></div><div class="pagination no-margin-bottom"><p class="clearfix"><p> Page 11 / 14 &nbsp;</p><p><span class="pre pagbuttons"><i class="fa fa-angle-double-left"></i>&nbsp;<a role="navigation" href="/page/10/" aria-label="Previous">Previous</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/page/12/" aria-label="Next">Next</a>&nbsp;<i class="fa fa-angle-double-right"></i></span></p></p></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2025&nbsp;<a target="_blank" href="https://long95288.github.io" rel="noopener noreferrer">long</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/js/jquery-3.1.0.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/google-analytics.js"></script><script src="/js/typography.js"></script></body></html>
