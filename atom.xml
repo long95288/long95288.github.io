@@ -6,7 +6,7 @@
   <link href="https://long95288.github.io/atom.xml" rel="self"/>
   
   <link href="https://long95288.github.io/"/>
-  <updated>2025-08-21T15:11:10.068Z</updated>
+  <updated>2025-08-27T14:08:16.534Z</updated>
   <id>https://long95288.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>高效能人士的七个习惯</title>
+    <link href="https://long95288.github.io/2025/08/27/read/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E9%AB%98%E6%95%88%E8%83%BD%E4%BA%BA%E5%A3%AB%E7%9A%84%E4%B8%83%E4%B8%AA%E4%B9%A0%E6%83%AF/"/>
+    <id>https://long95288.github.io/2025/08/27/read/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E9%AB%98%E6%95%88%E8%83%BD%E4%BA%BA%E5%A3%AB%E7%9A%84%E4%B8%83%E4%B8%AA%E4%B9%A0%E6%83%AF/</id>
+    <published>2025-08-27T14:07:35.000Z</published>
+    <updated>2025-08-27T14:08:16.534Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;   2025&amp;#x2F;08&amp;#x2F;22, 于深圳, 阅读《高效能人士的七个习惯》摘抄&lt;/p&gt;
+&lt;h3 id=&quot;TIPS&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="阅读" scheme="https://long95288.github.io/tags/%E9%98%85%E8%AF%BB/"/>
+    
+  </entry>
   
   <entry>
     <title>EE学习</title>
@@ -352,29 +376,6 @@
   </entry>
   
   <entry>
-    <title>Gradle-环境变量配置</title>
-    <link href="https://long95288.github.io/2025/03/05/android/Gradle-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/"/>
-    <id>https://long95288.github.io/2025/03/05/android/Gradle-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/</id>
-    <published>2025-03-04T16:00:00.000Z</published>
-    <updated>2025-08-04T15:00:20.131Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;配置环境变量&quot;&gt;&lt;a href=&quot;#配置环境变量&quot; class=&quot;headerlink&quot; title=&quot;配置环境变量&quot;&gt;&lt;/a&gt;配置环境变量&lt;/h3&gt;&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
-        
-      
-    
-    
-    
-    
-    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
-    
-  </entry>
-  
-  <entry>
     <title>AndroidStudio-请求网络失败</title>
     <link href="https://long95288.github.io/2025/03/05/android/AndroidStudio-%E8%AF%B7%E6%B1%82%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5/"/>
     <id>https://long95288.github.io/2025/03/05/android/AndroidStudio-%E8%AF%B7%E6%B1%82%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5/</id>
@@ -387,6 +388,29 @@
         
         
     <summary type="html">&lt;h3 id=&quot;注释掉代理配置&quot;&gt;&lt;a href=&quot;#注释掉代理配置&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Gradle-环境变量配置</title>
+    <link href="https://long95288.github.io/2025/03/05/android/Gradle-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/"/>
+    <id>https://long95288.github.io/2025/03/05/android/Gradle-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/</id>
+    <published>2025-03-04T16:00:00.000Z</published>
+    <updated>2025-08-04T15:00:20.131Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;配置环境变量&quot;&gt;&lt;a href=&quot;#配置环境变量&quot; class=&quot;headerlink&quot; title=&quot;配置环境变量&quot;&gt;&lt;/a&gt;配置环境变量&lt;/h3&gt;&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
         
       
     
@@ -464,29 +488,6 @@
     
     
     <category term="阅读" scheme="https://long95288.github.io/tags/%E9%98%85%E8%AF%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android-Studio升级之后开启崩溃报错</title>
-    <link href="https://long95288.github.io/2022/11/26/android/Android-Studio%E5%8D%87%E7%BA%A7%E4%B9%8B%E5%90%8E%E5%BC%80%E5%90%AF%E5%B4%A9%E6%BA%83%E6%8A%A5%E9%94%99/"/>
-    <id>https://long95288.github.io/2022/11/26/android/Android-Studio%E5%8D%87%E7%BA%A7%E4%B9%8B%E5%90%8E%E5%BC%80%E5%90%AF%E5%B4%A9%E6%BA%83%E6%8A%A5%E9%94%99/</id>
-    <published>2022-11-25T16:00:00.000Z</published>
-    <updated>2025-08-04T15:15:43.136Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;有如下报错信息&quot;&gt;&lt;a href=&quot;#有如下报错信息&quot; class=&quot;headerlink&quot; title=&quot;有如下报错信息&quot;&gt;&lt;/a&gt;有如下报错信息&lt;/h3&gt;&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
-        
-      
-    
-    
-    
-    
-    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
     
   </entry>
   
