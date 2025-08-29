@@ -6,7 +6,7 @@
   <link href="https://long95288.github.io/atom.xml" rel="self"/>
   
   <link href="https://long95288.github.io/"/>
-  <updated>2025-08-27T14:08:16.534Z</updated>
+  <updated>2025-08-29T14:05:10.819Z</updated>
   <id>https://long95288.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何成为失控时代的掌控者</title>
+    <link href="https://long95288.github.io/2025/08/29/read/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%A6%82%E4%BD%95%E6%88%90%E4%B8%BA%E5%A4%B1%E6%8E%A7%E6%97%B6%E4%BB%A3%E7%9A%84%E6%8E%8C%E6%8E%A7%E8%80%85/"/>
+    <id>https://long95288.github.io/2025/08/29/read/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%A6%82%E4%BD%95%E6%88%90%E4%B8%BA%E5%A4%B1%E6%8E%A7%E6%97%B6%E4%BB%A3%E7%9A%84%E6%8E%8C%E6%8E%A7%E8%80%85/</id>
+    <published>2025-08-29T14:02:44.000Z</published>
+    <updated>2025-08-29T14:05:10.819Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;   深圳,2025&amp;#x2F;08&amp;#x2F;27,读《混乱: 如何成为失控时代的掌控者》 &lt;/p&gt;
+&lt;h3 id=&quot;TIPS&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="阅读" scheme="https://long95288.github.io/tags/%E9%98%85%E8%AF%BB/"/>
+    
+  </entry>
   
   <entry>
     <title>高效能人士的七个习惯</title>
@@ -376,29 +400,6 @@
   </entry>
   
   <entry>
-    <title>AndroidStudio-请求网络失败</title>
-    <link href="https://long95288.github.io/2025/03/05/android/AndroidStudio-%E8%AF%B7%E6%B1%82%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5/"/>
-    <id>https://long95288.github.io/2025/03/05/android/AndroidStudio-%E8%AF%B7%E6%B1%82%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5/</id>
-    <published>2025-03-04T16:00:00.000Z</published>
-    <updated>2025-08-04T15:01:37.408Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;注释掉代理配置&quot;&gt;&lt;a href=&quot;#注释掉代理配置&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Gradle-环境变量配置</title>
     <link href="https://long95288.github.io/2025/03/05/android/Gradle-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/"/>
     <id>https://long95288.github.io/2025/03/05/android/Gradle-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/</id>
@@ -446,6 +447,29 @@
   </entry>
   
   <entry>
+    <title>AndroidStudio-请求网络失败</title>
+    <link href="https://long95288.github.io/2025/03/05/android/AndroidStudio-%E8%AF%B7%E6%B1%82%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5/"/>
+    <id>https://long95288.github.io/2025/03/05/android/AndroidStudio-%E8%AF%B7%E6%B1%82%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5/</id>
+    <published>2025-03-04T16:00:00.000Z</published>
+    <updated>2025-08-04T15:01:37.408Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;注释掉代理配置&quot;&gt;&lt;a href=&quot;#注释掉代理配置&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Android-JNI-日志输出代理</title>
     <link href="https://long95288.github.io/2024/08/24/android/Android-JNI-%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA/"/>
     <id>https://long95288.github.io/2024/08/24/android/Android-JNI-%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA/</id>
@@ -465,29 +489,6 @@
     
     
     <category term="android" scheme="https://long95288.github.io/tags/android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>那些摘抄的句子</title>
-    <link href="https://long95288.github.io/2024/04/16/read/%E9%82%A3%E4%BA%9B%E6%91%98%E6%8A%84%E7%9A%84%E5%8F%A5%E5%AD%90/"/>
-    <id>https://long95288.github.io/2024/04/16/read/%E9%82%A3%E4%BA%9B%E6%91%98%E6%8A%84%E7%9A%84%E5%8F%A5%E5%AD%90/</id>
-    <published>2024-04-16T07:34:00.000Z</published>
-    <updated>2025-08-21T14:50:36.789Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;关于自由&quot;&gt;&lt;a href=&quot;#关于自由&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="阅读" scheme="https://long95288.github.io/tags/%E9%98%85%E8%AF%BB/"/>
     
   </entry>
   
