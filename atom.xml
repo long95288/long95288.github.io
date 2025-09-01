@@ -6,7 +6,7 @@
   <link href="https://long95288.github.io/atom.xml" rel="self"/>
   
   <link href="https://long95288.github.io/"/>
-  <updated>2025-08-29T14:05:10.819Z</updated>
+  <updated>2025-09-01T13:54:14.881Z</updated>
   <id>https://long95288.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>QT-源码编译</title>
+    <link href="https://long95288.github.io/2025/08/30/c-cpp/QT-%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/"/>
+    <id>https://long95288.github.io/2025/08/30/c-cpp/QT-%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/</id>
+    <published>2025-08-30T13:53:28.000Z</published>
+    <updated>2025-09-01T13:54:14.881Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;Winows环境编译&quot;&gt;&lt;a href=&quot;#Winows环境编译&quot; class=&quot;headerlink&quot; title=&quot;Winows环境编译&quot;&gt;&lt;/a&gt;Winows环境编译&lt;/h3&gt;&lt;p&gt;从阿里云镜像下载源码:&lt;/p&gt;
+&lt;figure</summary>
+        
+      
+    
+    
+    
+    
+    <category term="c-cpp" scheme="https://long95288.github.io/tags/c-cpp/"/>
+    
+  </entry>
   
   <entry>
     <title>如何成为失控时代的掌控者</title>
@@ -423,30 +447,6 @@
   </entry>
   
   <entry>
-    <title>Gradle-配置镜像</title>
-    <link href="https://long95288.github.io/2025/03/05/android/Gradle-%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F/"/>
-    <id>https://long95288.github.io/2025/03/05/android/Gradle-%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F/</id>
-    <published>2025-03-04T16:00:00.000Z</published>
-    <updated>2025-08-04T14:57:23.941Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;在项目的&lt;code&gt;build.gradle&lt;/code&gt;文件中加入如下配置&lt;/p&gt;
-&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</summary>
-        
-      
-    
-    
-    
-    
-    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
-    
-  </entry>
-  
-  <entry>
     <title>AndroidStudio-请求网络失败</title>
     <link href="https://long95288.github.io/2025/03/05/android/AndroidStudio-%E8%AF%B7%E6%B1%82%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5/"/>
     <id>https://long95288.github.io/2025/03/05/android/AndroidStudio-%E8%AF%B7%E6%B1%82%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5/</id>
@@ -470,18 +470,19 @@
   </entry>
   
   <entry>
-    <title>Android-JNI-日志输出代理</title>
-    <link href="https://long95288.github.io/2024/08/24/android/Android-JNI-%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA/"/>
-    <id>https://long95288.github.io/2024/08/24/android/Android-JNI-%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA/</id>
-    <published>2024-08-23T16:00:00.000Z</published>
-    <updated>2025-08-04T15:12:29.314Z</updated>
+    <title>Gradle-配置镜像</title>
+    <link href="https://long95288.github.io/2025/03/05/android/Gradle-%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F/"/>
+    <id>https://long95288.github.io/2025/03/05/android/Gradle-%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F/</id>
+    <published>2025-03-04T16:00:00.000Z</published>
+    <updated>2025-08-04T14:57:23.941Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h3 id=&quot;引入&quot;&gt;&lt;a href=&quot;#引入&quot; class=&quot;headerlink&quot; title=&quot;引入&quot;&gt;&lt;/a&gt;引入&lt;/h3&gt;&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
+    <summary type="html">&lt;p&gt;在项目的&lt;code&gt;build.gradle&lt;/code&gt;文件中加入如下配置&lt;/p&gt;
+&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</summary>
         
       
     
