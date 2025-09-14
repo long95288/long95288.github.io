@@ -6,7 +6,7 @@
   <link href="https://long95288.github.io/atom.xml" rel="self"/>
   
   <link href="https://long95288.github.io/"/>
-  <updated>2025-09-01T15:24:41.252Z</updated>
+  <updated>2025-09-01T15:38:57.808Z</updated>
   <id>https://long95288.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://long95288.github.io/2025/09/01/soft/clion-build%E8%BE%93%E5%87%BA%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
     <id>https://long95288.github.io/2025/09/01/soft/clion-build%E8%BE%93%E5%87%BA%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</id>
     <published>2025-09-01T15:21:07.000Z</published>
-    <updated>2025-09-01T15:24:41.252Z</updated>
+    <updated>2025-09-01T15:38:57.808Z</updated>
     
     
       
@@ -117,7 +117,7 @@
     <link href="https://long95288.github.io/2025/08/21/ee/EE%E5%AD%A6%E4%B9%A0/"/>
     <id>https://long95288.github.io/2025/08/21/ee/EE%E5%AD%A6%E4%B9%A0/</id>
     <published>2025-08-21T15:10:41.000Z</published>
-    <updated>2025-08-21T15:11:10.068Z</updated>
+    <updated>2025-09-14T04:00:37.258Z</updated>
     
     
       
@@ -425,29 +425,6 @@
   </entry>
   
   <entry>
-    <title>AndroidStudio-请求网络失败</title>
-    <link href="https://long95288.github.io/2025/03/05/android/AndroidStudio-%E8%AF%B7%E6%B1%82%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5/"/>
-    <id>https://long95288.github.io/2025/03/05/android/AndroidStudio-%E8%AF%B7%E6%B1%82%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5/</id>
-    <published>2025-03-04T16:00:00.000Z</published>
-    <updated>2025-08-04T15:01:37.408Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;注释掉代理配置&quot;&gt;&lt;a href=&quot;#注释掉代理配置&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
-    
-  </entry>
-  
-  <entry>
     <title>AndroidStudio-一直弹窗代理解决方案</title>
     <link href="https://long95288.github.io/2025/03/05/android/AndroidStudio-%E4%B8%80%E7%9B%B4%E5%BC%B9%E7%AA%97%E4%BB%A3%E7%90%86%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
     <id>https://long95288.github.io/2025/03/05/android/AndroidStudio-%E4%B8%80%E7%9B%B4%E5%BC%B9%E7%AA%97%E4%BB%A3%E7%90%86%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</id>
@@ -483,6 +460,29 @@
         
         
     <summary type="html">&lt;h3 id=&quot;配置环境变量&quot;&gt;&lt;a href=&quot;#配置环境变量&quot; class=&quot;headerlink&quot; title=&quot;配置环境变量&quot;&gt;&lt;/a&gt;配置环境变量&lt;/h3&gt;&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
+        
+      
+    
+    
+    
+    
+    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AndroidStudio-请求网络失败</title>
+    <link href="https://long95288.github.io/2025/03/05/android/AndroidStudio-%E8%AF%B7%E6%B1%82%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5/"/>
+    <id>https://long95288.github.io/2025/03/05/android/AndroidStudio-%E8%AF%B7%E6%B1%82%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5/</id>
+    <published>2025-03-04T16:00:00.000Z</published>
+    <updated>2025-08-04T15:01:37.408Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;注释掉代理配置&quot;&gt;&lt;a href=&quot;#注释掉代理配置&quot; class=&quot;headerlink&quot;</summary>
         
       
     
