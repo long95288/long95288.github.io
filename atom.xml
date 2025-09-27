@@ -6,7 +6,7 @@
   <link href="https://long95288.github.io/atom.xml" rel="self"/>
   
   <link href="https://long95288.github.io/"/>
-  <updated>2025-09-01T15:38:57.808Z</updated>
+  <updated>2025-09-27T03:58:54.403Z</updated>
   <id>https://long95288.github.io/</id>
   
   <author>
@@ -15,6 +15,57 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>软件窗口贴边</title>
+    <link href="https://long95288.github.io/2025/09/27/soft/%E8%BD%AF%E4%BB%B6%E7%AA%97%E5%8F%A3%E8%B4%B4%E8%BE%B9/"/>
+    <id>https://long95288.github.io/2025/09/27/soft/%E8%BD%AF%E4%BB%B6%E7%AA%97%E5%8F%A3%E8%B4%B4%E8%BE%B9/</id>
+    <published>2025-09-27T03:58:31.000Z</published>
+    <updated>2025-09-27T03:58:54.403Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h3&gt;&lt;p&gt;   chrome浏览器的gui放到最上边去,无法用鼠标拖下来了。&lt;/p&gt;
+&lt;h3 id=&quot;解决&quot;&gt;&lt;a href=&quot;#解决&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="soft" scheme="https://long95288.github.io/tags/soft/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>深度工作</title>
+    <link href="https://long95288.github.io/2025/09/27/read/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%B7%B1%E5%BA%A6%E5%B7%A5%E4%BD%9C/"/>
+    <id>https://long95288.github.io/2025/09/27/read/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%B7%B1%E5%BA%A6%E5%B7%A5%E4%BD%9C/</id>
+    <published>2025-09-27T03:56:58.000Z</published>
+    <updated>2025-09-27T03:57:23.970Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;在个人娱乐的时候，不要被任一事物吸引，相反应该主动思考我如何度过“一天中的一天”。&lt;/li&gt;
+&lt;li&gt;在晚上或周末到来之前就确定要做的事情是十分重要的。&lt;/li&gt;
+&lt;li&gt;体验到何谓生活，而不仅仅是生存。&lt;/li&gt;
+&lt;li&gt;想要抵御娱乐网站对你时间和精力的诱惑，</summary>
+        
+      
+    
+    
+    
+    
+    <category term="阅读" scheme="https://long95288.github.io/tags/%E9%98%85%E8%AF%BB/"/>
+    
+  </entry>
   
   <entry>
     <title>clion-build输出乱码解决方案</title>
@@ -437,52 +488,6 @@
         
         
     <summary type="html">&lt;h3 id=&quot;注释掉gradle配置文件中代理&quot;&gt;&lt;a href=&quot;#注释掉gradle配置文件中代理&quot; class=&quot;headerlink&quot; title=&quot;注释掉gradle配置文件中代理&quot;&gt;&lt;/a&gt;注释掉gradle配置文件中代理&lt;/h3&gt;&lt;figure</summary>
-        
-      
-    
-    
-    
-    
-    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Gradle-环境变量配置</title>
-    <link href="https://long95288.github.io/2025/03/05/android/Gradle-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/"/>
-    <id>https://long95288.github.io/2025/03/05/android/Gradle-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/</id>
-    <published>2025-03-04T16:00:00.000Z</published>
-    <updated>2025-08-04T15:00:20.131Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;配置环境变量&quot;&gt;&lt;a href=&quot;#配置环境变量&quot; class=&quot;headerlink&quot; title=&quot;配置环境变量&quot;&gt;&lt;/a&gt;配置环境变量&lt;/h3&gt;&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
-        
-      
-    
-    
-    
-    
-    <category term="android" scheme="https://long95288.github.io/tags/android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>AndroidStudio-请求网络失败</title>
-    <link href="https://long95288.github.io/2025/03/05/android/AndroidStudio-%E8%AF%B7%E6%B1%82%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5/"/>
-    <id>https://long95288.github.io/2025/03/05/android/AndroidStudio-%E8%AF%B7%E6%B1%82%E7%BD%91%E7%BB%9C%E5%A4%B1%E8%B4%A5/</id>
-    <published>2025-03-04T16:00:00.000Z</published>
-    <updated>2025-08-04T15:01:37.408Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;注释掉代理配置&quot;&gt;&lt;a href=&quot;#注释掉代理配置&quot; class=&quot;headerlink&quot;</summary>
         
       
     
